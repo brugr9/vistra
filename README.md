@@ -1,5 +1,5 @@
-ch.bfh.bti7301.hs2013.GraphVisualisierung2
-==========================================
+GRAVIS -- Graph-Visualisierung (Gruppe 2)
+=========================================
 
 Visualisierugssoftware für Graphen und Graphenalgorithmen
 
