@@ -1,5 +1,7 @@
-GRAVIS -- Graph-Visualisierung (Gruppe 2)
-=========================================
+Graph-Visualisierung (Gruppe 2)
+===============================
+
+BFH-TI, HS 2013, Modul BTI7301
 
 Visualisierugssoftware für Graphen und Graphenalgorithmen
 
