@@ -4,6 +4,9 @@ import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.TreeLayout;
 import edu.uci.ics.jung.graph.Forest;
 import edu.uci.ics.jung.graph.Graph;
 

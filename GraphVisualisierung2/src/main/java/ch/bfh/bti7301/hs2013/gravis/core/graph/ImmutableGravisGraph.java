@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.collections15.BidiMap;
+import org.apache.commons.collections15.bidimap.DualHashBidiMap;
+
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.common.IImmutableGraph;

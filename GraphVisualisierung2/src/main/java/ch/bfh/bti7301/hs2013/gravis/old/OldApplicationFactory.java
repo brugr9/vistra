@@ -10,6 +10,8 @@ import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.CoreFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
 
 /**

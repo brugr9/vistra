@@ -3,7 +3,7 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.transform.Transformer;
+import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem;
@@ -31,14 +31,16 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 	 * @param commandList
 	 * @param edgesEnabled
 	 */
-	protected GravisGraphEventListener(List<ICommand> commandList, boolean edgesEnabled) {
+	protected GravisGraphEventListener(List<ICommand> commandList,
+			boolean edgesEnabled) {
 		this.commandList = commandList;
 		this.graphItemHistory = new ArrayList<>();
-		
+
 		// TODO bitte an dieser Klasse nichts ändern (pk)
 		// TODO CommandTransformer as a constructor parameter
-		
-		this.commandTransformer = CommandTransformerFactory.createCommandTransformer(this.graphItemHistory);
+
+		this.commandTransformer = CommandTransformerFactory
+				.createCommandTransformer(this.graphItemHistory);
 		this.edgesEnabled = edgesEnabled;
 	}
 

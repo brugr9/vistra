@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.collections15.BidiMap;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 

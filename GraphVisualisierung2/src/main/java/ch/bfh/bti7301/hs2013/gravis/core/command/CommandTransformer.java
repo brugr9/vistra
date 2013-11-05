@@ -3,6 +3,9 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections15.Transformer;
+import org.apache.commons.collections15.map.HashedMap;
+
 import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem.State;
 

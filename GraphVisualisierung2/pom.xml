@@ -3,13 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ch.bfh.bti7301.hs2013.gravis</groupId>
 	<artifactId>GraphVisualisierung2</artifactId>
-	<description>BFH-TI, HS 2013, Modul BTI7301
-
-Visualisierugssoftware für Graphen und Graphenalgorithmen
-
-Software zur Visualisierung der Traversierung von Graphen. Ein Algorithmus, wie etwa derjenige von Dijkstra soll mit diesem Werkzeug so auf einfache Weise visualisiert werden. Das Werkzeug soll sich als didaktisches Hilfsmittel für beliebige Graphen-Algorithmen eignen.
-
-Roland Bruggmann, Patrick Kofmel</description>
+	<description>Software zur Visualisierung der Traversierung von Graphen. Ein Algorithmus, wie etwa derjenige von Dijkstra soll mit diesem Werkzeug so auf einfache Weise visualisiert werden. Das Werkzeug soll sich als didaktisches Hilfsmittel für beliebige Graphen-Algorithmen eignen.</description>
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>GraphVisualisierung2</name>
@@ -29,60 +23,104 @@ Roland Bruggmann, Patrick Kofmel</description>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.directory.studio</groupId>
 			<artifactId>org.apache.commons.io</artifactId>
-			<version>2.4</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
 			<artifactId>jung-visualization</artifactId>
-			<version>2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
 			<artifactId>jung-algorithms</artifactId>
-			<version>2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
 			<artifactId>jung-api</artifactId>
-			<version>2.0.1</version>
 			<classifier>tests</classifier>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
 			<artifactId>jung-graph-impl</artifactId>
-			<version>2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
 			<artifactId>jung-io</artifactId>
-			<version>2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
 			<artifactId>jung-jai</artifactId>
-			<version>2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
 			<artifactId>jung-jai-samples</artifactId>
-			<version>2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
 			<artifactId>jung-samples</artifactId>
-			<version>2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
 			<artifactId>jung2</artifactId>
-			<version>2.0.1</version>
 			<type>pom</type>
 		</dependency>
 	</dependencies>
+	<organization>
+		<name>BFH-TI, HS 2013, Modul BTI7301</name>
+	</organization>
+	<scm>
+		<developerConnection>Roland Bruggmann, Patrick Kofmel</developerConnection>
+	</scm>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.directory.studio</groupId>
+				<artifactId>org.apache.commons.io</artifactId>
+				<version>2.4</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.jung</groupId>
+				<artifactId>jung-visualization</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.jung</groupId>
+				<artifactId>jung-algorithms</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.jung</groupId>
+				<artifactId>jung-graph-impl</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.jung</groupId>
+				<artifactId>jung-io</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.jung</groupId>
+				<artifactId>jung-jai</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.jung</groupId>
+				<artifactId>jung-jai-samples</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.jung</groupId>
+				<artifactId>jung-samples</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

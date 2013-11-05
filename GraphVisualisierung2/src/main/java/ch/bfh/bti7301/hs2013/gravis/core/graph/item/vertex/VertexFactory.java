@@ -1,5 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex;
 
+import org.apache.commons.collections15.Factory;
+
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 
 /**

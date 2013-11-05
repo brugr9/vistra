@@ -2,7 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import java.util.List;
 
-import javax.xml.transform.Transformer;
+import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem;
 

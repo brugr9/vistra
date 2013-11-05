@@ -9,6 +9,7 @@ import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
 import ch.bfh.bti7301.hs2013.gravis.gui.GuiFactory;
+import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
