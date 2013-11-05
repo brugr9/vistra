@@ -1,0 +1,67 @@
+%% Project 1: Titlepage for the project 'Graph Visualisierung 2' (GRAVIS)
+%% Style File
+%%---------------------------------------------------------------------------
+%%
+%% Created by Roland Bruggmann (http://about.geogeek.ch)
+%% Date Modified: 03/10/2013
+%%
+%-------------------------------------------------------------------------------
+%                 \gravistitlepage command: adds the titlepage
+%-------------------------------------------------------------------------------
+\newcommand\gravistitlepage[1]{
+    \begin{titlepage}
+    % 
+    % 
+    % Red Bar and BFH-Logo absolute placed at (87,10) on A4
+    %---------------------------------------------------------------------------
+    \setlength{\unitlength}{1mm}
+    \begin{textblock}{210}(-10,-10)
+	    \begin{picture}(210,32)
+		    \put(0,0){\color{bfhred}\rule{240mm}{30mm}}
+	    \end{picture}
+    \end{textblock}
+
+    \begin{textblock}{0}[0,0](84,7)
+% 	    \includegraphics[scale=0.6]{includes/images/bfh_en_white.png}
+	    \includegraphics[scale=1]{includes/images/bfh_de_white.pdf}
+    \end{textblock}
+
+    % Titel / Untertitel / Autor:
+    %---------------------------------------------------------------------------
+    \begin{flushleft}
+
+	    \vspace*{4cm}
+
+	    \fontsize{18pt}{20pt}\selectfont
+	    Projekt 1\\
+	    \fontsize{12pt}{15pt}\selectfont\vspace{0.5em}
+	    Modul BTI-7301, Herbstsemester 2013/14 \\
+% 
+	    \vspace{2cm}
+% 
+	    \fontsize{24pt}{26pt}\selectfont 
+	    \noindent \textbf{Graph Visualisierung 2 (GRAVIS)} \\
+	    \vspace{1cm}
+	    \fontsize{12pt}{20pt}\selectfont\vspace{0.3em}Object Oriented Analysis and Design (OOAD), Revision {#1} \\
+
+	    \vspace{5cm}
+	    \fontsize{12pt}{15pt}\selectfont
+	    \begin{tabbing}
+		  xxxxxxxxxxxxxxx\=xxxxxxxxx\=xxxxxxxxxxxx \kill
+		  Studenten: 	\> Roland Bruggmann, \href{mailto:brugr9@bfh.ch}{\nolinkurl{brugr9@bfh.ch}}\\
+				\> Patrick Kofmel, \href{mailto:kofmp1@bfh.ch}{\nolinkurl{kofmp1@bfh.ch}}\\
+		  \\
+		  Dozent:	\> Dr. J\"urgen Eckerle, \href{mailto:juergen.eckerle@bfh.ch}{\nolinkurl{juergen.eckerle@bfh.ch}}\\
+		  \\
+		  Datum:	\> \today \\
+	    \end{tabbing}
+      \end{flushleft}
+    % 
+    \vspace{6mm}
+    \fontsize{12pt}{15pt}\selectfont
+    Desktop-Programm zur visualisierten Traversierung von Graphen.
+    \end{titlepage}
+}
+% ===========================================================================
+% EOF
+%

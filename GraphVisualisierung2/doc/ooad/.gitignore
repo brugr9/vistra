@@ -1,0 +1,14 @@
+# latex
+*.aux
+*.backup
+*.bbl
+*.blg
+*.glo
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.log
+*.out
+*.toc

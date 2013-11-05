@@ -1,0 +1,86 @@
+%%
+%% Master document
+%% ==========================================================================
+%% Authors: brugr9, kofmp1
+%%---------------------------------------------------------------------------
+\documentclass[
+	a4paper,			% paper format
+	10pt,				% fontsize
+% 	twoside,			% double-sided
+% 	openright,			% begin new chapter on right side
+	notitlepage,			% do not set a default title page
+	parskip=half,			% set paragraph skip to half of a line
+]{scrartcl}				% KOMA-script article
+%%---------------------------------------------------------------------------
+\include{includes/preamble}
+
+%% Intro:
+%%---------------------------------------------------------------------------
+\begin{document} 			% Start Document
+
+\pagenumbering{roman}
+%%---------------------------------------------------------------------------
+
+%% Title Page and Table of contents
+%%---------------------------------------------------------------------------
+\gravistitlepage{1.5}
+\setcounter{page}{1}
+\setcounter{secnumdepth}{2} 		% Anzeigetiefe der Nummerierung
+\settocdepth{subsection}		% Set depth of toc
+% \cleardoublepage
+\tableofcontents
+\listoffigures
+\listoftables
+%%---------------------------------------------------------------------------
+
+%% Main part:
+%%---------------------------------------------------------------------------
+\include{includes/headerfooter}
+\pagenumbering{arabic}
+
+% \chapter[Inception]{Part one: Inception}
+\include{vision}
+\include{usecases}
+\include{suppspec}
+\include{glossary}
+% 
+% \chapter[Elaboration]{Part two: Elaboration}
+\include{domainmodel}
+% \include{designmodel}
+
+\fancyfoot{}				% clean fancy footer
+%% Appendix
+%%---------------------------------------------------------------------------
+% \cleardoublepage
+\appendix
+% \section{\appendixname}
+%%---------------------------------------------------------------------------
+
+%% Figures
+%%---------------------------------------------------------------------------
+% \cleardoublepage
+% \phantomsection 
+% \addcontentsline{toc}{subsection}{List of Figures}
+% \listoffigures
+%%---------------------------------------------------------------------------
+
+%% Tables
+%%---------------------------------------------------------------------------
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{subsection}{List of Tables}
+% \listoftables
+%%---------------------------------------------------------------------------
+
+%% Bibliography
+%%---------------------------------------------------------------------------
+% \phantomsection 
+% \addcontentsline{toc}{subsection}{Bibliography}
+% \bibliographystyle{unsrt}
+% \bibliographystyle{IEEEtranS}
+% \nocite{*}
+% \bibliography{includes/bibliography}
+%%---------------------------------------------------------------------------
+
+%%---------------------------------------------------------------------------
+\end{document}

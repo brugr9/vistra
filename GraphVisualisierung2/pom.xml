@@ -1,18 +1,88 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>ch.bfh.bti7301.hs2013.gravis</groupId>
-  <artifactId>GraphVisualisierung2</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>GraphVisualisierung2</name>
-  <url>https://github.com/brugr9/gravis</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.2</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ch.bfh.bti7301.hs2013.gravis</groupId>
+	<artifactId>GraphVisualisierung2</artifactId>
+	<description>BFH-TI, HS 2013, Modul BTI7301
+
+Visualisierugssoftware für Graphen und Graphenalgorithmen
+
+Software zur Visualisierung der Traversierung von Graphen. Ein Algorithmus, wie etwa derjenige von Dijkstra soll mit diesem Werkzeug so auf einfache Weise visualisiert werden. Das Werkzeug soll sich als didaktisches Hilfsmittel für beliebige Graphen-Algorithmen eignen.
+
+Roland Bruggmann, Patrick Kofmel</description>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>GraphVisualisierung2</name>
+	<url>https://github.com/brugr9/gravis</url>
+	<plugin>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<version>3.0</version>
+		<configuration>
+			<source>1.7</source>
+			<target>1.7</target>
+		</configuration>
+	</plugin>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.apache.commons.io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung-visualization</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung-algorithms</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung-api</artifactId>
+			<version>2.0.1</version>
+			<classifier>tests</classifier>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung-graph-impl</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung-io</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung-jai</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung-jai-samples</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung-samples</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jung</groupId>
+			<artifactId>jung2</artifactId>
+			<version>2.0.1</version>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
 </project>

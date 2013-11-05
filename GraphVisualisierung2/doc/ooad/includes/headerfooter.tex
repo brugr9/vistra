@@ -1,0 +1,18 @@
+% Set up header and footer
+%---------------------------------------------------------------------------
+\fancyhf{}						% clean all fields
+\fancypagestyle{plain}{					% new definition of plain style
+	\fancyhead[C]{					% header center part --> BFH logo
+		\begin{textblock}{0}[0,0](86,9)
+			\includegraphics[scale=1.0]{includes/images/bfh_without_text.pdf}
+		\end{textblock}
+	}
+	\fancyfoot[OR,EL]{\footnotesize \thepage} 	% footer right part --> page number
+	\fancyfoot[OL,ER]{\footnotesize \leftmark}	% footer left part -->	chapter
+}
+
+\renewcommand{\headrulewidth}{0pt}			% no header stripline
+\renewcommand{\footrulewidth}{0pt} 			% no bottom stripline
+
+\pagestyle{plain}
+%---------------------------------------------------------------------------

@@ -1,0 +1,157 @@
+\section{Vision}
+\label{sec:Vision}
+% Descibes the high-level goals and constraints, the business case, and provides an executive summary.
+Es soll eine Software erstellt werden, welche das Traversieren von Graphen mit verschiedenen Algorithmen darstellen kann. 
+
+Ein beliebiger Algorithmus, wie etwa derjenige von Dijkstra soll mit diesem Werkzeug so auf einfache Weise visualisiert werden. Das Werkzeug soll sich als didaktisches Hilfsmittel eignen. Neue Algorithmen sollen ohne grossen Aufwand hinzugef\"ugt werden k\"onnen. Zudem soll die Software Graphen aus einer Datei importieren k\"onnen.
+% 
+\subsection{Problem Statement}	
+\label{subsec:Problem Statement}
+% 
+\subsubsection{Daten}
+\label{subsubsec:Daten}
+Es stehen verschiedene Graphen und Algorithmen als Vorgaben zur Verf\"ugung.
+\begin{itemize}
+    \item Es k\"onnen gerichtete, ungerichtete, gewichtete und ungewichtete Graphen mit Einfach- und Mehrfachkanten traversiert werden.  
+    \item Nebst den im System als Vorgaben zur Verf\"ugung stehenden Graphen k\"onnen weitere Graphen importiert werden.
+    \item Es stehen mindestens folgende, bereits implementierte Algorithmen zur Verf\"ugung:
+  \begin{itemize}
+    \item Dijkstra: Suchen des k\"urzesten Weges zwischen zwei als Start und Ende festgelegten Knoten in einem gerichteten und gewichteten Graphen
+    \item Kruskal: minimaler Spannbaum berechnen
+    \item Rekursive Tiefensuche
+    \item Breitensuche
+  \end{itemize}
+  \item Nebst den im System als Vorgaben zur Verf\"ugung stehenden Algorithmen k\"onnen weitere Algorithmen importiert werden.
+  \item Importierte Daten bleiben dem System persistent erhalten.
+  \item Importierte Daten k\"onnen auch wieder gel\"oscht werden.
+\end{itemize}
+% 
+\subsubsection{Traversierung}
+\label{subsubsec:Traversierung}
+\begin{itemize}
+  \item Aus einer Liste mit Graphen kann ausgew\"ahlt werden, welcher Graph traversiert werden soll.
+  \item Ein Graph wird durch Kreise (Knoten), Geraden (ungerichtete Kanten), Pfeile (gerichtete Kanten) und Beschriftungen (Knotenbezeichnungen, Kantenbezeichnungen und Kantengewichte) dargestellt.
+  \item Je nach Typ von Graph werden die Knoten als Kreis oder als Baum angeordnet.
+  \item Die Anordnung der Knoten kann ver\"andert werden: Diese k\"onnen mit der Maus verschoben werden.
+  \item Mit der Wahl des Graphen wird eine Liste mit Algorithmen erstellt und dem Benutzer zugg\"anglich gemacht. Es sind nur diejenigen Algorithmen ausw\"ahlbar, die auf den Graph-Typ angewendet werden k\"onnen.
+  \item Aus der Liste mit Algorithmen kann ausgew\"ahlt werden, welche Traversierung erfolgen soll.
+  \item F\"ur manche Algorithmen muss ein Start-, z.T. auch ein Endknoten angegebenn werden.
+  \item Mit der Wahl des Algorithmus (und evtl. von Start- resp. Endknoten) wird die Traversierung ausgel\"ost.
+  \item Die Traversierung erstellt eine visualisierbare L\"osung.
+  \item Mit Abschluss der Traversierung wird dem Benutzer die Visualisierung zug\"anglich gemacht.
+\end{itemize}
+% 
+\subsubsection{Visualisierung}
+\label{subsubsec:Visualisierung}
+\begin{itemize}
+  \item Die Visualisierung kann Schrittweise erfolgen ('Step-by-step'): Dabei kann der Benutzer vor, zur\"uck, zum Anfang oder zum Ende der Visualisierung gelangen.
+  \item Die Schrittl\"ange der Visualisierung kann eingestellt werden.
+  \item Die Visualisierung kann auch abgespielt werden. Dabei kann der Benutzer die Animation starten, pausieren oder stoppen.
+  \item Das Tempo der abgespielten Visualisierung kann eingestellt werden.
+\end{itemize}
+% 
+\subsection{Other Requirements and Constraints}	
+\label{subsec:Other Requirements and Constraints}
+\begin{itemize}
+  \item Zu importierende Graphen werden validiert.
+  \item Zu importierende Algorithmen m\"ussen ein gegebenes Interface implementieren.
+  \item Ein Algorithmus gibt \"uber Annotations an, welche Graph-Typen damit traversiert werden k\"onnen (gerichtet, ungerichtet, gewichtet, ungewichtet, einfach- oder mehrfachkantig).
+  \item Die Visualisierung zeigt Schrittweise Farb\"anderungen von Knoten und Kanten, evtl. auch errechnete Zwischenergebnisse.
+  \item Mit jedem Step der Visualisierung wird auf einer Protokollpanele eine Statusmeldung ausgegeben, die die begangenen Traversierungsschritte erl\"autert.
+\end{itemize}
+% 
+\newpage
+\section{Project management}
+\label{sec:Project management}
+% 
+\subsection{Sourcecode management}
+\label{subsec:Sourcecode management}
+F\"ur das Sourcecode management (SCM) wird die Software git verwendet, das Projekt wird auf github gehalten (\url{https://github.com/brugr9/ch.bfh.bti7301.hs2013.GraphVisualisierung2}).
+% 
+\subsection{Time management}
+\label{subsec:Time management}
+Das Modul BTI-7301 Projekt 1 startete mit Beginn des Herbstsemester 2013/14. In der Woche 38 wurden die Projekte durch die Dozenten vorgestellt. Es wurden Teams gebildet und den den Projekten bzw. den Dozenten zugeteilt. Ein erstes Treffen des zust\"andigen Dozenten mit dem Team fand statt und erste Vereinbarungen wurden getroffen. Der Zeitplan gliedert sich nun wie folgt in vier Phasen:
+\begin{description}
+  \item[Phase 1: Projektplanung und Systemarchitektur] Wochen 39/40/41(/42) 2013 (3-4 Wochen)
+  \begin{itemize}
+    \item Einarbeitung in die Thematik (Graphen, Algorithmen, \dots)
+    \item Erstellen der Requirements, Spezifikation
+    \item Design der Systemarchitektur
+  \end{itemize}
+  \item[Phase 2: W\"ochentliche Sprintzyklen] Wochen (42/)43 bis 51 2013 (9-10 Wochen)
+  \begin{itemize}
+    \item Use Case w\"ahlen f\"ur n\"achsten Sprint
+    \item (Re-)Design der Interfaces und Klassenhierarchie, Test und Implementation
+    \item Review, Anpassung der Planung
+  \end{itemize}
+  \item[Phase 3: Projektabschluss] Wochen 52 2013 und 01 2014 (2 Wochen)
+  \begin{itemize}
+    \item Refactoring und Systemtests
+    \item Erstellen der Pr\"asentation
+  \end{itemize}
+  \item[Phase 4: Pr\"asentation des Projektes] Wochen 02 und 03 2014 (2 Wochen)
+  \begin{itemize}
+    \item Besprechen des Ablaufes der Pr\"asentation
+    \item Checklisten Medien und Ger\"ate
+    \item Pr\"asentation
+  \end{itemize}
+\end{description}
+% 
+\newpage
+\section{Architecture}
+\label{sec:Architecture}
+Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren.
+
+\subsection{Common}
+\label{subsec:Common}
+Die Komponente h\"alt die f\"ur die Implementation eines Algorithmus zu verwendende Schnittstellen bereit. Diese sind f\"ur Algorithmen zu verwenden, welche importiert werden wollen.
+
+\subsection{Core}
+\label{subsec:Core}
+Die Komponente implementiert:
+\begin{itemize}
+  \item Data Model: Datenhaltung f\"ur Graph (Datenelemente Knoten und Kanten), Algorithmus und berechnete Traversierung (Traversierungsschritte als Operationen auf den Graphen)
+  \item Business Logik: 
+  \begin{itemize}
+      \item Handling von Graphen und Algorithmen
+      \item Traversierung und damit Erstellen der visualisierbaren L\"osung
+      \item Handling von Daten-Import und L\"oschen von Daten
+      \item Validierung Graphen und Algorithmen beim Import
+  \end{itemize}
+  \item Core Inteface: eine Schnittstelle, welche der Komponente GUI zur Verf\"ugung steht
+\end{itemize}
+Es werden das Java Universal Network/Graph Framework (JUNG, \url{http://jung.sourceforge.net/}) sowie das XML-basierte Format GraphML (\url{http://graphml.graphdrawing.org/}) verwendet.
+
+\subsection{Gui}
+\label{subsec:Gui}
+Die Komponente implementiert ein Model-View-Control (MVC) unter Verwendung des Java-Observer-Pattern:
+\begin{itemize}
+  \item Model: Observable mit s\"amtlichen GUI-Attributen und deren Getter- und Setter-Methoden
+  \item View: Observer mit grafischen Elementen wie z.B. Menubar, Kn\"opfe, Regler und Text-Panelen
+  \item Control: Implementiert Listeners und deren Methoden
+\end{itemize}
+Es wird das Java Swing Framework verwendet.
+% 
+\subsubsection{Gui Elemente}
+\label{subsubsec:Gui Elemente}
+\begin{itemize}
+  \item Daten:
+  \begin{itemize}
+    \item Neuen Graphen oder Algorithmus importieren
+    \item Importierter Graph oder Algorithmus l\"oschen
+  \end{itemize}
+  \item Traversierung:
+  \begin{itemize}
+    \item Graph ausw\"ahlen
+    \item Algorithmus ausw\"ahlen
+    \item evt. Start- resp. Endknoten ausw\"ahlen
+  \end{itemize}
+  \item Visualisierung:
+  \begin{itemize}
+      \item Einstellung Step: Anzahl Traversierungs-Schritte pro Bild
+      \item Einstellung Delay: Zeitintervall zwischen zwei Bildern (in Sekunden)      
+      \item Visualisierung, 'step-by-step': Ein Bild vor, ein Bild zur\"uck, an das Ende oder den an den Anfang springen
+      \item Visualisierung, Animation: Starten, Anhalten, Stoppen
+      \item Anzeige des Visualisierungsfortschrittes in einer Progressbar
+  \end{itemize}
+\end{itemize}
