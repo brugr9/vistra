@@ -1,0 +1,12 @@
+ch.bfh.bti7301.hs2013.gravis
+ch.bfh.bti7301.hs2013.gravis.common
+ch.bfh.bti7301.hs2013.gravis.core
+ch.bfh.bti7301.hs2013.gravis.core.algorithm
+ch.bfh.bti7301.hs2013.gravis.core.command
+ch.bfh.bti7301.hs2013.gravis.core.graph
+ch.bfh.bti7301.hs2013.gravis.core.graph.item
+ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge
+ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex
+ch.bfh.bti7301.hs2013.gravis.core.util
+ch.bfh.bti7301.hs2013.gravis.gui
+ch.bfh.bti7301.hs2013.gravis.old
