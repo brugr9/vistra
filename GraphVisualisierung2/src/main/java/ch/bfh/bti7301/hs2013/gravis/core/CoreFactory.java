@@ -48,15 +48,17 @@ public final class CoreFactory {
 	 */
 	public static ICore createCore() throws Exception {
 		try {
-			Properties coreProperties = loadCoreProperties();
+			// TODO activate properties
+//			Properties coreProperties = loadCoreProperties();
+			
 			// Graph
 			Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
 			IGravisGraph gravisGraph = GraphFactory.createIGravisGraph(graph);
 			IGraphManager graphManager = GraphFactory
-					.createGraphManager(coreProperties);
+					.createGraphManager(null);
 			// Algorithm
 			IAlgorithmManager algorithmManager = AlgorithmFactory
-					.createAlgorithmManager(coreProperties);
+					.createAlgorithmManager(null);
 			// Traversal
 			ITraversal traversal = createTraveral(gravisGraph,
 					algorithmManager.getDefaultAlgorithm());

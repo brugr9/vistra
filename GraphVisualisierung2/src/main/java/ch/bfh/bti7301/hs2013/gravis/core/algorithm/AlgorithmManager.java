@@ -35,8 +35,11 @@ class AlgorithmManager extends AbstractParameterManager implements
 		try {
 			// TODO read from templatesDir as well as from workbenchDir and add
 			// TODO validation?
-			super.putAll(templatesDir.listFiles());
-			super.putAll(workbenchDir.listFiles());
+			
+			// TODO activate properties
+			
+//			super.putAll(templatesDir.listFiles());
+//			super.putAll(workbenchDir.listFiles());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

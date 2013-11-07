@@ -35,7 +35,7 @@ public final class OldApplicationFactory {
 	// String filename = "GraphMLBspTree";
 	// this.graphService.importGraph(path + "/" + filename +
 	// ".graphml");
-	public final static String IMPORTED_GRAPHS_PATH = "resources/graph/templates/";
+	public final static String IMPORTED_GRAPHS_PATH = "src/main/resources/META-INF/templates/";
 
 	/**
 	 * The default name of the property file name relative to the CLASSPATH.

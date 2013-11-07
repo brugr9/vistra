@@ -45,8 +45,10 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 		try {
 			// TODO read from templatesDir as well as from workbenchDir and add
 			// TODO validation?
-			super.putAll(templatesDir.listFiles());
-			super.putAll(workbenchDir.listFiles());
+			
+			// TODO activate properties
+//			super.putAll(templatesDir.listFiles());
+//			super.putAll(workbenchDir.listFiles());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -162,7 +164,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			// TODO bitte dummy value auskommentieren und nicht löschen
 			return this.loadGraph(new File(
 					OldApplicationFactory.IMPORTED_GRAPHS_PATH
-							+ "SampleTree1.graphml"));
+							+ "SampleTree2.graphml"));
 		} catch (Exception e) {
 			throw e;
 		}
