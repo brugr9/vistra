@@ -16,6 +16,7 @@
 	</organization>
 	<scm>
 		<developerConnection>Roland Bruggmann, Patrick Kofmel</developerConnection>
+		<url>https://github.com/brugr9/gravis</url>
 	</scm>
 	<dependencies>
 		<dependency>
@@ -100,4 +101,10 @@
 			</plugin>
 		</plugins>
 	</build>
+	<issueManagement>
+		<system>none</system>
+	</issueManagement>
+	<ciManagement>
+		<system>none</system>
+	</ciManagement>
 </project>
