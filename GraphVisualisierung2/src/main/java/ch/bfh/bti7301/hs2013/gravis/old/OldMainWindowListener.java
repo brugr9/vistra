@@ -392,6 +392,7 @@ public class OldMainWindowListener extends Observable implements
 					Graph<IVertex, IEdge> graph;
 					try {
 						graph = this.gravisCore.selectGraph("kk");
+						this.gravisCore.saveGraph();
 
 						this.setChanged();
 						this.notifyObservers(graph);

@@ -1,13 +1,16 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.collections15.BidiMap;
+import org.apache.commons.collections15.Transformer;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
@@ -20,8 +23,10 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.util.ValueTransformer;
 import ch.bfh.bti7301.hs2013.gravis.old.OldApplicationFactory;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.Hypergraph;
 import edu.uci.ics.jung.io.GraphMLMetadata;
 import edu.uci.ics.jung.io.GraphMLReader;
+import edu.uci.ics.jung.io.GraphMLWriter;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -65,8 +70,6 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		// TODO validate file against xsd of graphml
-		// TODO read GraphType from graphml: <graph id="Sample Graph 1"
-		// edgedefault="directed">
 
 		try {
 			IGravisGraph newGraph = null;
@@ -145,13 +148,43 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	/**
 	 * @param file
 	 */
-	private void storeGraph(File file) {
+	private void storeGraph(File file, IGravisGraph graph) {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		// TODO write GraphName from graphml
 		// TODO write GraphType from graphml: <graph id="Sample Graph 1"
 		// edgedefault="directed">
 		// TODO to implement
+		
+		GraphMLWriter<IVertex,IEdge> graphWriter = new GraphMLWriter<>();
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(file);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		Transformer<Hypergraph<IVertex,IEdge>,String> graphTransformer = 
+				new Transformer<Hypergraph<IVertex,IEdge>, String>() {
+			@Override
+			public String transform(Hypergraph<IVertex,IEdge> graph) {
+				if (graph instanceof IGravisGraph) {
+					return ((IGravisGraph) graph).getGraphId();
+				}
+				return "";
+			}
+		};
+		
+		graphWriter.addGraphData("id", "", "", graphTransformer);
+		try {
+			graphWriter.save(graph, writer);
+			
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -276,6 +309,9 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	@Override
 	public boolean saveGraph(IGravisGraph graph) throws Exception {
 		// TODO Auto-generated method stub
+		this.storeGraph(new File(
+					OldApplicationFactory.IMPORTED_GRAPHS_PATH
+							+ "SampleTree2_out.graphml"), graph);
 		return false;
 	}
 
