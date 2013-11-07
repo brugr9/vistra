@@ -15,7 +15,7 @@
 		<default>false</default>
 	</key>
 
-	<graph id="Sample Tree 1" edgedefault="directed">
+	<graph id="Sample Tree 2" edgedefault="directed">
 		<node id="A"> 
 			<data key="a0">gray</data>
 			<data key="a3">true</data>

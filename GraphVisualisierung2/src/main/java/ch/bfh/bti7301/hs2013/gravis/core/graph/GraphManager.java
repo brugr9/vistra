@@ -11,6 +11,7 @@ import org.apache.commons.collections15.BidiMap;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
@@ -64,7 +65,6 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		// TODO validate file against xsd of graphml
-		// TODO read GraphName from graphml
 		// TODO read GraphType from graphml: <graph id="Sample Graph 1"
 		// edgedefault="directed">
 
@@ -98,11 +98,8 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
-		// TODO File as method parameter
-
 		try {
 			IGravisGraph newGraph = GraphFactory.createIGravisGraph();
-			// TODO from which directory does graphReader get the file?
 			graphReader.load(file.getAbsolutePath(), newGraph);
 
 			BidiMap<IVertex, String> vertexIds = graphReader.getVertexIDs();
@@ -111,6 +108,13 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 					.getVertexMetadata();
 			Map<String, GraphMLMetadata<IEdge>> edgeMeta = graphReader
 					.getEdgeMetadata();
+			
+			Map<String, GraphMLMetadata<Graph<IVertex,IEdge>>> graphMeta = graphReader.getGraphMetadata();
+			// TODO read attribute Id from file: id
+			newGraph.setGraphId(graphMeta.get("id").transformer.transform(newGraph));
+			// TODO read graph type from file
+			newGraph.setType(IAlgorithm.GraphType.DIRECTED);
+			// TODO read GraphName from graphml
 
 			for (IVertex vertex : newGraph.getVertices()) {
 				vertex.setId(vertexIds.get(vertex));
