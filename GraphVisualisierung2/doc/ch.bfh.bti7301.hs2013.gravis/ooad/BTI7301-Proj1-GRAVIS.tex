@@ -6,11 +6,12 @@
 \documentclass[
 	a4paper,			% paper format
 	10pt,				% fontsize
-% 	twoside,			% double-sided
-% 	openright,			% begin new chapter on right side
-	notitlepage,			% do not set a default title page
+	twoside,			% double-sided
+	openright,			% begin new chapter on right side
+% 	notitlepage,			% do not set a default title page
 	parskip=half,			% set paragraph skip to half of a line
-]{scrartcl}				% KOMA-script article
+% ]{scrartcl}				% KOMA-script article
+]{scrbook}				% KOMA-script book
 %%---------------------------------------------------------------------------
 \include{includes/preamble}
 
@@ -24,12 +25,13 @@
 %% Title Page and Table of contents
 %%---------------------------------------------------------------------------
 \gravistitlepage{1.5}
-\setcounter{page}{1}
+% \cleardoublepage
 \setcounter{secnumdepth}{2} 		% Anzeigetiefe der Nummerierung
 \settocdepth{subsection}		% Set depth of toc
-% \cleardoublepage
 \tableofcontents
+% 
 \listoffigures
+% 
 \listoftables
 %%---------------------------------------------------------------------------
 
@@ -37,22 +39,42 @@
 %%---------------------------------------------------------------------------
 \include{includes/headerfooter}
 \pagenumbering{arabic}
-
-% \chapter[Inception]{Part one: Inception}
+\setcounter{page}{0}
+% 
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+% 
+\chapter{Inception}
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+% 
 \include{vision}
 \include{usecases}
 \include{suppspec}
 \include{glossary}
 % 
-% \chapter[Elaboration]{Part two: Elaboration}
+% \newpage		% neue Seite
+% \mbox{} 		% leere Textbox
+% 
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+% 
+\chapter{Elaboration}
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+% 
 \include{domainmodel}
-% \include{designmodel}
+\include{designmodel}
 
-\fancyfoot{}				% clean fancy footer
+% \fancyfoot{}				% clean fancy footer
 %% Appendix
 %%---------------------------------------------------------------------------
 % \cleardoublepage
-\appendix
+% \appendix
 % \section{\appendixname}
 %%---------------------------------------------------------------------------
 

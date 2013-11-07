@@ -1,18 +1,34 @@
 \section{Use Cases Model}
-\label{sec:use_cases_model}
+\label{sec:Use Cases Model}
 % Descirbes the functional requirements, mostly non-functional. During incepeion, the names of most use cases will be indentified, and perhapss 10% of teh use cases will be analyzed in detail.
+% 
+\subsection{Actors}
+\label{subsec:Actors}
+\begin{table}[htp]
+  \definecolor{tcA}{rgb}{0.862745,0.862745,0.862745}
+  \begin{tabular}[t]{|l|l|l|}\hline
+  % use packages: color,colortbl
+	  \rowcolor{tcA}
+	  Actor 			& Typ 		& Beschreibung \\\hline
+	  User		 		& primary 	& Interagiert mit dem System. \\\hline
+	  Operating System (OS) 	& supporting 	& Dient dem System beim Zugriff auf das Dateisystem. \\\hline
+  \end{tabular}
+  \caption{Actors}
+  \label{tab:actors}
+\end{table}
 
+% 
 \subsection{Use Cases Diagram}
-\label{subsec:use_cases_diagram}
+\label{subsec:Use Cases Diagram}
 \begin{figure}[H]
 %     \centering
 	\includegraphics[scale=0.5]{diagrams/use-cases-diagram.pdf}
     \caption{Use Cases Diagram}
     \label{fig:use_cases_diagram}
 \end{figure}
-
-\subsection{Use Cases in brief format}
-\label{subsec:uc_in_brief_format}
+% 
+\subsection{Use Cases in Brief Format}
+\label{subsec:Use Cases in Brief Format}
 % - All the use-cases of the application you discover, which have to be written in brief format;
 \begin{description}
   \item[Import Graph:] Der Benutzer kann einen neuen Graphen importieren.
@@ -40,47 +56,46 @@
   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Select Algorithm})
 
   \item[Set Step:] Der Benutzer kann f\"ur die Visualisierung die Anzahl Traversierungsschritte pro Bild einstellen.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Set Step})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Set Step})
 
   \item[Forward:] Der Benutzer kann in der Visualisierung ein Bild vorw\"arts gehen.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Forward})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Forward})
 
   \item[Backward:] Der Benutzer kann in der Visualisierung ein Bild r\"uckw\"arts gehen.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Backward})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Backward})
 
   \item[Goto Beginning:] Der Benutzer kann in der Visualisierung an das Ende springen.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Goto Beginning})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Goto Beginning})
 
   \item[Goto End:] Der Benutzer kann in der Visualisierung an den Anfang springen.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Goto End})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Goto End})
 
   \item[Set Delay:] Der Benutzer kann f\"ur die Visualisierung das Zeitintervall zwischen zwei Bildern einstellen.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Set Delay})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Set Delay})
 
   \item[Play:] Der Benutzer kann das Streaming der Visualisierung starten.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Play})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Play})
 
   \item[Pause:] Der Benutzer kann das Streaming der Visualisierung anhalten.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Pause})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Pause})
 
   \item[Resume:] Der Benutzer kann das Streaming der Visualisierung wiederaufnehmen.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Resume})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Resume})
 
   \item[Stop:] Der Benutzer kann das Streaming der Visualisierung stoppen.
-
-  (Ausgearbeitetes Format siehe Seite~\pageref{uc:Stop})
+% 
+%   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Stop})
 \end{description}
-
-\newpage
+% 
 \subsection{Use Cases in fully dressed format}
 \label{subsec:uc_in_fully_dressed_format}
 F\"ur alle Use Cases gilt:
@@ -89,9 +104,8 @@ F\"ur alle Use Cases gilt:
   \item Level: User-goal
   \item Primary: Actor User
 \end{itemize}
-% - In addition, the use cases related to the registration and the subscription of an actor as well as the upload/download functionalities must be provided in fully-dressed format (do not forget to use the numbering as explained in the book, as well as the advices we discussed);
+\newpage
 % 
-\subsubsection{Import Graph}
 \begin{usecase}{Import Graph}
     \preconditions{
 	    \item Die Dateistruktur des Betriebssystems ist zug\"anglich.
@@ -153,7 +167,6 @@ F\"ur alle Use Cases gilt:
 \end{usecase}
 \newpage 
 % 
-\subsubsection{Import Algorithm}
 \begin{usecase}{Import Algorithm}
     \preconditions{
 	    \item Die Dateistruktur des Betriebssystems ist zug\"anglich.
@@ -213,7 +226,6 @@ F\"ur alle Use Cases gilt:
 \end{usecase}
 \newpage 
 % 
-\subsubsection{Delete Graph}
 \begin{usecase}{Delete Graph}
     \precondition{
 	    Der zu l\"oschende Graph steht als \textbf{Datei} zur weiteren Verarbeitung zur Verf\"ugung.
@@ -235,7 +247,6 @@ F\"ur alle Use Cases gilt:
 \end{usecase}
 \newpage 
 % 
-\subsubsection{Delete Algorithm}
 \begin{usecase}{Delete Algorithm}
     \precondition{
 	    Der zu l\"oschende Algorithmus steht als \textbf{Datei} zur weiteren Verarbeitung zur Verf\"ugung.
@@ -257,7 +268,6 @@ F\"ur alle Use Cases gilt:
 \end{usecase}
 \newpage 
 % 
-\subsubsection{Select Graph}
 \begin{usecase}{Select Graph}
     \preconditions{
 	    \item Die Benutzerschnittstelle zur Wahl des Graphen ist aktiv.
@@ -296,7 +306,6 @@ F\"ur alle Use Cases gilt:
 \end{usecase}
 \newpage 
 % 
-\subsubsection{Select Algorithm}
 \begin{usecase}{Select Algorithm}
     \preconditions{
 	    \item Die Benutzerschnittstelle zur Wahl des Algorithmus ist aktiv.
@@ -330,228 +339,4 @@ F\"ur alle Use Cases gilt:
 		    \end{enumerate}
     }
 \end{usecase}
-\newpage 
-% 
-\subsubsection{Set Step}
-\begin{usecase}{Set Step}
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage 
-% 
-\subsubsection{Forward}
-\begin{usecase}{Forward}
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage 
-% 
-\subsubsection{Backward}
-\begin{usecase}{Backward}
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage 
-% 
-\subsubsection{Goto Beginning}
-\begin{usecase}{Goto Beginning}
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage 
-% 
-\subsubsection{Goto End}
-\begin{usecase}{Goto End} 
-
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage 
-% 
-\subsubsection{Set Delay}
-\begin{usecase}{Set Delay}
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage 
-% 
-\subsubsection{Play}
-\begin{usecase}{Play}
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage 
-% 
-\subsubsection{Pause}
-\begin{usecase}{Pause}
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage 
-% 
-\subsubsection{Resume}
-\begin{usecase}{Resume}
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage 
-% 
-\subsubsection{Stop}
-\begin{usecase}{Stop}
-    \precondition{
-	    
-    }
-    \postconditions{
-	    \item 
-	    \item 
-    }
-    \mainsuccess{
-	    \item 
-    }
-%     \hline \\ [-1.3ex]
-    \extensions{
-	    \item[1.a]
-		    \begin{enumerate}
-			\item 
-		    \end{enumerate}
-    }
-\end{usecase}
-\newpage
-% 
-
-Der Visualisierungsfortschritt wird in der Progressbar angezeigt.
+% \newpage

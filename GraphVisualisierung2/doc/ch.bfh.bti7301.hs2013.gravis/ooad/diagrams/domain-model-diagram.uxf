@@ -315,7 +315,7 @@ enable &gt;</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
-m2=1
+m2=0..1
 select &gt;</panel_attributes>
     <additional_attributes>21;35;119;35</additional_attributes>
   </element>
@@ -357,7 +357,7 @@ delete &gt;</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
-m2=1
+m2=0..1
 select &gt;</panel_attributes>
     <additional_attributes>21;35;119;35</additional_attributes>
   </element>

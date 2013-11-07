@@ -1,8 +1,8 @@
 \section{Domain Model}
-\label{sec:domain_model}
-
+\label{sec:Domain Model}
+% 
 \subsection{Domain Model Diagram}
-\label{subsec:domain_model_diagram}
+\label{subsec:Domain Model Diagram}
 \begin{figure}[H]
     \includegraphics[totalheight=0.55\textheight]{diagrams/domain-model-diagram.pdf}
     \caption{Domain Model Diagram}
@@ -11,11 +11,11 @@
 
 \newpage
 \subsection{Domain Model Description}
-\label{subsec:domain_model_description}
+\label{subsec:Domain Model Description}
 Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziationen, wie im Domain Model Diagram gezeigt. Attribute und Multiplizit\"aten werden in Klammern angegeben.
 
-\subsubsection{User interface}
-\label{subsubsec:User interface}
+\subsubsection{User Interface}
+\label{subsubsec:User Interface}
 \begin{itemize}
   \item \"Uber ein User Interface (1) kann ein User einen Traversal Manager (1) bedienen (\textit{operate}).
   \item \"Uber ein User Interface (1) kann ein User einen Traversal Player (1) bedienen (\textit{operate}).
@@ -27,12 +27,12 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
   \item Ein Traversal Manager h\"alt eine gegebene Anzahl Graphen als Vorlagen (\textit{List of Graphs}) bereit.
   \item \"Uber einen Parameter Manager (1) kann ein User einen oder mehrere Graphen (0..n) des Formates *.graphml importieren (\textit{import}). Diese werden der Liste mit Graphen (\textit{List of Graphs}) hinzugef\"ugt.
   \item \"Uber einen Parameter Manager (1) kann ein User vormals importierte Graphn (0..n) wieder l\"oschen (\textit{delete}). Diese werden aus der Liste mit Graphen (\textit{List of Graphs}) wieder entfernt.
-  \item \"Uber einen Parameter Manager (1) kann ein User einen Graphen (1) als Parameter ausw\"ahlen (\textit{select}).
+  \item \"Uber einen Parameter Manager (1) kann ein User einen Graphen (0..1) als Parameter ausw\"ahlen (\textit{select}).
   \item Mit der Wahl eines Graphen (1) als Parameter werden die auf den Graphen anwendbaren Algorithmen (0..n) aktiv gesetzt (\textit{enable}).
   \item Ein Traversal Manager h\"alt eine gegebene Anzahl Algorithmen als Vorlagen (\textit{List of Algorithms}) bereit. Diese werden der Liste mit Algorithmen (\textit{List of Algorithms}) hinzugef\"ugt.
   \item \"Uber einen Parameter Manager (1) kann ein User einen oder mehrere Algorithmen (0..n) importieren (\textit{import}), sofern dieser die geforderten Interfaces implementiert.
   \item \"Uber einen Parameter Manager (1) kann ein User vormals importierte Algorithmen (0..n) wieder l\"oschen (\textit{delete}). Diese werden aus der Liste mit Algorithmen (\textit{List of Algorithms}) wieder entfernt.
-  \item \"Uber einen Parameter Manager (1) kann ein User einen Algorithmus (1) als Parameter ausw\"ahlen (\textit{select}).
+  \item \"Uber einen Parameter Manager (1) kann ein User einen Algorithmus (0..1) als Parameter ausw\"ahlen (\textit{select}).
   \item Mit der Wahl eines Algorithmus (1) als Parameter wird eine Traversal (1) erstellt (\textit{generate}).
 \end{itemize}
 % 
@@ -49,7 +49,7 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
   \item Ein Algorithm kann Graphen mit ungerichteten oder gerichteten Kanten (\textit{Edgetype}) verarbeiten.
   \item Ein Algorithm kann aktiviert werden (\textit{Enabled}).
   \item Ein Algorithm kann ausgew\"ahlt werden (\textit{Selected}).
-  \item Ein Algorithm (1) generiert eine Traversal (1).
+  \item Ein Algorithm (1) generiert eine Traversal (1) (\textit{generate}).
 \end{itemize}
 % 
 \subsubsection{Traversal}
@@ -67,12 +67,12 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
 \subsubsection{Traversal Player}
 \label{subsubsec:Traversal Player}
 \begin{itemize}
-  \item Ein Traversal Player (1) steuert einen Visualizer (1).
+  \item Ein Traversal Player (1) steuert einen Visualizer (1) (\textit{control}).
   \item Ein Traversal Player h\"alt eine Traversierung (\textit{Traversal}).
-  \item \"Uber einen Traversal Player (1) kann ein User die Anzahl Schritte (\textit{Steplength}) pro Bild einstellen.
-  \item \"Uber einen Traversal Player (1) kann ein User die Zeit (\textit{Delay}) zwischen zwei Bildern einstellen.
-  \item \"Uber einen Traversal Player (1) kann ein User Springen-Elemente (\textit{Forward, Backward, To Beginning, To End}) f\"ur die Step-by-Step Visualisierung im Visualizer (1) bedienen.
-  \item \"Uber einen Traversal Player (1) kann ein User Abspiel-Elemente (\textit{Play, Pause, Resume, Stop}) f\"ur die animierte Visualisierung im Visualizer (1) bedienen.
+  \item Per Traversal Player kann ein User die Anzahl Schritte pro Bild (\textit{Steplength}) einstellen.
+  \item Per Traversal Player kann ein User die Zeit zwischen zwei Bildern (\textit{Delay}) einstellen.
+  \item Per Traversal Player kann ein User Step-by-Step-Elemente (\textit{Forward, Backward, To Beginning, To End}) bedienen.
+  \item Per Traversal Player kann ein User Animations-Elemente (\textit{Play, Pause, Resume, Stop}) bedienen.
 \end{itemize}
 
 \subsubsection{Visualizer}

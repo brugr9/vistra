@@ -1,155 +1,130 @@
 \section{Design Model}
-\label{sec:design-model}
-This design model affects previous artifacts with changes as follows:
+\label{sec:Design Model}
+Das Design Model nimmt sich allen wichtigeren Use Cases (UC) des Systems an. F\"ur die UC  \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Graph}, \textit{Delete Algorithm}, \textit{Select Graph} und \textit{Select Algorithm} werden die folgenden Diagramme erstellt:
 \begin{itemize}
-  \item The \textbf{Use Cases} got renamed to \textit{Register}, \textit{Subscribe}, \textit{Consult Articles}, \textit{Upload Articles} and \textit{Upload Issue}. 
-  \item One more \textbf{Use Case} named \textit{Fetch Articles} has been added in brief format.
-  \item The \textbf{Use Cases} in fully dressed format (\textit{Register}, \textit{Subscribe}, \textit{Upload Articles} and \textit{Fetch Articles}) got rewritten.
-  \item The \textbf{Use Case Diagram} got updated.
-  \item The \textbf{Domain Model Diagram} and the \textbf{Domain Model Description} got updated, some multiplicities have changed (e.g. for \textit{Article}).
+  \item Ein \textbf{System Sequence Diagram (SSD)}, welches zeigt, wie eine Benutzerinteraktion vom System erledigt wird; 
+  \item ein \textbf{Sequence Diagram (SD)}, welches zeigt, wie Objekte miteinander arbeiten und die Zust\"andigkeiten der Klassen illustriert; 
+  \item und ein \textbf{Design Class Diagram (DCD)}, welches die statischen Aspekte des Systems unter Ber\"ucksichtigung der Funktionalit\"at illustriert.
 \end{itemize}
-
-As mentioned earlier the ENL system is a typical client-server application. We develop the server side only, therefore we focus on the user interaction related Use Cases \textit{Register}, \textit{Subscribe}, \textit{Consult Articles}, \textit{Upload Article}, \textit{Fetch Articles} and \textit{Upload Issue}. For each of them, this documentation serves with
-\begin{itemize}
-  \item a \textbf{System Sequence Diagram (SSD)} illustrating how certain tasks are done between users and the system, 
-  \item a \textbf{Sequence Diagram (SD)} illustrating how objects collaborate together in the server and what the responsibilities of the classes are, 
-  \item and a \textbf{Design Class Diagram (DCD)} illustrating the static aspects of the server side of the ENL system with respect of the functionality.
-\end{itemize}
-
-Every system event will be associated to a single system operation of a controller. Moreover, a controller implements exclusively system operations (and maybe some privates methods). Generally, classes of our design do not call methods of any controllers.
+Jeder System-Event wird mit einer einzigen System-Operation eines Controllers assoziiert. Ein Controller implementiert ausschliesslich System-Operationen (und vielleicht einige private Methoden). Generell rufen die Klassen dieses Designs keine Methoden eines Controllers auf.
 \newpage
-
-\subsection{Login}
-\label{subsec:login}
+% 
+\subsection{Import Graph}
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{diagrams/sd/sd-login.png}
-    \caption{Login, Sequence Diagram}
-    \label{fig:login-sd}
-\end{figure}
-\newpage
-
-\subsection{Register}
-\label{subsec:register}
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{diagrams/ssd/ssd-register.pdf}
-    \caption{Register, System Sequence Diagram}
-    \label{fig:register-ssd}
+    \includegraphics[width=\textwidth]{diagrams/ssd-import-graph.pdf}
+    \caption{Import Graph, System Sequence Diagram}
+    \label{fig:import-graph-ssd}
 \end{figure}
 % \newpage
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{diagrams/sd/sd-register.png}
-    \caption{Register, Sequence Diagram}
-    \label{fig:register-sd}
+    \includegraphics[width=\textwidth]{diagrams/sd-import-graph.png}
+    \caption{Import Graph, Sequence Diagram}
+    \label{fig:import-graph-sd}
 \end{figure}
-\newpage
+% \newpage
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{diagrams/dcd/dcd-register.png}
-    \caption{Register, Design Class Diagram}
-    \label{fig:register-dcd}
+    \includegraphics[width=\textwidth]{diagrams/dcd-import-graph.png}
+    \caption{Import Graph, Design Class Diagram}
+    \label{fig:import-graph-dcd}
 \end{figure}
 \newpage
-
-\subsection{Subscribe}
-\label{subsec:subscribe}
+% 
+\subsection{Import Algorithm}
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{diagrams/ssd/ssd-subscribe.pdf}
-    \caption{Subscribe, System Sequence Diagram}
-    \label{fig:subscribe-ssd}
+    \includegraphics[width=\textwidth]{diagrams/ssd-import-algorithm.pdf}
+    \caption{Import Algorithm, System Sequence Diagram}
+    \label{fig:import-algorithm-ssd}
 \end{figure}
-\newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/sd/sd-subscribe.pdf}
-%     \caption{Subscribe, Sequence Diagram}
-%     \label{fig:subscribe-sd}
-% \end{figure}
 % \newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/dcd/dcd-subscribe.pdf}
-%     \caption{Subscribe, Design Class Diagram}
-%     \label{fig:subscribe-dcd}
-% \end{figure}
-% \newpage
-
-\subsection{Consult Articles}
-\label{subsec:consult-articles}
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{diagrams/ssd/ssd-consult-articles.pdf}
-    \caption{Consult-Articles, System Sequence Diagram}
-    \label{fig:consult-articles-ssd}
+    \includegraphics[width=\textwidth]{diagrams/sd-import-algorithm.png}
+    \caption{Import Algorithm, Sequence Diagram}
+    \label{fig:import-algorithm-sd}
 \end{figure}
-\newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/sd/sd-consult-articles.pdf}
-%     \caption{Consult-Articles, Sequence Diagram}
-%     \label{fig:consult-articles-sd}
-% \end{figure}
 % \newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/dcd/dcd-consult-articles.pdf}
-%     \caption{Consult-Articles, Design Class Diagram}
-%     \label{fig:consult-articles-dcd}
-% \end{figure}
-% \newpage
-
-\subsection{Upload Article}
-\label{subsec:upload-article}
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{diagrams/ssd/ssd-upload-article.pdf}
-    \caption{Upload-Article, System Sequence Diagram}
-    \label{fig:upload-article-ssd}
+    \includegraphics[width=\textwidth]{diagrams/dcd-import-algorithm.png}
+    \caption{Import Algorithm, Design Class Diagram}
+    \label{fig:import-algorithm-dcd}
 \end{figure}
 \newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/sd/sd-upload-article.pdf}
-%     \caption{Upload-Article, Sequence Diagram}
-%     \label{fig:upload-article-sd}
-% \end{figure}
-% \newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/dcd/dcd-upload-article.pdf}
-%     \caption{Upload-Article, Design Class Diagram}
-%     \label{fig:upload-article-dcd}
-% \end{figure}
-% \newpage
-
-\subsection{Fetch Articles}
-\label{subsec:fetch-articles}
+% 
+\subsection{Delete Graph}
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{diagrams/ssd/ssd-fetch-articles.pdf}
-    \caption{Fetch-Articles, System Sequence Diagram}
-    \label{fig:fetch-articles-ssd}
+    \includegraphics[width=\textwidth]{diagrams/ssd-delete-graph.pdf}
+    \caption{Delete Graph, System Sequence Diagram}
+    \label{fig:delete-graph-ssd}
 \end{figure}
-\newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/sd/sd-fetch-articles.pdf}
-%     \caption{Fetch-Articles, Sequence Diagram}
-%     \label{fig:fetch-articles-sd}
-% \end{figure}
 % \newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/dcd/dcd-fetch-articles.pdf}
-%     \caption{Fetch-Articles, Design Class Diagram}
-%     \label{fig:fetch-articles-dcd}
-% \end{figure}
-% \newpage
-
-\subsection{Upload Issue}
-\label{subsec:upload-issue}
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{diagrams/ssd/ssd-upload-issue.pdf}
-    \caption{Upload-Issue, System Sequence Diagram}
-    \label{fig:upload-issue-ssd}
+    \includegraphics[width=\textwidth]{diagrams/sd-delete-graph.png}
+    \caption{Delete Graph, Sequence Diagram}
+    \label{fig:delete-graph-sd}
+\end{figure}
+% \newpage
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/dcd-delete-graph.png}
+    \caption{Delete Graph, Design Class Diagram}
+    \label{fig:delete-graph-dcd}
 \end{figure}
 \newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/sd/sd-upload-issue.pdf}
-%     \caption{Upload-Issue, Sequence Diagram}
-%     \label{fig:upload-issue-sd}
-% \end{figure}
+% 
+\subsection{Delete Algorithm}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/ssd-delete-algorithm.pdf}
+    \caption{Delete Algorithm, System Sequence Diagram}
+    \label{fig:delete-algorithm-ssd}
+\end{figure}
 % \newpage
-% \begin{figure}[H]
-%     \includegraphics[width=\textwidth]{diagrams/dcd/dcd-upload-issue.pdf}
-%     \caption{Upload-Issue, Design Class Diagram}
-%     \label{fig:upload-issue-dcd}
-% \end{figure}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/sd-delete-algorithm.png}
+    \caption{Delete Algorithm, Sequence Diagram}
+    \label{fig:delete-algorithm-sd}
+\end{figure}
+% \newpage
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/dcd-delete-algorithm.png}
+    \caption{Delete Algorithm, Design Class Diagram}
+    \label{fig:delete-algorithm-dcd}
+\end{figure}
+\newpage
+% 
+\subsection{Select Graph}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/ssd-select-graph.pdf}
+    \caption{Select Graph, System Sequence Diagram}
+    \label{fig:select-graph-ssd}
+\end{figure}
+% \newpage
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/sd-select-graph.png}
+    \caption{Select Graph, Sequence Diagram}
+    \label{fig:select-graph-sd}
+\end{figure}
+% \newpage
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/dcd-select-graph.png}
+    \caption{Select Graph, Design Class Diagram}
+    \label{fig:select-graph-dcd}
+\end{figure}
+\newpage
+% 
+\subsection{Select Algorithm}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/ssd-select-algorithm.pdf}
+    \caption{Select Algorithm, System Sequence Diagram}
+    \label{fig:select-algorithm-ssd}
+\end{figure}
+% \newpage
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/sd-select-algorithm.png}
+    \caption{Select Algorithm, Sequence Diagram}
+    \label{fig:select-algorithm-sd}
+\end{figure}
+% \newpage
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{diagrams/dcd-select-algorithm.png}
+    \caption{Select Algorithm, Design Class Diagram}
+    \label{fig:select-algorithm-dcd}
+\end{figure}
 % \newpage
