@@ -58,5 +58,5 @@ public interface IGravisGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 * @param graphType
 	 */
-	public abstract void setType(GraphType[] graphType);
+	public abstract void setType(GraphType ... graphType);
 }

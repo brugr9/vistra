@@ -92,13 +92,14 @@ public final class GraphFactory {
 	public static IGraphManager createGraphManager(Properties p)
 			throws Exception {
 		try {
-			File templatesDir = new File(p.getProperty("dir.templates.graph"));
-			templatesDir.setReadOnly();
-			File workbenchDir = new File(p.getProperty("dir.workbench.graph"));
-			FileNameExtensionFilter filter = new FileNameExtensionFilter(
-					p.getProperty("suffix.graph.description"),
-					p.getProperty("suffix.graph"));
-			return new GraphManager(templatesDir, workbenchDir, filter);
+			// TODO activate properties
+//			File templatesDir = new File(p.getProperty("dir.templates.graph"));
+//			templatesDir.setReadOnly();
+//			File workbenchDir = new File(p.getProperty("dir.workbench.graph"));
+//			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+//					p.getProperty("suffix.graph.description"),
+//					p.getProperty("suffix.graph"));
+			return new GraphManager(null, null, null);
 		} catch (Exception e) {
 			throw e;
 		}

@@ -35,8 +35,11 @@ class AlgorithmManager extends AbstractParameterManager implements
 		try {
 			// TODO read from templatesDir as well as from workbenchDir and add
 			// TODO validation?
-			super.putAll(templatesDir.listFiles());
-			super.putAll(workbenchDir.listFiles());
+			
+			// TODO activate properties
+			
+//			super.putAll(templatesDir.listFiles());
+//			super.putAll(workbenchDir.listFiles());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,7 +89,7 @@ class AlgorithmManager extends AbstractParameterManager implements
 			// File file = super.getFile(algorithmId);
 			// return AlgorithmFactory.createAlgorithm(file);
 			// TODO bitte dummy value auskommentieren und nicht löschen
-			return new AlgorithmDijkstra();
+			return new AlgorithmDLSRecursive();
 		} catch (Exception e) {
 			throw e;
 		}

@@ -1,6 +1,8 @@
 package ch.bfh.bti7301.hs2013.gravis.core.util;
 
 import java.awt.Color;
+import java.awt.Point;
+import java.awt.geom.Point2D;
 
 /**
  * A utility class, therefore serving with static method only.
@@ -58,6 +60,19 @@ public final class ValueTransformer {
 			return GravisColor.gray;
 		default:
 			return GravisColor.red;
+		}
+	}
+
+	/**
+	 * @param xValue
+	 * @param yValue
+	 * @return
+	 */
+	public static Point2D transformLocation(String xValue, String yValue) {
+		try {
+			return new Point(Integer.parseInt(xValue), Integer.parseInt(yValue));
+		} catch (Exception e) {
+			return new Point();
 		}
 	}
 

@@ -1,16 +1,20 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.collections15.BidiMap;
+import org.apache.commons.collections15.Transformer;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
@@ -19,8 +23,10 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.util.ValueTransformer;
 import ch.bfh.bti7301.hs2013.gravis.old.OldApplicationFactory;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.Hypergraph;
 import edu.uci.ics.jung.io.GraphMLMetadata;
 import edu.uci.ics.jung.io.GraphMLReader;
+import edu.uci.ics.jung.io.GraphMLWriter;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -45,8 +51,10 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 		try {
 			// TODO read from templatesDir as well as from workbenchDir and add
 			// TODO validation?
-			super.putAll(templatesDir.listFiles());
-			super.putAll(workbenchDir.listFiles());
+			
+			// TODO activate properties
+//			super.putAll(templatesDir.listFiles());
+//			super.putAll(workbenchDir.listFiles());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,9 +70,6 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		// TODO validate file against xsd of graphml
-		// TODO read GraphName from graphml
-		// TODO read GraphType from graphml: <graph id="Sample Graph 1"
-		// edgedefault="directed">
 
 		try {
 			IGravisGraph newGraph = null;
@@ -96,11 +101,8 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
-		// TODO File as method parameter
-
 		try {
 			IGravisGraph newGraph = GraphFactory.createIGravisGraph();
-			// TODO from which directory does graphReader get the file?
 			graphReader.load(file.getAbsolutePath(), newGraph);
 
 			BidiMap<IVertex, String> vertexIds = graphReader.getVertexIDs();
@@ -109,23 +111,33 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 					.getVertexMetadata();
 			Map<String, GraphMLMetadata<IEdge>> edgeMeta = graphReader
 					.getEdgeMetadata();
+			
+			Map<String, GraphMLMetadata<Graph<IVertex,IEdge>>> graphMeta = graphReader.getGraphMetadata();
+			// TODO read attribute Id from file: id
+			newGraph.setGraphId(graphMeta.get("id").transformer.transform(newGraph));
+			// TODO read graph type from file
+			newGraph.setType(IAlgorithm.GraphType.DIRECTED);
+			// TODO read GraphName from graphml
 
 			for (IVertex vertex : newGraph.getVertices()) {
 				vertex.setId(vertexIds.get(vertex));
-				// TODO read attribute Ids from file: a0, a3
+				// TODO read attribute Ids from file: vertexColor, startVertex, vertexLocation.x, vertexLocation.y
 				vertex.setColor(ValueTransformer.transformColor(vertexMeta
-						.get("a0").transformer.transform(vertex)));
+						.get("vertexColor").transformer.transform(vertex)));
 				vertex.setStart(ValueTransformer.transformBoolean(vertexMeta
-						.get("a3").transformer.transform(vertex)));
+						.get("startVertex").transformer.transform(vertex)));
+				vertex.setLocation(ValueTransformer.transformLocation(vertexMeta
+						.get("vertexLocation.x").transformer.transform(vertex), vertexMeta
+						.get("vertexLocation.y").transformer.transform(vertex)));
 			}
 
 			for (IEdge edge : newGraph.getEdges()) {
 				edge.setId(edgeIds.get(edge));
-				// TODO read attribute Ids from file: a1, a2
+				// TODO read attribute Ids from file: edgeColor, weight
 				// edge.setColor(ValueTransformer.transformColor(edgeMeta
-				// .get("a1").transformer.transform(edge)));
+				// .get("edgeColor").transformer.transform(edge)));
 				edge.setWeight(ValueTransformer.transformWeight(edgeMeta
-						.get("a2").transformer.transform(edge)));
+						.get("weight").transformer.transform(edge)));
 			}
 
 			return newGraph;
@@ -139,13 +151,43 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	/**
 	 * @param file
 	 */
-	private void storeGraph(File file) {
+	private void storeGraph(File file, IGravisGraph graph) {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		// TODO write GraphName from graphml
 		// TODO write GraphType from graphml: <graph id="Sample Graph 1"
 		// edgedefault="directed">
 		// TODO to implement
+		
+		GraphMLWriter<IVertex,IEdge> graphWriter = new GraphMLWriter<>();
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(file);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		Transformer<Hypergraph<IVertex,IEdge>,String> graphTransformer = 
+				new Transformer<Hypergraph<IVertex,IEdge>, String>() {
+			@Override
+			public String transform(Hypergraph<IVertex,IEdge> graph) {
+				if (graph instanceof IGravisGraph) {
+					return ((IGravisGraph) graph).getGraphId();
+				}
+				return "";
+			}
+		};
+		
+		graphWriter.addGraphData("id", "", "", graphTransformer);
+		try {
+			graphWriter.save(graph, writer);
+			
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -162,7 +204,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			// TODO bitte dummy value auskommentieren und nicht löschen
 			return this.loadGraph(new File(
 					OldApplicationFactory.IMPORTED_GRAPHS_PATH
-							+ "SampleTree1.graphml"));
+							+ "SampleTree2.graphml"));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -270,6 +312,9 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	@Override
 	public boolean saveGraph(IGravisGraph graph) throws Exception {
 		// TODO Auto-generated method stub
+		this.storeGraph(new File(
+					OldApplicationFactory.IMPORTED_GRAPHS_PATH
+							+ "SampleTree2_out.graphml"), graph);
 		return false;
 	}
 

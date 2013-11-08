@@ -10,6 +10,7 @@ import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.CoreFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
+import ch.bfh.bti7301.hs2013.gravis.gui.VisualizationPanel;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -35,7 +36,7 @@ public final class OldApplicationFactory {
 	// String filename = "GraphMLBspTree";
 	// this.graphService.importGraph(path + "/" + filename +
 	// ".graphml");
-	public final static String IMPORTED_GRAPHS_PATH = "resources/graph/templates/";
+	public final static String IMPORTED_GRAPHS_PATH = "src/main/resources/META-INF/templates/";
 
 	/**
 	 * The default name of the property file name relative to the CLASSPATH.
@@ -79,7 +80,7 @@ public final class OldApplicationFactory {
 			e.printStackTrace();
 		}
 
-		OldVisualizationPanel graphPanel = new OldVisualizationPanel(
+		VisualizationPanel graphPanel = new VisualizationPanel(
 				new CircleLayout<IVertex, IEdge>(GraphFactory.createGraph()));
 		OldIGravisMainListener mainWindowListener = new OldMainWindowListener(
 				gravisCore);

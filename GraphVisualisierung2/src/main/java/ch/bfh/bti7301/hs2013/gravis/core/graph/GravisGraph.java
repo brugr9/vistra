@@ -111,8 +111,8 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	}
 
 	@Override
-	public void setType(GraphType[] graphType) {
-		this.setType(graphType);
+	public void setType(GraphType ... graphType) {
+		this.graphType = graphType;
 	}
 
 }
