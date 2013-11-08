@@ -11,7 +11,7 @@
 % 
 \subsection{Domain Model Description}
 \label{subsec:Domain Model Description}
-Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziationen, wie im Domain Model Diagram gezeigt. Attribute und Multiplizit\"aten werden in Klammern angegeben.
+Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziationen, wie im Domain Model Diagram gezeigt. Multiplizit\"aten und Attribute werden in Klammern angegeben.
 % 
 \subsubsection{User Interface}
 \label{subsubsec:User Interface}
@@ -23,16 +23,16 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
 \subsubsection{Traversal Manager}
 \label{subsubsec:Traversal Manager}
 \begin{itemize}
-  \item Ein Traversal Manager h\"alt eine gegebene Anzahl Graphen als Vorlagen (\textit{List of Graphs}) bereit.
-  \item \"Uber einen Parameter Manager (1) kann ein User einen oder mehrere Graphen (0..n) des Formates *.graphml importieren (\textit{import}). Diese werden der Liste mit Graphen (\textit{List of Graphs}) hinzugef\"ugt.
+  \item Ein Traversal Manager verwaltet die zur Traversal ben\"otigten Parameter Graph (\textit{List of Graphs}) und Algorithm (\textit{List of Algorithms}).
+  \item Ein Traversal Manager h\"alt eine gegebene Anzahl von Graphen als Vorlagen bereit.
+  \item \"Uber einen Parameter Manager (1) kann ein User einen oder mehrere Graphen (0..n) des Formates *.graphml importieren (\textit{import}). Die importierten Graphen werden der Liste mit Graphen (\textit{List of Graphs}) hinzugef\"ugt.
   \item \"Uber einen Parameter Manager (1) kann ein User vormals importierte Graphn (0..n) wieder l\"oschen (\textit{delete}). Diese werden aus der Liste mit Graphen (\textit{List of Graphs}) wieder entfernt.
   \item \"Uber einen Parameter Manager (1) kann ein User einen Graphen (0..1) als Parameter ausw\"ahlen (\textit{select}).
   \item Mit der Wahl eines Graphen (1) als Parameter werden die auf den Graphen anwendbaren Algorithmen (0..n) aktiv gesetzt (\textit{enable}).
-  \item Ein Traversal Manager h\"alt eine gegebene Anzahl Algorithmen als Vorlagen (\textit{List of Algorithms}) bereit. Diese werden der Liste mit Algorithmen (\textit{List of Algorithms}) hinzugef\"ugt.
-  \item \"Uber einen Parameter Manager (1) kann ein User einen oder mehrere Algorithmen (0..n) importieren (\textit{import}), sofern dieser die geforderten Interfaces implementiert.
+  \item Ein Traversal Manager h\"alt eine gegebene Anzahl Algorithmen als Vorlagen bereit.
+  \item \"Uber einen Parameter Manager (1) kann ein User einen oder mehrere Algorithmen (0..n) importieren (\textit{import}), sofern diese ein gefordertes Interface implementieren. Die importierten Algorithmen werden der Liste mit Algorithmen (\textit{List of Algorithms}) hinzugef\"ugt.
   \item \"Uber einen Parameter Manager (1) kann ein User vormals importierte Algorithmen (0..n) wieder l\"oschen (\textit{delete}). Diese werden aus der Liste mit Algorithmen (\textit{List of Algorithms}) wieder entfernt.
-  \item \"Uber einen Parameter Manager (1) kann ein User einen Algorithmus (0..1) als Parameter ausw\"ahlen (\textit{select}).
-  \item Mit der Wahl eines Algorithmus (1) als Parameter wird eine Traversal (1) erstellt (\textit{generate}).
+  \item \"Uber einen Parameter Manager (1) kann ein User einen aktivierten (\textit{Enabled}) Algorithmus (0..1) als Parameter ausw\"ahlen (\textit{select}).
 \end{itemize}
 % 
 \subsubsection{Graph}
@@ -46,21 +46,22 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
 \label{subsubsec:Algorithm}
 \begin{itemize}
   \item Ein Algorithm kann Graphen mit ungerichteten oder gerichteten Kanten (\textit{Edgetype}) verarbeiten.
-  \item Ein Algorithm kann aktiviert werden (\textit{Enabled}).
-  \item Ein Algorithm kann ausgew\"ahlt werden (\textit{Selected}).
   \item Ein Algorithm (1) generiert eine Traversal (1) (\textit{generate}).
+  \item Ein Algorithm kann aktiviert werden (\textit{Enabled}).
+  \item Ein aktivierter Algorithm (\textit{Enabled}) kann ausgew\"ahlt werden (\textit{Selected}).
+  \item Infolge des Ausw\"ahlens eines Algorithm (1) als Parameter (\textit{Selected}) wird eine Traversal (1) erstellt (\textit{generate}).
 \end{itemize}
 % 
 \subsubsection{Traversal}
 \label{subsubsec:Traversal}
 \begin{itemize}
-  \item Eine Traversal (1) kann einen oder mehrere Steps (0..n) auflisten (\textit{List of Steps}).
+  \item Eine Traversal (1) kann einen oder mehrere Steps (0..n) beinhalten resp. auflisten (\textit{List of Steps}).
 \end{itemize}
 
 \subsubsection{Step}
 \label{subsubsec:Step}
 \begin{itemize}
-  \item Ein Step ist ein Schritt der Traversierung.
+  \item Ein Step ist ein Schritt der Traversal.
 \end{itemize}
 
 \subsubsection{Traversal Player}
@@ -77,6 +78,6 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
 \subsubsection{Visualizer}
 \label{subsubsec:Visualizer}
 \begin{itemize}
-  \item Ein Visualizer (1) visualisiert einen Graphen (1).
-  \item Ein Visualizer (1) kann einen oder mehrere Steps (0..n) visualisieren.
+  \item Ein Visualizer (1) kann einen Graphen (0..1) visualisieren (\textit{visualize}).
+  \item Ein Visualizer (1) kann einen oder mehrere Steps (0..n) visualisieren (\textit{visualize}).
 \end{itemize}

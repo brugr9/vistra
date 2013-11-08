@@ -204,7 +204,7 @@ list&gt;</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-
 m1= 1
-m2= 1
+m2= 0..1
  
  
  
@@ -470,5 +470,86 @@ select &gt;</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>70;21;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>308</x>
+      <y>301</y>
+      <w>98</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>Mit der Wahl eines
+Graphen als Para-
+meter (select) 
+werden die auf den 
+Graphen anwend-
+baren Algorithmen
+aktiv gesetzt 
+(enable).
+bg=gray
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>385</x>
+      <y>294</y>
+      <w>111</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>21;49;98;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>385</x>
+      <y>203</y>
+      <w>97</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>21;140;84;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>399</x>
+      <y>581</y>
+      <w>105</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>Mit der Wahl eines
+Algorithmus als 
+Parameter (select) 
+wird die Traversal
+berechnet
+(generate).
+bg=gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>413</x>
+      <y>315</y>
+      <w>62</w>
+      <h>279</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>21;266;49;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>413</x>
+      <y>406</y>
+      <w>216</w>
+      <h>188</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>21;175;203;21</additional_attributes>
   </element>
 </diagram>
