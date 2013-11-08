@@ -14,6 +14,7 @@ import org.apache.commons.collections15.Transformer;
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.PointTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -79,15 +80,8 @@ public class VisualizationPanel extends VisualizationViewer<IVertex, IEdge>
 				@SuppressWarnings("unchecked")
 				Graph<IVertex, IEdge> graph = (Graph<IVertex, IEdge>) arg;
 
-				Transformer<IVertex,Point2D> pointTransformer = new Transformer<IVertex,Point2D>() {
-					@Override
-					public Point2D transform(IVertex vertex) {
-						return vertex.getLocation();
-					}
-				};
-				
 				// TODO add dynamic layout
-				Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph, pointTransformer);
+				Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph, new PointTransformer());
 				layout.setSize(new Dimension(250, 350));
 				this.setGraphLayout(layout);
 

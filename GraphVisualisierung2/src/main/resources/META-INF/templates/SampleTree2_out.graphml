@@ -8,27 +8,27 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 </key>
 <graph edgedefault="directed">
 <data key="id">Sample Tree 2</data>
-<node id="B"/>
+<node id="E"/>
+<node id="J"/>
+<node id="I"/>
 <node id="G"/>
 <node id="F"/>
-<node id="D"/>
-<node id="C"/>
-<node id="I"/>
-<node id="J"/>
-<node id="E"/>
-<node id="H"/>
 <node id="L"/>
+<node id="H"/>
 <node id="K"/>
+<node id="C"/>
 <node id="A"/>
+<node id="D"/>
+<node id="B"/>
+<edge source="E" target="H"/>
+<edge source="F" target="G"/>
+<edge source="K" target="L"/>
+<edge source="E" target="F"/>
+<edge source="A" target="B"/>
+<edge source="I" target="J"/>
+<edge source="A" target="I"/>
 <edge source="A" target="E"/>
 <edge source="C" target="D"/>
-<edge source="I" target="J"/>
-<edge source="E" target="H"/>
-<edge source="A" target="B"/>
-<edge source="A" target="I"/>
 <edge source="B" target="C"/>
-<edge source="F" target="G"/>
-<edge source="E" target="F"/>
-<edge source="K" target="L"/>
 </graph>
 </graphml>

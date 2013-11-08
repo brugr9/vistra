@@ -89,7 +89,7 @@ class AlgorithmManager extends AbstractParameterManager implements
 			// File file = super.getFile(algorithmId);
 			// return AlgorithmFactory.createAlgorithm(file);
 			// TODO bitte dummy value auskommentieren und nicht löschen
-			return new AlgorithmDijkstra();
+			return new AlgorithmDLSRecursive();
 		} catch (Exception e) {
 			throw e;
 		}
