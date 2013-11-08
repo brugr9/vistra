@@ -121,20 +121,23 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 
 			for (IVertex vertex : newGraph.getVertices()) {
 				vertex.setId(vertexIds.get(vertex));
-				// TODO read attribute Ids from file: a0, a3
+				// TODO read attribute Ids from file: vertexColor, startVertex, vertexLocation.x, vertexLocation.y
 				vertex.setColor(ValueTransformer.transformColor(vertexMeta
-						.get("a0").transformer.transform(vertex)));
+						.get("vertexColor").transformer.transform(vertex)));
 				vertex.setStart(ValueTransformer.transformBoolean(vertexMeta
-						.get("a3").transformer.transform(vertex)));
+						.get("startVertex").transformer.transform(vertex)));
+				vertex.setLocation(ValueTransformer.transformLocation(vertexMeta
+						.get("vertexLocation.x").transformer.transform(vertex), vertexMeta
+						.get("vertexLocation.y").transformer.transform(vertex)));
 			}
 
 			for (IEdge edge : newGraph.getEdges()) {
 				edge.setId(edgeIds.get(edge));
-				// TODO read attribute Ids from file: a1, a2
+				// TODO read attribute Ids from file: edgeColor, weight
 				// edge.setColor(ValueTransformer.transformColor(edgeMeta
-				// .get("a1").transformer.transform(edge)));
+				// .get("edgeColor").transformer.transform(edge)));
 				edge.setWeight(ValueTransformer.transformWeight(edgeMeta
-						.get("a2").transformer.transform(edge)));
+						.get("weight").transformer.transform(edge)));
 			}
 
 			return newGraph;

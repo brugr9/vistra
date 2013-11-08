@@ -1,12 +1,15 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
 import java.awt.Dimension;
+import java.awt.geom.Point2D;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
+
+import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
@@ -67,15 +70,24 @@ public class VisualizationPanel extends VisualizationViewer<IVertex, IEdge>
 
 		// TODO bitte an dieser Klasse nichts ändern (pk)
 
-		if (o instanceof GuiModel && arg instanceof Graph<?, ?>) {
-			GuiModel m = (GuiModel) o;
+		// if (o instanceof GuiModel && arg instanceof Graph<?, ?>) {
+		// GuiModel m = (GuiModel) o;
+			if (arg instanceof Graph<?, ?>) {
+//				GuiModel m = (GuiModel) o;
 
 			try {
 				@SuppressWarnings("unchecked")
 				Graph<IVertex, IEdge> graph = (Graph<IVertex, IEdge>) arg;
 
+				Transformer<IVertex,Point2D> pointTransformer = new Transformer<IVertex,Point2D>() {
+					@Override
+					public Point2D transform(IVertex vertex) {
+						return vertex.getLocation();
+					}
+				};
+				
 				// TODO add dynamic layout
-				Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph);
+				Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph, pointTransformer);
 				layout.setSize(new Dimension(250, 350));
 				this.setGraphLayout(layout);
 
@@ -85,11 +97,11 @@ public class VisualizationPanel extends VisualizationViewer<IVertex, IEdge>
 				this.getRenderContext().setEdgeDrawPaintTransformer(
 						new EdgeColorTransformer());
 
-				this.visualizationPanelBorder.setTitle(m
-						.getVisualizationPanelLabel());
+//				this.visualizationPanelBorder.setTitle(m
+//						.getVisualizationPanelLabel());
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e.toString(),
-						m.getProgramName(), 1, null);
+//				JOptionPane.showMessageDialog(null, e.toString(),
+//						m.getProgramName(), 1, null);
 				e.printStackTrace();
 			}
 		}

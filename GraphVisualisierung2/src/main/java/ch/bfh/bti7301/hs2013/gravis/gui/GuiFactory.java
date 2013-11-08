@@ -1,11 +1,16 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
+import java.awt.geom.Point2D;
+
+import org.apache.commons.collections15.Transformer;
+
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.algorithms.layout.TreeLayout;
 import edu.uci.ics.jung.graph.Forest;
 import edu.uci.ics.jung.graph.Graph;
@@ -68,20 +73,12 @@ public final class GuiFactory {
 
 	/**
 	 * @param graph
+	 * @param pointTransformer 
 	 * @return a new instance of type Layout<IVertex, IEdge>
 	 */
 	public static Layout<IVertex, IEdge> createLayout(
-			Graph<IVertex, IEdge> graph) {
-		return createCircleLayout(graph);
-	}
-
-	/**
-	 * @param graph
-	 * @return a circle layout
-	 */
-	public static Layout<IVertex, IEdge> createCircleLayout(
-			Graph<IVertex, IEdge> graph) {
-		return new CircleLayout<>(graph);
+			Graph<IVertex, IEdge> graph, Transformer<IVertex, Point2D> pointTransformer) {
+		return new StaticLayout<>(graph, pointTransformer);
 	}
 
 	/**
@@ -174,6 +171,15 @@ public final class GuiFactory {
 	}
 
 	/**
+	 * @param graph
+	 * @return a circle layout
+	 */
+	static Layout<IVertex, IEdge> createCircleLayout(
+			Graph<IVertex, IEdge> graph) {
+		return new CircleLayout<>(graph);
+	}
+	
+	/**
 	 * Creates a render panel.
 	 * 
 	 * @param guiModel
@@ -195,7 +201,7 @@ public final class GuiFactory {
 	 */
 	static VisualizationPanel createVisualizationPanel(GuiModel guiModel) {
 		Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
-		Layout<IVertex, IEdge> layout = createLayout(graph);
+		Layout<IVertex, IEdge> layout = createCircleLayout(graph);
 		VisualizationPanel visualizationPanel = new VisualizationPanel(layout);
 		guiModel.addObserver(visualizationPanel);
 		return visualizationPanel;

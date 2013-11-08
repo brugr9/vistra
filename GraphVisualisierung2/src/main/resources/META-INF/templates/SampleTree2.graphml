@@ -2,17 +2,23 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
      http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
 
-	<key id="a0" for="node" attr.name="color" attr.type="string">
+	<key id="vertexColor" for="node" attr.name="vertexColor" attr.type="string">
 		<default>red</default>
 	</key>
-	<key id="a1" for="edge" attr.name="edgeColor" attr.type="string">
+	<key id="edgeColor" for="edge" attr.name="edgeColor" attr.type="string">
 		<default>black</default>
 	</key>
-	<key id="a2" for="edge" attr.name="weight" attr.type="double">
+	<key id="weight" for="edge" attr.name="weight" attr.type="double">
 		<default>1.0</default>
 	</key>
-	<key id="a3" for="node" attr.name="startNode" attr.type="boolean">
+	<key id="startVertex" for="node" attr.name="startVertex" attr.type="boolean">
 		<default>false</default>
+	</key>
+	<key id="vertexLocation.x" for="node" attr.name="vertexLocation.x" attr.type="integer">
+		<default>0</default>
+	</key>
+	<key id="vertexLocation.y" for="node" attr.name="vertexLocation.y" attr.type="integer">
+		<default>0</default>
 	</key>
 
 	<!-- <key id="g1" for="graph" attr.name="edgedefault" attr.type="string">
@@ -23,20 +29,55 @@
 		<!-- <data key="g1">directed</data> -->
 
 		<node id="A">
-			<data key="a0">gray</data>
-			<data key="a3">true</data>
+			<data key="vertexColor">gray</data>
+			<data key="startVertex">true</data>
+			<data key="vertexLocation.x">300</data>
+			<data key="vertexLocation.y">50</data>
 		</node>
-		<node id="B" />
-		<node id="C" />
-		<node id="D" />
-		<node id="E" />
-		<node id="F" />
-		<node id="G" />
-		<node id="H" />
-		<node id="I" />
-		<node id="J" />
-		<node id="K" />
-		<node id="L" />
+		<node id="B">
+			<data key="vertexLocation.x">250</data>
+			<data key="vertexLocation.y">100</data>
+		</node>
+		<node id="C">
+			<data key="vertexLocation.x">200</data>
+			<data key="vertexLocation.y">150</data>
+		</node>
+		<node id="D">
+			<data key="vertexLocation.x">150</data>
+			<data key="vertexLocation.y">200</data>
+		</node>
+		<node id="E">
+			<data key="vertexLocation.x">300</data>
+			<data key="vertexLocation.y">100</data>
+		</node>
+		<node id="F">
+			<data key="vertexLocation.x">300</data>
+			<data key="vertexLocation.y">150</data>
+		</node>
+		<node id="G">
+			<data key="vertexLocation.x">300</data>
+			<data key="vertexLocation.y">200</data>
+		</node>
+		<node id="H">
+			<data key="vertexLocation.x">350</data>
+			<data key="vertexLocation.y">150</data>
+		</node>
+		<node id="I">
+			<data key="vertexLocation.x">350</data>
+			<data key="vertexLocation.y">100</data>
+		</node>
+		<node id="J">
+			<data key="vertexLocation.x">400</data>
+			<data key="vertexLocation.y">150</data>
+		</node>
+		<node id="K">
+			<data key="vertexLocation.x">500</data>
+			<data key="vertexLocation.y">50</data>
+		</node>
+		<node id="L">
+			<data key="vertexLocation.x">500</data>
+			<data key="vertexLocation.y">100</data>
+		</node>
 		<edge id="ab" source="A" target="B"/>
 		<edge id="bc" source="B" target="C"/>
 		<edge id="cd" source="C" target="D"/>

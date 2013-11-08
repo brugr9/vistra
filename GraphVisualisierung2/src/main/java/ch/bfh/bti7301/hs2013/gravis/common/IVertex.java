@@ -1,5 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.common;
 
+import java.awt.geom.Point2D;
+
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * @author Roland Bruggmann (brugr9@bfh.ch)
@@ -51,4 +53,15 @@ public interface IVertex extends IGraphItem {
 	 *            the end to set
 	 */
 	public abstract void setEnd(boolean end);
+
+	/**
+	 * @return
+	 */
+	public abstract Point2D getLocation();
+	
+	/**
+	 * 
+	 * @param location
+	 */
+	public abstract void setLocation(Point2D location);
 }
