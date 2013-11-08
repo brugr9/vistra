@@ -1,6 +1,9 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
 import java.awt.Dimension;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.util.Observable;
 import java.util.Observer;
@@ -85,11 +88,21 @@ public class VisualizationPanel extends VisualizationViewer<IVertex, IEdge>
 				layout.setSize(new Dimension(250, 350));
 				this.setGraphLayout(layout);
 
+				Transformer<IVertex,Shape> vertexSize = new Transformer<IVertex,Shape>(){
+		            public Shape transform(IVertex vertex){
+		                Ellipse2D circle = new Ellipse2D.Double(-15, -15, 30, 30);
+//		                if(i == 2) return AffineTransform.getScaleInstance(2, 2).createTransformedShape(circle);
+//		                else return circle;
+		                return circle;
+		            }
+		        };
+				
 				// TODO adjust implementation
 				this.getRenderContext().setVertexFillPaintTransformer(
 						new VertexColorTransformer());
 				this.getRenderContext().setEdgeDrawPaintTransformer(
 						new EdgeColorTransformer());
+				this.getRenderContext().setVertexShapeTransformer(vertexSize);
 
 //				this.visualizationPanelBorder.setTitle(m
 //						.getVisualizationPanelLabel());
