@@ -11,7 +11,7 @@ import javax.swing.KeyStroke;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class GuiModel extends Observable {
+public final class Model extends Observable {
 
 	// ViewType elements
 	private String programName;
@@ -151,7 +151,7 @@ public final class GuiModel extends Observable {
 	/**
 	 * Main constructor.
 	 */
-	public GuiModel() {
+	public Model() {
 		super();
 		this.programName = "";
 		this.i18nBaseName = "";

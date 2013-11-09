@@ -8,7 +8,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.IMPORT_GRAPH;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.IMPORT_ALGORITHM;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.DELETE_GRAPH;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.DELETE_ALGORITHM;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.DE_DE;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.FR_FR;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.EN_US;
 
 /**
  * A menu bar.
@@ -76,10 +82,10 @@ public final class MenuBar extends JMenuBar implements Observer {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param guiControl
+	 * @param control
 	 *            the controller as in MVC
 	 */
-	public MenuBar(GuiControl guiControl) {
+	public MenuBar(Control control) {
 		{// JMenu fileMenu
 			this.fileMenu = new JMenu("fileMenu");
 			// JMenuItem
@@ -91,22 +97,18 @@ public final class MenuBar extends JMenuBar implements Observer {
 					"deleteAlgorithmMenuItem");
 			this.quitMenuItem = new JMenuItem("quitMenuItem");
 			// addActionListener
-			this.importGraphMenuItem.addActionListener(guiControl.ioListener);
-			this.importAlgorithmMenuItem
-					.addActionListener(guiControl.ioListener);
-			this.deleteGraphMenuItem.addActionListener(guiControl.ioListener);
-			this.deleteAlgorithmMenuItem
-					.addActionListener(guiControl.ioListener);
-			this.quitMenuItem.addActionListener(guiControl.quitListener);
+			this.importGraphMenuItem.addActionListener(control.ioListener);
+			this.importAlgorithmMenuItem.addActionListener(control.ioListener);
+			this.deleteGraphMenuItem.addActionListener(control.ioListener);
+			this.deleteAlgorithmMenuItem.addActionListener(control.ioListener);
+			this.quitMenuItem.addActionListener(control.quitListener);
 			// setActionCommand
-			this.importGraphMenuItem.setActionCommand(EventSource.IMPORT_GRAPH
+			this.importGraphMenuItem.setActionCommand(IMPORT_GRAPH.toString());
+			this.importAlgorithmMenuItem.setActionCommand(IMPORT_ALGORITHM
 					.toString());
-			this.importAlgorithmMenuItem
-					.setActionCommand(EventSource.IMPORT_ALGORITHM.toString());
-			this.deleteGraphMenuItem.setActionCommand(EventSource.DELETE_GRAPH
+			this.deleteGraphMenuItem.setActionCommand(DELETE_GRAPH.toString());
+			this.deleteAlgorithmMenuItem.setActionCommand(DELETE_ALGORITHM
 					.toString());
-			this.deleteAlgorithmMenuItem
-					.setActionCommand(EventSource.DELETE_ALGORITHM.toString());
 			// add
 			this.fileMenu.add(this.importAlgorithmMenuItem);
 			this.fileMenu.add(this.deleteAlgorithmMenuItem);
@@ -121,13 +123,13 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.frFRMenuItem = new JMenuItem("frFRMenuItem");
 			this.enUSMenuItem = new JMenuItem("enUSMenuItem");
 			// addActionListener
-			this.deDEMenuItem.addActionListener(guiControl.i18nListener);
-			this.frFRMenuItem.addActionListener(guiControl.i18nListener);
-			this.enUSMenuItem.addActionListener(guiControl.i18nListener);
+			this.deDEMenuItem.addActionListener(control.i18nListener);
+			this.frFRMenuItem.addActionListener(control.i18nListener);
+			this.enUSMenuItem.addActionListener(control.i18nListener);
 			// setActionCommand
-			this.deDEMenuItem.setActionCommand(EventSource.DE_DE.toString());
-			this.frFRMenuItem.setActionCommand(EventSource.FR_FR.toString());
-			this.enUSMenuItem.setActionCommand(EventSource.EN_US.toString());
+			this.deDEMenuItem.setActionCommand(DE_DE.toString());
+			this.frFRMenuItem.setActionCommand(FR_FR.toString());
+			this.enUSMenuItem.setActionCommand(EN_US.toString());
 			// add
 			this.i18nMenu.add(this.deDEMenuItem);
 			this.i18nMenu.add(this.frFRMenuItem);
@@ -139,8 +141,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.helpMenuItem = new JMenuItem("helpMenuItem");
 			this.aboutMenuItem = new JMenuItem("aboutMenuItem");
 			// addActionListener
-			this.helpMenuItem.addActionListener(guiControl.helpListener);
-			this.aboutMenuItem.addActionListener(guiControl.aboutListener);
+			this.helpMenuItem.addActionListener(control.helpListener);
+			this.aboutMenuItem.addActionListener(control.aboutListener);
 			// setActionCommand
 			this.helpMenuItem.setActionCommand("help");
 			this.aboutMenuItem.setActionCommand("about");
@@ -159,7 +161,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		GuiModel m = (GuiModel) o;
+		Model m = (Model) o;
 		try {
 			{// JMenu fileMenu
 				// setText

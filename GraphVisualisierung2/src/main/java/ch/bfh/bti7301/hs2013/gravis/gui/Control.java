@@ -32,16 +32,16 @@ import edu.uci.ics.jung.graph.Graph;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class GuiControl {
+public final class Control implements  IControl {
 
 	/**
 	 * A field for a Core.
 	 */
 	private final ICore core;
 	/**
-	 * A field for a GuiModel as in MVC.
+	 * A field for a Model as in MVC.
 	 */
-	private final GuiModel guiModel;
+	private final Model model;
 	/**
 	 * A field for a file chooser.
 	 */
@@ -96,18 +96,18 @@ public final class GuiControl {
 	 * 
 	 * @param core
 	 *            a core
-	 * @param guiModel
+	 * @param model
 	 *            a model
 	 * @param i18nBaseName
 	 *            a i18n base name
 	 */
-	public GuiControl(ICore core, GuiModel guiModel, String i18nBaseName) {
+	public Control(ICore core, Model model, String i18nBaseName) {
 		super();
 		// Core
 		this.core = core;
 		// Model
-		this.guiModel = guiModel;
-		this.guiModel.setI18nBaseName(i18nBaseName);
+		this.model = model;
+		this.model.setI18nBaseName(i18nBaseName);
 		// Control
 		this.fileChooser = new JFileChooser();
 		this.i18nListener = new I18nListener();
@@ -136,10 +136,10 @@ public final class GuiControl {
 					System.getProperty("user.country"));
 			this.setViewI18n(locale);
 			// parameter
-			this.guiModel.setGraphComboModel(this.core.getGraphNames());
-			this.guiModel.setGraphComboModel(this.core.getAlgorithmNames());
+			this.model.setGraphComboModel(this.core.getGraphNames());
+			this.model.setGraphComboModel(this.core.getAlgorithmNames());
 			// protocol
-			this.appendProtocol(guiModel.getAboutMessageText() + "----\n");
+			this.appendProtocol(model.getAboutMessageText() + "----\n");
 			// enable/disable elements
 			this.setViewReady();
 		} catch (Exception ex) {
@@ -158,13 +158,13 @@ public final class GuiControl {
 	private void appendProtocol(String newEntry) throws Exception {
 
 		try {
-			String oldEntry = this.guiModel.getProtocolPanelText();
+			String oldEntry = this.model.getProtocolPanelText();
 			if (oldEntry.equals(""))
-				this.guiModel.setProtocolPanelText(newEntry);
+				this.model.setProtocolPanelText(newEntry);
 			else
-				this.guiModel.setProtocolPanelText(oldEntry + "\n" + newEntry);
+				this.model.setProtocolPanelText(oldEntry + "\n" + newEntry);
 
-			this.guiModel.notifyObservers();
+			this.model.notifyObservers();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -183,124 +183,124 @@ public final class GuiControl {
 		try {
 			// resource
 			ResourceBundle b = ResourceBundle.getBundle(
-					this.guiModel.getI18nBaseName(), locale);
-			this.guiModel.setResourceBundle(b);
+					this.model.getI18nBaseName(), locale);
+			this.model.setResourceBundle(b);
 
 			// Control
 			JComponent.setDefaultLocale(locale);
 			this.fileChooser = new JFileChooser();
 			this.fileChooser.setLocale(locale);
 			// app name
-			this.guiModel.setProgramName(b.getString("app.label"));
+			this.model.setProgramName(b.getString("app.label"));
 			{// MenuBar
 				{// Label
 					// Menu
-					this.guiModel.setFileMenuLabel(b.getString("file.label"));
-					this.guiModel.setI18nMenuLabel(b.getString("i18n.label"));
-					this.guiModel.setInfoMenuLabel(b.getString("info.label"));
+					this.model.setFileMenuLabel(b.getString("file.label"));
+					this.model.setI18nMenuLabel(b.getString("i18n.label"));
+					this.model.setInfoMenuLabel(b.getString("info.label"));
 					// MenuItem
 					// (...)
-					this.guiModel.setImportAlgorithmLabel(b
+					this.model.setImportAlgorithmLabel(b
 							.getString("importAlgorithm.label"));
-					this.guiModel.setDeleteAlgorithmLabel(b
+					this.model.setDeleteAlgorithmLabel(b
 							.getString("deleteAlgorithm.label"));
-					this.guiModel.setImportGraphLabel(b
+					this.model.setImportGraphLabel(b
 							.getString("importGraph.label"));
-					this.guiModel.setDeleteGraphLabel(b
+					this.model.setDeleteGraphLabel(b
 							.getString("deleteGraph.label"));
-					this.guiModel.setQuitLabel(b.getString("quit.label"));
+					this.model.setQuitLabel(b.getString("quit.label"));
 					// (...)
-					this.guiModel.setDeDEMenuItemLabel(b
+					this.model.setDeDEMenuItemLabel(b
 							.getString("deDE.label"));
-					this.guiModel.setFrFRMenuItemLabel(b
+					this.model.setFrFRMenuItemLabel(b
 							.getString("frFR.label"));
-					this.guiModel.setEnUSMenuItemLabel(b
+					this.model.setEnUSMenuItemLabel(b
 							.getString("enUS.label"));
 					// (...)
-					this.guiModel.setHelpMenuItemLabel(b
+					this.model.setHelpMenuItemLabel(b
 							.getString("help.label"));
-					this.guiModel.setAboutMenuItemLabel(b
+					this.model.setAboutMenuItemLabel(b
 							.getString("about.label"));
 				}
 				{// Mnemonic / Accelerator
 					// Menu
-					this.guiModel.setFileMenuMnemonic(b.getString(
+					this.model.setFileMenuMnemonic(b.getString(
 							"file.mnemonic").toCharArray()[0]);
-					this.guiModel.setI18nMenuMnemonic(b.getString(
+					this.model.setI18nMenuMnemonic(b.getString(
 							"i18n.mnemonic").toCharArray()[0]);
-					this.guiModel.setInfoMenuMnemonic(b.getString(
+					this.model.setInfoMenuMnemonic(b.getString(
 							"info.mnemonic").toCharArray()[0]);
 					// MenuItem
 					// Mnemonic
-					this.guiModel.setQuitMenuItemMnemonic(b.getString(
+					this.model.setQuitMenuItemMnemonic(b.getString(
 							"quit.mnemonic").toCharArray()[0]);
-					this.guiModel.setDeDEMenuItemMnemonic(b.getString(
+					this.model.setDeDEMenuItemMnemonic(b.getString(
 							"deDE.mnemonic").toCharArray()[0]);
-					this.guiModel.setFrFRMenuItemMnemonic(b.getString(
+					this.model.setFrFRMenuItemMnemonic(b.getString(
 							"frFR.mnemonic").toCharArray()[0]);
-					this.guiModel.setEnUSMenuItemMnemonic(b.getString(
+					this.model.setEnUSMenuItemMnemonic(b.getString(
 							"enUS.mnemonic").toCharArray()[0]);
-					this.guiModel.setHelpMenuItemMnemonic(b.getString(
+					this.model.setHelpMenuItemMnemonic(b.getString(
 							"help.mnemonic").toCharArray()[0]);
-					this.guiModel.setAboutMenuItemMnemonic(b.getString(
+					this.model.setAboutMenuItemMnemonic(b.getString(
 							"about.mnemonic").toCharArray()[0]);
 					// Accelerator
-					this.guiModel.setRenderMenuItemAccelerator(KeyStroke
+					this.model.setRenderMenuItemAccelerator(KeyStroke
 							.getKeyStroke(b.getString("render.accelerator")));
-					this.guiModel.setQuitMenuItemAccelerator(KeyStroke
+					this.model.setQuitMenuItemAccelerator(KeyStroke
 							.getKeyStroke(b.getString("quit.accelerator")));
-					this.guiModel.setHelpMenuItemAccelerator(KeyStroke
+					this.model.setHelpMenuItemAccelerator(KeyStroke
 							.getKeyStroke(b.getString("help.accelerator")));
-					this.guiModel.setAboutMenuItemAccelerator(KeyStroke
+					this.model.setAboutMenuItemAccelerator(KeyStroke
 							.getKeyStroke(b.getString("about.accelerator")));
 				}
 			}
 			{// Parameter Panel
-				this.guiModel
+				this.model
 						.setRenderPanelLabel(b.getString("settings.label"));
-				this.guiModel.setGraphLabel(b.getString("graph.label"));
-				this.guiModel.setAlgorithmLabel(b.getString("algorithm.label"));
+				this.model.setGraphLabel(b.getString("graph.label"));
+				this.model.setAlgorithmLabel(b.getString("algorithm.label"));
 			}
 			{// Visualization Panel
-				this.guiModel.setVisualizationPanelLabel(b
+				this.model.setVisualizationPanelLabel(b
 						.getString("visualization.label"));
 			}
 			{// Player Panel
-				this.guiModel.setStepLabel(b.getString("setStep.label"));
-				this.guiModel.setDelayLabel(b.getString("setTime.label"));
-				this.guiModel.setProgressLabel(b.getString("progress.label"));
+				this.model.setStepLabel(b.getString("setStep.label"));
+				this.model.setDelayLabel(b.getString("setTime.label"));
+				this.model.setProgressLabel(b.getString("progress.label"));
 
-				this.guiModel.setPlayerPanelLabel(b.getString("player.label"));
-				this.guiModel.setPlayButtonLabel(b.getString("play.label"));
-				this.guiModel.setPauseButtonLabel(b.getString("pause.label"));
-				this.guiModel.setStopButtonLabel(b.getString("stop.label"));
+				this.model.setPlayerPanelLabel(b.getString("player.label"));
+				this.model.setPlayButtonLabel(b.getString("play.label"));
+				this.model.setPauseButtonLabel(b.getString("pause.label"));
+				this.model.setStopButtonLabel(b.getString("stop.label"));
 
-				this.guiModel.setHomeButtonLabel(b.getString("home.label"));
-				this.guiModel.setBackwardButtonLabel(b
+				this.model.setHomeButtonLabel(b.getString("home.label"));
+				this.model.setBackwardButtonLabel(b
 						.getString("backward.label"));
-				this.guiModel.setForwardButtonLabel(b
+				this.model.setForwardButtonLabel(b
 						.getString("forward.label"));
-				this.guiModel.setEndButtonLabel(b.getString("end.label"));
+				this.model.setEndButtonLabel(b.getString("end.label"));
 			}
 			{// Protocol Panel
-				this.guiModel.setProtocolPanelLabel(b
+				this.model.setProtocolPanelLabel(b
 						.getString("protocol.label"));
 			}
 			{// Pane
-				this.guiModel.setImportLabel(b.getString("import.label"));
-				this.guiModel.setDeleteLabel(b.getString("delete.label"));
+				this.model.setImportLabel(b.getString("import.label"));
+				this.model.setDeleteLabel(b.getString("delete.label"));
 
-				String title = this.guiModel.getProgramName();
-				this.guiModel.setHelpMessageLabel(title + " - "
+				String title = this.model.getProgramName();
+				this.model.setHelpMessageLabel(title + " - "
 						+ b.getString("help.label"));
-				this.guiModel.setHelpMessageText(b.getString("help.message"));
-				this.guiModel.setAboutMessageLabel(title + " - "
+				this.model.setHelpMessageText(b.getString("help.message"));
+				this.model.setAboutMessageLabel(title + " - "
 						+ b.getString("about.label"));
-				this.guiModel.setAboutMessageText(title + "\n"
+				this.model.setAboutMessageText(title + "\n"
 						+ b.getString("about.message"));
-				this.guiModel.setQuitMessageText(b.getString("quit.message"));
+				this.model.setQuitMessageText(b.getString("quit.message"));
 			}
-			this.guiModel.notifyObservers();
+			this.model.notifyObservers();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw ex;
@@ -314,11 +314,11 @@ public final class GuiControl {
 	 */
 	private void setViewBusy() {
 
-		this.guiModel.setMenuEnabled(false);
-		this.guiModel.setParameterEnabled(false);
-		this.guiModel.setPlayerEnabled(false);
+		this.model.setMenuEnabled(false);
+		this.model.setParameterEnabled(false);
+		this.model.setPlayerEnabled(false);
 
-		this.guiModel.notifyObservers();
+		this.model.notifyObservers();
 
 	}
 
@@ -328,12 +328,12 @@ public final class GuiControl {
 	 */
 	private void setViewReady() {
 
-		this.guiModel.setMenuEnabled(true);
-		this.guiModel.setGraphEnabled(true);
-		this.guiModel.setAlgorithmEnabled(false);
-		this.guiModel.setPlayerEnabled(false);
+		this.model.setMenuEnabled(true);
+		this.model.setGraphEnabled(true);
+		this.model.setAlgorithmEnabled(false);
+		this.model.setPlayerEnabled(false);
 
-		this.guiModel.notifyObservers();
+		this.model.notifyObservers();
 	}
 
 	/**
@@ -342,18 +342,18 @@ public final class GuiControl {
 	 */
 	private void setViewPlay() {
 
-		this.guiModel.setMenuEnabled(false);
-		this.guiModel.setParameterEnabled(false);
+		this.model.setMenuEnabled(false);
+		this.model.setParameterEnabled(false);
 
 		// Player Panel
-		this.guiModel.setPlayerEnabled(false);
-		this.guiModel.setPauseButtonLabel(this.guiModel.getResourceBundle()
+		this.model.setPlayerEnabled(false);
+		this.model.setPauseButtonLabel(this.model.getResourceBundle()
 				.getString("pause.label"));
-		this.guiModel.setPauseButtonActionCommand(EventSource.PAUSE.toString());
-		this.guiModel.setPauseButtonEnabled(true);
-		this.guiModel.setStopButtonEnabled(true);
+		this.model.setPauseButtonActionCommand(EventSource.PAUSE.toString());
+		this.model.setPauseButtonEnabled(true);
+		this.model.setStopButtonEnabled(true);
 
-		this.guiModel.notifyObservers();
+		this.model.notifyObservers();
 
 	}
 
@@ -363,12 +363,12 @@ public final class GuiControl {
 	 */
 	private void setViewPause() {
 
-		this.guiModel.setPauseButtonLabel(this.guiModel.getResourceBundle()
+		this.model.setPauseButtonLabel(this.model.getResourceBundle()
 				.getString("resume.label"));
-		this.guiModel
+		this.model
 				.setPauseButtonActionCommand(EventSource.RESUME.toString());
 
-		this.guiModel.notifyObservers();
+		this.model.notifyObservers();
 	}
 
 	/**
@@ -377,23 +377,23 @@ public final class GuiControl {
 	 */
 	private void setViewStop() {
 
-		this.guiModel.setMenuEnabled(true);
-		this.guiModel.setParameterEnabled(true);
+		this.model.setMenuEnabled(true);
+		this.model.setParameterEnabled(true);
 
 		// Player Panel
-		this.guiModel.setPlayerEnabled(true);
-		this.guiModel.setPauseButtonEnabled(false);
-		this.guiModel.setStopButtonEnabled(false);
+		this.model.setPlayerEnabled(true);
+		this.model.setPauseButtonEnabled(false);
+		this.model.setStopButtonEnabled(false);
 
-		if (this.guiModel.getProgressValue() == this.guiModel
+		if (this.model.getProgressValue() == this.model
 				.getProgressValueMaximum())
 			this.setViewEnd();
-		else if (this.guiModel.getProgressValue() == 0)
+		else if (this.model.getProgressValue() == 0)
 			this.setViewBeginning();
 		else
-			this.guiModel.setStepByStepEnabled(true);
+			this.model.setStepByStepEnabled(true);
 
-		this.guiModel.notifyObservers();
+		this.model.notifyObservers();
 
 	}
 
@@ -403,12 +403,12 @@ public final class GuiControl {
 	 */
 	private void setViewBeginning() {
 
-		this.guiModel.setProgressValue(0);
-		this.guiModel.setStepByStepEnabled(true);
-		this.guiModel.setHomeButtonEnabled(false);
-		this.guiModel.setBackwardButtonEnabled(false);
+		this.model.setProgressValue(0);
+		this.model.setStepByStepEnabled(true);
+		this.model.setHomeButtonEnabled(false);
+		this.model.setBackwardButtonEnabled(false);
 
-		this.guiModel.notifyObservers();
+		this.model.notifyObservers();
 
 	}
 
@@ -418,12 +418,12 @@ public final class GuiControl {
 	 */
 	private void setViewEnd() {
 
-		this.guiModel.setProgressValue(this.guiModel.getProgressValueMaximum());
-		this.guiModel.setStepByStepEnabled(true);
-		this.guiModel.setForwardButtonEnabled(false);
-		this.guiModel.setEndButtonEnabled(false);
+		this.model.setProgressValue(this.model.getProgressValueMaximum());
+		this.model.setStepByStepEnabled(true);
+		this.model.setForwardButtonEnabled(false);
+		this.model.setEndButtonEnabled(false);
 
-		this.guiModel.notifyObservers();
+		this.model.notifyObservers();
 
 	}
 
@@ -440,15 +440,15 @@ public final class GuiControl {
 			Graph<IVertex, IEdge> graph = this.core.selectGraph("");
 
 			// Model
-			this.guiModel.setGraphSelected(index);
-			this.guiModel.setAlgorithmSelected(0);
-			this.guiModel.setProgressValue(0);
+			this.model.setGraphSelected(index);
+			this.model.setAlgorithmSelected(0);
+			this.model.setProgressValue(0);
 
 			// ViewType
-			this.guiModel.setAlgorithmEnabled(true);
-			this.guiModel.setPlayerEnabled(false);
+			this.model.setAlgorithmEnabled(true);
+			this.model.setPlayerEnabled(false);
 
-			this.guiModel.notifyObservers(graph);
+			this.model.notifyObservers(graph);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -471,10 +471,10 @@ public final class GuiControl {
 			// this.core.selectAlgorithm(index);
 			this.core.executeTraverser(this.traversalListener);
 			// Model
-			this.guiModel.setAlgorithmSelected(index);
+			this.model.setAlgorithmSelected(index);
 			// ViewType
-			this.guiModel.setProgressValue(0);
-			this.guiModel.setProgressValueMaximum(this.core
+			this.model.setProgressValue(0);
+			this.model.setProgressValueMaximum(this.core
 					.getGraphIteratorSize());
 			this.setViewStop();
 
@@ -513,7 +513,7 @@ public final class GuiControl {
 
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -564,30 +564,30 @@ public final class GuiControl {
 				// Import vs. delete
 				if (c.equals(EventSource.IMPORT_GRAPH.toString())
 						|| c.equals(EventSource.IMPORT_ALGORITHM.toString())) {
-					fileChooser.setApproveButtonText(guiModel.getImportLabel());
+					fileChooser.setApproveButtonText(model.getImportLabel());
 				} else {
-					fileChooser.setApproveButtonText(guiModel.getDeleteLabel());
+					fileChooser.setApproveButtonText(model.getDeleteLabel());
 					// TODO restrict access to workbench directory only
 				}
 				// Events
 				if (c.equals(EventSource.IMPORT_GRAPH.toString())) {
-					appendProtocol(guiModel.getImportGraphLabel());
-					fileChooser.setDialogTitle(guiModel.getImportGraphLabel());
+					appendProtocol(model.getImportGraphLabel());
+					fileChooser.setDialogTitle(model.getImportGraphLabel());
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION)
 						importGraph(fileChooser.getSelectedFile());
 
 				} else if (c.equals(EventSource.IMPORT_ALGORITHM.toString())) {
-					appendProtocol(guiModel.getImportAlgorithmLabel());
-					fileChooser.setDialogTitle(guiModel
+					appendProtocol(model.getImportAlgorithmLabel());
+					fileChooser.setDialogTitle(model
 							.getImportAlgorithmLabel());
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION)
 						importAlgorithm(fileChooser.getSelectedFile());
 
 				} else if (c.equals(EventSource.DELETE_GRAPH.toString())) {
-					appendProtocol(guiModel.getDeleteGraphLabel());
-					fileChooser.setDialogTitle(guiModel.getDeleteGraphLabel());
+					appendProtocol(model.getDeleteGraphLabel());
+					fileChooser.setDialogTitle(model.getDeleteGraphLabel());
 					fileChooser
 							.setCurrentDirectory(core.getGraphWorkbenchDir());
 					option = fileChooser.showDialog(top, null);
@@ -597,8 +597,8 @@ public final class GuiControl {
 					}
 
 				} else if (c.equals(EventSource.DELETE_ALGORITHM.toString())) {
-					appendProtocol(guiModel.getDeleteAlgorithmLabel());
-					fileChooser.setDialogTitle(guiModel
+					appendProtocol(model.getDeleteAlgorithmLabel());
+					fileChooser.setDialogTitle(model
 							.getDeleteAlgorithmLabel());
 					fileChooser.setCurrentDirectory(core
 							.getAlgorithmWorkbenchDir());
@@ -612,7 +612,7 @@ public final class GuiControl {
 
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 
@@ -628,9 +628,9 @@ public final class GuiControl {
 		private void importGraph(File file) throws Exception {
 			try {
 				core.importGraph(file);
-				guiModel.setGraphComboModel(core.getGraphNames());
+				model.setGraphComboModel(core.getGraphNames());
 				selectGraph(0);
-				JOptionPane.showMessageDialog(null, guiModel
+				JOptionPane.showMessageDialog(null, model
 						.getResourceBundle().getString("import.graph.message"));
 			} catch (Exception ex) {
 				throw ex;
@@ -649,9 +649,9 @@ public final class GuiControl {
 
 			try {
 				core.deleteGraph(file);
-				guiModel.setGraphComboModel(core.getGraphNames());
+				model.setGraphComboModel(core.getGraphNames());
 				selectGraph(0);
-				JOptionPane.showMessageDialog(null, guiModel
+				JOptionPane.showMessageDialog(null, model
 						.getResourceBundle().getString("delete.graph.message"));
 			} catch (Exception ex) {
 				throw ex;
@@ -670,11 +670,11 @@ public final class GuiControl {
 
 			try {
 				core.importAlgorithm(file);
-				guiModel.setAlgorithmComboModel(core.getAlgorithmNames());
+				model.setAlgorithmComboModel(core.getAlgorithmNames());
 				selectAlgorithm(0);
 				JOptionPane.showMessageDialog(
 						null,
-						guiModel.getResourceBundle().getString(
+						model.getResourceBundle().getString(
 								"import.algorthm.message"));
 			} catch (Exception ex) {
 				throw ex;
@@ -693,11 +693,11 @@ public final class GuiControl {
 
 			try {
 				core.deleteAlgorithm(file);
-				guiModel.setAlgorithmComboModel(core.getAlgorithmNames());
+				model.setAlgorithmComboModel(core.getAlgorithmNames());
 				selectAlgorithm(0);
 				JOptionPane.showMessageDialog(
 						null,
-						guiModel.getResourceBundle().getString(
+						model.getResourceBundle().getString(
 								"delete.algorthm.message"));
 			} catch (Exception ex) {
 				throw ex;
@@ -725,7 +725,7 @@ public final class GuiControl {
 				selectGraph(index);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -752,7 +752,7 @@ public final class GuiControl {
 				}
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -773,11 +773,11 @@ public final class GuiControl {
 				// TODO i18n
 				String traversal = "Traversal: ready.";
 				JOptionPane.showMessageDialog(null, traversal,
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				appendProtocol(traversal);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -802,10 +802,10 @@ public final class GuiControl {
 				JFormattedTextField textField = (JFormattedTextField) e
 						.getSource();
 				int newValue = Integer.valueOf(textField.getText());
-				guiModel.setStepValue(newValue);
+				model.setStepValue(newValue);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -831,10 +831,10 @@ public final class GuiControl {
 				JFormattedTextField textField = (JFormattedTextField) e
 						.getSource();
 				int newValue = Integer.valueOf(textField.getText());
-				guiModel.setDelayValue(newValue);
+				model.setDelayValue(newValue);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -867,18 +867,18 @@ public final class GuiControl {
 		 */
 		private void goBackward() {
 			try {
-				int step = guiModel.getStepValue();
-				int progress = guiModel.getProgressValue();
+				int step = model.getStepValue();
+				int progress = model.getProgressValue();
 				int min = 0;
 				for (int i = 0; i < step; i++) {
 					if (min < progress) {
 						core.goBackward();
-						guiModel.setProgressValue(--progress);
+						model.setProgressValue(--progress);
 					}
 				}
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -889,18 +889,18 @@ public final class GuiControl {
 		 */
 		private void goForward() {
 			try {
-				int step = guiModel.getStepValue();
-				int progress = guiModel.getProgressValue();
-				int max = guiModel.getProgressValueMaximum();
+				int step = model.getStepValue();
+				int progress = model.getProgressValue();
+				int max = model.getProgressValueMaximum();
 				for (int i = 0; i < step; i++) {
 					if (progress < max) {
 						core.goForward();
-						guiModel.setProgressValue(++progress);
+						model.setProgressValue(++progress);
 					}
 				}
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 
@@ -911,17 +911,17 @@ public final class GuiControl {
 			while (true) {
 				if (this.play) {
 					try {
-						int progress = guiModel.getProgressValue();
-						int max = guiModel.getProgressValueMaximum();
+						int progress = model.getProgressValue();
+						int max = model.getProgressValueMaximum();
 						if (progress == max) {
 							core.goToBeginning();
-							progress = guiModel.getProgressValue();
+							progress = model.getProgressValue();
 						}
 						while (progress < max) {
 							appendProtocol("step");
 							goForward();
-							progress = guiModel.getProgressValue();
-							Thread.sleep(guiModel.getDelayValue() * 1000);
+							progress = model.getProgressValue();
+							Thread.sleep(model.getDelayValue() * 1000);
 						}
 						setViewStop();
 						this.play = false;
@@ -929,7 +929,7 @@ public final class GuiControl {
 						setViewStop();
 						this.play = false;
 						JOptionPane.showMessageDialog(null, ex.toString(),
-								guiModel.getProgramName(), 1, null);
+								model.getProgramName(), 1, null);
 						ex.printStackTrace();
 					}
 				}
@@ -975,7 +975,7 @@ public final class GuiControl {
 
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -994,11 +994,11 @@ public final class GuiControl {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				JOptionPane.showMessageDialog(null,
-						guiModel.getHelpMessageText(),
-						guiModel.getHelpMessageLabel(), 1, null);
+						model.getHelpMessageText(),
+						model.getHelpMessageLabel(), 1, null);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -1017,11 +1017,11 @@ public final class GuiControl {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				JOptionPane.showMessageDialog(null,
-						guiModel.getAboutMessageText(),
-						guiModel.getAboutMessageLabel(), 1, null);
+						model.getAboutMessageText(),
+						model.getAboutMessageLabel(), 1, null);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(),
-						guiModel.getProgramName(), 1, null);
+						model.getProgramName(), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -1039,32 +1039,12 @@ public final class GuiControl {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int value = JOptionPane.showConfirmDialog(null,
-					guiModel.getQuitMessageText(), guiModel.getQuitLabel(),
+					model.getQuitMessageText(), model.getQuitLabel(),
 					JOptionPane.YES_NO_OPTION);
 			if (value == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
 		}
-	}
-
-	/**
-	 * Constants for different kind of GUI events.
-	 * 
-	 * @author Patrick Kofmel (kofmp1@bfh.ch)
-	 * @author Roland Bruggmann (brugr9@bfh.ch)
-	 * 
-	 */
-	protected enum EventSource {
-		// i18n
-		DE_DE, FR_FR, EN_US,
-		// data, graph
-		IMPORT_GRAPH, DELETE_GRAPH,
-		// data, algorithm
-		IMPORT_ALGORITHM, DELETE_ALGORITHM,
-		// player settings
-		SET_DELAY, SET_STEP,
-		// player
-		GOTO_BEGINNING, BACKWARD, FORWARD, GOTO_END, PLAY, PAUSE, RESUME, STOP,
 	}
 
 }

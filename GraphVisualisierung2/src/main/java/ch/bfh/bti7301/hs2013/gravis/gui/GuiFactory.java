@@ -26,7 +26,7 @@ public final class GuiFactory {
 	/**
 	 * A field for a i18n base name.
 	 */
-	private static final String i18nBaseName = "i18n.MessagesBundle";
+	private static final String I18N_BASE = "META-INF/i18n/MessagesBundle";
 
 	/**
 	 * A main (no-)constructor.
@@ -42,7 +42,7 @@ public final class GuiFactory {
 	 * @param height
 	 * @return a view as in MVC
 	 */
-	public static IGuiView createGui(ICore core, int width, int height) {
+	public static IView createGui(ICore core, int width, int height) {
 		return createGui(core, width, height, ViewType.DEFAULT);
 	}
 
@@ -55,29 +55,28 @@ public final class GuiFactory {
 	 * @param type
 	 * @return a view as in MVC
 	 */
-	public static IGuiView createGui(ICore core, int width, int height,
+	public static IView createGui(ICore core, int width, int height,
 			ViewType type) {
-		GuiModel guiModel = createGuiModel();
-		GuiControl guiControl = createGuiControl(core, guiModel, i18nBaseName);
+		Model model = new Model();
+		Control control = new Control(core, model, I18N_BASE);
 		switch (type) {
 		case FULL:
-			return createGuiViewFull(guiModel, guiControl, width, height);
+			return new ViewFull(model, control, width, height);
 		case MINIMAL:
-			return createGuiViewMinimal(guiModel, guiControl, width, height);
-		case DEFAULT:
-			return createGuiViewDefault(guiModel, guiControl, width, height);
+			return new ViewMinimal(model, control, width, height);
 		default:
-			return createGuiViewDefault(guiModel, guiControl, width, height);
+			return new ViewFull(model, control, width, height);
 		}
 	}
 
 	/**
 	 * @param graph
-	 * @param pointTransformer 
+	 * @param pointTransformer
 	 * @return a new instance of type Layout<IVertex, IEdge>
 	 */
 	public static Layout<IVertex, IEdge> createLayout(
-			Graph<IVertex, IEdge> graph, Transformer<IVertex, Point2D> pointTransformer) {
+			Graph<IVertex, IEdge> graph,
+			Transformer<IVertex, Point2D> pointTransformer) {
 		return new StaticLayout<>(graph, pointTransformer);
 	}
 
@@ -91,82 +90,15 @@ public final class GuiFactory {
 	}
 
 	/**
-	 * Creates a full view - view as in MVC.
-	 * 
-	 * @param guiModel
-	 * @param guiControl
-	 * @param width
-	 * @param height
-	 * @return a view as in MVC
-	 */
-	private static IGuiView createGuiViewFull(GuiModel guiModel,
-			GuiControl guiControl, int width, int height) {
-		return new GuiViewFull(guiModel, guiControl, width, height);
-	}
-
-	/**
-	 * Creates a minimal view - view as in MVC.
-	 * 
-	 * @param guiModel
-	 * @param guiControl
-	 * @param width
-	 * @param height
-	 * @return a view as in MVC
-	 */
-	private static IGuiView createGuiViewMinimal(GuiModel guiModel,
-			GuiControl guiControl, int width, int height) {
-		return new GuiViewMinimal(guiModel, guiControl, width, height);
-	}
-
-	/**
-	 * Creates a default view -- view as in MVC.
-	 * 
-	 * @param guiModel
-	 * @param guiControl
-	 * @param width
-	 * @param height
-	 * @return a view as in MVC
-	 */
-	private static IGuiView createGuiViewDefault(GuiModel guiModel,
-			GuiControl guiControl, int width, int height) {
-		// TODO: GuiViewDefault
-		return new GuiViewFull(guiModel, guiControl, width, height);
-	}
-
-	/**
-	 * Creates a gui model as in MVC.
-	 * 
-	 * @return a gui model
-	 */
-	private static GuiModel createGuiModel() {
-		GuiModel guiModel = new GuiModel();
-		return guiModel;
-	}
-
-	/**
-	 * Creates a GUI control as in MVC.
-	 * 
-	 * @param core
-	 * @param guiModel
-	 * @param i18nBaseName
-	 * @return a new instance of type <code>GuiControl</code>
-	 */
-	private static GuiControl createGuiControl(ICore core, GuiModel guiModel,
-			String i18nBaseName) {
-		GuiControl guiControl = new GuiControl(core, guiModel, i18nBaseName);
-		return guiControl;
-	}
-
-	/**
 	 * Creates a menu bar.
 	 * 
-	 * @param guiModel
-	 * @param guiControl
+	 * @param model
+	 * @param control
 	 * @return a menu bar
 	 */
-	static MenuBar createMenuBar(GuiModel guiModel, GuiControl guiControl) {
-		MenuBar menuBar = new MenuBar(guiControl);
-		guiModel.addObserver(menuBar);
+	static MenuBar createMenuBar(Model model, Control control) {
+		MenuBar menuBar = new MenuBar(control);
+		model.addObserver(menuBar);
 		return menuBar;
 	}
 
@@ -174,65 +106,61 @@ public final class GuiFactory {
 	 * @param graph
 	 * @return a circle layout
 	 */
-	static Layout<IVertex, IEdge> createCircleLayout(
-			Graph<IVertex, IEdge> graph) {
+	static Layout<IVertex, IEdge> createCircleLayout(Graph<IVertex, IEdge> graph) {
 		return new CircleLayout<>(graph);
 	}
-	
+
 	/**
 	 * Creates a render panel.
 	 * 
-	 * @param guiModel
-	 * @param guiControl
+	 * @param model
+	 * @param control
 	 * @return a settings panel
 	 */
-	static ParameterPanel createRenderPanel(GuiModel guiModel,
-			GuiControl guiControl) {
-		ParameterPanel parameterPanel = new ParameterPanel(guiControl);
-		guiModel.addObserver(parameterPanel);
+	static ParameterPanel createRenderPanel(Model model, Control control) {
+		ParameterPanel parameterPanel = new ParameterPanel(control);
+		model.addObserver(parameterPanel);
 		return parameterPanel;
 	}
 
 	/**
 	 * Creates a visualization panel with a circle layout.
 	 * 
-	 * @param guiModel
+	 * @param model
 	 * @return a visualization panel
 	 */
-	static VisualizationPanel createVisualizationPanel(GuiModel guiModel) {
+	static VisualizationPanel createVisualizationPanel(Model model) {
 		Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
 		Layout<IVertex, IEdge> layout = createCircleLayout(graph);
 		VisualizationPanel visualizationPanel = new VisualizationPanel(layout);
-		guiModel.addObserver(visualizationPanel);
+		model.addObserver(visualizationPanel);
 		return visualizationPanel;
 	}
 
 	/**
 	 * Creates a player panel.
 	 * 
-	 * @param guiModel
-	 * @param guiControl
+	 * @param model
+	 * @param control
 	 * @return a player panel
 	 */
-	static PlayerPanel createPlayerPanel(GuiModel guiModel,
-			GuiControl guiControl) {
-		PlayerPanel playerPanel = new PlayerPanel(guiControl);
-		guiModel.addObserver(playerPanel);
+	static PlayerPanel createPlayerPanel(Model model, Control control) {
+		PlayerPanel playerPanel = new PlayerPanel(control);
+		model.addObserver(playerPanel);
 		return playerPanel;
 	}
 
 	/**
 	 * Creates a protocol panel.
 	 * 
-	 * @param guiModel
+	 * @param model
 	 * @param width
 	 * @param height
 	 * @return a protocol panel
 	 */
-	static ProtocolPanel createProtocolPanel(GuiModel guiModel, int width,
-			int height) {
+	static ProtocolPanel createProtocolPanel(Model model, int width, int height) {
 		ProtocolPanel protocolPanel = new ProtocolPanel();
-		guiModel.addObserver(protocolPanel);
+		model.addObserver(protocolPanel);
 		return protocolPanel;
 	}
 

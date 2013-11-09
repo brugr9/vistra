@@ -1,12 +1,12 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.BACKWARD;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.FORWARD;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.GOTO_BEGINNING;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.GOTO_END;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.PAUSE;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.PLAY;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.STOP;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.BACKWARD;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.FORWARD;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.GOTO_BEGINNING;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.GOTO_END;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.PAUSE;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.PLAY;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.STOP;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -115,23 +115,23 @@ public final class PlayerPanel extends JPanel implements Observer {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param guiControl
+	 * @param control
 	 *            the controller as in MVC
 	 */
-	public PlayerPanel(GuiControl guiControl) {
+	public PlayerPanel(Control control) {
 
 		// spinner
 		this.stepLabel = new JLabel("stepLabel");
 		this.stepSpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
 		this.stepSpinner = new JSpinner(this.stepSpinnerNumberModel);
 		((JSpinner.NumberEditor) this.stepSpinner.getEditor()).getTextField()
-				.addFocusListener(guiControl.stepSettingsListener);
+				.addFocusListener(control.stepSettingsListener);
 
 		this.delayLabel = new JLabel("delayLabel");
 		this.delaySpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
 		this.delaySpinner = new JSpinner(this.delaySpinnerNumberModel);
 		((JSpinner.NumberEditor) this.delaySpinner.getEditor()).getTextField()
-				.addFocusListener(guiControl.delaySettingsListener);
+				.addFocusListener(control.delaySettingsListener);
 
 		this.progressLabel = new JLabel("progressLabel");
 
@@ -142,31 +142,31 @@ public final class PlayerPanel extends JPanel implements Observer {
 
 		this.playButton = new JButton("playButton");
 		this.playButton.setActionCommand(PLAY.toString());
-		this.playButton.addActionListener(guiControl.playerListener);
+		this.playButton.addActionListener(control.playerListener);
 
 		this.pauseButton = new JButton("pauseButton");
 		this.pauseButton.setActionCommand(PAUSE.toString());
-		this.pauseButton.addActionListener(guiControl.playerListener);
+		this.pauseButton.addActionListener(control.playerListener);
 
 		this.stopButton = new JButton("stopButton");
 		this.stopButton.setActionCommand(STOP.toString());
-		this.stopButton.addActionListener(guiControl.playerListener);
+		this.stopButton.addActionListener(control.playerListener);
 
 		this.homeButton = new JButton("homeButton");
 		this.homeButton.setActionCommand(GOTO_BEGINNING.toString());
-		this.homeButton.addActionListener(guiControl.playerListener);
+		this.homeButton.addActionListener(control.playerListener);
 
 		this.backwardButton = new JButton("backwardButton");
 		this.backwardButton.setActionCommand(BACKWARD.toString());
-		this.backwardButton.addActionListener(guiControl.playerListener);
+		this.backwardButton.addActionListener(control.playerListener);
 
 		this.forwardButton = new JButton("forwardButton");
 		this.forwardButton.setActionCommand(FORWARD.toString());
-		this.forwardButton.addActionListener(guiControl.playerListener);
+		this.forwardButton.addActionListener(control.playerListener);
 
 		this.endButton = new JButton("endButton");
 		this.endButton.setActionCommand(GOTO_END.toString());
-		this.endButton.addActionListener(guiControl.playerListener);
+		this.endButton.addActionListener(control.playerListener);
 
 		// Panel
 		// 1
@@ -208,7 +208,7 @@ public final class PlayerPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		GuiModel m = (GuiModel) o;
+		Model m = (Model) o;
 
 		try {
 

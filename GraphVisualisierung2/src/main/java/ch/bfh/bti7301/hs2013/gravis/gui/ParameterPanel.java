@@ -60,10 +60,10 @@ public final class ParameterPanel extends JPanel implements Observer {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param guiControl
+	 * @param control
 	 *            the controller as in MVC
 	 */
-	public ParameterPanel(GuiControl guiControl) {
+	public ParameterPanel(Control control) {
 
 		this.graphLabel = new JLabel("graphLabel");
 		this.algorithmLabel = new JLabel("algorithmLabel");
@@ -71,14 +71,14 @@ public final class ParameterPanel extends JPanel implements Observer {
 		// Combobox
 		this.graphComboModel = new DefaultComboBoxModel<String>(new String[] {});
 		this.graphCombo = new JComboBox<String>(this.graphComboModel);
-		this.graphCombo.addItemListener(guiControl.graphSettingsListener);
+		this.graphCombo.addItemListener(control.graphSettingsListener);
 		// this.graphCombo.setBounds(463, 12, 170, 20);
 
 		this.algorithmComboModel = new DefaultComboBoxModel<String>(
 				new String[] {});
 		this.algorithmCombo = new JComboBox<String>(this.algorithmComboModel);
 		this.algorithmCombo
-				.addItemListener(guiControl.algorithmSettingsListener);
+				.addItemListener(control.algorithmSettingsListener);
 		// this.algorithmCombo.setBounds(463, 12, 170, 20);
 
 		// Panel
@@ -104,7 +104,7 @@ public final class ParameterPanel extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		GuiModel m = (GuiModel) o;
+		Model m = (Model) o;
 
 		try {
 

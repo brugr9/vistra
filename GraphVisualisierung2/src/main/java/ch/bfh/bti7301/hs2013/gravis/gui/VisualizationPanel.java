@@ -74,10 +74,10 @@ public class VisualizationPanel extends VisualizationViewer<IVertex, IEdge>
 
 		// TODO bitte an dieser Klasse nichts ändern (pk)
 
-		// if (o instanceof GuiModel && arg instanceof Graph<?, ?>) {
-		// GuiModel m = (GuiModel) o;
+		// if (o instanceof Model && arg instanceof Graph<?, ?>) {
+		// Model m = (Model) o;
 			if (arg instanceof Graph<?, ?>) {
-//				GuiModel m = (GuiModel) o;
+//				Model m = (Model) o;
 
 			try {
 				@SuppressWarnings("unchecked")

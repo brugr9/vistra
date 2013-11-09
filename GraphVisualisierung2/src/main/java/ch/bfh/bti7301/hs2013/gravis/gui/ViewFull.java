@@ -16,12 +16,13 @@ import javax.swing.JPanel;
  * <li>a {@link ParameterPanel}
  * <li>a {@link VisualizationPanel}
  * <li>a {@link PlayerPanel}
+ * <li>a {@link ProtocolPanel}
  * </ul>
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GuiViewMinimal extends JFrame implements IGuiView {
+public class ViewFull extends JFrame implements IView {
 
 	private static final long serialVersionUID = 1L;
 
@@ -49,30 +50,36 @@ public class GuiViewMinimal extends JFrame implements IGuiView {
 	 * A field for a player panel.
 	 */
 	private final PlayerPanel playerPanel;
+	/**
+	 * A field for a protocol panel.
+	 */
+	private final ProtocolPanel protocolPanel;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param guiModel
+	 * @param model
 	 *            a model as in MVC
-	 * @param guiControl
+	 * @param control
 	 *            a control as in MVC
 	 * @param width
 	 *            the width of the view
 	 * @param height
 	 *            the height of the view
 	 */
-	public GuiViewMinimal(GuiModel guiModel, GuiControl guiControl, int width,
+	public ViewFull(Model model, Control control, int width,
 			int height) {
-		super(guiModel.getProgramName());
+		super(model.getProgramName());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Components
-		this.menuBar = GuiFactory.createMenuBar(guiModel, guiControl);
+		this.menuBar = GuiFactory.createMenuBar(model, control);
 		this.parameterPanel = GuiFactory
-				.createRenderPanel(guiModel, guiControl);
-		this.visualizationPanel = GuiFactory.createVisualizationPanel(guiModel);
-		this.playerPanel = GuiFactory.createPlayerPanel(guiModel, guiControl);
+				.createRenderPanel(model, control);
+		this.visualizationPanel = GuiFactory.createVisualizationPanel(model);
+		this.playerPanel = GuiFactory.createPlayerPanel(model, control);
+		this.protocolPanel = GuiFactory
+				.createProtocolPanel(model, width, 30);
 
 		// Layout
 		this.setJMenuBar(this.menuBar);
@@ -86,6 +93,7 @@ public class GuiViewMinimal extends JFrame implements IGuiView {
 		this.setLayout(new BorderLayout());
 		this.add(panel1, BorderLayout.NORTH);
 		this.add(panel2, BorderLayout.CENTER);
+		this.add(this.protocolPanel, BorderLayout.SOUTH);
 
 		// Size
 		this.setLocation(60, 50);
@@ -93,11 +101,11 @@ public class GuiViewMinimal extends JFrame implements IGuiView {
 		this.setResizable(true);
 		// let's go ...
 		try {
-			guiControl.init();
+			control.init();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
 					"setViewInit():\n" + e.getMessage(),
-					guiModel.getProgramName(), 1, null);
+					model.getProgramName(), 1, null);
 			e.printStackTrace();
 		}
 		this.setVisible(true);

@@ -69,7 +69,7 @@ public final class ProtocolPanel extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		GuiModel m = (GuiModel) o;
+		Model m = (Model) o;
 		try {
 			this.protocolPanelBorder.setTitle(m.getProtocolPanelLabel());
 			this.protocolTextArea.setText(m.getProtocolPanelText());
