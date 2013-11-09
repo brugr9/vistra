@@ -19,9 +19,9 @@
       <w>140</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>Parameter Selection 1
+    <panel_attributes>Step-by-Step
 --
-do/enable Graph Selection</panel_attributes>
+do/enable Traversal Controller</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -32,9 +32,9 @@ do/enable Graph Selection</panel_attributes>
       <w>154</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>Parameter Selection 2
+    <panel_attributes>Animation
 --
-do/enable Algorithm Selection</panel_attributes>
+do/enable Pause, enable Stop</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -134,9 +134,7 @@ do/enable Algorithm Selection</panel_attributes>
       <w>154</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>Traversal Info
---
-do/pop up Info-Panel</panel_attributes>
+    <panel_attributes/>
     <additional_attributes/>
   </element>
   <element>
@@ -147,9 +145,7 @@ do/pop up Info-Panel</panel_attributes>
       <w>154</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>Traversal Player
---
-do/enable Traversal Player</panel_attributes>
+    <panel_attributes/>
     <additional_attributes/>
   </element>
   <element>
@@ -215,7 +211,7 @@ do/enable Traversal Player</panel_attributes>
       <w>406</w>
       <h>609</h>
     </coordinates>
-    <panel_attributes>sm Traversal Manager</panel_attributes>
+    <panel_attributes>sm Traversal Controller</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

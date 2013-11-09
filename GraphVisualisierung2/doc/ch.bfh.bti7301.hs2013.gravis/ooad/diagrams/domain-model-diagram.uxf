@@ -8,7 +8,7 @@
       <w>105</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>Traversal Controller
+    <panel_attributes>Parameter Controller
 --
 List of Graphs
 List of Algorithms</panel_attributes>
@@ -48,13 +48,11 @@ Selected
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>588</x>
-      <y>455</y>
+      <y>469</y>
       <w>77</w>
-      <h>28</h>
+      <h>21</h>
     </coordinates>
-    <panel_attributes>Traversal
---
-List of Steps</panel_attributes>
+    <panel_attributes>Traversal</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -76,7 +74,7 @@ List of Steps</panel_attributes>
       <w>105</w>
       <h>154</h>
     </coordinates>
-    <panel_attributes>Traversal Player
+    <panel_attributes>Traversal Controller
 --
 Traversal
 --
@@ -139,19 +137,19 @@ control &gt;</panel_attributes>
       <x>483</x>
       <y>469</y>
       <w>118</w>
-      <h>97</h>
+      <h>111</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
 visualize&gt;</panel_attributes>
-    <additional_attributes>21;21;105;84</additional_attributes>
+    <additional_attributes>21;21;105;98</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>588</x>
-      <y>546</y>
+      <y>560</y>
       <w>77</w>
       <h>21</h>
     </coordinates>
@@ -161,16 +159,16 @@ visualize&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>581</x>
-      <y>462</y>
-      <w>60</w>
-      <h>97</h>
+      <x>574</x>
+      <y>469</y>
+      <w>77</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=-
 m1= 1
 m2=   0..n
-list&gt;</panel_attributes>
-    <additional_attributes>35;21;35;84</additional_attributes>
+manage&gt;</panel_attributes>
+    <additional_attributes>42;21;42;91</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -255,13 +253,13 @@ operate&gt;</panel_attributes>
       <x>567</x>
       <y>364</y>
       <w>88</w>
-      <h>104</h>
+      <h>118</h>
     </coordinates>
     <panel_attributes>lt=-
 m1= 1
 m2= 1
 generate&gt;</panel_attributes>
-    <additional_attributes>49;21;49;91</additional_attributes>
+    <additional_attributes>49;21;49;105</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
+  <zoom_level>5</zoom_level>
+  <element>
+    <type>com.umlet.element.SequenceDiagram</type>
+    <coordinates>
+      <x>115</x>
+      <y>120</y>
+      <w>985</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>title: Import Graph
+_control:Control~id1_|_core:Core~id3_|_:FileUtils~id4_|_manager:GraphManager~id5_|_reader:GraphMLReader~id7_|_graph:Graph~id6_|_graphs:SortedSet&lt;File&gt;~id8_|_file:File~id2_
+
+id1-&gt;&gt;id2:id1,id2:new File()
+id2.&gt;id1:id1,id2:file
+
+id1-&gt;&gt;id3:id1,id2,id3:importGraph(file)
+
+
+id3-&gt;&gt;id4:id1,id2,id3,id4:copy(file, dir)
+id4.&gt;id3:id1,id2,id3,id4:path
+
+id3-&gt;id3:id1,id2,id3:file.setPath(path)
+id3-&gt;&gt;id5:id1,id2,id3,id5:import(file)
+
+id5-&gt;&gt;id6:id1,id2,id3,id5,id6:new Graph()
+id6.&gt;id5:id1,id2,id3,id5,id6:graph
+
+id5-&gt;&gt;id7:id1,id2,id3,id5,id6,id7:load(file, graph)
+
+id5-&gt;&gt;id8:id1,id2,id3,id5,id8:add(file)
+id8.&gt;id5:id1,id2,id3,id5,id8:boolean
+
+id5.&gt;id3:id1,id2,id3,id5:boolean
+
+id3-&gt;&gt;id4:id1,id2,id3,id4:delete(file)
+id4-&gt;&gt;id2:id1,id3,id4:
+
+id3.&gt;id1:id1,id2,id3:boolean
+id1-&gt;id1:id1,id2:Msg-Pane</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.InteractionFrame</type>
+    <coordinates>
+      <x>250</x>
+      <y>345</y>
+      <w>825</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>if ex or false
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

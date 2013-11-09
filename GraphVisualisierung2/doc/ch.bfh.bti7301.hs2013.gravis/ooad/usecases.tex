@@ -9,10 +9,10 @@
   \begin{tabular}[t]{|l|l|l|}\hline
   % use packages: color,colortbl
 	  \rowcolor{tcA}
-	  Actor 			& Typ 		& Beschreibung \\\hline
-	  User		 		& primary 	& Interagiert mit dem System. \\\hline
-	  Operating System (OS) 	& supporting 	& Dient dem System beim Zugriff auf das Dateisystem. \\\hline
-	  Algorithm Developer 		& offstage 	& Entwickler von Algorithmen. \\\hline
+	  Actor 		& Typ 		& Beschreibung \\\hline
+	  User		 	& primary 	& Interagiert mit dem System. \\\hline
+	  Operating System 	& supporting 	& Dient dem System beim Zugriff auf das Dateisystem. \\\hline
+	  Algorithm Developer 	& offstage 	& Entwickler von Algorithmen. \\\hline
   \end{tabular}
   \caption{Actors}
   \label{tab:actors}
@@ -52,7 +52,7 @@
 
   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Select Graph})
 
-  \item[Select Algorithm:] Der User kann einen Algorithmus ausw\"ahlen, evt. Start- resp. Endknoten ausw\"ahlen.
+  \item[Select Algorithm:] Der User kann einen Algorithmus ausw\"ahlen.
 
   (Ausgearbeitetes Format siehe Seite~\pageref{uc:Select Algorithm})
 
@@ -66,15 +66,15 @@
 
   \item[Goto End:] Der User kann in der Step-by-Step-Visualisierung an den Anfang springen.
 
-  \item[Set Delay:] Der User kann f\"ur die Visualisierung das Zeitintervall zwischen zwei Bildern einstellen.
+  \item[Set Delay:] Der User kann f\"ur die animierte Visualisierung das Zeitintervall zwischen zwei Bildern einstellen.
 
   \item[Play:] Der User kann die animierte Visualisierung starten.
 
-  \item[Pause:] Der User kann die animierte Visualisierung anhalten.
+  \item[Pause:] Der User kann die animierte Visualisierung pausieren.
 
-  \item[Resume:] Der User kann die animierte Visualisierung wieder aktivieren.
+  \item[Resume:] Der User kann die pausierte animierte Visualisierung wieder aktivieren.
 
-  \item[Stop:] Der User kann die animierte Visualisierung stoppen.
+  \item[Stop:] Der User kann die animierte Visualisierung anhalten.
 \end{description}
 % 
 \subsection{Use Cases in Fully Dressed Format}
@@ -316,7 +316,7 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
 	    \item Der gew\"ahlte Algorithm wurde als Instanz geladen.
 	    \item Die Parameterliste der Benutzerschnittstelle wurde aktualisiert.
             \item Der gew\"ahlte Algorithm hat eine Traversal generiert.
-	    \item Der Traversal Player ist aktiviert und somit zur Visualisierung der Traversal bereit.
+	    \item Das System ist zur Visualisierung der Traversal bereit.
     }
     \mainsuccess{
 	    \item In der Parameterliste wird der gew\"ahlte Algorithm als ausgew\"ahlt markiert (\textit{selected}).
@@ -327,7 +327,7 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
 	    \item Der gew\"ahlte Algorithm brechnet die Traversal.
 	    \item Der User erh\"alt eine Mitteilung, dass die Berechnung der Traversal abgeschlossen ist.
 	    \item Der User quittiert die Mitteilung.
-	    \item Der Traversal Player wird aktiviert.
+	    \item Die Abspielkonsole zur Steuerung der Visualisierung wird aktiviert.
     }
 %     \hline \\ [-1.3ex]
 %     \extensions{

@@ -8,7 +8,7 @@ Zur elaboration der sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \
 \end{itemize}
 Jeder System-Event wird mit einer einzigen System-Operation eines Controllers assoziiert. Ein Controller implementiert ausschliesslich System-Operationen (und eventuell einige private Methoden). Generell rufen die Klassen dieses Designs keine Methoden eines Controllers auf.
 
-Anschliessend werden zur elaboration der Benutzerschnittstellen \textit{Traversal Manager} und \textit{Traversal Player} diese als State Machine (SM) betrachtet und mit je einem State Diagram illustriert.
+Anschliessend werden die Konzeptklassen \textit{Parameter Controller} und \textit{Traversal Controller} zur Elaboration als State Machine (SM) betrachtet und je mit einem State Diagram illustriert.
 % \newpage
 % 
 \subsection{UC1 Import Graph}
@@ -149,19 +149,19 @@ Anschliessend werden zur elaboration der Benutzerschnittstellen \textit{Traversa
 \end{figure}
 % \newpage
 % 
-\subsection{Traversal Manager}
+\subsection{Parameter Controller}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{diagrams/sm-traversal-manager.pdf}
-    \caption{Traversal Manager, State Diagram}
-    \label{fig:sm-traversal-manager}
+    \includegraphics[scale=0.5]{diagrams/sm-parameter-controller.pdf}
+    \caption{Parameter Controller, State Diagram}
+    \label{fig:sm-parameter-controller}
 \end{figure}
 % \newpage
 % 
-\subsection{Traversal Player}
+\subsection{Traversal Controller}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{diagrams/sm-traversal-player.pdf}
-    \caption{Traversal Player, State Diagram}
-    \label{fig:sm-traversal-player}
+    \includegraphics[scale=0.5]{diagrams/sm-traversal-controller.pdf}
+    \caption{Traversal Controller, State Diagram}
+    \label{fig:sm-traversal-controller}
 \end{figure}
