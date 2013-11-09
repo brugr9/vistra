@@ -81,7 +81,7 @@ public final class Model extends Observable {
 	private boolean algorithmEnabled;
 	private boolean graphEnabled;
 
-	// VisualizationPanel
+	// Visualizer
 	private String visualizationPanelLabel;
 
 	// Player Panel

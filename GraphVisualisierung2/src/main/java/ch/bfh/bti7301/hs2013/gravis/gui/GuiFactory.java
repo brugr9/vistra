@@ -111,43 +111,43 @@ public final class GuiFactory {
 	}
 
 	/**
-	 * Creates a render panel.
+	 * Creates a parameter controller.
 	 * 
 	 * @param model
 	 * @param control
-	 * @return a settings panel
+	 * @return a parameter controller
 	 */
-	static ParameterPanel createRenderPanel(Model model, Control control) {
-		ParameterPanel parameterPanel = new ParameterPanel(control);
-		model.addObserver(parameterPanel);
-		return parameterPanel;
+	static ParameterController createParameterController(Model model, Control control) {
+		ParameterController parameterController = new ParameterController(control);
+		model.addObserver(parameterController);
+		return parameterController;
 	}
 
 	/**
-	 * Creates a visualization panel with a circle layout.
+	 * Creates a visualizer with a circle layout.
 	 * 
 	 * @param model
-	 * @return a visualization panel
+	 * @return a visualizer
 	 */
-	static VisualizationPanel createVisualizationPanel(Model model) {
+	static Visualizer createVisualizer(Model model) {
 		Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
 		Layout<IVertex, IEdge> layout = createCircleLayout(graph);
-		VisualizationPanel visualizationPanel = new VisualizationPanel(layout);
-		model.addObserver(visualizationPanel);
-		return visualizationPanel;
+		Visualizer visualizer = new Visualizer(layout);
+		model.addObserver(visualizer);
+		return visualizer;
 	}
 
 	/**
-	 * Creates a player panel.
+	 * Creates a traversal controller.
 	 * 
 	 * @param model
 	 * @param control
-	 * @return a player panel
+	 * @return a traversal controller
 	 */
-	static PlayerPanel createPlayerPanel(Model model, Control control) {
-		PlayerPanel playerPanel = new PlayerPanel(control);
-		model.addObserver(playerPanel);
-		return playerPanel;
+	static TraversalController createTraversalController(Model model, Control control) {
+		TraversalController traversalController = new TraversalController(control);
+		model.addObserver(traversalController);
+		return traversalController;
 	}
 
 	/**

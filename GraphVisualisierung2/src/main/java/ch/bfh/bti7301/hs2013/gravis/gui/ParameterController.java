@@ -20,7 +20,7 @@ import javax.swing.border.TitledBorder;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class ParameterPanel extends JPanel implements Observer {
+public final class ParameterController extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 
@@ -63,7 +63,7 @@ public final class ParameterPanel extends JPanel implements Observer {
 	 * @param control
 	 *            the controller as in MVC
 	 */
-	public ParameterPanel(Control control) {
+	public ParameterController(Control control) {
 
 		this.graphLabel = new JLabel("graphLabel");
 		this.algorithmLabel = new JLabel("algorithmLabel");

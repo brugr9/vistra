@@ -34,7 +34,7 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VisualizationPanel extends VisualizationViewer<IVertex, IEdge>
+public class Visualizer extends VisualizationViewer<IVertex, IEdge>
 		implements Observer {
 
 	private static final long serialVersionUID = 177109739873034494L;
@@ -44,7 +44,7 @@ public class VisualizationPanel extends VisualizationViewer<IVertex, IEdge>
 	 */
 	private TitledBorder visualizationPanelBorder;
 
-	public VisualizationPanel(Layout<IVertex, IEdge> layout) {
+	public Visualizer(Layout<IVertex, IEdge> layout) {
 		super(layout);
 
 		this.setPreferredSize(new Dimension(800, 300));

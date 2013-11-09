@@ -13,9 +13,9 @@ import javax.swing.JPanel;
  * This view instantiates
  * <ul>
  * <li>a {@link MenuBar}
- * <li>a {@link ParameterPanel}
- * <li>a {@link VisualizationPanel}
- * <li>a {@link PlayerPanel}
+ * <li>a {@link ParameterController}
+ * <li>a {@link Visualizer}
+ * <li>a {@link TraversalController}
  * </ul>
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
@@ -40,15 +40,15 @@ public class ViewMinimal extends JFrame implements IView {
 	/**
 	 * A field for the settings panel.
 	 */
-	private final ParameterPanel parameterPanel;
+	private final ParameterController parameterController;
 	/**
 	 * A field for a visualization panel.
 	 */
-	private final VisualizationPanel visualizationPanel;
+	private final Visualizer visualizer;
 	/**
 	 * A field for a player panel.
 	 */
-	private final PlayerPanel playerPanel;
+	private final TraversalController traversalController;
 
 	/**
 	 * Main constructor.
@@ -69,20 +69,20 @@ public class ViewMinimal extends JFrame implements IView {
 
 		// Components
 		this.menuBar = GuiFactory.createMenuBar(model, control);
-		this.parameterPanel = GuiFactory
-				.createRenderPanel(model, control);
-		this.visualizationPanel = GuiFactory.createVisualizationPanel(model);
-		this.playerPanel = GuiFactory.createPlayerPanel(model, control);
+		this.parameterController = GuiFactory
+				.createParameterController(model, control);
+		this.visualizer = GuiFactory.createVisualizer(model);
+		this.traversalController = GuiFactory.createTraversalController(model, control);
 
 		// Layout
 		this.setJMenuBar(this.menuBar);
 		this.panel1 = new JPanel();
 		this.panel1.setLayout(new BorderLayout());
-		this.panel1.add(this.parameterPanel, BorderLayout.NORTH);
-		this.panel1.add(this.visualizationPanel, BorderLayout.SOUTH);
+		this.panel1.add(this.parameterController, BorderLayout.NORTH);
+		this.panel1.add(this.visualizer, BorderLayout.SOUTH);
 		this.panel2 = new JPanel();
 		this.panel2.setLayout(new BorderLayout());
-		this.panel2.add(this.playerPanel, BorderLayout.NORTH);
+		this.panel2.add(this.traversalController, BorderLayout.NORTH);
 		this.setLayout(new BorderLayout());
 		this.add(panel1, BorderLayout.NORTH);
 		this.add(panel2, BorderLayout.CENTER);

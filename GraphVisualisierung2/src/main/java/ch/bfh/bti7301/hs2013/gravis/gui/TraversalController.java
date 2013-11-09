@@ -25,13 +25,13 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
 /**
- * A player panel.
+ * A traversal controller panel.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public final class PlayerPanel extends JPanel implements Observer {
+public final class TraversalController extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 
@@ -118,7 +118,7 @@ public final class PlayerPanel extends JPanel implements Observer {
 	 * @param control
 	 *            the controller as in MVC
 	 */
-	public PlayerPanel(Control control) {
+	public TraversalController(Control control) {
 
 		// spinner
 		this.stepLabel = new JLabel("stepLabel");

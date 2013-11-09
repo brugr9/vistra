@@ -32,7 +32,7 @@ import edu.uci.ics.jung.graph.Graph;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class Control implements  IControl {
+public final class Control implements IControl {
 
 	/**
 	 * A field for a Core.
