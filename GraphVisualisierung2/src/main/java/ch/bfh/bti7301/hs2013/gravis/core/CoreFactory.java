@@ -31,7 +31,7 @@ public final class CoreFactory {
 	/**
 	 * The default name of the property file name relative to the CLASSPATH.
 	 */
-	public final static String CORE_PROPERTIES_FILENAME = "Core.properties";
+	public final static String CORE_PROPERTIES = "META-INF/Core";
 
 	/**
 	 * A main (no-)constructor.
@@ -162,13 +162,13 @@ public final class CoreFactory {
 		ClassLoader classLoader = Thread.currentThread()
 				.getContextClassLoader();
 		InputStream is = classLoader
-				.getResourceAsStream(CORE_PROPERTIES_FILENAME);
+				.getResourceAsStream(CORE_PROPERTIES);
 		try {
 			properties.load(is);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(
 					"Cannot load properties file for core: "
-							+ CORE_PROPERTIES_FILENAME);
+							+ CORE_PROPERTIES);
 		}
 		return properties;
 

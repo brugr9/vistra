@@ -116,7 +116,7 @@ class Traversal implements ITraversal {
 			// TODO GravisGraphEventListener and IteratorManager need an
 			// Observer
 			// for processing and traversing updates
-			// TODO notify GuiControl.selectAlgorithm(index) for changes in item
+			// TODO notify Control.selectAlgorithm(index) for changes in item
 			
 			// TODO problem when this method is called twice
 			// TODO add TraversalListener

@@ -4,7 +4,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.CoreFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.gui.GuiFactory;
 import ch.bfh.bti7301.hs2013.gravis.gui.GuiFactory.ViewType;
-import ch.bfh.bti7301.hs2013.gravis.gui.IGuiView;
+import ch.bfh.bti7301.hs2013.gravis.gui.IView;
 
 /**
  * 
@@ -24,12 +24,12 @@ public final class ApplicationFactory {
 	 * 
 	 * @return a default Application with core and GUI
 	 */
-	protected static IGuiView createApplication(int width, int height)
+	protected static IView createApplication(int width, int height)
 			throws Exception {
 		try {
 			ICore core = CoreFactory.createCore();
-			IGuiView guiView = GuiFactory.createGui(core, width, height);
-			return guiView;
+			IView view = GuiFactory.createGui(core, width, height);
+			return view;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -40,13 +40,13 @@ public final class ApplicationFactory {
 	 * 
 	 * @return an Application with core and a GUI of given type
 	 */
-	protected static IGuiView createApplication(int width, int height,
+	protected static IView createApplication(int width, int height,
 			ViewType viewType) throws Exception {
 		try {
 			ICore core = CoreFactory.createCore();
-			IGuiView guiView = GuiFactory.createGui(core, width, height,
+			IView view = GuiFactory.createGui(core, width, height,
 					viewType);
-			return guiView;
+			return view;
 		} catch (Exception e) {
 			throw e;
 		}

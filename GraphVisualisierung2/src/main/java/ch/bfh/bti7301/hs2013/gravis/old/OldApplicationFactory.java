@@ -10,7 +10,7 @@ import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.CoreFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
-import ch.bfh.bti7301.hs2013.gravis.gui.VisualizationPanel;
+import ch.bfh.bti7301.hs2013.gravis.gui.Visualizer;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -80,7 +80,7 @@ public final class OldApplicationFactory {
 			e.printStackTrace();
 		}
 
-		VisualizationPanel graphPanel = new VisualizationPanel(
+		Visualizer graphPanel = new Visualizer(
 				new CircleLayout<IVertex, IEdge>(GraphFactory.createGraph()));
 		OldIGravisMainListener mainWindowListener = new OldMainWindowListener(
 				gravisCore);
@@ -144,18 +144,18 @@ public final class OldApplicationFactory {
 	// * @return a new instance of type OldGravisMainWindow
 	// */
 	// private static OldGravisMainWindow createGraphVisualizerMainWindow(
-	// String title, VisualizationPanel graphPanel,
+	// String title, Visualizer graphPanel,
 	// OldIGravisMainListener mainWindowListener) {
 	// return
 	// }
 
 	// /**
 	// * @param layout
-	// * @return a new instance of type VisualizationPanel
+	// * @return a new instance of type Visualizer
 	// */
-	// private static VisualizationPanel createGraphVisualizationPanel(
+	// private static Visualizer createGraphVisualizationPanel(
 	// Layout<IVertex, IEdge> layout) {
-	// return new VisualizationPanel(null, null);
+	// return new Visualizer(null, null);
 	// }
 
 	// /**
