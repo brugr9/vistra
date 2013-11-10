@@ -2,14 +2,11 @@ package ch.bfh.bti7301.hs2013.gravis.gui;
 
 import java.awt.Dimension;
 import java.awt.Shape;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Point2D;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 import org.apache.commons.collections15.Transformer;
@@ -34,7 +31,7 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Visualizer extends VisualizationViewer<IVertex, IEdge>
+public class VisualizerPanel extends VisualizationViewer<IVertex, IEdge>
 		implements Observer {
 
 	private static final long serialVersionUID = 177109739873034494L;
@@ -44,7 +41,7 @@ public class Visualizer extends VisualizationViewer<IVertex, IEdge>
 	 */
 	private TitledBorder visualizationPanelBorder;
 
-	public Visualizer(Layout<IVertex, IEdge> layout) {
+	public VisualizerPanel(Layout<IVertex, IEdge> layout) {
 		super(layout);
 
 		this.setPreferredSize(new Dimension(800, 300));
@@ -76,27 +73,31 @@ public class Visualizer extends VisualizationViewer<IVertex, IEdge>
 
 		// if (o instanceof Model && arg instanceof Graph<?, ?>) {
 		// Model m = (Model) o;
-			if (arg instanceof Graph<?, ?>) {
-//				Model m = (Model) o;
+		if (arg instanceof Graph<?, ?>) {
+			// Model m = (Model) o;
 
 			try {
 				@SuppressWarnings("unchecked")
 				Graph<IVertex, IEdge> graph = (Graph<IVertex, IEdge>) arg;
 
 				// TODO add dynamic layout
-				Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph, new PointTransformer());
+				Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph,
+						new PointTransformer());
 				layout.setSize(new Dimension(250, 350));
 				this.setGraphLayout(layout);
 
-				Transformer<IVertex,Shape> vertexSize = new Transformer<IVertex,Shape>(){
-		            public Shape transform(IVertex vertex){
-		                Ellipse2D circle = new Ellipse2D.Double(-15, -15, 30, 30);
-//		                if(i == 2) return AffineTransform.getScaleInstance(2, 2).createTransformedShape(circle);
-//		                else return circle;
-		                return circle;
-		            }
-		        };
-				
+				Transformer<IVertex, Shape> vertexSize = new Transformer<IVertex, Shape>() {
+					@Override
+					public Shape transform(IVertex vertex) {
+						Ellipse2D circle = new Ellipse2D.Double(-15, -15, 30,
+								30);
+						// if(i == 2) return AffineTransform.getScaleInstance(2,
+						// 2).createTransformedShape(circle);
+						// else return circle;
+						return circle;
+					}
+				};
+
 				// TODO adjust implementation
 				this.getRenderContext().setVertexFillPaintTransformer(
 						new VertexColorTransformer());
@@ -104,11 +105,11 @@ public class Visualizer extends VisualizationViewer<IVertex, IEdge>
 						new EdgeColorTransformer());
 				this.getRenderContext().setVertexShapeTransformer(vertexSize);
 
-//				this.visualizationPanelBorder.setTitle(m
-//						.getVisualizationPanelLabel());
+				// this.visualizationPanelBorder.setTitle(m.getResourceBundle()
+				// .getString("visualization.label"));
 			} catch (Exception e) {
-//				JOptionPane.showMessageDialog(null, e.toString(),
-//						m.getProgramName(), 1, null);
+				// JOptionPane.showMessageDialog(null, e.toString(),
+				// m.getProgramName(), 1, null);
 				e.printStackTrace();
 			}
 		}

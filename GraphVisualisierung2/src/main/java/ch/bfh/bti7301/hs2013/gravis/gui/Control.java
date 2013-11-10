@@ -15,7 +15,6 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -69,7 +68,7 @@ public final class Control implements IControl {
 	/**
 	 * A field for a 'step settings' listener.
 	 */
-	protected final StepSettingsListener stepSettingsListener;
+	protected final SteplengthListener steplengthListener;
 	/**
 	 * A field for a 'delay settings' listener.
 	 */
@@ -98,16 +97,13 @@ public final class Control implements IControl {
 	 *            a core
 	 * @param model
 	 *            a model
-	 * @param i18nBaseName
-	 *            a i18n base name
 	 */
-	public Control(ICore core, Model model, String i18nBaseName) {
+	public Control(ICore core, Model model) {
 		super();
 		// Core
 		this.core = core;
 		// Model
 		this.model = model;
-		this.model.setI18nBaseName(i18nBaseName);
 		// Control
 		this.fileChooser = new JFileChooser();
 		this.i18nListener = new I18nListener();
@@ -115,7 +111,7 @@ public final class Control implements IControl {
 		this.graphSettingsListener = new GraphSettingsListener();
 		this.algorithmSettingsListener = new AlgorithmSettingsListener();
 		this.traversalListener = new TraversalListener();
-		this.stepSettingsListener = new StepSettingsListener();
+		this.steplengthListener = new SteplengthListener();
 		this.delaySettingsListener = new DelaySettingsListener();
 		this.playerListener = new PlayerListener();
 		this.helpListener = new HelpListener();
@@ -124,28 +120,21 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * A method for initial ViewType settings on start-up,
 	 * 
 	 * @throws Exception
 	 */
-	protected void init() throws Exception {
-
+	public void init() throws Exception {
 		try {
-			// i18n
-			Locale locale = new Locale(System.getProperty("user.language"),
-					System.getProperty("user.country"));
-			this.setViewI18n(locale);
-			// parameter
-			this.model.setGraphComboModel(this.core.getGraphNames());
-			this.model.setGraphComboModel(this.core.getAlgorithmNames());
-			// protocol
-			this.appendProtocol(model.getAboutMessageText() + "----\n");
-			// enable/disable elements
+			this.model.setGraphs(this.core.getGraphNames());
+			this.model.setAlgorithms(this.core.getAlgorithmNames());
+			this.i18nListener.actionPerformed(null);
+			this.appendProtocol(this.model.getResourceBundle().getString(
+					"about.message")
+					+ "\n----");
 			this.setViewReady();
 		} catch (Exception ex) {
 			throw ex;
 		}
-
 	}
 
 	/**
@@ -158,151 +147,14 @@ public final class Control implements IControl {
 	private void appendProtocol(String newEntry) throws Exception {
 
 		try {
-			String oldEntry = this.model.getProtocolPanelText();
+			String oldEntry = this.model.getProtocol();
 			if (oldEntry.equals(""))
-				this.model.setProtocolPanelText(newEntry);
+				this.model.setProtocol(newEntry);
 			else
-				this.model.setProtocolPanelText(oldEntry + "\n" + newEntry);
+				this.model.setProtocol(oldEntry + "\n" + newEntry);
 
 			this.model.notifyObservers();
 		} catch (Exception ex) {
-			throw ex;
-		}
-
-	}
-
-	/**
-	 * Sets the language specific ViewType elements.
-	 * 
-	 * @param locale
-	 *            the locale to set
-	 * @throws Exception
-	 */
-	private void setViewI18n(Locale locale) throws Exception {
-
-		try {
-			// resource
-			ResourceBundle b = ResourceBundle.getBundle(
-					this.model.getI18nBaseName(), locale);
-			this.model.setResourceBundle(b);
-
-			// Control
-			JComponent.setDefaultLocale(locale);
-			this.fileChooser = new JFileChooser();
-			this.fileChooser.setLocale(locale);
-			// app name
-			this.model.setProgramName(b.getString("app.label"));
-			{// MenuBar
-				{// Label
-					// Menu
-					this.model.setFileMenuLabel(b.getString("file.label"));
-					this.model.setI18nMenuLabel(b.getString("i18n.label"));
-					this.model.setInfoMenuLabel(b.getString("info.label"));
-					// MenuItem
-					// (...)
-					this.model.setImportAlgorithmLabel(b
-							.getString("importAlgorithm.label"));
-					this.model.setDeleteAlgorithmLabel(b
-							.getString("deleteAlgorithm.label"));
-					this.model.setImportGraphLabel(b
-							.getString("importGraph.label"));
-					this.model.setDeleteGraphLabel(b
-							.getString("deleteGraph.label"));
-					this.model.setQuitLabel(b.getString("quit.label"));
-					// (...)
-					this.model.setDeDEMenuItemLabel(b
-							.getString("deDE.label"));
-					this.model.setFrFRMenuItemLabel(b
-							.getString("frFR.label"));
-					this.model.setEnUSMenuItemLabel(b
-							.getString("enUS.label"));
-					// (...)
-					this.model.setHelpMenuItemLabel(b
-							.getString("help.label"));
-					this.model.setAboutMenuItemLabel(b
-							.getString("about.label"));
-				}
-				{// Mnemonic / Accelerator
-					// Menu
-					this.model.setFileMenuMnemonic(b.getString(
-							"file.mnemonic").toCharArray()[0]);
-					this.model.setI18nMenuMnemonic(b.getString(
-							"i18n.mnemonic").toCharArray()[0]);
-					this.model.setInfoMenuMnemonic(b.getString(
-							"info.mnemonic").toCharArray()[0]);
-					// MenuItem
-					// Mnemonic
-					this.model.setQuitMenuItemMnemonic(b.getString(
-							"quit.mnemonic").toCharArray()[0]);
-					this.model.setDeDEMenuItemMnemonic(b.getString(
-							"deDE.mnemonic").toCharArray()[0]);
-					this.model.setFrFRMenuItemMnemonic(b.getString(
-							"frFR.mnemonic").toCharArray()[0]);
-					this.model.setEnUSMenuItemMnemonic(b.getString(
-							"enUS.mnemonic").toCharArray()[0]);
-					this.model.setHelpMenuItemMnemonic(b.getString(
-							"help.mnemonic").toCharArray()[0]);
-					this.model.setAboutMenuItemMnemonic(b.getString(
-							"about.mnemonic").toCharArray()[0]);
-					// Accelerator
-					this.model.setRenderMenuItemAccelerator(KeyStroke
-							.getKeyStroke(b.getString("render.accelerator")));
-					this.model.setQuitMenuItemAccelerator(KeyStroke
-							.getKeyStroke(b.getString("quit.accelerator")));
-					this.model.setHelpMenuItemAccelerator(KeyStroke
-							.getKeyStroke(b.getString("help.accelerator")));
-					this.model.setAboutMenuItemAccelerator(KeyStroke
-							.getKeyStroke(b.getString("about.accelerator")));
-				}
-			}
-			{// Parameter Panel
-				this.model
-						.setRenderPanelLabel(b.getString("settings.label"));
-				this.model.setGraphLabel(b.getString("graph.label"));
-				this.model.setAlgorithmLabel(b.getString("algorithm.label"));
-			}
-			{// Visualization Panel
-				this.model.setVisualizationPanelLabel(b
-						.getString("visualization.label"));
-			}
-			{// Player Panel
-				this.model.setStepLabel(b.getString("setStep.label"));
-				this.model.setDelayLabel(b.getString("setTime.label"));
-				this.model.setProgressLabel(b.getString("progress.label"));
-
-				this.model.setPlayerPanelLabel(b.getString("player.label"));
-				this.model.setPlayButtonLabel(b.getString("play.label"));
-				this.model.setPauseButtonLabel(b.getString("pause.label"));
-				this.model.setStopButtonLabel(b.getString("stop.label"));
-
-				this.model.setHomeButtonLabel(b.getString("home.label"));
-				this.model.setBackwardButtonLabel(b
-						.getString("backward.label"));
-				this.model.setForwardButtonLabel(b
-						.getString("forward.label"));
-				this.model.setEndButtonLabel(b.getString("end.label"));
-			}
-			{// Protocol Panel
-				this.model.setProtocolPanelLabel(b
-						.getString("protocol.label"));
-			}
-			{// Pane
-				this.model.setImportLabel(b.getString("import.label"));
-				this.model.setDeleteLabel(b.getString("delete.label"));
-
-				String title = this.model.getProgramName();
-				this.model.setHelpMessageLabel(title + " - "
-						+ b.getString("help.label"));
-				this.model.setHelpMessageText(b.getString("help.message"));
-				this.model.setAboutMessageLabel(title + " - "
-						+ b.getString("about.label"));
-				this.model.setAboutMessageText(title + "\n"
-						+ b.getString("about.message"));
-				this.model.setQuitMessageText(b.getString("quit.message"));
-			}
-			this.model.notifyObservers();
-		} catch (Exception ex) {
-			ex.printStackTrace();
 			throw ex;
 		}
 
@@ -329,8 +181,8 @@ public final class Control implements IControl {
 	private void setViewReady() {
 
 		this.model.setMenuEnabled(true);
-		this.model.setGraphEnabled(true);
-		this.model.setAlgorithmEnabled(false);
+		this.model.setGraphsEnabled(true);
+		this.model.setAlgorithmsEnabled(false);
 		this.model.setPlayerEnabled(false);
 
 		this.model.notifyObservers();
@@ -347,11 +199,11 @@ public final class Control implements IControl {
 
 		// Player Panel
 		this.model.setPlayerEnabled(false);
-		this.model.setPauseButtonLabel(this.model.getResourceBundle()
-				.getString("pause.label"));
-		this.model.setPauseButtonActionCommand(EventSource.PAUSE.toString());
-		this.model.setPauseButtonEnabled(true);
-		this.model.setStopButtonEnabled(true);
+		this.model.setPauseLabel(this.model.getResourceBundle().getString(
+				"pause.label"));
+		this.model.setPauseEvent(EventSource.PAUSE);
+		this.model.setPauseEnabled(true);
+		this.model.setStopEnabled(true);
 
 		this.model.notifyObservers();
 
@@ -363,10 +215,9 @@ public final class Control implements IControl {
 	 */
 	private void setViewPause() {
 
-		this.model.setPauseButtonLabel(this.model.getResourceBundle()
-				.getString("resume.label"));
-		this.model
-				.setPauseButtonActionCommand(EventSource.RESUME.toString());
+		this.model.setPauseLabel(this.model.getResourceBundle().getString(
+				"resume.label"));
+		this.model.setPauseEvent(EventSource.RESUME);
 
 		this.model.notifyObservers();
 	}
@@ -382,13 +233,12 @@ public final class Control implements IControl {
 
 		// Player Panel
 		this.model.setPlayerEnabled(true);
-		this.model.setPauseButtonEnabled(false);
-		this.model.setStopButtonEnabled(false);
+		this.model.setPauseEnabled(false);
+		this.model.setStopEnabled(false);
 
-		if (this.model.getProgressValue() == this.model
-				.getProgressValueMaximum())
+		if (this.model.getProgress() == this.model.getProgressMaximum())
 			this.setViewEnd();
-		else if (this.model.getProgressValue() == 0)
+		else if (this.model.getProgress() == 0)
 			this.setViewBeginning();
 		else
 			this.model.setStepByStepEnabled(true);
@@ -403,10 +253,10 @@ public final class Control implements IControl {
 	 */
 	private void setViewBeginning() {
 
-		this.model.setProgressValue(0);
+		this.model.setProgress(0);
 		this.model.setStepByStepEnabled(true);
-		this.model.setHomeButtonEnabled(false);
-		this.model.setBackwardButtonEnabled(false);
+		this.model.setToBeginningEnabled(false);
+		this.model.setBackwardEnabled(false);
 
 		this.model.notifyObservers();
 
@@ -418,10 +268,10 @@ public final class Control implements IControl {
 	 */
 	private void setViewEnd() {
 
-		this.model.setProgressValue(this.model.getProgressValueMaximum());
+		this.model.setProgress(this.model.getProgressMaximum());
 		this.model.setStepByStepEnabled(true);
-		this.model.setForwardButtonEnabled(false);
-		this.model.setEndButtonEnabled(false);
+		this.model.setForwardEnabled(false);
+		this.model.setToEndEnabled(false);
 
 		this.model.notifyObservers();
 
@@ -436,16 +286,12 @@ public final class Control implements IControl {
 
 		try {
 			// Core
-			// TODO mapping index -> name
 			Graph<IVertex, IEdge> graph = this.core.selectGraph("");
 
-			// Model
-			this.model.setGraphSelected(index);
-			this.model.setAlgorithmSelected(0);
-			this.model.setProgressValue(0);
-
-			// ViewType
-			this.model.setAlgorithmEnabled(true);
+			// Gui
+			this.model.setSelectedGraph(index);
+			this.model.setAlgorithmsEnabled(true);
+			this.selectAlgorithm(0);
 			this.model.setPlayerEnabled(false);
 
 			this.model.notifyObservers(graph);
@@ -464,19 +310,22 @@ public final class Control implements IControl {
 	private void selectAlgorithm(int index) throws Exception {
 
 		try {
-			this.setViewBusy();
+			if (index == 0) {
 
-			// Core
-			// TODO mapping index -> name
-			// this.core.selectAlgorithm(index);
-			this.core.executeTraverser(this.traversalListener);
-			// Model
-			this.model.setAlgorithmSelected(index);
-			// ViewType
-			this.model.setProgressValue(0);
-			this.model.setProgressValueMaximum(this.core
-					.getGraphIteratorSize());
-			this.setViewStop();
+			} else {
+
+				this.setViewBusy();
+
+				// Core
+				// this.core.selectAlgorithm(index);
+				this.core.executeTraverser(this.traversalListener);
+				// Model
+				this.model.setSelectedAlgorithm(index);
+				// ViewType
+				this.model.setProgress(0);
+				this.model.setProgressMaximum(this.core.getGraphIteratorSize());
+				this.setViewStop();
+			}
 
 		} catch (Exception e) {
 			this.setViewReady();
@@ -495,25 +344,44 @@ public final class Control implements IControl {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				String c = e.getActionCommand();
-				appendProtocol(c);
-				Locale locale;
+				String language, country;
 
-				if (c.equals(EventSource.DE_DE.toString()))
-					locale = new Locale("de", "DE");
-				else if (c.equals(EventSource.FR_FR.toString()))
-					locale = new Locale("fr", "FR");
-				else if (c.equals(EventSource.EN_US.toString()))
-					locale = new Locale("en", "US");
-				else
-					locale = new Locale(System.getProperty("user.language"),
-							System.getProperty("user.country"));
+				if (e != null) {
+					String c = e.getActionCommand();
+					appendProtocol(c);
 
-				setViewI18n(locale);
+					if (c.equals(EventSource.DE_DE.toString())) {
+						language = "de";
+						country = "DE";
+					} else if (c.equals(EventSource.FR_FR.toString())) {
+						language = "fr";
+						country = "FR";
+					} else if (c.equals(EventSource.EN_US.toString())) {
+						language = "en";
+						country = "US";
+					} else {
+						language = System.getProperty("user.language");
+						country = System.getProperty("user.country");
+					}
+
+				} else {
+					language = System.getProperty("user.language");
+					country = System.getProperty("user.country");
+				}
+
+				Locale locale = new Locale(language, country);
+
+				JComponent.setDefaultLocale(locale);
+				fileChooser.setLocale(locale);
+				// model
+				ResourceBundle b = ResourceBundle.getBundle(
+						model.getI18nBaseName(), locale);
+				model.setResourceBundle(b);
+				model.notifyObservers();
 
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -543,6 +411,7 @@ public final class Control implements IControl {
 				int option;
 				JComponent top = (JComponent) ((JComponent) e.getSource())
 						.getTopLevelAncestor();
+				ResourceBundle b = model.getResourceBundle();
 
 				// File chooser
 				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -550,7 +419,7 @@ public final class Control implements IControl {
 				fileChooser.setMultiSelectionEnabled(false);
 				fileChooser.addChoosableFileFilter(core.getGraphFilter());
 				fileChooser.addChoosableFileFilter(core.getAlgorithmFilter());
-				// Graph vs. algorithm
+				// Parameter: Graph vs. algorithm
 				if (c.equals(EventSource.IMPORT_GRAPH.toString())
 						|| c.equals(EventSource.DELETE_GRAPH.toString())) {
 					fileChooser.setFileFilter(core.getGraphFilter());
@@ -561,33 +430,37 @@ public final class Control implements IControl {
 					fileChooser
 							.removeChoosableFileFilter(core.getGraphFilter());
 				}
-				// Import vs. delete
+				// Event: Import vs. delete
 				if (c.equals(EventSource.IMPORT_GRAPH.toString())
 						|| c.equals(EventSource.IMPORT_ALGORITHM.toString())) {
-					fileChooser.setApproveButtonText(model.getImportLabel());
+					fileChooser.setApproveButtonText(b
+							.getString("import.label"));
 				} else {
-					fileChooser.setApproveButtonText(model.getDeleteLabel());
+					fileChooser.setApproveButtonText(b
+							.getString("delete.label"));
 					// TODO restrict access to workbench directory only
 				}
 				// Events
 				if (c.equals(EventSource.IMPORT_GRAPH.toString())) {
-					appendProtocol(model.getImportGraphLabel());
-					fileChooser.setDialogTitle(model.getImportGraphLabel());
+					appendProtocol(b.getString("importGraph.label"));
+					fileChooser
+							.setDialogTitle(b.getString("importGraph.label"));
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION)
 						importGraph(fileChooser.getSelectedFile());
 
 				} else if (c.equals(EventSource.IMPORT_ALGORITHM.toString())) {
-					appendProtocol(model.getImportAlgorithmLabel());
-					fileChooser.setDialogTitle(model
-							.getImportAlgorithmLabel());
+					appendProtocol(b.getString("importAlgorithm.label"));
+					fileChooser.setDialogTitle(b
+							.getString("importAlgorithm.label"));
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION)
 						importAlgorithm(fileChooser.getSelectedFile());
 
 				} else if (c.equals(EventSource.DELETE_GRAPH.toString())) {
-					appendProtocol(model.getDeleteGraphLabel());
-					fileChooser.setDialogTitle(model.getDeleteGraphLabel());
+					appendProtocol(b.getString("deleteGraph.label"));
+					fileChooser
+							.setDialogTitle(b.getString("deleteGraph.label"));
 					fileChooser
 							.setCurrentDirectory(core.getGraphWorkbenchDir());
 					option = fileChooser.showDialog(top, null);
@@ -597,9 +470,9 @@ public final class Control implements IControl {
 					}
 
 				} else if (c.equals(EventSource.DELETE_ALGORITHM.toString())) {
-					appendProtocol(model.getDeleteAlgorithmLabel());
-					fileChooser.setDialogTitle(model
-							.getDeleteAlgorithmLabel());
+					appendProtocol(b.getString("deleteAlgorithm.label"));
+					fileChooser.setDialogTitle(b
+							.getString("deleteAlgorithm.label"));
 					fileChooser.setCurrentDirectory(core
 							.getAlgorithmWorkbenchDir());
 					option = fileChooser.showDialog(top, null);
@@ -611,8 +484,8 @@ public final class Control implements IControl {
 				}
 
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 
@@ -628,10 +501,10 @@ public final class Control implements IControl {
 		private void importGraph(File file) throws Exception {
 			try {
 				core.importGraph(file);
-				model.setGraphComboModel(core.getGraphNames());
+				model.setGraphs(core.getGraphNames());
 				selectGraph(0);
-				JOptionPane.showMessageDialog(null, model
-						.getResourceBundle().getString("import.graph.message"));
+				JOptionPane.showMessageDialog(null, model.getResourceBundle()
+						.getString("import.graph.message"));
 			} catch (Exception ex) {
 				throw ex;
 			}
@@ -649,10 +522,10 @@ public final class Control implements IControl {
 
 			try {
 				core.deleteGraph(file);
-				model.setGraphComboModel(core.getGraphNames());
+				model.setGraphs(core.getGraphNames());
 				selectGraph(0);
-				JOptionPane.showMessageDialog(null, model
-						.getResourceBundle().getString("delete.graph.message"));
+				JOptionPane.showMessageDialog(null, model.getResourceBundle()
+						.getString("delete.graph.message"));
 			} catch (Exception ex) {
 				throw ex;
 			}
@@ -670,12 +543,10 @@ public final class Control implements IControl {
 
 			try {
 				core.importAlgorithm(file);
-				model.setAlgorithmComboModel(core.getAlgorithmNames());
+				model.setAlgorithms(core.getAlgorithmNames());
 				selectAlgorithm(0);
-				JOptionPane.showMessageDialog(
-						null,
-						model.getResourceBundle().getString(
-								"import.algorthm.message"));
+				JOptionPane.showMessageDialog(null, model.getResourceBundle()
+						.getString("import.algorthm.message"));
 			} catch (Exception ex) {
 				throw ex;
 			}
@@ -693,12 +564,10 @@ public final class Control implements IControl {
 
 			try {
 				core.deleteAlgorithm(file);
-				model.setAlgorithmComboModel(core.getAlgorithmNames());
+				model.setAlgorithms(core.getAlgorithmNames());
 				selectAlgorithm(0);
-				JOptionPane.showMessageDialog(
-						null,
-						model.getResourceBundle().getString(
-								"delete.algorthm.message"));
+				JOptionPane.showMessageDialog(null, model.getResourceBundle()
+						.getString("delete.algorthm.message"));
 			} catch (Exception ex) {
 				throw ex;
 			}
@@ -724,8 +593,8 @@ public final class Control implements IControl {
 				// String graphName = (String) box.getSelectedItem();
 				selectGraph(index);
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -751,8 +620,8 @@ public final class Control implements IControl {
 					selectAlgorithm(index);
 				}
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -770,26 +639,26 @@ public final class Control implements IControl {
 		@Override
 		public void stateChanged(ChangeEvent e) {
 			try {
-				// TODO i18n
-				String traversal = "Traversal: ready.";
-				JOptionPane.showMessageDialog(null, traversal,
-						model.getProgramName(), 1, null);
-				appendProtocol(traversal);
+				String text = model.getResourceBundle().getString(
+						"render.message");
+				JOptionPane.showMessageDialog(null, text, model
+						.getResourceBundle().getString("app.label"), 1, null);
+				appendProtocol(text);
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
 	}
 
 	/**
-	 * A step settings listener.
+	 * A steplenth settings listener.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class StepSettingsListener implements FocusListener {
+	private final class SteplengthListener implements FocusListener {
 
 		@Override
 		public void focusGained(FocusEvent e) {
@@ -801,11 +670,11 @@ public final class Control implements IControl {
 			try {
 				JFormattedTextField textField = (JFormattedTextField) e
 						.getSource();
-				int newValue = Integer.valueOf(textField.getText());
-				model.setStepValue(newValue);
+				int value = Integer.valueOf(textField.getText());
+				model.setSteplength(value);
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -830,11 +699,11 @@ public final class Control implements IControl {
 			try {
 				JFormattedTextField textField = (JFormattedTextField) e
 						.getSource();
-				int newValue = Integer.valueOf(textField.getText());
-				model.setDelayValue(newValue);
+				int value = Integer.valueOf(textField.getText());
+				model.setDelay(value);
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -867,18 +736,18 @@ public final class Control implements IControl {
 		 */
 		private void goBackward() {
 			try {
-				int step = model.getStepValue();
-				int progress = model.getProgressValue();
+				int step = model.getSteplength();
+				int progress = model.getProgress();
 				int min = 0;
 				for (int i = 0; i < step; i++) {
 					if (min < progress) {
 						core.goBackward();
-						model.setProgressValue(--progress);
+						model.setProgress(--progress);
 					}
 				}
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -889,18 +758,18 @@ public final class Control implements IControl {
 		 */
 		private void goForward() {
 			try {
-				int step = model.getStepValue();
-				int progress = model.getProgressValue();
-				int max = model.getProgressValueMaximum();
+				int step = model.getSteplength();
+				int progress = model.getProgress();
+				int max = model.getProgressMaximum();
 				for (int i = 0; i < step; i++) {
 					if (progress < max) {
 						core.goForward();
-						model.setProgressValue(++progress);
+						model.setProgress(++progress);
 					}
 				}
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 
@@ -911,17 +780,17 @@ public final class Control implements IControl {
 			while (true) {
 				if (this.play) {
 					try {
-						int progress = model.getProgressValue();
-						int max = model.getProgressValueMaximum();
+						int progress = model.getProgress();
+						int max = model.getProgressMaximum();
 						if (progress == max) {
 							core.goToBeginning();
-							progress = model.getProgressValue();
+							progress = model.getProgress();
 						}
 						while (progress < max) {
 							appendProtocol("step");
 							goForward();
-							progress = model.getProgressValue();
-							Thread.sleep(model.getDelayValue() * 1000);
+							progress = model.getProgress();
+							Thread.sleep(model.getDelay() * 1000);
 						}
 						setViewStop();
 						this.play = false;
@@ -929,7 +798,8 @@ public final class Control implements IControl {
 						setViewStop();
 						this.play = false;
 						JOptionPane.showMessageDialog(null, ex.toString(),
-								model.getProgramName(), 1, null);
+								model.getResourceBundle()
+										.getString("app.label"), 1, null);
 						ex.printStackTrace();
 					}
 				}
@@ -974,8 +844,8 @@ public final class Control implements IControl {
 				}
 
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -993,12 +863,12 @@ public final class Control implements IControl {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				JOptionPane.showMessageDialog(null,
-						model.getHelpMessageText(),
-						model.getHelpMessageLabel(), 1, null);
+				JOptionPane.showMessageDialog(null, model.getResourceBundle()
+						.getString("help.message"), model.getResourceBundle()
+						.getString("help.label"), 1, null);
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -1016,12 +886,12 @@ public final class Control implements IControl {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				JOptionPane.showMessageDialog(null,
-						model.getAboutMessageText(),
-						model.getAboutMessageLabel(), 1, null);
+				JOptionPane.showMessageDialog(null, model.getResourceBundle()
+						.getString("about.message"), model.getResourceBundle()
+						.getString("about.label"), 1, null);
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						model.getProgramName(), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 		}
@@ -1038,8 +908,9 @@ public final class Control implements IControl {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int value = JOptionPane.showConfirmDialog(null,
-					model.getQuitMessageText(), model.getQuitLabel(),
+			int value = JOptionPane.showConfirmDialog(null, model
+					.getResourceBundle().getString("quit.message"), model
+					.getResourceBundle().getString("app.label"),
 					JOptionPane.YES_NO_OPTION);
 			if (value == JOptionPane.YES_OPTION) {
 				System.exit(0);

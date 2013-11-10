@@ -20,7 +20,7 @@ public interface IControl {
 	 */
 	public enum EventSource {
 		// i18n
-		DE_DE, FR_FR, EN_US,
+		I18N, DE_DE, FR_FR, EN_US,
 		// data, graph
 		IMPORT_GRAPH, DELETE_GRAPH,
 		// data, algorithm
@@ -30,5 +30,5 @@ public interface IControl {
 		// player
 		GOTO_BEGINNING, BACKWARD, FORWARD, GOTO_END, PLAY, PAUSE, RESUME, STOP,
 	}
-	
+
 }

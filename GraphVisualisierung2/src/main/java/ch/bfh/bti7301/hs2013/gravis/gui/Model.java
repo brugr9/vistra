@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.KeyStroke;
 
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
+
 /**
  * A model as in MVC containing some fields and its getter and setter methods.
  * 
@@ -13,290 +15,163 @@ import javax.swing.KeyStroke;
  */
 public final class Model extends Observable {
 
-	// ViewType elements
-	private String programName;
+	// i18n
 	private String i18nBaseName;
 	private ResourceBundle resourceBundle;
 
-	// MenuBar
-	private String fileMenuLabel;
-	private String importAlgorithmLabel;
-	private String deleteAlgorithmLabel;
-	private String importGraphLabel;
-	private String deleteGraphLabel;
-	private String quitLabel;
-	private String i18nMenuLabel;
-	private String deDEMenuItemLabel;
-	private String frFRMenuItemLabel;
-	private String enUSMenuItemLabel;
-	private String infoMenuLabel;
-	private String helpMenuItemLabel;
-	private String aboutMenuItemLabel;
+	// Menu
+	private boolean fileEnabled;
+	private boolean i18nEnabled;
+	private boolean deDEEnabled;
+	private boolean frFREnabled;
+	private boolean enUSEnabled;
+	private boolean infoEnabled;
+	private boolean helpEnabled;
+	private boolean aboutEnabled;
+	private boolean quitEnabled;
 
-	private char fileMenuMnemonic;
-	private char renderMnemonic;
-	private char saveGraphMnemonic;
-	private char quitMenuItemMnemonic;
-	private char i18nMenuMnemonic;
-	private char deDEMenuItemMnemonic;
-	private char frFRMenuItemMnemonic;
-	private char enUSMenuItemMnemonic;
-	private char infoMenuMnemonic;
-	private char helpMenuItemMnemonic;
-	private char aboutMenuItemMnemonic;
-
-	private KeyStroke renderMenuItemAccelerator;
-	private KeyStroke quitMenuItemAccelerator;
-	private KeyStroke helpMenuItemAccelerator;
-	private KeyStroke aboutMenuItemAccelerator;
-
-	private boolean fileMenuEnabled;
-	private boolean importAlgorithmMenuItemEnabled;
-	private boolean deleteAlgorithmMenuItemEnabled;
-	private boolean importGraphMenuItemEnabled;
+	// IO
+	private boolean importAlgorithmEnabled;
+	private boolean deleteAlgorithmEnabled;
+	private boolean importGraphEnabled;
 	private boolean saveGraphEnabled;
-	private boolean exportGraphMenuItemEnabled;
-	private boolean deleteGraphMenuItemEnabled;
-	private boolean renderMenuItemEnabled;
-	private boolean quitMenuItemEnabled;
-	private boolean i18nMenuEnabled;
-	private boolean deDEMenuItemEnabled;
-	private boolean frFRMenuItemEnabled;
-	private boolean enUSMenuItemEnabled;
-	private boolean infoMenuEnabled;
-	private boolean helpMenuItemEnabled;
-	private boolean aboutMenuItemEnabled;
+	private boolean exportGraphEnabled;
+	private boolean deleteGraphEnabled;
 
-	// Parameter Panel
-	private String renderPanelLabel;
-	private String algorithmLabel;
-	private String graphLabel;
+	// Parameter
+	private String[] graphs;
+	private String[] algorithms;
+	private boolean graphsEnabled;
+	private boolean algorithmsEnabled;
+	private int selectedGraph;
+	private int selectedAlgorithm;
 
-	private String[] graphComboModel;
-	private String[] algorithmComboModel;
-
-	private int algorithmSelected;
-	private int graphSelected;
-
-	private boolean algorithmEnabled;
-	private boolean graphEnabled;
-
-	// Visualizer
-	private String visualizationPanelLabel;
-
-	// Player Panel
-	private String playerPanelLabel;
-
-	private String delayLabel;
-	private int delayValue;
+	// Player
+	private int delay;
+	private int steplength;
 	private boolean delayEnabled;
+	private boolean steplengthEnabled;
+	private int progress;
+	private int progressMaximum;
 
-	private String stepLabel;
-	private int stepValue;
-	private boolean stepEnabled;
-
-	private String progressLabel;
-	private int progressValue;
-	private int progressValueMaximum;
-
-	private String playButtonLabel;
-	private boolean playButtonEnabled;
-	private KeyStroke playAccelerator;
-
-	private String pauseButtonLabel;
-	private boolean pauseButtonEnabled;
-	private String pauseButtonActionCommand;
+	private String pauseLabel;
 	private KeyStroke pauseAccelerator;
+	private EventSource pauseEvent;
 
-	private String stopButtonLabel;
-	private boolean stopButtonEnabled;
-	private KeyStroke stopAccelerator;
+	private boolean playEnabled;
+	private boolean pauseEnabled;
+	private boolean stopEnabled;
 
-	private String homeButtonLabel;
-	private boolean homeButtonEnabled;
-	private KeyStroke homeAccelerator;
+	private boolean toBeginningEnabled;
+	private boolean backwardEnabled;
+	private boolean forwardEnabled;
+	private boolean toEndEnabled;
 
-	private String backwardButtonLabel;
-	private char backwardButtonMnemonic;
-	private boolean backwardButtonEnabled;
-	private KeyStroke backwardAccelerator;
-
-	private String forwardButtonLabel;
-	private boolean forwardButtonEnabled;
-	private KeyStroke forwardAccelerator;
-
-	private String endButtonLabel;
-	private boolean endButtonEnabled;
-	private KeyStroke endAccelerator;
-
-	// Protocol Panel
-	private String protocolPanelLabel;
-	private String protocolPanelText;
-
-	// IO Pane
-	private String importLabel;
-	private String deleteLabel;
-
-	// Help Pane
-	private String helpMessageLabel;
-	private String helpMessageText;
-
-	// About Pane
-	private String aboutMessageLabel;
-	private String aboutMessageText;
-
-	// Quit
-	private String quitMessageText;
+	// Protocol
+	private String protocol;
 
 	/**
 	 * Main constructor.
+	 * 
+	 * @param i18nBaseName
+	 *            an i18n base name
 	 */
-	public Model() {
+	public Model(String i18nBaseName) {
 		super();
-		this.programName = "";
-		this.i18nBaseName = "";
+
+		// ViewType elements
+		this.i18nBaseName = i18nBaseName;
 		this.resourceBundle = null;
-		this.fileMenuLabel = "";
-		this.importAlgorithmLabel = "";
-		this.deleteAlgorithmLabel = "";
-		this.importGraphLabel = "";
-		this.deleteGraphLabel = "";
-		this.quitLabel = "";
-		this.i18nMenuLabel = "";
-		this.deDEMenuItemLabel = "";
-		this.frFRMenuItemLabel = "";
-		this.enUSMenuItemLabel = "";
-		this.infoMenuLabel = "";
-		this.helpMenuItemLabel = "";
-		this.aboutMenuItemLabel = "";
-		this.fileMenuMnemonic = ' ';
-		this.saveGraphMnemonic = ' ';
-		this.renderMnemonic = ' ';
-		this.quitMenuItemMnemonic = ' ';
-		this.i18nMenuMnemonic = ' ';
-		this.deDEMenuItemMnemonic = ' ';
-		this.frFRMenuItemMnemonic = ' ';
-		this.enUSMenuItemMnemonic = ' ';
-		this.infoMenuMnemonic = ' ';
-		this.helpMenuItemMnemonic = ' ';
-		this.aboutMenuItemMnemonic = ' ';
-		this.renderMenuItemAccelerator = null;
-		this.quitMenuItemAccelerator = null;
-		this.helpMenuItemAccelerator = null;
-		this.aboutMenuItemAccelerator = null;
 
-		this.fileMenuEnabled = false;
-		this.importAlgorithmMenuItemEnabled = false;
-		this.deleteAlgorithmMenuItemEnabled = false;
-		this.importGraphMenuItemEnabled = false;
+		// Menu
+		this.fileEnabled = false;
+		this.i18nEnabled = false;
+		this.deDEEnabled = false;
+		this.frFREnabled = false;
+		this.enUSEnabled = false;
+		this.infoEnabled = false;
+		this.helpEnabled = false;
+		this.aboutEnabled = false;
+		this.quitEnabled = false;
+
+		// IO
+		this.importAlgorithmEnabled = false;
+		this.deleteAlgorithmEnabled = false;
+		this.importGraphEnabled = false;
 		this.saveGraphEnabled = false;
-		this.exportGraphMenuItemEnabled = false;
-		this.deleteGraphMenuItemEnabled = false;
-		this.renderMenuItemEnabled = false;
-		this.quitMenuItemEnabled = false;
-		this.i18nMenuEnabled = false;
-		this.deDEMenuItemEnabled = false;
-		this.frFRMenuItemEnabled = false;
-		this.enUSMenuItemEnabled = false;
-		this.infoMenuEnabled = false;
-		this.helpMenuItemEnabled = false;
-		this.aboutMenuItemEnabled = false;
+		this.exportGraphEnabled = false;
+		this.deleteGraphEnabled = false;
 
-		this.renderPanelLabel = "";
-		this.algorithmLabel = "";
-		this.graphLabel = "";
-		this.algorithmSelected = 0;
-		this.graphSelected = 0;
-		this.graphComboModel = new String[] {};
-		this.algorithmComboModel = new String[] {};
-		this.algorithmEnabled = false;
-		this.graphEnabled = false;
+		// Parameter
+		this.graphs = null;
+		this.algorithms = null;
+		this.graphsEnabled = false;
+		this.algorithmsEnabled = false;
+		this.selectedGraph = 0;
+		this.selectedAlgorithm = 0;
 
-		this.visualizationPanelLabel = "";
-
-		this.delayLabel = "";
-		this.stepLabel = "";
-		this.playerPanelLabel = "";
-		this.playButtonLabel = "";
-		this.pauseButtonLabel = "";
-		this.stopButtonLabel = "";
-		this.homeButtonLabel = "";
-		this.backwardButtonLabel = "";
-		this.forwardButtonLabel = "";
-		this.endButtonLabel = "";
-
-		this.delayValue = 1;
-		this.stepValue = 1;
-		this.progressLabel = "";
-		this.progressValue = 0;
-		this.progressValueMaximum = 0;
-		this.pauseButtonActionCommand = "";
-
+		// Player
+		this.delay = 1;
+		this.steplength = 1;
 		this.delayEnabled = false;
-		this.stepEnabled = false;
-		this.playButtonEnabled = false;
-		this.pauseButtonEnabled = false;
-		this.stopButtonEnabled = false;
-		this.homeButtonEnabled = false;
-		this.backwardButtonEnabled = false;
-		this.forwardButtonEnabled = false;
-		this.endButtonEnabled = false;
+		this.steplengthEnabled = false;
+		this.progress = 0;
+		this.progressMaximum = 0;
 
-		this.playAccelerator = null;
+		this.pauseLabel = "";
 		this.pauseAccelerator = null;
-		this.stopAccelerator = null;
-		this.homeAccelerator = null;
-		this.backwardAccelerator = null;
-		this.forwardAccelerator = null;
-		this.endAccelerator = null;
+		this.pauseEvent = null;
 
-		this.protocolPanelLabel = "";
-		this.protocolPanelText = "";
-		this.importLabel = "";
-		this.deleteLabel = "";
-		this.helpMessageLabel = "";
-		this.helpMessageText = "";
-		this.aboutMessageLabel = "";
-		this.aboutMessageText = "";
-		this.quitMessageText = "";
+		this.playEnabled = false;
+		this.pauseEnabled = false;
+		this.stopEnabled = false;
+
+		this.toBeginningEnabled = false;
+		this.backwardEnabled = false;
+		this.forwardEnabled = false;
+		this.toEndEnabled = false;
+
+		// Protocol
+		this.protocol = "";
+
 	}
 
 	/**
-	 * Disables or enables the menu elements.
+	 * Disables or enables menu elements.
 	 * 
 	 * @param enabled
 	 */
 	protected void setMenuEnabled(boolean enabled) {
 		// Menu
-		this.setFileMenuEnabled(enabled);
-		this.setI18nMenuEnabled(enabled);
-		this.setInfoMenuEnabled(enabled);
+		this.setFileEnabled(enabled);
+		this.setI18nEnabled(enabled);
+		this.setInfoEnabled(enabled);
 		// MenuItem
 		// (...)
-		this.setImportAlgorithmMenuItemEnabled(enabled);
-		this.setDeleteAlgorithmMenuItemEnabled(enabled);
-		this.setImportGraphMenuItemEnabled(enabled);
-		this.setDeleteGraphMenuItemEnabled(enabled);
-		this.setQuitMenuItemEnabled(enabled);
+		this.setImportAlgorithmEnabled(enabled);
+		this.setDeleteAlgorithmEnabled(enabled);
+		this.setImportGraphEnabled(enabled);
+		this.setDeleteGraphEnabled(enabled);
+		this.setQuitEnabled(enabled);
 		// (...)
-		this.setDeDEMenuItemEnabled(enabled);
-		this.setFrFRMenuItemEnabled(enabled);
-		this.setEnUSMenuItemEnabled(enabled);
+		this.setDeDEEnabled(enabled);
+		this.setFrFREnabled(enabled);
+		this.setEnUSEnabled(enabled);
 		// (...)
-		this.setHelpMenuItemEnabled(enabled);
-		this.setAboutMenuItemEnabled(enabled);
+		this.setHelpEnabled(enabled);
+		this.setAboutEnabled(enabled);
 
 		this.setChanged();
 	}
 
 	/**
-	 * Disables or enables render parameter.
+	 * Disables or enables parameter elements.
 	 * 
 	 * @param enabled
 	 */
 	protected void setParameterEnabled(boolean enabled) {
-		this.setGraphEnabled(enabled);
-		this.setAlgorithmEnabled(enabled);
+		this.setGraphsEnabled(enabled);
+		this.setAlgorithmsEnabled(enabled);
 
 		this.setChanged();
 	}
@@ -307,11 +182,11 @@ public final class Model extends Observable {
 	 * @param enabled
 	 */
 	protected void setPlayerEnabled(boolean enabled) {
-		this.setStepEnabled(enabled);
+		this.setSteplengthEnabled(enabled);
 		this.setDelayEnabled(enabled);
-		this.setPlayButtonEnabled(enabled);
-		this.setPauseButtonEnabled(enabled);
-		this.setStopButtonEnabled(enabled);
+		this.setPlayEnabled(enabled);
+		this.setPauseEnabled(enabled);
+		this.setStopEnabled(enabled);
 		this.setStepByStepEnabled(enabled);
 
 		this.setChanged();
@@ -323,19 +198,12 @@ public final class Model extends Observable {
 	 * @param enabled
 	 */
 	protected void setStepByStepEnabled(boolean enabled) {
-		this.setHomeButtonEnabled(enabled);
-		this.setBackwardButtonEnabled(enabled);
-		this.setForwardButtonEnabled(enabled);
-		this.setEndButtonEnabled(enabled);
+		this.setToBeginningEnabled(enabled);
+		this.setBackwardEnabled(enabled);
+		this.setForwardEnabled(enabled);
+		this.setToEndEnabled(enabled);
 
 		this.setChanged();
-	}
-
-	/**
-	 * @return the programName
-	 */
-	protected String getProgramName() {
-		return programName;
 	}
 
 	/**
@@ -353,227 +221,87 @@ public final class Model extends Observable {
 	}
 
 	/**
-	 * @return the fileMenuLabel
+	 * @return the fileEnabled
 	 */
-	protected String getFileMenuLabel() {
-		return fileMenuLabel;
+	protected boolean isFileEnabled() {
+		return fileEnabled;
 	}
 
 	/**
-	 * @return the importAlgorithmLabel
+	 * @return the i18nEnabled
 	 */
-	protected String getImportAlgorithmLabel() {
-		return importAlgorithmLabel;
+	protected boolean isI18nEnabled() {
+		return i18nEnabled;
 	}
 
 	/**
-	 * @return the deleteAlgorithmLabel
+	 * @return the deDEEnabled
 	 */
-	protected String getDeleteAlgorithmLabel() {
-		return deleteAlgorithmLabel;
+	protected boolean isDeDEEnabled() {
+		return deDEEnabled;
 	}
 
 	/**
-	 * @return the importGraphLabel
+	 * @return the frFREnabled
 	 */
-	protected String getImportGraphLabel() {
-		return importGraphLabel;
+	protected boolean isFrFREnabled() {
+		return frFREnabled;
 	}
 
 	/**
-	 * @return the deleteGraphLabel
+	 * @return the enUSEnabled
 	 */
-	protected String getDeleteGraphLabel() {
-		return deleteGraphLabel;
+	protected boolean isEnUSEnabled() {
+		return enUSEnabled;
 	}
 
 	/**
-	 * @return the quitLabel
+	 * @return the infoEnabled
 	 */
-	protected String getQuitLabel() {
-		return quitLabel;
+	protected boolean isInfoEnabled() {
+		return infoEnabled;
 	}
 
 	/**
-	 * @return the i18nMenuLabel
+	 * @return the helpEnabled
 	 */
-	protected String getI18nMenuLabel() {
-		return i18nMenuLabel;
+	protected boolean isHelpEnabled() {
+		return helpEnabled;
 	}
 
 	/**
-	 * @return the deDEMenuItemLabel
+	 * @return the aboutEnabled
 	 */
-	protected String getDeDEMenuItemLabel() {
-		return deDEMenuItemLabel;
+	protected boolean isAboutEnabled() {
+		return aboutEnabled;
 	}
 
 	/**
-	 * @return the frFRMenuItemLabel
+	 * @return the quitEnabled
 	 */
-	protected String getFrFRMenuItemLabel() {
-		return frFRMenuItemLabel;
+	protected boolean isQuitEnabled() {
+		return quitEnabled;
 	}
 
 	/**
-	 * @return the enUSMenuItemLabel
+	 * @return the importAlgorithmEnabled
 	 */
-	protected String getEnUSMenuItemLabel() {
-		return enUSMenuItemLabel;
+	protected boolean isImportAlgorithmEnabled() {
+		return importAlgorithmEnabled;
 	}
 
 	/**
-	 * @return the infoMenuLabel
+	 * @return the deleteAlgorithmEnabled
 	 */
-	protected String getInfoMenuLabel() {
-		return infoMenuLabel;
+	protected boolean isDeleteAlgorithmEnabled() {
+		return deleteAlgorithmEnabled;
 	}
 
 	/**
-	 * @return the helpMenuItemLabel
+	 * @return the importGraphEnabled
 	 */
-	protected String getHelpMenuItemLabel() {
-		return helpMenuItemLabel;
-	}
-
-	/**
-	 * @return the aboutMenuItemLabel
-	 */
-	protected String getAboutMenuItemLabel() {
-		return aboutMenuItemLabel;
-	}
-
-	/**
-	 * @return the fileMenuMnemonic
-	 */
-	protected char getFileMenuMnemonic() {
-		return fileMenuMnemonic;
-	}
-
-	/**
-	 * @return the renderMnemonic
-	 */
-	protected char getRenderMnemonic() {
-		return renderMnemonic;
-	}
-
-	/**
-	 * @return the saveGraphMnemonic
-	 */
-	protected char getSaveGraphMnemonic() {
-		return saveGraphMnemonic;
-	}
-
-	/**
-	 * @return the quitMenuItemMnemonic
-	 */
-	protected char getQuitMenuItemMnemonic() {
-		return quitMenuItemMnemonic;
-	}
-
-	/**
-	 * @return the i18nMenuMnemonic
-	 */
-	protected char getI18nMenuMnemonic() {
-		return i18nMenuMnemonic;
-	}
-
-	/**
-	 * @return the deDEMenuItemMnemonic
-	 */
-	protected char getDeDEMenuItemMnemonic() {
-		return deDEMenuItemMnemonic;
-	}
-
-	/**
-	 * @return the frFRMenuItemMnemonic
-	 */
-	protected char getFrFRMenuItemMnemonic() {
-		return frFRMenuItemMnemonic;
-	}
-
-	/**
-	 * @return the enUSMenuItemMnemonic
-	 */
-	protected char getEnUSMenuItemMnemonic() {
-		return enUSMenuItemMnemonic;
-	}
-
-	/**
-	 * @return the infoMenuMnemonic
-	 */
-	protected char getInfoMenuMnemonic() {
-		return infoMenuMnemonic;
-	}
-
-	/**
-	 * @return the helpMenuItemMnemonic
-	 */
-	protected char getHelpMenuItemMnemonic() {
-		return helpMenuItemMnemonic;
-	}
-
-	/**
-	 * @return the aboutMenuItemMnemonic
-	 */
-	protected char getAboutMenuItemMnemonic() {
-		return aboutMenuItemMnemonic;
-	}
-
-	/**
-	 * @return the renderMenuItemAccelerator
-	 */
-	protected KeyStroke getRenderMenuItemAccelerator() {
-		return renderMenuItemAccelerator;
-	}
-
-	/**
-	 * @return the quitMenuItemAccelerator
-	 */
-	protected KeyStroke getQuitMenuItemAccelerator() {
-		return quitMenuItemAccelerator;
-	}
-
-	/**
-	 * @return the helpMenuItemAccelerator
-	 */
-	protected KeyStroke getHelpMenuItemAccelerator() {
-		return helpMenuItemAccelerator;
-	}
-
-	/**
-	 * @return the aboutMenuItemAccelerator
-	 */
-	protected KeyStroke getAboutMenuItemAccelerator() {
-		return aboutMenuItemAccelerator;
-	}
-
-	/**
-	 * @return the fileMenuEnabled
-	 */
-	protected boolean isFileMenuEnabled() {
-		return fileMenuEnabled;
-	}
-
-	/**
-	 * @return the importAlgorithmMenuItemEnabled
-	 */
-	protected boolean isImportAlgorithmMenuItemEnabled() {
-		return importAlgorithmMenuItemEnabled;
-	}
-
-	/**
-	 * @return the deleteAlgorithmMenuItemEnabled
-	 */
-	protected boolean isDeleteAlgorithmMenuItemEnabled() {
-		return deleteAlgorithmMenuItemEnabled;
-	}
-
-	/**
-	 * @return the importGraphMenuItemEnabled
-	 */
-	protected boolean isImportGraphMenuItemEnabled() {
-		return importGraphMenuItemEnabled;
+	protected boolean isImportGraphEnabled() {
+		return importGraphEnabled;
 	}
 
 	/**
@@ -584,171 +312,73 @@ public final class Model extends Observable {
 	}
 
 	/**
-	 * @return the exportGraphMenuItemEnabled
+	 * @return the exportGraphEnabled
 	 */
-	protected boolean isExportGraphMenuItemEnabled() {
-		return exportGraphMenuItemEnabled;
+	protected boolean isExportGraphEnabled() {
+		return exportGraphEnabled;
 	}
 
 	/**
-	 * @return the deleteGraphMenuItemEnabled
+	 * @return the deleteGraphEnabled
 	 */
-	protected boolean isDeleteGraphMenuItemEnabled() {
-		return deleteGraphMenuItemEnabled;
+	protected boolean isDeleteGraphEnabled() {
+		return deleteGraphEnabled;
 	}
 
 	/**
-	 * @return the renderMenuItemEnabled
+	 * @return the graphs
 	 */
-	protected boolean isRenderMenuItemEnabled() {
-		return renderMenuItemEnabled;
+	protected String[] getGraphs() {
+		return graphs;
 	}
 
 	/**
-	 * @return the quitMenuItemEnabled
+	 * @return the algorithms
 	 */
-	protected boolean isQuitMenuItemEnabled() {
-		return quitMenuItemEnabled;
+	protected String[] getAlgorithms() {
+		return algorithms;
 	}
 
 	/**
-	 * @return the i18nMenuEnabled
+	 * @return the graphsEnabled
 	 */
-	protected boolean isI18nMenuEnabled() {
-		return i18nMenuEnabled;
+	protected boolean isGraphsEnabled() {
+		return graphsEnabled;
 	}
 
 	/**
-	 * @return the deDEMenuItemEnabled
+	 * @return the algorithmsEnabled
 	 */
-	protected boolean isDeDEMenuItemEnabled() {
-		return deDEMenuItemEnabled;
+	protected boolean isAlgorithmsEnabled() {
+		return algorithmsEnabled;
 	}
 
 	/**
-	 * @return the frFRMenuItemEnabled
+	 * @return the selectedGraph
 	 */
-	protected boolean isFrFRMenuItemEnabled() {
-		return frFRMenuItemEnabled;
+	protected int getSelectedGraph() {
+		return selectedGraph;
 	}
 
 	/**
-	 * @return the enUSMenuItemEnabled
+	 * @return the selectedAlgorithm
 	 */
-	protected boolean isEnUSMenuItemEnabled() {
-		return enUSMenuItemEnabled;
+	protected int getSelectedAlgorithm() {
+		return selectedAlgorithm;
 	}
 
 	/**
-	 * @return the infoMenuEnabled
+	 * @return the delay
 	 */
-	protected boolean isInfoMenuEnabled() {
-		return infoMenuEnabled;
+	protected int getDelay() {
+		return delay;
 	}
 
 	/**
-	 * @return the helpMenuItemEnabled
+	 * @return the steplength
 	 */
-	protected boolean isHelpMenuItemEnabled() {
-		return helpMenuItemEnabled;
-	}
-
-	/**
-	 * @return the aboutMenuItemEnabled
-	 */
-	protected boolean isAboutMenuItemEnabled() {
-		return aboutMenuItemEnabled;
-	}
-
-	/**
-	 * @return the renderPanelLabel
-	 */
-	protected String getRenderPanelLabel() {
-		return renderPanelLabel;
-	}
-
-	/**
-	 * @return the algorithmLabel
-	 */
-	protected String getAlgorithmLabel() {
-		return algorithmLabel;
-	}
-
-	/**
-	 * @return the graphLabel
-	 */
-	protected String getGraphLabel() {
-		return graphLabel;
-	}
-
-	/**
-	 * @return the graphComboModel
-	 */
-	protected String[] getGraphComboModel() {
-		return graphComboModel;
-	}
-
-	/**
-	 * @return the algorithmComboModel
-	 */
-	protected String[] getAlgorithmComboModel() {
-		return algorithmComboModel;
-	}
-
-	/**
-	 * @return the algorithmSelected
-	 */
-	protected int getAlgorithmSelected() {
-		return algorithmSelected;
-	}
-
-	/**
-	 * @return the graphSelected
-	 */
-	protected int getGraphSelected() {
-		return graphSelected;
-	}
-
-	/**
-	 * @return the algorithmEnabled
-	 */
-	protected boolean isAlgorithmEnabled() {
-		return algorithmEnabled;
-	}
-
-	/**
-	 * @return the graphEnabled
-	 */
-	protected boolean isGraphEnabled() {
-		return graphEnabled;
-	}
-
-	/**
-	 * @return the visualizationPanelLabel
-	 */
-	protected String getVisualizationPanelLabel() {
-		return visualizationPanelLabel;
-	}
-
-	/**
-	 * @return the playerPanelLabel
-	 */
-	protected String getPlayerPanelLabel() {
-		return playerPanelLabel;
-	}
-
-	/**
-	 * @return the delayLabel
-	 */
-	protected String getDelayLabel() {
-		return delayLabel;
-	}
-
-	/**
-	 * @return the delayValue
-	 */
-	protected int getDelayValue() {
-		return delayValue;
+	protected int getSteplength() {
+		return steplength;
 	}
 
 	/**
@@ -759,87 +389,31 @@ public final class Model extends Observable {
 	}
 
 	/**
-	 * @return the stepLabel
+	 * @return the steplengthEnabled
 	 */
-	protected String getStepLabel() {
-		return stepLabel;
+	protected boolean isSteplengthEnabled() {
+		return steplengthEnabled;
 	}
 
 	/**
-	 * @return the stepValue
+	 * @return the progress
 	 */
-	protected int getStepValue() {
-		return stepValue;
+	protected int getProgress() {
+		return progress;
 	}
 
 	/**
-	 * @return the stepEnabled
+	 * @return the progressMaximum
 	 */
-	protected boolean isStepEnabled() {
-		return stepEnabled;
+	protected int getProgressMaximum() {
+		return progressMaximum;
 	}
 
 	/**
-	 * @return the progressLabel
+	 * @return the pauseLabel
 	 */
-	protected String getProgressLabel() {
-		return progressLabel;
-	}
-
-	/**
-	 * @return the progressValue
-	 */
-	protected int getProgressValue() {
-		return progressValue;
-	}
-
-	/**
-	 * @return the progressValueMaximum
-	 */
-	protected int getProgressValueMaximum() {
-		return progressValueMaximum;
-	}
-
-	/**
-	 * @return the playButtonLabel
-	 */
-	protected String getPlayButtonLabel() {
-		return playButtonLabel;
-	}
-
-	/**
-	 * @return the playButtonEnabled
-	 */
-	protected boolean isPlayButtonEnabled() {
-		return playButtonEnabled;
-	}
-
-	/**
-	 * @return the playAccelerator
-	 */
-	protected KeyStroke getPlayAccelerator() {
-		return playAccelerator;
-	}
-
-	/**
-	 * @return the pauseButtonLabel
-	 */
-	protected String getPauseButtonLabel() {
-		return pauseButtonLabel;
-	}
-
-	/**
-	 * @return the pauseButtonEnabled
-	 */
-	protected boolean isPauseButtonEnabled() {
-		return pauseButtonEnabled;
-	}
-
-	/**
-	 * @return the pauseButtonActionCommand
-	 */
-	protected String getPauseButtonActionCommand() {
-		return pauseButtonActionCommand;
+	protected String getPauseLabel() {
+		return pauseLabel;
 	}
 
 	/**
@@ -850,187 +424,66 @@ public final class Model extends Observable {
 	}
 
 	/**
-	 * @return the stopButtonLabel
+	 * @return the pauseEvent
 	 */
-	protected String getStopButtonLabel() {
-		return stopButtonLabel;
+	protected EventSource getPauseEvent() {
+		return pauseEvent;
 	}
 
 	/**
-	 * @return the stopButtonEnabled
+	 * @return the playEnabled
 	 */
-	protected boolean isStopButtonEnabled() {
-		return stopButtonEnabled;
+	protected boolean isPlayEnabled() {
+		return playEnabled;
 	}
 
 	/**
-	 * @return the stopAccelerator
+	 * @return the pauseEnabled
 	 */
-	protected KeyStroke getStopAccelerator() {
-		return stopAccelerator;
+	protected boolean isPauseEnabled() {
+		return pauseEnabled;
 	}
 
 	/**
-	 * @return the homeButtonLabel
+	 * @return the stopEnabled
 	 */
-	protected String getHomeButtonLabel() {
-		return homeButtonLabel;
+	protected boolean isStopEnabled() {
+		return stopEnabled;
 	}
 
 	/**
-	 * @return the homeButtonEnabled
+	 * @return the toBeginningEnabled
 	 */
-	protected boolean isHomeButtonEnabled() {
-		return homeButtonEnabled;
+	protected boolean isToBeginningEnabled() {
+		return toBeginningEnabled;
 	}
 
 	/**
-	 * @return the homeAccelerator
+	 * @return the backwardEnabled
 	 */
-	protected KeyStroke getHomeAccelerator() {
-		return homeAccelerator;
+	protected boolean isBackwardEnabled() {
+		return backwardEnabled;
 	}
 
 	/**
-	 * @return the backwardButtonLabel
+	 * @return the forwardEnabled
 	 */
-	protected String getBackwardButtonLabel() {
-		return backwardButtonLabel;
+	protected boolean isForwardEnabled() {
+		return forwardEnabled;
 	}
 
 	/**
-	 * @return the backwardButtonMnemonic
+	 * @return the toEndEnabled
 	 */
-	protected char getBackwardButtonMnemonic() {
-		return backwardButtonMnemonic;
+	protected boolean isToEndEnabled() {
+		return toEndEnabled;
 	}
 
 	/**
-	 * @return the backwardButtonEnabled
+	 * @return the protocol
 	 */
-	protected boolean isBackwardButtonEnabled() {
-		return backwardButtonEnabled;
-	}
-
-	/**
-	 * @return the backwardAccelerator
-	 */
-	protected KeyStroke getBackwardAccelerator() {
-		return backwardAccelerator;
-	}
-
-	/**
-	 * @return the forwardButtonLabel
-	 */
-	protected String getForwardButtonLabel() {
-		return forwardButtonLabel;
-	}
-
-	/**
-	 * @return the forwardButtonEnabled
-	 */
-	protected boolean isForwardButtonEnabled() {
-		return forwardButtonEnabled;
-	}
-
-	/**
-	 * @return the forwardAccelerator
-	 */
-	protected KeyStroke getForwardAccelerator() {
-		return forwardAccelerator;
-	}
-
-	/**
-	 * @return the endButtonLabel
-	 */
-	protected String getEndButtonLabel() {
-		return endButtonLabel;
-	}
-
-	/**
-	 * @return the endButtonEnabled
-	 */
-	protected boolean isEndButtonEnabled() {
-		return endButtonEnabled;
-	}
-
-	/**
-	 * @return the endAccelerator
-	 */
-	protected KeyStroke getEndAccelerator() {
-		return endAccelerator;
-	}
-
-	/**
-	 * @return the protocolPanelLabel
-	 */
-	protected String getProtocolPanelLabel() {
-		return protocolPanelLabel;
-	}
-
-	/**
-	 * @return the protocolPanelText
-	 */
-	protected String getProtocolPanelText() {
-		return protocolPanelText;
-	}
-
-	/**
-	 * @return the importLabel
-	 */
-	protected String getImportLabel() {
-		return importLabel;
-	}
-
-	/**
-	 * @return the deleteLabel
-	 */
-	protected String getDeleteLabel() {
-		return deleteLabel;
-	}
-
-	/**
-	 * @return the helpMessageLabel
-	 */
-	protected String getHelpMessageLabel() {
-		return helpMessageLabel;
-	}
-
-	/**
-	 * @return the helpMessageText
-	 */
-	protected String getHelpMessageText() {
-		return helpMessageText;
-	}
-
-	/**
-	 * @return the aboutMessageLabel
-	 */
-	protected String getAboutMessageLabel() {
-		return aboutMessageLabel;
-	}
-
-	/**
-	 * @return the aboutMessageText
-	 */
-	protected String getAboutMessageText() {
-		return aboutMessageText;
-	}
-
-	/**
-	 * @return the quitMessageText
-	 */
-	protected String getQuitMessageText() {
-		return quitMessageText;
-	}
-
-	/**
-	 * @param programName
-	 *            the programName to set
-	 */
-	protected void setProgramName(String programName) {
-		this.programName = programName;
-		this.setChanged();
+	protected String getProtocol() {
+		return protocol;
 	}
 
 	/**
@@ -1052,295 +505,110 @@ public final class Model extends Observable {
 	}
 
 	/**
-	 * @param fileMenuLabel
-	 *            the fileMenuLabel to set
+	 * @param fileEnabled
+	 *            the fileEnabled to set
 	 */
-	protected void setFileMenuLabel(String fileMenuLabel) {
-		this.fileMenuLabel = fileMenuLabel;
+	protected void setFileEnabled(boolean fileEnabled) {
+		this.fileEnabled = fileEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param importAlgorithmLabel
-	 *            the importAlgorithmLabel to set
+	 * @param i18nEnabled
+	 *            the i18nEnabled to set
 	 */
-	protected void setImportAlgorithmLabel(String importAlgorithmLabel) {
-		this.importAlgorithmLabel = importAlgorithmLabel;
+	protected void setI18nEnabled(boolean i18nEnabled) {
+		this.i18nEnabled = i18nEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param deleteAlgorithmLabel
-	 *            the deleteAlgorithmLabel to set
+	 * @param deDEEnabled
+	 *            the deDEEnabled to set
 	 */
-	protected void setDeleteAlgorithmLabel(String deleteAlgorithmLabel) {
-		this.deleteAlgorithmLabel = deleteAlgorithmLabel;
+	protected void setDeDEEnabled(boolean deDEEnabled) {
+		this.deDEEnabled = deDEEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param importGraphLabel
-	 *            the importGraphLabel to set
+	 * @param frFREnabled
+	 *            the frFREnabled to set
 	 */
-	protected void setImportGraphLabel(String importGraphLabel) {
-		this.importGraphLabel = importGraphLabel;
+	protected void setFrFREnabled(boolean frFREnabled) {
+		this.frFREnabled = frFREnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param deleteGraphLabel
-	 *            the deleteGraphLabel to set
+	 * @param enUSEnabled
+	 *            the enUSEnabled to set
 	 */
-	protected void setDeleteGraphLabel(String deleteGraphLabel) {
-		this.deleteGraphLabel = deleteGraphLabel;
+	protected void setEnUSEnabled(boolean enUSEnabled) {
+		this.enUSEnabled = enUSEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param quitLabel
-	 *            the quitLabel to set
+	 * @param infoEnabled
+	 *            the infoEnabled to set
 	 */
-	protected void setQuitLabel(String quitLabel) {
-		this.quitLabel = quitLabel;
+	protected void setInfoEnabled(boolean infoEnabled) {
+		this.infoEnabled = infoEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param i18nMenuLabel
-	 *            the i18nMenuLabel to set
+	 * @param helpEnabled
+	 *            the helpEnabled to set
 	 */
-	protected void setI18nMenuLabel(String i18nMenuLabel) {
-		this.i18nMenuLabel = i18nMenuLabel;
+	protected void setHelpEnabled(boolean helpEnabled) {
+		this.helpEnabled = helpEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param deDEMenuItemLabel
-	 *            the deDEMenuItemLabel to set
+	 * @param aboutEnabled
+	 *            the aboutEnabled to set
 	 */
-	protected void setDeDEMenuItemLabel(String deDEMenuItemLabel) {
-		this.deDEMenuItemLabel = deDEMenuItemLabel;
+	protected void setAboutEnabled(boolean aboutEnabled) {
+		this.aboutEnabled = aboutEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param frFRMenuItemLabel
-	 *            the frFRMenuItemLabel to set
+	 * @param quitEnabled
+	 *            the quitEnabled to set
 	 */
-	protected void setFrFRMenuItemLabel(String frFRMenuItemLabel) {
-		this.frFRMenuItemLabel = frFRMenuItemLabel;
+	protected void setQuitEnabled(boolean quitEnabled) {
+		this.quitEnabled = quitEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param enUSMenuItemLabel
-	 *            the enUSMenuItemLabel to set
+	 * @param importAlgorithmEnabled
+	 *            the importAlgorithmEnabled to set
 	 */
-	protected void setEnUSMenuItemLabel(String enUSMenuItemLabel) {
-		this.enUSMenuItemLabel = enUSMenuItemLabel;
+	protected void setImportAlgorithmEnabled(boolean importAlgorithmEnabled) {
+		this.importAlgorithmEnabled = importAlgorithmEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param infoMenuLabel
-	 *            the infoMenuLabel to set
+	 * @param deleteAlgorithmEnabled
+	 *            the deleteAlgorithmEnabled to set
 	 */
-	protected void setInfoMenuLabel(String infoMenuLabel) {
-		this.infoMenuLabel = infoMenuLabel;
+	protected void setDeleteAlgorithmEnabled(boolean deleteAlgorithmEnabled) {
+		this.deleteAlgorithmEnabled = deleteAlgorithmEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param helpMenuItemLabel
-	 *            the helpMenuItemLabel to set
+	 * @param importGraphEnabled
+	 *            the importGraphEnabled to set
 	 */
-	protected void setHelpMenuItemLabel(String helpMenuItemLabel) {
-		this.helpMenuItemLabel = helpMenuItemLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param aboutMenuItemLabel
-	 *            the aboutMenuItemLabel to set
-	 */
-	protected void setAboutMenuItemLabel(String aboutMenuItemLabel) {
-		this.aboutMenuItemLabel = aboutMenuItemLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param fileMenuMnemonic
-	 *            the fileMenuMnemonic to set
-	 */
-	protected void setFileMenuMnemonic(char fileMenuMnemonic) {
-		this.fileMenuMnemonic = fileMenuMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param renderMnemonic
-	 *            the renderMnemonic to set
-	 */
-	protected void setRenderMnemonic(char renderMnemonic) {
-		this.renderMnemonic = renderMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param saveGraphMnemonic
-	 *            the saveGraphMnemonic to set
-	 */
-	protected void setSaveGraphMnemonic(char saveGraphMnemonic) {
-		this.saveGraphMnemonic = saveGraphMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param quitMenuItemMnemonic
-	 *            the quitMenuItemMnemonic to set
-	 */
-	protected void setQuitMenuItemMnemonic(char quitMenuItemMnemonic) {
-		this.quitMenuItemMnemonic = quitMenuItemMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param i18nMenuMnemonic
-	 *            the i18nMenuMnemonic to set
-	 */
-	protected void setI18nMenuMnemonic(char i18nMenuMnemonic) {
-		this.i18nMenuMnemonic = i18nMenuMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param deDEMenuItemMnemonic
-	 *            the deDEMenuItemMnemonic to set
-	 */
-	protected void setDeDEMenuItemMnemonic(char deDEMenuItemMnemonic) {
-		this.deDEMenuItemMnemonic = deDEMenuItemMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param frFRMenuItemMnemonic
-	 *            the frFRMenuItemMnemonic to set
-	 */
-	protected void setFrFRMenuItemMnemonic(char frFRMenuItemMnemonic) {
-		this.frFRMenuItemMnemonic = frFRMenuItemMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param enUSMenuItemMnemonic
-	 *            the enUSMenuItemMnemonic to set
-	 */
-	protected void setEnUSMenuItemMnemonic(char enUSMenuItemMnemonic) {
-		this.enUSMenuItemMnemonic = enUSMenuItemMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param infoMenuMnemonic
-	 *            the infoMenuMnemonic to set
-	 */
-	protected void setInfoMenuMnemonic(char infoMenuMnemonic) {
-		this.infoMenuMnemonic = infoMenuMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param helpMenuItemMnemonic
-	 *            the helpMenuItemMnemonic to set
-	 */
-	protected void setHelpMenuItemMnemonic(char helpMenuItemMnemonic) {
-		this.helpMenuItemMnemonic = helpMenuItemMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param aboutMenuItemMnemonic
-	 *            the aboutMenuItemMnemonic to set
-	 */
-	protected void setAboutMenuItemMnemonic(char aboutMenuItemMnemonic) {
-		this.aboutMenuItemMnemonic = aboutMenuItemMnemonic;
-		this.setChanged();
-	}
-
-	/**
-	 * @param renderMenuItemAccelerator
-	 *            the renderMenuItemAccelerator to set
-	 */
-	protected void setRenderMenuItemAccelerator(
-			KeyStroke renderMenuItemAccelerator) {
-		this.renderMenuItemAccelerator = renderMenuItemAccelerator;
-		this.setChanged();
-	}
-
-	/**
-	 * @param quitMenuItemAccelerator
-	 *            the quitMenuItemAccelerator to set
-	 */
-	protected void setQuitMenuItemAccelerator(KeyStroke quitMenuItemAccelerator) {
-		this.quitMenuItemAccelerator = quitMenuItemAccelerator;
-		this.setChanged();
-	}
-
-	/**
-	 * @param helpMenuItemAccelerator
-	 *            the helpMenuItemAccelerator to set
-	 */
-	protected void setHelpMenuItemAccelerator(KeyStroke helpMenuItemAccelerator) {
-		this.helpMenuItemAccelerator = helpMenuItemAccelerator;
-		this.setChanged();
-	}
-
-	/**
-	 * @param aboutMenuItemAccelerator
-	 *            the aboutMenuItemAccelerator to set
-	 */
-	protected void setAboutMenuItemAccelerator(
-			KeyStroke aboutMenuItemAccelerator) {
-		this.aboutMenuItemAccelerator = aboutMenuItemAccelerator;
-		this.setChanged();
-	}
-
-	/**
-	 * @param fileMenuEnabled
-	 *            the fileMenuEnabled to set
-	 */
-	protected void setFileMenuEnabled(boolean fileMenuEnabled) {
-		this.fileMenuEnabled = fileMenuEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param importAlgorithmMenuItemEnabled
-	 *            the importAlgorithmMenuItemEnabled to set
-	 */
-	protected void setImportAlgorithmMenuItemEnabled(
-			boolean importAlgorithmMenuItemEnabled) {
-		this.importAlgorithmMenuItemEnabled = importAlgorithmMenuItemEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param deleteAlgorithmMenuItemEnabled
-	 *            the deleteAlgorithmMenuItemEnabled to set
-	 */
-	protected void setDeleteAlgorithmMenuItemEnabled(
-			boolean deleteAlgorithmMenuItemEnabled) {
-		this.deleteAlgorithmMenuItemEnabled = deleteAlgorithmMenuItemEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param importGraphMenuItemEnabled
-	 *            the importGraphMenuItemEnabled to set
-	 */
-	protected void setImportGraphMenuItemEnabled(
-			boolean importGraphMenuItemEnabled) {
-		this.importGraphMenuItemEnabled = importGraphMenuItemEnabled;
+	protected void setImportGraphEnabled(boolean importGraphEnabled) {
+		this.importGraphEnabled = importGraphEnabled;
 		this.setChanged();
 	}
 
@@ -1354,220 +622,92 @@ public final class Model extends Observable {
 	}
 
 	/**
-	 * @param exportGraphMenuItemEnabled
-	 *            the exportGraphMenuItemEnabled to set
+	 * @param exportGraphEnabled
+	 *            the exportGraphEnabled to set
 	 */
-	protected void setExportGraphMenuItemEnabled(
-			boolean exportGraphMenuItemEnabled) {
-		this.exportGraphMenuItemEnabled = exportGraphMenuItemEnabled;
+	protected void setExportGraphEnabled(boolean exportGraphEnabled) {
+		this.exportGraphEnabled = exportGraphEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param deleteGraphMenuItemEnabled
-	 *            the deleteGraphMenuItemEnabled to set
+	 * @param deleteGraphEnabled
+	 *            the deleteGraphEnabled to set
 	 */
-	protected void setDeleteGraphMenuItemEnabled(
-			boolean deleteGraphMenuItemEnabled) {
-		this.deleteGraphMenuItemEnabled = deleteGraphMenuItemEnabled;
+	protected void setDeleteGraphEnabled(boolean deleteGraphEnabled) {
+		this.deleteGraphEnabled = deleteGraphEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param renderMenuItemEnabled
-	 *            the renderMenuItemEnabled to set
+	 * @param graphs
+	 *            the graphs to set
 	 */
-	protected void setRenderMenuItemEnabled(boolean renderMenuItemEnabled) {
-		this.renderMenuItemEnabled = renderMenuItemEnabled;
+	protected void setGraphs(String[] graphs) {
+		this.graphs = graphs;
 		this.setChanged();
 	}
 
 	/**
-	 * @param quitMenuItemEnabled
-	 *            the quitMenuItemEnabled to set
+	 * @param algorithms
+	 *            the algorithms to set
 	 */
-	protected void setQuitMenuItemEnabled(boolean quitMenuItemEnabled) {
-		this.quitMenuItemEnabled = quitMenuItemEnabled;
+	protected void setAlgorithms(String[] algorithms) {
+		this.algorithms = algorithms;
 		this.setChanged();
 	}
 
 	/**
-	 * @param i18nMenuEnabled
-	 *            the i18nMenuEnabled to set
+	 * @param graphsEnabled
+	 *            the graphsEnabled to set
 	 */
-	protected void setI18nMenuEnabled(boolean i18nMenuEnabled) {
-		this.i18nMenuEnabled = i18nMenuEnabled;
+	protected void setGraphsEnabled(boolean graphsEnabled) {
+		this.graphsEnabled = graphsEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param deDEMenuItemEnabled
-	 *            the deDEMenuItemEnabled to set
+	 * @param algorithmsEnabled
+	 *            the algorithmsEnabled to set
 	 */
-	protected void setDeDEMenuItemEnabled(boolean deDEMenuItemEnabled) {
-		this.deDEMenuItemEnabled = deDEMenuItemEnabled;
+	protected void setAlgorithmsEnabled(boolean algorithmsEnabled) {
+		this.algorithmsEnabled = algorithmsEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param frFRMenuItemEnabled
-	 *            the frFRMenuItemEnabled to set
+	 * @param selectedGraph
+	 *            the selectedGraph to set
 	 */
-	protected void setFrFRMenuItemEnabled(boolean frFRMenuItemEnabled) {
-		this.frFRMenuItemEnabled = frFRMenuItemEnabled;
+	protected void setSelectedGraph(int selectedGraph) {
+		this.selectedGraph = selectedGraph;
 		this.setChanged();
 	}
 
 	/**
-	 * @param enUSMenuItemEnabled
-	 *            the enUSMenuItemEnabled to set
+	 * @param selectedAlgorithm
+	 *            the selectedAlgorithm to set
 	 */
-	protected void setEnUSMenuItemEnabled(boolean enUSMenuItemEnabled) {
-		this.enUSMenuItemEnabled = enUSMenuItemEnabled;
+	protected void setSelectedAlgorithm(int selectedAlgorithm) {
+		this.selectedAlgorithm = selectedAlgorithm;
 		this.setChanged();
 	}
 
 	/**
-	 * @param infoMenuEnabled
-	 *            the infoMenuEnabled to set
+	 * @param delay
+	 *            the delay to set
 	 */
-	protected void setInfoMenuEnabled(boolean infoMenuEnabled) {
-		this.infoMenuEnabled = infoMenuEnabled;
+	protected void setDelay(int delay) {
+		this.delay = delay;
 		this.setChanged();
 	}
 
 	/**
-	 * @param helpMenuItemEnabled
-	 *            the helpMenuItemEnabled to set
+	 * @param steplength
+	 *            the steplength to set
 	 */
-	protected void setHelpMenuItemEnabled(boolean helpMenuItemEnabled) {
-		this.helpMenuItemEnabled = helpMenuItemEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param aboutMenuItemEnabled
-	 *            the aboutMenuItemEnabled to set
-	 */
-	protected void setAboutMenuItemEnabled(boolean aboutMenuItemEnabled) {
-		this.aboutMenuItemEnabled = aboutMenuItemEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param renderPanelLabel
-	 *            the renderPanelLabel to set
-	 */
-	protected void setRenderPanelLabel(String renderPanelLabel) {
-		this.renderPanelLabel = renderPanelLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param algorithmLabel
-	 *            the algorithmLabel to set
-	 */
-	protected void setAlgorithmLabel(String algorithmLabel) {
-		this.algorithmLabel = algorithmLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param graphLabel
-	 *            the graphLabel to set
-	 */
-	protected void setGraphLabel(String graphLabel) {
-		this.graphLabel = graphLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param graphComboModel
-	 *            the graphComboModel to set
-	 */
-	protected void setGraphComboModel(String[] graphComboModel) {
-		this.graphComboModel = graphComboModel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param algorithmComboModel
-	 *            the algorithmComboModel to set
-	 */
-	protected void setAlgorithmComboModel(String[] algorithmComboModel) {
-		this.algorithmComboModel = algorithmComboModel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param algorithmSelected
-	 *            the algorithmSelected to set
-	 */
-	protected void setAlgorithmSelected(int algorithmSelected) {
-		this.algorithmSelected = algorithmSelected;
-		this.setChanged();
-	}
-
-	/**
-	 * @param graphSelected
-	 *            the graphSelected to set
-	 */
-	protected void setGraphSelected(int graphSelected) {
-		this.graphSelected = graphSelected;
-		this.setChanged();
-	}
-
-	/**
-	 * @param algorithmEnabled
-	 *            the algorithmEnabled to set
-	 */
-	protected void setAlgorithmEnabled(boolean algorithmEnabled) {
-		this.algorithmEnabled = algorithmEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param graphEnabled
-	 *            the graphEnabled to set
-	 */
-	protected void setGraphEnabled(boolean graphEnabled) {
-		this.graphEnabled = graphEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param visualizationPanelLabel
-	 *            the visualizationPanelLabel to set
-	 */
-	protected void setVisualizationPanelLabel(String visualizationPanelLabel) {
-		this.visualizationPanelLabel = visualizationPanelLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param playerPanelLabel
-	 *            the playerPanelLabel to set
-	 */
-	protected void setPlayerPanelLabel(String playerPanelLabel) {
-		this.playerPanelLabel = playerPanelLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param delayLabel
-	 *            the delayLabel to set
-	 */
-	protected void setDelayLabel(String delayLabel) {
-		this.delayLabel = delayLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param delayValue
-	 *            the delayValue to set
-	 */
-	protected void setDelayValue(int delayValue) {
-		this.delayValue = delayValue;
+	protected void setSteplength(int steplength) {
+		this.steplength = steplength;
 		this.setChanged();
 	}
 
@@ -1581,110 +721,38 @@ public final class Model extends Observable {
 	}
 
 	/**
-	 * @param stepLabel
-	 *            the stepLabel to set
+	 * @param steplengthEnabled
+	 *            the steplengthEnabled to set
 	 */
-	protected void setStepLabel(String stepLabel) {
-		this.stepLabel = stepLabel;
+	protected void setSteplengthEnabled(boolean steplengthEnabled) {
+		this.steplengthEnabled = steplengthEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param stepValue
-	 *            the stepValue to set
+	 * @param progress
+	 *            the progress to set
 	 */
-	protected void setStepValue(int stepValue) {
-		this.stepValue = stepValue;
+	protected void setProgress(int progress) {
+		this.progress = progress;
 		this.setChanged();
 	}
 
 	/**
-	 * @param stepEnabled
-	 *            the stepEnabled to set
+	 * @param progressMaximum
+	 *            the progressMaximum to set
 	 */
-	protected void setStepEnabled(boolean stepEnabled) {
-		this.stepEnabled = stepEnabled;
+	protected void setProgressMaximum(int progressMaximum) {
+		this.progressMaximum = progressMaximum;
 		this.setChanged();
 	}
 
 	/**
-	 * @param progressLabel
-	 *            the progressLabel to set
+	 * @param pauseLabel
+	 *            the pauseLabel to set
 	 */
-	protected void setProgressLabel(String progressLabel) {
-		this.progressLabel = progressLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param progressValue
-	 *            the progressValue to set
-	 */
-	protected void setProgressValue(int progressValue) {
-		this.progressValue = progressValue;
-		this.setChanged();
-	}
-
-	/**
-	 * @param progressValueMaximum
-	 *            the progressValueMaximum to set
-	 */
-	protected void setProgressValueMaximum(int progressValueMaximum) {
-		this.progressValueMaximum = progressValueMaximum;
-		this.setChanged();
-	}
-
-	/**
-	 * @param playButtonLabel
-	 *            the playButtonLabel to set
-	 */
-	protected void setPlayButtonLabel(String playButtonLabel) {
-		this.playButtonLabel = playButtonLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param playButtonEnabled
-	 *            the playButtonEnabled to set
-	 */
-	protected void setPlayButtonEnabled(boolean playButtonEnabled) {
-		this.playButtonEnabled = playButtonEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param playAccelerator
-	 *            the playAccelerator to set
-	 */
-	protected void setPlayAccelerator(KeyStroke playAccelerator) {
-		this.playAccelerator = playAccelerator;
-		this.setChanged();
-	}
-
-	/**
-	 * @param pauseButtonLabel
-	 *            the pauseButtonLabel to set
-	 */
-	protected void setPauseButtonLabel(String pauseButtonLabel) {
-		this.pauseButtonLabel = pauseButtonLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param pauseButtonEnabled
-	 *            the pauseButtonEnabled to set
-	 */
-	protected void setPauseButtonEnabled(boolean pauseButtonEnabled) {
-		this.pauseButtonEnabled = pauseButtonEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param pauseButtonActionCommand
-	 *            the pauseButtonActionCommand to set
-	 */
-	protected void setPauseButtonActionCommand(String pauseButtonActionCommand) {
-		this.pauseButtonActionCommand = pauseButtonActionCommand;
+	protected void setPauseLabel(String pauseLabel) {
+		this.pauseLabel = pauseLabel;
 		this.setChanged();
 	}
 
@@ -1698,227 +766,83 @@ public final class Model extends Observable {
 	}
 
 	/**
-	 * @param stopButtonLabel
-	 *            the stopButtonLabel to set
+	 * @param pauseEvent
+	 *            the pauseEvent to set
 	 */
-	protected void setStopButtonLabel(String stopButtonLabel) {
-		this.stopButtonLabel = stopButtonLabel;
+	protected void setPauseEvent(EventSource pauseEvent) {
+		this.pauseEvent = pauseEvent;
 		this.setChanged();
 	}
 
 	/**
-	 * @param stopButtonEnabled
-	 *            the stopButtonEnabled to set
+	 * @param playEnabled
+	 *            the playEnabled to set
 	 */
-	protected void setStopButtonEnabled(boolean stopButtonEnabled) {
-		this.stopButtonEnabled = stopButtonEnabled;
+	protected void setPlayEnabled(boolean playEnabled) {
+		this.playEnabled = playEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param stopAccelerator
-	 *            the stopAccelerator to set
+	 * @param pauseEnabled
+	 *            the pauseEnabled to set
 	 */
-	protected void setStopAccelerator(KeyStroke stopAccelerator) {
-		this.stopAccelerator = stopAccelerator;
+	protected void setPauseEnabled(boolean pauseEnabled) {
+		this.pauseEnabled = pauseEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param homeButtonLabel
-	 *            the homeButtonLabel to set
+	 * @param stopEnabled
+	 *            the stopEnabled to set
 	 */
-	protected void setHomeButtonLabel(String homeButtonLabel) {
-		this.homeButtonLabel = homeButtonLabel;
+	protected void setStopEnabled(boolean stopEnabled) {
+		this.stopEnabled = stopEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param homeButtonEnabled
-	 *            the homeButtonEnabled to set
+	 * @param toBeginningEnabled
+	 *            the toBeginningEnabled to set
 	 */
-	protected void setHomeButtonEnabled(boolean homeButtonEnabled) {
-		this.homeButtonEnabled = homeButtonEnabled;
+	protected void setToBeginningEnabled(boolean toBeginningEnabled) {
+		this.toBeginningEnabled = toBeginningEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param homeAccelerator
-	 *            the homeAccelerator to set
+	 * @param backwardEnabled
+	 *            the backwardEnabled to set
 	 */
-	protected void setHomeAccelerator(KeyStroke homeAccelerator) {
-		this.homeAccelerator = homeAccelerator;
+	protected void setBackwardEnabled(boolean backwardEnabled) {
+		this.backwardEnabled = backwardEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param backwardButtonLabel
-	 *            the backwardButtonLabel to set
+	 * @param forwardEnabled
+	 *            the forwardEnabled to set
 	 */
-	protected void setBackwardButtonLabel(String backwardButtonLabel) {
-		this.backwardButtonLabel = backwardButtonLabel;
+	protected void setForwardEnabled(boolean forwardEnabled) {
+		this.forwardEnabled = forwardEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param backwardButtonMnemonic
-	 *            the backwardButtonMnemonic to set
+	 * @param toEndEnabled
+	 *            the toEndEnabled to set
 	 */
-	protected void setBackwardButtonMnemonic(char backwardButtonMnemonic) {
-		this.backwardButtonMnemonic = backwardButtonMnemonic;
+	protected void setToEndEnabled(boolean toEndEnabled) {
+		this.toEndEnabled = toEndEnabled;
 		this.setChanged();
 	}
 
 	/**
-	 * @param backwardButtonEnabled
-	 *            the backwardButtonEnabled to set
+	 * @param protocol
+	 *            the protocol to set
 	 */
-	protected void setBackwardButtonEnabled(boolean backwardButtonEnabled) {
-		this.backwardButtonEnabled = backwardButtonEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param backwardAccelerator
-	 *            the backwardAccelerator to set
-	 */
-	protected void setBackwardAccelerator(KeyStroke backwardAccelerator) {
-		this.backwardAccelerator = backwardAccelerator;
-		this.setChanged();
-	}
-
-	/**
-	 * @param forwardButtonLabel
-	 *            the forwardButtonLabel to set
-	 */
-	protected void setForwardButtonLabel(String forwardButtonLabel) {
-		this.forwardButtonLabel = forwardButtonLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param forwardButtonEnabled
-	 *            the forwardButtonEnabled to set
-	 */
-	protected void setForwardButtonEnabled(boolean forwardButtonEnabled) {
-		this.forwardButtonEnabled = forwardButtonEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param forwardAccelerator
-	 *            the forwardAccelerator to set
-	 */
-	protected void setForwardAccelerator(KeyStroke forwardAccelerator) {
-		this.forwardAccelerator = forwardAccelerator;
-		this.setChanged();
-	}
-
-	/**
-	 * @param endButtonLabel
-	 *            the endButtonLabel to set
-	 */
-	protected void setEndButtonLabel(String endButtonLabel) {
-		this.endButtonLabel = endButtonLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param endButtonEnabled
-	 *            the endButtonEnabled to set
-	 */
-	protected void setEndButtonEnabled(boolean endButtonEnabled) {
-		this.endButtonEnabled = endButtonEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param endAccelerator
-	 *            the endAccelerator to set
-	 */
-	protected void setEndAccelerator(KeyStroke endAccelerator) {
-		this.endAccelerator = endAccelerator;
-		this.setChanged();
-	}
-
-	/**
-	 * @param protocolPanelLabel
-	 *            the protocolPanelLabel to set
-	 */
-	protected void setProtocolPanelLabel(String protocolPanelLabel) {
-		this.protocolPanelLabel = protocolPanelLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param protocolPanelText
-	 *            the protocolPanelText to set
-	 */
-	protected void setProtocolPanelText(String protocolPanelText) {
-		this.protocolPanelText = protocolPanelText;
-		this.setChanged();
-	}
-
-	/**
-	 * @param importLabel
-	 *            the importLabel to set
-	 */
-	protected void setImportLabel(String importLabel) {
-		this.importLabel = importLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param deleteLabel
-	 *            the deleteLabel to set
-	 */
-	protected void setDeleteLabel(String deleteLabel) {
-		this.deleteLabel = deleteLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param helpMessageLabel
-	 *            the helpMessageLabel to set
-	 */
-	protected void setHelpMessageLabel(String helpMessageLabel) {
-		this.helpMessageLabel = helpMessageLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param helpMessageText
-	 *            the helpMessageText to set
-	 */
-	protected void setHelpMessageText(String helpMessageText) {
-		this.helpMessageText = helpMessageText;
-		this.setChanged();
-	}
-
-	/**
-	 * @param aboutMessageLabel
-	 *            the aboutMessageLabel to set
-	 */
-	protected void setAboutMessageLabel(String aboutMessageLabel) {
-		this.aboutMessageLabel = aboutMessageLabel;
-		this.setChanged();
-	}
-
-	/**
-	 * @param aboutMessageText
-	 *            the aboutMessageText to set
-	 */
-	protected void setAboutMessageText(String aboutMessageText) {
-		this.aboutMessageText = aboutMessageText;
-		this.setChanged();
-	}
-
-	/**
-	 * @param quitMessageText
-	 *            the quitMessageText to set
-	 */
-	protected void setQuitMessageText(String quitMessageText) {
-		this.quitMessageText = quitMessageText;
+	protected void setProtocol(String protocol) {
+		this.protocol = protocol;
 		this.setChanged();
 	}
 

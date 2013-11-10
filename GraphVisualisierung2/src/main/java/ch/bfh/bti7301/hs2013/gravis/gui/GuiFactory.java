@@ -26,7 +26,7 @@ public final class GuiFactory {
 	/**
 	 * A field for a i18n base name.
 	 */
-	private static final String I18N_BASE = "META-INF/i18n/MessagesBundle";
+	private static final String I18N_BASE_NAME = "META-INF/i18n/MessagesBundle";
 
 	/**
 	 * A main (no-)constructor.
@@ -41,9 +41,15 @@ public final class GuiFactory {
 	 * @param width
 	 * @param height
 	 * @return a view as in MVC
+	 * @throws Exception
 	 */
-	public static IView createGui(ICore core, int width, int height) {
-		return createGui(core, width, height, ViewType.DEFAULT);
+	public static IView createGui(ICore core, int width, int height)
+			throws Exception {
+		try {
+			return createGui(core, width, height, ViewType.DEFAULT);
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
@@ -54,18 +60,25 @@ public final class GuiFactory {
 	 * @param height
 	 * @param type
 	 * @return a view as in MVC
+	 * @throws Exception
 	 */
 	public static IView createGui(ICore core, int width, int height,
-			ViewType type) {
-		Model model = new Model();
-		Control control = new Control(core, model, I18N_BASE);
-		switch (type) {
-		case FULL:
-			return new ViewFull(model, control, width, height);
-		case MINIMAL:
-			return new ViewMinimal(model, control, width, height);
-		default:
-			return new ViewFull(model, control, width, height);
+			ViewType type) throws Exception {
+		try {
+			Model model = new Model(I18N_BASE_NAME);
+			Control control = new Control(core, model);
+			IView view;
+			switch (type) {
+			case FULL:
+				view = new ViewFull(model, control, width, height);
+			case MINIMAL:
+				view = new ViewMinimal(model, control, width, height);
+			default:
+				view = new ViewFull(model, control, width, height);
+			}
+			return view;
+		} catch (Exception ex) {
+			throw ex;
 		}
 	}
 
@@ -117,10 +130,10 @@ public final class GuiFactory {
 	 * @param control
 	 * @return a parameter controller
 	 */
-	static ParameterController createParameterController(Model model, Control control) {
-		ParameterController parameterController = new ParameterController(control);
-		model.addObserver(parameterController);
-		return parameterController;
+	static ParameterPanel createParameterController(Model model, Control control) {
+		ParameterPanel parameterPanel = new ParameterPanel(control);
+		model.addObserver(parameterPanel);
+		return parameterPanel;
 	}
 
 	/**
@@ -129,12 +142,12 @@ public final class GuiFactory {
 	 * @param model
 	 * @return a visualizer
 	 */
-	static Visualizer createVisualizer(Model model) {
+	static VisualizerPanel createVisualizer(Model model) {
 		Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
 		Layout<IVertex, IEdge> layout = createCircleLayout(graph);
-		Visualizer visualizer = new Visualizer(layout);
-		model.addObserver(visualizer);
-		return visualizer;
+		VisualizerPanel visualizerPanel = new VisualizerPanel(layout);
+		model.addObserver(visualizerPanel);
+		return visualizerPanel;
 	}
 
 	/**
@@ -144,10 +157,10 @@ public final class GuiFactory {
 	 * @param control
 	 * @return a traversal controller
 	 */
-	static TraversalController createTraversalController(Model model, Control control) {
-		TraversalController traversalController = new TraversalController(control);
-		model.addObserver(traversalController);
-		return traversalController;
+	static PlayerPanel createTraversalController(Model model, Control control) {
+		PlayerPanel playerPanel = new PlayerPanel(control);
+		model.addObserver(playerPanel);
+		return playerPanel;
 	}
 
 	/**

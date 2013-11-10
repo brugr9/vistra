@@ -1,20 +1,24 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.DELETE_ALGORITHM;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.DELETE_GRAPH;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.DE_DE;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.EN_US;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.FR_FR;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.IMPORT_ALGORITHM;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.IMPORT_GRAPH;
+
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
-import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.IMPORT_GRAPH;
-import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.IMPORT_ALGORITHM;
-import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.DELETE_GRAPH;
-import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.DELETE_ALGORITHM;
-import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.DE_DE;
-import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.FR_FR;
-import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.EN_US;
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
 
 /**
  * A menu bar.
@@ -161,81 +165,103 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		Model m = (Model) o;
-		try {
-			{// JMenu fileMenu
-				// setText
-				this.fileMenu.setText(m.getFileMenuLabel());
-				this.importAlgorithmMenuItem.setText(m
-						.getImportAlgorithmLabel());
-				this.deleteAlgorithmMenuItem.setText(m
-						.getDeleteAlgorithmLabel());
-				this.importGraphMenuItem.setText(m.getImportGraphLabel());
-				this.deleteGraphMenuItem.setText(m.getDeleteGraphLabel());
-				this.quitMenuItem.setText(m.getQuitLabel());
-				// setMnemonic
-				this.fileMenu.setMnemonic(m.getFileMenuMnemonic());
-				this.quitMenuItem.setMnemonic(m.getQuitMenuItemMnemonic());
-				// setAccelerator
-				this.quitMenuItem
-						.setAccelerator(m.getQuitMenuItemAccelerator());
-				// setEnabled
-				this.fileMenu.setEnabled(m.isFileMenuEnabled());
-				this.importAlgorithmMenuItem.setEnabled(m
-						.isImportAlgorithmMenuItemEnabled());
-				this.deleteAlgorithmMenuItem.setEnabled(m
-						.isDeleteAlgorithmMenuItemEnabled());
-				this.importGraphMenuItem.setEnabled(m
-						.isImportGraphMenuItemEnabled());
-				this.deleteGraphMenuItem.setEnabled(m
-						.isDeleteGraphMenuItemEnabled());
-				this.quitMenuItem.setEnabled(m.isQuitMenuItemEnabled());
-			}
-			{// JMenu i18nMenu
-				// setText
-				this.i18nMenu.setText(m.getI18nMenuLabel());
-				// setMnemonic
-				this.i18nMenu.setMnemonic(m.getI18nMenuMnemonic());
-				// setEnabled
-				this.i18nMenu.setEnabled(m.isI18nMenuEnabled());
+		if (o instanceof Model) {
+
+			Model m = (Model) o;
+			ResourceBundle b = m.getResourceBundle();
+
+			try {
+
+				// TODO arg
+				// if (arg == EventSource.I18N)
+
+				{// JMenu fileMenu
+					// setText
+					this.fileMenu.setText(b.getString("file.label"));
+					this.importAlgorithmMenuItem.setText(b
+							.getString("importAlgorithm.label"));
+					this.deleteAlgorithmMenuItem.setText(b
+							.getString("deleteAlgorithm.label"));
+					this.importGraphMenuItem.setText(b
+							.getString("importGraph.label"));
+					this.deleteGraphMenuItem.setText(b
+							.getString("deleteGraph.label"));
+					this.quitMenuItem.setText(b.getString("quit.label"));
+					// setMnemonic
+					this.fileMenu.setMnemonic(b.getString("file.mnemonic")
+							.toCharArray()[0]);
+					this.quitMenuItem.setMnemonic(b.getString("quit.mnemonic")
+							.toCharArray()[0]);
+					// setAccelerator
+					this.quitMenuItem.setAccelerator(KeyStroke.getKeyStroke(b
+							.getString("quit.accelerator")));
+				}
 				{// JMenu i18nMenu
 					// setText
-					this.deDEMenuItem.setText(m.getDeDEMenuItemLabel());
-					this.frFRMenuItem.setText(m.getFrFRMenuItemLabel());
-					this.enUSMenuItem.setText(m.getEnUSMenuItemLabel());
+					this.i18nMenu.setText(b.getString("i18n.label"));
 					// setMnemonic
-					this.deDEMenuItem.setMnemonic(m.getDeDEMenuItemMnemonic());
-					this.frFRMenuItem.setMnemonic(m.getFrFRMenuItemMnemonic());
-					this.enUSMenuItem.setMnemonic(m.getEnUSMenuItemMnemonic());
-					// setEnabled
-					this.deDEMenuItem.setEnabled(m.isDeDEMenuItemEnabled());
-					this.frFRMenuItem.setEnabled(m.isFrFRMenuItemEnabled());
-					this.enUSMenuItem.setEnabled(m.isEnUSMenuItemEnabled());
+					this.i18nMenu.setMnemonic(b.getString("i18n.mnemonic")
+							.toCharArray()[0]);
+					{// JMenu i18nMenu
+						// setText
+						this.deDEMenuItem.setText(b.getString("deDE.label"));
+						this.frFRMenuItem.setText(b.getString("frFR.label"));
+						this.enUSMenuItem.setText(b.getString("enUS.label"));
+						// setMnemonic
+						this.deDEMenuItem.setMnemonic(b.getString(
+								"deDE.mnemonic").toCharArray()[0]);
+						this.deDEMenuItem.setMnemonic(b.getString(
+								"frFR.mnemonic").toCharArray()[0]);
+						this.deDEMenuItem.setMnemonic(b.getString(
+								"enUS.mnemonic").toCharArray()[0]);
+					}
 				}
+				{// JMenu infoMenu
+					// setText
+					this.infoMenu.setText(b.getString("info.label"));
+					this.helpMenuItem.setText(b.getString("help.label"));
+					this.aboutMenuItem.setText(b.getString("about.label"));
+					// setMnemonic
+					this.infoMenu.setMnemonic(b.getString("info.mnemonic")
+							.toCharArray()[0]);
+					this.helpMenuItem.setMnemonic(b.getString("help.mnemonic")
+							.toCharArray()[0]);
+					this.aboutMenuItem.setMnemonic(b
+							.getString("about.mnemonic").toCharArray()[0]);
+					// setAccelerator
+					this.helpMenuItem.setAccelerator(KeyStroke.getKeyStroke(b
+							.getString("help.accelerator")));
+					this.aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(b
+							.getString("about.accelerator")));
+				}
+
+				// TODO arg
+				// if (arg == ...)
+				{
+					this.fileMenu.setEnabled(m.isFileEnabled());
+					this.importAlgorithmMenuItem.setEnabled(m
+							.isImportAlgorithmEnabled());
+					this.deleteAlgorithmMenuItem.setEnabled(m
+							.isDeleteAlgorithmEnabled());
+					this.importGraphMenuItem.setEnabled(m
+							.isImportGraphEnabled());
+					this.deleteGraphMenuItem.setEnabled(m
+							.isDeleteGraphEnabled());
+					this.quitMenuItem.setEnabled(m.isQuitEnabled());
+					this.i18nMenu.setEnabled(m.isI18nEnabled());
+					this.deDEMenuItem.setEnabled(m.isDeDEEnabled());
+					this.frFRMenuItem.setEnabled(m.isFrFREnabled());
+					this.enUSMenuItem.setEnabled(m.isEnUSEnabled());
+					this.infoMenu.setEnabled(m.isInfoEnabled());
+					this.helpMenuItem.setEnabled(m.isHelpEnabled());
+					this.aboutMenuItem.setEnabled(m.isAboutEnabled());
+				}
+
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.toString(),
+						b.getString("app.label"), 1, null);
+				e.printStackTrace();
 			}
-			{// JMenu infoMenu
-				// setText
-				this.infoMenu.setText(m.getInfoMenuLabel());
-				this.helpMenuItem.setText(m.getHelpMenuItemLabel());
-				this.aboutMenuItem.setText(m.getAboutMenuItemLabel());
-				// setMnemonic
-				this.infoMenu.setMnemonic(m.getInfoMenuMnemonic());
-				this.helpMenuItem.setMnemonic(m.getHelpMenuItemMnemonic());
-				this.aboutMenuItem.setMnemonic(m.getAboutMenuItemMnemonic());
-				// setAccelerator
-				this.helpMenuItem
-						.setAccelerator(m.getHelpMenuItemAccelerator());
-				this.aboutMenuItem.setAccelerator(m
-						.getAboutMenuItemAccelerator());
-				// setEnabled
-				this.infoMenu.setEnabled(m.isInfoMenuEnabled());
-				this.helpMenuItem.setEnabled(m.isHelpMenuItemEnabled());
-				this.aboutMenuItem.setEnabled(m.isAboutMenuItemEnabled());
-			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.toString(),
-					m.getProgramName(), 1, null);
-			e.printStackTrace();
 		}
 	}
 }

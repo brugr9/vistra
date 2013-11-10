@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -13,9 +12,9 @@ import javax.swing.JPanel;
  * This view instantiates
  * <ul>
  * <li>a {@link MenuBar}
- * <li>a {@link ParameterController}
- * <li>a {@link Visualizer}
- * <li>a {@link TraversalController}
+ * <li>a {@link ParameterPanel}
+ * <li>a {@link VisualizerPanel}
+ * <li>a {@link PlayerPanel}
  * </ul>
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
@@ -40,15 +39,15 @@ public class ViewMinimal extends JFrame implements IView {
 	/**
 	 * A field for the settings panel.
 	 */
-	private final ParameterController parameterController;
+	private final ParameterPanel parameterPanel;
 	/**
 	 * A field for a visualization panel.
 	 */
-	private final Visualizer visualizer;
+	private final VisualizerPanel visualizerPanel;
 	/**
 	 * A field for a player panel.
 	 */
-	private final TraversalController traversalController;
+	private final PlayerPanel playerPanel;
 
 	/**
 	 * Main constructor.
@@ -58,31 +57,34 @@ public class ViewMinimal extends JFrame implements IView {
 	 * @param control
 	 *            a control as in MVC
 	 * @param width
-	 *            the width of the view
+	 *            the width of the frame
 	 * @param height
-	 *            the height of the view
+	 *            the height of the frame
+	 * @throws Exception
 	 */
-	public ViewMinimal(Model model, Control control, int width,
-			int height) {
-		super(model.getProgramName());
+	public ViewMinimal(Model model, Control control, int width, int height)
+			throws Exception {
+		super();
+		// TODO
+		// super(model.getResourceBundle().getString("app.label"));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Components
 		this.menuBar = GuiFactory.createMenuBar(model, control);
-		this.parameterController = GuiFactory
-				.createParameterController(model, control);
-		this.visualizer = GuiFactory.createVisualizer(model);
-		this.traversalController = GuiFactory.createTraversalController(model, control);
+		this.parameterPanel = GuiFactory.createParameterController(model,
+				control);
+		this.visualizerPanel = GuiFactory.createVisualizer(model);
+		this.playerPanel = GuiFactory.createTraversalController(model, control);
 
 		// Layout
 		this.setJMenuBar(this.menuBar);
 		this.panel1 = new JPanel();
 		this.panel1.setLayout(new BorderLayout());
-		this.panel1.add(this.parameterController, BorderLayout.NORTH);
-		this.panel1.add(this.visualizer, BorderLayout.SOUTH);
+		this.panel1.add(this.parameterPanel, BorderLayout.NORTH);
+		this.panel1.add(this.visualizerPanel, BorderLayout.SOUTH);
 		this.panel2 = new JPanel();
 		this.panel2.setLayout(new BorderLayout());
-		this.panel2.add(this.traversalController, BorderLayout.NORTH);
+		this.panel2.add(this.playerPanel, BorderLayout.NORTH);
 		this.setLayout(new BorderLayout());
 		this.add(panel1, BorderLayout.NORTH);
 		this.add(panel2, BorderLayout.CENTER);
@@ -91,15 +93,9 @@ public class ViewMinimal extends JFrame implements IView {
 		this.setLocation(60, 50);
 		this.setMinimumSize(new Dimension(width, height));
 		this.setResizable(true);
+
 		// let's go ...
-		try {
-			control.init();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"setViewInit():\n" + e.getMessage(),
-					model.getProgramName(), 1, null);
-			e.printStackTrace();
-		}
+		control.init();
 		this.setVisible(true);
 	}
 }
