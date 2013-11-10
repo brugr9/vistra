@@ -12,6 +12,8 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
  */
 public abstract class AbstractGraphItem implements IGraphItem {
 
+	private static int counter = 0;
+	
 	private String id;
 	private String info;
 	private String name;
@@ -26,7 +28,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * Main constructor.
 	 */
 	protected AbstractGraphItem() {
-		this.id = "";
+		this.id = String.valueOf(counter++);
 		this.info = "";
 		this.name = "";
 		this.comment = "";

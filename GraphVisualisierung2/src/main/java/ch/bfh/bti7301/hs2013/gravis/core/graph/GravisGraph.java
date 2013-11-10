@@ -17,6 +17,8 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 
 	private static final long serialVersionUID = 7604897874620015084L;
 
+	private static int counter = 0;
+	
 	private String graphDescription;
 
 	private String graphId;
@@ -29,8 +31,8 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	protected GravisGraph(Graph<IVertex, IEdge> delegate) {
 		super(delegate);
 
-		this.graphDescription = "";
-		this.graphId = "";
+		this.graphId = "Graph " + counter++;
+		this.graphDescription = "Graph " + counter++;
 		this.edgeType = EdgeType.DIRECTED;
 	}
 

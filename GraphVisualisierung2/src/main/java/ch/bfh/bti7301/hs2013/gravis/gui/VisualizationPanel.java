@@ -18,6 +18,8 @@ import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.PointTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
@@ -60,20 +62,24 @@ public class VisualizationPanel extends VisualizationViewer<IVertex, IEdge>
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
 		this.getRenderContext().setVertexFillPaintTransformer(
 				new VertexColorTransformer());
-		DefaultModalGraphMouse<IVertex, IEdge> gm = new DefaultModalGraphMouse<>();
 		
-//		final EditingModalGraphMouse<Number,Number> graphMouse = 
-//		new EditingModalGraphMouse<Number,Number>(vv.getRenderContext(), 
-//				vertexFactory, edgeFactory);
+//		DefaultModalGraphMouse<IVertex, IEdge> gm = new DefaultModalGraphMouse<>();
+		
+		EditingModalGraphMouse<IVertex,IEdge> graphMouse = 
+		new EditingModalGraphMouse<>(this.getRenderContext(), 
+				new VertexFactory(), new EdgeFactory());
+		
 //		vv.setGraphMouse(graphMouse);
 //		vv.addKeyListener(graphMouse.getModeKeyListener());
 //		graphMouse.setMode(ModalGraphMouse.Mode.EDITING);
 		
-		gm.setMode(Mode.PICKING);
-		this.setGraphMouse(gm);
-		this.visualizationPanelBorder = BorderFactory
-				.createTitledBorder("visualizationPanel");
-		this.setBorder(visualizationPanelBorder);
+//		gm.setMode(Mode.PICKING);
+//		gm.setMode(Mode.TRANSFORMING);
+		graphMouse.setMode(Mode.EDITING);
+		this.setGraphMouse(graphMouse);
+//		this.visualizationPanelBorder = BorderFactory
+//				.createTitledBorder("visualizationPanel");
+//		this.setBorder(visualizationPanelBorder);
 
 	}
 
