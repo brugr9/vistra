@@ -202,7 +202,8 @@ public final class GuiFactory {
 	static VisualizationPanel createVisualizationPanel(GuiModel guiModel) {
 		Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
 		Layout<IVertex, IEdge> layout = createCircleLayout(graph);
-		VisualizationPanel visualizationPanel = new VisualizationPanel(layout);
+		GravisVisualizationViewer visualizationViewer = new GravisVisualizationViewer(layout);
+		VisualizationPanel visualizationPanel = new VisualizationPanel(visualizationViewer);
 		guiModel.addObserver(visualizationPanel);
 		return visualizationPanel;
 	}

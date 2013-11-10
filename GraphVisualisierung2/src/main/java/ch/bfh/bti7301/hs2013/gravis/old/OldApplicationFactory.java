@@ -10,6 +10,7 @@ import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.CoreFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
+import ch.bfh.bti7301.hs2013.gravis.gui.GravisVisualizationViewer;
 import ch.bfh.bti7301.hs2013.gravis.gui.VisualizationPanel;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -80,15 +81,16 @@ public final class OldApplicationFactory {
 			e.printStackTrace();
 		}
 
-		VisualizationPanel graphPanel = new VisualizationPanel(
+		GravisVisualizationViewer visualizationViewer = new GravisVisualizationViewer(
 				new CircleLayout<IVertex, IEdge>(GraphFactory.createGraph()));
+		VisualizationPanel visualizationPanel = new VisualizationPanel(visualizationViewer);
 		OldIGravisMainListener mainWindowListener = new OldMainWindowListener(
 				gravisCore);
-		JFrame mainWindow = new OldGravisMainWindow("Test", graphPanel,
+		JFrame mainWindow = new OldGravisMainWindow("Test", visualizationPanel,
 				mainWindowListener);
 		// new OldGravisMainWindow(title, graphPanel, mainWindowListener);
 
-		mainWindowListener.addObserver(graphPanel);
+		mainWindowListener.addObserver(visualizationPanel);
 
 		return mainWindow;
 	}
