@@ -14,11 +14,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public abstract class AbstractParameterManager implements IParameterManager {
 
 	/**
-	 * A field for a parameter map.
-	 */
-	private final ParameterMap parameterMap;
-
-	/**
 	 * A field for a templates directory.
 	 */
 	private final File templatesDir;
@@ -27,6 +22,11 @@ public abstract class AbstractParameterManager implements IParameterManager {
 	 * A field for a workbench directory.
 	 */
 	private final File workbenchDir;
+
+	/**
+	 * A field for a parameter map.
+	 */
+	private ParameterMap parameterMap;
 
 	/**
 	 * A field for a filename extension filter.
@@ -38,10 +38,10 @@ public abstract class AbstractParameterManager implements IParameterManager {
 	 */
 	public AbstractParameterManager(File templatesDir, File workbenchDir,
 			FileNameExtensionFilter filter) {
-		this.parameterMap = new ParameterMap();
 		this.templatesDir = templatesDir;
 		this.workbenchDir = workbenchDir;
 		this.filter = filter;
+		this.parameterMap = new ParameterMap();
 	}
 
 	@Override
