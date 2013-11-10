@@ -3,7 +3,6 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge;
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
-import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -11,18 +10,13 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  */
 class GravisEdge extends AbstractGraphItem implements IEdge {
 
-	private double weight = 1.0;
-
-	// directed edge is the default value
-	private EdgeType edgeType = EdgeType.DIRECTED;
+	private double weight;
 
 	protected GravisEdge() {
 		super();
 
+		this.weight = 1.0;
 		this.setColor(GravisColor.BLACK);
-		// TODO bitte an dieser Klasse nichts ändern (pk)
-
-		// TODO use directed, undirected edge
 	}
 
 	/*
@@ -55,29 +49,6 @@ class GravisEdge extends AbstractGraphItem implements IEdge {
 	@Override
 	public void setWeight(double weight) {
 		this.weight = weight;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge#setEdgeType(edu
-	 * .uci .ics.jung.graph.util.EdgeType)
-	 */
-	@Override
-	public void setEdgeType(EdgeType edgeType) {
-		this.edgeType = edgeType;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge#getEdgeType()
-	 */
-	@Override
-	public EdgeType getEdgeType() {
-		return this.edgeType;
 	}
 
 }

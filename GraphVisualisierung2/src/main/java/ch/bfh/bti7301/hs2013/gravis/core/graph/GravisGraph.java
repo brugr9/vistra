@@ -2,11 +2,11 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
 import java.util.Collection;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.GraphDecorator;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -17,11 +17,11 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 
 	private static final long serialVersionUID = 7604897874620015084L;
 
-	private String graphName;
+	private String graphDescription;
 
 	private String graphId;
 
-	private GraphType[] graphType;
+	private EdgeType edgeType;
 
 	/**
 	 * @param delegate
@@ -29,9 +29,9 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	protected GravisGraph(Graph<IVertex, IEdge> delegate) {
 		super(delegate);
 
-		this.graphName = this.toString();
+		this.graphDescription = "";
 		this.graphId = "";
-		this.graphType = new GraphType[] {};
+		this.edgeType = EdgeType.DIRECTED;
 	}
 
 	/*
@@ -42,14 +42,11 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	@Override
 	public void clear() {
 		Collection<IVertex> collection = this.delegate.getVertices();
-		IVertex[] vertices = this.delegate.getVertices().toArray(
-				new IVertex[collection.size()]);
+		IVertex[] vertices = collection.toArray(new IVertex[collection.size()]);
 
 		for (IVertex vertex : vertices) {
 			this.delegate.removeVertex(vertex);
 		}
-
-		this.setGraphName(this.toString());
 	}
 
 	/*
@@ -69,8 +66,8 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#getGraphName()
 	 */
 	@Override
-	public String getGraphName() {
-		return this.graphName;
+	public String getDescription() {
+		return this.graphDescription;
 	}
 
 	/*
@@ -81,8 +78,8 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * .lang.String)
 	 */
 	@Override
-	public void setGraphName(String graphName) {
-		this.graphName = graphName;
+	public void setDescription(String graphName) {
+		this.graphDescription = graphName;
 	}
 
 	/*
@@ -91,7 +88,7 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#getGraphId()
 	 */
 	@Override
-	public String getGraphId() {
+	public String getId() {
 		return this.graphId;
 	}
 
@@ -101,18 +98,24 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#setGraphId(int)
 	 */
 	@Override
-	public void setGraphId(String graphId) {
+	public void setId(String graphId) {
 		this.graphId = graphId;
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#getEdgeType()
+	 */
 	@Override
-	public GraphType[] getType() {
-		return this.graphType;
+	public EdgeType getEdgeType() {
+		return this.edgeType;
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#setEdgeType(edu.uci.ics.jung.graph.util.EdgeType)
+	 */
 	@Override
-	public void setType(GraphType ... graphType) {
-		this.graphType = graphType;
+	public void setEdgeType(EdgeType edgeType) {
+		this.edgeType = edgeType;
 	}
 
 }

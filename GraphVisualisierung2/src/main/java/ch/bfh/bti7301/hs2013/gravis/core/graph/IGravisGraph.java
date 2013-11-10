@@ -1,9 +1,9 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -28,35 +28,36 @@ public interface IGravisGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 * @return String
 	 */
-	public abstract String getGraphName();
+	public abstract String getDescription();
 
 	/**
 	 * 
 	 * @param graphName
 	 */
-	public abstract void setGraphName(String graphName);
+	public abstract void setDescription(String graphDescription);
 
 	/**
 	 * 
 	 * @return graphId
 	 */
-	public abstract String getGraphId();
+	public abstract String getId();
 
 	/**
 	 * 
 	 * @param graphId
 	 */
-	public abstract void setGraphId(String graphId);
+	public abstract void setId(String graphId);
 
 	/**
 	 * 
-	 * @return GraphType[]
+	 * @return EdgeType
 	 */
-	public abstract GraphType[] getType();
-
+	public abstract EdgeType getEdgeType();
+	
 	/**
 	 * 
-	 * @param graphType
+	 * @param edgeType
 	 */
-	public abstract void setType(GraphType ... graphType);
+	public abstract void setEdgeType(EdgeType edgeType);
+
 }
