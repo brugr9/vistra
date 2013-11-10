@@ -122,6 +122,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			for (IVertex vertex : newGraph.getVertices()) {
 				vertex.setId(vertexIds.get(vertex));
 				// TODO read attribute Ids from file: vertexColor, startVertex, vertexLocation.x, vertexLocation.y
+				// TODO read endVertex from graphml
 				vertex.setColor(ValueTransformer.transformColor(vertexMeta
 						.get("vertexColor").transformer.transform(vertex)));
 				vertex.setStart(ValueTransformer.transformBoolean(vertexMeta
