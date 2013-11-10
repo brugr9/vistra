@@ -1,35 +1,56 @@
 \section{Software Architecture Document}
 \label{sec:Software Architecture Document}
-Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren.
 % 
+\subsection{Motivation}
+Die Drei-Schichten-Architektur getrennt in Common, Core und Gui ergibt sich aus den Requirements. Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit, die Komponente Gui enth\"alt die grafische Benutzerschnittstelle und schliesslich die Komponente Core: das Herzst\"uck des Systems k\"ummert sich um I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
+% 
+\subsection{Architektonische Repr\"asentation}
+
+% 
+\subsection{Architektonische Faktoren}
+
+% 
+\subsection{Architektonische Entscheidungen}
+\begin{itemize}
+  \item Zu Projektbeginn wurde relativ bald die Drei-Schichten-Architektur entworfen.
+  \item In der Woche 45 wurde entschieden, das Projekt als Maven-Projekt zu halten. Der Entscheid wurde vorallem getroffen, da Properties zentral verwaltet und Tests sauber vom restlichen Sourcecode getrennt gehalten werden k\"onnen.
+\end{itemize}
+% 
+\subsection{Logical View}
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{diagrams/package-diagram.pdf}
     \caption{Software Architecture, Package Diagram}
     \label{fig:package-diagram}
 \end{figure}
+Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren.
 % 
-\subsection{Common}
-\label{subsec:Common}
+\subsection{Deployment View}
+
+% 
+\subsection{Process View}
+% 
+\subsubsection{Common}
+\label{subsubsec:Common}
 Die Komponente h\"alt die f\"ur die Implementation eines Algorithmus zu verwendende Schnittstellen bereit. Diese sind f\"ur Algorithmen zu verwenden, welche importiert werden wollen.
 % 
-\subsection{Core}
-\label{subsec:Core}
+\subsubsection{Core}
+\label{subsubsec:Core}
 Die Komponente implementiert:
 \begin{itemize}
-  \item Data Model: Datenhaltung f\"ur Graph (Datenelemente Knoten und Kanten), Algorithmus und berechnete Traversierung (Traversierungsschritte als Operationen auf den Graphen)
+  \item Data Model: Datenhaltung f\"ur Graph (Datenelemente Knoten und Kanten), Algorithmus und berechnete Traversierung, Traversierungsschritte als Resultat der Operation eines Algorithmus auf einen Graphen
   \item Business Logik: 
   \begin{itemize}
-      \item Handling von Graphen und Algorithmen
-      \item Traversierung und damit Erstellen der visualisierbaren L\"osung
       \item Handling von Daten-Import und L\"oschen von Daten
       \item Validierung Graphen und Algorithmen beim Import
+      \item Handling von Graphen und Algorithmen
+      \item Traversierung und damit Erstellen der visualisierbaren L\"osung
   \end{itemize}
   \item Core Inteface: eine Schnittstelle, welche der Komponente GUI zur Verf\"ugung steht
 \end{itemize}
 % 
-\subsection{Gui}
-\label{subsec:Gui}
+\subsubsection{Gui}
+\label{subsubsec:Gui}
 Die Komponente implementiert ein Model-View-Control (MVC) unter Verwendung des Java-Observer-Pattern:
 \begin{itemize}
   \item Model: Observable mit s\"amtlichen GUI-Attributen und deren Getter- und Setter-Methoden
@@ -37,8 +58,8 @@ Die Komponente implementiert ein Model-View-Control (MVC) unter Verwendung des J
   \item Control: Implementiert Listeners und deren Methoden
 \end{itemize}
 % 
-\subsubsection{Gui Elemente}
-\label{subsubsec:Gui Elemente}
+\subsection{Use-Case View}
+Folgende Gui-Elemente wurden implementiert:
 \begin{itemize}
   \item Daten:
   \begin{itemize}

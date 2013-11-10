@@ -89,12 +89,13 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
 % 
 \section{Design Model}
 \label{sec:Design Model}
-Zur elaboration der sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Graph}, \textit{Delete Algorithm}, \textit{Select Graph} und \textit{Select Algorithm} werden diese je mit den folgenden Diagrammen illustriert:
+Zur Elaboration des Designs werden zuerst die zwei Konzeptklassen \textit{Parameter Controller} und \textit{Traversal Controller} als State Machine (SM) betrachtet und je mit einem State Diagram illustriert.
+
+Anschliessend werden die sechs Use Cases \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Graph}, \textit{Delete Algorithm}, \textit{Select Graph} und \textit{Select Algorithm} erarbeitet und je mit einem System Sequence Diagram (SSD), einem Sequence Diagram (SD) und einem Design Class Diagram (DCD) illustriert.
 \begin{itemize}
   \item System Sequence Diagram (SSD): zeigt, wie eine Benutzerinteraktion vom System verarbeitet wird.
   \item Sequence Diagram (SD): zeigt, wie Objekte miteinander arbeiten und erl\"autert die Zust\"andigkeiten der Klassen. 
   \item Design Class Diagram (DCD): zeigt die Elemente des Systems unter Ber\"ucksichtigung ihrer Funktionalit\"at.
 \end{itemize}
-Anschliessend werden die Konzeptklassen \textit{Parameter Controller} und \textit{Traversal Controller} zur Elaboration als State Machine (SM) betrachtet und je mit einem State Diagram illustriert.
 
 Ein Controller implementiert ausschliesslich System-Operationen (und eventuell einige private Methoden). Jeder System-Event wird mit einer einzigen System-Operation eines Controllers assoziiert.
