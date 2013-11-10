@@ -1,10 +1,15 @@
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+\chapter{Design}
+% 
 \section{Domain Model}
 \label{sec:Domain Model}
 % 
 \subsection{Domain Model Diagram}
 \label{subsec:Domain Model Diagram}
 \begin{figure}[H]
-    \includegraphics[totalheight=0.55\textheight]{diagrams/domain-model-diagram.pdf}
+    \includegraphics[totalheight=0.6\textheight]{diagrams/domain-model-diagram.pdf}
     \caption{Domain Model Diagram}
     \label{fig:domain_model_diagram}
 \end{figure}
@@ -81,3 +86,15 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
   \item Ein Visualizer (1) kann einen Graphen (0..1) visualisieren (\textit{visualize}).
   \item Ein Visualizer (1) kann einen oder mehrere Steps (0..n) visualisieren (\textit{visualize}).
 \end{itemize}
+% 
+\section{Design Model}
+\label{sec:Design Model}
+Zur elaboration der sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Graph}, \textit{Delete Algorithm}, \textit{Select Graph} und \textit{Select Algorithm} werden diese je mit den folgenden Diagrammen illustriert:
+\begin{itemize}
+  \item System Sequence Diagram (SSD): zeigt, wie eine Benutzerinteraktion vom System verarbeitet wird.
+  \item Sequence Diagram (SD): zeigt, wie Objekte miteinander arbeiten und erl\"autert die Zust\"andigkeiten der Klassen. 
+  \item Design Class Diagram (DCD): zeigt die Elemente des Systems unter Ber\"ucksichtigung ihrer Funktionalit\"at.
+\end{itemize}
+Anschliessend werden die Konzeptklassen \textit{Parameter Controller} und \textit{Traversal Controller} zur Elaboration als State Machine (SM) betrachtet und je mit einem State Diagram illustriert.
+
+Ein Controller implementiert ausschliesslich System-Operationen (und eventuell einige private Methoden). Jeder System-Event wird mit einer einzigen System-Operation eines Controllers assoziiert.

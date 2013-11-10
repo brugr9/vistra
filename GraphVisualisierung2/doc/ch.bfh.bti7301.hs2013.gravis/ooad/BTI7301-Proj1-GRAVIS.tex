@@ -41,38 +41,16 @@
 \pagenumbering{arabic}
 \setcounter{page}{0}
 % 
-\newpage		% neue Seite
-\mbox{} 		% leere Textbox
-\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
-% 
-\chapter{Requirements}
-\newpage		% neue Seite
-\mbox{} 		% leere Textbox
-\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
-% 
-\include{vision}
-\include{usecases}
-\include{suppspec}
-\include{glossary}
-% \include{domainrules}
-\include{projectmanagement}
-% 
-% \newpage		% neue Seite
-% \mbox{} 		% leere Textbox
-% 
-\newpage		% neue Seite
-\mbox{} 		% leere Textbox
-\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
-% 
-\chapter{Design}
-\newpage		% neue Seite
-\mbox{} 		% leere Textbox
-\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
-% 
-\include{domainmodel}
-\include{designmodel}
-\include{architecture}
-% \include{datamodel}
+% Requirements
+\include{vision} 	% Vision
+\include{usecases} 	% Use Cases
+\include{suppspec} 	% Supplementary Specification, Glossary, Domain Rules
+% Design
+\include{domainmodel} 	% Domain Model
+\include{designmodel} 	% Design Model
+\include{architecture} % Software Architecture Document, Data Model
+% Project Management
+\include{projectmanagement} % Time Management, Development Environment Description
 
 % \fancyfoot{}				% clean fancy footer
 %% Appendix

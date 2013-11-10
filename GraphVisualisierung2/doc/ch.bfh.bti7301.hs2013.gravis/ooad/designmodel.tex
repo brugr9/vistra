@@ -1,15 +1,3 @@
-\section{Design Model}
-\label{sec:Design Model}
-Zur elaboration der sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Graph}, \textit{Delete Algorithm}, \textit{Select Graph} und \textit{Select Algorithm} werden diese je mit den folgenden Diagrammen illustriert:
-\begin{itemize}
-  \item System Sequence Diagram (SSD): zeigt, wie eine Benutzerinteraktion vom System verarbeitet wird.
-  \item Sequence Diagram (SD): zeigt, wie Objekte miteinander arbeiten und erl\"autert die Zust\"andigkeiten der Klassen. 
-  \item Design Class Diagram (DCD): zeigt die Elemente des Systems unter Ber\"ucksichtigung ihrer Funktionalit\"at.
-\end{itemize}
-Jeder System-Event wird mit einer einzigen System-Operation eines Controllers assoziiert. Ein Controller implementiert ausschliesslich System-Operationen (und eventuell einige private Methoden). Generell rufen die Klassen dieses Designs keine Methoden eines Controllers auf.
-
-Anschliessend werden die Konzeptklassen \textit{Parameter Controller} und \textit{Traversal Controller} zur Elaboration als State Machine (SM) betrachtet und je mit einem State Diagram illustriert.
-% \newpage
 % 
 \subsection{UC1 Import Graph}
 \begin{figure}[H]
@@ -24,10 +12,10 @@ Anschliessend werden die Konzeptklassen \textit{Parameter Controller} und \texti
     \includegraphics[
 % 		    width=\textwidth,
 % 		    height=\textheight,
-		    angle=90,
-		    scale=0.18,
-% 		    keepaspectratio=true
-	  ]{diagrams/sd-import-graph.pdf}
+% 		    angle=90,
+		    scale=0.4,
+		    keepaspectratio=true
+	]{diagrams/sd-import-graph.pdf}
     \caption{UC1 Import Graph, Sequence Diagram}
     \label{fig:import-graph-sd}
 \end{figure}
@@ -158,16 +146,28 @@ Anschliessend werden die Konzeptklassen \textit{Parameter Controller} und \texti
 \subsection{Parameter Controller}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{diagrams/sm-parameter-controller.pdf}
+    \includegraphics[
+% 		    width=\textwidth,
+% 		    height=\textheight,
+% 		    angle=90,
+		    scale=0.5,
+		    keepaspectratio=true
+    ]{diagrams/sm-parameter-controller.pdf}
     \caption{Parameter Controller, State Diagram}
-    \label{fig:sm-parameter-controller}
+    \label{fig:parameter-controller-sm}
 \end{figure}
 % \newpage
 % 
 \subsection{Traversal Controller}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{diagrams/sm-traversal-controller.pdf}
+    \includegraphics[
+% 		    width=\textwidth,
+% 		    height=\textheight,
+% 		    angle=90,
+		    scale=0.5,
+		    keepaspectratio=true
+    ]{diagrams/sm-traversal-controller.pdf}
     \caption{Traversal Controller, State Diagram}
-    \label{fig:sm-traversal-controller}
+    \label{fig:traversal-controller-sm}
 \end{figure}
