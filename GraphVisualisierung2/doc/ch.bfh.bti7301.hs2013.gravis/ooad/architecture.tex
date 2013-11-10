@@ -1,14 +1,11 @@
 \section{Software Architecture Document}
 \label{sec:Software Architecture Document}
 % 
-\subsection{Motivation}
-Die Drei-Schichten-Architektur getrennt in Common, Core und Gui ergibt sich aus den Requirements. Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit, die Komponente Gui enth\"alt die grafische Benutzerschnittstelle und schliesslich die Komponente Core: das Herzst\"uck des Systems k\"ummert sich um I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
+% \subsection{Architektonische Repr\"asentation}
 % 
-\subsection{Architektonische Repr\"asentation}
-
 % 
-\subsection{Architektonische Faktoren}
-
+% \subsection{Architektonische Faktoren}
+% 
 % 
 \subsection{Architektonische Entscheidungen}
 \begin{itemize}
@@ -23,10 +20,11 @@ Die Drei-Schichten-Architektur getrennt in Common, Core und Gui ergibt sich aus 
     \caption{Software Architecture, Package Diagram}
     \label{fig:package-diagram}
 \end{figure}
-Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren.
+\subsubsection{Beschreibung und Motivation}
+Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren. Die Drei-Schichten-Architektur hat sich aus den Requirements ergeben. Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit, die Komponente Gui enth\"alt die (grafische) Benutzerschnittstelle und schliesslich die Komponente Core: das Herzst\"uck des Systems k\"ummert sich um I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
 % 
-\subsection{Deployment View}
-
+% \subsection{Deployment View}
+% 
 % 
 \subsection{Process View}
 % 
@@ -59,7 +57,7 @@ Die Komponente implementiert ein Model-View-Control (MVC) unter Verwendung des J
 \end{itemize}
 % 
 \subsection{Use-Case View}
-Folgende Gui-Elemente wurden implementiert:
+Folgende Use Cases wurden implementiert:
 \begin{itemize}
   \item Daten:
   \begin{itemize}
@@ -74,13 +72,12 @@ Folgende Gui-Elemente wurden implementiert:
   \end{itemize}
   \item Visualisierung:
   \begin{itemize}
-      \item Einstellung Steplength: Anzahl Traversierungs-Schritte pro Bild
-      \item Einstellung Delay: Zeitintervall zwischen zwei Bildern (in Sekunden)      
+      \item Einstellen Steplength: Anzahl Traversierungs-Schritte pro Bild
+      \item Einstellen Delay: Zeitintervall zwischen zwei Bildern (in Sekunden)      
       \item Visualisierung, Step-by-Step: Ein Bild vor, ein Bild zur\"uck, an das Ende oder den an den Anfang springen
       \item Visualisierung, Animation: Starten, Anhalten, Stoppen
-      \item Anzeige des Visualisierungsfortschrittes in einer Progressbar
   \end{itemize}
 \end{itemize}
 % 
-\section{Data Model}
-\label{sec:Data Model}
+% \section{Data Model}
+% \label{sec:Data Model}

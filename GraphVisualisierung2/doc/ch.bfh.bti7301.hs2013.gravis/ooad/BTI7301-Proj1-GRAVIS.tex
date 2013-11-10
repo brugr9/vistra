@@ -56,39 +56,52 @@
 \fancyfoot{}				% clean fancy footer
 %% Appendix
 %%---------------------------------------------------------------------------
-% \cleardoublepage
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+% 
 \newpage		% neue Seite
 \mbox{} 		% leere Textbox
 \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
 % 
 \appendix
-% \chapter{\appendixname}
+\chapter{\appendixname}
 %%---------------------------------------------------------------------------
 
 %% Figures
 %%---------------------------------------------------------------------------
-% \cleardoublepage
-% \phantomsection 
-% \addcontentsline{toc}{section}{List of Figures}
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+\phantomsection 
+\addcontentsline{toc}{section}{List of Figures}
 \listoffigures
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
 %%---------------------------------------------------------------------------
 
 %% Tables
 %%---------------------------------------------------------------------------
-% \cleardoublepage
-% \phantomsection
-% \addcontentsline{toc}{section}{List of Tables}
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+\phantomsection
+\addcontentsline{toc}{section}{List of Tables}
 \listoftables
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
 %%---------------------------------------------------------------------------
 
 %% Bibliography
 %%---------------------------------------------------------------------------
-% \phantomsection
-% \addcontentsline{toc}{section}{Bibliography}
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern	
+\phantomsection
+\addcontentsline{toc}{section}{Bibliography}
 % \bibliographystyle{unsrt}
 \bibliographystyle{IEEEtranS}
 \nocite{*}
 \bibliography{includes/bibliography}
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
 %%---------------------------------------------------------------------------
 
 %%---------------------------------------------------------------------------
