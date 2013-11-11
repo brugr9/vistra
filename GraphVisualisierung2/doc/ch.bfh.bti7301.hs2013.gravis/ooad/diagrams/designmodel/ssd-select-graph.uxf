@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.SequenceDiagram</type>
+    <coordinates>
+      <x>260</x>
+      <y>70</y>
+      <w>230</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>title: Select Graph
+User~id1|GRAVIS~id2
+id1-&gt;&gt;&gt;id2:selectGraph(index)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
