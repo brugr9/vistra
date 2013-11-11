@@ -16,19 +16,8 @@ public interface IEdge extends IGraphItem {
 
 	/**
 	 * 
-	 * @return EdgeType
-	 */
-	public abstract EdgeType getEdgeType();
-
-	/**
-	 * 
 	 * @param weight
 	 */
 	public abstract void setWeight(double weight);
-
-	/**
-	 * @param edgeType
-	 */
-	public abstract void setEdgeType(EdgeType edgeType);
 
 }

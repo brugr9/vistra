@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  * <ul>
  * <li>a {@link MenuBar}
  * <li>a {@link ParameterPanel}
- * <li>a {@link VisualizerPanel}
+ * <li>a {@link VisualizationPanel}
  * <li>a {@link PlayerPanel}
  * <li>a {@link ProtocolPanel}
  * </ul>
@@ -44,7 +44,7 @@ public class ViewFull extends JFrame implements IView {
 	/**
 	 * A field for a visualization panel.
 	 */
-	private final VisualizerPanel visualizerPanel;
+	private final VisualizationPanel visualizationPanel;
 	/**
 	 * A field for a player panel.
 	 */
@@ -78,7 +78,7 @@ public class ViewFull extends JFrame implements IView {
 		this.menuBar = GuiFactory.createMenuBar(model, control);
 		this.parameterPanel = GuiFactory.createParameterController(model,
 				control);
-		this.visualizerPanel = GuiFactory.createVisualizer(model);
+		this.visualizationPanel = GuiFactory.createVisualizer(model);
 		this.playerPanel = GuiFactory.createTraversalController(model, control);
 		this.protocolPanel = GuiFactory.createProtocolPanel(model, width, 30);
 
@@ -87,7 +87,7 @@ public class ViewFull extends JFrame implements IView {
 		this.panel1 = new JPanel();
 		this.panel1.setLayout(new BorderLayout());
 		this.panel1.add(this.parameterPanel, BorderLayout.NORTH);
-		this.panel1.add(this.visualizerPanel, BorderLayout.SOUTH);
+		this.panel1.add(this.visualizationPanel, BorderLayout.SOUTH);
 		this.panel2 = new JPanel();
 		this.panel2.setLayout(new BorderLayout());
 		this.panel2.add(this.playerPanel, BorderLayout.NORTH);

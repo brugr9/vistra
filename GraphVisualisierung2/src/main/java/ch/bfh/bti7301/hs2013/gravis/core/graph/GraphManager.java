@@ -14,7 +14,6 @@ import org.apache.commons.collections15.Transformer;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
@@ -24,6 +23,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.ValueTransformer;
 import ch.bfh.bti7301.hs2013.gravis.old.OldApplicationFactory;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.Hypergraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.GraphMLMetadata;
 import edu.uci.ics.jung.io.GraphMLReader;
 import edu.uci.ics.jung.io.GraphMLWriter;
@@ -114,14 +114,15 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			
 			Map<String, GraphMLMetadata<Graph<IVertex,IEdge>>> graphMeta = graphReader.getGraphMetadata();
 			// TODO read attribute Id from file: id
-			newGraph.setGraphId(graphMeta.get("id").transformer.transform(newGraph));
+			newGraph.setId(graphMeta.get("id").transformer.transform(newGraph));
 			// TODO read graph type from file
-			newGraph.setType(IAlgorithm.GraphType.DIRECTED);
+			newGraph.setEdgeType(EdgeType.DIRECTED);
 			// TODO read GraphName from graphml
 
 			for (IVertex vertex : newGraph.getVertices()) {
 				vertex.setId(vertexIds.get(vertex));
 				// TODO read attribute Ids from file: vertexColor, startVertex, vertexLocation.x, vertexLocation.y
+				// TODO read endVertex from graphml
 				vertex.setColor(ValueTransformer.transformColor(vertexMeta
 						.get("vertexColor").transformer.transform(vertex)));
 				vertex.setStart(ValueTransformer.transformBoolean(vertexMeta
@@ -173,7 +174,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			@Override
 			public String transform(Hypergraph<IVertex,IEdge> graph) {
 				if (graph instanceof IGravisGraph) {
-					return ((IGravisGraph) graph).getGraphId();
+					return ((IGravisGraph) graph).getId();
 				}
 				return "";
 			}
@@ -224,7 +225,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 				FileUtils.copyFileToDirectory(file, this.getWorkbenchDir());
 				File theCopy = new File(this.getWorkbenchDir() + file.getName());
 				IGravisGraph graph = this.loadGraph(theCopy);
-				super.add(graph.getGraphId(), theCopy);
+				super.add(graph.getId(), theCopy);
 				return graph;
 			} else
 				throw new IOException(this.getClass().toString()

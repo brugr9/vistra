@@ -1,10 +1,10 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import edu.uci.ics.jung.graph.ObservableGraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -52,8 +52,8 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#getGraphName()
 	 */
 	@Override
-	public String getGraphName() {
-		return this.gravisGraph.getGraphName();
+	public String getDescription() {
+		return this.gravisGraph.getDescription();
 	}
 
 	/*
@@ -64,8 +64,8 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 	 * .lang.String)
 	 */
 	@Override
-	public void setGraphName(String graphName) {
-		this.gravisGraph.setGraphName(graphName);
+	public void setDescription(String graphName) {
+		this.gravisGraph.setDescription(graphName);
 	}
 
 	/*
@@ -85,8 +85,8 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#getGraphId()
 	 */
 	@Override
-	public String getGraphId() {
-		return this.gravisGraph.getGraphId();
+	public String getId() {
+		return this.gravisGraph.getId();
 	}
 
 	/*
@@ -95,20 +95,24 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#setGraphId(int)
 	 */
 	@Override
-	public void setGraphId(String graphId) {
-		this.gravisGraph.setGraphId(graphId);
+	public void setId(String graphId) {
+		this.gravisGraph.setId(graphId);
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#getEdgeType()
+	 */
 	@Override
-	public GraphType[] getType() {
-		// TODO Auto-generated method stub
-		return null;
+	public EdgeType getEdgeType() {
+		return this.gravisGraph.getEdgeType();
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#setEdgeType(edu.uci.ics.jung.graph.util.EdgeType)
+	 */
 	@Override
-	public void setType(GraphType[] graphType) {
-		// TODO Auto-generated method stub
-
+	public void setEdgeType(EdgeType edgeType) {
+		this.gravisGraph.setEdgeType(edgeType);
 	}
 
 }

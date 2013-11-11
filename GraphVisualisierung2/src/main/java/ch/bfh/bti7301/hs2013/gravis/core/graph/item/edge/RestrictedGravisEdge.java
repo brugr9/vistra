@@ -35,17 +35,6 @@ final class RestrictedGravisEdge extends AbstractRestrictedGraphItem implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge#getEdgeType()
-	 */
-	@Override
-	public EdgeType getEdgeType() {
-		return this.edge.getEdgeType();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge#setWeight(double)
 	 */
 	@Override
@@ -55,17 +44,4 @@ final class RestrictedGravisEdge extends AbstractRestrictedGraphItem implements
 				"setWeight: Unsupported operation!");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge#setEdgeType(edu
-	 * .uci.ics.jung.graph.util.EdgeType)
-	 */
-	@Override
-	public void setEdgeType(EdgeType edgeType) {
-		// TODO Exception handling
-		throw new UnsupportedOperationException(
-				"setEdgeType: Unsupported operation!");
-	}
 }

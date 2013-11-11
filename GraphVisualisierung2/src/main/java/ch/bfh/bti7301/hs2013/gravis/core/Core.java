@@ -15,6 +15,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * This class gives access to all important methods of the core classes (facade
@@ -56,14 +57,15 @@ class Core implements ICore {
 		try {
 			IGravisGraph graph = this.traversal.getGraph();
 
-			if (graph.getGraphId() == graphId) {
+			if (graph.getId() == graphId) {
 				return graph;
 			}
 
 			graph = this.graphManager.getGraph(graphId);
 			this.traversal.setParameter(graph);
-			GraphType[] types = graph.getType();
-			algorithmManager.updateAlgorithmList(types);
+			EdgeType type = graph.getEdgeType();
+			// TODO updateAlgorithmList() anpassen für EdgeType
+			this.algorithmManager.updateAlgorithmList(new GraphType[] { GraphType.DIRECTED });
 			return graph;
 		} catch (Exception e) {
 			throw e;
@@ -92,7 +94,7 @@ class Core implements ICore {
 		try {
 			IGravisGraph graph = this.traversal.getGraph();
 
-			if (graphId == graph.getGraphId()) {
+			if (graphId == graph.getId()) {
 				graph.clear();
 				return graph;
 			}
@@ -143,7 +145,7 @@ class Core implements ICore {
 			throws Exception {
 		try {
 			if (directory.isDirectory()
-					&& graphId == this.traversal.getGraph().getGraphId()) {
+					&& graphId == this.traversal.getGraph().getId()) {
 				this.graphManager.exportGraph(graphId, directory);
 				return this.traversal.getGraph();
 

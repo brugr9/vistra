@@ -10,7 +10,8 @@ import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.CoreFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
-import ch.bfh.bti7301.hs2013.gravis.gui.VisualizerPanel;
+import ch.bfh.bti7301.hs2013.gravis.gui.GravisVisualizationViewer;
+import ch.bfh.bti7301.hs2013.gravis.gui.VisualizationPanel;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -80,15 +81,17 @@ public final class OldApplicationFactory {
 			e.printStackTrace();
 		}
 
-		VisualizerPanel graphPanel = new VisualizerPanel(
+		GravisVisualizationViewer visualizationViewer = new GravisVisualizationViewer(
 				new CircleLayout<IVertex, IEdge>(GraphFactory.createGraph()));
+		VisualizationPanel visualizationPanel = new VisualizationPanel(
+				visualizationViewer);
 		OldIGravisMainListener mainWindowListener = new OldMainWindowListener(
 				gravisCore);
-		JFrame mainWindow = new OldGravisMainWindow("Test", graphPanel,
+		JFrame mainWindow = new OldGravisMainWindow("Test", visualizationPanel,
 				mainWindowListener);
 		// new OldGravisMainWindow(title, graphPanel, mainWindowListener);
 
-		mainWindowListener.addObserver(graphPanel);
+		mainWindowListener.addObserver(visualizationPanel);
 
 		return mainWindow;
 	}
@@ -144,18 +147,18 @@ public final class OldApplicationFactory {
 	// * @return a new instance of type OldGravisMainWindow
 	// */
 	// private static OldGravisMainWindow createGraphVisualizerMainWindow(
-	// String title, VisualizerPanel graphPanel,
+	// String title, VisualizationPanel graphPanel,
 	// OldIGravisMainListener mainWindowListener) {
 	// return
 	// }
 
 	// /**
 	// * @param layout
-	// * @return a new instance of type VisualizerPanel
+	// * @return a new instance of type VisualizationPanel
 	// */
-	// private static VisualizerPanel createGraphVisualizationPanel(
+	// private static VisualizationPanel createGraphVisualizationPanel(
 	// Layout<IVertex, IEdge> layout) {
-	// return new VisualizerPanel(null, null);
+	// return new VisualizationPanel(null, null);
 	// }
 
 	// /**
