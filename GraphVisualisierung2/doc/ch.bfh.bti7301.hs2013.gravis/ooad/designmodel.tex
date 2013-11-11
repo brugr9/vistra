@@ -6,12 +6,13 @@
 % 		    width=\textwidth,
 % 		    height=\textheight,
 % 		    angle=90,
-		    scale=0.5,
+		    scale=0.6,
 		    keepaspectratio=true
     ]{diagrams/designmodel/sm-parameter-controller.pdf}
     \caption{Parameter Controller, State Diagram}
     \label{fig:parameter-controller-sm}
 \end{figure}
+% ----------------------------------------------------------------------------
 % \newpage
 % 
 \subsection{Traversal Controller}
@@ -28,6 +29,7 @@
     \caption{Traversal Controller, State Diagram}
     \label{fig:traversal-controller-sm}
 \end{figure}
+% ----------------------------------------------------------------------------
 % \newpage
 % 
 \subsection{UC1 Import Graph}
@@ -44,17 +46,31 @@
     \label{fig:import-graph-ssd}
 \end{figure}
 % \newpage
-\begin{figure}
-    \centering
+\begin{figure}[p]% will be the left-side figure
+  \begin{leftfullpage}
     \includegraphics[
 % 		    width=\textwidth,
 % 		    height=\textheight,
 % 		    angle=90,
-		    scale=0.4,
-		    keepaspectratio=true
-	]{diagrams/designmodel/sd-import-graph.pdf}
-    \caption{UC1 Import Graph, Sequence Diagram}
-    \label{fig:import-graph-sd}
+		    scale=0.42,
+% 		    keepaspectratio=true
+	]{diagrams/designmodel/sd-import-graph-1-2.png}
+    \caption{UC1 Import Graph, Sequence Diagram 1/2}
+    \label{fig:import-graph-sd-1}
+  \end{leftfullpage}
+\end{figure}
+\begin{figure}[p]% will be the right-side figure
+  \begin{fullpage}
+    \includegraphics[
+% 		    width=\textwidth,
+% 		    height=\textheight,
+% 		    angle=90,
+		    scale=0.42,
+% 		    keepaspectratio=true
+	]{diagrams/designmodel/sd-import-graph-2-2.png}
+    \caption{UC1 Import Graph, Sequence Diagram 2/2}
+    \label{fig:import-graph-sd-2}
+  \end{fullpage}
 \end{figure}
 % \newpage
 \begin{figure}[H]
@@ -63,6 +79,7 @@
     \caption{UC1 Import Graph, Design Class Diagram}
     \label{fig:import-graph-dcd}
 \end{figure}
+% ----------------------------------------------------------------------------
 % \newpage
 % 
 \subsection{UC2 Import Algorithm}
@@ -92,6 +109,7 @@
     \caption{UC2 Import Algorithm, Design Class Diagram}
     \label{fig:import-algorithm-dcd}
 \end{figure}
+% ----------------------------------------------------------------------------
 % \newpage
 % 
 \subsection{UC3 Delete Graph}
@@ -121,6 +139,7 @@
     \caption{UC3 Delete Graph, Design Class Diagram}
     \label{fig:delete-graph-dcd}
 \end{figure}
+% ----------------------------------------------------------------------------
 % \newpage
 % 
 \subsection{UC4 Delete Algorithm}
@@ -150,6 +169,7 @@
     \caption{UC4 Delete Algorithm, Design Class Diagram}
     \label{fig:delete-algorithm-dcd}
 \end{figure}
+% ----------------------------------------------------------------------------
 % \newpage
 % 
 \subsection{UC5 Select Graph}
@@ -179,6 +199,7 @@
     \caption{UC5 Select Graph, Design Class Diagram}
     \label{fig:select-graph-dcd}
 \end{figure}
+% ----------------------------------------------------------------------------
 % \newpage
 % 
 \subsection{UC6 Select Algorithm}

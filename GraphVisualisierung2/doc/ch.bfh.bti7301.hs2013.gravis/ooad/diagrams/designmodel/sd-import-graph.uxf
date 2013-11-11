@@ -1,60 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
-  <zoom_level>2</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <type>com.umlet.element.SequenceDiagram</type>
     <coordinates>
-      <x>204</x>
-      <y>180</y>
-      <w>570</w>
-      <h>212</h>
+      <x>0</x>
+      <y>0</y>
+      <w>2150</w>
+      <h>1040</h>
     </coordinates>
     <panel_attributes>title: Import Graph
-_importGraphMenuItem:JMenuItem~id0_|_ioListener:ActionListener~id1_|_model:Model~id2_|_parameterPanel:ParameterPanel~id12_|_core:Core~id3_|_graphManager:GraphManager~id5_|_graphs:SortedSet&lt;File&gt;~id6_|_reader:GraphMLReader~id7_|_graph:Graph~id8_|_:FileUtils~id9_|_original:File~id11_|_copy:File~id10_
+_:MenuBar~id0_|_:IOListener~id1_|_:JFileChooser~id2_|_:Model~id3_|_:Control~id11_|_:Core~id5_|_:FileUtils~id6_|_:GraphManager~id7_|_:Graph~id8_|_:GraphMLReader~id9_|_:SortedSet&lt;File&gt;~id10_
 
 id0-&gt;&gt;id1:id0,id1:actionPerformed(event)
 
-id1-&gt;&gt;id11:id1,id11:new File()
-id11.&gt;id1:id1,id11:original
-
-id1-&gt;&gt;id3:id1,id3,id11:importGraph(original)
-
-id3-&gt;&gt;id9:id1,id11,id3,id9:copy(original, dir)
-id9-&gt;&gt;id11:id1,id11,id3,id9:[...]
-id11.&gt;id9:id1,id3,id9,id11:[...]
-id9-&gt;&gt;id10:id1,id3,id9,id10:new File(newPath)
-id10.&gt;id9:id1,id3,id9,id10:copy
-
-id9.&gt;id3:id1,id10,id3,id9:copy
-
-id3-&gt;&gt;id5:id1,id10,id3,id5:import(copy)
-
-id5-&gt;&gt;id8:id1,id10,id3,id5,id8:new Graph()
-id8.&gt;id5:id1,id10,id3,id5,id8:graph
-
-id5-&gt;&gt;id7:id1,id10,id3,id5,id8,id7:load(copy, graph)
-
-id5-&gt;&gt;id6:id1,id10,id3,id5,id6:add(copy)
-id6.&gt;id5:id1,id10,id3,id5,id6:ok
-
+id1-&gt;&gt;id2:id1,id2:getSelectedFile()
+id2.&gt;id1:id1,id2:original
 iframe{:if exeption
-id3-&gt;&gt;id9:id1,id10,id3,id9:delete(copy)
-id9-&gt;&gt;id10:id1,id3,id9:
-id3.&gt;id1:id1,id3:exeption
-id1-&gt;id1:id1:Msg-Pane: exeption
+id1-&gt;id1:id1:Msg exeption
 iframe}}
 
 iframe{:else
-id5-&gt;&gt;id6:id1,id10,id3,id5,id6:getGraphNames()
-id6.&gt;id5:id1,id10,id3,id5,id6:names
+id1-&gt;&gt;id5:id1,id5:importGraph(original)
+id5-&gt;&gt;id6:id1,id5,id6:copy(original, toDir)
+id6.&gt;id5:id1,id5,id6:copy
+id5-&gt;&gt;id7:id1,id5,id7:import(copy)
+id7-&gt;&gt;id8:id1,id5,id7,id8:new Graph()
+id8.&gt;id7:id1,id5,id7,id8:graph
+id7-&gt;&gt;id9:id1,id5,id7,id9:load(copy, graph)
+id7-&gt;&gt;id10:id1,id10,id5,id7,id10:add(copy)
+id10.&gt;id7:id1,id10,id5,id7,id10:ok
+id7-&gt;&gt;id10:id1,id10,id5,id7,id10:getNames()
+id10.&gt;id7:id1,id10,id5,id7,id10:names
+id7.&gt;id5:id1,id5,id7:names
 
-id5.&gt;id3:id1,id10,id3,id5:names
-id3.&gt;id1:id1,id10,id3:names
+iframe{:if exeption
+id5-&gt;&gt;id6:id1,id5,id6:delete(copy)
+id5.&gt;id1:id1,id5:exeption
+id1-&gt;id1:id1:Msg exeption
+iframe}}
 
-id1-&gt;&gt;id2:id1,id2,id10:setGraphs(names)
-id1-&gt;&gt;id2:id1,id2,id10:notifyObservers()
-id2-&gt;&gt;id12:id1,id2,id10,id12:update()
+iframe{:else
+id5.&gt;id1:id1,id5:names
+id1-&gt;&gt;id3:id1,id3:setGraphs(names)
+id1-&gt;&gt;id11:id1,id11:selectGraph(0)
+id1-&gt;id1:id1:Msg success
+iframe}}
 
-id1-&gt;id1:id1,id10:Msg-Pane: success
 iframe}}</panel_attributes>
     <additional_attributes/>
   </element>
