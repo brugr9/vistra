@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Properties;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
+
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

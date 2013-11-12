@@ -3,8 +3,8 @@ package ch.bfh.bti7301.hs2013.gravis.core;
 import java.util.List;
 import java.util.Properties;
 
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.AlgorithmFactory;
-import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithmManager;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;

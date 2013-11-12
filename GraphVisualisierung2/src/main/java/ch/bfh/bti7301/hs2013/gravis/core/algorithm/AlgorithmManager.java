@@ -3,8 +3,10 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.io.FileUtils;
+
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
-import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm.GraphType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)

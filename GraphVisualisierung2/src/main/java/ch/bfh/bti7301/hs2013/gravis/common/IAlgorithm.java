@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
+package ch.bfh.bti7301.hs2013.gravis.common;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
 
