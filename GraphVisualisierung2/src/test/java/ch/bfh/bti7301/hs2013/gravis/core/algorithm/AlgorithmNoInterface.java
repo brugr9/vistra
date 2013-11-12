@@ -21,18 +21,13 @@ public class AlgorithmNoInterface {
 		return null;
 	}
 
-<<<<<<< HEAD
-	public void execute(IRestrictedGraph graph) throws Exception {
-		// Auto-generated method stub
-
-	}
 
 	public int getId() {
 		// Auto-generated method stub
 		return 0;
-=======
-	public void execute(IImmutableGraph graph) throws Exception {
->>>>>>> branch 'master' of https://github.com/brugr9/gravis.git
+	}
+		
+	public void execute(IRestrictedGraph graph) throws Exception {
 	}
 
 	public EdgeType[] getAnnotations() {
