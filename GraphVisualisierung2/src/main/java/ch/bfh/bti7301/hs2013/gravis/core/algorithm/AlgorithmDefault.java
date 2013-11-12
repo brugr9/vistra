@@ -19,8 +19,7 @@ public class AlgorithmDefault extends AbstractAlgorithm {
 		super.setDescription("A default algorithm just implementing the interface"
 				+ "IAlgorithm. Does nothing on execute.");
 		super.setGraphTypes(new GraphType[] { GraphType.UNDIRECTED,
-				GraphType.DIRECTED, GraphType.UNWEIGHTED, GraphType.WEIGHTED,
-				GraphType.SINGLEEDGE, GraphType.MULTIEDGE });
+				GraphType.DIRECTED });
 	}
 
 }

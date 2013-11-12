@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  * <ul>
  * <li>a {@link MenuBar}
  * <li>a {@link ParameterPanel}
- * <li>a {@link VisualizerPanel}
+ * <li>a {@link VisualizationPanel}
  * <li>a {@link PlayerPanel}
  * </ul>
  * 

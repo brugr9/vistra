@@ -16,12 +16,7 @@ public interface IAlgorithm {
 	 * 
 	 */
 	public static enum GraphType {
-		//
 		UNDIRECTED, DIRECTED,
-		//
-		UNWEIGHTED, WEIGHTED,
-		//
-		SINGLEEDGE, MULTIEDGE,
 	}
 
 	/**

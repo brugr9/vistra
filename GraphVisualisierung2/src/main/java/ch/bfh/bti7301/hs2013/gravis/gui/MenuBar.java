@@ -18,8 +18,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
-
 /**
  * A menu bar.
  * 

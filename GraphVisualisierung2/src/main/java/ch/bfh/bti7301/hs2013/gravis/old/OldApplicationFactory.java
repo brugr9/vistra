@@ -75,7 +75,7 @@ public final class OldApplicationFactory {
 
 		ICore gravisCore = null;
 		try {
-			gravisCore = CoreFactory.createCore();
+			// gravisCore = CoreFactory.createCore();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

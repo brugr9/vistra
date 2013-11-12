@@ -13,7 +13,7 @@ import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class Model extends Observable {
+public final class Model extends Observable implements IModel {
 
 	// i18n
 	private String i18nBaseName;
@@ -141,7 +141,8 @@ public final class Model extends Observable {
 	 * 
 	 * @param enabled
 	 */
-	protected void setMenuEnabled(boolean enabled) {
+	@Override
+	public void setMenuEnabled(boolean enabled) {
 		// Menu
 		this.setFileEnabled(enabled);
 		this.setI18nEnabled(enabled);
@@ -169,7 +170,8 @@ public final class Model extends Observable {
 	 * 
 	 * @param enabled
 	 */
-	protected void setParameterEnabled(boolean enabled) {
+	@Override
+	public void setParameterEnabled(boolean enabled) {
 		this.setGraphsEnabled(enabled);
 		this.setAlgorithmsEnabled(enabled);
 
@@ -181,7 +183,8 @@ public final class Model extends Observable {
 	 * 
 	 * @param enabled
 	 */
-	protected void setPlayerEnabled(boolean enabled) {
+	@Override
+	public void setPlayerEnabled(boolean enabled) {
 		this.setSteplengthEnabled(enabled);
 		this.setDelayEnabled(enabled);
 		this.setPlayEnabled(enabled);
@@ -197,7 +200,8 @@ public final class Model extends Observable {
 	 * 
 	 * @param enabled
 	 */
-	protected void setStepByStepEnabled(boolean enabled) {
+	@Override
+	public void setStepByStepEnabled(boolean enabled) {
 		this.setToBeginningEnabled(enabled);
 		this.setBackwardEnabled(enabled);
 		this.setForwardEnabled(enabled);
