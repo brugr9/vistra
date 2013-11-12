@@ -15,7 +15,7 @@
 		<default>false</default>
 	</key>
 
-	<graph id="Sample Graph 2" edgedefault="directed">
+	<graph id="Sample Graph 1" edgedefault="directed">
 		 <node id="A"> 
 		</node> 
 		<node id="B"> 

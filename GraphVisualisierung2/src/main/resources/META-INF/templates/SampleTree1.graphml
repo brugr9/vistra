@@ -27,7 +27,7 @@
 		<default>directed</default>
 	</key> -->
 
-	<graph id="Sample Tree 2" edgedefault="directed">
+	<graph id="Sample Tree 1" edgedefault="directed">
 		<!-- <data key="g1">directed</data> -->
 
 		<node id="A">

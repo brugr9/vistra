@@ -205,7 +205,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			// TODO bitte dummy value auskommentieren und nicht löschen
 			return this.loadGraph(new File(
 					OldApplicationFactory.IMPORTED_GRAPHS_PATH
-							+ "SampleTree2.graphml"));
+							+ "SampleTree1.graphml"));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -315,7 +315,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 		// TODO Auto-generated method stub
 		this.storeGraph(new File(
 					OldApplicationFactory.IMPORTED_GRAPHS_PATH
-							+ "SampleTree2_out.graphml"), graph);
+							+ "SampleTree1_out.graphml"), graph);
 		return false;
 	}
 

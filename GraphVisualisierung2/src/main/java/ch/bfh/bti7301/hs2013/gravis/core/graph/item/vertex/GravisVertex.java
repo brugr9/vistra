@@ -22,12 +22,14 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	 * A field for the end status.
 	 */
 	private boolean end;
-	/**
-	 * A field for a shape.
-	 */
-	private String shape;
+	
+	private double width;
+	
+	private double height;
 	
 	private Point2D location;
+	
+	private String shape;
 
 	/**
 	 * Main constructor setting start and end to false both by default.

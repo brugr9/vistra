@@ -98,7 +98,7 @@ public class GravisVisualizationViewer extends
 
 				Transformer<IVertex, Shape> vertexSize = new Transformer<IVertex, Shape>() {
 					public Shape transform(IVertex vertex) {
-						Ellipse2D circle = new Ellipse2D.Double(-15, -15, 30,
+						Ellipse2D circle = new Ellipse2D.Double(-20, -15, 40,
 								30);
 						// if(i == 2) return AffineTransform.getScaleInstance(2,
 						// 2).createTransformedShape(circle);

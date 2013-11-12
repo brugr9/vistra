@@ -82,7 +82,7 @@ public class VisualizationPanel extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		this.visualizationViewer.update(o, arg);
 		
-		this.repaint();
+//		this.repaint();
 	}
 
 }
