@@ -9,7 +9,7 @@
       <h>740</h>
     </coordinates>
     <panel_attributes>title: Delete Graph (main success)
-_:MenuBar~id0_|_:IOListener~id1_|_:JFileChooser~id2_|_:Model~id3_|_:Control~id11_|_:Core~id5_|_:GraphManager~id7_|_:File~id6_|_:SortedSet&lt;File&gt;~id10_
+_:JMenuItem~id0_|_:IOListener~id1_|_:JFileChooser~id2_|_:Model~id3_|_:Control~id11_|_:Core~id5_|_:GraphManager~id7_|_:File~id6_|_:SortedSet&lt;File&gt;~id10_
 
 id0-&gt;&gt;id1:id0,id1:actionPerformed(event)
 

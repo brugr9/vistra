@@ -536,13 +536,12 @@ public final class Control implements IControl {
 	private final class SelectGraphListener implements ItemListener {
 
 		@Override
-		public void itemStateChanged(ItemEvent e) {
+		public void itemStateChanged(ItemEvent event) {
 			try {
 				@SuppressWarnings("unchecked")
-				JComboBox<IGravisGraph> box = (JComboBox<IGravisGraph>) e
+				JComboBox<IGravisGraph> box = (JComboBox<IGravisGraph>) event
 						.getSource();
 				int index = box.getSelectedIndex();
-				// String graphName = (String) box.getSelectedItem();
 				selectGraph(index);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(), model

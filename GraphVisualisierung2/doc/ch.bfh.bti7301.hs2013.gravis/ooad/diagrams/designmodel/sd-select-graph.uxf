@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.SequenceDiagram</type>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>1780</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>title: Select Graph
+_:JComboBox&lt;String&gt;~id0_|_:SelectGraphListener~id1_|_:Control~id2_|_:Model~id3_|_:Core~id4_|_:GraphManager~id5_|_:File~id6_|_:SortedSet&lt;File&gt;~id7_
+
+id0-&gt;&gt;id1:id0,id1:itemStateChanged(event)
+id1-&gt;&gt;id0:id0,id1:getSelectedIndex()
+id0.&gt;id1:id0,id1:index
+id1-&gt;&gt;id2:id1,id2:selectGraph(index)
+
+
+
+iframe{:if exception
+id2.&gt;id1:id1,id2:exception
+id1-&gt;id1:id1:Msg exception
+iframe}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
