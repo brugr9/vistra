@@ -96,58 +96,16 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
     \postconditions{
 	    \item Der Parameter steht dem System zur weiteren Verarbeitung zur Verf\"ugung.
 	    \item Der Parameter steht dem User in der Parameterliste zur Auswahl bereit.
-            \item Die Parameterlisten wurden auf Default-Werte gesetzt.
-	    \item Die Parameterlisten der Benutzerschnittstellen wurden aktualisiert.
-	    \item Der Graph wurde durch das System ausgew\"ahlt und im GUI dargestellt.
+            \item Der Default-Graph wurde ausgew\"ahlt.
     }
     \mainsuccess{
-	    \item Der User startet den Graph-Import.
-	    \item Der User wird dazu aufgefordert, den Pfad und den Dateinamen einer Datei anzugeben oder den Vorgang abzubrechen.
-	    \item Die angegebene Datei wird in die Dateistruktur des Systems kopiert.
-	    \item Die angegebene Datei wird durch das System auf Kompatibilit\"at gepr\"uft.
-	    \item Der zu importierte Graph wird zur Graph-Parameterliste hinzugef\"ugt.
-	    \item Der Graph wird durch das System in der Graph-Parameterliste ausgew\"ahlt (siehe \textit{UC Select Graph}, Seite~\pageref{uc:Select Graph}.
+	    \item Der User w\"ahlt \"uber die Benutzerschnittstelle das Importieren eines Graphen (import).
+	    \item Der User wird dazu aufgefordert, den Pfad und den Dateinamen einer Datei anzugeben (open) oder den Vorgang abzubrechen (abort).
+	    \item Die angegebene Datei wird in die Dateistruktur des Systems kopiert (copy).
+	    \item Die angegebene Datei wird durch das System auf Kompatibilit\"at gepr\"uft (load).
+	    \item Der importierte Graph wird zur Graph-Parameterliste hinzugef\"ugt (add).
+	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC Select Graph} Seite~\pageref{uc:Select Graph}).
     }
-%     \newpage
-%     \hline \\ [-1.3ex]
-%     \extensions{
-% 	    \item[1.a]
-% 		    \begin{enumerate}
-% 			\item Das Starten des Vorganges \textbf{schl\"agt fehl}.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[2.a]
-% 		    \begin{enumerate}
-% 			\item Der User \textbf{bricht den Vorgang ab}.
-% 		    \end{enumerate}
-% 	    \item[2.b]
-% 		    \begin{enumerate}
-% 			\item Die angegebene Datei kann \textbf{nicht gefunden} werden.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 			\item Dem User wird widerum die M\"oglichkeit gegeben, den Pfad und den Dateinamen einer Datei anzugeben oder den Vorgang abzubrechen (Rekursion).
-% 		    \end{enumerate}
-% 	    \item[3.a]
-% 		    \begin{enumerate}
-% 			\item Die angegebene Datei \textbf{kann nicht} in die Dateistruktur des Systems \textbf{kopiert werden}.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[4.a]
-% 		    \begin{enumerate}
-% 			\item Die angegebene Datei ist \textbf{nicht kompatibel}.
-% 			\item Die kopierte Datei wird aus der Dateistruktur des Systems gel\"oscht.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[5.a]
-% 		    \begin{enumerate}
-% 			\item Der Name des importierten Graphen \textbf{kann nicht zur Parameterliste hinzugef\"ugt werden}.
-% 			\item Die kopierte Datei wird aus der Dateistruktur des Systems gel\"oscht.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[6.a]
-% 		    \begin{enumerate}
-% 			\item siehe \textit{UC Select Graph}, Seite~\pageref{uc:Select Graph} resp. \textit{UC Select Algorithm}, Seite~\pageref{uc:Select Algorithm}.
-% 		    \end{enumerate}
-%     }
 \end{usecase}
 \newpage 
 % 
@@ -159,58 +117,17 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
     }
     \postconditions{
 	    \item Der Parameter steht dem System zur weiteren Verarbeitung zur Verf\"ugung.
-	    \item Die Graph-Parameterliste wurde aktualisiert.
-	    \item Die Parameterlisten wurden auf Default-Werte gesetzt.
-	    \item Die Parameterlisten der Benutzerschnittstellen wurden aktualisiert.
+	    \item Der Parameter steht dem User in der Parameterliste zur Auswahl bereit.
+            \item Der Default-Graph wurde ausgew\"ahlt.
     }
     \mainsuccess{
-	    \item Der User startet den Algorithmus-Import.
-	    \item Der User wird dazu aufgefordert, den Pfad und den Dateinamen einer Datei anzugeben oder den Vorgang abzubrechen.
-	    \item Die angegebene Datei wird in die Dateistruktur des Systems kopiert.
-	    \item Die Datei wird durch das System auf Kompatibilit\"at gepr\"uft.
-	    \item Der Name des importierten Parameters wird zur Parameterliste der entsprechenden Benutzerschnittstelle hinzugef\"ugt.
+	    \item Der User w\"ahlt \"uber die Benutzerschnittstelle das Importieren eines Algorithm (import).
+	    \item Der User wird dazu aufgefordert, den Pfad und den Dateinamen einer Datei anzugeben (open) oder den Vorgang abzubrechen (abort).
+	    \item Die angegebene Datei wird in die Dateistruktur des Systems kopiert (copy).
+	    \item Die angegebene Datei wird durch das System auf Kompatibilit\"at gepr\"uft (load).
+	    \item Der importierte Algorithmus wird zur Algorithmus-Parameterliste hinzugef\"ugt (add).
+	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC Select Graph} Seite~\pageref{uc:Select Graph}).
     }
-%     \newpage
-%     \hline \\ [-1.3ex]
-%     \extensions{
-% 	    \item[1.a]
-% 		    \begin{enumerate}
-% 			\item Das Starten des Vorganges \textbf{schl\"agt fehl}.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[2.a]
-% 		    \begin{enumerate}
-% 			\item Der User \textbf{bricht den Vorgang ab}.
-% 		    \end{enumerate}
-% 	    \item[2.b]
-% 		    \begin{enumerate}
-% 			\item Die angegebene Datei kann \textbf{nicht gefunden} werden.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 			\item Dem User wird widerum die M\"oglichkeit gegeben, den Pfad und den Dateinamen einer Datei anzugeben oder den Vorgang abzubrechen (Rekursion).
-% 		    \end{enumerate}
-% 	    \item[3.a]
-% 		    \begin{enumerate}
-% 			\item Die angegebene Datei \textbf{kann nicht} in die Dateistruktur des Systems \textbf{kopiert werden}.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[4.a]
-% 		    \begin{enumerate}
-% 			\item Die angegebene Datei ist \textbf{nicht kompatibel}.
-% 			\item Die Datei wird aus der Dateistruktur des Systems gel\"oscht.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[5.a]
-% 		    \begin{enumerate}
-% 			\item Der Name des importierten Parameters \textbf{kann nicht zur Parameterliste hinzugef\"ugt werden}.
-% 			\item Der importierte Parameter wird aus dem Arbeitsspeicher gel\"oscht.
-% 			\item Die importierte Datei wird aus der Dateistruktur des Systems gel\"oscht.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[6.a]
-% 		    \begin{enumerate}
-% 			\item siehe \textit{UC Select Graph}, Seite~\pageref{uc:Select Graph} resp. \textit{UC Select Algorithm}, Seite~\pageref{uc:Select Algorithm}.
-% 		    \end{enumerate}
-%     }
 \end{usecase}
 \newpage 
 % 
@@ -223,19 +140,15 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
     \postconditions{
 	    \item Die Datei wurde aus dem System gel\"oscht.
 	    \item Die Graph-Parameterliste wurde aktualisiert.
-	    \item Die Parameterlisten wurden auf Default-Werte gesetzt.
-	    \item Die Parameterlisten der Benutzerschnittstellen wurden aktualisiert.
+            \item Der Default-Graph wurde ausgew\"ahlt.
     }
     \mainsuccess{
-	    \item 
+	    \item Der User w\"ahlt ahlt \"uber die Benutzerschnittstelle das L\"oschen eines Graphen (delete).
+	    \item Der User wird dazu aufgefordert, den Pfad und den Dateinamen der Datei anzugeben (open) oder den Vorgang abzubrechen (abort).
+	    \item Die angegebene Datei wird aus der Dateistruktur des Systems gel\"oscht (delete).
+	    \item Der gel\"oschte Graph wird aus der Graph-Parameterliste entfernt (remove).
+	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC Select Graph} Seite~\pageref{uc:Select Graph}).
     }
-%     \hline \\ [-1.3ex]
-%     \extensions{
-% 	    \item[1.a]
-% 		    \begin{enumerate}
-% 			\item 
-% 		    \end{enumerate}
-%     }
 \end{usecase}
 \newpage 
 % 
@@ -248,19 +161,15 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
     \postconditions{
 	    \item Die Datei wurde aus dem System gel\"oscht.
 	    \item Die Algorithm-Parameterliste wurde aktualisiert.
-	    \item Die Parameterlisten wurden auf Default-Werte gesetzt.
-	    \item Die Parameterlisten der Benutzerschnittstellen wurden aktualisiert.
+            \item Der Default-Graph wurde ausgew\"ahlt.
     }
     \mainsuccess{
-	    \item 
+	    \item Der User w\"ahlt ahlt \"uber die Benutzerschnittstelle das L\"oschen eines Algorithm (delete).
+	    \item Der User wird dazu aufgefordert, den Pfad und den Dateinamen der Datei anzugeben (open) oder den Vorgang abzubrechen (abort).
+	    \item Die angegebene Datei wird aus der Dateistruktur des Systems gel\"oscht (delete).
+	    \item Der gel\"oschte Algorithm wird aus der Algorithm-Parameterliste entfernt (remove).
+	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC Select Graph} Seite~\pageref{uc:Select Graph}).
     }
-%     \hline \\ [-1.3ex]
-%     \extensions{
-% 	    \item[1.a]
-% 		    \begin{enumerate}
-% 			\item 
-% 		    \end{enumerate}
-%     }
 \end{usecase}
 \newpage 
 % 
@@ -269,47 +178,26 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
 	    Die Benutzerschnittstelle zur Wahl eines Graphen ist aktiv.
     }
     \postconditions{
-	    \item Der Graph wurde als ausgew\"ahlt markiert (\textit{selected}).
+	    \item Der Graph wurde als ausgew\"ahlt markiert.
 	    \item Der gew\"ahlte Graph steht als geladene Instanz zur weiteren Verarbeitung zur Verf\"ugung.
 	    \item Der gew\"ahlte Graph ist visualisiert.
-	    \item Die auf den Graphen anwendbaren Algorithmen wurden aktiv gesetzt (\textit{enable}).
+	    \item Die auf den Graphen anwendbaren Algorithmen wurden aktiv gesetzt.
 	    \item Die Parameterlisten der Benutzerschnittstellen wurden aktualisiert.
     }
     \mainsuccess{
-	    \item In der Parameterliste wird der gew\"ahlte Graph alsaktuell gesetzt.
-	    \item Der vormalige Graph wird im System entladen.
-	    \item Der gew\"ahlte Graph wird im System geladen.
-	    \item Die auf den Graphen anwendbaren Algorithmen werden aktiv gesetzt (\textit{enable}).
+	    \item Der vormalige Graph wird im System entladen (clear).
+	    \item Der gew\"ahlte Graph wird ins System geladen (load).
+	    \item In der Parameterliste wird der gew\"ahlte Graph als aktuell gesetzt (set selected).
+	    \item Die auf den Graphen anwendbaren Algorithm werden aktiv gesetzt (enable).
 	    \item Die Parameterlisten der Benutzerschnittstellen werden aktualisiert.
 	    \item Der aktuelle Graph wird im Visualizer dargestellt.
     }
-%     \hline \\ [-1.3ex]
-%     \extensions{
-% 	    \item[1.a]
-% 		    \begin{enumerate}
-% 			\item Das Setzen des gew\"ahlten Graphen als aktuell \textbf{schl\"agt fehl}.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[2.a]
-% 		    \begin{enumerate}
-% 			\item Der vormalige Graph kann \textbf{nicht entladen} werden.
-% 			\item In der Parameterliste wird der vormalige Graph als aktuell gesetzt.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[3.a]
-% 		    \begin{enumerate}
-% 			\item Der gew\"ahlte Graph kann \textbf{nicht geladen} werden.
-% 			\item In der Parameterliste Graph wird ein leerer Default-Wert als aktuell gesetzt.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-%     }
 \end{usecase}
 \newpage 
 % 
 \begin{usecase}{Select Algorithm}
     \preconditions{
 	    \item Die Benutzerschnittstelle zur Wahl eines Algorithm ist aktiv.
-	    \item In der Benutzerschnittstelle zur Wahl des Algorithm steht mindestens ein aktivierter Algorithm zur Auswahl zur Verf\"ugung.
     }
     \postconditions{
 	    \item Der Algorithm wurde als ausgew\"ahlt markiert (\textit{selected}).
