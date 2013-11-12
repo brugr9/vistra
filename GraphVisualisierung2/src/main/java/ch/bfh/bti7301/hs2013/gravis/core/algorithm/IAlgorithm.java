@@ -1,6 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 
 /**
  * An algorithm able to operate on a <code>Graph</code>.
@@ -45,7 +45,7 @@ public interface IAlgorithm {
 	 * @param graph
 	 * @throws Exception
 	 */
-	public abstract void execute(IImmutableGraph graph) throws Exception;
+	public abstract void execute(IRestrictedGraph graph) throws Exception;
 
 	/**
 	 * Returns the algorithm id.

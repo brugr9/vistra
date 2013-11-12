@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.graph.item;
+package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
 import javax.swing.event.ChangeListener;
 

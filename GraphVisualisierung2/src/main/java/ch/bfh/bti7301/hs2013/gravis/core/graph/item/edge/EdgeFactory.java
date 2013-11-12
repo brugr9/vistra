@@ -22,8 +22,8 @@ public class EdgeFactory implements Factory<IEdge> {
 	 * @param edge
 	 * @return IEdge
 	 */
-	public static IEdge createRestrictedGravisEdge(IEdge edge) {
-		return new RestrictedGravisEdge(edge);
+	public static IRestrictedEdge createRestrictedEdge(IEdge edge) {
+		return new RestrictedEdge(edge);
 	}
 
 }

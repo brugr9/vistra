@@ -7,41 +7,14 @@ import java.awt.Color;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IGraphItem {
+public interface IGraphItem extends IRestrictedGraphItem {
 
 	/**
 	 * 
-	 * @author Patrick Kofmel (kofmp1@bfh.ch)
-	 * 
+	 * @param result
 	 */
-	public static enum State {
-		INITIAL, ACTIVATION, VISIT, SOLUTION
-	}
-
-	/**
-	 * 
-	 * @return String id
-	 */
-	public abstract String getId();
-
-	/**
-	 * 
-	 * @return String info
-	 */
-	public abstract String getInfo();
-
-	/**
-	 * 
-	 * @return color
-	 */
-	public abstract Color getColor();
-
-	/**
-	 * 
-	 * @return name as String
-	 */
-	public abstract String getName();
-
+	public abstract void setPaintedResult(double result);
+	
 	/**
 	 * 
 	 * @param id
@@ -59,70 +32,5 @@ public interface IGraphItem {
 	 * @param color
 	 */
 	public abstract void setColor(Color color);
-
-	/**
-	 * 
-	 * @param name
-	 */
-	public abstract void setName(String name);
-
-	/**
-	 * 
-	 * @return double value
-	 */
-	public abstract double getResult();
-
-	/**
-	 * 
-	 * @param value
-	 */
-	public abstract void setResult(double value);
-
-	/**
-	 * 
-	 * @return comment
-	 */
-	public abstract String getComment();
-
-	/**
-	 * 
-	 * @param comment
-	 */
-	public abstract void setComment(String comment);
-
-	/**
-	 * @return boolean
-	 */
-	public abstract boolean isVisited();
-
-	/**
-	 * 
-	 * @param value
-	 */
-	public abstract void setVisited(boolean value);
-
-	/**
-	 * 
-	 * @param state
-	 */
-	public abstract void setState(State state);
-
-	/**
-	 * 
-	 * @return State
-	 */
-	public abstract State getState();
-
-	/**
-	 * 
-	 * @return double
-	 */
-	public abstract double getPaintedResult();
-
-	/**
-	 * 
-	 * @param result
-	 */
-	public abstract void setPaintedResult(double result);
-
+	
 }

@@ -9,9 +9,7 @@ import java.awt.Color;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public abstract class AbstractRestrictedGraphItem implements IGraphItem {
-
-	// TODO bitte an dieser Klasse nichts ändern (pk)
+public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphItem {
 
 	/**
 	 * A field for an item.
@@ -56,16 +54,6 @@ public abstract class AbstractRestrictedGraphItem implements IGraphItem {
 	@Override
 	public Color getColor() {
 		return this.item.getColor();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#getName()
-	 */
-	@Override
-	public String getName() {
-		return this.item.getName();
 	}
 
 	/*
@@ -150,90 +138,6 @@ public abstract class AbstractRestrictedGraphItem implements IGraphItem {
 	@Override
 	public void setResult(double value) {
 		this.item.setResult(value);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#setId(java.lang
-	 * .String)
-	 */
-	@Override
-	public void setId(String id) {
-		// TODO Exception handling
-		throw new UnsupportedOperationException("setId: Unsupported operation!");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#setInfo(java.
-	 * lang.String)
-	 */
-	@Override
-	public void setInfo(String info) {
-		// TODO Exception handling
-		throw new UnsupportedOperationException(
-				"setInfo: Unsupported operation!");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#setColor(java
-	 * .awt.Color)
-	 */
-	@Override
-	public void setColor(Color color) {
-		// TODO Exception handling
-		throw new UnsupportedOperationException(
-				"setColor: Unsupported operation!");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#setName(java.
-	 * lang.String)
-	 */
-	@Override
-	public void setName(String name) {
-		// TODO Exception handling
-		throw new UnsupportedOperationException(
-				"setName: Unsupported operation!");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.common.IGraphItem#setPaintedResult(double)
-	 */
-	@Override
-	public void setPaintedResult(double result) {
-		// TODO Exception handling
-		throw new UnsupportedOperationException(
-				"setPaintedResult: Unsupported operation!");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		return this.item.equals(obj);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return this.item.hashCode();
 	}
 
 	/*

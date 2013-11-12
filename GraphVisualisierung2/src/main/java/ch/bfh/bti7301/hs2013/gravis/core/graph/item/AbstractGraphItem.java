@@ -12,10 +12,9 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 public abstract class AbstractGraphItem implements IGraphItem {
 
 	private static int counter = 0;
-	
+
 	private String id;
 	private String info;
-	private String name;
 	private String comment;
 	private double result;
 	private double paintedResult;
@@ -29,7 +28,6 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	protected AbstractGraphItem() {
 		this.id = String.valueOf(counter++);
 		this.info = "";
-		this.name = "";
 		this.comment = "";
 		this.paintedResult = this.result = Double.NaN;
 		this.visited = false;
@@ -44,52 +42,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 */
 	@Override
 	public String toString() {
-		return this.getName();
+		return this.getId();
 	}
-
-	// TODO bitte an dieser Klasse nichts ändern (pk)
-	// TODO problem in method VisualizationViewer.setLayout() with equals() and
-	// hash code()
-
-	// /* (non-Javadoc)
-	// * @see java.lang.Object#hashCode()
-	// */
-	// @Override
-	// public int hashCode() {
-	// if (this.id == null || this.id.isEmpty()) {
-	// return super.hashCode();
-	// } else {
-	// return this.id.hashCode();
-	// }
-	// }
-	//
-	// /* (non-Javadoc)
-	// * @see java.lang.Object#equals(java.lang.Object)
-	// */
-	// @Override
-	// public boolean equals(Object obj) {
-	// if (this == obj) {
-	// return true;
-	// }
-	//
-	// if (obj == null) {
-	// return false;
-	// }
-	//
-	// if (this.getClass() != obj.getClass()) {
-	// return false;
-	// }
-	//
-	// AbstractGraphItem other = (AbstractGraphItem) obj;
-	//
-	// if (this.id == null || this.id.isEmpty()) {
-	// return this == obj;
-	// } else if (!this.id.equals(other.id)) {
-	// return false;
-	// }
-	//
-	// return true;
-	// }
 
 	@Override
 	public String getId() {
@@ -107,11 +61,6 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	}
 
 	@Override
-	public String getName() {
-		return this.name.isEmpty() ? this.id : this.name;
-	}
-
-	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -124,11 +73,6 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setColor(Color color) {
 		this.color = color;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Override
@@ -192,4 +136,35 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		this.paintedResult = result;
 	}
 
+	
+	
+	// TODO bitte an dieser Klasse nichts ändern (pk)
+
+	// TODO problem in method VisualizationViewer.setLayout() with equals() and
+	// hash code()
+
+	// @Override
+	// public int hashCode() {
+	// return this.id.hashCode();
+	// }
+	//
+	// /* (non-Javadoc)
+	// * @see java.lang.Object#equals(java.lang.Object)
+	// */
+	// @Override
+	// public boolean equals(Object obj) {
+	// if (this == obj)
+	// return true;
+	// if (obj == null)
+	// return false;
+	// if (getClass() != obj.getClass())
+	// return false;
+	// AbstractGraphItem other = (AbstractGraphItem) obj;
+	// if (this.id == null) {
+	// if (other.id != null)
+	// return false;
+	// } else if (!this.id.equals(other.id))
+	// return false;
+	// return true;
+	// }
 }

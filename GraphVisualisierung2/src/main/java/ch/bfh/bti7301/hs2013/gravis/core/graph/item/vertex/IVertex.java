@@ -9,36 +9,19 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IVertex extends IGraphItem {
+public interface IVertex extends IGraphItem, IRestrictedVertex {
 
 	/**
-	 * Returns <code>true</code> if this is a start.
 	 * 
-	 * @return <code>true</code> if this is a start
+	 * @param width
 	 */
-	public abstract boolean isStart();
-
+	public abstract void setWidth(double width);
+	
 	/**
-	 * Returns <code>true</code> if this is an end.
 	 * 
-	 * @return Returns <code>true</code> if this is an end.
+	 * @param height
 	 */
-	public abstract boolean isEnd();
-
-	/**
-	 * Returns the shape.
-	 * 
-	 * @return the shape
-	 */
-	public abstract String getShape();
-
-	/**
-	 * Sets the shape.
-	 * 
-	 * @param shape
-	 *            the shape to set
-	 */
-	public abstract void setShape(String shape);
+	public abstract void setHeight(double height);
 
 	/**
 	 * Sets the start.
@@ -56,11 +39,6 @@ public interface IVertex extends IGraphItem {
 	 */
 	public abstract void setEnd(boolean end);
 
-	/**
-	 * @return
-	 */
-	public abstract Point2D getLocation();
-	
 	/**
 	 * 
 	 * @param location

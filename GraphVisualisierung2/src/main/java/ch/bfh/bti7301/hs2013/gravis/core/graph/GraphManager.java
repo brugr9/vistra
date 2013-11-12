@@ -115,12 +115,11 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			Map<String, GraphMLMetadata<Graph<IVertex,IEdge>>> graphMeta = graphReader.getGraphMetadata();
 			// TODO read attribute Id from file: id
 			newGraph.setId(graphMeta.get("id").transformer.transform(newGraph));
-			// TODO read graph type from file
+			// TODO read edge type from file
 			newGraph.setEdgeType(EdgeType.DIRECTED);
 			// TODO read GraphName from graphml
 
 			for (IVertex vertex : newGraph.getVertices()) {
-				vertex.setId(vertexIds.get(vertex));
 				// TODO read attribute Ids from file: vertexColor, startVertex, vertexLocation.x, vertexLocation.y
 				// TODO read endVertex from graphml
 				vertex.setColor(ValueTransformer.transformColor(vertexMeta
@@ -130,6 +129,8 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 				vertex.setLocation(ValueTransformer.transformLocation(vertexMeta
 						.get("vertexLocation.x").transformer.transform(vertex), vertexMeta
 						.get("vertexLocation.y").transformer.transform(vertex)));
+				
+				vertex.setId(vertexIds.get(vertex));
 			}
 
 			for (IEdge edge : newGraph.getEdges()) {

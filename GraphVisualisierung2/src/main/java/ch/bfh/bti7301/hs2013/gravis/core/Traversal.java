@@ -2,7 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.core;
 
 import static ch.bfh.bti7301.hs2013.gravis.core.CoreFactory.createImmutListIterator;
 import static ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory.createGravisGraphEventListener;
-import static ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory.createImmutableGraph;
+import static ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory.createRestrictedGraph;
 import static ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory.createObservableGraph;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import javax.swing.event.ChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
@@ -128,10 +128,10 @@ class Traversal implements ITraversal {
 			IObservableGravisGraph observableGraph = createObservableGraph(this.graph);
 
 			observableGraph.addGraphEventListener(graphEventListener);
-			IImmutableGraph immutableGraph = createImmutableGraph(observableGraph);
+			IRestrictedGraph restrictedGraph = createRestrictedGraph(observableGraph);
 
 			// TODO notify IGraphItemStateChangeListener
-			this.algorithm.execute(immutableGraph);
+			this.algorithm.execute(restrictedGraph);
 
 			for (int i = commandList.size() - 1; i >= 0; i--) {
 				commandList.get(i).unExecute();

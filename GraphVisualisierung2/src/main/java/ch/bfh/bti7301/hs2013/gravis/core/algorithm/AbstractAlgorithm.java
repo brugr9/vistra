@@ -3,7 +3,7 @@
  */
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 
 /**
  * Abstract algorithm, does nothing on execute().
@@ -128,7 +128,7 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	 * #execute(edu.uci.ics.jung.graph.Graph)
 	 */
 	@Override
-	public void execute(IImmutableGraph graph) throws Exception {
+	public void execute(IRestrictedGraph graph) throws Exception {
 		// Does nothing on execute.
 	}
 

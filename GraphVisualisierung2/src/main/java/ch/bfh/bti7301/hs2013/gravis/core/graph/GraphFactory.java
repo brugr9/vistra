@@ -63,11 +63,11 @@ public final class GraphFactory {
 
 	/**
 	 * @param graph
-	 * @return a new instance of type IImmutableGraph
+	 * @return a new instance of type IRestrictedGraph
 	 */
-	public static IImmutableGraph createImmutableGraph(
+	public static IRestrictedGraph createRestrictedGraph(
 			IObservableGravisGraph graph) {
-		return new ImmutableGravisGraph(graph);
+		return new RestrictedGraph(graph);
 	}
 
 	/**
