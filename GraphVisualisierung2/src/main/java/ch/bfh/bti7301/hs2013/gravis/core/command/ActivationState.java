@@ -1,6 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
 /**

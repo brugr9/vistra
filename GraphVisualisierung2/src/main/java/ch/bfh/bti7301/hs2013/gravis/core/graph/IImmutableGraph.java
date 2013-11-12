@@ -1,8 +1,10 @@
-package ch.bfh.bti7301.hs2013.gravis.common;
+package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
 import java.util.Collection;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphItemUpdate;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
 

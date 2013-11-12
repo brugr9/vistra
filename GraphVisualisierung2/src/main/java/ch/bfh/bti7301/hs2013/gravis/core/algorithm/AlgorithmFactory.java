@@ -5,7 +5,6 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.util.FileUtil;
 
 /**

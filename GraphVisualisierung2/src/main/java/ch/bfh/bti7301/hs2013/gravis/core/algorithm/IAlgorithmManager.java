@@ -2,9 +2,8 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.core.IParameterManager;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm.GraphType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)

@@ -19,9 +19,9 @@ import javax.swing.border.TitledBorder;
 import org.apache.commons.collections15.Factory;
 import org.apache.commons.collections15.Transformer;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.PointTransformer;
