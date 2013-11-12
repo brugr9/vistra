@@ -624,6 +624,7 @@ public final class Control implements IControl {
 						.getSource();
 				int value = Integer.valueOf(textField.getText());
 				model.setSteplength(value);
+				model.notifyObservers(EventSource.SET_STEPLENGTH);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(), model
 						.getResourceBundle().getString("app.label"), 1, null);
@@ -653,6 +654,7 @@ public final class Control implements IControl {
 						.getSource();
 				int value = Integer.valueOf(textField.getText());
 				model.setDelay(value);
+				model.notifyObservers(EventSource.SET_DELAY);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(), model
 						.getResourceBundle().getString("app.label"), 1, null);

@@ -26,7 +26,7 @@ public interface IControl {
 		// IO algorithm
 		IMPORT_ALGORITHM, DELETE_ALGORITHM,
 		// player settings
-		SET_DELAY, SET_STEP,
+		SET_DELAY, SET_STEPLENGTH,
 		// player
 		GOTO_BEGINNING, BACKWARD, FORWARD, GOTO_END, PLAY, PAUSE, RESUME, STOP,
 	}
