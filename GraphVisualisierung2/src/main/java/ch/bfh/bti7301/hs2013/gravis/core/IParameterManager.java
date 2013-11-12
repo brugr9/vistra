@@ -4,7 +4,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core;
 
 import java.io.File;
-
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -76,7 +75,7 @@ public interface IParameterManager {
 	 * 
 	 * @param file
 	 *            the file to remove
-	 * @return <code>true</code> if the file was remove
+	 * @return <code>true</code> if the file was removed
 	 * @throws Exception
 	 */
 	public abstract boolean remove(File file) throws Exception;

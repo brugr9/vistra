@@ -75,6 +75,8 @@ class Core implements ICore {
 	@Override
 	public String[] importGraph(File source) throws Exception {
 
+		// as shown in sd-import-graph
+
 		// copy
 		File destinationDirectory = this.graphManager.getWorkbenchDir();
 		try {
@@ -161,6 +163,8 @@ class Core implements ICore {
 	@Override
 	public String[] importAlgorithm(File source) throws Exception {
 
+		// as shown in sd-import-algorithm
+
 		// copy
 		File destinationDirectory = this.algorithmManager.getWorkbenchDir();
 		try {
@@ -182,7 +186,7 @@ class Core implements ICore {
 		try {
 			boolean ok = this.algorithmManager.add(copy);
 			if (ok)
-				names = this.getGraphs();
+				names = this.getAlgorithms();
 			return names;
 		} catch (Exception e) {
 			FileUtils.fileDelete(pathname);
@@ -199,7 +203,8 @@ class Core implements ICore {
 	@Override
 	public String[] getAlgorithms() throws Exception {
 		try {
-			return this.algorithmManager.getNames();
+			EdgeType type = this.traversal.getGraph().getEdgeType();
+			return this.algorithmManager.getNames(type);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -296,13 +301,18 @@ class Core implements ICore {
 	 */
 	@Override
 	public String[] deleteGraph(File file) throws Exception {
+
 		try {
-			this.graphManager.deleteGraph(file);
-			this.traversal.setParameter(GraphFactory.createIGravisGraph());
-		} catch (Exception e) {
-			throw e;
+			// as shown in sd-delete-graph
+			// TODO this is a main success scenario
+			boolean ok1 = this.graphManager.remove(file);
+			boolean ok2 = file.delete();
+			String[] names = this.getGraphs();
+			return names;
+		} catch (Exception ex) {
+			throw ex;
 		}
-		return null;
+
 	}
 
 	/*
@@ -312,14 +322,18 @@ class Core implements ICore {
 	 */
 	@Override
 	public String[] deleteAlgorithm(File file) throws Exception {
+
 		try {
-			this.algorithmManager.deleteAlgorithm(file);
-			this.traversal.setParameter(this.algorithmManager
-					.getDefaultAlgorithm());
-		} catch (Exception e) {
-			throw e;
+			// as shown in sd-delete-algorithm
+			// TODO this is a main success scenario
+			boolean ok1 = this.algorithmManager.remove(file);
+			boolean ok2 = file.delete();
+			String[] names = this.getAlgorithms();
+			return names;
+		} catch (Exception ex) {
+			throw ex;
 		}
-		return null;
+
 	}
 
 	@Override
