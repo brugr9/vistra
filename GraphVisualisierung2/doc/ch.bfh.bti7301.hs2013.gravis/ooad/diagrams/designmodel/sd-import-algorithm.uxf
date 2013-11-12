@@ -6,7 +6,7 @@
       <x>0</x>
       <y>0</y>
       <w>2110</w>
-      <h>1190</h>
+      <h>1100</h>
     </coordinates>
     <panel_attributes>title: Import Algorithm
 _:MenuBar~id0_|_:IOListener~id1_|_:JFileChooser~id2_|_:Model~id3_|_:Control~id11_|_:Core~id5_|_:AlgorithmManager~id7_|_:FileUtils~id6_|_:File~id12_|_:SortedSet&lt;File&gt;~id10_
@@ -46,14 +46,11 @@ id1-&gt;id1:id1:Msg exception
 iframe}}
 
 iframe{:else
-id5-&gt;&gt;id7:id1,id5,id7:getNames()
-id7-&gt;&gt;id10:id1,id10,id5,id7,id10:getNames()
-id10.&gt;id7:id1,id10,id5,id7,id10:names
-id7.&gt;id5:id1,id5,id7:names
+id5-&gt;&gt;id5:id1,id5:names = getAlgorithms()
 
 id5.&gt;id1:id1,id5:names
 id1-&gt;&gt;id3:id1,id3:setAlgorithms(names)
-id1-&gt;&gt;id11:id1,id11:selectGraph(0)
+id1-&gt;&gt;id11:id1,id11:selectAlgorithm(0)
 id1-&gt;id1:id1:Msg import.algorithm.message
 iframe}}
 

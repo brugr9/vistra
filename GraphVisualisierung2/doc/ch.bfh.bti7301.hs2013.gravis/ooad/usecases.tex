@@ -104,7 +104,7 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
 	    \item Die angegebene Datei wird in die Dateistruktur des Systems kopiert (copy).
 	    \item Die angegebene Datei wird durch das System auf Kompatibilit\"at gepr\"uft (load).
 	    \item Der importierte Graph wird zur Graph-Parameterliste hinzugef\"ugt (add).
-	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC Select Graph} Seite~\pageref{uc:Select Graph}).
+	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC5 Select Graph} Seite~\pageref{uc:Select Graph}).
     }
 \end{usecase}
 \newpage 
@@ -126,7 +126,7 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
 	    \item Die angegebene Datei wird in die Dateistruktur des Systems kopiert (copy).
 	    \item Die angegebene Datei wird durch das System auf Kompatibilit\"at gepr\"uft (load).
 	    \item Der importierte Algorithmus wird zur Algorithmus-Parameterliste hinzugef\"ugt (add).
-	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC Select Graph} Seite~\pageref{uc:Select Graph}).
+	    \item Der Default-Algorithm wird ausgew\"ahlt (select, siehe \textit{UC6 Select Algorithm} Seite~\pageref{uc:Select Algorithm}).
     }
 \end{usecase}
 \newpage 
@@ -147,7 +147,7 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
 	    \item Der User wird dazu aufgefordert, den Pfad und den Dateinamen der Datei anzugeben (open) oder den Vorgang abzubrechen (abort).
 	    \item Die angegebene Datei wird aus der Dateistruktur des Systems gel\"oscht (delete).
 	    \item Der gel\"oschte Graph wird aus der Graph-Parameterliste entfernt (remove).
-	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC Select Graph} Seite~\pageref{uc:Select Graph}).
+	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC5 Select Graph} Seite~\pageref{uc:Select Graph}).
     }
 \end{usecase}
 \newpage 
@@ -168,7 +168,7 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
 	    \item Der User wird dazu aufgefordert, den Pfad und den Dateinamen der Datei anzugeben (open) oder den Vorgang abzubrechen (abort).
 	    \item Die angegebene Datei wird aus der Dateistruktur des Systems gel\"oscht (delete).
 	    \item Der gel\"oschte Algorithm wird aus der Algorithm-Parameterliste entfernt (remove).
-	    \item Der Default-Graph wird ausgew\"ahlt (select, siehe \textit{UC Select Graph} Seite~\pageref{uc:Select Graph}).
+	    \item Der Default-Algorithm wird ausgew\"ahlt (select, siehe \textit{UC6 Select Algorithm} Seite~\pageref{uc:Select Algorithm}).
     }
 \end{usecase}
 \newpage 
@@ -208,34 +208,11 @@ Die sechs UC \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Gr
     }
     \mainsuccess{
 	    \item In der Parameterliste wird der gew\"ahlte Algorithm als ausgew\"ahlt markiert (\textit{selected}).
-% 	    \item Der vormalige Algorithm wird im System entladen.
 	    \item Der gew\"ahlte Algorithm wird ins System geladen.
 	    \item Die Parameterliste der Benutzerschnittstelle wurde aktualisiert.
-	    \item Der User w\"ahlt zur Berechnung der Traversal evtl. einen Start-, evtl. auch einen Endknoten. % TODO seperater UC?
 	    \item Der gew\"ahlte Algorithm brechnet die Traversal.
 	    \item Der User erh\"alt eine Mitteilung, dass die Berechnung der Traversal abgeschlossen ist.
 	    \item Der User quittiert die Mitteilung.
 	    \item Die Abspielkonsole zur Steuerung der Visualisierung wird aktiviert.
     }
-%     \hline \\ [-1.3ex]
-%     \extensions{
-% 	    \item[1.a]
-% 		    \begin{enumerate}
-% 			\item Das Setzen des gew\"ahlten Algorithm als aktuell \textbf{schl\"agt fehl}.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[2.a]
-% 		    \begin{enumerate}
-% 			\item Der vormalige Algorithm kann \textbf{nicht entladen} werden.
-% 			\item In der Parameterliste wird der vormalige Algorithm als aktuell gesetzt.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-% 	    \item[3.a]
-% 		    \begin{enumerate}
-% 			\item Der gew\"ahlte Algorithm kann \textbf{nicht geladen} werden.
-% 			\item In der Parameterliste wird ein leerer Default-Wert als aktuell gesetzt.
-% 			\item Eine Fehlermeldung wird ausgegeben.
-% 		    \end{enumerate}
-%     }
 \end{usecase}
-% \newpage
