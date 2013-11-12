@@ -24,10 +24,6 @@ public class AlgorithmNoInterface {
 	public void execute(IImmutableGraph graph) throws Exception {
 	}
 
-	public int getId() {
-		return 0;
-	}
-
 	public EdgeType[] getAnnotations() {
 		return null;
 	}

@@ -41,13 +41,6 @@ public interface IAlgorithm {
 	public abstract void execute(IImmutableGraph graph) throws Exception;
 
 	/**
-	 * Returns the algorithm id.
-	 * 
-	 * @return the algorithm id
-	 */
-	public abstract int getId();
-
-	/**
 	 * @return annotations
 	 */
 	public abstract GraphType[] getGraphTypes();

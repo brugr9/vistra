@@ -65,8 +65,6 @@ public class ViewMinimal extends JFrame implements IView {
 	public ViewMinimal(Model model, Control control, int width, int height)
 			throws Exception {
 		super();
-		// TODO
-		// super(model.getResourceBundle().getString("app.label"));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Components
@@ -96,6 +94,7 @@ public class ViewMinimal extends JFrame implements IView {
 
 		// let's go ...
 		control.init();
+		super.setTitle(model.getResourceBundle().getString("app.label"));
 		this.setVisible(true);
 	}
 }

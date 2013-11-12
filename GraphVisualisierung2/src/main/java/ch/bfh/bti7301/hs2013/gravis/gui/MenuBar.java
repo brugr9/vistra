@@ -18,6 +18,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
+
 /**
  * A menu bar.
  * 
@@ -163,6 +165,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
+
 		if (o instanceof Model) {
 
 			Model m = (Model) o;
@@ -170,37 +173,36 @@ public final class MenuBar extends JMenuBar implements Observer {
 
 			try {
 
-				// TODO arg
-				// if (arg == EventSource.I18N)
+				if (arg == EventSource.I18N) {
 
-				{// JMenu fileMenu
-					// setText
-					this.fileMenu.setText(b.getString("file.label"));
-					this.importAlgorithmMenuItem.setText(b
-							.getString("importAlgorithm.label"));
-					this.deleteAlgorithmMenuItem.setText(b
-							.getString("deleteAlgorithm.label"));
-					this.importGraphMenuItem.setText(b
-							.getString("importGraph.label"));
-					this.deleteGraphMenuItem.setText(b
-							.getString("deleteGraph.label"));
-					this.quitMenuItem.setText(b.getString("quit.label"));
-					// setMnemonic
-					this.fileMenu.setMnemonic(b.getString("file.mnemonic")
-							.toCharArray()[0]);
-					this.quitMenuItem.setMnemonic(b.getString("quit.mnemonic")
-							.toCharArray()[0]);
-					// setAccelerator
-					this.quitMenuItem.setAccelerator(KeyStroke.getKeyStroke(b
-							.getString("quit.accelerator")));
-				}
-				{// JMenu i18nMenu
-					// setText
-					this.i18nMenu.setText(b.getString("i18n.label"));
-					// setMnemonic
-					this.i18nMenu.setMnemonic(b.getString("i18n.mnemonic")
-							.toCharArray()[0]);
+					{// JMenu fileMenu
+						// setText
+						this.fileMenu.setText(b.getString("file.label"));
+						this.importAlgorithmMenuItem.setText(b
+								.getString("importAlgorithm.label"));
+						this.deleteAlgorithmMenuItem.setText(b
+								.getString("deleteAlgorithm.label"));
+						this.importGraphMenuItem.setText(b
+								.getString("importGraph.label"));
+						this.deleteGraphMenuItem.setText(b
+								.getString("deleteGraph.label"));
+						this.quitMenuItem.setText(b.getString("quit.label"));
+						// setMnemonic
+						this.fileMenu.setMnemonic(b.getString("file.mnemonic")
+								.toCharArray()[0]);
+						this.quitMenuItem.setMnemonic(b.getString(
+								"quit.mnemonic").toCharArray()[0]);
+						// setAccelerator
+						this.quitMenuItem.setAccelerator(KeyStroke
+								.getKeyStroke(b.getString("quit.accelerator")));
+					}
 					{// JMenu i18nMenu
+						// setText
+						this.i18nMenu.setText(b.getString("i18n.label"));
+						// setMnemonic
+						this.i18nMenu.setMnemonic(b.getString("i18n.mnemonic")
+								.toCharArray()[0]);
+						// JMenu i18nMenu
 						// setText
 						this.deDEMenuItem.setText(b.getString("deDE.label"));
 						this.frFRMenuItem.setText(b.getString("frFR.label"));
@@ -213,29 +215,28 @@ public final class MenuBar extends JMenuBar implements Observer {
 						this.deDEMenuItem.setMnemonic(b.getString(
 								"enUS.mnemonic").toCharArray()[0]);
 					}
-				}
-				{// JMenu infoMenu
-					// setText
-					this.infoMenu.setText(b.getString("info.label"));
-					this.helpMenuItem.setText(b.getString("help.label"));
-					this.aboutMenuItem.setText(b.getString("about.label"));
-					// setMnemonic
-					this.infoMenu.setMnemonic(b.getString("info.mnemonic")
-							.toCharArray()[0]);
-					this.helpMenuItem.setMnemonic(b.getString("help.mnemonic")
-							.toCharArray()[0]);
-					this.aboutMenuItem.setMnemonic(b
-							.getString("about.mnemonic").toCharArray()[0]);
-					// setAccelerator
-					this.helpMenuItem.setAccelerator(KeyStroke.getKeyStroke(b
-							.getString("help.accelerator")));
-					this.aboutMenuItem.setAccelerator(KeyStroke.getKeyStroke(b
-							.getString("about.accelerator")));
-				}
+					{// JMenu infoMenu
+						// setText
+						this.infoMenu.setText(b.getString("info.label"));
+						this.helpMenuItem.setText(b.getString("help.label"));
+						this.aboutMenuItem.setText(b.getString("about.label"));
+						// setMnemonic
+						this.infoMenu.setMnemonic(b.getString("info.mnemonic")
+								.toCharArray()[0]);
+						this.helpMenuItem.setMnemonic(b.getString(
+								"help.mnemonic").toCharArray()[0]);
+						this.aboutMenuItem.setMnemonic(b.getString(
+								"about.mnemonic").toCharArray()[0]);
+						// setAccelerator
+						this.helpMenuItem.setAccelerator(KeyStroke
+								.getKeyStroke(b.getString("help.accelerator")));
+						this.aboutMenuItem
+								.setAccelerator(KeyStroke.getKeyStroke(b
+										.getString("about.accelerator")));
+					}
 
-				// TODO arg
-				// if (arg == ...)
-				{
+				} else {
+
 					this.fileMenu.setEnabled(m.isFileEnabled());
 					this.importAlgorithmMenuItem.setEnabled(m
 							.isImportAlgorithmEnabled());
@@ -253,6 +254,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 					this.infoMenu.setEnabled(m.isInfoEnabled());
 					this.helpMenuItem.setEnabled(m.isHelpEnabled());
 					this.aboutMenuItem.setEnabled(m.isAboutEnabled());
+
 				}
 
 			} catch (Exception e) {
@@ -260,6 +262,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 						b.getString("app.label"), 1, null);
 				e.printStackTrace();
 			}
+
 		}
+
 	}
 }

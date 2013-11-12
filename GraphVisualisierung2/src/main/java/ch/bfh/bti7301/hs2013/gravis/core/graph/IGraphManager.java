@@ -28,34 +28,16 @@ public interface IGraphManager extends IParameterManager {
 	 * @return the names of available graphs
 	 * @throws Exception
 	 */
-	public abstract String[] importGraph(File file) throws Exception;
+	public abstract boolean addGraph(File file) throws Exception;
 
 	/**
-	 * Removes the graph with the given id from the application and returns a
-	 * new empty graph.
+	 * Clears a graph as given by index and returns the empty graph.
 	 * 
 	 * @param index
 	 * @return IGravisGraph
 	 * @throws Exception
 	 */
 	public abstract IGravisGraph clearGraph(int index) throws Exception;
-
-	/**
-	 * 
-	 * @param index
-	 * @param destinationDir
-	 * @throws Exception
-	 */
-	public abstract void exportGraph(int index, File destinationDir)
-			throws Exception;
-
-	/**
-	 * 
-	 * @param graph
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public abstract boolean saveGraph(IGravisGraph graph) throws Exception;
 
 	/**
 	 * 

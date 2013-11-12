@@ -66,16 +66,6 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 		return this.description;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getId()
-	 */
-	@Override
-	public final int getId() {
-		return this.id;
-	}
-
 	@Override
 	public final GraphType[] getGraphTypes() {
 		return this.graphtypes;

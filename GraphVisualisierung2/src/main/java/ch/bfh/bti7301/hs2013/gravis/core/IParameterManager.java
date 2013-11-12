@@ -43,15 +43,14 @@ public interface IParameterManager {
 	public abstract String[] getNames() throws Exception;
 
 	/**
-	 * Checks, if the file can be loaded, then adds the file to the parameter
-	 * list and returns an array over the names in the parameter list.
+	 * Adds the file to the parameter list.
 	 * 
 	 * @param file
 	 *            the file to add
 	 * @return the names of available parameters
 	 * @throws Exception
 	 */
-	public abstract String[] add(File file) throws Exception;
+	public abstract boolean add(File file) throws Exception;
 
 	/**
 	 * Adds a bunch of files.
@@ -73,11 +72,11 @@ public interface IParameterManager {
 	public abstract File getFile(int index) throws Exception;
 
 	/**
-	 * Deletes a file.
+	 * Removes a file.
 	 * 
 	 * @param file
-	 *            the file to delete
-	 * @return <code>true</code> if the file was deleted
+	 *            the file to remove
+	 * @return <code>true</code> if the file was remove
 	 * @throws Exception
 	 */
 	public abstract boolean remove(File file) throws Exception;

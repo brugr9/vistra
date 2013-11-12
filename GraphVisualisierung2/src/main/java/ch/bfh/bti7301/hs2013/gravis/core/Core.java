@@ -47,11 +47,6 @@ class Core implements ICore {
 		this.iteratorManager = iteratorManager;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#setGraph(int)
-	 */
 	@Override
 	public Graph<IVertex, IEdge> selectGraph(int index) throws Exception {
 		try {
@@ -77,17 +72,35 @@ class Core implements ICore {
 	 */
 	@Override
 	public String[] importGraph(File source) throws Exception {
+
+		// copy
+		File destinationDirectory = this.graphManager.getWorkbenchDir();
 		try {
-			File destinationDirectory = this.graphManager.getWorkbenchDir();
 			FileUtils.copyFileToDirectory(source, destinationDirectory);
-			String pathname = destinationDirectory.getPath() + File.separator
-					+ source.getName();
-			File copy = new File(pathname);
-			String[] names = this.graphManager.add(copy);
-			return names;
 		} catch (Exception e) {
 			throw e;
 		}
+		String pathname = destinationDirectory.getPath() + File.separator
+				+ source.getName();
+		File copy = null;
+		try {
+			copy = new File(pathname);
+		} catch (Exception e) {
+			throw e;
+		}
+
+		// names
+		String[] names = null;
+		try {
+			boolean ok = this.graphManager.add(copy);
+			if (ok)
+				names = this.getGraphs();
+			return names;
+		} catch (Exception e) {
+			FileUtils.fileDelete(pathname);
+			throw e;
+		}
+
 	}
 
 	@Override
@@ -103,37 +116,6 @@ class Core implements ICore {
 			graph = this.graphManager.clearGraph(index);
 			this.traversal.setParameter(graph);
 			return graph;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#saveGraph(int)
-	 */
-	@Override
-	public boolean saveGraph() throws Exception {
-		try {
-			IGravisGraph graph = this.traversal.getGraph();
-			return this.graphManager.saveGraph(graph);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#exportGraph(int)
-	 */
-	@Override
-	public boolean exportGraph(File source, File destinationDirectory)
-			throws Exception {
-		try {
-			FileUtils.copyFileToDirectory(source, destinationDirectory);
-			return true;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -182,7 +164,9 @@ class Core implements ICore {
 			String pathname = destinationDirectory.getPath() + File.separator
 					+ source.getName();
 			File copy = new File(pathname);
-			String[] names = this.algorithmManager.add(copy);
+			String[] names = null;
+			if (this.algorithmManager.add(copy))
+				names = this.algorithmManager.getNames();
 			return names;
 		} catch (Exception e) {
 			throw e;

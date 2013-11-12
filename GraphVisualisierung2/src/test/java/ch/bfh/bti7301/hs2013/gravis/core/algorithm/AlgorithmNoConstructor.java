@@ -33,11 +33,6 @@ public class AlgorithmNoConstructor implements IAlgorithm {
 	}
 
 	@Override
-	public int getId() {
-		return 0;
-	}
-
-	@Override
 	public GraphType[] getGraphTypes() {
 		return null;
 	}

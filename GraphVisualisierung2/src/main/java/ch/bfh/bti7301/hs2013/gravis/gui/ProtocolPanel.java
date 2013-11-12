@@ -14,6 +14,8 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
+
 /**
  * A protocol panel.
  * 
@@ -76,14 +78,15 @@ public final class ProtocolPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				// TODO arg
-				// if (arg == ...)
-				this.protocolPanelBorder
-						.setTitle(b.getString("protocol.label"));
-				this.protocolTextArea.setText(m.getProtocol());
-				this.protocolTextArea.setCaretPosition(this.protocolTextArea
-						.getDocument().getLength());
-
+				if (arg == EventSource.I18N)
+					this.protocolPanelBorder.setTitle(b
+							.getString("protocol.label"));
+				else {
+					this.protocolTextArea.setText(m.getProtocol());
+					this.protocolTextArea
+							.setCaretPosition(this.protocolTextArea
+									.getDocument().getLength());
+				}
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),
 						b.getString("app.label"), 1, null);

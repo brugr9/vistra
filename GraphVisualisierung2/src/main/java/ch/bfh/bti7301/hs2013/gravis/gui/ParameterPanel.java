@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
+
 /**
  * A parameter panel.
  * 
@@ -111,24 +113,24 @@ public final class ParameterPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				// TODO arg
-				// if (arg == EventSource.I18N)
-				this.settingsPanelBorder
-						.setTitle(b.getString("settings.label"));
-				// label
-				this.graphLabel.setText(b.getString("graph.label"));
-				this.algorithmLabel.setText(b.getString("algorithm.label"));
-				// combo
-				this.graphComboModel = new DefaultComboBoxModel<String>(
-						m.getGraphs());
-				this.algorithmComboModel = new DefaultComboBoxModel<String>(
-						m.getAlgorithms());
 
-				this.graphCombo.setSelectedIndex(m.getSelectedGraph());
-				this.algorithmCombo.setSelectedIndex(m.getSelectedAlgorithm());
-
-				this.graphCombo.setEnabled(m.isGraphsEnabled());
-				this.algorithmCombo.setEnabled(m.isAlgorithmsEnabled());
+				if (arg == EventSource.I18N) {
+					this.settingsPanelBorder.setTitle(b
+							.getString("settings.label"));
+					this.graphLabel.setText(b.getString("graph.label"));
+					this.algorithmLabel.setText(b.getString("algorithm.label"));
+				} else {
+					// combo
+					this.graphComboModel = new DefaultComboBoxModel<String>(
+							m.getGraphs());
+					this.algorithmComboModel = new DefaultComboBoxModel<String>(
+							m.getAlgorithms());
+					this.graphCombo.setSelectedIndex(m.getSelectedGraph());
+					this.algorithmCombo.setSelectedIndex(m
+							.getSelectedAlgorithm());
+					this.graphCombo.setEnabled(m.isGraphsEnabled());
+					this.algorithmCombo.setEnabled(m.isAlgorithmsEnabled());
+				}
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

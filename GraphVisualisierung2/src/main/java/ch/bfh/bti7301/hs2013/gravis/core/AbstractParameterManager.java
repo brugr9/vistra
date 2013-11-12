@@ -25,14 +25,14 @@ public class AbstractParameterManager implements IParameterManager {
 	private final File workbenchDir;
 
 	/**
-	 * A field for a parameter map.
-	 */
-	private ArrayList<File> parameters;
-
-	/**
 	 * A field for a filename extension filter.
 	 */
 	private final FileNameExtensionFilter filter;
+
+	/**
+	 * A field for a parameter map.
+	 */
+	private ArrayList<File> parameters;
 
 	/**
 	 * Main constructor.
@@ -66,9 +66,8 @@ public class AbstractParameterManager implements IParameterManager {
 	}
 
 	@Override
-	public String[] add(File file) throws Exception {
-		this.parameters.add(file);
-		return this.getNames();
+	public boolean add(File file) throws Exception {
+		return this.parameters.add(file);
 	}
 
 	@Override

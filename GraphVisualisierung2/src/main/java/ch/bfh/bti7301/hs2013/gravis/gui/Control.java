@@ -127,6 +127,7 @@ public final class Control implements IControl {
 		try {
 			this.model.setGraphs(this.core.getGraphs());
 			this.model.setAlgorithms(this.core.getAlgorithms());
+			this.model.setPauseEvent(EventSource.PAUSE);
 			this.i18nListener.actionPerformed(null);
 			this.appendProtocol(this.model.getResourceBundle().getString(
 					"about.message")
@@ -315,10 +316,10 @@ public final class Control implements IControl {
 	private void selectAlgorithm(int index) throws Exception {
 
 		try {
-			
+
 			this.model.setSelectedAlgorithm(index);
 			this.model.setProgress(0);
-			
+
 			if (index == 0) {
 				this.model.setProgressMaximum(0);
 				this.model.setPlayerEnabled(false);
@@ -381,7 +382,7 @@ public final class Control implements IControl {
 				ResourceBundle b = ResourceBundle.getBundle(
 						model.getI18nBaseName(), locale);
 				model.setResourceBundle(b);
-				model.notifyObservers();
+				model.notifyObservers(EventSource.I18N);
 
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(), model

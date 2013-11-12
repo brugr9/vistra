@@ -25,6 +25,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
+
 /**
  * A player panel.
  * 
@@ -216,41 +218,42 @@ public final class PlayerPanel extends JPanel implements Observer {
 
 			try {
 
-				// TODO arg
-				// if (arg == EventSource.I18N)
-				this.playerPanelBorder.setTitle(b.getString("player.label"));
+				if (arg == EventSource.I18N) {
+					this.playerPanelBorder
+							.setTitle(b.getString("player.label"));
+					this.steplengthLabel.setText(b.getString("setStep.label"));
+					this.delayLabel.setText(b.getString("setDelay.label"));
+					this.progressLabel.setText(b.getString("progress.label"));
+					//
+					this.playButton.setText(b.getString("play.label"));
+					// this.pauseButton.setText(b.getString("pause.label"));
+					this.stopButton.setText(b.getString("stop.label"));
+					this.toBeginningButton.setText(b.getString("home.label"));
+					this.backwardButton.setText(b.getString("backward.label"));
+					this.forwardButton.setText(b.getString("forward.label"));
+					this.toEndButton.setText(b.getString("end.label"));
 
-				// spinner
-				this.steplengthLabel.setText(b.getString("setStep.label"));
-				this.delayLabel.setText(b.getString("setDelay.label"));
-				this.steplengthSpinner.setValue(m.getSteplength());
-				this.delaySpinner.setValue(m.getDelay());
-				this.steplengthSpinner.setEnabled(m.isSteplengthEnabled());
-				this.delaySpinner.setEnabled(m.isDelayEnabled());
+				} else {
 
-				// progressbar
-				this.progressLabel.setText(b.getString("progress.label"));
-				this.progressBar.setMaximum(m.getProgressMaximum());
-				this.progressBar.setValue(m.getProgress());
+					this.steplengthSpinner.setValue(m.getSteplength());
+					this.delaySpinner.setValue(m.getDelay());
+					this.progressBar.setMaximum(m.getProgressMaximum());
+					this.progressBar.setValue(m.getProgress());
 
-				// buttons
-				this.playButton.setText(b.getString("play.label"));
-				this.pauseButton.setText(b.getString("pause.label"));
-				this.stopButton.setText(b.getString("stop.label"));
-				this.toBeginningButton.setText(b.getString("home.label"));
-				this.backwardButton.setText(b.getString("backward.label"));
-				this.forwardButton.setText(b.getString("forward.label"));
-				this.toEndButton.setText(b.getString("end.label"));
+					this.steplengthSpinner.setEnabled(m.isSteplengthEnabled());
+					this.delaySpinner.setEnabled(m.isDelayEnabled());
+					this.playButton.setEnabled(m.isPlayEnabled());
+					this.pauseButton.setEnabled(m.isPauseEnabled());
+					this.stopButton.setEnabled(m.isStopEnabled());
+					this.toBeginningButton.setEnabled(m.isToBeginningEnabled());
+					this.backwardButton.setEnabled(m.isBackwardEnabled());
+					this.forwardButton.setEnabled(m.isForwardEnabled());
+					this.toEndButton.setEnabled(m.isToEndEnabled());
 
+				}
+				//
 				this.pauseButton.setActionCommand(m.getPauseEvent().toString());
-
-				this.playButton.setEnabled(m.isPlayEnabled());
-				this.pauseButton.setEnabled(m.isPauseEnabled());
-				this.stopButton.setEnabled(m.isStopEnabled());
-				this.toBeginningButton.setEnabled(m.isToBeginningEnabled());
-				this.backwardButton.setEnabled(m.isBackwardEnabled());
-				this.forwardButton.setEnabled(m.isForwardEnabled());
-				this.toEndButton.setEnabled(m.isToEndEnabled());
+				this.pauseButton.setText(b.getString("pause.label"));
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

@@ -2,6 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -35,8 +36,12 @@ class AlgorithmManager extends AbstractParameterManager implements
 		super(templatesDir, workbenchDir, filter);
 		try {
 			// TODO validation?
-			super.putAll(templatesDir.listFiles());
-			super.putAll(workbenchDir.listFiles());
+			for (File file : templatesDir.listFiles()) {
+				super.add(file);
+			}
+			for (File file : workbenchDir.listFiles()) {
+				super.add(file);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -20,10 +20,8 @@ import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.util.ValueTransformer;
-import ch.bfh.bti7301.hs2013.gravis.old.OldApplicationFactory;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.Hypergraph;
-import edu.uci.ics.jung.graph.SparseGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.GraphMLMetadata;
 import edu.uci.ics.jung.io.GraphMLReader;
@@ -51,8 +49,12 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 		super(templatesDir, workbenchDir, filter);
 		try {
 			// TODO validation?
-			super.putAll(templatesDir.listFiles());
-			super.putAll(workbenchDir.listFiles());
+			for (File file : templatesDir.listFiles()) {
+				super.add(file);
+			}
+			for (File file : workbenchDir.listFiles()) {
+				super.add(file);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,15 +65,13 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	 * @param file
 	 * @return IGravisGraph
 	 */
-	private IGravisGraph loadGraph(final File file) throws Exception {
-
-		// TODO bitte an dieser Methode nichts ändern (pk)
+	private IGravisGraph load(final File file) throws Exception {
 
 		// TODO validate file against xsd of graphml
 
 		try {
 			IGravisGraph newGraph = null;
-			newGraph = this.loadGraph(file,
+			newGraph = this.read(file,
 					new GraphMLReader<Graph<IVertex, IEdge>, IVertex, IEdge>(
 							new VertexFactory(), new EdgeFactory()));
 			return newGraph;
@@ -92,12 +92,10 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	 * @throws IOException
 	 * @throws Exception
 	 */
-	private IGravisGraph loadGraph(
+	private IGravisGraph read(
 			final File file,
 			final GraphMLReader<Graph<IVertex, IEdge>, IVertex, IEdge> graphReader)
 			throws IOException, Exception {
-
-		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		try {
 			IGravisGraph newGraph = GraphFactory.createIGravisGraph();
@@ -155,8 +153,6 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	 * @param file
 	 */
 	private void storeGraph(File file, IGravisGraph graph) {
-		// TODO bitte an dieser Methode nichts ändern (pk)
-
 		// TODO write GraphName from graphml
 		// TODO write GraphType from graphml: <graph id="Sample Graph 1"
 		// edgedefault="directed">
@@ -201,7 +197,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	public IGravisGraph getGraph(int index) throws Exception {
 		try {
 			File file = super.getFile(index);
-			return this.loadGraph(file);
+			return this.load(file);
 			// TODO bitte dummy value auskommentieren und nicht löschen
 			// return this.loadGraph(new File(
 			// OldApplicationFactory.IMPORTED_GRAPHS_PATH
@@ -219,15 +215,13 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	 * .lang.String)
 	 */
 	@Override
-	public String[] importGraph(File file) throws Exception {
+	public boolean addGraph(File file) throws Exception {
 		try {
-			this.loadGraph(file);
-			super.add(file);
-			return super.getNames();
+			this.load(file);
+			return super.add(file);
 		} catch (Exception e) {
 			throw e;
 		}
-
 	}
 
 	/*
@@ -239,17 +233,10 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	@Override
 	public IGravisGraph clearGraph(int index) throws Exception {
 		try {
-			IGravisGraph graph = this.loadGraph(super.getFile(index));
+			File file = super.getFile(index);
+			IGravisGraph graph = this.load(file);
 			graph.clear();
 			return graph;
-
-			// File file = super.getFile(index);
-			// if (super.delete(file)) {
-			// // TODO update graph-lists
-			// // TODO load graph and clear
-			// return GraphFactory.createIGravisGraph();
-			// } else
-			// return null;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -272,25 +259,6 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			throw e;
 		}
 
-	}
-
-	@Override
-	public void exportGraph(int index, File destinationDir) throws Exception {
-		try {
-			FileUtils.copyFileToDirectory(super.getFile(index), destinationDir);
-		} catch (IOException e) {
-			throw e;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	@Override
-	public boolean saveGraph(IGravisGraph graph) throws Exception {
-		// TODO Auto-generated method stub
-		this.storeGraph(new File(OldApplicationFactory.IMPORTED_GRAPHS_PATH
-				+ "SampleTree2_out.graphml"), graph);
-		return false;
 	}
 
 }

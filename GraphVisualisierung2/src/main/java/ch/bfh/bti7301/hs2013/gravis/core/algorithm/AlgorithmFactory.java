@@ -40,9 +40,6 @@ public final class AlgorithmFactory {
 							p.getProperty("suffix.algorithm.binary"),
 							p.getProperty("suffix.algorithm.archive") });
 			return new AlgorithmManager(templatesDir, workbenchDir, filter);
-
-			// TODO activate properties
-			// return new AlgorithmManager(null, null, null);
 		} catch (Exception e) {
 			throw e;
 		}

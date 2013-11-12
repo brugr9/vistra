@@ -52,24 +52,6 @@ public interface ICore {
 	public abstract String[] deleteGraph(File file) throws Exception;
 
 	/**
-	 * Saves the current graph.
-	 * 
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public abstract boolean saveGraph() throws Exception;
-
-	/**
-	 * 
-	 * @param source
-	 * @param destinationDirectory
-	 * @return <code>true<code> if success
-	 * @throws Exception
-	 */
-	public abstract boolean exportGraph(File source, File destinationDirectory)
-			throws Exception;
-
-	/**
 	 * Returns the names of available graphs.
 	 * 
 	 * @return the names of available graphs
