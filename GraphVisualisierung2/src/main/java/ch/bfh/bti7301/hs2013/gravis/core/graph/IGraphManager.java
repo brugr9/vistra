@@ -47,4 +47,9 @@ public interface IGraphManager extends IParameterManager {
 	 */
 	public abstract String[] deleteGraph(File file) throws Exception;
 
+	/**
+	 * @param graph
+	 */
+	public abstract void saveGraph(IGravisGraph graph);
+
 }

@@ -336,4 +336,18 @@ class Core implements ICore {
 		return this.algorithmManager.getFilter();
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#saveGraph()
+	 */
+	@Override
+	public void saveGraph() {
+		try {
+			IGravisGraph graph = this.traversal.getGraph();
+			this.graphManager.saveGraph(graph);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+
 }

@@ -190,4 +190,7 @@ public interface ICore {
 	 */
 	void executeTraverser(ChangeListener listener) throws Exception;
 
+	
+	public abstract void saveGraph();
+
 }

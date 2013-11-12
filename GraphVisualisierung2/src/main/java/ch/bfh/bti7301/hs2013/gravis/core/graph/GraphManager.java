@@ -258,4 +258,14 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager#saveGraph(ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph)
+	 */
+	@Override
+	public void saveGraph(IGravisGraph graph) {
+		// TODO bitte diesen code nur auskommentieren und nicht löschen
+				this.write(new File(
+							"src/main/resources/META-INF/templates/SampleTree1_out.graphml"), graph);
+	}
+
 }
