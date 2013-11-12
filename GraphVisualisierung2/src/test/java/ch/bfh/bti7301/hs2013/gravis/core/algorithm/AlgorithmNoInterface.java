@@ -14,27 +14,21 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public class AlgorithmNoInterface {
 
 	public String getName() {
-		// Auto-generated method stub
 		return null;
 	}
 
 	public String getDescription() {
-		// Auto-generated method stub
 		return null;
 	}
 
 	public void execute(IImmutableGraph graph) throws Exception {
-		// Auto-generated method stub
-
 	}
 
 	public int getId() {
-		// Auto-generated method stub
 		return 0;
 	}
 
 	public EdgeType[] getAnnotations() {
-		// Auto-generated method stub
 		return null;
 	}
 

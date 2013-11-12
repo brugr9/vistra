@@ -1,5 +1,9 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.common.IImmutableGraph;
 
@@ -19,34 +23,34 @@ public class AlgorithmEvil implements IAlgorithm {
 	public AlgorithmEvil() {
 	}
 
+	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public void execute(IImmutableGraph graph) throws Exception {
 		try {
 			// TODO behave evil
-			// graph.getClass().getClassLoader().getParent())
-
+			// FileUtils.deleteQuietly(graph);
 		} catch (Exception e) {
 			throw e;
 		}
 
 	}
 
+	@Override
 	public int getId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
 	public GraphType[] getGraphTypes() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

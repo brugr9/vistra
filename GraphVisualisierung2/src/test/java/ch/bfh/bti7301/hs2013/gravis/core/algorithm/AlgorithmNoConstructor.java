@@ -18,28 +18,27 @@ public class AlgorithmNoConstructor implements IAlgorithm {
 	private AlgorithmNoConstructor() {
 	}
 
+	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public void execute(IImmutableGraph graph) throws Exception {
-		// TODO Auto-generated method stub
-
 	}
 
+	@Override
 	public int getId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
 	public GraphType[] getGraphTypes() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
