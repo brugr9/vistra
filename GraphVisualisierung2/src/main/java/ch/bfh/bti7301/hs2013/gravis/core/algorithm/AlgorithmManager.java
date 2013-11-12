@@ -43,15 +43,27 @@ class AlgorithmManager extends AbstractParameterManager implements
 	}
 
 	@Override
-	public boolean importAlgorithm(File file) throws Exception {
+	public boolean addAlgorithm(File file) throws Exception {
+		try {
+			try {
+				this.load(file);
+				return super.add(file);
+			} catch (Exception e) {
+				throw e;
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * 
+	 * @param file
+	 * @throws Exception
+	 */
+	private void load(File file) throws Exception {
 		try {
 			AlgorithmFactory.createAlgorithm(file);
-			super.add(file);
-			return true;
-			// TODO remove 'fakes'
-			// return new AlgorithmDFSRecursive();
-			// return new AlgorithmDLSRecursive();
-			// return new AlgorithmDijkstra();
 		} catch (Exception e) {
 			throw e;
 		}

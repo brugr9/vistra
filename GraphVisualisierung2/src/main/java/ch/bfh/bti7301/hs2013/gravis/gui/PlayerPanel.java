@@ -128,13 +128,13 @@ public final class PlayerPanel extends JPanel implements Observer {
 		this.steplengthSpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
 		this.steplengthSpinner = new JSpinner(this.steplengthSpinnerNumberModel);
 		((JSpinner.NumberEditor) this.steplengthSpinner.getEditor())
-				.getTextField().addFocusListener(control.steplengthListener);
+				.getTextField().addFocusListener(control.setSteplengthListener);
 
 		this.delayLabel = new JLabel("delayLabel");
 		this.delaySpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
 		this.delaySpinner = new JSpinner(this.delaySpinnerNumberModel);
 		((JSpinner.NumberEditor) this.delaySpinner.getEditor()).getTextField()
-				.addFocusListener(control.delaySettingsListener);
+				.addFocusListener(control.setDelayListener);
 
 		this.progressLabel = new JLabel("progressLabel");
 

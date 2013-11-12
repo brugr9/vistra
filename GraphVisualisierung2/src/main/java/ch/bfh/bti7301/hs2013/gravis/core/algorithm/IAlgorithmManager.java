@@ -29,7 +29,7 @@ public interface IAlgorithmManager extends IParameterManager {
 	 * @return <code>true<code> if imported
 	 * @throws Exception
 	 */
-	public abstract boolean importAlgorithm(File file) throws Exception;
+	public abstract boolean addAlgorithm(File file) throws Exception;
 
 	/**
 	 * @return IAlgorithm

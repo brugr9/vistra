@@ -160,19 +160,35 @@ class Core implements ICore {
 	 */
 	@Override
 	public String[] importAlgorithm(File source) throws Exception {
+
+		// copy
+		File destinationDirectory = this.algorithmManager.getWorkbenchDir();
 		try {
-			File destinationDirectory = this.algorithmManager.getWorkbenchDir();
 			FileUtils.copyFileToDirectory(source, destinationDirectory);
-			String pathname = destinationDirectory.getPath() + File.separator
-					+ source.getName();
-			File copy = new File(pathname);
-			String[] names = null;
-			if (this.algorithmManager.add(copy))
-				names = this.algorithmManager.getNames();
-			return names;
 		} catch (Exception e) {
 			throw e;
 		}
+		String pathname = destinationDirectory.getPath() + File.separator
+				+ source.getName();
+		File copy = null;
+		try {
+			copy = new File(pathname);
+		} catch (Exception e) {
+			throw e;
+		}
+
+		// names
+		String[] names = null;
+		try {
+			boolean ok = this.algorithmManager.add(copy);
+			if (ok)
+				names = this.getGraphs();
+			return names;
+		} catch (Exception e) {
+			FileUtils.fileDelete(pathname);
+			throw e;
+		}
+
 	}
 
 	/*

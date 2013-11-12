@@ -74,13 +74,13 @@ public final class ParameterPanel extends JPanel implements Observer {
 		// Combobox
 		this.graphComboModel = new DefaultComboBoxModel<String>(new String[] {});
 		this.graphCombo = new JComboBox<String>(this.graphComboModel);
-		this.graphCombo.addItemListener(control.graphSettingsListener);
+		this.graphCombo.addItemListener(control.selectGraphListener);
 		// this.graphCombo.setBounds(463, 12, 170, 20);
 
 		this.algorithmComboModel = new DefaultComboBoxModel<String>(
 				new String[] {});
 		this.algorithmCombo = new JComboBox<String>(this.algorithmComboModel);
-		this.algorithmCombo.addItemListener(control.algorithmSettingsListener);
+		this.algorithmCombo.addItemListener(control.selectAlgorithmListener);
 		// this.algorithmCombo.setBounds(463, 12, 170, 20);
 
 		// Panel

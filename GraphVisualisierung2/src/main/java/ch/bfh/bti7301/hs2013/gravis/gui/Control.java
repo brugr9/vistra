@@ -54,25 +54,25 @@ public final class Control implements IControl {
 	 */
 	protected final IOListener ioListener;
 	/**
-	 * A field for a 'graph settings' listener.
+	 * A field for a 'select graph' listener.
 	 */
-	protected final GraphSettingsListener graphSettingsListener;
+	protected final SelectGraphListener selectGraphListener;
 	/**
-	 * A field for a 'algorithm settings' listener.
+	 * A field for a 'select algorithm' listener.
 	 */
-	protected final AlgorithmSettingsListener algorithmSettingsListener;
+	protected final SelectAlgorithmListener selectAlgorithmListener;
 	/**
 	 * A field for a 'traversal' listener.
 	 */
 	protected final TraversalListener traversalListener;
 	/**
-	 * A field for a 'step settings' listener.
+	 * A field for a 'set steplength' listener.
 	 */
-	protected final SteplengthListener steplengthListener;
+	protected final SetSteplengthListener setSteplengthListener;
 	/**
-	 * A field for a 'delay settings' listener.
+	 * A field for a 'set delay' listener.
 	 */
-	protected final DelaySettingsListener delaySettingsListener;
+	protected final SetDelayListener setDelayListener;
 	/**
 	 * A field for a 'player' listener.
 	 */
@@ -108,11 +108,11 @@ public final class Control implements IControl {
 		this.fileChooser = new JFileChooser();
 		this.i18nListener = new I18nListener();
 		this.ioListener = new IOListener();
-		this.graphSettingsListener = new GraphSettingsListener();
-		this.algorithmSettingsListener = new AlgorithmSettingsListener();
+		this.selectGraphListener = new SelectGraphListener();
+		this.selectAlgorithmListener = new SelectAlgorithmListener();
 		this.traversalListener = new TraversalListener();
-		this.steplengthListener = new SteplengthListener();
-		this.delaySettingsListener = new DelaySettingsListener();
+		this.setSteplengthListener = new SetSteplengthListener();
+		this.setDelayListener = new SetDelayListener();
 		this.playerListener = new PlayerListener();
 		this.helpListener = new HelpListener();
 		this.aboutListener = new AboutListener();
@@ -457,9 +457,9 @@ public final class Control implements IControl {
 					appendProtocol(b.getString("importGraph.label"));
 					fileChooser
 							.setDialogTitle(b.getString("importGraph.label"));
+					// as shown in sd-import-graph
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						// as shown in sd-import-graph
 						File source = fileChooser.getSelectedFile();
 						String[] names = core.importGraph(source);
 						model.setGraphs(names);
@@ -471,9 +471,9 @@ public final class Control implements IControl {
 					appendProtocol(b.getString("importAlgorithm.label"));
 					fileChooser.setDialogTitle(b
 							.getString("importAlgorithm.label"));
+					// as shown in sd-import-algorithm
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						// as shown in sd-import-algorithm
 						File source = fileChooser.getSelectedFile();
 						String[] names = core.importAlgorithm(source);
 						model.setAlgorithms(names);
@@ -487,9 +487,9 @@ public final class Control implements IControl {
 							.setDialogTitle(b.getString("deleteGraph.label"));
 					fileChooser
 							.setCurrentDirectory(core.getGraphWorkbenchDir());
+					// as shown in sd-delete-graph
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						// as shown in sd-delete-graph
 						File file = fileChooser.getSelectedFile();
 						String[] names = core.deleteGraph(file);
 						model.setGraphs(names);
@@ -503,9 +503,9 @@ public final class Control implements IControl {
 							.getString("deleteAlgorithm.label"));
 					fileChooser.setCurrentDirectory(core
 							.getAlgorithmWorkbenchDir());
+					// as shown in sd-delete-algorithm
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						// as shown in sd-delete-algorithm
 						File file = fileChooser.getSelectedFile();
 						String[] names = core.deleteAlgorithm(file);
 						model.setAlgorithms(names);
@@ -528,12 +528,12 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * A graph settings listener.
+	 * A select graph listener.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class GraphSettingsListener implements ItemListener {
+	private final class SelectGraphListener implements ItemListener {
 
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -554,12 +554,12 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * An algorithm settings listener.
+	 * A select algorithm listener.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class AlgorithmSettingsListener implements ItemListener {
+	private final class SelectAlgorithmListener implements ItemListener {
 
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -605,12 +605,12 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * A steplenth settings listener.
+	 * A set steplenth listener.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class SteplengthListener implements FocusListener {
+	private final class SetSteplengthListener implements FocusListener {
 
 		@Override
 		public void focusGained(FocusEvent e) {
@@ -634,12 +634,12 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * A delay settings listener.
+	 * A set delay listener.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class DelaySettingsListener implements FocusListener {
+	private final class SetDelayListener implements FocusListener {
 
 		@Override
 		public void focusGained(FocusEvent e) {
