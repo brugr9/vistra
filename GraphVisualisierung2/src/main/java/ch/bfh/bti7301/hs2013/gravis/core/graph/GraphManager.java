@@ -47,17 +47,17 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	public GraphManager(File templatesDir, File workbenchDir,
 			FileNameExtensionFilter filter) {
 		super(templatesDir, workbenchDir, filter);
-		try {
-			// TODO validation?
-			for (File file : templatesDir.listFiles()) {
-				super.add(file);
-			}
-			for (File file : workbenchDir.listFiles()) {
-				super.add(file);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			// TODO validation?
+//			for (File file : templatesDir.listFiles()) {
+//				super.add(file);
+//			}
+//			for (File file : workbenchDir.listFiles()) {
+//				super.add(file);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
@@ -197,8 +197,12 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	@Override
 	public IGravisGraph getGraph(int index) throws Exception {
 		try {
-			File file = super.getFile(index);
-			return this.load(file);
+//			File file = super.getFile(index);
+//			return this.load(file);
+			
+			// TODO bitte dummy value auskommentieren und nicht löschen (pk)
+			return this.load(new File(
+					"src/main/resources/META-INF/templates/SampleTree1.graphml"));
 		} catch (Exception e) {
 			throw e;
 		}

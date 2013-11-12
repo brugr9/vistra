@@ -41,7 +41,7 @@ public class VisualizationPanel extends JPanel implements Observer {
 	/**
 	 * A field for a visualization viewer.
 	 */
-	private VisualizationViewer<IVertex, IEdge> viewer;
+	private GravisVisualizationViewer viewer;
 
 	/**
 	 * 
@@ -98,10 +98,10 @@ public class VisualizationPanel extends JPanel implements Observer {
 				e.printStackTrace();
 			}
 
-		} else {
-			this.update(o, arg);
-			// this.repaint();
-		}
+		} 
+//		else {
+			this.viewer.update(o, arg);
+//		}
 
 	}
 }
