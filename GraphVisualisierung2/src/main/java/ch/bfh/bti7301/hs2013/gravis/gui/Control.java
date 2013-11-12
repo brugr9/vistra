@@ -125,8 +125,8 @@ public final class Control implements IControl {
 	 */
 	public void init() throws Exception {
 		try {
-			this.model.setGraphs(this.core.getGraphNames());
-			this.model.setAlgorithms(this.core.getAlgorithmNames());
+			this.model.setGraphs(this.core.getGraphs());
+			this.model.setAlgorithms(this.core.getAlgorithms());
 			this.i18nListener.actionPerformed(null);
 			this.appendProtocol(this.model.getResourceBundle().getString(
 					"about.message")
@@ -285,15 +285,20 @@ public final class Control implements IControl {
 	private void selectGraph(int index) throws Exception {
 
 		try {
-			// Core
-			Graph<IVertex, IEdge> graph = this.core.selectGraph("");
-
-			// Gui
+			// graph
 			this.model.setSelectedGraph(index);
-			this.model.setAlgorithmsEnabled(true);
+			Graph<IVertex, IEdge> graph = this.core.selectGraph(index);
+			// algorithm
+			String[] names = this.core.getAlgorithms();
+			this.model.setAlgorithms(names);
 			this.selectAlgorithm(0);
+			if (index == 0) {
+				this.model.setAlgorithmsEnabled(false);
+			} else {
+				this.model.setAlgorithmsEnabled(true);
+			}
+			// view
 			this.model.setPlayerEnabled(false);
-
 			this.model.notifyObservers(graph);
 		} catch (Exception e) {
 			throw e;
@@ -310,19 +315,18 @@ public final class Control implements IControl {
 	private void selectAlgorithm(int index) throws Exception {
 
 		try {
+			
+			this.model.setSelectedAlgorithm(index);
+			this.model.setProgress(0);
+			
 			if (index == 0) {
-
+				this.model.setProgressMaximum(0);
+				this.model.setPlayerEnabled(false);
+				this.model.notifyObservers();
 			} else {
-
 				this.setViewBusy();
-
-				// Core
-				// this.core.selectAlgorithm(index);
+				this.core.selectAlgorithm(index);
 				this.core.executeTraverser(this.traversalListener);
-				// Model
-				this.model.setSelectedAlgorithm(index);
-				// ViewType
-				this.model.setProgress(0);
 				this.model.setProgressMaximum(this.core.getGraphIteratorSize());
 				this.setViewStop();
 			}
@@ -407,57 +411,76 @@ public final class Control implements IControl {
 
 			try {
 
+				ResourceBundle b = model.getResourceBundle();
 				String c = e.getActionCommand();
-				int option;
 				JComponent top = (JComponent) ((JComponent) e.getSource())
 						.getTopLevelAncestor();
-				ResourceBundle b = model.getResourceBundle();
+				int option = 0;
+				String msg = "";
 
-				// File chooser
-				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				fileChooser.setAcceptAllFileFilterUsed(false);
-				fileChooser.setMultiSelectionEnabled(false);
-				fileChooser.addChoosableFileFilter(core.getGraphFilter());
-				fileChooser.addChoosableFileFilter(core.getAlgorithmFilter());
-				// Parameter: Graph vs. algorithm
-				if (c.equals(EventSource.IMPORT_GRAPH.toString())
-						|| c.equals(EventSource.DELETE_GRAPH.toString())) {
-					fileChooser.setFileFilter(core.getGraphFilter());
-					fileChooser.removeChoosableFileFilter(core
+				{// File chooser settings
+					fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+					fileChooser.setAcceptAllFileFilterUsed(false);
+					fileChooser.setMultiSelectionEnabled(false);
+					fileChooser.addChoosableFileFilter(core.getGraphFilter());
+					fileChooser.addChoosableFileFilter(core
 							.getAlgorithmFilter());
-				} else {
-					fileChooser.setFileFilter(core.getAlgorithmFilter());
-					fileChooser
-							.removeChoosableFileFilter(core.getGraphFilter());
-				}
-				// Event: Import vs. delete
-				if (c.equals(EventSource.IMPORT_GRAPH.toString())
-						|| c.equals(EventSource.IMPORT_ALGORITHM.toString())) {
-					fileChooser.setApproveButtonText(b
-							.getString("import.label"));
-				} else {
-					fileChooser.setApproveButtonText(b
-							.getString("delete.label"));
-					// TODO restrict access to workbench directory only
+					// Graph vs. algorithm
+					if (c.equals(EventSource.IMPORT_GRAPH.toString())
+							|| c.equals(EventSource.DELETE_GRAPH.toString())) {
+						fileChooser.setFileFilter(core.getGraphFilter());
+						fileChooser.removeChoosableFileFilter(core
+								.getAlgorithmFilter());
+					} else if (c
+							.equals(EventSource.IMPORT_ALGORITHM.toString())
+							|| c.equals(EventSource.DELETE_ALGORITHM.toString())) {
+						fileChooser.setFileFilter(core.getAlgorithmFilter());
+						fileChooser.removeChoosableFileFilter(core
+								.getGraphFilter());
+					}
+					// Import vs. delete
+					if (c.equals(EventSource.IMPORT_GRAPH.toString())
+							|| c.equals(EventSource.IMPORT_ALGORITHM.toString())) {
+						fileChooser.setApproveButtonText(b
+								.getString("import.label"));
+					} else if (c.equals(EventSource.DELETE_GRAPH.toString())
+							|| c.equals(EventSource.DELETE_ALGORITHM.toString())) {
+						fileChooser.setApproveButtonText(b
+								.getString("delete.label"));
+						// TODO restrict access to workbench directory only
+					}
 				}
 				// Events
 				if (c.equals(EventSource.IMPORT_GRAPH.toString())) {
+					// Import graph
 					appendProtocol(b.getString("importGraph.label"));
 					fileChooser
 							.setDialogTitle(b.getString("importGraph.label"));
 					option = fileChooser.showDialog(top, null);
-					if (option == JFileChooser.APPROVE_OPTION)
-						importGraph(fileChooser.getSelectedFile());
-
+					if (option == JFileChooser.APPROVE_OPTION) {
+						// as shown in sd-import-graph
+						File source = fileChooser.getSelectedFile();
+						String[] names = core.importGraph(source);
+						model.setGraphs(names);
+						selectGraph(0);
+						msg = b.getString("import.graph.message");
+					}
 				} else if (c.equals(EventSource.IMPORT_ALGORITHM.toString())) {
+					// Import algorithm
 					appendProtocol(b.getString("importAlgorithm.label"));
 					fileChooser.setDialogTitle(b
 							.getString("importAlgorithm.label"));
 					option = fileChooser.showDialog(top, null);
-					if (option == JFileChooser.APPROVE_OPTION)
-						importAlgorithm(fileChooser.getSelectedFile());
-
+					if (option == JFileChooser.APPROVE_OPTION) {
+						// as shown in sd-import-algorithm
+						File source = fileChooser.getSelectedFile();
+						String[] names = core.importAlgorithm(source);
+						model.setAlgorithms(names);
+						selectAlgorithm(0);
+						msg = b.getString("import.algorthm.message");
+					}
 				} else if (c.equals(EventSource.DELETE_GRAPH.toString())) {
+					// Delete graph
 					appendProtocol(b.getString("deleteGraph.label"));
 					fileChooser
 							.setDialogTitle(b.getString("deleteGraph.label"));
@@ -465,11 +488,15 @@ public final class Control implements IControl {
 							.setCurrentDirectory(core.getGraphWorkbenchDir());
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						deleteGraph(fileChooser.getSelectedFile());
-						fileChooser.getUI().rescanCurrentDirectory(fileChooser);
+						// as shown in sd-delete-graph
+						File file = fileChooser.getSelectedFile();
+						String[] names = core.deleteGraph(file);
+						model.setGraphs(names);
+						selectGraph(0);
+						msg = b.getString("delete.graph.message");
 					}
-
 				} else if (c.equals(EventSource.DELETE_ALGORITHM.toString())) {
+					// Delete algorithm
 					appendProtocol(b.getString("deleteAlgorithm.label"));
 					fileChooser.setDialogTitle(b
 							.getString("deleteAlgorithm.label"));
@@ -477,99 +504,23 @@ public final class Control implements IControl {
 							.getAlgorithmWorkbenchDir());
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						deleteAlgorithm(fileChooser.getSelectedFile());
-						fileChooser.getUI().rescanCurrentDirectory(fileChooser);
+						// as shown in sd-delete-algorithm
+						File file = fileChooser.getSelectedFile();
+						String[] names = core.deleteAlgorithm(file);
+						model.setAlgorithms(names);
+						selectAlgorithm(0);
+						msg = b.getString("delete.algorthm.message");
 					}
-
 				}
+
+				fileChooser.getUI().rescanCurrentDirectory(fileChooser);
+				appendProtocol(msg);
+				JOptionPane.showMessageDialog(null, msg);
 
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(), model
 						.getResourceBundle().getString("app.label"), 1, null);
 				ex.printStackTrace();
-			}
-
-		}
-
-		/**
-		 * Imports a graph.
-		 * 
-		 * @param file
-		 *            the file to import
-		 * @throws Exception
-		 */
-		private void importGraph(File file) throws Exception {
-			try {
-				core.importGraph(file);
-				model.setGraphs(core.getGraphNames());
-				selectGraph(0);
-				JOptionPane.showMessageDialog(null, model.getResourceBundle()
-						.getString("import.graph.message"));
-			} catch (Exception ex) {
-				throw ex;
-			}
-
-		}
-
-		/**
-		 * Deletes a graph.
-		 * 
-		 * @param file
-		 *            the file to delete
-		 * @throws Exception
-		 */
-		private void deleteGraph(File file) throws Exception {
-
-			try {
-				core.deleteGraph(file);
-				model.setGraphs(core.getGraphNames());
-				selectGraph(0);
-				JOptionPane.showMessageDialog(null, model.getResourceBundle()
-						.getString("delete.graph.message"));
-			} catch (Exception ex) {
-				throw ex;
-			}
-
-		}
-
-		/**
-		 * Imports an algorithm.
-		 * 
-		 * @param file
-		 *            the file to import
-		 * @throws Exception
-		 */
-		private void importAlgorithm(File file) throws Exception {
-
-			try {
-				core.importAlgorithm(file);
-				model.setAlgorithms(core.getAlgorithmNames());
-				selectAlgorithm(0);
-				JOptionPane.showMessageDialog(null, model.getResourceBundle()
-						.getString("import.algorthm.message"));
-			} catch (Exception ex) {
-				throw ex;
-			}
-
-		}
-
-		/**
-		 * Deletes an algorithm.
-		 * 
-		 * @param file
-		 *            the file to delete
-		 * @throws Exception
-		 */
-		private void deleteAlgorithm(File file) throws Exception {
-
-			try {
-				core.deleteAlgorithm(file);
-				model.setAlgorithms(core.getAlgorithmNames());
-				selectAlgorithm(0);
-				JOptionPane.showMessageDialog(null, model.getResourceBundle()
-						.getString("delete.algorthm.message"));
-			} catch (Exception ex) {
-				throw ex;
 			}
 
 		}

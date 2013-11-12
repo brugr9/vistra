@@ -10,7 +10,6 @@ import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import edu.uci.ics.jung.graph.Graph;
 
 /**
- * 
  * This interface gives access to all important core classes. It is a facade to
  * different other classes and interfaces (facade pattern).
  * 
@@ -21,45 +20,36 @@ import edu.uci.ics.jung.graph.Graph;
 public interface ICore {
 
 	/**
-	 * Selects a graph as parameter for the traversal. Invokes the rebuild of
-	 * list with possible algorithms too.
+	 * Selects a graph as parameter for the traversal, invokes the rebuild of
+	 * the list with available algorithms and returns the loaded graph.
 	 * 
-	 * @param graphId
-	 * @return Graph<IVertex, IEdge>
+	 * @param index
+	 *            the graph index
+	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract Graph<IVertex, IEdge> selectGraph(String graphId)
+	public abstract Graph<IVertex, IEdge> selectGraph(int index)
 			throws Exception;
 
 	/**
 	 * Imports a graph given as file.
 	 * 
-	 * @param file
-	 *            the graph file
-	 * @return the imported graph
+	 * @param source
+	 *            the graph file to import
+	 * @return the names of available graphs
 	 * @throws Exception
 	 */
-	public abstract Graph<IVertex, IEdge> importGraph(File file)
-			throws Exception;
-
-	// /**
-	// *
-	// * @param graphId
-	// * @throws Exception
-	// * @deprecated
-	// */
-	// public abstract void deleteGraph(String graphId) throws Exception;
+	public abstract String[] importGraph(File source) throws Exception;
 
 	/**
 	 * Deletes an imported graph file.
 	 * 
 	 * @param file
 	 *            the graph file to delete
+	 * @return the names of available graphs
 	 * @throws Exception
 	 */
-	public abstract void deleteGraph(File file) throws Exception;
-
-	// TODO Methode nicht notwendig?
+	public abstract String[] deleteGraph(File file) throws Exception;
 
 	/**
 	 * Saves the current graph.
@@ -71,89 +61,63 @@ public interface ICore {
 
 	/**
 	 * 
-	 * @param graphId
-	 * @param directory
-	 * @return Graph<IVertex, IEdge>
+	 * @param source
+	 * @param destinationDirectory
+	 * @return <code>true<code> if success
 	 * @throws Exception
 	 */
-	public abstract Graph<IVertex, IEdge> exportGraph(String graphId,
-			File directory) throws Exception;
+	public abstract boolean exportGraph(File source, File destinationDirectory)
+			throws Exception;
 
 	/**
+	 * Returns the names of available graphs.
 	 * 
-	 * @param graphId
-	 * @return String
-	 */
-	public abstract String getGraphName(String graphId) throws Exception;
-
-	/**
-	 * @return String[]
+	 * @return the names of available graphs
 	 * @throws Exception
 	 */
-	public abstract String[] getGraphNames() throws Exception;
+	public abstract String[] getGraphs() throws Exception;
 
 	/**
 	 * Selects an algorithm as parameter for the traversal.
 	 * 
-	 * @param algorithmId
+	 * @param index
+	 *            the algorithm index
 	 * @throws Exception
 	 */
-	public abstract void selectAlgorithm(String algorithmId) throws Exception;
+	public abstract void selectAlgorithm(int index) throws Exception;
 
 	/**
-	 * Imports an algorithm file.
+	 * Imports an algorithm given as file.
 	 * 
-	 * @param file
-	 *            the algorithm file
-	 * @return the algorithmId
+	 * @param source
+	 *            the algorithm file to import
+	 * @return the names of available algorithms
 	 * @throws Exception
 	 */
-	public abstract int importAlgorithm(File file) throws Exception;
-
-	// /**
-	// * Deletes an imported algorithm.
-	// *
-	// * @param algorithmId
-	// * @throws Exception
-	// * @deprecated
-	// */
-	// public abstract void deleteAlgorithm(String algorithmId) throws
-	// Exception;
+	public abstract String[] importAlgorithm(File source) throws Exception;
 
 	/**
 	 * Deletes an imported algorithm file.
 	 * 
 	 * @param file
 	 *            the algorithm file to delete
+	 * @return the names of available algorithms
 	 * @throws Exception
 	 */
-	// TODO return boolean -> warum?
-	public abstract void deleteAlgorithm(File file) throws Exception;
-
-	// TODO Methode nicht notwendig?
+	public abstract String[] deleteAlgorithm(File file) throws Exception;
 
 	/**
-	 * @return String
-	 */
-	public abstract String getAlgorithmName(String algorithmId)
-			throws Exception;
-
-	/**
-	 * @return String[]
-	 * @throws Exception
-	 */
-	public abstract String[] getAlgorithmNames() throws Exception;
-
-	/**
+	 * Returns the names of available algorithms.
 	 * 
-	 * @param listener
+	 * @return the names of available algorithms
 	 * @throws Exception
 	 */
-	public abstract void executeTraverser(ChangeListener listener)
-			throws Exception;
+	public abstract String[] getAlgorithms() throws Exception;
 
 	/**
-	 * @return int
+	 * Returns the number of steps the traversal has.
+	 * 
+	 * @return the number of steps
 	 */
 	public abstract int getGraphIteratorSize();
 
@@ -189,11 +153,11 @@ public interface ICore {
 	 * Removes all vertices and edges from the graph with the given id and
 	 * returns the empty graph.
 	 * 
-	 * @param graphId
+	 * @param index
 	 * @return Graph<IVertex, IEdge>
 	 * @throws Exception
 	 */
-	public Graph<IVertex, IEdge> clearGraph(String graphId) throws Exception;
+	public Graph<IVertex, IEdge> clearGraph(int index) throws Exception;
 
 	/**
 	 * Returns the graph templates directory.
@@ -236,4 +200,12 @@ public interface ICore {
 	 * @return the algorithm filename extension filter
 	 */
 	public abstract FileNameExtensionFilter getAlgorithmFilter();
+
+	/**
+	 * 
+	 * @param listener
+	 * @throws Exception
+	 */
+	void executeTraverser(ChangeListener listener) throws Exception;
+
 }

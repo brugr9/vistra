@@ -362,7 +362,7 @@ public class OldMainWindowListener extends Observable implements
 				// TODO remove string literal
 				if (!algorithmName.equals("Algorithmus wählen")) {
 					try {
-						this.gravisCore.selectAlgorithm("aa");
+						this.gravisCore.selectAlgorithm(0);
 						this.setChanged();
 						this.notifyObservers();
 
@@ -391,7 +391,7 @@ public class OldMainWindowListener extends Observable implements
 				if (!graphName.equals("Graph wählen")) {
 					Graph<IVertex, IEdge> graph;
 					try {
-						graph = this.gravisCore.selectGraph("kk");
+						graph = this.gravisCore.selectGraph(0);
 						this.gravisCore.saveGraph();
 
 						this.setChanged();

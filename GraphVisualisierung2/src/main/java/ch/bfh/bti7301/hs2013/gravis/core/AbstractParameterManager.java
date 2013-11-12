@@ -4,6 +4,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -11,7 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public abstract class AbstractParameterManager implements IParameterManager {
+public class AbstractParameterManager implements IParameterManager {
 
 	/**
 	 * A field for a templates directory.
@@ -26,7 +27,7 @@ public abstract class AbstractParameterManager implements IParameterManager {
 	/**
 	 * A field for a parameter map.
 	 */
-	private ParameterMap parameterMap;
+	private ArrayList<File> parameters;
 
 	/**
 	 * A field for a filename extension filter.
@@ -41,7 +42,7 @@ public abstract class AbstractParameterManager implements IParameterManager {
 		this.templatesDir = templatesDir;
 		this.workbenchDir = workbenchDir;
 		this.filter = filter;
-		this.parameterMap = new ParameterMap();
+		this.parameters = new ArrayList<File>();
 	}
 
 	@Override
@@ -60,33 +61,31 @@ public abstract class AbstractParameterManager implements IParameterManager {
 	}
 
 	@Override
-	public String getName(String parameterId) throws Exception {
-		return parameterId;
-	}
-
-	@Override
 	public String[] getNames() throws Exception {
-		return this.parameterMap.keySet().toArray(new String[0]);
+		return this.parameters.toArray(new String[0]);
 	}
 
 	@Override
-	public File add(String parameterId, File file) {
-		return this.parameterMap.put(parameterId, file);
+	public String[] add(File file) throws Exception {
+		this.parameters.add(file);
+		return this.getNames();
 	}
 
 	@Override
-	public boolean putAll(File[] files) throws Exception {
-		return this.parameterMap.putAll(files);
+	public String[] putAll(File[] files) throws Exception {
+		for (File file : files)
+			this.parameters.add(file);
+		return this.getNames();
 	}
 
 	@Override
-	public File getFile(String parameterId) throws Exception {
-		return this.parameterMap.get(parameterId);
+	public File getFile(int index) throws Exception {
+		return this.parameters.get(index);
 	}
 
 	@Override
-	public boolean delete(File file) throws Exception {
-		return this.parameterMap.delete(file);
+	public boolean remove(File file) throws Exception {
+		return this.parameters.remove(file);
 	}
 
 }

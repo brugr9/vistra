@@ -5,7 +5,8 @@ import java.io.File;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
+import org.apache.maven.shared.utils.io.FileUtils;
+
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
@@ -53,19 +54,16 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#setGraph(int)
 	 */
 	@Override
-	public Graph<IVertex, IEdge> selectGraph(String graphId) throws Exception {
+	public Graph<IVertex, IEdge> selectGraph(int index) throws Exception {
 		try {
 			IGravisGraph graph = this.traversal.getGraph();
 
-			if (graph.getId() == graphId) {
-				return graph;
-			}
-
-			graph = this.graphManager.getGraph(graphId);
+			graph = this.graphManager.getGraph(index);
 			this.traversal.setParameter(graph);
 			EdgeType type = graph.getEdgeType();
 			// TODO updateAlgorithmList() anpassen für EdgeType
-			this.algorithmManager.updateAlgorithmList(new GraphType[] { GraphType.DIRECTED });
+			this.algorithmManager
+					.updateAlgorithmList(new EdgeType[] { EdgeType.DIRECTED });
 			return graph;
 		} catch (Exception e) {
 			throw e;
@@ -79,46 +77,37 @@ class Core implements ICore {
 	 * )
 	 */
 	@Override
-	public Graph<IVertex, IEdge> importGraph(File file) throws Exception {
+	public String[] importGraph(File source) throws Exception {
 		try {
-			IGravisGraph graph = this.graphManager.importGraph(file);
-			this.traversal.setParameter(graph);
-			return graph;
+			File destinationDirectory = this.graphManager.getWorkbenchDir();
+			FileUtils.copyFileToDirectory(source, destinationDirectory);
+			String pathname = destinationDirectory.getPath() + File.separator
+					+ source.getName();
+			File copy = new File(pathname);
+			String[] names = this.graphManager.add(copy);
+			return names;
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	@Override
-	public Graph<IVertex, IEdge> clearGraph(String graphId) throws Exception {
+	public Graph<IVertex, IEdge> clearGraph(int index) throws Exception {
 		try {
 			IGravisGraph graph = this.traversal.getGraph();
 
-			if (graphId == graph.getId()) {
-				graph.clear();
-				return graph;
-			}
+			// if (graphId == graph.getId()) {
+			// graph.clear();
+			// return graph;
+			// }
 
-			graph = this.graphManager.clearGraph(graphId);
+			graph = this.graphManager.clearGraph(index);
 			this.traversal.setParameter(graph);
 			return graph;
 		} catch (Exception e) {
 			throw e;
 		}
 	}
-
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#deleteGraph(int)
-	// */
-	// /**
-	// * @deprecated
-	// */
-	// @Override
-	// public void deleteGraph(String graphId) throws Exception {
-	//
-	// }
 
 	/*
 	 * (non-Javadoc)
@@ -141,31 +130,11 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#exportGraph(int)
 	 */
 	@Override
-	public Graph<IVertex, IEdge> exportGraph(String graphId, File directory)
+	public boolean exportGraph(File source, File destinationDirectory)
 			throws Exception {
 		try {
-			if (directory.isDirectory()
-					&& graphId == this.traversal.getGraph().getId()) {
-				this.graphManager.exportGraph(graphId, directory);
-				return this.traversal.getGraph();
-
-			} else
-				// TODO Exception handling
-				throw new Exception();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#getGraphName(int)
-	 */
-	@Override
-	public String getGraphName(String graphId) throws Exception {
-		try {
-			return this.graphManager.getName(graphId);
+			FileUtils.copyFileToDirectory(source, destinationDirectory);
+			return true;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -177,7 +146,7 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#getGraphNames()
 	 */
 	@Override
-	public String[] getGraphNames() throws Exception {
+	public String[] getGraphs() throws Exception {
 		try {
 			return this.graphManager.getNames();
 		} catch (Exception e) {
@@ -191,10 +160,10 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#setAlgorithm(int)
 	 */
 	@Override
-	public void selectAlgorithm(String algorithmId) throws Exception {
+	public void selectAlgorithm(int index) throws Exception {
 		try {
 			this.traversal.setParameter(this.algorithmManager
-					.getAlgorithm(algorithmId));
+					.getAlgorithm(index));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -207,38 +176,15 @@ class Core implements ICore {
 	 * .String)
 	 */
 	@Override
-	public int importAlgorithm(File file) throws Exception {
+	public String[] importAlgorithm(File source) throws Exception {
 		try {
-			IAlgorithm algorithm = this.algorithmManager.importAlgorithm(file);
-			this.traversal.setParameter(algorithm);
-			return algorithm.getId();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#deleteAlgorithm(int)
-	// */
-	// /**
-	// * @deprecated
-	// */
-	// @Override
-	// public void deleteAlgorithm(String algorithmId) throws Exception {
-	//
-	// }
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#geAlgorithmName(int)
-	 */
-	@Override
-	public String getAlgorithmName(String algorithmId) throws Exception {
-		try {
-			return this.algorithmManager.getName(algorithmId);
+			File destinationDirectory = this.algorithmManager.getWorkbenchDir();
+			FileUtils.copyFileToDirectory(source, destinationDirectory);
+			String pathname = destinationDirectory.getPath() + File.separator
+					+ source.getName();
+			File copy = new File(pathname);
+			String[] names = this.algorithmManager.add(copy);
+			return names;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -250,7 +196,7 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#getAlgorithmNames()
 	 */
 	@Override
-	public String[] getAlgorithmNames() throws Exception {
+	public String[] getAlgorithms() throws Exception {
 		try {
 			return this.algorithmManager.getNames();
 		} catch (Exception e) {
@@ -348,13 +294,14 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#deleteGraph()
 	 */
 	@Override
-	public void deleteGraph(File file) throws Exception {
+	public String[] deleteGraph(File file) throws Exception {
 		try {
 			this.graphManager.deleteGraph(file);
 			this.traversal.setParameter(GraphFactory.createIGravisGraph());
 		} catch (Exception e) {
 			throw e;
 		}
+		return null;
 	}
 
 	/*
@@ -363,7 +310,7 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#deleteAlgorithm()
 	 */
 	@Override
-	public void deleteAlgorithm(File file) throws Exception {
+	public String[] deleteAlgorithm(File file) throws Exception {
 		try {
 			this.algorithmManager.deleteAlgorithm(file);
 			this.traversal.setParameter(this.algorithmManager
@@ -371,6 +318,7 @@ class Core implements ICore {
 		} catch (Exception e) {
 			throw e;
 		}
+		return null;
 	}
 
 	@Override

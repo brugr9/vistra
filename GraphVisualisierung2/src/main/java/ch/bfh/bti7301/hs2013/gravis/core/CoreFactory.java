@@ -31,7 +31,7 @@ public final class CoreFactory {
 	/**
 	 * The default name of the property file name relative to the CLASSPATH.
 	 */
-	public final static String CORE_PROPERTIES = "META-INF/Core";
+	public final static String APPLICATION_PROPERTIES = "META-INF/Application";
 
 	/**
 	 * A main (no-)constructor.
@@ -48,17 +48,16 @@ public final class CoreFactory {
 	 */
 	public static ICore createCore() throws Exception {
 		try {
-			// TODO activate properties
-//			Properties coreProperties = loadCoreProperties();
-			
+			Properties properties = loadCoreProperties();
+
 			// Graph
 			Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
 			IGravisGraph gravisGraph = GraphFactory.createIGravisGraph(graph);
 			IGraphManager graphManager = GraphFactory
-					.createGraphManager(null);
+					.createGraphManager(properties);
 			// Algorithm
 			IAlgorithmManager algorithmManager = AlgorithmFactory
-					.createAlgorithmManager(null);
+					.createAlgorithmManager(properties);
 			// Traversal
 			ITraversal traversal = createTraveral(gravisGraph,
 					algorithmManager.getDefaultAlgorithm());
@@ -156,19 +155,15 @@ public final class CoreFactory {
 	 */
 	private static Properties loadCoreProperties() throws Exception {
 
-		Properties properties = null;
-		properties = new Properties();
-
+		Properties properties = new Properties();
 		ClassLoader classLoader = Thread.currentThread()
 				.getContextClassLoader();
-		InputStream is = classLoader
-				.getResourceAsStream(CORE_PROPERTIES);
+		InputStream is = classLoader.getResourceAsStream(APPLICATION_PROPERTIES);
 		try {
 			properties.load(is);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(
-					"Cannot load properties file for core: "
-							+ CORE_PROPERTIES);
+					"Cannot load properties file for core: " + APPLICATION_PROPERTIES);
 		}
 		return properties;
 
