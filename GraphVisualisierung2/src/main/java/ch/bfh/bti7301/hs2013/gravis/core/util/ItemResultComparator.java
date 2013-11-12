@@ -2,7 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.core.util;
 
 import java.util.Comparator;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)

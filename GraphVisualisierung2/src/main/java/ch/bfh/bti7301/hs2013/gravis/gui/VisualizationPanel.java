@@ -1,26 +1,19 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
-import java.awt.BorderLayout;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
 import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
-import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
-import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 
 /**
  * A visualization panel.
@@ -99,7 +92,7 @@ public class VisualizationPanel extends JPanel implements Observer {
 
 		} else {
 			this.update(o, arg);
-			this.repaint();
+			// this.repaint();
 		}
 
 	}

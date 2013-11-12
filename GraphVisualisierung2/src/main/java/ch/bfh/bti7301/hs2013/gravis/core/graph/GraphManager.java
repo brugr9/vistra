@@ -14,10 +14,10 @@ import org.apache.commons.collections15.Transformer;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.util.ValueTransformer;
 import edu.uci.ics.jung.graph.Graph;
@@ -152,7 +152,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	/**
 	 * @param file
 	 */
-	private void storeGraph(File file, IGravisGraph graph) {
+	private void write(File file, IGravisGraph graph) {
 		// TODO write GraphName from graphml
 		// TODO write GraphType from graphml: <graph id="Sample Graph 1"
 		// edgedefault="directed">
@@ -198,10 +198,6 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 		try {
 			File file = super.getFile(index);
 			return this.load(file);
-			// TODO bitte dummy value auskommentieren und nicht löschen
-			// return this.loadGraph(new File(
-			// OldApplicationFactory.IMPORTED_GRAPHS_PATH
-			// + "SampleTree2.graphml"));
 		} catch (Exception e) {
 			throw e;
 		}

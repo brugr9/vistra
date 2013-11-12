@@ -7,13 +7,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.maven.shared.utils.io.FileUtils;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithmManager;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -57,7 +59,7 @@ class Core implements ICore {
 			EdgeType type = graph.getEdgeType();
 			// TODO updateAlgorithmList() anpassen für EdgeType
 			this.algorithmManager
-					.updateAlgorithmList(new EdgeType[] { EdgeType.DIRECTED });
+					.updateAlgorithmList(new GraphType[] { GraphType.DIRECTED });
 			return graph;
 		} catch (Exception e) {
 			throw e;

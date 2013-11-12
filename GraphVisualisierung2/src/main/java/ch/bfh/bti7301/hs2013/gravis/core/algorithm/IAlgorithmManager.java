@@ -2,9 +2,8 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.IParameterManager;
-import edu.uci.ics.jung.graph.util.EdgeType;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm.GraphType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -42,7 +41,7 @@ public interface IAlgorithmManager extends IParameterManager {
 	 * @param types
 	 *            an array of EdgeType
 	 */
-	public abstract void updateAlgorithmList(EdgeType[] types);
+	public abstract void updateAlgorithmList(GraphType[] types);
 
 	/**
 	 * Deletes an imported algorithm.

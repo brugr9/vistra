@@ -1,8 +1,8 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 

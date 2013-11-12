@@ -4,7 +4,7 @@ import java.awt.Paint;
 
 import org.apache.commons.collections15.Transformer;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)

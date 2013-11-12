@@ -1,11 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
-import java.io.File;
-
-import org.apache.commons.io.FileUtils;
-
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.common.IImmutableGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
 
 /**
  * A dummy algorithm implementing the interface <code>IAlgorithm</code>.

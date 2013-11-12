@@ -1,8 +1,8 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IGraphItem.State;
-import ch.bfh.bti7301.hs2013.gravis.common.IImmutableGraph;
-import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem.State;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 
 /**
  * Depth-first search (DFS) algorithm, implemented recursively

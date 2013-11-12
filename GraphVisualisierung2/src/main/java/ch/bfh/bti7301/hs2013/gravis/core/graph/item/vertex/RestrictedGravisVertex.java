@@ -2,7 +2,6 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex;
 
 import java.awt.geom.Point2D;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractRestrictedGraphItem;
 
 /**

@@ -2,8 +2,6 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge;
 
 import org.apache.commons.collections15.Factory;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
-
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 

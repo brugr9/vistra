@@ -10,8 +10,8 @@ import javax.swing.border.TitledBorder;
 
 import org.apache.commons.collections15.Transformer;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.common.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.PointTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
@@ -99,7 +99,7 @@ public class GravisVisualizationViewer extends
 
 				Transformer<IVertex, Shape> vertexSize = new Transformer<IVertex, Shape>() {
 					public Shape transform(IVertex vertex) {
-						Ellipse2D circle = new Ellipse2D.Double(-15, -15, 30,
+						Ellipse2D circle = new Ellipse2D.Double(-20, -15, 40,
 								30);
 						// if(i == 2) return AffineTransform.getScaleInstance(2,
 						// 2).createTransformedShape(circle);

@@ -1,17 +1,10 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import org.apache.commons.io.FileUtils;
-
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
-import edu.uci.ics.jung.graph.util.EdgeType;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm.GraphType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -84,7 +77,7 @@ class AlgorithmManager extends AbstractParameterManager implements
 	}
 
 	@Override
-	public void updateAlgorithmList(EdgeType[] types) {
+	public void updateAlgorithmList(GraphType[] types) {
 		// TODO Auto-generated method stub
 
 	}

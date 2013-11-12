@@ -1,7 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.data.workbench.algorithm;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.common.IImmutableGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
 
 /**
  * A dummy algorithm implementing the interface <code>IAlgorithm</code>.
@@ -22,11 +22,6 @@ public class AlgorithmDummy implements IAlgorithm {
 	 * A filed for the description.
 	 */
 	private String description;
-
-	/**
-	 * A filed for the id.
-	 */
-	private int id;
 
 	/**
 	 * A field for the annotations.
@@ -65,16 +60,6 @@ public class AlgorithmDummy implements IAlgorithm {
 	@Override
 	public final String getDescription() {
 		return this.description;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getId()
-	 */
-	@Override
-	public final int getId() {
-		return this.id;
 	}
 
 	@Override
