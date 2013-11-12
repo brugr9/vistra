@@ -30,9 +30,9 @@
 \settocdepth{subsection}		% Set depth of toc
 \tableofcontents
 % 
-\listoffigures
+% \listoffigures
 % 
-\listoftables
+% \listoftables
 %%---------------------------------------------------------------------------
 
 %% Main part:
@@ -41,71 +41,67 @@
 \pagenumbering{arabic}
 \setcounter{page}{0}
 % 
-\newpage		% neue Seite
-\mbox{} 		% leere Textbox
-\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
-% 
-\chapter{Requirements}
-\newpage		% neue Seite
-\mbox{} 		% leere Textbox
-\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
-% 
-\include{vision}
-\include{usecases}
-\include{suppspec}
-\include{glossary}
-% \include{domainrules}
-\include{projectmanagement}
-% 
-% \newpage		% neue Seite
-% \mbox{} 		% leere Textbox
-% 
-\newpage		% neue Seite
-\mbox{} 		% leere Textbox
-\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
-% 
-\chapter{Design}
-\newpage		% neue Seite
-\mbox{} 		% leere Textbox
-\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
-% 
-\include{domainmodel}
-\include{designmodel}
-\include{architecture}
-\include{datamodel}
+% Requirements
+\include{vision} 	% Vision
+\include{usecases} 	% Use Cases
+\include{suppspec} 	% Supplementary Specification, Glossary, Domain Rules
+% Design
+\include{domainmodel} 	% Domain Model, Design Model
+\include{designmodel} 	% Design Model: diagrams
+\include{architecture} % Software Architecture Document, Data Model
+% Project Management
+\include{projectmanagement} % Time Management, Development Environment Description
 
-% \fancyfoot{}				% clean fancy footer
+%%---------------------------------------------------------------------------
+\fancyfoot{}				% clean fancy footer
 %% Appendix
 %%---------------------------------------------------------------------------
-% \cleardoublepage
-% \appendix
-% \section{\appendixname}
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+% 
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+% 
+\appendix
+\chapter{\appendixname}
 %%---------------------------------------------------------------------------
 
 %% Figures
 %%---------------------------------------------------------------------------
-% \cleardoublepage
-% \phantomsection 
-% \addcontentsline{toc}{subsection}{List of Figures}
-% \listoffigures
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+\phantomsection 
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
 %%---------------------------------------------------------------------------
 
 %% Tables
 %%---------------------------------------------------------------------------
-% \cleardoublepage
-% \phantomsection
-% \addcontentsline{toc}{subsection}{List of Tables}
-% \listoftables
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+\phantomsection
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
 %%---------------------------------------------------------------------------
 
 %% Bibliography
 %%---------------------------------------------------------------------------
-% \phantomsection 
-% \addcontentsline{toc}{subsection}{Bibliography}
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern	
+\phantomsection
+\addcontentsline{toc}{section}{Bibliography}
 % \bibliographystyle{unsrt}
-% \bibliographystyle{IEEEtranS}
-% \nocite{*}
-% \bibliography{includes/bibliography}
+\bibliographystyle{IEEEtranS}
+\nocite{*}
+\bibliography{includes/bibliography}
+% \thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
 %%---------------------------------------------------------------------------
 
 %%---------------------------------------------------------------------------

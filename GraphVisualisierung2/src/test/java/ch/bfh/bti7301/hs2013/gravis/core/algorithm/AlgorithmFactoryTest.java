@@ -12,6 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
+
 /**
  * Tests the algorithm loader.
  * 

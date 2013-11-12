@@ -1,41 +1,19 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Point2D;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import org.apache.commons.collections15.Factory;
-import org.apache.commons.collections15.Transformer;
-
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
-import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.PointTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
 import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
-import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
-import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
-import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
-import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
-import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
-import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
 /**
  * A visualization panel.
@@ -47,42 +25,75 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 public class VisualizationPanel extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 177109739873034494L;
-	
-	private Observer visualizationViewer;
-	
+
+	/**
+	 * A field for a titled border.
+	 */
+	private TitledBorder titledBorder;
+
+	/**
+	 * A field for a visualization viewer.
+	 */
+	private VisualizationViewer<IVertex, IEdge> viewer;
+
 	/**
 	 * 
-	 * @param visualizationViewer
+	 * @param layout
 	 */
-	public VisualizationPanel(GravisVisualizationViewer visualizationViewer) {
+	public VisualizationPanel(Layout<IVertex, IEdge> layout) {
 		super();
-		
-		this.visualizationViewer = visualizationViewer;
-		EditingModalGraphMouse<IVertex,IEdge> graphMouse = 
-				new EditingModalGraphMouse<>(visualizationViewer.getRenderContext(), 
-						new VertexFactory(), new EdgeFactory());
+		// panel
+		this.titledBorder = BorderFactory
+				.createTitledBorder("visualizationPanel");
+		this.setBorder(titledBorder);
+		// viewer
+		this.viewer = new VisualizationViewer<IVertex, IEdge>(layout);
 
-		visualizationViewer.setGraphMouse(graphMouse);
-		visualizationViewer.addKeyListener(graphMouse.getModeKeyListener());
-		graphMouse.setMode(ModalGraphMouse.Mode.EDITING);
-		
-		JPanel controls = new JPanel();
-		JComboBox modeBox = graphMouse.getModeComboBox();
-		controls.add(modeBox);
-		this.add(controls, BorderLayout.NORTH);
-		
-		GraphZoomScrollPane panel = new GraphZoomScrollPane(visualizationViewer);
-		this.add(panel, BorderLayout.CENTER);
+		//
+		// EditingModalGraphMouse<IVertex, IEdge> graphMouse = new
+		// EditingModalGraphMouse<>(
+		// this.viewer.getRenderContext(), new VertexFactory(),
+		// new EdgeFactory());
+		//
+		// this.viewer.setGraphMouse(graphMouse);
+		// this.viewer.addKeyListener(graphMouse.getModeKeyListener());
+		// graphMouse.setMode(ModalGraphMouse.Mode.EDITING);
+		//
+		// JPanel controls = new JPanel();
+		// JComboBox modeBox = graphMouse.getModeComboBox();
+		// controls.add(modeBox);
+		// this.add(controls, BorderLayout.NORTH);
+		//
+		// GraphZoomScrollPane pane = new GraphZoomScrollPane(viewer);
+		// this.add(pane, BorderLayout.CENTER);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		this.visualizationViewer.update(o, arg);
-		
-//		this.repaint();
-	}
 
+		if (o instanceof Model) {
+
+			Model m = (Model) o;
+			ResourceBundle b = m.getResourceBundle();
+			try {
+				if (arg == EventSource.I18N)
+					b.getString("visualization.label");
+
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.toString(),
+						b.getString("app.label"), 1, null);
+				e.printStackTrace();
+			}
+
+		} else {
+			this.update(o, arg);
+			// this.repaint();
+		}
+
+	}
 }

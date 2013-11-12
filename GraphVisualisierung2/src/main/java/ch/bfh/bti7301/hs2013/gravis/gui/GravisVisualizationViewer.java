@@ -10,18 +10,14 @@ import javax.swing.border.TitledBorder;
 
 import org.apache.commons.collections15.Transformer;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.PointTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
-import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
-import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
@@ -39,6 +35,10 @@ public class GravisVisualizationViewer extends
 	 */
 	private TitledBorder visualizationPanelBorder;
 
+	/**
+	 * 
+	 * @param layout
+	 */
 	public GravisVisualizationViewer(Layout<IVertex, IEdge> layout) {
 		super(layout);
 
@@ -50,25 +50,26 @@ public class GravisVisualizationViewer extends
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
 		this.getRenderContext().setVertexFillPaintTransformer(
 				new VertexColorTransformer());
-		
-//		DefaultModalGraphMouse<IVertex, IEdge> gm = new DefaultModalGraphMouse<>();
-		
-//		EditingModalGraphMouse<IVertex,IEdge> graphMouse = 
-//		new EditingModalGraphMouse<>(this.getRenderContext(), 
-//				new VertexFactory(), new EdgeFactory());
-		
-//		vv.setGraphMouse(graphMouse);
-//		vv.addKeyListener(graphMouse.getModeKeyListener());
-//		graphMouse.setMode(ModalGraphMouse.Mode.EDITING);
-		
-//		gm.setMode(Mode.PICKING);
-//		gm.setMode(Mode.TRANSFORMING);
-//		graphMouse.setMode(Mode.EDITING);
-//		this.setGraphMouse(graphMouse);
-//		this.visualizationPanelBorder = BorderFactory
-//				.createTitledBorder("visualizationPanel");
-//		this.setBorder(visualizationPanelBorder);
-		
+
+		// DefaultModalGraphMouse<IVertex, IEdge> gm = new
+		// DefaultModalGraphMouse<>();
+
+		// EditingModalGraphMouse<IVertex,IEdge> graphMouse =
+		// new EditingModalGraphMouse<>(this.getRenderContext(),
+		// new VertexFactory(), new EdgeFactory());
+
+		// vv.setGraphMouse(graphMouse);
+		// vv.addKeyListener(graphMouse.getModeKeyListener());
+		// graphMouse.setMode(ModalGraphMouse.Mode.EDITING);
+
+		// gm.setMode(Mode.PICKING);
+		// gm.setMode(Mode.TRANSFORMING);
+		// graphMouse.setMode(Mode.EDITING);
+		// this.setGraphMouse(graphMouse);
+		// this.visualizationPanelBorder = BorderFactory
+		// .createTitledBorder("visualizationPanel");
+		// this.setBorder(visualizationPanelBorder);
+
 	}
 
 	/*
@@ -93,7 +94,7 @@ public class GravisVisualizationViewer extends
 				// TODO add dynamic layout
 				Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph,
 						new PointTransformer());
-//				layout.setSize(new Dimension(250, 350));
+				// layout.setSize(new Dimension(250, 350));
 				this.setGraphLayout(layout);
 
 				Transformer<IVertex, Shape> vertexSize = new Transformer<IVertex, Shape>() {
@@ -113,14 +114,15 @@ public class GravisVisualizationViewer extends
 				this.getRenderContext().setEdgeDrawPaintTransformer(
 						new EdgeColorTransformer());
 				this.getRenderContext().setVertexShapeTransformer(vertexSize);
-				
+
 				// this.setVertexToolTipTransformer(vertexToolTipTransformer);
 
-//				Container content = getContentPane();
-//				final GraphZoomScrollPane panel = new GraphZoomScrollPane(vv);
-//				content.add(panel);
-//				Factory<Number> vertexFactory = new VertexFactory();
-//				Factory<Number> edgeFactory = new EdgeFactory();
+				// Container content = getContentPane();
+				// final GraphZoomScrollPane panel = new
+				// GraphZoomScrollPane(vv);
+				// content.add(panel);
+				// Factory<Number> vertexFactory = new VertexFactory();
+				// Factory<Number> edgeFactory = new EdgeFactory();
 
 				// this.visualizationPanelBorder.setTitle(m
 				// .getVisualizationPanelLabel());

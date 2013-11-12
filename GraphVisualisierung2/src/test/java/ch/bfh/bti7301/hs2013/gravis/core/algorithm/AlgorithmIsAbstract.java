@@ -1,9 +1,10 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
+
 
 /**
- * A dummy algorithm implementing the interface <code>IAlgorithm</code> by
- * extending <code>AbstractAlgorithm</code>.
+ * A dummy algorithm implementing the interface <code>IAlgorithm</code>.
  * <p>
  * As declared as abstract, the instantiation should fail.
  * 

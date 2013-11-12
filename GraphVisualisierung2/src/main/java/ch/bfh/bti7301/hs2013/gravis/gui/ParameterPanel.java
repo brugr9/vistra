@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ComboBoxModel;
@@ -14,8 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
+
 /**
- * An settings panel.
+ * A parameter panel.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -60,10 +63,10 @@ public final class ParameterPanel extends JPanel implements Observer {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param guiControl
+	 * @param control
 	 *            the controller as in MVC
 	 */
-	public ParameterPanel(GuiControl guiControl) {
+	public ParameterPanel(Control control) {
 
 		this.graphLabel = new JLabel("graphLabel");
 		this.algorithmLabel = new JLabel("algorithmLabel");
@@ -71,14 +74,13 @@ public final class ParameterPanel extends JPanel implements Observer {
 		// Combobox
 		this.graphComboModel = new DefaultComboBoxModel<String>(new String[] {});
 		this.graphCombo = new JComboBox<String>(this.graphComboModel);
-		this.graphCombo.addItemListener(guiControl.graphSettingsListener);
+		this.graphCombo.addItemListener(control.graphSettingsListener);
 		// this.graphCombo.setBounds(463, 12, 170, 20);
 
 		this.algorithmComboModel = new DefaultComboBoxModel<String>(
 				new String[] {});
 		this.algorithmCombo = new JComboBox<String>(this.algorithmComboModel);
-		this.algorithmCombo
-				.addItemListener(guiControl.algorithmSettingsListener);
+		this.algorithmCombo.addItemListener(control.algorithmSettingsListener);
 		// this.algorithmCombo.setBounds(463, 12, 170, 20);
 
 		// Panel
@@ -104,31 +106,38 @@ public final class ParameterPanel extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		GuiModel m = (GuiModel) o;
 
-		try {
+		if (o instanceof Model) {
 
-			this.settingsPanelBorder.setTitle(m.getRenderPanelLabel());
-			// label
-			this.graphLabel.setText(m.getGraphLabel());
-			this.algorithmLabel.setText(m.getAlgorithmLabel());
-			// combo
-			this.graphComboModel = new DefaultComboBoxModel<String>(
-					m.getGraphComboModel());
-			this.algorithmComboModel = new DefaultComboBoxModel<String>(
-					m.getAlgorithmComboModel());
+			Model m = (Model) o;
+			ResourceBundle b = m.getResourceBundle();
 
-			this.graphCombo.setSelectedIndex(m.getGraphSelected());
-			this.algorithmCombo.setSelectedIndex(m.getAlgorithmSelected());
+			try {
 
-			this.graphCombo.setEnabled(m.isGraphEnabled());
-			this.algorithmCombo.setEnabled(m.isAlgorithmEnabled());
+				if (arg == EventSource.I18N) {
+					this.settingsPanelBorder.setTitle(b
+							.getString("settings.label"));
+					this.graphLabel.setText(b.getString("graph.label"));
+					this.algorithmLabel.setText(b.getString("algorithm.label"));
+				} else {
+					// combo
+					this.graphComboModel = new DefaultComboBoxModel<String>(
+							m.getGraphs());
+					this.algorithmComboModel = new DefaultComboBoxModel<String>(
+							m.getAlgorithms());
+					this.graphCombo.setSelectedIndex(m.getSelectedGraph());
+					this.algorithmCombo.setSelectedIndex(m
+							.getSelectedAlgorithm());
+					this.graphCombo.setEnabled(m.isGraphsEnabled());
+					this.algorithmCombo.setEnabled(m.isAlgorithmsEnabled());
+				}
 
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.toString(),
-					m.getProgramName(), 1, null);
-			e.printStackTrace();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.toString(),
+						b.getString("app.label"), 1, null);
+				e.printStackTrace();
+			}
+
 		}
-
 	}
 }

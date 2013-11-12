@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -12,6 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
+
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
 
 /**
  * A protocol panel.
@@ -69,16 +72,26 @@ public final class ProtocolPanel extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		GuiModel m = (GuiModel) o;
-		try {
-			this.protocolPanelBorder.setTitle(m.getProtocolPanelLabel());
-			this.protocolTextArea.setText(m.getProtocolPanelText());
-			this.protocolTextArea.setCaretPosition(this.protocolTextArea
-					.getDocument().getLength());
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.toString(),
-					m.getProgramName(), 1, null);
-			e.printStackTrace();
+		if (o instanceof Model) {
+
+			Model m = (Model) o;
+			ResourceBundle b = m.getResourceBundle();
+
+			try {
+				if (arg == EventSource.I18N)
+					this.protocolPanelBorder.setTitle(b
+							.getString("protocol.label"));
+				else {
+					this.protocolTextArea.setText(m.getProtocol());
+					this.protocolTextArea
+							.setCaretPosition(this.protocolTextArea
+									.getDocument().getLength());
+				}
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.toString(),
+						b.getString("app.label"), 1, null);
+				e.printStackTrace();
+			}
 		}
 	}
 }

@@ -3,8 +3,8 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>280</x>
-      <y>200</y>
+      <x>350</x>
+      <y>380</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -14,8 +14,8 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>280</x>
-      <y>440</y>
+      <x>350</x>
+      <y>150</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -25,8 +25,8 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>280</x>
-      <y>300</y>
+      <x>350</x>
+      <y>240</y>
       <w>510</w>
       <h>120</h>
     </coordinates>
@@ -37,8 +37,8 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>300</x>
-      <y>340</y>
+      <x>370</x>
+      <y>280</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -49,8 +49,8 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>460</x>
-      <y>340</y>
+      <x>530</x>
+      <y>280</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -61,8 +61,8 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>620</x>
-      <y>340</y>
+      <x>690</x>
+      <y>280</y>
       <w>140</w>
       <h>70</h>
     </coordinates>

@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.swing.event.ChangeListener;
 
-import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
@@ -116,7 +116,7 @@ class Traversal implements ITraversal {
 			// TODO GravisGraphEventListener and IteratorManager need an
 			// Observer
 			// for processing and traversing updates
-			// TODO notify GuiControl.selectAlgorithm(index) for changes in item
+			// TODO notify Control.selectAlgorithm(index) for changes in item
 			
 			// TODO problem when this method is called twice
 			// TODO add TraversalListener

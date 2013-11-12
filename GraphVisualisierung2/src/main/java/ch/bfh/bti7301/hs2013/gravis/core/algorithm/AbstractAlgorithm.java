@@ -3,7 +3,10 @@
  */
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
+
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
+
 
 /**
  * Abstract algorithm, does nothing on execute().
@@ -63,16 +66,6 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	@Override
 	public final String getDescription() {
 		return this.description;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getId()
-	 */
-	@Override
-	public final int getId() {
-		return this.id;
 	}
 
 	@Override

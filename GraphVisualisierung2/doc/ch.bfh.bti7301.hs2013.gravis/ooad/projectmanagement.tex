@@ -1,8 +1,10 @@
-\section{Projekt Management}
-\label{sec:Projekt Management}
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+\chapter{Project Management}
 % 
-\subsection{Time Management}
-\label{subsec:Time Management}
+\section{Time Management}
+\label{sec:Time Management}
 Das Modul BTI-7301 Projekt 1 startete mit Beginn des Herbstsemester 2013/14. In der Woche 38 wurden die Projekte durch die Dozenten vorgestellt. Es wurden Teams gebildet und den den Projekten bzw. den Dozenten zugeteilt. Ein erstes Treffen des zust\"andigen Dozenten mit dem Team fand statt und erste Vereinbarungen wurden getroffen. Der Zeitplan gliedert sich nun wie folgt in vier Phasen:
 \begin{description}
   \item[Phase 1: Projektplanung und Systemarchitektur] Wochen 39/40/41(/42) 2013 (3-4 Wochen)
@@ -30,6 +32,23 @@ Das Modul BTI-7301 Projekt 1 startete mit Beginn des Herbstsemester 2013/14. In 
   \end{itemize}
 \end{description}
 % 
-\subsection{Development Environment}
-\label{subsec:Development Environment}
-Das System wird in Java als Maven-Projekt implementiert. Es werden das Java Universal Network/Graph Framework (JUNG, \url{http://jung.sourceforge.net/}), das XML-basierte Format GraphML (\url{http://graphml.graphdrawing.org/}), die Apache Commons IO Library und das Java Swing Framework verwendet. F\"ur das Sourcecode Management (SCM) wird die Software git verwendet, das Projekt wird auf github gehalten (\url{https://github.com/brugr9/gravis}). Als IDE kommt Eclipse mit Egit zum Einsatz.
+\section{Development Description}
+\label{sec:Development Description}
+% 
+Als integrierte Entwicklungsumgebung wird die Software \textit{Eclipse IDE} eingesetzt.
+% 
+\subsection{Programming Language and Libraries}
+\label{subsec:Programming Language and Libraries}
+Das System wird in der Programmiersprache Java implementiert. Es werden das Java Universal Network/Graph Framework JUNG~\cite{jung:2013}, das XML-basierte Format GraphML~\cite{graphml:2013}, die Apache Commons IO Library und das Java Swing Framework verwendet.
+% 
+\subsection{Sourcecode Management}
+\label{subsec:Sourcecode Management}
+F\"ur das Sourcecode Management (SCM) wird die Software git verwendet, das Projekt wird auf der webbasierten Plattform \textit{github} gehalten.
+
+Seit dem Entscheid in der Woche 45, das Projekt mit Maven zu erweitern, ist das aktuelle Projekt unter \url{https://github.com/brugr9/gravis} zu finden.
+
+Das Vorg\"anger-Projekt ist weiterhin bis mindestens nach Erhalt der Modul-Bewertung erreichbar \"uber den URL \url{https://github.com/brugr9/ch.bfh.bti7301.hs2013.GraphVisualisierung2}.
+% 
+\subsection{Object Oriented Analysis and Design}
+\label{subsec:Object Oriented Analysis and Design}
+Die Entwicklung des Projektes erfolgt objektorientiert und wird laufend dokumentiert. Die Elaboration der Komponenten und der Aufbau der Dokumentation richten sich nach C. Larman~\cite{larmann:2004}. F\"ur die Formulierung der Use Cases im ausgearbeiteten Format wurde ein \LaTeX-Style-File~\cite{bruggmann:2013} erstellt und verwendet.

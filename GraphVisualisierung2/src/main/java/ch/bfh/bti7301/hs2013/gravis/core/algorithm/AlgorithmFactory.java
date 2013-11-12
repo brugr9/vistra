@@ -2,10 +2,9 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
 import java.util.Properties;
-
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import ch.bfh.bti7301.hs2013.gravis.core.util.FileUtil;
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
@@ -29,19 +28,17 @@ public final class AlgorithmFactory {
 	public static IAlgorithmManager createAlgorithmManager(Properties p)
 			throws Exception {
 		try {
-//			File templatesDir = new File(
-//					p.getProperty("dir.templates.algorithm"));
-//			templatesDir.setReadOnly();
-//			File workbenchDir = new File(
-//					p.getProperty("dir.workbench.algorithm"));
-//			FileNameExtensionFilter filter = new FileNameExtensionFilter(
-//					p.getProperty("suffix.algorithm.description"),
-//					new String[] { p.getProperty("suffix.algorithm.source"),
-//							p.getProperty("suffix.algorithm.binary"),
-//							p.getProperty("suffix.algorithm.archive") });
-			
-			// TODO activate properties
-			return new AlgorithmManager(null, null, null);
+			File templatesDir = new File(
+					p.getProperty("dir.templates.algorithm"));
+			templatesDir.setReadOnly();
+			File workbenchDir = new File(
+					p.getProperty("dir.workbench.algorithm"));
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+					p.getProperty("suffix.algorithm.description"),
+					new String[] { p.getProperty("suffix.algorithm.source"),
+							p.getProperty("suffix.algorithm.binary"),
+							p.getProperty("suffix.algorithm.archive") });
+			return new AlgorithmManager(templatesDir, workbenchDir, filter);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -61,7 +58,7 @@ public final class AlgorithmFactory {
 		try {
 
 			ClassLoader cl = AlgorithmFactory.class.getClassLoader();
-			Class<?> c = cl.loadClass(FileUtil.getSuffix(file));
+			Class<?> c = cl.loadClass(file.getName());
 			return (IAlgorithm) c.newInstance();
 
 		} catch (SecurityException e) {

@@ -1,38 +1,43 @@
+\newpage		% neue Seite
+\mbox{} 		% leere Textbox
+\thispagestyle{empty} 	% leere Kopf- und Fusszeile - also keine Seitennummern
+\chapter{Design}
+% 
 \section{Domain Model}
 \label{sec:Domain Model}
 % 
 \subsection{Domain Model Diagram}
 \label{subsec:Domain Model Diagram}
 \begin{figure}[H]
-    \includegraphics[totalheight=0.55\textheight]{diagrams/domain-model-diagram.pdf}
+    \includegraphics[totalheight=0.6\textheight]{diagrams/domain-model-diagram.pdf}
     \caption{Domain Model Diagram}
     \label{fig:domain_model_diagram}
 \end{figure}
 % 
 \subsection{Domain Model Description}
 \label{subsec:Domain Model Description}
-Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziationen, wie im Domain Model Diagram gezeigt. Multiplizit\"aten und Attribute werden in Klammern angegeben.
+Es folgt eine Beschreibung der Konzeptklassen (conceptual classes) mit Assoziationen, wie im Domain Model Diagram gezeigt. Multiplizit\"aten und Attribute werden in Klammern angegeben.
 % 
 \subsubsection{User Interface}
 \label{subsubsec:User Interface}
 \begin{itemize}
-  \item \"Uber ein User Interface (1) kann ein User einen Traversal Manager (1) bedienen (\textit{operate}).
-  \item \"Uber ein User Interface (1) kann ein User einen Traversal Player (1) bedienen (\textit{operate}).
+  \item \"Uber ein User Interface (1) kann ein User einen Parameter Controller (1) bedienen (\textit{operate}).
+  \item \"Uber ein User Interface (1) kann ein User einen Traversal Controller (1) bedienen (\textit{operate}).
 \end{itemize}
 % 
-\subsubsection{Traversal Manager}
-\label{subsubsec:Traversal Manager}
+\subsubsection{Parameter Controller}
+\label{subsubsec:Parameter Controller}
 \begin{itemize}
-  \item Ein Traversal Manager verwaltet die zur Traversal ben\"otigten Parameter Graph (\textit{List of Graphs}) und Algorithm (\textit{List of Algorithms}).
-  \item Ein Traversal Manager h\"alt eine gegebene Anzahl von Graphen als Vorlagen bereit.
-  \item \"Uber einen Parameter Manager (1) kann ein User einen oder mehrere Graphen (0..n) des Formates *.graphml importieren (\textit{import}). Die importierten Graphen werden der Liste mit Graphen (\textit{List of Graphs}) hinzugef\"ugt.
-  \item \"Uber einen Parameter Manager (1) kann ein User vormals importierte Graphn (0..n) wieder l\"oschen (\textit{delete}). Diese werden aus der Liste mit Graphen (\textit{List of Graphs}) wieder entfernt.
-  \item \"Uber einen Parameter Manager (1) kann ein User einen Graphen (0..1) als Parameter ausw\"ahlen (\textit{select}).
+  \item Ein Parameter Controller verwaltet die zur Traversal ben\"otigten Parameter Graph (\textit{List of Graphs}) und Algorithm (\textit{List of Algorithms}).
+  \item Der Parameter Controller h\"alt eine gegebene Anzahl von Graphen als Vorlagen bereit.
+  \item Per Parameter Controller (1) kann ein User einen oder mehrere Graphen (0..n) des Formates *.graphml importieren (\textit{import}). Die importierten Graphen werden der Liste mit Graphen (\textit{List of Graphs}) hinzugef\"ugt.
+  \item Per Parameter Controller (1) kann ein User vormals importierte Graphn (0..n) wieder l\"oschen (\textit{delete}). Diese werden aus der Liste mit Graphen (\textit{List of Graphs}) wieder entfernt.
+  \item Per Parameter Controller (1) kann ein User einen Graphen (0..1) als Parameter ausw\"ahlen (\textit{select}).
   \item Mit der Wahl eines Graphen (1) als Parameter werden die auf den Graphen anwendbaren Algorithmen (0..n) aktiv gesetzt (\textit{enable}).
-  \item Ein Traversal Manager h\"alt eine gegebene Anzahl Algorithmen als Vorlagen bereit.
-  \item \"Uber einen Parameter Manager (1) kann ein User einen oder mehrere Algorithmen (0..n) importieren (\textit{import}), sofern diese ein gefordertes Interface implementieren. Die importierten Algorithmen werden der Liste mit Algorithmen (\textit{List of Algorithms}) hinzugef\"ugt.
-  \item \"Uber einen Parameter Manager (1) kann ein User vormals importierte Algorithmen (0..n) wieder l\"oschen (\textit{delete}). Diese werden aus der Liste mit Algorithmen (\textit{List of Algorithms}) wieder entfernt.
-  \item \"Uber einen Parameter Manager (1) kann ein User einen aktivierten (\textit{Enabled}) Algorithmus (0..1) als Parameter ausw\"ahlen (\textit{select}).
+  \item Ein Parameter Controller h\"alt eine gegebene Anzahl Algorithmen als Vorlagen bereit.
+  \item Per Parameter Controller (1) kann ein User einen oder mehrere Algorithmen (0..n) importieren (\textit{import}), sofern diese ein gefordertes Interface implementieren. Die importierten Algorithmen werden der Liste mit Algorithmen (\textit{List of Algorithms}) hinzugef\"ugt.
+  \item Per Parameter Controller (1) kann ein User vormals importierte Algorithmen (0..n) wieder l\"oschen (\textit{delete}). Diese werden aus der Liste mit Algorithmen (\textit{List of Algorithms}) wieder entfernt.
+  \item Per Parameter Controller (1) kann ein User einen aktivierten (\textit{Enabled}) Algorithmus (0..1) als Parameter ausw\"ahlen (\textit{select}).
 \end{itemize}
 % 
 \subsubsection{Graph}
@@ -55,24 +60,24 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
 \subsubsection{Traversal}
 \label{subsubsec:Traversal}
 \begin{itemize}
-  \item Eine Traversal (1) kann einen oder mehrere Steps (0..n) beinhalten resp. auflisten (\textit{List of Steps}).
+  \item Eine Traversal (1) kann einen oder mehrere Steps (0..n) verwalten (\textit{manage}).
 \end{itemize}
 
 \subsubsection{Step}
 \label{subsubsec:Step}
 \begin{itemize}
-  \item Ein Step ist ein Schritt der Traversal.
+  \item Ein Step ist ein Schritt der Traversierung.
 \end{itemize}
 
-\subsubsection{Traversal Player}
-\label{subsubsec:Traversal Player}
+\subsubsection{Traversal Controller}
+\label{subsubsec:Traversal Controller}
 \begin{itemize}
-  \item Ein Traversal Player (1) steuert einen Visualizer (1) (\textit{control}).
-  \item Ein Traversal Player h\"alt eine Traversierung (\textit{Traversal}).
-  \item Per Traversal Player kann ein User die Anzahl Schritte pro Bild (\textit{Steplength}) einstellen.
-  \item Per Traversal Player kann ein User die Zeit zwischen zwei Bildern (\textit{Delay}) einstellen.
-  \item Per Traversal Player kann ein User Step-by-Step-Elemente (\textit{Forward, Backward, To Beginning, To End}) bedienen.
-  \item Per Traversal Player kann ein User Animations-Elemente (\textit{Play, Pause, Resume, Stop}) bedienen.
+  \item Ein Traversal Controller (1) steuert einen Visualizer (1) (\textit{control}).
+  \item Der Traversal Controller h\"alt eine Traversierung (\textit{Traversal}).
+  \item Per Traversal Controller kann ein User die Anzahl Schritte pro Bild (\textit{Steplength}) einstellen.
+  \item Per Traversal Controller kann ein User die Zeit zwischen zwei Bildern (\textit{Delay}) einstellen.
+  \item Per Traversal Controller kann ein User Step-by-Step-Elemente (\textit{Forward, Backward, To Beginning, To End}) bedienen.
+  \item Per Traversal Controller kann ein User Animations-Elemente (\textit{Play, Pause, Resume, Stop}) bedienen.
 \end{itemize}
 
 \subsubsection{Visualizer}
@@ -81,3 +86,16 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual class) mit Assoziation
   \item Ein Visualizer (1) kann einen Graphen (0..1) visualisieren (\textit{visualize}).
   \item Ein Visualizer (1) kann einen oder mehrere Steps (0..n) visualisieren (\textit{visualize}).
 \end{itemize}
+% 
+\section{Design Model}
+\label{sec:Design Model}
+Zur Elaboration des Designs werden zuerst die zwei Konzeptklassen \textit{Parameter Controller} und \textit{Traversal Controller} als State Machine (SM) betrachtet und je mit einem State Diagram illustriert.
+
+Anschliessend werden die sechs Use Cases \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Graph}, \textit{Delete Algorithm}, \textit{Select Graph} und \textit{Select Algorithm} erarbeitet und je mit einem System Sequence Diagram (SSD), einem Sequence Diagram (SD) und einem Design Class Diagram (DCD) illustriert.
+\begin{itemize}
+  \item System Sequence Diagram (SSD): zeigt, wie eine Benutzerinteraktion vom System verarbeitet wird.
+  \item Sequence Diagram (SD): zeigt, wie Objekte miteinander arbeiten und erl\"autert die Zust\"andigkeiten der Klassen. 
+  \item Design Class Diagram (DCD): zeigt die Elemente des Systems unter Ber\"ucksichtigung ihrer Funktionalit\"at.
+\end{itemize}
+
+Ein Controller implementiert ausschliesslich System-Operationen (und eventuell einige private Methoden). Jeder System-Event wird mit einer einzigen System-Operation eines Controllers assoziiert.

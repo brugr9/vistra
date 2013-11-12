@@ -14,76 +14,71 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public interface IParameterManager {
 
 	/**
-	 * @return the templatesDir
+	 * Returns the templates directory.
+	 * 
+	 * @return the templates directory
 	 */
 	public abstract File getTemplatesDir();
 
 	/**
-	 * @return the workbenchDir
+	 * Returns the workbench directory.
+	 * 
+	 * @return the workbench directory
 	 */
 	public abstract File getWorkbenchDir();
 
 	/**
-	 * @return the filter
+	 * Returns the file name extension filter.
+	 * 
+	 * @return the file name extension filter
 	 */
 	public abstract FileNameExtensionFilter getFilter();
 
 	/**
-	 * Returns the name of a parameter item given by index.
+	 * Returns the names of available parameters.
 	 * 
-	 * @param parameterId
-	 * @return the parameter name
-	 * @throws Exception
-	 * @deprecated
-	 */
-	public abstract String getName(String parameterId) throws Exception;
-
-	/**
-	 * Returns all the names.
-	 * 
-	 * @return all the names
+	 * @return the names of available parameters
 	 * @throws Exception
 	 */
 	public abstract String[] getNames() throws Exception;
 
 	/**
-	 * Adds a file.
+	 * Adds the file to the parameter list.
 	 * 
-	 * @param parameterId
-	 *            the parameter ID
 	 * @param file
 	 *            the file to add
-	 * @return the file
+	 * @return the names of available parameters
+	 * @throws Exception
 	 */
-	public abstract File add(String parameterId, File file);
+	public abstract boolean add(File file) throws Exception;
 
 	/**
 	 * Adds a bunch of files.
 	 * 
 	 * @param files
 	 *            the files to add
-	 * @return <code>true</code> if the files were added
+	 * @return the names of available parameters
 	 */
-	public abstract boolean putAll(File[] files) throws Exception;
+	public abstract String[] putAll(File[] files) throws Exception;
 
 	/**
-	 * Returns a file given by parameter ID.
+	 * Returns a file given by index.
 	 * 
-	 * @param parameterId
-	 *            the parameter name
+	 * @param index
+	 *            the parameter index
 	 * @return the file
 	 * @throws Exception
 	 */
-	public abstract File getFile(String parameterId) throws Exception;
+	public abstract File getFile(int index) throws Exception;
 
 	/**
-	 * Deletes a file.
+	 * Removes a file.
 	 * 
 	 * @param file
-	 *            the file to delete
-	 * @return <code>true</code> if the file was deleted
+	 *            the file to remove
+	 * @return <code>true</code> if the file was remove
 	 * @throws Exception
 	 */
-	public abstract boolean delete(File file) throws Exception;
+	public abstract boolean remove(File file) throws Exception;
 
 }

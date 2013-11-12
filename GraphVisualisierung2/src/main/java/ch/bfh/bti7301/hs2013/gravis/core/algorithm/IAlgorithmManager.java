@@ -2,8 +2,9 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
 
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
+import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.core.IParameterManager;
-import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm.GraphType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -14,33 +15,21 @@ public interface IAlgorithmManager extends IParameterManager {
 
 	/**
 	 * 
-	 * @param algorithmId
+	 * @param index
 	 * @return IAlgorithm
 	 * @throws Exception
 	 */
-	public abstract IAlgorithm getAlgorithm(String algorithmId)
-			throws Exception;
+	public abstract IAlgorithm getAlgorithm(int index) throws Exception;
 
 	/**
 	 * Imports an algorithm class-file as given.
 	 * 
 	 * @param file
-	 *            the graph file
-	 * @return the imported algorithm
+	 *            the algorithm file
+	 * @return <code>true<code> if imported
 	 * @throws Exception
 	 */
-	public abstract IAlgorithm importAlgorithm(File file) throws Exception;
-
-	/**
-	 * Deletes an imported algorithm.
-	 * 
-	 * @param algorithmId
-	 *            the algorithm ID
-	 * @return <code>true</code> if the algorithm got deleted
-	 * @throws Exception
-	 */
-	public abstract boolean deleteAlgorithm(String algorithmId)
-			throws Exception;
+	public abstract boolean importAlgorithm(File file) throws Exception;
 
 	/**
 	 * @return IAlgorithm
@@ -51,13 +40,18 @@ public interface IAlgorithmManager extends IParameterManager {
 	/**
 	 * 
 	 * @param types
-	 *            GraphType[]
+	 *            an array of EdgeType
 	 */
 	public abstract void updateAlgorithmList(GraphType[] types);
 
 	/**
+	 * Deletes an imported algorithm.
+	 * 
 	 * @param file
+	 *            the algorithm
+	 * @return <code>true</code> if the algorithm got deleted
+	 * @throws Exception
 	 */
-	public abstract void deleteAlgorithm(File file);
+	public abstract boolean deleteAlgorithm(File file) throws Exception;
 
 }

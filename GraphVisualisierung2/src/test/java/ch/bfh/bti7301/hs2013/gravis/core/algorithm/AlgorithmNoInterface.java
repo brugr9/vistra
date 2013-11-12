@@ -14,15 +14,14 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public class AlgorithmNoInterface {
 
 	public String getName() {
-		// Auto-generated method stub
 		return null;
 	}
 
 	public String getDescription() {
-		// Auto-generated method stub
 		return null;
 	}
 
+<<<<<<< HEAD
 	public void execute(IRestrictedGraph graph) throws Exception {
 		// Auto-generated method stub
 
@@ -31,10 +30,12 @@ public class AlgorithmNoInterface {
 	public int getId() {
 		// Auto-generated method stub
 		return 0;
+=======
+	public void execute(IImmutableGraph graph) throws Exception {
+>>>>>>> branch 'master' of https://github.com/brugr9/gravis.git
 	}
 
 	public EdgeType[] getAnnotations() {
-		// Auto-generated method stub
 		return null;
 	}
 

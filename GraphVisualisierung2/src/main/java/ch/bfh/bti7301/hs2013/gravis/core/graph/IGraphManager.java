@@ -13,62 +13,38 @@ public interface IGraphManager extends IParameterManager {
 
 	/**
 	 * 
-	 * @param graphId
+	 * @param index
+	 *            the graph index
 	 * @return IGravisGraph
 	 * @throws Exception
 	 */
-	public abstract IGravisGraph getGraph(String graphId) throws Exception;
+	public abstract IGravisGraph getGraph(int index) throws Exception;
 
 	/**
-	 * Imports a graph from a GraphML-file into the existing graph.
-	 * 
-	 * TODO format description GraphML: weight and color attributes, ...
+	 * Imports a graph from a GraphML-file into the system.
 	 * 
 	 * @param file
 	 *            the file to import
-	 * @return the imported graph
+	 * @return the names of available graphs
 	 * @throws Exception
 	 */
-	public abstract IGravisGraph importGraph(File file) throws Exception;
+	public abstract boolean addGraph(File file) throws Exception;
 
 	/**
+	 * Clears a graph as given by index and returns the empty graph.
 	 * 
-	 * @param graphId
+	 * @param index
 	 * @return IGravisGraph
 	 * @throws Exception
 	 */
-	public abstract IGravisGraph clearGraph(String graphId) throws Exception;
-
-	/**
-	 * Removes the graph with the given id from the application and returns a
-	 * new empty graph.
-	 * 
-	 * @param graphId
-	 * @throws Exception
-	 */
-	public abstract void deleteGraph(String graphId) throws Exception;
+	public abstract IGravisGraph clearGraph(int index) throws Exception;
 
 	/**
 	 * 
-	 * @param graphId
-	 * @param destinationDir
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public abstract boolean exportGraph(String graphId, File destinationDir)
-			throws Exception;
-
-	/**
-	 * 
-	 * @param graph
-	 * @return boolean
-	 * @throws Exception
-	 */
-	public abstract boolean saveGraph(IGravisGraph graph) throws Exception;
-
-	/**
 	 * @param file
+	 * @return the names of available graphs
+	 * @throws Exception
 	 */
-	public abstract void deleteGraph(File file) throws Exception;
+	public abstract String[] deleteGraph(File file) throws Exception;
 
 }

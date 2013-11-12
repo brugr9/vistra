@@ -1,18 +1,19 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.BACKWARD;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.FORWARD;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.GOTO_BEGINNING;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.GOTO_END;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.PAUSE;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.PLAY;
-import static ch.bfh.bti7301.hs2013.gravis.gui.GuiControl.EventSource.STOP;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.BACKWARD;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.FORWARD;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.GOTO_BEGINNING;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.GOTO_END;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.PAUSE;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.PLAY;
+import static ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource.STOP;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -23,6 +24,8 @@ import javax.swing.JProgressBar;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
+
+import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
 
 /**
  * A player panel.
@@ -52,25 +55,25 @@ public final class PlayerPanel extends JPanel implements Observer {
 	 */
 	private JPanel playerPanel3;
 	/**
-	 * A field for a step label.
+	 * A field for a steplength label.
 	 */
-	private JLabel stepLabel;
+	private JLabel steplengthLabel;
 	/**
 	 * A field for a delay label.
 	 */
 	private JLabel delayLabel;
 	/**
-	 * A field for a step spinner number model.
+	 * A field for a steplength spinner number model.
 	 */
-	private SpinnerNumberModel stepSpinnerNumberModel;
+	private SpinnerNumberModel steplengthSpinnerNumberModel;
 	/**
 	 * A field for an delay spinner number model.
 	 */
 	private SpinnerNumberModel delaySpinnerNumberModel;
 	/**
-	 * A field for an step spinner.
+	 * A field for an steplength spinner.
 	 */
-	private JSpinner stepSpinner;
+	private JSpinner steplengthSpinner;
 	/**
 	 * A field for an delay spinner.
 	 */
@@ -96,9 +99,9 @@ public final class PlayerPanel extends JPanel implements Observer {
 	 */
 	private JButton stopButton;
 	/**
-	 * A field for a home button.
+	 * A field for a toBeginning button.
 	 */
-	private JButton homeButton;
+	private JButton toBeginningButton;
 	/**
 	 * A field for a backward button.
 	 */
@@ -108,30 +111,30 @@ public final class PlayerPanel extends JPanel implements Observer {
 	 */
 	private JButton forwardButton;
 	/**
-	 * A field for an end button.
+	 * A field for an toEnd button.
 	 */
-	private JButton endButton;
+	private JButton toEndButton;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param guiControl
+	 * @param control
 	 *            the controller as in MVC
 	 */
-	public PlayerPanel(GuiControl guiControl) {
+	public PlayerPanel(Control control) {
 
 		// spinner
-		this.stepLabel = new JLabel("stepLabel");
-		this.stepSpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
-		this.stepSpinner = new JSpinner(this.stepSpinnerNumberModel);
-		((JSpinner.NumberEditor) this.stepSpinner.getEditor()).getTextField()
-				.addFocusListener(guiControl.stepSettingsListener);
+		this.steplengthLabel = new JLabel("steplengthLabel");
+		this.steplengthSpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
+		this.steplengthSpinner = new JSpinner(this.steplengthSpinnerNumberModel);
+		((JSpinner.NumberEditor) this.steplengthSpinner.getEditor())
+				.getTextField().addFocusListener(control.steplengthListener);
 
 		this.delayLabel = new JLabel("delayLabel");
 		this.delaySpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
 		this.delaySpinner = new JSpinner(this.delaySpinnerNumberModel);
 		((JSpinner.NumberEditor) this.delaySpinner.getEditor()).getTextField()
-				.addFocusListener(guiControl.delaySettingsListener);
+				.addFocusListener(control.delaySettingsListener);
 
 		this.progressLabel = new JLabel("progressLabel");
 
@@ -142,38 +145,38 @@ public final class PlayerPanel extends JPanel implements Observer {
 
 		this.playButton = new JButton("playButton");
 		this.playButton.setActionCommand(PLAY.toString());
-		this.playButton.addActionListener(guiControl.playerListener);
+		this.playButton.addActionListener(control.playerListener);
 
 		this.pauseButton = new JButton("pauseButton");
 		this.pauseButton.setActionCommand(PAUSE.toString());
-		this.pauseButton.addActionListener(guiControl.playerListener);
+		this.pauseButton.addActionListener(control.playerListener);
 
 		this.stopButton = new JButton("stopButton");
 		this.stopButton.setActionCommand(STOP.toString());
-		this.stopButton.addActionListener(guiControl.playerListener);
+		this.stopButton.addActionListener(control.playerListener);
 
-		this.homeButton = new JButton("homeButton");
-		this.homeButton.setActionCommand(GOTO_BEGINNING.toString());
-		this.homeButton.addActionListener(guiControl.playerListener);
+		this.toBeginningButton = new JButton("toBeginningButton");
+		this.toBeginningButton.setActionCommand(GOTO_BEGINNING.toString());
+		this.toBeginningButton.addActionListener(control.playerListener);
 
 		this.backwardButton = new JButton("backwardButton");
 		this.backwardButton.setActionCommand(BACKWARD.toString());
-		this.backwardButton.addActionListener(guiControl.playerListener);
+		this.backwardButton.addActionListener(control.playerListener);
 
 		this.forwardButton = new JButton("forwardButton");
 		this.forwardButton.setActionCommand(FORWARD.toString());
-		this.forwardButton.addActionListener(guiControl.playerListener);
+		this.forwardButton.addActionListener(control.playerListener);
 
-		this.endButton = new JButton("endButton");
-		this.endButton.setActionCommand(GOTO_END.toString());
-		this.endButton.addActionListener(guiControl.playerListener);
+		this.toEndButton = new JButton("toEndButton");
+		this.toEndButton.setActionCommand(GOTO_END.toString());
+		this.toEndButton.addActionListener(control.playerListener);
 
 		// Panel
 		// 1
 		this.playerPanel1 = new JPanel();
 		this.playerPanel1.setLayout(new GridLayout(1, 6));
-		this.playerPanel1.add(this.stepLabel);
-		this.playerPanel1.add(this.stepSpinner);
+		this.playerPanel1.add(this.steplengthLabel);
+		this.playerPanel1.add(this.steplengthSpinner);
 		this.playerPanel1.add(this.delayLabel);
 		this.playerPanel1.add(this.delaySpinner);
 		this.playerPanel1.add(this.progressLabel);
@@ -187,10 +190,10 @@ public final class PlayerPanel extends JPanel implements Observer {
 		// 3
 		this.playerPanel3 = new JPanel();
 		this.playerPanel3.setLayout(new GridLayout(1, 4));
-		this.playerPanel2.add(this.homeButton);
+		this.playerPanel2.add(this.toBeginningButton);
 		this.playerPanel2.add(this.backwardButton);
 		this.playerPanel2.add(this.forwardButton);
-		this.playerPanel2.add(this.endButton);
+		this.playerPanel2.add(this.toEndButton);
 		// 1 - 2 - 3
 		this.playerPanelBorder = BorderFactory
 				.createTitledBorder("playerPanel");
@@ -208,55 +211,57 @@ public final class PlayerPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		GuiModel m = (GuiModel) o;
+		if (o instanceof Model) {
 
-		try {
+			Model m = (Model) o;
+			ResourceBundle b = m.getResourceBundle();
 
-			this.playerPanelBorder.setTitle(m.getPlayerPanelLabel());
+			try {
 
-			// spinner
-			this.stepLabel.setText(m.getStepLabel());
-			this.delayLabel.setText(m.getDelayLabel());
-			this.stepSpinner.setValue(m.getStepValue());
-			this.delaySpinner.setValue(m.getDelayValue());
-			this.stepSpinner.setEnabled(m.isStepEnabled());
-			this.delaySpinner.setEnabled(m.isDelayEnabled());
+				if (arg == EventSource.I18N) {
+					this.playerPanelBorder
+							.setTitle(b.getString("player.label"));
+					this.steplengthLabel.setText(b.getString("setStep.label"));
+					this.delayLabel.setText(b.getString("setDelay.label"));
+					this.progressLabel.setText(b.getString("progress.label"));
+					//
+					this.playButton.setText(b.getString("play.label"));
+					// this.pauseButton.setText(b.getString("pause.label"));
+					this.stopButton.setText(b.getString("stop.label"));
+					this.toBeginningButton.setText(b.getString("home.label"));
+					this.backwardButton.setText(b.getString("backward.label"));
+					this.forwardButton.setText(b.getString("forward.label"));
+					this.toEndButton.setText(b.getString("end.label"));
 
-			// progressbar
-			this.progressLabel.setText(m.getProgressLabel());
-			this.progressBar.setMaximum(m.getProgressValueMaximum());
-			this.progressBar.setValue(m.getProgressValue());
+				} else {
 
-			// button
-			this.playButton.setText(m.getPlayButtonLabel());
-			this.playButton.setEnabled(m.isPlayButtonEnabled());
+					this.steplengthSpinner.setValue(m.getSteplength());
+					this.delaySpinner.setValue(m.getDelay());
+					this.progressBar.setMaximum(m.getProgressMaximum());
+					this.progressBar.setValue(m.getProgress());
 
-			this.pauseButton.setText(m.getPauseButtonLabel());
-			this.pauseButton.setActionCommand(m.getPauseButtonActionCommand());
-			this.pauseButton.setEnabled(m.isPauseButtonEnabled());
+					this.steplengthSpinner.setEnabled(m.isSteplengthEnabled());
+					this.delaySpinner.setEnabled(m.isDelayEnabled());
+					this.playButton.setEnabled(m.isPlayEnabled());
+					this.pauseButton.setEnabled(m.isPauseEnabled());
+					this.stopButton.setEnabled(m.isStopEnabled());
+					this.toBeginningButton.setEnabled(m.isToBeginningEnabled());
+					this.backwardButton.setEnabled(m.isBackwardEnabled());
+					this.forwardButton.setEnabled(m.isForwardEnabled());
+					this.toEndButton.setEnabled(m.isToEndEnabled());
 
-			this.stopButton.setText(m.getStopButtonLabel());
-			this.stopButton.setEnabled(m.isStopButtonEnabled());
+				}
+				//
+				this.pauseButton.setActionCommand(m.getPauseEvent().toString());
+				this.pauseButton.setText(b.getString("pause.label"));
 
-			this.homeButton.setText(m.getHomeButtonLabel());
-			this.homeButton.setEnabled(m.isHomeButtonEnabled());
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.toString(),
+						b.getString("app.label"), 1, null);
+				e.printStackTrace();
+			}
 
-			this.backwardButton.setText(m.getBackwardButtonLabel());
-			this.backwardButton.setMnemonic(m.getBackwardButtonMnemonic());
-			this.backwardButton.setEnabled(m.isBackwardButtonEnabled());
-
-			this.forwardButton.setText(m.getForwardButtonLabel());
-			this.forwardButton.setEnabled(m.isForwardButtonEnabled());
-
-			this.endButton.setText(m.getEndButtonLabel());
-			this.endButton.setEnabled(m.isEndButtonEnabled());
-
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.toString(),
-					m.getProgramName(), 1, null);
-			e.printStackTrace();
 		}
-
 	}
 
 }
