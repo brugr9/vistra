@@ -21,7 +21,7 @@
     \label{fig:package-diagram}
 \end{figure}
 \subsubsection{Beschreibung und Motivation}
-Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren. Die Drei-Schichten-Architektur hat sich aus den Requirements ergeben. Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit, die Komponente Gui enth\"alt die (grafische) Benutzerschnittstelle und schliesslich die Komponente Core: das Herzst\"uck des Systems k\"ummert sich um I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
+Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren. Die Drei-Schichten-Architektur hat sich aus den Requirements ergeben. Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit, die Komponente Gui enth\"alt die (grafische) Benutzerschnittstelle und schliesslich die Komponente Core: das Herzst\"uck des Systems k\"ummert sich um das Initialisieren der Komponenten, I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
 % 
 % \subsection{Deployment View}
 % 
