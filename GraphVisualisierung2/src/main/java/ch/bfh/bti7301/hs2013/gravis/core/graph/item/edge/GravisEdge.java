@@ -27,7 +27,8 @@ class GravisEdge extends AbstractGraphItem implements IEdge {
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + ": " + this.weight;
+		;
+		return super.toString();
 	}
 
 	/*

@@ -1,8 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
 import java.awt.Dimension;
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -43,15 +41,71 @@ public class GravisVisualizationViewer extends
 	public GravisVisualizationViewer(Layout<IVertex, IEdge> layout) {
 		super(layout);
 
+		// TODO bitte an dieser Klasse nichts ändern (pk)
+		
 		this.setPreferredSize(new Dimension(800, 300));
-		this.getRenderContext().setVertexLabelTransformer(
-				new ToStringLabeller<IVertex>());
-		this.getRenderContext().setEdgeLabelTransformer(
-				new ToStringLabeller<IEdge>());
+		
+		Transformer<IVertex, String> vertexLabelTransformer = 
+				new Transformer<IVertex, String>() {
+			@Override
+			public String transform(IVertex vertex) {
+				// TODO notify protocol panel
+//				System.out.println(vertex.getComment());
+				return  vertex.getId() + (Double.isNaN(vertex.getPaintedResult()) ? "" : ": "
+						+ vertex.getPaintedResult());
+			}
+		};
+		this.getRenderContext().setVertexLabelTransformer(vertexLabelTransformer);
+		
+		Transformer<IEdge, String> edgeLabelTransformer = 
+				new Transformer<IEdge, String>() {
+			@Override
+			public String transform(IEdge edge) {
+				// TODO notify protocol panel
+//				System.out.println(edge.getComment());
+				return  edge.getId() +  ": "
+						+ edge.getWeight()
+						+ (Double.isNaN(edge.getPaintedResult()) ? "" : "\n"
+								+ edge.getPaintedResult());
+			}
+		};
+		this.getRenderContext().setEdgeLabelTransformer(edgeLabelTransformer);
+		
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
 		this.getRenderContext().setVertexFillPaintTransformer(
 				new VertexColorTransformer());
 
+		this.getRenderContext().setVertexFillPaintTransformer(
+				new VertexColorTransformer());
+		this.getRenderContext().setEdgeDrawPaintTransformer(
+				new EdgeColorTransformer());
+		this.getRenderContext().setVertexShapeTransformer(new ShapeTransformer());
+		
+		Transformer<IVertex,String> vertexToolTipTransformer = 
+				new Transformer<IVertex,String>() {
+					@Override
+					public String transform(IVertex input) {
+						// TODO Auto-generated method stub
+						return input.toString();
+					}
+		};
+		this.setVertexToolTipTransformer(vertexToolTipTransformer);
+		
+		Transformer<IEdge,String> edgeToolTipTransformer = 
+				new Transformer<IEdge,String>() {
+					@Override
+					public String transform(IEdge input) {
+						// TODO Auto-generated method stub
+						return input.toString();
+					}
+		};
+		this.setEdgeToolTipTransformer(edgeToolTipTransformer);
+		
+//		this.getRenderContext().setVertexLabelTransformer(
+//				new ToStringLabeller<IVertex>());
+//		this.getRenderContext().setEdgeLabelTransformer(
+//				new ToStringLabeller<IEdge>());
+		
 		// DefaultModalGraphMouse<IVertex, IEdge> gm = new
 		// DefaultModalGraphMouse<>();
 
@@ -99,13 +153,6 @@ public class GravisVisualizationViewer extends
 				this.setGraphLayout(layout);
 
 				// TODO adjust implementation
-				this.getRenderContext().setVertexFillPaintTransformer(
-						new VertexColorTransformer());
-				this.getRenderContext().setEdgeDrawPaintTransformer(
-						new EdgeColorTransformer());
-				this.getRenderContext().setVertexShapeTransformer(new ShapeTransformer());
-
-				// this.setVertexToolTipTransformer(vertexToolTipTransformer);
 
 				// Container content = getContentPane();
 				// final GraphZoomScrollPane panel = new

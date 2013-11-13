@@ -27,7 +27,7 @@
 		<default>0</default>
 	</key>
 	<key id="vertexWidth" for="node" attr.name="vertexWidth" attr.type="double ">
-		<default>30.0</default>
+		<default>40.0</default>
 	</key>
 	<key id="vertexHeight" for="node" attr.name="vertexHeight" attr.type="double ">
 		<default>30.0</default>

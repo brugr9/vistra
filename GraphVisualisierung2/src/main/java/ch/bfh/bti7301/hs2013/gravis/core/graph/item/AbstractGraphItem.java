@@ -62,12 +62,12 @@ public abstract class AbstractGraphItem implements IGraphItem {
 
 	@Override
 	public void setId(String id) {
-		this.id = id;
+		this.id = id.trim();
 	}
 
 	@Override
 	public void setInfo(String info) {
-		this.info = info;
+		this.info = info.trim();
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 
 	@Override
 	public void setComment(String comment) {
-		this.comment = comment;
+		this.comment = comment.trim();
 	}
 
 	@Override
