@@ -20,10 +20,11 @@ class AlgorithmManager extends AbstractParameterManager implements
 		IAlgorithmManager {
 
 	/**
-	 * 
+	 * An algorithm map mapping integer (the index of an algorithm in
+	 * super.parameters) to edge type (the capability of the algorithm).
 	 */
 	private HashedMap<Integer, EdgeType> algorithmMap;
-	
+
 	/**
 	 * Main constructor
 	 * 
@@ -65,8 +66,10 @@ class AlgorithmManager extends AbstractParameterManager implements
 	}
 
 	/**
+	 * Loads an algorithm.
 	 * 
 	 * @param file
+	 *            the algorithm to load
 	 * @throws Exception
 	 */
 	private void load(File file) throws Exception {
