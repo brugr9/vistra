@@ -29,7 +29,7 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph#isEmpty()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#isEmpty()
 	 */
 	@Override
 	public boolean isEmpty() {

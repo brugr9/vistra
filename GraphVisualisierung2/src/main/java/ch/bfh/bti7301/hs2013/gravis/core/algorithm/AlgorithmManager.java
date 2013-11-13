@@ -38,17 +38,17 @@ class AlgorithmManager extends AbstractParameterManager implements
 	public AlgorithmManager(File templatesDir, File workbenchDir,
 			FileNameExtensionFilter filter) {
 		super(templatesDir, workbenchDir, filter);
-		try {
-			// TODO validation?
-			for (File file : templatesDir.listFiles()) {
-				super.add(file);
-			}
-			for (File file : workbenchDir.listFiles()) {
-				super.add(file);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			// TODO validation?
+//			for (File file : templatesDir.listFiles()) {
+//				super.add(file);
+//			}
+//			for (File file : workbenchDir.listFiles()) {
+//				super.add(file);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
@@ -83,10 +83,12 @@ class AlgorithmManager extends AbstractParameterManager implements
 	@Override
 	public IAlgorithm getAlgorithm(int index) throws Exception {
 		try {
-			File file = super.getFile(index);
-			return AlgorithmFactory.createAlgorithm(file);
+//			File file = super.getFile(index);
+//			return AlgorithmFactory.createAlgorithm(file);
 			// TODO bitte dummy value auskommentieren und nicht löschen
-			// return new AlgorithmDLSRecursive();
+			 return new AlgorithmDLSRecursive();
+//			 return new AlgorithmDFSRecursive();
+//			 return new AlgorithmDijkstra();
 		} catch (Exception e) {
 			throw e;
 		}

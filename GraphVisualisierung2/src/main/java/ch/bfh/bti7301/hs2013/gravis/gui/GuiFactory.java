@@ -8,6 +8,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.util.PointTransformer;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.StaticLayout;
@@ -144,13 +145,12 @@ public final class GuiFactory {
 	 */
 	static VisualizationPanel createVisualizer(Model model) {
 		Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
-		Layout<IVertex, IEdge> layout = createCircleLayout(graph);
-		VisualizationPanel visualizationPanel = new VisualizationPanel(layout);
-		// GravisVisualizationViewer visualizationViewer = new
-		// GravisVisualizationViewer(
-		// layout);
-		// VisualizationPanel visualizationPanel = new VisualizationPanel(
-		// visualizationViewer);
+		Layout<IVertex, IEdge> layout = createLayout(graph, new PointTransformer());
+		GravisVisualizationViewer visualizationViewer = new
+		GravisVisualizationViewer(layout);
+		VisualizationPanel visualizationPanel = new VisualizationPanel(
+		visualizationViewer);
+		 
 		model.addObserver(visualizationPanel);
 		return visualizationPanel;
 	}

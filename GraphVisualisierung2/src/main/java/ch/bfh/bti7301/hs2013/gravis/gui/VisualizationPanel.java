@@ -1,19 +1,26 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
+import java.awt.BorderLayout;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
 import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
  * A visualization panel.
@@ -34,38 +41,39 @@ public class VisualizationPanel extends JPanel implements Observer {
 	/**
 	 * A field for a visualization viewer.
 	 */
-	private VisualizationViewer<IVertex, IEdge> viewer;
+	private GravisVisualizationViewer viewer;
 
 	/**
 	 * 
 	 * @param layout
 	 */
-	public VisualizationPanel(Layout<IVertex, IEdge> layout) {
+	public VisualizationPanel(GravisVisualizationViewer visualizationViewer) {
 		super();
+		
 		// panel
 		this.titledBorder = BorderFactory
 				.createTitledBorder("visualizationPanel");
 		this.setBorder(titledBorder);
 		// viewer
-		this.viewer = new VisualizationViewer<IVertex, IEdge>(layout);
-
-		//
-		// EditingModalGraphMouse<IVertex, IEdge> graphMouse = new
-		// EditingModalGraphMouse<>(
-		// this.viewer.getRenderContext(), new VertexFactory(),
-		// new EdgeFactory());
-		//
-		// this.viewer.setGraphMouse(graphMouse);
-		// this.viewer.addKeyListener(graphMouse.getModeKeyListener());
-		// graphMouse.setMode(ModalGraphMouse.Mode.EDITING);
-		//
-		// JPanel controls = new JPanel();
-		// JComboBox modeBox = graphMouse.getModeComboBox();
-		// controls.add(modeBox);
-		// this.add(controls, BorderLayout.NORTH);
-		//
-		// GraphZoomScrollPane pane = new GraphZoomScrollPane(viewer);
-		// this.add(pane, BorderLayout.CENTER);
+		this.viewer = visualizationViewer;
+				
+		
+		 EditingModalGraphMouse<IVertex, IEdge> graphMouse = new
+		 EditingModalGraphMouse<>(
+		 this.viewer.getRenderContext(), new VertexFactory(),
+		 new EdgeFactory());
+		
+		 this.viewer.setGraphMouse(graphMouse);
+		 this.viewer.addKeyListener(graphMouse.getModeKeyListener());
+		 graphMouse.setMode(Mode.EDITING);
+		
+		 JPanel controls = new JPanel();
+		 JComboBox modeBox = graphMouse.getModeComboBox();
+		 controls.add(modeBox);
+		 this.add(controls, BorderLayout.NORTH);
+		
+		 GraphZoomScrollPane pane = new GraphZoomScrollPane(viewer);
+		 this.add(pane, BorderLayout.CENTER);
 	}
 
 	/*
@@ -90,10 +98,10 @@ public class VisualizationPanel extends JPanel implements Observer {
 				e.printStackTrace();
 			}
 
-		} else {
-			this.update(o, arg);
-			// this.repaint();
-		}
+		} 
+//		else {
+			this.viewer.update(o, arg);
+//		}
 
 	}
 }

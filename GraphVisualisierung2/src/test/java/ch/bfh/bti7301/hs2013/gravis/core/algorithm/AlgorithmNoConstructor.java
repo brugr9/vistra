@@ -1,7 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
 
 /**
  * A dummy algorithm implementing the interface <code>IAlgorithm</code>. Since
@@ -29,7 +29,7 @@ public class AlgorithmNoConstructor implements IAlgorithm {
 	}
 
 	@Override
-	public void execute(IImmutableGraph graph) throws Exception {
+	public void execute(IRestrictedGraph graph) throws Exception {
 	}
 
 	@Override

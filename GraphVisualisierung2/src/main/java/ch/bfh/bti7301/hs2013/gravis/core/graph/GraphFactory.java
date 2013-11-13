@@ -9,6 +9,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseGraph;
@@ -63,11 +65,11 @@ public final class GraphFactory {
 
 	/**
 	 * @param graph
-	 * @return a new instance of type IImmutableGraph
+	 * @return a new instance of type IRestrictedGraph
 	 */
-	public static IImmutableGraph createImmutableGraph(
+	public static IRestrictedGraph createRestrictedGraph(
 			IObservableGravisGraph graph) {
-		return new ImmutableGravisGraph(graph);
+		return new RestrictedGraph(graph);
 	}
 
 	/**
@@ -114,4 +116,5 @@ public final class GraphFactory {
 			List<ICommand> commandList, boolean enableEdges) {
 		return new GravisGraphEventListener(commandList, enableEdges);
 	}
+	
 }

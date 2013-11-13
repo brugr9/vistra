@@ -1,6 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -21,7 +21,13 @@ public class AlgorithmNoInterface {
 		return null;
 	}
 
-	public void execute(IImmutableGraph graph) throws Exception {
+
+	public int getId() {
+		// Auto-generated method stub
+		return 0;
+	}
+		
+	public void execute(IRestrictedGraph graph) throws Exception {
 	}
 
 	public EdgeType[] getAnnotations() {

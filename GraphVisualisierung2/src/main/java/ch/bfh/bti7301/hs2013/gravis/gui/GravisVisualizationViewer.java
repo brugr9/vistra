@@ -14,6 +14,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.PointTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.ShapeTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -97,23 +98,12 @@ public class GravisVisualizationViewer extends
 				// layout.setSize(new Dimension(250, 350));
 				this.setGraphLayout(layout);
 
-				Transformer<IVertex, Shape> vertexSize = new Transformer<IVertex, Shape>() {
-					public Shape transform(IVertex vertex) {
-						Ellipse2D circle = new Ellipse2D.Double(-20, -15, 40,
-								30);
-						// if(i == 2) return AffineTransform.getScaleInstance(2,
-						// 2).createTransformedShape(circle);
-						// else return circle;
-						return circle;
-					}
-				};
-
 				// TODO adjust implementation
 				this.getRenderContext().setVertexFillPaintTransformer(
 						new VertexColorTransformer());
 				this.getRenderContext().setEdgeDrawPaintTransformer(
 						new EdgeColorTransformer());
-				this.getRenderContext().setVertexShapeTransformer(vertexSize);
+				this.getRenderContext().setVertexShapeTransformer(new ShapeTransformer());
 
 				// this.setVertexToolTipTransformer(vertexToolTipTransformer);
 

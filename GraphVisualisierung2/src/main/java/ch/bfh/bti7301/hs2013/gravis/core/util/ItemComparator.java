@@ -2,7 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.core.util;
 
 import java.util.Comparator;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
 
 /**
  * This comparator compares graph items in lexicographical id order.
@@ -10,8 +10,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public class ItemComparator<T extends IGraphItem> implements
-		Comparator<IGraphItem> {
+public class ItemComparator implements Comparator<IRestrictedGraphItem> {
 
 	/*
 	 * (non-Javadoc)
@@ -19,7 +18,7 @@ public class ItemComparator<T extends IGraphItem> implements
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public int compare(IGraphItem i1, IGraphItem i2) {
+	public int compare(IRestrictedGraphItem i1, IRestrictedGraphItem i2) {
 		return i1.getId().compareTo(i2.getId());
 	}
 

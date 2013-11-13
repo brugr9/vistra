@@ -47,17 +47,17 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	public GraphManager(File templatesDir, File workbenchDir,
 			FileNameExtensionFilter filter) {
 		super(templatesDir, workbenchDir, filter);
-		try {
-			// TODO validation?
-			for (File file : templatesDir.listFiles()) {
-				super.add(file);
-			}
-			for (File file : workbenchDir.listFiles()) {
-				super.add(file);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			// TODO validation?
+//			for (File file : templatesDir.listFiles()) {
+//				super.add(file);
+//			}
+//			for (File file : workbenchDir.listFiles()) {
+//				super.add(file);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
@@ -112,7 +112,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 					.getGraphMetadata();
 			// TODO read attribute Id from file: id
 			newGraph.setId(graphMeta.get("id").transformer.transform(newGraph));
-			// TODO read graph type from file
+			// TODO read edge type from file
 			newGraph.setEdgeType(EdgeType.DIRECTED);
 			// TODO read GraphName from graphml
 
@@ -125,11 +125,12 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 						.get("vertexColor").transformer.transform(vertex)));
 				vertex.setStart(ValueTransformer.transformBoolean(vertexMeta
 						.get("startVertex").transformer.transform(vertex)));
-				vertex.setLocation(ValueTransformer.transformLocation(
-						vertexMeta.get("vertexLocation.x").transformer
-								.transform(vertex), vertexMeta
-								.get("vertexLocation.y").transformer
-								.transform(vertex)));
+
+				vertex.setLocation(ValueTransformer.transformLocation(vertexMeta
+						.get("vertexLocation.x").transformer.transform(vertex), vertexMeta
+						.get("vertexLocation.y").transformer.transform(vertex)));
+				
+				vertex.setId(vertexIds.get(vertex));
 			}
 
 			for (IEdge edge : newGraph.getEdges()) {
@@ -196,8 +197,12 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	@Override
 	public IGravisGraph getGraph(int index) throws Exception {
 		try {
-			File file = super.getFile(index);
-			return this.load(file);
+//			File file = super.getFile(index);
+//			return this.load(file);
+			
+			// TODO bitte dummy value auskommentieren und nicht löschen (pk)
+			return this.load(new File(
+					"src/main/resources/META-INF/templates/SampleTree1.graphml"));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -255,6 +260,16 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			throw e;
 		}
 
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager#saveGraph(ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph)
+	 */
+	@Override
+	public void saveGraph(IGravisGraph graph) {
+		// TODO bitte diesen code nur auskommentieren und nicht löschen
+				this.write(new File(
+							"src/main/resources/META-INF/templates/SampleTree1_out.graphml"), graph);
 	}
 
 }

@@ -22,8 +22,8 @@ public class VertexFactory implements Factory<IVertex> {
 	 * @param vertex
 	 * @return the restricted vertex
 	 */
-	public static IVertex createRestrictedGravisVertex(IVertex vertex) {
-		return new RestrictedGravisVertex(vertex);
+	public static IRestrictedVertex createRestrictedVertex(IVertex vertex) {
+		return new RestrictedVertex(vertex);
 	}
 
 }

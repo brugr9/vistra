@@ -15,11 +15,12 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem;
 class GravisVertex extends AbstractGraphItem implements IVertex {
 
 	/**
-	 * A field for the start status.
+	 * A field for the start position.
 	 */
 	private boolean start;
+	
 	/**
-	 * A field for the end status.
+	 * A field for the end position.
 	 */
 	private boolean end;
 	
@@ -29,16 +30,16 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	
 	private Point2D location;
 	
-	private String shape;
-
 	/**
 	 * Main constructor setting start and end to false both by default.
 	 */
 	protected GravisVertex() {
 		super();
+		
 		this.start = false;
 		this.end = false;
-		this.shape = "";
+		this.width = 40.0;
+		this.height = 30.0;
 		this.location = new Point();
 	}
 
@@ -53,11 +54,6 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	}
 
 	@Override
-	public String getShape() {
-		return this.shape;
-	}
-
-	@Override
 	public void setStart(boolean start) {
 		this.start = start;
 	}
@@ -65,11 +61,6 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	@Override
 	public void setEnd(boolean end) {
 		this.end = end;
-	}
-
-	@Override
-	public void setShape(String shape) {
-		this.shape = shape;
 	}
 
 	/* (non-Javadoc)
@@ -86,6 +77,38 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	@Override
 	public void setLocation(Point2D location) {
 		this.location = location;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#getWidth()
+	 */
+	@Override
+	public double getWidth() {
+		return this.width;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#setWidth(double)
+	 */
+	@Override
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#getHeight()
+	 */
+	@Override
+	public double getHeight() {
+		return this.height;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#setHeight(double)
+	 */
+	@Override
+	public void setHeight(double height) {
+		this.height = height;
 	}
 
 }

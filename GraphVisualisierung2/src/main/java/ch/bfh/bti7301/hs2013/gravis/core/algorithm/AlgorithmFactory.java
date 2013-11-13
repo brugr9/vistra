@@ -27,21 +27,23 @@ public final class AlgorithmFactory {
 	 */
 	public static IAlgorithmManager createAlgorithmManager(Properties p)
 			throws Exception {
-		try {
-			File templatesDir = new File(
-					p.getProperty("dir.templates.algorithm"));
-			templatesDir.setReadOnly();
-			File workbenchDir = new File(
-					p.getProperty("dir.workbench.algorithm"));
-			FileNameExtensionFilter filter = new FileNameExtensionFilter(
-					p.getProperty("suffix.algorithm.description"),
-					new String[] { p.getProperty("suffix.algorithm.source"),
-							p.getProperty("suffix.algorithm.binary"),
-							p.getProperty("suffix.algorithm.archive") });
-			return new AlgorithmManager(templatesDir, workbenchDir, filter);
-		} catch (Exception e) {
-			throw e;
-		}
+		// TODO remove dummy value
+//		try {
+//			File templatesDir = new File(
+//					p.getProperty("dir.templates.algorithm"));
+//			templatesDir.setReadOnly();
+//			File workbenchDir = new File(
+//					p.getProperty("dir.workbench.algorithm"));
+//			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+//					p.getProperty("suffix.algorithm.description"),
+//					new String[] { p.getProperty("suffix.algorithm.source"),
+//							p.getProperty("suffix.algorithm.binary"),
+//							p.getProperty("suffix.algorithm.archive") });
+//			return new AlgorithmManager(templatesDir, workbenchDir, filter);
+			return new AlgorithmManager(null, null, null);
+//		} catch (Exception e) {
+//			throw e;
+//		}
 	}
 
 	/**
