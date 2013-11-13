@@ -111,4 +111,13 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 		this.height = height;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	
 }

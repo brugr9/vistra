@@ -55,6 +55,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	 */
 	private void visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
 		vertex1.setVisited(true);
+		vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
 		vertex1.setState(State.ACTIVATION);
 		graph.updateState(vertex1);
 		
@@ -67,6 +68,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 			if (!vertex2.isVisited()) {
 				this.visit(graph, vertex2);
 				
+				vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
 				vertex1.setState(State.ACTIVATION);
 				graph.updateState(vertex1);
 			}

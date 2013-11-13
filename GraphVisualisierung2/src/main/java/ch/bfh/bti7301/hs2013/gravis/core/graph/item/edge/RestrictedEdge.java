@@ -26,4 +26,13 @@ final class RestrictedEdge extends AbstractRestrictedGraphItem implements IRestr
 		return this.edge.getWeight();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.edge.toString();
+	}
+
+	
 }

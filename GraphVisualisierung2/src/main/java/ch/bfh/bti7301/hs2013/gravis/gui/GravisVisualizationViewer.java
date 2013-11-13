@@ -1,8 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,6 +18,8 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.decorators.ConstantDirectionalEdgeValueTransformer;
+import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
@@ -43,15 +44,74 @@ public class GravisVisualizationViewer extends
 	public GravisVisualizationViewer(Layout<IVertex, IEdge> layout) {
 		super(layout);
 
-		this.setPreferredSize(new Dimension(800, 300));
-		this.getRenderContext().setVertexLabelTransformer(
-				new ToStringLabeller<IVertex>());
-		this.getRenderContext().setEdgeLabelTransformer(
-				new ToStringLabeller<IEdge>());
+		// TODO bitte an dieser Klasse nichts ändern (pk)
+		
+		this.setPreferredSize(new Dimension(800, 400));
+		this.setBackground(Color.white);
+		
+		Transformer<IVertex, String> vertexLabelTransformer = 
+				new Transformer<IVertex, String>() {
+			@Override
+			public String transform(IVertex vertex) {
+				return  vertex.getId() + (Double.isNaN(vertex.getPaintedResult()) ? "" : ": "
+						+ vertex.getPaintedResult());
+			}
+		};
+		this.getRenderContext().setVertexLabelTransformer(vertexLabelTransformer);
+		
+		Transformer<IEdge, String> edgeLabelTransformer = 
+				new Transformer<IEdge, String>() {
+			@Override
+			public String transform(IEdge edge) {
+				return  edge.getWeight() + (Double.isNaN(edge.getPaintedResult()) ? "" : "| "
+								+ edge.getPaintedResult());
+			}
+		};
+		this.getRenderContext().setEdgeLabelTransformer(edgeLabelTransformer);
+		
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
+//		this.getRenderer().getEdgeLabelRenderer().
+		
 		this.getRenderContext().setVertexFillPaintTransformer(
 				new VertexColorTransformer());
 
+		this.getRenderContext().setVertexFillPaintTransformer(
+				new VertexColorTransformer());
+		this.getRenderContext().setEdgeDrawPaintTransformer(
+				new EdgeColorTransformer());
+		this.getRenderContext().setVertexShapeTransformer(new ShapeTransformer());
+		
+		Transformer<IVertex,String> vertexToolTipTransformer = 
+				new Transformer<IVertex,String>() {
+					@Override
+					public String transform(IVertex input) {
+						// TODO Auto-generated method stub
+						return input.toString();
+					}
+		};
+		this.setVertexToolTipTransformer(vertexToolTipTransformer);
+		
+		Transformer<IEdge,String> edgeToolTipTransformer = 
+				new Transformer<IEdge,String>() {
+					@Override
+					public String transform(IEdge input) {
+						// TODO Auto-generated method stub
+						return input.toString();
+					}
+		};
+		this.setEdgeToolTipTransformer(edgeToolTipTransformer);
+		
+		this.getRenderContext().setEdgeShapeTransformer(new EdgeShape.Line<IVertex,IEdge>());
+		
+		// centers edge label
+		this.getRenderContext().setEdgeLabelClosenessTransformer(
+				new ConstantDirectionalEdgeValueTransformer<IVertex,IEdge>(0.5, 0.5));
+		
+//		this.getRenderContext().setVertexLabelTransformer(
+//				new ToStringLabeller<IVertex>());
+//		this.getRenderContext().setEdgeLabelTransformer(
+//				new ToStringLabeller<IEdge>());
+		
 		// DefaultModalGraphMouse<IVertex, IEdge> gm = new
 		// DefaultModalGraphMouse<>();
 
@@ -99,13 +159,6 @@ public class GravisVisualizationViewer extends
 				this.setGraphLayout(layout);
 
 				// TODO adjust implementation
-				this.getRenderContext().setVertexFillPaintTransformer(
-						new VertexColorTransformer());
-				this.getRenderContext().setEdgeDrawPaintTransformer(
-						new EdgeColorTransformer());
-				this.getRenderContext().setVertexShapeTransformer(new ShapeTransformer());
-
-				// this.setVertexToolTipTransformer(vertexToolTipTransformer);
 
 				// Container content = getContentPane();
 				// final GraphZoomScrollPane panel = new

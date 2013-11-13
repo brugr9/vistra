@@ -61,6 +61,7 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 
 			ICommand command = this.commandTransformer.transform(currentItem);
 			command.execute();
+			
 			this.graphItemHistory.add(currentItem);
 			this.commandList.add(command);
 		}

@@ -49,11 +49,12 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	 * @param vertex1
 	 */
 	private void visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
+		vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
 		vertex1.setState(State.ACTIVATION);
 		graph.updateState(vertex1);
 
 		vertex1.setVisited(true);
-		vertex1.setComment("Der Knoten " + vertex1 + " wurde zum ersten Mal besucht.");
+		vertex1.setComment("Der Knoten " + vertex1 + " wurde besucht.");
 		vertex1.setState(State.VISIT);
 		graph.updateState(vertex1);
 
@@ -61,6 +62,7 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 			if (!vertex2.isVisited()) {
 				this.visit(graph, vertex2);
 				
+				vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
 				vertex1.setState(State.ACTIVATION);
 				graph.updateState(vertex1);
 			}

@@ -65,7 +65,7 @@ public class VisualizationPanel extends JPanel implements Observer {
 		
 		 this.viewer.setGraphMouse(graphMouse);
 		 this.viewer.addKeyListener(graphMouse.getModeKeyListener());
-		 graphMouse.setMode(Mode.EDITING);
+		 graphMouse.setMode(Mode.PICKING);
 		
 		 JPanel controls = new JPanel();
 		 JComboBox modeBox = graphMouse.getModeComboBox();
