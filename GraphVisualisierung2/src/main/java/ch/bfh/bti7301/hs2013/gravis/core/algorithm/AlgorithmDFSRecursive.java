@@ -55,14 +55,17 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	private void visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
 		vertex1.setVisited(true);
 		vertex1.setState(State.ACTIVATION);
-		vertex1.setResult(++this.counter);
 		graph.updateState(vertex1);
+		
+		vertex1.setResult(++this.counter);
+		vertex1.setComment("Der Knoten " + vertex1 + " wurde zur Lösung hinzugefügt.");
 		vertex1.setState(State.SOLUTION);
 		graph.updateState(vertex1);
 
 		for (IRestrictedVertex vertex2 : graph.getSuccessors(vertex1)) {
 			if (!vertex2.isVisited()) {
 				this.visit(graph, vertex2);
+				
 				vertex1.setState(State.ACTIVATION);
 				graph.updateState(vertex1);
 			}

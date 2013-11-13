@@ -52,18 +52,21 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 		graph.updateState(vertex1);
 
 		vertex1.setVisited(true);
+		vertex1.setComment("Der Knoten " + vertex1 + " wurde zum ersten Mal besucht.");
 		vertex1.setState(State.VISIT);
 		graph.updateState(vertex1);
 
 		for (IRestrictedVertex vertex2 : graph.getSuccessors(vertex1)) {
 			if (!vertex2.isVisited()) {
 				this.visit(graph, vertex2);
+				
 				vertex1.setState(State.ACTIVATION);
 				graph.updateState(vertex1);
 			}
 		}
 
 		vertex1.setResult(++this.counter);
+		vertex1.setComment("Der Knoten " + vertex1 + " wurde zur Lösung hinzugefügt.");
 		vertex1.setState(State.SOLUTION);
 		graph.updateState(vertex1);
 	}
