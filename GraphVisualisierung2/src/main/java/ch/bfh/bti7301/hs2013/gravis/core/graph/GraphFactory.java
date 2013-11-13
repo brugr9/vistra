@@ -1,11 +1,15 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.apache.commons.collections15.Transformer;
+
+import ch.bfh.bti7301.hs2013.gravis.core.command.CommandTransformerFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
@@ -114,7 +118,12 @@ public final class GraphFactory {
 	 */
 	public static GraphEventListener<IVertex, IEdge> createGravisGraphEventListener(
 			List<ICommand> commandList, boolean enableEdges) {
-		return new GravisGraphEventListener(commandList, enableEdges);
+		List<IGraphItem> graphItemHistory = new ArrayList<>();
+		Transformer<IGraphItem, ICommand> commandTransformer = CommandTransformerFactory
+				.createCommandTransformer(graphItemHistory);
+		
+		return new GravisGraphEventListener(commandList, graphItemHistory,
+				commandTransformer, enableEdges);
 	}
 	
 }

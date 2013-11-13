@@ -1,11 +1,9 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections15.Transformer;
 
-import ch.bfh.bti7301.hs2013.gravis.core.command.CommandTransformerFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
@@ -20,6 +18,7 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
 class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 
 	private final List<ICommand> commandList;
+	
 	private final List<IGraphItem> graphItemHistory;
 
 	private final Transformer<IGraphItem, ICommand> commandTransformer;
@@ -29,18 +28,18 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 	/**
 	 * 
 	 * @param commandList
+	 * @param graphItemHistory
+	 * @param commandTransformer
 	 * @param edgesEnabled
 	 */
-	protected GravisGraphEventListener(List<ICommand> commandList,
+	protected GravisGraphEventListener(List<ICommand> commandList, 
+			List<IGraphItem> graphItemHistory, 
+			Transformer<IGraphItem, ICommand> commandTransformer,
 			boolean edgesEnabled) {
+		
 		this.commandList = commandList;
-		this.graphItemHistory = new ArrayList<>();
-
-		// TODO bitte an dieser Klasse nichts ändern (pk)
-		// TODO CommandTransformer as a constructor parameter
-
-		this.commandTransformer = CommandTransformerFactory
-				.createCommandTransformer(this.graphItemHistory);
+		this.graphItemHistory = graphItemHistory;
+		this.commandTransformer = commandTransformer;
 		this.edgesEnabled = edgesEnabled;
 	}
 

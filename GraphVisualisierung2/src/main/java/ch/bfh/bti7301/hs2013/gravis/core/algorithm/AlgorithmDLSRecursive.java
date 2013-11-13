@@ -21,6 +21,7 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
 		super.setId(1);
+		this.setEnableEdges(false);
 	}
 
 	/*

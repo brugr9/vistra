@@ -113,24 +113,15 @@ class Traversal implements ITraversal {
 		try {
 			// TODO bitte an dieser Methode nichts ändern (pk)
 
-			// TODO GravisGraphEventListener and IteratorManager need an
-			// Observer
-			// for processing and traversing updates
-			// TODO notify Control.selectAlgorithm(index) for changes in item
-			
-			// TODO problem when this method is called twice
-			// TODO add TraversalListener
-
 			List<ICommand> commandList = new ArrayList<>();
-			// TODO read enableEdges flag from algorithm
-			GraphEventListener<IVertex, IEdge> graphEventListener = createGravisGraphEventListener(
-					commandList, true);
+			GraphEventListener<IVertex, IEdge> graphEventListener = 
+					createGravisGraphEventListener(commandList, this.algorithm.isEnableEdges());
 			IObservableGravisGraph observableGraph = createObservableGraph(this.graph);
 
 			observableGraph.addGraphEventListener(graphEventListener);
 			IRestrictedGraph restrictedGraph = createRestrictedGraph(observableGraph);
 
-			// TODO notify IGraphItemStateChangeListener
+			// TODO notify 
 			this.algorithm.execute(restrictedGraph);
 
 			for (int i = commandList.size() - 1; i >= 0; i--) {
@@ -138,7 +129,8 @@ class Traversal implements ITraversal {
 			}
 			
 			// TODO notify changeListener
-			
+			// TODO IteratorManager needs an IGraphItemStateChangeListener
+			// for processing and traversing updates
 			return createImmutListIterator(commandList);
 		} catch (Exception e) {
 			throw e;

@@ -17,7 +17,7 @@ public final class CommandTransformerFactory {
 
 	/**
 	 * @param graphItemHistory
-	 * @return an instance of ICommandFactory
+	 * @return an instance of Transformer
 	 */
 	public static Transformer<IGraphItem, ICommand> createCommandTransformer(
 			List<IGraphItem> graphItemHistory) {
