@@ -2,6 +2,8 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.apache.commons.collections15.map.HashedMap;
 import org.apache.commons.io.FileUtils;
 
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
@@ -17,6 +19,11 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 class AlgorithmManager extends AbstractParameterManager implements
 		IAlgorithmManager {
 
+	/**
+	 * 
+	 */
+	private HashedMap<Integer, EdgeType> algorithmMap;
+	
 	/**
 	 * Main constructor
 	 * 

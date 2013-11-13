@@ -52,14 +52,9 @@ class Core implements ICore {
 	@Override
 	public Graph<IVertex, IEdge> selectGraph(int index) throws Exception {
 		try {
-			IGravisGraph graph = this.traversal.getGraph();
-
-			graph = this.graphManager.getGraph(index);
+			// as shown in sd-select-graph
+			IGravisGraph graph = this.graphManager.getGraph(index);
 			this.traversal.setParameter(graph);
-			EdgeType type = graph.getEdgeType();
-			// TODO updateAlgorithmList() anpassen für EdgeType
-			this.algorithmManager
-					.updateAlgorithmList(new GraphType[] { GraphType.DIRECTED });
 			return graph;
 		} catch (Exception e) {
 			throw e;

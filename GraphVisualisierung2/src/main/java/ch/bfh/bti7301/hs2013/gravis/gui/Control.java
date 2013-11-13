@@ -24,6 +24,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * A control as in MVC.
@@ -126,13 +127,12 @@ public final class Control implements IControl {
 	public void init() throws Exception {
 		try {
 			this.model.setGraphs(this.core.getGraphs());
-			this.model.setAlgorithms(this.core.getAlgorithms());
 			this.model.setPauseEvent(EventSource.PAUSE);
 			this.i18nListener.actionPerformed(null);
 			this.appendProtocol(this.model.getResourceBundle().getString(
 					"about.message")
 					+ "\n----");
-			this.setViewReady();
+			this.setViewChoiceGraph();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -176,14 +176,28 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * Sets the view elements to ready mode.
+	 * Sets the view elements ready for graph choice.
 	 * 
 	 */
-	private void setViewReady() {
+	private void setViewChoiceGraph() {
 
 		this.model.setMenuEnabled(true);
 		this.model.setGraphsEnabled(true);
 		this.model.setAlgorithmsEnabled(false);
+		this.model.setPlayerEnabled(false);
+
+		this.model.notifyObservers();
+	}
+
+	/**
+	 * Sets the view elements ready for algorithm choice.
+	 * 
+	 */
+	private void setViewChoiceAlgorithm() {
+
+		// this.model.setMenuEnabled(true);
+		// this.model.setGraphsEnabled(true);
+		this.model.setAlgorithmsEnabled(true);
 		this.model.setPlayerEnabled(false);
 
 		this.model.notifyObservers();
@@ -285,22 +299,22 @@ public final class Control implements IControl {
 	 */
 	private void selectGraph(int index) throws Exception {
 
+		// as shown in sd-select-graph
 		try {
 			// graph
+			IGravisGraph graph = (IGravisGraph) this.core.selectGraph(index);
+			this.model.setGraph(graph);
 			this.model.setSelectedGraph(index);
-			Graph<IVertex, IEdge> graph = this.core.selectGraph(index);
 			// algorithm
 			String[] names = this.core.getAlgorithms();
 			this.model.setAlgorithms(names);
-			this.selectAlgorithm(0);
-			if (index == 0) {
-				this.model.setAlgorithmsEnabled(false);
-			} else {
-				this.model.setAlgorithmsEnabled(true);
-			}
+			this.model.setSelectedAlgorithm(0);
 			// view
-			this.model.setPlayerEnabled(false);
-			this.model.notifyObservers(graph);
+			if (index == 0) {
+				this.setViewChoiceGraph();
+			} else {
+				this.setViewChoiceAlgorithm();
+			}
 		} catch (Exception e) {
 			throw e;
 		}
@@ -333,7 +347,7 @@ public final class Control implements IControl {
 			}
 
 		} catch (Exception e) {
-			this.setViewReady();
+			this.setViewChoiceGraph();
 			throw e;
 		}
 
@@ -541,6 +555,7 @@ public final class Control implements IControl {
 				@SuppressWarnings("unchecked")
 				JComboBox<IGravisGraph> box = (JComboBox<IGravisGraph>) event
 						.getSource();
+				// as shown in sd-select-graph
 				int index = box.getSelectedIndex();
 				selectGraph(index);
 			} catch (Exception ex) {
@@ -567,6 +582,7 @@ public final class Control implements IControl {
 					@SuppressWarnings("unchecked")
 					JComboBox<IAlgorithm> box = (JComboBox<IAlgorithm>) e
 							.getSource();
+					// as shown in sd-select-algorithm
 					int index = box.getSelectedIndex();
 					selectAlgorithm(index);
 				}
