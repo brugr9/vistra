@@ -36,7 +36,7 @@ class CommentCommand extends EmptyCommand {
 		this.item.setInfo(this.newComment);
 
 		// TODO bitte an dieser Methode nichts ändern (pk)
-		// TODO notify listener
+		// TODO notify protocol panel
 		if (!this.item.getInfo().isEmpty()) {
 			System.out.println(this.item.getInfo());
 		}
@@ -50,7 +50,7 @@ class CommentCommand extends EmptyCommand {
 	@Override
 	public void unExecute() {
 		// TODO bitte an dieser Methode nichts ändern (pk)
-		// TODO notify listener
+		// TODO notify protocol panel
 		if (!this.item.getInfo().isEmpty()) {
 			System.out.println("Zurück: " + this.item.getInfo());
 		}

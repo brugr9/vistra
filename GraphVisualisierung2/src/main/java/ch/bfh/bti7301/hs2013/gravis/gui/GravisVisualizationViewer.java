@@ -1,5 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,6 +18,8 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.decorators.ConstantDirectionalEdgeValueTransformer;
+import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
@@ -43,14 +46,13 @@ public class GravisVisualizationViewer extends
 
 		// TODO bitte an dieser Klasse nichts ändern (pk)
 		
-		this.setPreferredSize(new Dimension(800, 300));
+		this.setPreferredSize(new Dimension(800, 400));
+		this.setBackground(Color.white);
 		
 		Transformer<IVertex, String> vertexLabelTransformer = 
 				new Transformer<IVertex, String>() {
 			@Override
 			public String transform(IVertex vertex) {
-				// TODO notify protocol panel
-//				System.out.println(vertex.getComment());
 				return  vertex.getId() + (Double.isNaN(vertex.getPaintedResult()) ? "" : ": "
 						+ vertex.getPaintedResult());
 			}
@@ -61,17 +63,15 @@ public class GravisVisualizationViewer extends
 				new Transformer<IEdge, String>() {
 			@Override
 			public String transform(IEdge edge) {
-				// TODO notify protocol panel
-//				System.out.println(edge.getComment());
-				return  edge.getId() +  ": "
-						+ edge.getWeight()
-						+ (Double.isNaN(edge.getPaintedResult()) ? "" : "\n"
+				return  edge.getWeight() + (Double.isNaN(edge.getPaintedResult()) ? "" : "| "
 								+ edge.getPaintedResult());
 			}
 		};
 		this.getRenderContext().setEdgeLabelTransformer(edgeLabelTransformer);
 		
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
+//		this.getRenderer().getEdgeLabelRenderer().
+		
 		this.getRenderContext().setVertexFillPaintTransformer(
 				new VertexColorTransformer());
 
@@ -100,6 +100,12 @@ public class GravisVisualizationViewer extends
 					}
 		};
 		this.setEdgeToolTipTransformer(edgeToolTipTransformer);
+		
+		this.getRenderContext().setEdgeShapeTransformer(new EdgeShape.Line<IVertex,IEdge>());
+		
+		// centers edge label
+		this.getRenderContext().setEdgeLabelClosenessTransformer(
+				new ConstantDirectionalEdgeValueTransformer<IVertex,IEdge>(0.5, 0.5));
 		
 //		this.getRenderContext().setVertexLabelTransformer(
 //				new ToStringLabeller<IVertex>());
