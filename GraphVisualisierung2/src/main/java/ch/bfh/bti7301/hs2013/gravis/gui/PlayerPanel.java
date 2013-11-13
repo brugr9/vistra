@@ -128,13 +128,13 @@ public final class PlayerPanel extends JPanel implements Observer {
 		this.steplengthSpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
 		this.steplengthSpinner = new JSpinner(this.steplengthSpinnerNumberModel);
 		((JSpinner.NumberEditor) this.steplengthSpinner.getEditor())
-				.getTextField().addFocusListener(control.steplengthListener);
+				.getTextField().addFocusListener(control.setSteplengthListener);
 
 		this.delayLabel = new JLabel("delayLabel");
 		this.delaySpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
 		this.delaySpinner = new JSpinner(this.delaySpinnerNumberModel);
 		((JSpinner.NumberEditor) this.delaySpinner.getEditor()).getTextField()
-				.addFocusListener(control.delaySettingsListener);
+				.addFocusListener(control.setDelayListener);
 
 		this.progressLabel = new JLabel("progressLabel");
 
@@ -219,27 +219,37 @@ public final class PlayerPanel extends JPanel implements Observer {
 			try {
 
 				if (arg == EventSource.I18N) {
+
 					this.playerPanelBorder
 							.setTitle(b.getString("player.label"));
 					this.steplengthLabel.setText(b.getString("setStep.label"));
 					this.delayLabel.setText(b.getString("setDelay.label"));
 					this.progressLabel.setText(b.getString("progress.label"));
-					//
 					this.playButton.setText(b.getString("play.label"));
-					// this.pauseButton.setText(b.getString("pause.label"));
+					this.pauseButton.setText(b.getString("pause.label"));
 					this.stopButton.setText(b.getString("stop.label"));
 					this.toBeginningButton.setText(b.getString("home.label"));
 					this.backwardButton.setText(b.getString("backward.label"));
 					this.forwardButton.setText(b.getString("forward.label"));
 					this.toEndButton.setText(b.getString("end.label"));
 
-				} else {
+				} else if (arg == EventSource.SET_DELAY) {
+
+					this.delaySpinner.setValue(m.getDelay());
+
+				} else if (arg == EventSource.SET_STEPLENGTH) {
 
 					this.steplengthSpinner.setValue(m.getSteplength());
-					this.delaySpinner.setValue(m.getDelay());
+
+				} else {
+
 					this.progressBar.setMaximum(m.getProgressMaximum());
 					this.progressBar.setValue(m.getProgress());
-
+					//
+					this.pauseButton.setActionCommand(m.getPauseEvent()
+							.toString());
+					this.pauseButton.setText(b.getString("pause.label"));
+					//
 					this.steplengthSpinner.setEnabled(m.isSteplengthEnabled());
 					this.delaySpinner.setEnabled(m.isDelayEnabled());
 					this.playButton.setEnabled(m.isPlayEnabled());
@@ -251,9 +261,6 @@ public final class PlayerPanel extends JPanel implements Observer {
 					this.toEndButton.setEnabled(m.isToEndEnabled());
 
 				}
-				//
-				this.pauseButton.setActionCommand(m.getPauseEvent().toString());
-				this.pauseButton.setText(b.getString("pause.label"));
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

@@ -5,6 +5,7 @@ import java.io.File;
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.core.IParameterManager;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -13,6 +14,15 @@ import ch.bfh.bti7301.hs2013.gravis.core.IParameterManager;
  */
 public interface IAlgorithmManager extends IParameterManager {
 
+	/**
+	 * Returns the names of available parameters.
+	 * 
+	 * @param edgetype
+	 * @return the names of available parameters
+	 * @throws Exception
+	 */
+	public abstract String[] getNames(EdgeType edgetype) throws Exception;
+	
 	/**
 	 * 
 	 * @param index
@@ -29,7 +39,7 @@ public interface IAlgorithmManager extends IParameterManager {
 	 * @return <code>true<code> if imported
 	 * @throws Exception
 	 */
-	public abstract boolean importAlgorithm(File file) throws Exception;
+	public abstract boolean addAlgorithm(File file) throws Exception;
 
 	/**
 	 * @return IAlgorithm

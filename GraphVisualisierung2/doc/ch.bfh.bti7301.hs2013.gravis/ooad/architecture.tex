@@ -21,7 +21,7 @@
     \label{fig:package-diagram}
 \end{figure}
 \subsubsection{Beschreibung und Motivation}
-Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren. Die Drei-Schichten-Architektur hat sich aus den Requirements ergeben. Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit, die Komponente Gui enth\"alt die (grafische) Benutzerschnittstelle und schliesslich die Komponente Core: das Herzst\"uck des Systems k\"ummert sich um I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
+Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren. Die Drei-Schichten-Architektur hat sich aus den Requirements ergeben. Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit, die Komponente Gui enth\"alt die (grafische) Benutzerschnittstelle und schliesslich die Komponente Core: das Herzst\"uck des Systems k\"ummert sich um das Initialisieren der Komponenten, I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
 % 
 % \subsection{Deployment View}
 % 
@@ -56,6 +56,19 @@ Die Komponente implementiert ein Model-View-Control (MVC) unter Verwendung des J
   \item Control: Implementiert Listeners und deren Methoden
 \end{itemize}
 % 
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+% 		    width=\textwidth,
+% 		    height=\textheight,
+% 		    angle=90,
+		    scale=0.1,
+		    keepaspectratio=true
+    ]{diagrams/architecture/Draft_System_Architecture_PK_V1_cropped.jpeg}
+    \caption{Gui, MVC: Conceptual Class Diagram}
+    \label{fig:gui-mvc-ccd}
+\end{figure}
+% 
 \subsection{Use-Case View}
 Folgende Use Cases wurden implementiert:
 \begin{itemize}
@@ -78,6 +91,19 @@ Folgende Use Cases wurden implementiert:
       \item Visualisierung, Animation: Starten, Anhalten, Stoppen
   \end{itemize}
 \end{itemize}
+% 
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+% 		    width=\textwidth,
+% 		    height=\textheight,
+% 		    angle=90,
+		    scale=0.1,
+		    keepaspectratio=true
+    ]{diagrams/architecture/Screen_Sketch_PK_V1_cropped.jpeg}
+    \caption{Gui, View: Screen Sketch}
+    \label{fig:gui-view-screen-sketch}
+\end{figure}
 % 
 % \section{Data Model}
 % \label{sec:Data Model}

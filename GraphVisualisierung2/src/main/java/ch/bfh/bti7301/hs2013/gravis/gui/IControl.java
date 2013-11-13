@@ -21,12 +21,12 @@ public interface IControl {
 	public enum EventSource {
 		// i18n
 		I18N, DE_DE, FR_FR, EN_US,
-		// data, graph
+		// IO graph
 		IMPORT_GRAPH, DELETE_GRAPH,
-		// data, algorithm
+		// IO algorithm
 		IMPORT_ALGORITHM, DELETE_ALGORITHM,
 		// player settings
-		SET_DELAY, SET_STEP,
+		SET_DELAY, SET_STEPLENGTH,
 		// player
 		GOTO_BEGINNING, BACKWARD, FORWARD, GOTO_END, PLAY, PAUSE, RESUME, STOP,
 	}

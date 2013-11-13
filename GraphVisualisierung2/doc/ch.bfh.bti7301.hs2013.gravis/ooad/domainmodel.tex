@@ -89,13 +89,15 @@ Es folgt eine Beschreibung der Konzeptklassen (conceptual classes) mit Assoziati
 % 
 \section{Design Model}
 \label{sec:Design Model}
-Zur Elaboration des Designs werden zuerst die zwei Konzeptklassen \textit{Parameter Controller} und \textit{Traversal Controller} als State Machine (SM) betrachtet und je mit einem State Diagram illustriert.
-
-Anschliessend werden die sechs Use Cases \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Graph}, \textit{Delete Algorithm}, \textit{Select Graph} und \textit{Select Algorithm} erarbeitet und je mit einem System Sequence Diagram (SSD), einem Sequence Diagram (SD) und einem Design Class Diagram (DCD) illustriert.
+Zur Elaboration des Designs werden die sechs Use Cases \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Graph}, \textit{Delete Algorithm}, \textit{Select Graph} und \textit{Select Algorithm} erarbeitet und je mit einem System Sequence Diagram (SSD), einem Sequence Diagram (SD) und einem Design Class Diagram (DCD) illustriert.
 \begin{itemize}
-  \item System Sequence Diagram (SSD): zeigt, wie eine Benutzerinteraktion vom System verarbeitet wird.
-  \item Sequence Diagram (SD): zeigt, wie Objekte miteinander arbeiten und erl\"autert die Zust\"andigkeiten der Klassen. 
-  \item Design Class Diagram (DCD): zeigt die Elemente des Systems unter Ber\"ucksichtigung ihrer Funktionalit\"at.
+  \item Ein System Sequence Diagram zeigt, wie eine Benutzerinteraktion vom System verarbeitet wird.
+  \item Ein Sequence Diagram zeigt, wie Objekte miteinander arbeiten und erl\"autert die Zust\"andigkeiten der Klassen. 
+  \item Ein Design Class Diagram zeigt die Elemente des Systems unter Ber\"ucksichtigung ihrer Funktionalit\"at.
 \end{itemize}
 
-Ein Controller implementiert ausschliesslich System-Operationen (und eventuell einige private Methoden). Jeder System-Event wird mit einer einzigen System-Operation eines Controllers assoziiert.
+Ein Controller (hier: Control und Core) implementiert ausschliesslich System-Operationen (und eventuell einige private Methoden). Jeder System-Event wird mit einer einzigen System-Operation eines Controllers assoziiert.
+
+F\"ur die Use Cases \textit{Select Graph} und \textit{Select Algorithm} wird zudem die Konzeptklasse \textit{Traversal Controller} als State Machine (SM) betrachtet und mit einem State Diagram illustriert.
+
+Ein weiteres State Diagram zeigt die Konzeptklasse \textit{Parameter Controller} als State Machine. Dieses illustriert die Use Cases \textit{Set Steplength}, \textit{Set Delay}, \textit{Forward}, \textit{Backward}, \textit{Goto Beginning}, \textit{Goto End}, \textit{Play}, \textit{Pause}, \textit{Resume} und \textit{Stop}.

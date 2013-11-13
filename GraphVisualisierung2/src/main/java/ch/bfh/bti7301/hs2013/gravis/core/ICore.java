@@ -8,6 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * This interface gives access to all important core classes. It is a facade to

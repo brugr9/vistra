@@ -2,9 +2,9 @@ package ch.bfh.bti7301.hs2013.gravis.gui;
 
 import java.util.Observable;
 import java.util.ResourceBundle;
-
 import javax.swing.KeyStroke;
 
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
 
 /**
@@ -14,6 +14,10 @@ import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
  * 
  */
 public final class Model extends Observable implements IModel {
+
+	// gravis
+	private IGravisGraph graph;
+	// private IImmutListIterator<ICommand> traversal;
 
 	// i18n
 	private String i18nBaseName;
@@ -34,8 +38,6 @@ public final class Model extends Observable implements IModel {
 	private boolean importAlgorithmEnabled;
 	private boolean deleteAlgorithmEnabled;
 	private boolean importGraphEnabled;
-	private boolean saveGraphEnabled;
-	private boolean exportGraphEnabled;
 	private boolean deleteGraphEnabled;
 
 	// Parameter
@@ -79,7 +81,9 @@ public final class Model extends Observable implements IModel {
 	public Model(String i18nBaseName) {
 		super();
 
-		// ViewType elements
+		this.graph = null;
+
+		// i18n
 		this.i18nBaseName = i18nBaseName;
 		this.resourceBundle = null;
 
@@ -98,8 +102,6 @@ public final class Model extends Observable implements IModel {
 		this.importAlgorithmEnabled = false;
 		this.deleteAlgorithmEnabled = false;
 		this.importGraphEnabled = false;
-		this.saveGraphEnabled = false;
-		this.exportGraphEnabled = false;
 		this.deleteGraphEnabled = false;
 
 		// Parameter
@@ -211,6 +213,13 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/**
+	 * @return the graph
+	 */
+	protected IGravisGraph getGraph() {
+		return graph;
+	}
+
+	/**
 	 * @return the i18nBaseName
 	 */
 	protected String getI18nBaseName() {
@@ -306,20 +315,6 @@ public final class Model extends Observable implements IModel {
 	 */
 	protected boolean isImportGraphEnabled() {
 		return importGraphEnabled;
-	}
-
-	/**
-	 * @return the saveGraphEnabled
-	 */
-	protected boolean isSaveGraphEnabled() {
-		return saveGraphEnabled;
-	}
-
-	/**
-	 * @return the exportGraphEnabled
-	 */
-	protected boolean isExportGraphEnabled() {
-		return exportGraphEnabled;
 	}
 
 	/**
@@ -491,6 +486,15 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/**
+	 * @param graph
+	 *            the graph to set
+	 */
+	protected void setGraph(IGravisGraph graph) {
+		this.graph = graph;
+		this.setChanged();
+	}
+
+	/**
 	 * @param i18nBaseName
 	 *            the i18nBaseName to set
 	 */
@@ -613,24 +617,6 @@ public final class Model extends Observable implements IModel {
 	 */
 	protected void setImportGraphEnabled(boolean importGraphEnabled) {
 		this.importGraphEnabled = importGraphEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param saveGraphEnabled
-	 *            the saveGraphEnabled to set
-	 */
-	protected void setSaveGraphEnabled(boolean saveGraphEnabled) {
-		this.saveGraphEnabled = saveGraphEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param exportGraphEnabled
-	 *            the exportGraphEnabled to set
-	 */
-	protected void setExportGraphEnabled(boolean exportGraphEnabled) {
-		this.exportGraphEnabled = exportGraphEnabled;
 		this.setChanged();
 	}
 

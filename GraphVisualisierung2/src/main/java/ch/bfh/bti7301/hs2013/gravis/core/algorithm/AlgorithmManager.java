@@ -2,11 +2,14 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.apache.commons.collections15.map.HashedMap;
 import org.apache.commons.io.FileUtils;
 
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -15,6 +18,12 @@ import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
  */
 class AlgorithmManager extends AbstractParameterManager implements
 		IAlgorithmManager {
+
+	/**
+	 * An algorithm map mapping integer (the index of an algorithm in
+	 * super.parameters) to edge type (the capability of the algorithm).
+	 */
+	private HashedMap<Integer, EdgeType> algorithmMap;
 
 	/**
 	 * Main constructor
@@ -43,15 +52,29 @@ class AlgorithmManager extends AbstractParameterManager implements
 	}
 
 	@Override
-	public boolean importAlgorithm(File file) throws Exception {
+	public boolean addAlgorithm(File file) throws Exception {
+		try {
+			try {
+				this.load(file);
+				return super.add(file);
+			} catch (Exception e) {
+				throw e;
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Loads an algorithm.
+	 * 
+	 * @param file
+	 *            the algorithm to load
+	 * @throws Exception
+	 */
+	private void load(File file) throws Exception {
 		try {
 			AlgorithmFactory.createAlgorithm(file);
-			super.add(file);
-			return true;
-			// TODO remove 'fakes'
-			// return new AlgorithmDFSRecursive();
-			// return new AlgorithmDLSRecursive();
-			// return new AlgorithmDijkstra();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -94,6 +117,13 @@ class AlgorithmManager extends AbstractParameterManager implements
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+
+	@Override
+	public String[] getNames(EdgeType edgetype) throws Exception {
+		// TODO select algorithms by edgetype
+		String[] names = super.getNames();
+		return names;
 	}
 
 }

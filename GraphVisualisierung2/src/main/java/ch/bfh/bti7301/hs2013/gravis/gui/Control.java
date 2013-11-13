@@ -24,6 +24,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * A control as in MVC.
@@ -54,25 +55,25 @@ public final class Control implements IControl {
 	 */
 	protected final IOListener ioListener;
 	/**
-	 * A field for a 'graph settings' listener.
+	 * A field for a 'select graph' listener.
 	 */
-	protected final GraphSettingsListener graphSettingsListener;
+	protected final SelectGraphListener selectGraphListener;
 	/**
-	 * A field for a 'algorithm settings' listener.
+	 * A field for a 'select algorithm' listener.
 	 */
-	protected final AlgorithmSettingsListener algorithmSettingsListener;
+	protected final SelectAlgorithmListener selectAlgorithmListener;
 	/**
 	 * A field for a 'traversal' listener.
 	 */
 	protected final TraversalListener traversalListener;
 	/**
-	 * A field for a 'step settings' listener.
+	 * A field for a 'set steplength' listener.
 	 */
-	protected final SteplengthListener steplengthListener;
+	protected final SetSteplengthListener setSteplengthListener;
 	/**
-	 * A field for a 'delay settings' listener.
+	 * A field for a 'set delay' listener.
 	 */
-	protected final DelaySettingsListener delaySettingsListener;
+	protected final SetDelayListener setDelayListener;
 	/**
 	 * A field for a 'player' listener.
 	 */
@@ -108,11 +109,11 @@ public final class Control implements IControl {
 		this.fileChooser = new JFileChooser();
 		this.i18nListener = new I18nListener();
 		this.ioListener = new IOListener();
-		this.graphSettingsListener = new GraphSettingsListener();
-		this.algorithmSettingsListener = new AlgorithmSettingsListener();
+		this.selectGraphListener = new SelectGraphListener();
+		this.selectAlgorithmListener = new SelectAlgorithmListener();
 		this.traversalListener = new TraversalListener();
-		this.steplengthListener = new SteplengthListener();
-		this.delaySettingsListener = new DelaySettingsListener();
+		this.setSteplengthListener = new SetSteplengthListener();
+		this.setDelayListener = new SetDelayListener();
 		this.playerListener = new PlayerListener();
 		this.helpListener = new HelpListener();
 		this.aboutListener = new AboutListener();
@@ -126,13 +127,12 @@ public final class Control implements IControl {
 	public void init() throws Exception {
 		try {
 			this.model.setGraphs(this.core.getGraphs());
-			this.model.setAlgorithms(this.core.getAlgorithms());
 			this.model.setPauseEvent(EventSource.PAUSE);
 			this.i18nListener.actionPerformed(null);
 			this.appendProtocol(this.model.getResourceBundle().getString(
 					"about.message")
 					+ "\n----");
-			this.setViewReady();
+			this.setViewChoiceGraph();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -176,14 +176,28 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * Sets the view elements to ready mode.
+	 * Sets the view elements ready for graph choice.
 	 * 
 	 */
-	private void setViewReady() {
+	private void setViewChoiceGraph() {
 
 		this.model.setMenuEnabled(true);
 		this.model.setGraphsEnabled(true);
 		this.model.setAlgorithmsEnabled(false);
+		this.model.setPlayerEnabled(false);
+
+		this.model.notifyObservers();
+	}
+
+	/**
+	 * Sets the view elements ready for algorithm choice.
+	 * 
+	 */
+	private void setViewChoiceAlgorithm() {
+
+		// this.model.setMenuEnabled(true);
+		// this.model.setGraphsEnabled(true);
+		this.model.setAlgorithmsEnabled(true);
 		this.model.setPlayerEnabled(false);
 
 		this.model.notifyObservers();
@@ -285,22 +299,22 @@ public final class Control implements IControl {
 	 */
 	private void selectGraph(int index) throws Exception {
 
+		// as shown in sd-select-graph
 		try {
 			// graph
+			IGravisGraph graph = (IGravisGraph) this.core.selectGraph(index);
+			this.model.setGraph(graph);
 			this.model.setSelectedGraph(index);
-			Graph<IVertex, IEdge> graph = this.core.selectGraph(index);
 			// algorithm
 			String[] names = this.core.getAlgorithms();
 			this.model.setAlgorithms(names);
-			this.selectAlgorithm(0);
-			if (index == 0) {
-				this.model.setAlgorithmsEnabled(false);
-			} else {
-				this.model.setAlgorithmsEnabled(true);
-			}
+			this.model.setSelectedAlgorithm(0);
 			// view
-			this.model.setPlayerEnabled(false);
-			this.model.notifyObservers(graph);
+			if (index == 0) {
+				this.setViewChoiceGraph();
+			} else {
+				this.setViewChoiceAlgorithm();
+			}
 		} catch (Exception e) {
 			throw e;
 		}
@@ -333,7 +347,7 @@ public final class Control implements IControl {
 			}
 
 		} catch (Exception e) {
-			this.setViewReady();
+			this.setViewChoiceGraph();
 			throw e;
 		}
 
@@ -457,9 +471,9 @@ public final class Control implements IControl {
 					appendProtocol(b.getString("importGraph.label"));
 					fileChooser
 							.setDialogTitle(b.getString("importGraph.label"));
+					// as shown in sd-import-graph
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						// as shown in sd-import-graph
 						File source = fileChooser.getSelectedFile();
 						String[] names = core.importGraph(source);
 						model.setGraphs(names);
@@ -471,9 +485,9 @@ public final class Control implements IControl {
 					appendProtocol(b.getString("importAlgorithm.label"));
 					fileChooser.setDialogTitle(b
 							.getString("importAlgorithm.label"));
+					// as shown in sd-import-algorithm
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						// as shown in sd-import-algorithm
 						File source = fileChooser.getSelectedFile();
 						String[] names = core.importAlgorithm(source);
 						model.setAlgorithms(names);
@@ -487,9 +501,9 @@ public final class Control implements IControl {
 							.setDialogTitle(b.getString("deleteGraph.label"));
 					fileChooser
 							.setCurrentDirectory(core.getGraphWorkbenchDir());
+					// as shown in sd-delete-graph
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						// as shown in sd-delete-graph
 						File file = fileChooser.getSelectedFile();
 						String[] names = core.deleteGraph(file);
 						model.setGraphs(names);
@@ -503,9 +517,9 @@ public final class Control implements IControl {
 							.getString("deleteAlgorithm.label"));
 					fileChooser.setCurrentDirectory(core
 							.getAlgorithmWorkbenchDir());
+					// as shown in sd-delete-algorithm
 					option = fileChooser.showDialog(top, null);
 					if (option == JFileChooser.APPROVE_OPTION) {
-						// as shown in sd-delete-algorithm
 						File file = fileChooser.getSelectedFile();
 						String[] names = core.deleteAlgorithm(file);
 						model.setAlgorithms(names);
@@ -528,21 +542,21 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * A graph settings listener.
+	 * A select graph listener.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class GraphSettingsListener implements ItemListener {
+	private final class SelectGraphListener implements ItemListener {
 
 		@Override
-		public void itemStateChanged(ItemEvent e) {
+		public void itemStateChanged(ItemEvent event) {
 			try {
 				@SuppressWarnings("unchecked")
-				JComboBox<IGravisGraph> box = (JComboBox<IGravisGraph>) e
+				JComboBox<IGravisGraph> box = (JComboBox<IGravisGraph>) event
 						.getSource();
+				// as shown in sd-select-graph
 				int index = box.getSelectedIndex();
-				// String graphName = (String) box.getSelectedItem();
 				selectGraph(index);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(), model
@@ -554,12 +568,12 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * An algorithm settings listener.
+	 * A select algorithm listener.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class AlgorithmSettingsListener implements ItemListener {
+	private final class SelectAlgorithmListener implements ItemListener {
 
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -568,6 +582,7 @@ public final class Control implements IControl {
 					@SuppressWarnings("unchecked")
 					JComboBox<IAlgorithm> box = (JComboBox<IAlgorithm>) e
 							.getSource();
+					// as shown in sd-select-algorithm
 					int index = box.getSelectedIndex();
 					selectAlgorithm(index);
 				}
@@ -605,12 +620,12 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * A steplenth settings listener.
+	 * A set steplenth listener.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class SteplengthListener implements FocusListener {
+	private final class SetSteplengthListener implements FocusListener {
 
 		@Override
 		public void focusGained(FocusEvent e) {
@@ -624,6 +639,7 @@ public final class Control implements IControl {
 						.getSource();
 				int value = Integer.valueOf(textField.getText());
 				model.setSteplength(value);
+				model.notifyObservers(EventSource.SET_STEPLENGTH);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(), model
 						.getResourceBundle().getString("app.label"), 1, null);
@@ -634,12 +650,12 @@ public final class Control implements IControl {
 	}
 
 	/**
-	 * A delay settings listener.
+	 * A set delay listener.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class DelaySettingsListener implements FocusListener {
+	private final class SetDelayListener implements FocusListener {
 
 		@Override
 		public void focusGained(FocusEvent e) {
@@ -653,6 +669,7 @@ public final class Control implements IControl {
 						.getSource();
 				int value = Integer.valueOf(textField.getText());
 				model.setDelay(value);
+				model.notifyObservers(EventSource.SET_DELAY);
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(), model
 						.getResourceBundle().getString("app.label"), 1, null);

@@ -5,6 +5,7 @@ package ch.bfh.bti7301.hs2013.gravis.core;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.SortedSet;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -30,7 +31,8 @@ public class AbstractParameterManager implements IParameterManager {
 	private final FileNameExtensionFilter filter;
 
 	/**
-	 * A field for a parameter map.
+	 * A field for a list of parameters.
+	 * TODO sorted set
 	 */
 	private ArrayList<File> parameters;
 
