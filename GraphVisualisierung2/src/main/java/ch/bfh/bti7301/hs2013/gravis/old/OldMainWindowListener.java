@@ -26,8 +26,11 @@ import java.util.Observable;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphItemStateChangeEvent;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
@@ -208,8 +211,20 @@ public class OldMainWindowListener extends Observable implements
 			// TODO needed parameter: observer for processing and traversing
 			// updates
 
+			ChangeListener listener = new ChangeListener() {
+				
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					if (e instanceof GraphItemStateChangeEvent) {
+						GraphItemStateChangeEvent graphEvent = (GraphItemStateChangeEvent) e;
+						
+						System.out.println(graphEvent);
+					}
+				}
+			};
+			
 			try {
-				this.gravisCore.executeTraverser(null);
+				this.gravisCore.executeTraverser(listener);
 
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

@@ -20,7 +20,7 @@ class GravisGraphEvent extends GraphEvent<IVertex, IEdge> {
 	 * @param item
 	 */
 	protected GravisGraphEvent(Graph<IVertex, IEdge> graph, IGraphItem item) {
-		super(graph, null);
+		super(graph, item instanceof IEdge ? Type.EDGE_ADDED: Type.VERTEX_ADDED);
 		this.item = item;
 	}
 

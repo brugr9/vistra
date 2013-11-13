@@ -11,7 +11,7 @@ class IteratorManager implements IIteratorManager {
 	/**
 	 * A field for a graph iterator.
 	 */
-	private IImmutListIterator<ICommand> graphIterator;
+	private IGravisListIterator<ICommand> graphIterator;
 
 	/**
 	 * A field for a current command.
@@ -24,7 +24,7 @@ class IteratorManager implements IIteratorManager {
 	 * @param graphIterator
 	 * 
 	 */
-	protected IteratorManager(IImmutListIterator<ICommand> graphIterator) {
+	protected IteratorManager(IGravisListIterator<ICommand> graphIterator) {
 		this.graphIterator = graphIterator;
 		this.currentCommand = null;
 
@@ -113,7 +113,7 @@ class IteratorManager implements IIteratorManager {
 	 * .bfh.bti7301.hs2013.gravis.core.IImmutListIterator)
 	 */
 	@Override
-	public void setListIterator(IImmutListIterator<ICommand> listIterator)
+	public void setListIterator(IGravisListIterator<ICommand> listIterator)
 			throws Exception {
 		try {
 			this.graphIterator = listIterator;

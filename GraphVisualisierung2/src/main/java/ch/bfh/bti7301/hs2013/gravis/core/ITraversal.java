@@ -20,7 +20,7 @@ public interface ITraversal {
 	 * @return the immutable list of commands
 	 * @throws Exception
 	 */
-	public abstract IImmutListIterator<ICommand> execute(
+	public abstract IGravisListIterator<ICommand> execute(
 			ChangeListener graphItemStateChangeListener) throws Exception;
 
 	/**

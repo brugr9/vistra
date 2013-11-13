@@ -1,6 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core;
 
-import static ch.bfh.bti7301.hs2013.gravis.core.CoreFactory.createImmutListIterator;
+import static ch.bfh.bti7301.hs2013.gravis.core.CoreFactory.createGravisListIterator;
 import static ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory.createGravisGraphEventListener;
 import static ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory.createRestrictedGraph;
 import static ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory.createObservableGraph;
@@ -12,6 +12,7 @@ import javax.swing.event.ChangeListener;
 
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphItemStateChangeEvent;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
@@ -26,6 +27,10 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
  */
 class Traversal implements ITraversal {
 
+	// TODO read string from property file
+	private final static String SUCCESS_MESSAGE = "Die Durchführung der Traversierung "
+			+ "wurde erfolgreich abgeschlossen!";
+	
 	/**
 	 * A field for a graph.
 	 */
@@ -108,11 +113,9 @@ class Traversal implements ITraversal {
 	 * .bfh.bti7301.hs2013.gravis.core.graph.IGraphItemStateChangeListener)
 	 */
 	@Override
-	public IImmutListIterator<ICommand> execute(ChangeListener changeListener)
+	public IGravisListIterator<ICommand> execute(ChangeListener changeListener)
 			throws Exception {
 		try {
-			// TODO bitte an dieser Methode nichts ändern (pk)
-
 			List<ICommand> commandList = new ArrayList<>();
 			GraphEventListener<IVertex, IEdge> graphEventListener = 
 					createGravisGraphEventListener(commandList, this.algorithm.isEnableEdges());
@@ -121,17 +124,23 @@ class Traversal implements ITraversal {
 			observableGraph.addGraphEventListener(graphEventListener);
 			IRestrictedGraph restrictedGraph = createRestrictedGraph(observableGraph);
 
-			// TODO notify 
 			this.algorithm.execute(restrictedGraph);
 
+			// undo for all commands in the list in reverse order
 			for (int i = commandList.size() - 1; i >= 0; i--) {
 				commandList.get(i).unExecute();
 			}
 			
+			// TODO bitte an dieser Methode nichts ändern (pk)
 			// TODO notify changeListener
-			// TODO IteratorManager needs an IGraphItemStateChangeListener
+			// TODO IteratorManager needs an GraphItemStateChangeEvent
 			// for processing and traversing updates
-			return createImmutListIterator(commandList);
+			
+			IGravisListIterator<ICommand> listIterator = createGravisListIterator(commandList);
+			
+			changeListener.stateChanged(new GraphItemStateChangeEvent(this, SUCCESS_MESSAGE));
+			
+			return listIterator;
 		} catch (Exception e) {
 			throw e;
 		}

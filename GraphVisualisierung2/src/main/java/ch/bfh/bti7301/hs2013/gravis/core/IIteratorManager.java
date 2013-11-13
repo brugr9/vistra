@@ -43,7 +43,7 @@ public interface IIteratorManager {
 	 * @throws Exception
 	 */
 	public abstract void setListIterator(
-			IImmutListIterator<ICommand> listIterator) throws Exception;
+			IGravisListIterator<ICommand> listIterator) throws Exception;
 
 	/**
 	 * @return int

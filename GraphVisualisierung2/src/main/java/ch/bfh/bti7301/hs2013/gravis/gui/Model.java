@@ -17,7 +17,7 @@ public final class Model extends Observable implements IModel {
 
 	// gravis
 	private IGravisGraph graph;
-	// private IImmutListIterator<ICommand> traversal;
+	// private IGravisListIterator<ICommand> traversal;
 
 	// i18n
 	private String i18nBaseName;

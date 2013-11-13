@@ -214,7 +214,7 @@ class Core implements ICore {
 	@Override
 	public void executeTraverser(ChangeListener listener) throws Exception {
 		try {
-			IImmutListIterator<ICommand> listIterator = this.traversal
+			IGravisListIterator<ICommand> listIterator = this.traversal
 					.execute(listener);
 			this.iteratorManager.setListIterator(listIterator);
 		} catch (Exception e) {

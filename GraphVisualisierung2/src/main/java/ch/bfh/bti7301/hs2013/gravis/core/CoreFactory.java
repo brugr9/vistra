@@ -53,7 +53,7 @@ public final class CoreFactory {
 			// Traversal
 			ITraversal traversal = createTraveral(gravisGraph,
 					algorithmManager.getDefaultAlgorithm());
-			IImmutListIterator<ICommand> listIterator = createImmutListIterator();
+			IGravisListIterator<ICommand> listIterator = createImmutListIterator();
 			IIteratorManager iteratorManager = createIteratorManager(listIterator);
 
 			return createCore(graphManager, algorithmManager, traversal,
@@ -99,13 +99,13 @@ public final class CoreFactory {
 	}
 
 	/**
-	 * @return a new instance of type IImmutListIterator
+	 * @return a new instance of type IGravisListIterator
 	 * @throws Exception
 	 */
-	private static IImmutListIterator<ICommand> createImmutListIterator()
+	private static IGravisListIterator<ICommand> createImmutListIterator()
 			throws Exception {
 		try {
-			return new ImmutListIterator<ICommand>();
+			return new GravisListIterator<ICommand>();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -117,7 +117,7 @@ public final class CoreFactory {
 	 * @throws Exception
 	 */
 	private static IIteratorManager createIteratorManager(
-			IImmutListIterator<ICommand> listIterator) throws Exception {
+			IGravisListIterator<ICommand> listIterator) throws Exception {
 		try {
 			return new IteratorManager(listIterator);
 		} catch (Exception e) {
@@ -128,12 +128,12 @@ public final class CoreFactory {
 	/**
 	 * 
 	 * @param list
-	 * @return a new instance of type IImmutListIterator
+	 * @return a new instance of type IGravisListIterator
 	 */
-	public static IImmutListIterator<ICommand> createImmutListIterator(
+	public static IGravisListIterator<ICommand> createGravisListIterator(
 			List<ICommand> list) throws Exception {
 		try {
-			return new ImmutListIterator<ICommand>(list);
+			return new GravisListIterator<ICommand>(list);
 		} catch (Exception e) {
 			throw e;
 		}

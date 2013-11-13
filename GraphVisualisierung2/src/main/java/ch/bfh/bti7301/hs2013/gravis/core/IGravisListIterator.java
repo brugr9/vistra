@@ -8,7 +8,7 @@ import java.util.Iterator;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public interface IImmutListIterator<E> extends Iterable<E>, Iterator<E> {
+public interface IGravisListIterator<E> extends Iterable<E>, Iterator<E> {
 
 	/**
 	 * @return boolean

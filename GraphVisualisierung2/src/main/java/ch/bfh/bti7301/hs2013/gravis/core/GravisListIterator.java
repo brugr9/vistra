@@ -11,7 +11,7 @@ import java.util.ListIterator;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class ImmutListIterator<E> implements IImmutListIterator<E> {
+class GravisListIterator<E> implements IGravisListIterator<E> {
 
 	private final ListIterator<E> listIterator;
 
@@ -20,7 +20,7 @@ class ImmutListIterator<E> implements IImmutListIterator<E> {
 	/**
 	 * 
 	 */
-	protected ImmutListIterator() {
+	protected GravisListIterator() {
 		this(new ArrayList<E>());
 	}
 
@@ -28,7 +28,7 @@ class ImmutListIterator<E> implements IImmutListIterator<E> {
 	 * 
 	 * @param list
 	 */
-	protected ImmutListIterator(List<E> list) {
+	protected GravisListIterator(List<E> list) {
 		this.listIterator = list.listIterator();
 		this.size = list.size();
 	}
@@ -125,7 +125,7 @@ class ImmutListIterator<E> implements IImmutListIterator<E> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.IImmutListIterator#nextIndex()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.IGravisListIterator#nextIndex()
 	 */
 	@Override
 	public int nextIndex() {
@@ -135,7 +135,7 @@ class ImmutListIterator<E> implements IImmutListIterator<E> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.IImmutListIterator#previousIndex()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.IGravisListIterator#previousIndex()
 	 */
 	@Override
 	public int previousIndex() {
@@ -145,7 +145,7 @@ class ImmutListIterator<E> implements IImmutListIterator<E> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.IImmutListIterator#first()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.IGravisListIterator#first()
 	 */
 	@Override
 	public E first() {
@@ -161,7 +161,7 @@ class ImmutListIterator<E> implements IImmutListIterator<E> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.IImmutListIterator#last()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.IGravisListIterator#last()
 	 */
 	@Override
 	public E last() {
