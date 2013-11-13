@@ -5,33 +5,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
-import java.util.Scanner;
-
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.commons.collections15.BidiMap;
 import org.apache.commons.collections15.Transformer;
 import org.apache.commons.io.FileUtils;
-import org.xml.sax.SAXException;
-
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GraphTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.HyperEdgeTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.ValueTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.VertexTransformer;
-import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.Hypergraph;
-import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.GraphIOException;
-import edu.uci.ics.jung.io.GraphMLMetadata;
-import edu.uci.ics.jung.io.GraphMLReader;
 import edu.uci.ics.jung.io.GraphMLWriter;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 
@@ -42,11 +27,11 @@ import edu.uci.ics.jung.io.graphml.GraphMLReader2;
  */
 class GraphManager extends AbstractParameterManager implements IGraphManager {
 
-	private final GraphTransformer graphTransformer = new GraphTransformer();
-	private final VertexTransformer vertexTransformer = new VertexTransformer();
-	private final EdgeTransformer edgeTransformer = new EdgeTransformer();
-	private final HyperEdgeTransformer hyperEdgeTransformer = new HyperEdgeTransformer();
-	
+	private final GraphTransformer graphTransformer;
+	private final VertexTransformer vertexTransformer;
+	private final EdgeTransformer edgeTransformer;
+	private final HyperEdgeTransformer hyperEdgeTransformer;
+
 	/**
 	 * Main constructor
 	 * 
@@ -60,6 +45,12 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	public GraphManager(File templatesDir, File workbenchDir,
 			FileNameExtensionFilter filter) {
 		super(templatesDir, workbenchDir, filter);
+
+		this.graphTransformer = new GraphTransformer();
+		this.vertexTransformer = new VertexTransformer();
+		this.edgeTransformer = new EdgeTransformer();
+		this.hyperEdgeTransformer = new HyperEdgeTransformer();
+
 		// try {
 		// // TODO validation?
 		// for (File file : templatesDir.listFiles()) {
@@ -78,28 +69,29 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	 * @param file
 	 * @return IGravisGraph
 	 */
-	private IGravisGraph load(final File file) throws GraphException {		
-			try {
-				GraphMLReader2<IGravisGraph, IVertex, IEdge> graphReader = new GraphMLReader2<>(
-						new FileReader(file), this.graphTransformer,
-						this.vertexTransformer, this.edgeTransformer,
-						this.hyperEdgeTransformer);
-				
-				IGravisGraph newGraph = graphReader.readGraph();
-				
-				graphReader.close();
-				
-				return newGraph;
-			} catch (GraphIOException e) {
-				throw new GraphException("I/O error in GraphML-file "
-						+ file.getName() + "!", e);
-			} catch (FileNotFoundException e) {
-				throw new GraphException("GraphML-file not found: "
-						+ file.getName() + "!", e);
-			} catch (Exception e) {
-				throw new GraphException("Exception while loading data from GraphML-file "
-						+ file.getName() + "!", e);
-			}		
+	private IGravisGraph load(final File file) throws GraphException {
+		try {
+			GraphMLReader2<IGravisGraph, IVertex, IEdge> graphReader = new GraphMLReader2<>(
+					new FileReader(file), this.graphTransformer,
+					this.vertexTransformer, this.edgeTransformer,
+					this.hyperEdgeTransformer);
+
+			IGravisGraph newGraph = graphReader.readGraph();
+
+			graphReader.close();
+
+			return newGraph;
+		} catch (GraphIOException e) {
+			throw new GraphException("I/O error in GraphML-file "
+					+ file.getName() + "!", e);
+		} catch (FileNotFoundException e) {
+			throw new GraphException("GraphML-file not found: "
+					+ file.getName() + "!", e);
+		} catch (Exception e) {
+			throw new GraphException(
+					"Exception while loading data from GraphML-file "
+							+ file.getName() + "!", e);
+		}
 	}
 
 	/**
