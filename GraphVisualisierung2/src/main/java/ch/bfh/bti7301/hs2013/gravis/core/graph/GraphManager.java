@@ -2,6 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
@@ -20,10 +21,15 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GraphTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.HyperEdgeTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.ValueTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.VertexTransformer;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.Hypergraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
+import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.GraphMLMetadata;
 import edu.uci.ics.jung.io.GraphMLReader;
 import edu.uci.ics.jung.io.GraphMLWriter;
@@ -36,8 +42,10 @@ import edu.uci.ics.jung.io.graphml.GraphMLReader2;
  */
 class GraphManager extends AbstractParameterManager implements IGraphManager {
 
-	// TODO read from properties
-	private final static String GRAPH_ID = "id";
+	private final GraphTransformer graphTransformer = new GraphTransformer();
+	private final VertexTransformer vertexTransformer = new VertexTransformer();
+	private final EdgeTransformer edgeTransformer = new EdgeTransformer();
+	private final HyperEdgeTransformer hyperEdgeTransformer = new HyperEdgeTransformer();
 	
 	/**
 	 * Main constructor
@@ -70,90 +78,28 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	 * @param file
 	 * @return IGravisGraph
 	 */
-	private IGravisGraph load(final File file) throws GraphException {
-		try {
-//			GraphMLReader2<Graph<IVertex, IEdge>, IVertex, IEdge> graphReader = 
-//					new GraphMLReader2<>(new Scanner(file), 
-//					graphTransformer, vertexTransformer, edgeTransformer, hyperEdgeTransformer);
-			
-			
-			
-			return this.read(file,
-					new GraphMLReader<Graph<IVertex, IEdge>, IVertex, IEdge>(
-							new VertexFactory(), new EdgeFactory()));
-		} catch (SAXException e) {
-			throw new GraphException("XML parsing error in file " + file.getName() + "!", e);
-		} catch (ParserConfigurationException e) {
-			throw new GraphException("XML Parser configuration error in file " + 
-					file.getName() + "!", e);
-		} catch (IOException e) {
-			throw new GraphException("Unable to read from file " + file.getName() + "!", e);
-		} catch (Exception e) {
-			throw new GraphException("Exception while loading data from file " + 
-					file.getName() + "!", e);
-		}
-	}
-
-	/**
-	 * @param filename
-	 * @param graphMLReader
-	 * @return IGravisGraph
-	 * @throws IOException
-	 * @throws Exception
-	 */
-	private IGravisGraph read(
-			final File file,
-			final GraphMLReader<Graph<IVertex, IEdge>, IVertex, IEdge> graphReader)
-			throws IOException {
-
-		IGravisGraph newGraph = GraphFactory.createIGravisGraph();
-		graphReader.load(file.getAbsolutePath(), newGraph);
-
-		BidiMap<IVertex, String> vertexIds = graphReader.getVertexIDs();
-		BidiMap<IEdge, String> edgeIds = graphReader.getEdgeIDs();
-		Map<String, GraphMLMetadata<IVertex>> vertexMeta = graphReader
-				.getVertexMetadata();
-		Map<String, GraphMLMetadata<IEdge>> edgeMeta = graphReader
-				.getEdgeMetadata();
-		Map<String, GraphMLMetadata<Graph<IVertex, IEdge>>> graphMeta = graphReader
-				.getGraphMetadata();
+	private IGravisGraph load(final File file) throws GraphException {		
+			try {
+				GraphMLReader2<IGravisGraph, IVertex, IEdge> graphReader = new GraphMLReader2<>(
+						new FileReader(file), this.graphTransformer,
+						this.vertexTransformer, this.edgeTransformer,
+						this.hyperEdgeTransformer);
 				
-		newGraph.setId(graphMeta.get(GRAPH_ID).transformer.transform(newGraph));
-		
-		System.out.println(graphMeta.get("edgedefault"));
-		
-		// TODO read edge type from file
-		newGraph.setEdgeType(EdgeType.DIRECTED);
-		// TODO read graph description from graphml
-
-		for (IVertex vertex : newGraph.getVertices()) {
-			vertex.setId(vertexIds.get(vertex));
-			// TODO read attribute Ids from file: vertexColor, startVertex,
-			// vertexLocation.x, vertexLocation.y
-			// TODO read endVertex from graphml
-			vertex.setColor(ValueTransformer.transformColor(vertexMeta
-					.get("vertexColor").transformer.transform(vertex)));
-			vertex.setStart(ValueTransformer.transformBoolean(vertexMeta
-					.get("startVertex").transformer.transform(vertex)));
-
-			vertex.setLocation(ValueTransformer.transformLocation(vertexMeta
-					.get("vertexLocation.x").transformer.transform(vertex),
-					vertexMeta.get("vertexLocation.y").transformer
-							.transform(vertex)));
-
-			vertex.setId(vertexIds.get(vertex));
-		}
-
-		for (IEdge edge : newGraph.getEdges()) {
-			edge.setId(edgeIds.get(edge));
-			// TODO read attribute Ids from file: edgeColor, weight
-			// edge.setColor(ValueTransformer.transformColor(edgeMeta
-			// .get("edgeColor").transformer.transform(edge)));
-			edge.setWeight(ValueTransformer.transformWeight(edgeMeta
-					.get("weight").transformer.transform(edge)));
-		}
-
-		return newGraph;
+				IGravisGraph newGraph = graphReader.readGraph();
+				
+				graphReader.close();
+				
+				return newGraph;
+			} catch (GraphIOException e) {
+				throw new GraphException("I/O error in GraphML-file "
+						+ file.getName() + "!", e);
+			} catch (FileNotFoundException e) {
+				throw new GraphException("GraphML-file not found: "
+						+ file.getName() + "!", e);
+			} catch (Exception e) {
+				throw new GraphException("Exception while loading data from GraphML-file "
+						+ file.getName() + "!", e);
+			}		
 	}
 
 	/**

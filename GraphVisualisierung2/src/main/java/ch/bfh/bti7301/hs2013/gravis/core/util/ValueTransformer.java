@@ -23,7 +23,7 @@ public final class ValueTransformer {
 	 * @param stringValue
 	 * @return a transformed double value
 	 */
-	public static double transformWeight(String stringValue) {
+	public static double transformDouble(String stringValue) {
 		try {
 			return Double.parseDouble(stringValue);
 		} catch (Exception e) {
@@ -58,6 +58,8 @@ public final class ValueTransformer {
 			return GravisColor.blue;
 		case "gray":
 			return GravisColor.gray;
+		case "black":
+			return GravisColor.black;
 		default:
 			return GravisColor.red;
 		}

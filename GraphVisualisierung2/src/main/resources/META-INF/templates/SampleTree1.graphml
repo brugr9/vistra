@@ -4,16 +4,20 @@
 	xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
 	 http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
 
-	<key id="vertexColor" for="node" attr.name="vertexColor" attr.type="string">
-		<default>red</default>
-	</key>
 	<key id="edgeColor" for="edge" attr.name="edgeColor" attr.type="string">
 		<default>black</default>
 	</key>
 	<key id="weight" for="edge" attr.name="weight" attr.type="double">
 		<default>1.0</default>
 	</key>
+
+	<key id="vertexColor" for="node" attr.name="vertexColor" attr.type="string">
+		<default>red</default>
+	</key>
 	<key id="startVertex" for="node" attr.name="startVertex" attr.type="boolean">
+		<default>false</default>
+	</key>
+	<key id="endVertex" for="node" attr.name="endVertex" attr.type="boolean">
 		<default>false</default>
 	</key>
 	<key id="vertexLocation.x" for="node" attr.name="vertexLocation.x" attr.type="integer">
@@ -22,19 +26,29 @@
 	<key id="vertexLocation.y" for="node" attr.name="vertexLocation.y" attr.type="integer">
 		<default>0</default>
 	</key>
+	<key id="vertexWidth" for="node" attr.name="vertexWidth" attr.type="double ">
+		<default>30.0</default>
+	</key>
+	<key id="vertexHeight" for="node" attr.name="vertexHeight" attr.type="double ">
+		<default>30.0</default>
+	</key>
 
-	<!-- <key id="g1" for="graph" attr.name="edgedefault" attr.type="string">
-		<default>directed</default>
-	</key> -->
+	<key id="description" for="graph" attr.name="description" attr.type="string">
+		<default></default>
+	</key> 
 
-	<graph id="Sample Tree 1" edgedefault="directed">
-		<!-- <data key="g1">directed</data> -->
+	<graph id="Sample Forrest 1" edgedefault="directed">
+		<data key="description">
+			This sample forrest can be used with DFS and DLS algorithms.
+		</data>
 
 		<node id="A">
 			<data key="vertexColor">gray</data>
 			<data key="startVertex">true</data>
 			<data key="vertexLocation.x">300</data>
 			<data key="vertexLocation.y">50</data>
+			<data key="vertexWidth">50.0</data>
+			<data key="vertexHeight">40.0</data>
 		</node>
 		<node id="B">
 			<data key="vertexLocation.x">250</data>
@@ -77,10 +91,15 @@
 			<data key="vertexLocation.y">50</data>
 		</node>
 		<node id="L">
+			<data key="endVertex">true</data>
 			<data key="vertexLocation.x">500</data>
 			<data key="vertexLocation.y">100</data>
 		</node>
-		<edge id="ab" source="A" target="B"/>
+
+		<edge id="ab" source="A" target="B">
+			<data key="edgeColor">green</data>
+			<data key="weight">5.0</data>
+		</edge>
 		<edge id="bc" source="B" target="C"/>
 		<edge id="cd" source="C" target="D"/>
 		<edge id="ae" source="A" target="E"/>
