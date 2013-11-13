@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.graph;
+package ch.bfh.bti7301.hs2013.gravis.core;
 
 import javax.swing.event.ChangeEvent;
 
@@ -8,7 +8,7 @@ import javax.swing.event.ChangeEvent;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GraphItemStateChangeEvent extends ChangeEvent {
+public class TraversalChangeEvent extends ChangeEvent {
 
 	private static final long serialVersionUID = -6094850288655318973L;
 
@@ -17,7 +17,7 @@ public class GraphItemStateChangeEvent extends ChangeEvent {
 	/**
 	 * @param source
 	 */
-	public GraphItemStateChangeEvent(Object source, String message) {
+	protected TraversalChangeEvent(Object source, String message) {
 		super(source);
 		this.message = message;
 	}

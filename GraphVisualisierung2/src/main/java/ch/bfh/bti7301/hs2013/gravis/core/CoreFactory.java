@@ -3,6 +3,9 @@ package ch.bfh.bti7301.hs2013.gravis.core;
 import java.util.List;
 import java.util.Properties;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.AlgorithmFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithmManager;
@@ -129,6 +132,7 @@ public final class CoreFactory {
 	 * 
 	 * @param list
 	 * @return a new instance of type IGravisListIterator
+	 * @throws Exception
 	 */
 	public static IGravisListIterator<ICommand> createGravisListIterator(
 			List<ICommand> list) throws Exception {
@@ -137,5 +141,15 @@ public final class CoreFactory {
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+	
+	/**
+	 * @param source
+	 * @param message
+	 * @return a new instance of type ChangeEvent
+	 */
+	public static ChangeEvent createTraversalChangeEvent(
+			Object source, String message) {
+		return new TraversalChangeEvent(source, message);
 	}
 }

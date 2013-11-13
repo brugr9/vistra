@@ -12,7 +12,6 @@ import javax.swing.event.ChangeListener;
 
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphItemStateChangeEvent;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
@@ -131,14 +130,11 @@ class Traversal implements ITraversal {
 				commandList.get(i).unExecute();
 			}
 			
-			// TODO bitte an dieser Methode nichts ändern (pk)
-			// TODO notify changeListener
-			// TODO IteratorManager needs an GraphItemStateChangeEvent
-			// for processing and traversing updates
+			IGravisListIterator<ICommand> listIterator = createGravisListIterator(
+					commandList);
 			
-			IGravisListIterator<ICommand> listIterator = createGravisListIterator(commandList);
-			
-			changeListener.stateChanged(new GraphItemStateChangeEvent(this, SUCCESS_MESSAGE));
+			changeListener.stateChanged(CoreFactory.createTraversalChangeEvent(
+					this, SUCCESS_MESSAGE));
 			
 			return listIterator;
 		} catch (Exception e) {
