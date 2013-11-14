@@ -32,5 +32,17 @@ public interface IGraphItem extends IRestrictedGraphItem {
 	 * @param color
 	 */
 	public abstract void setColor(Color color);
+
+	public abstract void resetVisualizationValues();
+
+	/**
+	 * @return boolean
+	 */
+	public abstract boolean hasNoResult();
+
+	/**
+	 * @return boolean
+	 */
+	public abstract boolean hasNoComment();
 	
 }

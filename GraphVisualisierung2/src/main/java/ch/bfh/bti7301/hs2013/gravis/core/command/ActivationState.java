@@ -27,13 +27,8 @@ class ActivationState extends AbstractAnimationState {
 		ComplexCommand complexCommand = new ComplexCommand(
 				oldState.getPredecessorCommand());
 
-		complexCommand.add(new ColorCommand(currentItem,
-				currentItem.getColor(), this.stateColor));
-		complexCommand.add(new ResultCommand(currentItem, currentItem
-				.getPaintedResult(), currentItem.getResult()));
-		complexCommand.add(new CommentCommand(currentItem, currentItem
-				.getInfo(), currentItem.getComment()));
-
+		this.addVisualizationCommands(currentItem, complexCommand);
+		
 		this.predecessorCommand = new ColorCommand(currentItem,
 				this.stateColor, currentItem.getColor());
 		return complexCommand;

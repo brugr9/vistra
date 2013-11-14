@@ -20,6 +20,8 @@ class ResultCommand extends EmptyCommand {
 	 */
 	protected ResultCommand(IGraphItem currentItem, double paintedResult,
 			double result) {
+		super();
+
 		this.item = currentItem;
 		this.oldResult = paintedResult;
 		this.newResult = result;

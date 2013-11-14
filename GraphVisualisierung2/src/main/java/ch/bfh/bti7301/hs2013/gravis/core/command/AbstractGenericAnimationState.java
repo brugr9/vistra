@@ -47,13 +47,8 @@ abstract class AbstractGenericAnimationState extends AbstractAnimationState {
 			}
 		}
 
-		complexCommand.add(new ColorCommand(currentItem,
-				currentItem.getColor(), this.stateColor));
-		complexCommand.add(new ResultCommand(currentItem, currentItem
-				.getPaintedResult(), currentItem.getResult()));
-		complexCommand.add(new CommentCommand(currentItem, currentItem
-				.getInfo(), currentItem.getComment()));
-
+		this.addVisualizationCommands(currentItem, complexCommand);
+		
 		return complexCommand;
 	}
 

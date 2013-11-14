@@ -52,7 +52,7 @@ class CommentCommand extends EmptyCommand {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 		// TODO notify protocol panel
 		if (!this.item.getInfo().isEmpty()) {
-			System.out.println("Zurück: " + this.item.getInfo());
+			System.out.println("Zurücksetzen: " + this.item.getInfo());
 		}
 		
 		this.item.setInfo(this.oldComment);

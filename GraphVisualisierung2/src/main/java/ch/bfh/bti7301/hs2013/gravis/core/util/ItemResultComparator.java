@@ -10,6 +10,8 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
  */
 public class ItemResultComparator implements Comparator<IRestrictedGraphItem> {
 
+	private final double EPSILON = 0.001;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -17,8 +19,21 @@ public class ItemResultComparator implements Comparator<IRestrictedGraphItem> {
 	 */
 	@Override
 	public int compare(IRestrictedGraphItem i1, IRestrictedGraphItem i2) {
-		return new Double(i1.getPaintedResult()).intValue()
-				- new Double(i2.getPaintedResult()).intValue();
+		// result = r1 - r2
+		double result = i1.getPaintedResult() - i2.getPaintedResult();
+		
+		// |r1 - r2| < EPSILON => r1 - r2 = 0
+		if (Math.abs(result) < EPSILON) {
+			return 0;
+		}
+		
+		// r1 - r2 > 0
+		if (result > 0) {
+			return 1;
+		}
+		
+		// r1 - r2 < 0
+		return -1;
 	}
 
 }

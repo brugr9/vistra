@@ -27,8 +27,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 */
 	protected AbstractGraphItem() {
 		this.id = String.valueOf(counter++);
-		this.info = "";
-		this.comment = "";
+		this.info = this.comment = "";
 		this.paintedResult = this.result = Double.NaN;
 		this.visited = false;
 		this.state = State.INITIAL;
@@ -134,6 +133,31 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setPaintedResult(double result) {
 		this.paintedResult = result;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#resetVisualizationValues()
+	 */
+	@Override
+	public void resetVisualizationValues() {
+		this.comment = "";
+		this.result = Double.NaN;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#hasNoResult()
+	 */
+	@Override
+	public boolean hasNoResult() {
+		return Double.isNaN(this.result);
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#hasNoComment()
+	 */
+	@Override
+	public boolean hasNoComment() {
+		return this.comment.length() == 0;
 	}
 
 	

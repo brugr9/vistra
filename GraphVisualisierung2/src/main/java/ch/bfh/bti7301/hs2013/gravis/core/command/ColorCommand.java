@@ -22,6 +22,8 @@ class ColorCommand extends EmptyCommand {
 	 * @param newColor
 	 */
 	protected ColorCommand(IGraphItem item, Color oldColor, Color newColor) {
+		super();
+
 		this.item = item;
 		this.oldColor = oldColor;
 		this.newColor = newColor;

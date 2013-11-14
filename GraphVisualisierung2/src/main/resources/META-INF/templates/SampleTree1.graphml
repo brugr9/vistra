@@ -97,7 +97,7 @@
 		</node>
 
 		<edge id="ab" source="A" target="B">
-			<data key="edgeColor">green</data>
+			<!-- <data key="edgeColor">green</data> -->
 			<data key="weight">5.0</data>
 		</edge>
 		<edge id="bc" source="B" target="C"/>

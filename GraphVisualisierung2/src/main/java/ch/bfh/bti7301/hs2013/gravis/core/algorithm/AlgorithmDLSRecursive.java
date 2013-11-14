@@ -35,6 +35,8 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	public void execute(IRestrictedGraph graph) {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
+		// TODO Implementation für ungerichtete Kanten
+		
 		this.counter = 0;
 
 		for (IRestrictedVertex vertex : graph.getVertices()) {
@@ -69,7 +71,8 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 		}
 
 		vertex1.setResult(++this.counter);
-		vertex1.setComment("Der Knoten " + vertex1 + " wurde zur Lösung hinzugefügt.");
+		vertex1.setComment("Der Knoten " + vertex1 + " wurde traversiert und zur Lösung "
+				+ "hinzugefügt. Er hat die Traversierungs-Nr.: " + vertex1.getResult());
 		vertex1.setState(State.SOLUTION);
 		graph.updateState(vertex1);
 	}
