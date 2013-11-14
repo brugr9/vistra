@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+	 http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+
+	<key id="edgeColor" for="edge" attr.name="edgeColor" attr.type="string">
+		<default>black</default>
+	</key>
+	<key id="weight" for="edge" attr.name="weight" attr.type="double">
+		<default>1.0</default>
+	</key>
+
+	<key id="vertexColor" for="node" attr.name="vertexColor" attr.type="string">
+		<default>red</default>
+	</key>
+	<key id="startVertex" for="node" attr.name="startVertex" attr.type="boolean">
+		<default>false</default>
+	</key>
+	<key id="endVertex" for="node" attr.name="endVertex" attr.type="boolean">
+		<default>false</default>
+	</key>
+	<key id="vertexLocation.x" for="node" attr.name="vertexLocation.x" attr.type="integer">
+		<default>0</default>
+	</key>
+	<key id="vertexLocation.y" for="node" attr.name="vertexLocation.y" attr.type="integer">
+		<default>0</default>
+	</key>
+	<key id="vertexWidth" for="node" attr.name="vertexWidth" attr.type="double ">
+		<default>60.0</default>
+	</key>
+	<key id="vertexHeight" for="node" attr.name="vertexHeight" attr.type="double ">
+		<default>40.0</default>
+	</key>
+
+	<key id="description" for="graph" attr.name="description" attr.type="string">
+		<default></default>
+	</key> 
+
+	
+	<graph id="Dijkstra Sample Graph 1" edgedefault="directed">
+		<data key="description">
+			This sample graph can be used with the Dijkstra shortest path algorithm.
+		</data>
+
+		<node id="V1">
+			<data key="vertexColor">gray</data>
+			<data key="startVertex">true</data>
+			<data key="vertexLocation.x">300</data>
+			<data key="vertexLocation.y">50</data>
+		</node>
+		<node id="V2">
+			<data key="vertexLocation.x">100</data>
+			<data key="vertexLocation.y">250</data>
+		</node>
+		<node id="V3">
+			<data key="vertexLocation.x">200</data>
+			<data key="vertexLocation.y">400</data>
+		</node>
+		<node id="V4">
+			<data key="vertexLocation.x">400</data>
+			<data key="vertexLocation.y">400</data>
+		</node>
+		<node id="V5">
+			<data key="vertexLocation.x">500</data>
+			<data key="vertexLocation.y">250</data>
+		</node>
+
+		<edge id="e12" source="V1" target="V2">
+			<data key="weight">10.0</data>
+		</edge>
+		<edge id="e23" source="V2" target="V3">
+			<data key="weight">50.0</data>
+		</edge>
+		<edge id="e35" source="V3" target="V5">
+			<data key="weight">10.0</data>
+		</edge>
+		<edge id="e15" source="V1" target="V5">
+			<data key="weight">100.0</data>
+		</edge>
+		<edge id="e14" source="V1" target="V4">
+			<data key="weight">30.0</data>
+		</edge>
+		<edge id="e43" source="V4" target="V3">
+			<data key="weight">20.0</data>
+		</edge>
+		<edge id="e45" source="V4" target="V5">
+			<data key="weight">60.0</data>
+		</edge>
+	</graph>  
+</graphml>

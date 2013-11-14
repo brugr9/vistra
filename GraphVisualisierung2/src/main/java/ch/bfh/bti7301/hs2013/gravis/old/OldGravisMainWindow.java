@@ -105,68 +105,68 @@ public class OldGravisMainWindow extends JFrame {
 		btnNewButton_4.addActionListener(mainWindowListener);
 
 		JLabel lblNewLabel = new JLabel("Inkrement:");
-		lblNewLabel.setBounds(859, 654, 88, 14);
+		lblNewLabel.setBounds(859, 718, 88, 14);
 		getContentPane().add(lblNewLabel);
 
 		JProgressBar progressBar = new JProgressBar();
-		progressBar.setBounds(281, 654, 267, 14);
+		progressBar.setBounds(281, 718, 267, 14);
 		getContentPane().add(progressBar);
 
 		JLabel lblZeitintervall = new JLabel("Zeitintervall: ");
-		lblZeitintervall.setBounds(668, 654, 82, 14);
+		lblZeitintervall.setBounds(668, 718, 82, 14);
 		getContentPane().add(lblZeitintervall);
 
 		JButton btnNewButton_5 = new JButton("Play");
-		btnNewButton_5.setBounds(215, 690, 89, 23);
+		btnNewButton_5.setBounds(215, 754, 89, 23);
 		getContentPane().add(btnNewButton_5);
 		btnNewButton_5.setActionCommand(PLAY_ANIMATION.toString());
 		btnNewButton_5.addActionListener(mainWindowListener);
 
 		JButton btnPause = new JButton("Pause");
-		btnPause.setBounds(314, 690, 89, 23);
+		btnPause.setBounds(314, 754, 89, 23);
 		getContentPane().add(btnPause);
 		btnPause.setActionCommand(PAUSE_ANIMATION.toString());
 		btnPause.addActionListener(mainWindowListener);
 
 		JButton btnStop = new JButton("Stop");
-		btnStop.setBounds(413, 690, 89, 23);
+		btnStop.setBounds(413, 754, 89, 23);
 		getContentPane().add(btnStop);
 		btnStop.setActionCommand(STOP_ANIMATION.toString());
 		btnStop.addActionListener(mainWindowListener);
 
 		JButton btnAnfang = new JButton("Anfang");
-		btnAnfang.setBounds(671, 690, 89, 23);
+		btnAnfang.setBounds(671, 754, 89, 23);
 		getContentPane().add(btnAnfang);
 		btnAnfang.setActionCommand(BEGINNING_ANIMATION.toString());
 		btnAnfang.addActionListener(mainWindowListener);
 
 		JButton btnZurck = new JButton("Zurück");
-		btnZurck.setBounds(770, 690, 89, 23);
+		btnZurck.setBounds(770, 754, 89, 23);
 		getContentPane().add(btnZurck);
 		btnZurck.setActionCommand(BACKWARD_ANIMATION.toString());
 		btnZurck.addActionListener(mainWindowListener);
 
 		JButton btnVor = new JButton("Vor");
-		btnVor.setBounds(875, 690, 89, 23);
+		btnVor.setBounds(875, 754, 89, 23);
 		getContentPane().add(btnVor);
 		btnVor.setActionCommand(FORWARD_ANIMATION.toString());
 		btnVor.addActionListener(mainWindowListener);
 
 		JButton btnEnde = new JButton("Ende");
-		btnEnde.setBounds(974, 690, 89, 23);
+		btnEnde.setBounds(974, 754, 89, 23);
 		getContentPane().add(btnEnde);
 		btnEnde.setActionCommand(END_ANIMATION.toString());
 		btnEnde.addActionListener(mainWindowListener);
 
 		JLabel lblNewLabel_1 = new JLabel("Fortschritt: ");
-		lblNewLabel_1.setBounds(217, 654, 75, 14);
+		lblNewLabel_1.setBounds(217, 718, 75, 14);
 		getContentPane().add(lblNewLabel_1);
 		this.initialize();
 
 		JComboBox comboBox_2 = new JComboBox();
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] { "2", "4",
 				"8" }));
-		comboBox_2.setBounds(760, 651, 89, 20);
+		comboBox_2.setBounds(760, 715, 89, 20);
 		getContentPane().add(comboBox_2);
 		comboBox_2.setActionCommand(TIME_INTERVALL.toString());
 		comboBox_2.addItemListener(mainWindowListener);
@@ -174,13 +174,13 @@ public class OldGravisMainWindow extends JFrame {
 		JComboBox comboBox_3 = new JComboBox();
 		comboBox_3.setModel(new DefaultComboBoxModel(new String[] { "1", "5",
 				"10" }));
-		comboBox_3.setBounds(928, 651, 135, 20);
+		comboBox_3.setBounds(928, 715, 135, 20);
 		getContentPane().add(comboBox_3);
 		comboBox_3.setActionCommand(STEP_INCREMENT.toString());
 		comboBox_3.addItemListener(mainWindowListener);
 
 		JLabel lblSchrittVon = new JLabel("Schritt 1 von 100");
-		lblSchrittVon.setBounds(558, 654, 100, 14);
+		lblSchrittVon.setBounds(558, 718, 100, 14);
 		getContentPane().add(lblSchrittVon);
 
 		JButton btnNewButton_6 = new JButton("Graph speichern...");
@@ -197,7 +197,7 @@ public class OldGravisMainWindow extends JFrame {
 
 		// TODO add dynamic layout
 		this.getContentPane().add(graphPanel);
-		graphPanel.setBounds(20, 120, 1400, 600);
+		graphPanel.setBounds(20, 120, 1400, 550);
 
 		this.setVisible(true);
 	}
@@ -206,7 +206,7 @@ public class OldGravisMainWindow extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		this.setBounds(100, 100, 1513, 774);
+		this.setBounds(100, 100, 1513, 854);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 

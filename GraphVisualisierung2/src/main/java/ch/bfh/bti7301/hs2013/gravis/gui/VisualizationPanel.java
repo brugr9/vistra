@@ -49,31 +49,29 @@ public class VisualizationPanel extends JPanel implements Observer {
 	 */
 	public VisualizationPanel(GravisVisualizationViewer visualizationViewer) {
 		super();
-		
+
 		// panel
-//		this.titledBorder = BorderFactory
-//				.createTitledBorder("visualizationPanel");
-//		this.setBorder(titledBorder);
+		this.titledBorder = BorderFactory
+				.createTitledBorder("Visualization Panel");
+		this.setBorder(this.titledBorder);
 		// viewer
 		this.viewer = visualizationViewer;
-				
-		
-		 EditingModalGraphMouse<IVertex, IEdge> graphMouse = new
-		 EditingModalGraphMouse<>(
-		 this.viewer.getRenderContext(), new VertexFactory(),
-		 new EdgeFactory());
-		
-		 this.viewer.setGraphMouse(graphMouse);
-		 this.viewer.addKeyListener(graphMouse.getModeKeyListener());
-		 graphMouse.setMode(Mode.PICKING);
-		
-		 JPanel controls = new JPanel();
-		 JComboBox modeBox = graphMouse.getModeComboBox();
-		 controls.add(modeBox);
-		 this.add(controls, BorderLayout.NORTH);
-		
-		 GraphZoomScrollPane pane = new GraphZoomScrollPane(viewer);
-		 this.add(pane, BorderLayout.CENTER);
+
+		EditingModalGraphMouse<IVertex, IEdge> graphMouse = new EditingModalGraphMouse<>(
+				this.viewer.getRenderContext(), new VertexFactory(),
+				new EdgeFactory());
+
+		this.viewer.setGraphMouse(graphMouse);
+		this.viewer.addKeyListener(graphMouse.getModeKeyListener());
+		graphMouse.setMode(Mode.PICKING);
+
+		JPanel controls = new JPanel();
+		JComboBox<?> modeBox = graphMouse.getModeComboBox();
+		controls.add(modeBox);
+		this.add(controls, BorderLayout.NORTH);
+
+		GraphZoomScrollPane pane = new GraphZoomScrollPane(viewer);
+		this.add(pane, BorderLayout.CENTER);
 	}
 
 	/*
@@ -83,7 +81,6 @@ public class VisualizationPanel extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-
 		if (o instanceof Model) {
 
 			Model m = (Model) o;
@@ -98,10 +95,8 @@ public class VisualizationPanel extends JPanel implements Observer {
 				e.printStackTrace();
 			}
 
-		} 
-//		else {
-			this.viewer.update(o, arg);
-//		}
+		}
 
+		this.viewer.update(o, arg);
 	}
 }
