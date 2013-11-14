@@ -35,6 +35,7 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		// TODO Implementation für ungerichtete Kanten
+		// TODO endVertex 
 		
 		this.counter = 0;
 

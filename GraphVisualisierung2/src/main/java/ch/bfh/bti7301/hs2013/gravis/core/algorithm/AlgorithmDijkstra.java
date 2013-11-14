@@ -15,16 +15,17 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.ItemResultComparator;
 class AlgorithmDijkstra extends AbstractAlgorithm {
 
 	private final ItemResultComparator itemResultComparator;
-	
+
 	protected AlgorithmDijkstra() {
 		super();
 		super.setName("Dijkstra algorithm");
-		super.setDescription("Dijkstra algorithm, multi-edges not supported.");
+		super.setDescription("Dijkstra algorithm, multi-edges not supported, "
+				+ "negative weights not allowed.");
 		// TODO annotations
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
 		super.setId(2);
-		
+
 		this.itemResultComparator = new ItemResultComparator();
 	}
 
@@ -40,110 +41,178 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 	public void execute(IRestrictedGraph graph) throws Exception {
 
 		// TODO bitte an dieser Methode nichts ändern (pk)
-		
+
 		// TODO visualize edges
-		// TODO helper methods string builder
 		// TODO AlgorithmDijkstra with undirected edges
-		// TODO end vertex
 
 		Collection<? extends IRestrictedVertex> vertices = graph.getVertices();
 		IRestrictedVertex startVertex = graph.getStartVertex();
-		StringBuilder successors = new StringBuilder();
-		
-		startVertex.setState(State.ACTIVATION);
-		graph.updateState(startVertex);
-		
-		
-		for (IRestrictedVertex adjacentVertex : graph.getSuccessors(startVertex)) {
-			successors.append(adjacentVertex.getId() + ", ");
-		}
-		successors.delete(Math.max(0, successors.length() - 2), 
-				Math.max(0, successors.length()));
-		if (successors.length() != 0) {
-			startVertex.setComment("Der Knoten "
-					+ startVertex.getId()
-					+ " hat die folgenden Nachfolger: " + successors);
-		}
+
+		this.updateState(graph, startVertex, State.ACTIVATION);
+
+		// start vertex has distance 0
 		startVertex.setResult(0.0);
-		startVertex.setState(State.SOLUTION);
-		graph.updateState(startVertex);
-		
+		this.setSuccessorMessage(graph, startVertex);
+		this.updateState(graph, startVertex, State.SOLUTION);
 		vertices.remove(startVertex);
 
-		// init infinite distance from start vertex
-		for (IRestrictedVertex vertex : vertices) {
-			vertex.setResult(Double.POSITIVE_INFINITY);
-			vertex.setState(State.ACTIVATION);
-			graph.updateState(vertex);
-		}
-		
-		startVertex.setState(State.ACTIVATION);
-		graph.updateState(startVertex);
-		
-		// init edge weight as distance for all successors of start vertex
-		for (IRestrictedVertex vertex : graph.getSuccessors(startVertex)) {
-			vertex.setState(State.ACTIVATION);
-			graph.updateState(vertex);
-			
-			vertex.setResult(graph.findEdge(startVertex, vertex).getWeight());
-			vertex.setState(State.VISIT);
-			graph.updateState(vertex);
-			
-			startVertex.setState(State.ACTIVATION);
-			graph.updateState(startVertex);
+		if (this.updateEndVertexMessage(graph, startVertex, startVertex)) {
+			return;
 		}
 
-		PriorityQueue<IRestrictedVertex> prioQueue = new PriorityQueue<>(vertices.size(),
-				this.itemResultComparator);
-		double newDistance = 0.0;
-		double oldDistance = 0.0;
-				
+		this.initializeDistances(graph, vertices, startVertex);
+		this.calculateDistances(graph, vertices, startVertex);
+	}
+
+	/**
+	 * @param graph
+	 * @param vertices
+	 * @param startVertex
+	 */
+	private void initializeDistances(IRestrictedGraph graph,
+			Collection<? extends IRestrictedVertex> vertices,
+			IRestrictedVertex startVertex) {
+
+		// initialize infinite distance from start vertex
+		for (IRestrictedVertex vertex : vertices) {
+			vertex.setResult(Double.POSITIVE_INFINITY);
+			this.updateState(graph, vertex, State.ACTIVATION);
+		}
+
+		this.updateState(graph, startVertex, State.ACTIVATION);
+
+		// init edge weight as distance for all successors of start vertex
+		for (IRestrictedVertex vertex : graph.getSuccessors(startVertex)) {
+			this.updateState(graph, vertex, State.ACTIVATION);
+
+			vertex.setResult(graph.findEdge(startVertex, vertex).getWeight());
+			this.updateState(graph, vertex, State.VISIT);
+
+			this.updateState(graph, startVertex, State.ACTIVATION);
+		}
+	}
+	
+	/**
+	 * @param graph
+	 * @param vertices
+	 * @param startVertex
+	 */
+	private void calculateDistances(IRestrictedGraph graph,
+			Collection<? extends IRestrictedVertex> vertices,
+			IRestrictedVertex startVertex) {
+
+		PriorityQueue<IRestrictedVertex> prioQueue = new PriorityQueue<>(
+				vertices.size(), this.itemResultComparator);
 		prioQueue.addAll(vertices);
 
 		while (!prioQueue.isEmpty()) {
 			IRestrictedVertex selectedVertex = prioQueue.poll();
-			
-			selectedVertex.setState(State.ACTIVATION);
-			graph.updateState(selectedVertex);
-			
-			successors = new StringBuilder();
-			for (IRestrictedVertex adjacentVertex : graph.getSuccessors(selectedVertex)) {
-				successors.append(adjacentVertex.getId() + ", ");
-			}
-			successors.delete(Math.max(0, successors.length() - 2), 
-					Math.max(0, successors.length()));
-			
-			if (successors.length() != 0) {
-				selectedVertex.setComment("Der Knoten "
-						+ selectedVertex.getId()
-						+ " hat die folgenden Nachfolger: " + successors);
-			}
-			selectedVertex.setState(State.SOLUTION);
-			graph.updateState(selectedVertex);
 
-			for (IRestrictedVertex adjacentVertex : graph.getSuccessors(selectedVertex)) {
-				if (adjacentVertex.getState() != State.SOLUTION) {
-					adjacentVertex.setState(State.ACTIVATION);
-					graph.updateState(adjacentVertex);
-					
-					newDistance = selectedVertex.getPaintedResult()
-							+ graph.findEdge(selectedVertex, adjacentVertex)
-									.getWeight();
-					oldDistance = adjacentVertex.getPaintedResult();
-					adjacentVertex
-							.setResult(newDistance < oldDistance ? newDistance
-									: oldDistance);
-					adjacentVertex.setState(State.VISIT);
-					graph.updateState(adjacentVertex);
-				} 
+			this.updateState(graph, selectedVertex, State.ACTIVATION);
+
+			this.setSuccessorMessage(graph, selectedVertex);
+			this.updateState(graph, selectedVertex, State.SOLUTION);
+
+			if (this.updateEndVertexMessage(graph, startVertex, selectedVertex)) {
+				return;
 			}
+
+			this.updateAdjacentDistances(graph, selectedVertex);
+
+			prioQueue = this.newPriorityQueue(vertices, prioQueue,
+					selectedVertex);
+		}
+	}
+
+	/**
+	 * @param graph
+	 * @param selectedVertex
+	 */
+	private void updateAdjacentDistances(IRestrictedGraph graph,
+			IRestrictedVertex selectedVertex) {
+
+		double newDistance = 0.0;
+		double oldDistance = 0.0;
+
+		for (IRestrictedVertex adjacentVertex : graph
+				.getSuccessors(selectedVertex)) {
 			
-			vertices.remove(selectedVertex);
-			if (!vertices.isEmpty()) {
-				prioQueue = new PriorityQueue<>(vertices.size(), 
-						this.itemResultComparator);
-				prioQueue.addAll(vertices);
+			if (adjacentVertex.getState() != State.SOLUTION) {
+				
+				this.updateState(graph, adjacentVertex, State.ACTIVATION);
+
+				newDistance = selectedVertex.getPaintedResult()
+						+ graph.findEdge(selectedVertex, adjacentVertex)
+								.getWeight();
+				oldDistance = adjacentVertex.getPaintedResult();
+
+				adjacentVertex
+						.setResult(newDistance < oldDistance ? newDistance
+								: oldDistance);
+				this.updateState(graph, adjacentVertex, State.VISIT);
 			}
 		}
+	}
+
+	/**
+	 * @param vertices
+	 * @param prioQueue
+	 * @param selectedVertex
+	 * @return a new instance of PriorityQueue<IRestrictedVertex>
+	 */
+	private PriorityQueue<IRestrictedVertex> newPriorityQueue(
+			Collection<? extends IRestrictedVertex> vertices,
+			PriorityQueue<IRestrictedVertex> prioQueue,
+			IRestrictedVertex selectedVertex) {
+
+		vertices.remove(selectedVertex);
+
+		if (!vertices.isEmpty()) {
+			prioQueue = new PriorityQueue<>(vertices.size(),
+					this.itemResultComparator);
+			prioQueue.addAll(vertices);
+		}
+
+		return prioQueue;
+	}
+
+	/**
+	 * @param graph
+	 * @param vertex
+	 */
+	private void setSuccessorMessage(IRestrictedGraph graph,
+			IRestrictedVertex vertex) {
+
+		StringBuilder successors = new StringBuilder();
+
+		for (IRestrictedVertex adjacentVertex : graph.getSuccessors(vertex)) {
+			successors.append(adjacentVertex.getId() + ", ");
+		}
+
+		successors.delete(Math.max(0, successors.length() - 2),
+				Math.max(0, successors.length()));
+
+		if (successors.length() != 0) {
+			vertex.setComment("Der Knoten " + vertex.getId()
+					+ " hat die folgenden Nachfolger: " + successors);
+		}
+	}
+
+	/**
+	 * @param graph
+	 * @param startVertex
+	 * @param selectedVertex
+	 */
+	private boolean updateEndVertexMessage(IRestrictedGraph graph,
+			IRestrictedVertex startVertex, IRestrictedVertex selectedVertex) {
+
+		if (selectedVertex.isEnd()) {
+			selectedVertex.setComment("Der kürzeste Weg von "
+					+ startVertex.getId() + " nach " + selectedVertex.getId()
+					+ " wurde gefunden.");
+			graph.updateState(selectedVertex);
+			return true;
+		}
+		return false;
 	}
 }

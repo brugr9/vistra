@@ -40,6 +40,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		// TODO Implementation für ungerichtete Kanten
+		// TODO endVertex 
 		
 		this.counter = 0;
 

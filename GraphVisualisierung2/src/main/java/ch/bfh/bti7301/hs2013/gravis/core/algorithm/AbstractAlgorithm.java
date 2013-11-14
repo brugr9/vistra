@@ -3,10 +3,10 @@
  */
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
-
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
-
 
 /**
  * Abstract algorithm, does nothing on execute().
@@ -36,7 +36,7 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	 * A field for the graphtypes.
 	 */
 	private GraphType[] graphtypes;
-	
+
 	/**
 	 * 
 	 */
@@ -125,5 +125,16 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 		// Does nothing on execute.
 	}
 
-	
+	/**
+	 * 
+	 * @param graph
+	 * @param graphItem
+	 * @param state
+	 */
+	protected void updateState(IRestrictedGraph graph,
+			IRestrictedGraphItem graphItem, State state) {
+		graphItem.setState(state);
+		graph.updateState(graphItem);
+	}
+
 }
