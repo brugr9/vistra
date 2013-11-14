@@ -8,10 +8,10 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
  */
 class ResultCommand extends EmptyCommand {
 
-	private IGraphItem item;
+	private final IGraphItem item;
 
-	private double newResult;
-	private double oldResult;
+	private final double newResult;
+	private final double oldResult;
 
 	/**
 	 * @param currentItem

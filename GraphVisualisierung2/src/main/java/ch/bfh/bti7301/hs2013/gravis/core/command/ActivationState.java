@@ -1,5 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
+import javax.swing.event.ChangeListener;
+
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
@@ -9,8 +11,12 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
  */
 class ActivationState extends AbstractAnimationState {
 
-	protected ActivationState() {
-		super(GravisColor.BLUE);
+	/**
+	 * 
+	 * @param changeListener
+	 */
+	protected ActivationState(ChangeListener changeListener) {
+		super(GravisColor.BLUE, changeListener);
 	}
 
 	/*

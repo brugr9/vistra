@@ -10,10 +10,10 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
  */
 class ColorCommand extends EmptyCommand {
 
-	private IGraphItem item;
+	private final IGraphItem item;
 
-	private Color newColor;
-	private Color oldColor;
+	private final Color newColor;
+	private final Color oldColor;
 
 	/**
 	 * 

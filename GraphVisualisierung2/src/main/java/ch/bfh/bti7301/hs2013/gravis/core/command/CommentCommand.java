@@ -1,5 +1,9 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
+import javax.swing.event.ChangeListener;
+
+import ch.bfh.bti7301.hs2013.gravis.core.CoreFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 
 /**
@@ -8,22 +12,30 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
  */
 class CommentCommand extends EmptyCommand {
 
-	private IGraphItem item;
+	private final IGraphItem item;
 
-	private String newComment;
-	private String oldComment;
+	private final String newComment;
+	private final String oldComment;
+
+	private final ChangeListener changeListener;
+
+	private final TraversalChangeEvent changeEvent;
 
 	/**
 	 * @param currentItem
 	 * @param info
 	 * @param comment
+	 * @param changeListener
 	 */
-	protected CommentCommand(IGraphItem currentItem, String info, String comment) {
+	protected CommentCommand(IGraphItem currentItem, String info,
+			String comment, ChangeListener changeListener) {
 		super();
 
 		this.item = currentItem;
 		this.oldComment = info;
 		this.newComment = comment;
+		this.changeListener = changeListener;
+		this.changeEvent = CoreFactory.createTraversalChangeEvent(this);
 	}
 
 	/*
@@ -35,10 +47,9 @@ class CommentCommand extends EmptyCommand {
 	public void execute() {
 		this.item.setInfo(this.newComment);
 
-		// TODO bitte an dieser Methode nichts ändern (pk)
-		// TODO notify protocol panel
 		if (!this.item.getInfo().isEmpty()) {
-			System.out.println(this.item.getInfo());
+			this.changeEvent.setMessage(this.item.getInfo());
+			this.changeListener.stateChanged(this.changeEvent);
 		}
 	}
 
@@ -49,12 +60,13 @@ class CommentCommand extends EmptyCommand {
 	 */
 	@Override
 	public void unExecute() {
-		// TODO bitte an dieser Methode nichts ändern (pk)
-		// TODO notify protocol panel
 		if (!this.item.getInfo().isEmpty()) {
-			System.out.println("Zurücksetzen: " + this.item.getInfo());
+			// TODO bitte an dieser Methode nichts ändern (pk)
+			// TODO set message for undo
+			this.changeEvent.setMessage("Zurücksetzen: " + this.item.getInfo());
+			this.changeListener.stateChanged(this.changeEvent);
 		}
-		
+
 		this.item.setInfo(this.oldComment);
 	}
 

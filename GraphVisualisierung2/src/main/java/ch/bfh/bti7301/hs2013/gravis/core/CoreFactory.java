@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.AlgorithmFactory;
@@ -151,5 +150,13 @@ public final class CoreFactory {
 	public static ChangeEvent createTraversalChangeEvent(
 			Object source, String message) {
 		return new TraversalChangeEvent(source, message);
+	}
+
+	/**
+	 * @param source
+	 * @return TraversalChangeEvent
+	 */
+	public static TraversalChangeEvent createTraversalChangeEvent(Object source) {
+		return new TraversalChangeEvent(source);
 	}
 }

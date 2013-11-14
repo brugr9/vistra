@@ -218,7 +218,7 @@ public class OldMainWindowListener extends Observable implements
 					if (e instanceof TraversalChangeEvent) {
 						TraversalChangeEvent graphEvent = (TraversalChangeEvent) e;
 						
-						System.out.println(graphEvent);
+						System.out.println(graphEvent.getMessage());
 					}
 				}
 			};

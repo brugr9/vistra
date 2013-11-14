@@ -23,24 +23,19 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 
 	private final Transformer<IGraphItem, ICommand> commandTransformer;
 
-	private boolean edgesEnabled;
-
 	/**
 	 * 
 	 * @param commandList
 	 * @param graphItemHistory
 	 * @param commandTransformer
-	 * @param edgesEnabled
 	 */
 	protected GravisGraphEventListener(List<ICommand> commandList, 
 			List<IGraphItem> graphItemHistory, 
-			Transformer<IGraphItem, ICommand> commandTransformer,
-			boolean edgesEnabled) {
+			Transformer<IGraphItem, ICommand> commandTransformer) {
 		
 		this.commandList = commandList;
 		this.graphItemHistory = graphItemHistory;
 		this.commandTransformer = commandTransformer;
-		this.edgesEnabled = edgesEnabled;
 	}
 
 	/*
@@ -54,10 +49,6 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 	public void handleGraphEvent(GraphEvent<IVertex, IEdge> evt) {
 		if (evt instanceof GravisGraphEvent) {
 			IGraphItem currentItem = ((GravisGraphEvent) evt).getIGraphItem();
-
-			if (!this.edgesEnabled && currentItem instanceof IEdge) {
-				return;
-			}
 
 			ICommand command = this.commandTransformer.transform(currentItem);
 			command.execute();

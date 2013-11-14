@@ -21,6 +21,13 @@ public class TraversalChangeEvent extends ChangeEvent {
 		super(source);
 		this.message = message;
 	}
+	
+	/**
+	 * @param source
+	 */
+	protected TraversalChangeEvent(Object source) {
+		this(source, "");
+	}
 
 	/**
 	 * @return the message
@@ -35,6 +42,13 @@ public class TraversalChangeEvent extends ChangeEvent {
 	@Override
 	public String toString() {
 		return this.getMessage();
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	

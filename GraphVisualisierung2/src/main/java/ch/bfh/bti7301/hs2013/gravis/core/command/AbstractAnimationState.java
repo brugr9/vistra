@@ -2,6 +2,8 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import java.awt.Color;
 
+import javax.swing.event.ChangeListener;
+
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 
 /**
@@ -12,14 +14,18 @@ abstract class AbstractAnimationState implements IAnimationState {
 
 	protected final Color stateColor;
 
+	protected final ChangeListener changeListener;
+	
 	protected ICommand predecessorCommand;
-
+	
 	/**
 	 * 
 	 * @param color
+	 * @param changeListener 
 	 */
-	protected AbstractAnimationState(Color color) {
+	protected AbstractAnimationState(Color color, ChangeListener changeListener) {
 		this.stateColor = color;
+		this.changeListener = changeListener;
 
 		// Null Object
 		this.predecessorCommand = new EmptyCommand();
@@ -46,7 +52,7 @@ abstract class AbstractAnimationState implements IAnimationState {
 		
 		if (!currentItem.hasNoComment()) {
 			complexCommand.add(new CommentCommand(currentItem, currentItem
-					.getInfo(), currentItem.getComment()));
+					.getInfo(), currentItem.getComment(), this.changeListener));
 		}
 		
 		currentItem.resetVisualizationValues();

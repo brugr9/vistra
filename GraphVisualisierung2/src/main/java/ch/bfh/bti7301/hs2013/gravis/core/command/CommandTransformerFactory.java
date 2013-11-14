@@ -2,6 +2,8 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import java.util.List;
 
+import javax.swing.event.ChangeListener;
+
 import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
@@ -16,12 +18,14 @@ public final class CommandTransformerFactory {
 	}
 
 	/**
+	 * 
 	 * @param graphItemHistory
-	 * @return an instance of Transformer
+	 * @param changeListener
+	 * @return an instance of Transformer<IGraphItem, ICommand>
 	 */
 	public static Transformer<IGraphItem, ICommand> createCommandTransformer(
-			List<IGraphItem> graphItemHistory) {
-		return new CommandTransformer(graphItemHistory);
+			List<IGraphItem> graphItemHistory, ChangeListener changeListener) {
+		return new CommandTransformer(graphItemHistory, changeListener);
 	}
 
 }

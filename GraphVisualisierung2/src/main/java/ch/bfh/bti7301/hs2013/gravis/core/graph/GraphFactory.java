@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.collections15.Transformer;
@@ -117,17 +118,17 @@ public final class GraphFactory {
 	/**
 	 * 
 	 * @param commandList
-	 * @param enableEdges
+	 * @param changeListener
 	 * @return a new instance of type GraphEventListener<IVertex, IEdge>
 	 */
 	public static GraphEventListener<IVertex, IEdge> createGravisGraphEventListener(
-			List<ICommand> commandList, boolean enableEdges) {
+			List<ICommand> commandList, ChangeListener changeListener) {
 		List<IGraphItem> graphItemHistory = new ArrayList<>();
 		Transformer<IGraphItem, ICommand> commandTransformer = CommandTransformerFactory
-				.createCommandTransformer(graphItemHistory);
+				.createCommandTransformer(graphItemHistory, changeListener);
 		
 		return new GravisGraphEventListener(commandList, graphItemHistory,
-				commandTransformer, enableEdges);
+				commandTransformer);
 	}
 
 }

@@ -117,7 +117,7 @@ class Traversal implements ITraversal {
 		try {
 			List<ICommand> commandList = new ArrayList<>();
 			GraphEventListener<IVertex, IEdge> graphEventListener = 
-					createGravisGraphEventListener(commandList, true);
+					createGravisGraphEventListener(commandList, changeListener);
 			
 			IObservableGravisGraph observableGraph = createObservableGraph(this.graph);
 			observableGraph.addGraphEventListener(graphEventListener);
