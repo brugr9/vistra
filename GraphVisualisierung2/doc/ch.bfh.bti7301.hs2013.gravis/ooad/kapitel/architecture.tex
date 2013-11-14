@@ -20,6 +20,12 @@
     \caption{Software Architecture, Package Diagram}
     \label{fig:package-diagram}
 \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{diagrams/component-diagram.pdf}
+    \caption{Software Architecture, Component Diagram}
+    \label{fig:component-diagram}
+\end{figure}
 \subsubsection{Beschreibung und Motivation}
 Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren. Die Drei-Schichten-Architektur hat sich aus den Requirements ergeben. Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit, die Komponente Gui enth\"alt die (grafische) Benutzerschnittstelle und schliesslich die Komponente Core: das Herzst\"uck des Systems k\"ummert sich um das Initialisieren der Komponenten, I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
 % 
@@ -64,7 +70,7 @@ Die Komponente implementiert ein Model-View-Control (MVC) unter Verwendung des J
 % 		    angle=90,
 		    scale=0.1,
 		    keepaspectratio=true
-    ]{diagrams/architecture/Draft_System_Architecture_PK_V1_cropped.jpeg}
+    ]{diagrams/Draft_System_Architecture_PK_V1_cropped.jpeg}
     \caption{Gui, MVC: Conceptual Class Diagram}
     \label{fig:gui-mvc-ccd}
 \end{figure}
@@ -100,7 +106,7 @@ Folgende Use Cases wurden implementiert:
 % 		    angle=90,
 		    scale=0.1,
 		    keepaspectratio=true
-    ]{diagrams/architecture/Screen_Sketch_PK_V1_cropped.jpeg}
+    ]{diagrams/Screen_Sketch_PK_V1_cropped.jpeg}
     \caption{Gui, View: Screen Sketch}
     \label{fig:gui-view-screen-sketch}
 \end{figure}
