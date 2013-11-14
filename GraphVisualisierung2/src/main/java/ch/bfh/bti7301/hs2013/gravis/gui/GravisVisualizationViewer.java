@@ -46,7 +46,7 @@ public class GravisVisualizationViewer extends
 
 		// TODO bitte an dieser Klasse nichts ändern (pk)
 		
-		this.setPreferredSize(new Dimension(800, 400));
+		this.setPreferredSize(new Dimension(700, 220));
 		this.setBackground(Color.white);
 		
 		Transformer<IVertex, String> vertexLabelTransformer = 

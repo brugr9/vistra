@@ -51,9 +51,9 @@ public class VisualizationPanel extends JPanel implements Observer {
 		super();
 		
 		// panel
-		this.titledBorder = BorderFactory
-				.createTitledBorder("visualizationPanel");
-		this.setBorder(titledBorder);
+//		this.titledBorder = BorderFactory
+//				.createTitledBorder("visualizationPanel");
+//		this.setBorder(titledBorder);
 		// viewer
 		this.viewer = visualizationViewer;
 				
