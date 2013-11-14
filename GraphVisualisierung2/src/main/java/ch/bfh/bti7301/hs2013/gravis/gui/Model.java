@@ -13,7 +13,8 @@ import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class Model extends Observable implements IModel {
+// TODO IModel
+public final class Model extends Observable {
 
 	// gravis
 	private IGravisGraph graph;
@@ -143,7 +144,6 @@ public final class Model extends Observable implements IModel {
 	 * 
 	 * @param enabled
 	 */
-	@Override
 	public void setMenuEnabled(boolean enabled) {
 		// Menu
 		this.setFileEnabled(enabled);
@@ -172,7 +172,6 @@ public final class Model extends Observable implements IModel {
 	 * 
 	 * @param enabled
 	 */
-	@Override
 	public void setParameterEnabled(boolean enabled) {
 		this.setGraphsEnabled(enabled);
 		this.setAlgorithmsEnabled(enabled);
@@ -185,7 +184,6 @@ public final class Model extends Observable implements IModel {
 	 * 
 	 * @param enabled
 	 */
-	@Override
 	public void setPlayerEnabled(boolean enabled) {
 		this.setSteplengthEnabled(enabled);
 		this.setDelayEnabled(enabled);
@@ -202,7 +200,6 @@ public final class Model extends Observable implements IModel {
 	 * 
 	 * @param enabled
 	 */
-	@Override
 	public void setStepByStepEnabled(boolean enabled) {
 		this.setToBeginningEnabled(enabled);
 		this.setBackwardEnabled(enabled);

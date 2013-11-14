@@ -21,10 +21,6 @@ import javax.swing.event.ChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * A control as in MVC.
@@ -35,11 +31,11 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public final class Control implements IControl {
 
 	/**
-	 * A field for a Core.
+	 * A field for a core.
 	 */
 	private final ICore core;
 	/**
-	 * A field for a Model as in MVC.
+	 * A field for a model as in MVC.
 	 */
 	private final Model model;
 	/**
