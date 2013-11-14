@@ -47,9 +47,4 @@ public interface IAlgorithm {
 	 */
 	public abstract GraphType[] getGraphTypes();
 
-	/**
-	 * @return boolean
-	 */
-	public abstract boolean isEnableEdges();
-
 }

@@ -26,7 +26,6 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
 		super.setId(0);
-		this.setEnableEdges(false);
 	}
 
 	/*

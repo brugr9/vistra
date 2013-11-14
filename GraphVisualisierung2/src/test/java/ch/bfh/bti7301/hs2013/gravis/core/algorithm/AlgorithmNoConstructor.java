@@ -37,13 +37,5 @@ public class AlgorithmNoConstructor implements IAlgorithm {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm#isEnableEdges()
-	 */
-	@Override
-	public boolean isEnableEdges() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }

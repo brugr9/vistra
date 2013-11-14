@@ -24,7 +24,6 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
 		super.setId(2);
-		this.setEnableEdges(true);
 		
 		this.itemResultComparator = new ItemResultComparator();
 	}

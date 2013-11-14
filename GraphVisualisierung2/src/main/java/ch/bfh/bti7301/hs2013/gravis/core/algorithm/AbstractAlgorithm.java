@@ -38,13 +38,6 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	private GraphType[] graphtypes;
 	
 	/**
-	 * true: the algorithm activates the animation of edges (edge colors, edge 
-	 * results, edge comments changes)
-	 * false: the algorithm does not need animation of edges
-	 */
-	private boolean enableEdges;
-
-	/**
 	 * 
 	 */
 	protected AbstractAlgorithm() {
@@ -52,7 +45,6 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 		this.description = "";
 		this.id = -1;
 		this.graphtypes = new GraphType[] {};
-		this.enableEdges = true;
 	}
 
 	/*
@@ -133,20 +125,5 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 		// Does nothing on execute.
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm#isEnableEdges()
-	 */
-	@Override
-	public boolean isEnableEdges() {
-		return this.enableEdges;
-	}
-
-	/**
-	 * 
-	 * @param enableEdges
-	 */
-	protected void setEnableEdges(boolean enableEdges) {
-		this.enableEdges = enableEdges;
-	}
 	
 }

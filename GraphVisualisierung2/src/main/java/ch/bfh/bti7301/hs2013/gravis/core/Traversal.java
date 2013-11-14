@@ -117,9 +117,9 @@ class Traversal implements ITraversal {
 		try {
 			List<ICommand> commandList = new ArrayList<>();
 			GraphEventListener<IVertex, IEdge> graphEventListener = 
-					createGravisGraphEventListener(commandList, this.algorithm.isEnableEdges());
+					createGravisGraphEventListener(commandList, true);
+			
 			IObservableGravisGraph observableGraph = createObservableGraph(this.graph);
-
 			observableGraph.addGraphEventListener(graphEventListener);
 			IRestrictedGraph restrictedGraph = createRestrictedGraph(observableGraph);
 
