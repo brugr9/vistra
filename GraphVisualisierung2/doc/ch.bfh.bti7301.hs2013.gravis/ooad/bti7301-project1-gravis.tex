@@ -2,22 +2,22 @@
 % Main document
 % ===========================================================================
 % This is part of the document "Project documentation template".
-% Authors: brd3, kaa1
+% Authors: brd3, kaa1, (enhanced by brugr9)
 %
 
 %---------------------------------------------------------------------------
 \documentclass[
-	a4paper,			% paper format
-	10pt,				% fontsize
-	twoside,			% double-sided
-	openright,			% begin new chapter on right side
-	notitlepage,			% use no standard title page
-	parskip=half,			% set paragraph skip to half of a line
-]{scrreprt}				% KOMA-script report
+	a4paper,				% paper format
+	10pt,					% fontsize
+	twoside,				% double-sided
+	openright,				% begin new chapter on right side
+	notitlepage,				% use no standard title page
+	parskip=half,				% set paragraph skip to half of a line
+]{scrreprt}					% KOMA-script report
 %---------------------------------------------------------------------------
 
 \raggedbottom
-\KOMAoptions{cleardoublepage=plain}	% Add header and footer on blank pages
+\KOMAoptions{cleardoublepage=plain}		% Add header and footer on blank pages
 
 
 % Load Standard Packages:
@@ -99,8 +99,8 @@
 
 % Makeindex Package
 %---------------------------------------------------------------------------
-\usepackage{makeidx}					% To produce index
-\makeindex						% Index-Initialisation
+\usepackage{makeidx}				% To produce index
+\makeindex					% Index-Initialisation
 %---------------------------------------------------------------------------
 
 % Glossary Package
@@ -120,22 +120,22 @@
 \include{datenbanken/glossar}
 %---------------------------------------------------------------------------
 
-% Other Packages (added by brugr9)
+% Other Packages (brugr9)
 %---------------------------------------------------------------------------
-\usepackage{colortbl} 					% Fuer farbige Tabellen-Kopfzeile
-\usepackage{includes/ooaduc} 				% OOAD: Use Cases
-\usepackage{afterpage,dpfloat} 				% Fuer Doppelseiten
+\usepackage{colortbl} 				% Fuer farbige Tabellen-Kopfzeile
+\usepackage{includes/ooaduc} 			% OOAD: Use Cases
+\usepackage{afterpage,dpfloat} 			% Fuer Doppelseiten
 %---------------------------------------------------------------------------
 
 % Intro:
 %---------------------------------------------------------------------------
-\begin{document}					% Start Document
-\settocdepth{section}					% Set depth of toc
+\begin{document}				% Start Document
+\settocdepth{section}				% Set depth of toc
 \pagenumbering{roman}				
 %---------------------------------------------------------------------------
 
-\input{vorspann/titel}					% Titel der Arbeit aus Datei titel.tex lesen
-\input{vorspann/version}				% Versionsnummer und -datum aus Datei version.tex lesen
+\input{vorspann/titel}				% Titel der Arbeit aus Datei titel.tex lesen
+\input{vorspann/version}			% Versionsnummer und -datum aus Datei version.tex lesen
 
 % Set up header and footer
 %---------------------------------------------------------------------------
@@ -144,15 +144,15 @@
 \patchcmd{\@fancyfoot}{\rlap}{\color{bfhgrey}\rlap}{}{}	% new color of footer
 \makeatother
 
-\fancyhf{}						% clean all fields
-\fancypagestyle{plain}{					% new definition of plain style	
-	\fancyfoot[OR,EL]{\footnotesize \thepage} 	% footer right part --> page number
+\fancyhf{}							% clean all fields
+\fancypagestyle{plain}{						% new definition of plain style	
+	\fancyfoot[OR,EL]{\footnotesize \thepage} 		% footer right part --> page number
 	\fancyfoot[OL,ER]{\footnotesize \titel, Version \versionnumber, \versiondate}	% footer even page left part 
 }
 
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter.  #1}{}}
-\renewcommand{\headrulewidth}{0pt}			% no header stripline
-\renewcommand{\footrulewidth}{0pt} 			% no bottom stripline
+\renewcommand{\headrulewidth}{0pt}				% no header stripline
+\renewcommand{\footrulewidth}{0pt} 				% no bottom stripline
 
 \pagestyle{plain}
 %---------------------------------------------------------------------------
@@ -160,12 +160,12 @@
 
 % Title Page and Abstract
 %---------------------------------------------------------------------------
-\include{vorspann/titelseite_ohne_bild}		% activate for Titelseite ohne Bild
-% \include{vorspann/titelseite_mit_bild}		% activate for Titelseite mit Bild
+\include{vorspann/titelseite_ohne_bild}	% activate for Titelseite ohne Bild
+% \include{vorspann/titelseite_mit_bild}	% activate for Titelseite mit Bild
 \include{vorspann/versionen}
 \cleardoubleemptypage
 \setcounter{page}{1}
-% \cleardoublepage
+\cleardoublepage
 % \phantomsection 
 % \addcontentsline{toc}{chapter}{Management Summary}
 % \include{vorspann/management_summary}
@@ -175,23 +175,25 @@
 % Table of contents
 %---------------------------------------------------------------------------
 \tableofcontents
-% \cleardoublepage
+\cleardoublepage
 %---------------------------------------------------------------------------
 
 % Main part:
 %---------------------------------------------------------------------------
 \pagenumbering{arabic}
 
+%  (brugr9) begin
 % Requirements
-\include{kapitel/vision} 	% Vision
-\include{kapitel/usecases} 	% Use Cases
-\include{kapitel/suppspec} 	% Supplementary Specification, Domain Rules
+\include{kapitel/vision} 			% Vision
+\include{kapitel/usecases} 			% Use Cases
+\include{kapitel/suppspec} 			% Supplementary Specification, Domain Rules
 % Design
-\include{kapitel/domainmodel} 	% Domain Model, Design Model
-\include{kapitel/designmodel} 	% Design Model: diagrams
-\include{kapitel/architecture} % Software Architecture Document, Data Model
+\include{kapitel/domainmodel} 			% Domain Model, Design Model
+\include{kapitel/designmodel} 			% Design Model: diagrams
+\include{kapitel/architecture} 			% Software Architecture Document, Data Model
 % Project Management
-\include{kapitel/projectmanagement} % Time Management, Development Environment Description
+\include{kapitel/projectmanagement} 		% Time Management, Development Environment Description
+%  (brugr9) end
 
 %---------------------------------------------------------------------------
 
