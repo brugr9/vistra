@@ -1,0 +1,24 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{A}\relax \glsresetentrylist %
+\glossaryentryfield{Algorithm}{\glsnamefont{Algorithm}}{Algorithmus: Anleitung, wie ein Graph durchschritten werden soll.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter{page}\glsnumberformat{4}}}%
+\glossaryentryfield{Animation}{\glsnamefont{Animation}}{Visualisierung, bei der der Bild-Wechsel wiederholt automatisch, also ohne Benutzerinteraktion erfolgt.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter{page}\glsnumberformat{4}}}\glsgroupskip
+\glsgroupheading{D}\relax \glsresetentrylist %
+\glossaryentryfield{Delay}{\glsnamefont{Delay}}{F\"ur die Animation: Verstreichende Zeit zwischen einem Bild-Wechsel.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter{page}\glsnumberformat{4}}}\glsgroupskip
+\glsgroupheading{I}\relax \glsresetentrylist %
+\glossaryentryfield{Image}{\glsnamefont{Image}}{Bild, Darstellung eines Zustandes eines Graphen.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter{page}\glsnumberformat{4}}}\glsgroupskip
+\glsgroupheading{S}\relax \glsresetentrylist %
+\glossaryentryfield{Step}{\glsnamefont{Step}}{Einzelner Schritt der Traversierung.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter{page}\glsnumberformat{4}}}%
+\glossaryentryfield{Step-by-Step}{\glsnamefont{Step-by-Step}}{Visualisierung, bei der ein Bild-Wechsel durch eine Benutzerinteraktion erfolgt.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter{page}\glsnumberformat{4}}}%
+\glossaryentryfield{Steplength}{\glsnamefont{Steplength}}{Anzahl Schritte (Steps) pro Bild-Wechsel.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter{page}\glsnumberformat{4}}}\glsgroupskip
+\glsgroupheading{T}\relax \glsresetentrylist %
+\glossaryentryfield{Traversal}{\glsnamefont{Traversal}}{Traversierung: Durchf\"uhrung eines Algorithmus und Sammlung der Traversierungsschritte als Resultat. Der Graph erf\"ahrt bei jedem Traversierungsschritt eine \`Anderung seines Zustandes.}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter{page}\glsnumberformat{4}}}%
+\end{theglossary}\glossarypostamble

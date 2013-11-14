@@ -1,22 +1,7 @@
 This is makeindex, version 2.15 [TeX Live 2009] (kpathsea + Thai support).
 Scanning style file ./bti7301-project1-gravis.ist...........................done (27 attributes redefined, 0 ignored).
-Scanning input file bti7301-project1-gravis.glo...
-!! Input index error (file = bti7301-project1-gravis.glo, line = 1):
-   -- Missing arguments -- need two (premature LFD).
-!! Input index error (file = bti7301-project1-gravis.glo, line = 2):
-   -- Missing arguments -- need two (premature LFD).
-!! Input index error (file = bti7301-project1-gravis.glo, line = 3):
-   -- Missing arguments -- need two (premature LFD).
-!! Input index error (file = bti7301-project1-gravis.glo, line = 4):
-   -- Missing arguments -- need two (premature LFD).
-!! Input index error (file = bti7301-project1-gravis.glo, line = 5):
-   -- Missing arguments -- need two (premature LFD).
-!! Input index error (file = bti7301-project1-gravis.glo, line = 6):
-   -- Missing arguments -- need two (premature LFD).
-!! Input index error (file = bti7301-project1-gravis.glo, line = 7):
-   -- Missing arguments -- need two (premature LFD).
-!! Input index error (file = bti7301-project1-gravis.glo, line = 8):
-   -- Missing arguments -- need two (premature LFD).
-done (0 entries accepted, 8 rejected).
-Nothing written in bti7301-project1-gravis.gls.
+Scanning input file bti7301-project1-gravis.glo....done (8 entries accepted, 0 rejected).
+Sorting entries....done (31 comparisons).
+Generating output file bti7301-project1-gravis.gls....done (24 lines written, 0 warnings).
+Output written in bti7301-project1-gravis.gls.
 Transcript written in bti7301-project1-gravis.glg.
