@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  * <li>a {@link MenuBar}
  * <li>a {@link ParameterPanel}
  * <li>a {@link VisualizationPanel}
- * <li>a {@link PlayerPanel}
+ * <li>a {@link TraversalPanel}
  * </ul>
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
@@ -47,7 +47,7 @@ public class ViewMinimal extends JFrame implements IView {
 	/**
 	 * A field for a player panel.
 	 */
-	private final PlayerPanel playerPanel;
+	private final TraversalPanel traversalPanel;
 
 	/**
 	 * Main constructor.
@@ -72,7 +72,7 @@ public class ViewMinimal extends JFrame implements IView {
 		this.parameterPanel = GuiFactory.createParameterController(model,
 				control);
 		this.visualizationPanel = GuiFactory.createVisualizer(model);
-		this.playerPanel = GuiFactory.createTraversalController(model, control);
+		this.traversalPanel = GuiFactory.createTraversalController(model, control);
 
 		// Layout
 		this.setJMenuBar(this.menuBar);
@@ -82,7 +82,7 @@ public class ViewMinimal extends JFrame implements IView {
 		this.panel1.add(this.visualizationPanel, BorderLayout.SOUTH);
 		this.panel2 = new JPanel();
 		this.panel2.setLayout(new BorderLayout());
-		this.panel2.add(this.playerPanel, BorderLayout.NORTH);
+		this.panel2.add(this.traversalPanel, BorderLayout.NORTH);
 		this.setLayout(new BorderLayout());
 		this.add(panel1, BorderLayout.NORTH);
 		this.add(panel2, BorderLayout.CENTER);

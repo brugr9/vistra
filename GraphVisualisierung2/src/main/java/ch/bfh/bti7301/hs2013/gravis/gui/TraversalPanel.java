@@ -28,13 +28,13 @@ import javax.swing.border.TitledBorder;
 import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
 
 /**
- * A player panel.
+ * A traversal panel.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public final class PlayerPanel extends JPanel implements Observer {
+public final class TraversalPanel extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 
@@ -121,7 +121,7 @@ public final class PlayerPanel extends JPanel implements Observer {
 	 * @param control
 	 *            the controller as in MVC
 	 */
-	public PlayerPanel(Control control) {
+	public TraversalPanel(Control control) {
 
 		// spinner
 		this.steplengthLabel = new JLabel("steplengthLabel");

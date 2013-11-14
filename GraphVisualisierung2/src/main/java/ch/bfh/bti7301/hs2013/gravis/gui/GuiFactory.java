@@ -162,10 +162,10 @@ public final class GuiFactory {
 	 * @param control
 	 * @return a traversal controller
 	 */
-	static PlayerPanel createTraversalController(Model model, Control control) {
-		PlayerPanel playerPanel = new PlayerPanel(control);
-		model.addObserver(playerPanel);
-		return playerPanel;
+	static TraversalPanel createTraversalController(Model model, Control control) {
+		TraversalPanel traversalPanel = new TraversalPanel(control);
+		model.addObserver(traversalPanel);
+		return traversalPanel;
 	}
 
 	/**
