@@ -147,7 +147,10 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			// TODO bitte dummy value auskommentieren und nicht löschen (pk)
 			return this
 					.load(new File(
-							"src/main/resources/META-INF/templates/SampleTree1.graphml"));
+							"src/main/resources/META-INF/templates/DijkstraSampleGraph1.graphml"));
+//			return this
+//					.load(new File(
+//							"src/main/resources/META-INF/templates/SampleTree1.graphml"));
 		} catch (Exception e) {
 			throw e;
 		}

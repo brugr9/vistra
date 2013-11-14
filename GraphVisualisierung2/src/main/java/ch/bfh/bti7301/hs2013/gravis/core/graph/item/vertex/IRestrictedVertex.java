@@ -41,5 +41,6 @@ public interface IRestrictedVertex extends IRestrictedGraphItem {
 	 * @return
 	 */
 	public abstract Point2D getLocation();
+
 	
 }

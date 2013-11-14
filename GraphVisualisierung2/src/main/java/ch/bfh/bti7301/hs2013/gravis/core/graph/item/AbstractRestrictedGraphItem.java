@@ -77,6 +77,16 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 		this.item.setComment(comment);
 	}
 
+	
+	
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#appendComment(java.lang.String)
+	 */
+	@Override
+	public void appendComment(String comment) {
+		this.item.appendComment(comment);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

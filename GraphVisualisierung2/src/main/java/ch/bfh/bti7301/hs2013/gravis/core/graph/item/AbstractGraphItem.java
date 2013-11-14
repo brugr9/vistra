@@ -160,6 +160,14 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		return this.comment.length() == 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#appendComment(java.lang.String)
+	 */
+	@Override
+	public void appendComment(String comment) {
+		this.comment += System.getProperty("line.separator") + comment;
+	}
+
 	
 	
 	// TODO bitte an dieser Klasse nichts ändern (pk)

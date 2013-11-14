@@ -41,18 +41,22 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 	public void execute(IRestrictedGraph graph) throws Exception {
 
 		// TODO bitte an dieser Methode nichts ändern (pk)
-
+		
+		// TODO set comments in calculateDistances()
 		// TODO visualize edges
 		// TODO AlgorithmDijkstra with undirected edges
 
 		Collection<? extends IRestrictedVertex> vertices = graph.getVertices();
 		IRestrictedVertex startVertex = graph.getStartVertex();
 
+		startVertex.setComment(startVertex.getId() + " ist der Startknoten.");
 		this.updateState(graph, startVertex, State.ACTIVATION);
 
 		// start vertex has distance 0
 		startVertex.setResult(0.0);
 		this.setSuccessorMessage(graph, startVertex);
+		startVertex.appendComment("Für den Knoten " + startVertex.getId() + 
+				" wurde der kürzeste Weg berechnet: " + startVertex.getResult());
 		this.updateState(graph, startVertex, State.SOLUTION);
 		vertices.remove(startVertex);
 
@@ -76,18 +80,28 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		// initialize infinite distance from start vertex
 		for (IRestrictedVertex vertex : vertices) {
 			vertex.setResult(Double.POSITIVE_INFINITY);
+			vertex.setComment("Der Knoten " + vertex.getId() + 
+					" wurde mit folgendem Wert initialisiert: " + vertex.getResult());
 			this.updateState(graph, vertex, State.ACTIVATION);
 		}
 
+		startVertex.setComment("Rückkehr zum Startknoten " + startVertex.getId() + ".");
 		this.updateState(graph, startVertex, State.ACTIVATION);
 
 		// init edge weight as distance for all successors of start vertex
 		for (IRestrictedVertex vertex : graph.getSuccessors(startVertex)) {
+			vertex.setComment("Der Knoten " + vertex.getId() + 
+					" wird aktiviert.");
 			this.updateState(graph, vertex, State.ACTIVATION);
 
 			vertex.setResult(graph.findEdge(startVertex, vertex).getWeight());
+			vertex.setComment("Der Knoten " + vertex.getId() + 
+					" wurde besucht. Der neue kürzeste Weg vom Startknoten aus ist: " +
+					vertex.getResult());
 			this.updateState(graph, vertex, State.VISIT);
-
+			
+			startVertex.setComment("Der Knoten " + startVertex.getId() + 
+					" wird aktiviert.");
 			this.updateState(graph, startVertex, State.ACTIVATION);
 		}
 	}

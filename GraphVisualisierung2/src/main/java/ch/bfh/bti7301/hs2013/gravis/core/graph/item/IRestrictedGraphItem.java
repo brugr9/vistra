@@ -67,6 +67,11 @@ public interface IRestrictedGraphItem {
 	public abstract void setComment(String comment);
 
 	/**
+	 * @param comment
+	 */
+	public abstract void appendComment(String comment);
+	
+	/**
 	 * @return boolean
 	 */
 	public abstract boolean isVisited();
