@@ -2,6 +2,8 @@ package ch.bfh.bti7301.hs2013.gravis.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Paint;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,6 +17,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.ShapeTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.VertexColorTransformer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.decorators.ConstantDirectionalEdgeValueTransformer;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape;
@@ -95,8 +98,25 @@ public class GravisVisualizationViewer extends
 		// centers edge label
 		this.getRenderContext().setEdgeLabelClosenessTransformer(
 				new ConstantDirectionalEdgeValueTransformer<IVertex,IEdge>(0.5, 0.5));
+		
+		RenderContext<IVertex, IEdge> context = this.getRenderContext();
+		context.setEdgeDrawPaintTransformer(new KeyframeGradientTransformer());
+
 	}
 
+	class KeyframeGradientTransformer implements Transformer<IEdge, Paint> {
+        @Override
+        public Paint transform(IEdge edge) {
+            // TODO: Here you would determine the gradient information
+            // based on the edge.getKeyframe().
+        	int x = 5;
+            int y = 7;
+            // fill RoundRectangle2D.Double
+            Paint gradient = new GradientPaint(x, y, Color.red, 200, y,  Color.blue);
+            return gradient;
+        }
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
