@@ -8,8 +8,6 @@ import static ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory.createObserva
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.event.ChangeListener;
-
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
@@ -109,10 +107,10 @@ class Traversal implements ITraversal {
 	 * (non-Javadoc)
 	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ITraversal#executeTraverser(ch
-	 * .bfh.bti7301.hs2013.gravis.core.graph.IGraphItemStateChangeListener)
+	 * .bfh.bti7301.hs2013.gravis.core.TraversalChangeListener)
 	 */
 	@Override
-	public IGravisListIterator<ICommand> execute(ChangeListener changeListener)
+	public IGravisListIterator<ICommand> execute(TraversalChangeListener changeListener)
 			throws Exception {
 		try {
 			List<ICommand> commandList = new ArrayList<>();

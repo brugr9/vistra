@@ -2,7 +2,6 @@ package ch.bfh.bti7301.hs2013.gravis.core;
 
 import java.io.File;
 
-import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.maven.shared.utils.io.FileUtils;
@@ -192,14 +191,8 @@ class Core implements ICore {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#executeTraverser(ch.bfh
-	 * .bti7301.hs2013.gravis.core.graph.IGraphItemStateChangeListener)
-	 */
 	@Override
-	public void executeTraverser(ChangeListener listener) throws Exception {
+	public void executeTraverser(TraversalChangeListener listener) throws Exception {
 		try {
 			this.iteratorManager.setListIterator(this.traversal
 					.execute(listener));

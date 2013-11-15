@@ -1,9 +1,8 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
-import javax.swing.event.ChangeListener;
-
 import ch.bfh.bti7301.hs2013.gravis.core.CoreFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
+import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 
 /**
@@ -17,7 +16,7 @@ class CommentCommand extends EmptyCommand {
 	private final String newComment;
 	private final String oldComment;
 
-	private final ChangeListener changeListener;
+	private final TraversalChangeListener changeListener;
 
 	private final TraversalChangeEvent changeEvent;
 
@@ -28,7 +27,7 @@ class CommentCommand extends EmptyCommand {
 	 * @param changeListener
 	 */
 	protected CommentCommand(IGraphItem currentItem, String info,
-			String comment, ChangeListener changeListener) {
+			String comment, TraversalChangeListener changeListener) {
 		super();
 
 		this.item = currentItem;

@@ -144,9 +144,9 @@ public final class CoreFactory {
 	/**
 	 * @param source
 	 * @param message
-	 * @return a new instance of type ChangeEvent
+	 * @return a new instance of type TraversalChangeEvent
 	 */
-	public static ChangeEvent createTraversalChangeEvent(
+	public static TraversalChangeEvent createTraversalChangeEvent(
 			Object source, String message) {
 		return new TraversalChangeEvent(source, message);
 	}

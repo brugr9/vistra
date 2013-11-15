@@ -31,6 +31,7 @@ import javax.swing.event.ChangeListener;
 
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
+import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
@@ -212,18 +213,19 @@ public class OldMainWindowListener extends Observable implements
 			// TODO needed parameter: observer for processing and traversing
 			// updates
 
-			ChangeListener listener = new ChangeListener() {
-				
+			TraversalChangeListener listener = new TraversalChangeListener() {
+
 				@Override
-				public void stateChanged(ChangeEvent e) {
-					if (e instanceof TraversalChangeEvent) {
-						TraversalChangeEvent graphEvent = (TraversalChangeEvent) e;
-						
-						System.out.println(graphEvent.getMessage());
-					}
+				public void stateChanged(TraversalChangeEvent e) {
+					// if (e instanceof TraversalChangeEvent) {
+					// TraversalChangeEvent graphEvent = (TraversalChangeEvent)
+					// e;
+
+					System.out.println(e.getMessage());
+					// }
 				}
 			};
-			
+
 			try {
 				this.gravisCore.executeTraverser(listener);
 

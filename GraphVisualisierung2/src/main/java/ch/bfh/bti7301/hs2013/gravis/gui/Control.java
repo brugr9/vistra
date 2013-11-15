@@ -19,6 +19,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
+import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
+import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 
@@ -597,10 +599,10 @@ public final class Control implements IControl {
 	 * 
 	 */
 	// TODO interface
-	private class TraversalListener implements ChangeListener {
+	private class TraversalListener implements TraversalChangeListener {
 
 		@Override
-		public void stateChanged(ChangeEvent e) {
+		public void stateChanged(TraversalChangeEvent e) {
 			try {
 				String text = model.getResourceBundle().getString(
 						"render.message");

@@ -2,7 +2,6 @@ package ch.bfh.bti7301.hs2013.gravis.core;
 
 import java.io.File;
 
-import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
@@ -189,7 +188,7 @@ public interface ICore {
 	 * @param listener
 	 * @throws Exception
 	 */
-	public abstract void executeTraverser(ChangeListener listener) throws Exception;
+	public abstract void executeTraverser(TraversalChangeListener listener) throws Exception;
 
 	/**
 	 * 

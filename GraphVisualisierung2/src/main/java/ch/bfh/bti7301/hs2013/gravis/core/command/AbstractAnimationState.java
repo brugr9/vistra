@@ -2,8 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import java.awt.Color;
 
-import javax.swing.event.ChangeListener;
-
+import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 
 /**
@@ -14,7 +13,7 @@ abstract class AbstractAnimationState implements IAnimationState {
 
 	protected final Color stateColor;
 
-	protected final ChangeListener changeListener;
+	protected final TraversalChangeListener changeListener;
 	
 	protected ICommand predecessorCommand;
 	
@@ -23,7 +22,7 @@ abstract class AbstractAnimationState implements IAnimationState {
 	 * @param color
 	 * @param changeListener 
 	 */
-	protected AbstractAnimationState(Color color, ChangeListener changeListener) {
+	protected AbstractAnimationState(Color color, TraversalChangeListener changeListener) {
 		this.stateColor = color;
 		this.changeListener = changeListener;
 

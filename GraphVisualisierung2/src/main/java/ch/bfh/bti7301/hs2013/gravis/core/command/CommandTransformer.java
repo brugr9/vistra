@@ -3,11 +3,10 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.event.ChangeListener;
-
 import org.apache.commons.collections15.Transformer;
 import org.apache.commons.collections15.map.HashedMap;
 
+import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 /**
@@ -26,7 +25,7 @@ class CommandTransformer implements Transformer<IGraphItem, ICommand> {
 	 * @param changeListener
 	 */
 	protected CommandTransformer(List<IGraphItem> graphItemHistory,
-			ChangeListener changeListener) {
+			TraversalChangeListener changeListener) {
 		this.states = new HashedMap<>();
 		this.states.put(State.INITIAL, new InitialState(graphItemHistory, changeListener));
 		this.states.put(State.ACTIVATION, new ActivationState(changeListener));

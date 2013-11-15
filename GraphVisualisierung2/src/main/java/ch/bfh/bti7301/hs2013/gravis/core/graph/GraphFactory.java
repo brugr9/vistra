@@ -12,6 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
+import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.command.CommandTransformerFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
@@ -122,7 +123,7 @@ public final class GraphFactory {
 	 * @return a new instance of type GraphEventListener<IVertex, IEdge>
 	 */
 	public static GraphEventListener<IVertex, IEdge> createGravisGraphEventListener(
-			List<ICommand> commandList, ChangeListener changeListener) {
+			List<ICommand> commandList, TraversalChangeListener changeListener) {
 		List<IGraphItem> graphItemHistory = new ArrayList<>();
 		Transformer<IGraphItem, ICommand> commandTransformer = CommandTransformerFactory
 				.createCommandTransformer(graphItemHistory, changeListener);

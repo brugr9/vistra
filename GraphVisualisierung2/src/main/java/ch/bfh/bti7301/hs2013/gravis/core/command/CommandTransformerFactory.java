@@ -2,10 +2,9 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import java.util.List;
 
-import javax.swing.event.ChangeListener;
-
 import org.apache.commons.collections15.Transformer;
 
+import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 
 /**
@@ -24,7 +23,7 @@ public final class CommandTransformerFactory {
 	 * @return an instance of Transformer<IGraphItem, ICommand>
 	 */
 	public static Transformer<IGraphItem, ICommand> createCommandTransformer(
-			List<IGraphItem> graphItemHistory, ChangeListener changeListener) {
+			List<IGraphItem> graphItemHistory, TraversalChangeListener changeListener) {
 		return new CommandTransformer(graphItemHistory, changeListener);
 	}
 

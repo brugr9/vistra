@@ -1,7 +1,5 @@
 package ch.bfh.bti7301.hs2013.gravis.core;
 
-import javax.swing.event.ChangeListener;
-
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
@@ -17,11 +15,11 @@ public interface ITraversal {
 	 * Returns an immutable list of commands generated during the traversal.
 	 * 
 	 * @param graphItemStateChangeListener
-	 * @return the immutable list of commands
+	 * @return the list of commands
 	 * @throws Exception
 	 */
 	public abstract IGravisListIterator<ICommand> execute(
-			ChangeListener graphItemStateChangeListener) throws Exception;
+			TraversalChangeListener graphItemStateChangeListener) throws Exception;
 
 	/**
 	 * Sets the parameter algorithm.
