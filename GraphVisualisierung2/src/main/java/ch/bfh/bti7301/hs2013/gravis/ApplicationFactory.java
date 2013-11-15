@@ -15,7 +15,7 @@ import ch.bfh.bti7301.hs2013.gravis.gui.IView;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class ApplicationFactory {
+final class ApplicationFactory {
 
 	/**
 	 * The default name of the property file name relative to the CLASSPATH.

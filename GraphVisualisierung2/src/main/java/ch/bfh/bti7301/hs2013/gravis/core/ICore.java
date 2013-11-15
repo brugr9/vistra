@@ -5,6 +5,7 @@ import java.io.File;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
@@ -137,10 +138,9 @@ public interface ICore {
 	 * returns the empty graph.
 	 * 
 	 * @param index
-	 * @return Graph<IVertex, IEdge>
 	 * @throws Exception
 	 */
-	public Graph<IVertex, IEdge> clearGraph(int index) throws Exception;
+	public void clearGraph(int index) throws Exception;
 
 	/**
 	 * Returns the graph templates directory.
@@ -189,9 +189,20 @@ public interface ICore {
 	 * @param listener
 	 * @throws Exception
 	 */
-	void executeTraverser(ChangeListener listener) throws Exception;
+	public abstract void executeTraverser(ChangeListener listener) throws Exception;
 
-	
-	public abstract void saveGraph();
+	/**
+	 * 
+	 * @param graph
+	 * @throws Exception
+	 */
+	public abstract void saveGraph(IGravisGraph graph) throws Exception;
+
+	/**
+	 * 
+	 * @return Graph<IVertex, IEdge>
+	 * @throws Exception
+	 */
+	public abstract void exportGraph(IGravisGraph graph) throws Exception;
 
 }

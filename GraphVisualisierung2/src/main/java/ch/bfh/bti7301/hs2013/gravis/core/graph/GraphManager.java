@@ -5,9 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import org.apache.commons.collections15.Transformer;
 import org.apache.commons.io.FileUtils;
+
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
@@ -97,7 +100,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	/**
 	 * @param file
 	 */
-	private void write(File file, IGravisGraph graph) {
+	private void store(File file, IGravisGraph graph) {
 		// TODO write GraphName from graphml
 		// TODO write GraphType from graphml: <graph id="Sample Graph 1"
 		// edgedefault="directed">
@@ -148,9 +151,9 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			return this
 					.load(new File(
 							"src/main/resources/META-INF/templates/DijkstraSampleGraph1.graphml"));
-//			return this
-//					.load(new File(
-//							"src/main/resources/META-INF/templates/SampleTree1.graphml"));
+			// return this
+			// .load(new File(
+			// "src/main/resources/META-INF/templates/SampleTree1.graphml"));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -180,12 +183,11 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager#clearGraph(int)
 	 */
 	@Override
-	public IGravisGraph clearGraph(int index) throws Exception {
+	public void clearGraph(int index) throws Exception {
 		try {
 			File file = super.getFile(index);
 			IGravisGraph graph = this.load(file);
 			graph.clear();
-			return graph;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -210,17 +212,26 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 
 	}
 
+	@Override
+	public void saveGraph(IGravisGraph graph) {
+		// TODO bitte diesen code nur auskommentieren und nicht löschen
+		this.store(
+				new File(
+						"src/main/resources/META-INF/templates/SampleTree1_out.graphml"),
+				graph);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager#saveGraph(ch.bfh
-	 * .bti7301.hs2013.gravis.core.graph.IGravisGraph)
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager#exportGraph(ch.
+	 * bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph)
 	 */
 	@Override
-	public void saveGraph(IGravisGraph graph) {
+	public void exportGraph(IGravisGraph graph) throws Exception {
 		// TODO bitte diesen code nur auskommentieren und nicht löschen
-		this.write(
+		this.store(
 				new File(
 						"src/main/resources/META-INF/templates/SampleTree1_out.graphml"),
 				graph);

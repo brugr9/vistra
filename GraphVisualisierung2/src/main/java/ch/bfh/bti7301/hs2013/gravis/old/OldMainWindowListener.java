@@ -31,6 +31,7 @@ import javax.swing.event.ChangeListener;
 
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
@@ -404,10 +405,10 @@ public class OldMainWindowListener extends Observable implements
 
 				// TODO remove string literal
 				if (!graphName.equals("Graph wählen")) {
-					Graph<IVertex, IEdge> graph;
+					IGravisGraph graph;
 					try {
-						graph = this.gravisCore.selectGraph(1);
-						this.gravisCore.saveGraph();
+						graph = (IGravisGraph) this.gravisCore.selectGraph(1);
+						this.gravisCore.saveGraph(graph);
 
 						this.setChanged();
 						this.notifyObservers(graph);

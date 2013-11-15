@@ -46,8 +46,7 @@ public final class CoreFactory {
 	public static ICore createCore(Properties p) throws Exception {
 		try {
 			// Graph
-			Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
-			IGravisGraph gravisGraph = GraphFactory.createIGravisGraph(graph);
+			IGravisGraph gravisGraph = GraphFactory.createIGravisGraph();
 			IGraphManager graphManager = GraphFactory.createGraphManager(p);
 			// Algorithm
 			IAlgorithmManager algorithmManager = AlgorithmFactory
@@ -55,7 +54,7 @@ public final class CoreFactory {
 			// Traversal
 			ITraversal traversal = createTraveral(gravisGraph,
 					algorithmManager.getDefaultAlgorithm());
-			IGravisListIterator<ICommand> listIterator = createImmutListIterator();
+			IGravisListIterator<ICommand> listIterator = createListIterator();
 			IIteratorManager iteratorManager = createIteratorManager(listIterator);
 
 			return createCore(graphManager, algorithmManager, traversal,
@@ -104,7 +103,7 @@ public final class CoreFactory {
 	 * @return a new instance of type IGravisListIterator
 	 * @throws Exception
 	 */
-	private static IGravisListIterator<ICommand> createImmutListIterator()
+	private static IGravisListIterator<ICommand> createListIterator()
 			throws Exception {
 		try {
 			return new GravisListIterator<ICommand>();

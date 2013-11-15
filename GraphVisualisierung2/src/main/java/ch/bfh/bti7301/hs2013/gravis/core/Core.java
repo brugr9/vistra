@@ -7,11 +7,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.maven.shared.utils.io.FileUtils;
 
-import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithmManager;
-import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm.GraphType;
-import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
@@ -103,18 +99,9 @@ class Core implements ICore {
 	}
 
 	@Override
-	public Graph<IVertex, IEdge> clearGraph(int index) throws Exception {
+	public void clearGraph(int index) throws Exception {
 		try {
-			IGravisGraph graph = this.traversal.getGraph();
-
-			// if (graphId == graph.getId()) {
-			// graph.clear();
-			// return graph;
-			// }
-
-			graph = this.graphManager.clearGraph(index);
-			this.traversal.setParameter(graph);
-			return graph;
+			this.graphManager.clearGraph(index);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -214,9 +201,8 @@ class Core implements ICore {
 	@Override
 	public void executeTraverser(ChangeListener listener) throws Exception {
 		try {
-			IGravisListIterator<ICommand> listIterator = this.traversal
-					.execute(listener);
-			this.iteratorManager.setListIterator(listIterator);
+			this.iteratorManager.setListIterator(this.traversal
+					.execute(listener));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -361,18 +347,22 @@ class Core implements ICore {
 		return this.algorithmManager.getFilter();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#saveGraph()
-	 */
 	@Override
-	public void saveGraph() {
+	public void saveGraph(IGravisGraph graph) throws Exception {
 		try {
-			IGravisGraph graph = this.traversal.getGraph();
 			this.graphManager.saveGraph(graph);
 		} catch (Exception e) {
 			throw e;
 		}
-		
+	}
+
+	@Override
+	public void exportGraph(IGravisGraph graph) throws Exception {
+		try {
+			this.graphManager.exportGraph(graph);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }
