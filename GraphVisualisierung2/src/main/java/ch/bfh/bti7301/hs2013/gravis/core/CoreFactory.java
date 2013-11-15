@@ -3,7 +3,6 @@ package ch.bfh.bti7301.hs2013.gravis.core;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.event.ChangeEvent;
 
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.AlgorithmFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
@@ -12,9 +11,6 @@ import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import edu.uci.ics.jung.graph.Graph;
 
 /**
  * This factory class creates and composes all necessary objects used in the
@@ -46,16 +42,15 @@ public final class CoreFactory {
 	public static ICore createCore(Properties p) throws Exception {
 		try {
 			// Graph
-			IGravisGraph gravisGraph = GraphFactory.createIGravisGraph();
 			IGraphManager graphManager = GraphFactory.createGraphManager(p);
 			// Algorithm
 			IAlgorithmManager algorithmManager = AlgorithmFactory
 					.createAlgorithmManager(p);
 			// Traversal
-			ITraversal traversal = createTraveral(gravisGraph,
+			ITraversal traversal = createTraveral(GraphFactory.createIGravisGraph(),
 					algorithmManager.getDefaultAlgorithm());
-			IGravisListIterator<ICommand> listIterator = createListIterator();
-			IIteratorManager iteratorManager = createIteratorManager(listIterator);
+			// Iteration
+			IIteratorManager iteratorManager = createIteratorManager(createListIterator());
 
 			return createCore(graphManager, algorithmManager, traversal,
 					iteratorManager);
