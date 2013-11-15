@@ -38,8 +38,8 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 		
 		this.start = false;
 		this.end = false;
-		this.width = 40.0;
-		this.height = 30.0;
+		this.width = 60.0;
+		this.height = 40.0;
 		this.location = new Point();
 	}
 

@@ -27,7 +27,12 @@ public class GraphTransformer implements Transformer<GraphMetadata, IGravisGraph
 		
 		newGraph.setId(graphMeta.getId());
 		newGraph.setEdgeType(edgeType);
-		newGraph.setDescription(graphMeta.getProperty(DESCRIPTION_PROPERTY).trim());
+		
+		if (graphMeta.getProperty(DESCRIPTION_PROPERTY) != null) {
+			newGraph.setDescription(graphMeta.getProperty(DESCRIPTION_PROPERTY)
+					.trim());
+		}
+		
 		return newGraph;
 	}
 
