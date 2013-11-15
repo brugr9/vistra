@@ -2,9 +2,8 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
 import java.util.Properties;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)

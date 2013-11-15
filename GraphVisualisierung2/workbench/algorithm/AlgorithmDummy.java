@@ -1,6 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.data.workbench.algorithm;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IImmutableGraph;
 
 /**
@@ -44,7 +44,7 @@ public class AlgorithmDummy implements IAlgorithm {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm#getName()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getName()
 	 */
 	@Override
 	public final String getName() {
@@ -55,7 +55,7 @@ public class AlgorithmDummy implements IAlgorithm {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm#getDescription()
+	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getDescription()
 	 */
 	@Override
 	public final String getDescription() {

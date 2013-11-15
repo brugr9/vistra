@@ -7,9 +7,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.maven.shared.utils.io.FileUtils;
 
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm.GraphType;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithmManager;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm.GraphType;
 import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager;

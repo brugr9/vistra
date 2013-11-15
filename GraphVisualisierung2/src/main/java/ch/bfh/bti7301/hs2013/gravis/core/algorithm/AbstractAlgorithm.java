@@ -6,7 +6,6 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
-import ch.bfh.bti7301.hs2013.gravis.common.IAlgorithm;
 
 /**
  * Abstract algorithm, does nothing on execute().
