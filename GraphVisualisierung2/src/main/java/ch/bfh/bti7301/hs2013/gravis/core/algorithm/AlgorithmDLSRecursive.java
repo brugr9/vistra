@@ -15,7 +15,8 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	protected AlgorithmDLSRecursive() {
 		super();
 		super.setName("Depth-last search (DLS), recursive");
-		super.setDescription("Depth-last search (DLS), implemented recursively.");
+		super.setDescription("Depth-last search (DLS) for DIRECTED and UNDIRECTED edges, "
+				+ "implemented recursively.");
 		// TODO annotations
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
@@ -33,7 +34,6 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	public void execute(IRestrictedGraph graph) {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
-		// TODO Implementation für ungerichtete Kanten
 		// TODO endVertex 
 		
 		this.counter = 0;
@@ -50,7 +50,8 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	 * @param vertex1
 	 */
 	private void visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
-		vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
+		vertex1.setComment("Die Knoten werden in Postorder-Reihenfolge nummeriert.");
+		vertex1.appendComment("Der Knoten " + vertex1 + " wird aktiviert.");
 		vertex1.setState(State.ACTIVATION);
 		graph.updateState(vertex1);
 

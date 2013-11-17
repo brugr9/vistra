@@ -21,7 +21,8 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	protected AlgorithmDFSRecursive() {
 		super();
 		super.setName("Depth-first search (DFS), recursive");
-		super.setDescription("Depth-first search (DFS), implemented recursively.");
+		super.setDescription("Depth-first search (DFS) for DIRECTED and UNDIRECTED edges, "
+				+ "implemented recursively.");
 		// TODO annotations
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
@@ -39,7 +40,6 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	public void execute(IRestrictedGraph graph) {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
-		// TODO Implementation für ungerichtete Kanten
 		// TODO endVertex 
 		
 		this.counter = 0;
@@ -56,8 +56,9 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	 * @param vertex1
 	 */
 	private void visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
+		vertex1.setComment("Die Knoten werden in Preorder-Reihenfolge nummeriert.");
 		vertex1.setDone(true);
-		vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
+		vertex1.appendComment("Der Knoten " + vertex1 + " wird aktiviert.");
 		vertex1.setState(State.ACTIVATION);
 		graph.updateState(vertex1);
 		
