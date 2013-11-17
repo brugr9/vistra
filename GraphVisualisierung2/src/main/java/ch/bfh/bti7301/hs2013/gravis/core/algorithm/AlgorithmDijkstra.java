@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.ItemResultComparator;
+import ch.bfh.bti7301.hs2013.gravis.core.util.ItemPaintedResultComparator;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -14,7 +14,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.ItemResultComparator;
  */
 class AlgorithmDijkstra extends AbstractAlgorithm {
 
-	private final ItemResultComparator itemResultComparator;
+	private final ItemPaintedResultComparator itemResultComparator;
 
 	protected AlgorithmDijkstra() {
 		super();
@@ -26,7 +26,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		// TODO init id
 		super.setId(2);
 
-		this.itemResultComparator = new ItemResultComparator();
+		this.itemResultComparator = new ItemPaintedResultComparator();
 	}
 
 	/*

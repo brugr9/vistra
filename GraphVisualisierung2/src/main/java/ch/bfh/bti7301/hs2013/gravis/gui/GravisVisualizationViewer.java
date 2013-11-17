@@ -99,8 +99,8 @@ public class GravisVisualizationViewer extends
 		this.getRenderContext().setEdgeLabelClosenessTransformer(
 				new ConstantDirectionalEdgeValueTransformer<IVertex,IEdge>(0.5, 0.5));
 		
-		RenderContext<IVertex, IEdge> context = this.getRenderContext();
-		context.setEdgeDrawPaintTransformer(new KeyframeGradientTransformer());
+//		RenderContext<IVertex, IEdge> context = this.getRenderContext();
+//		context.setEdgeDrawPaintTransformer(new KeyframeGradientTransformer());
 
 	}
 
