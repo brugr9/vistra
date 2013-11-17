@@ -409,7 +409,7 @@ public class OldMainWindowListener extends Observable implements
 				if (!graphName.equals("Graph wählen")) {
 					IGravisGraph graph;
 					try {
-						graph = (IGravisGraph) this.gravisCore.selectGraph(1);
+						graph = this.gravisCore.selectGraph(1);
 						this.gravisCore.saveGraph(graph);
 
 						this.setChanged();

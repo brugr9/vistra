@@ -300,7 +300,7 @@ public final class Control implements IControl {
 		// as shown in sd-select-graph
 		try {
 			// graph
-			IGravisGraph graph = (IGravisGraph) this.core.selectGraph(index);
+			IGravisGraph graph = this.core.selectGraph(index);
 			this.model.setGraph(graph);
 			this.model.setSelectedGraph(index);
 			// algorithm

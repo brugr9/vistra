@@ -9,9 +9,6 @@ import org.apache.maven.shared.utils.io.FileUtils;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithmManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -45,7 +42,7 @@ class Core implements ICore {
 	}
 
 	@Override
-	public Graph<IVertex, IEdge> selectGraph(int index) throws Exception {
+	public IGravisGraph selectGraph(int index) throws Exception {
 		try {
 			// as shown in sd-select-graph
 			IGravisGraph graph = this.graphManager.getGraph(index);

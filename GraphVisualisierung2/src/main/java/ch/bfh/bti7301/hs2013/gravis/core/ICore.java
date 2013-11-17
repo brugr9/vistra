@@ -5,10 +5,6 @@ import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * This interface gives access to all important core classes. It is a facade to
@@ -29,7 +25,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract Graph<IVertex, IEdge> selectGraph(int index)
+	public abstract IGravisGraph selectGraph(int index)
 			throws Exception;
 
 	/**

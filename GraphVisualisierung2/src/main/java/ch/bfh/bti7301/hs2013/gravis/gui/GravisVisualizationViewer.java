@@ -9,6 +9,7 @@ import java.util.Observer;
 
 import org.apache.commons.collections15.Transformer;
 
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
@@ -127,14 +128,13 @@ public class GravisVisualizationViewer extends
 
 		// TODO bitte an dieser Klasse nichts ändern (pk)
 
-		// if (o instanceof GuiModel && arg instanceof Graph<?, ?>) {
+		// if (o instanceof GuiModel && arg instanceof IGravisGraph) {
 		// GuiModel m = (GuiModel) o;
-		if (arg instanceof Graph<?, ?>) {
+		if (arg instanceof IGravisGraph) {
 			// GuiModel m = (GuiModel) o;
 
 			try {
-				@SuppressWarnings("unchecked")
-				Graph<IVertex, IEdge> graph = (Graph<IVertex, IEdge>) arg;
+				IGravisGraph graph = (IGravisGraph) arg;
 
 				// TODO add dynamic layout
 				Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph,
