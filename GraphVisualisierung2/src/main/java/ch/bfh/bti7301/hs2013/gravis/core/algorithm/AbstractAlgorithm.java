@@ -130,7 +130,7 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	 * @param graphItem
 	 * @param state
 	 */
-	protected void updateState(IRestrictedGraph graph,
+	protected final void updateState(IRestrictedGraph graph,
 			IRestrictedGraphItem graphItem, State state) {
 		graphItem.setState(state);
 		graph.updateState(graphItem);
