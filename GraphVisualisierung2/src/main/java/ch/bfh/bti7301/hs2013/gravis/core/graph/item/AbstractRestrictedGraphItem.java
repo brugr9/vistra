@@ -93,8 +93,8 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#isVisited()
 	 */
 	@Override
-	public boolean isVisited() {
-		return this.item.isVisited();
+	public boolean isDone() {
+		return this.item.isDone();
 	}
 
 	/*
@@ -104,8 +104,8 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#setVisited(boolean )
 	 */
 	@Override
-	public void setVisited(boolean value) {
-		this.item.setVisited(value);
+	public void setDone(boolean value) {
+		this.item.setDone(value);
 	}
 
 	/*

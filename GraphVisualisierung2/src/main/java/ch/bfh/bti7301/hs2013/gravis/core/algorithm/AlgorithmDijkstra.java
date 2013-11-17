@@ -19,8 +19,8 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 	protected AlgorithmDijkstra() {
 		super();
 		super.setName("Dijkstra algorithm");
-		super.setDescription("Dijkstra algorithm, multi-edges not supported, "
-				+ "negative weights not allowed.");
+		super.setDescription("Dijkstra algorithm for DIRECTED and UNDIRECTED edges. "
+				+ "Multi-edges not supported, negative weights not allowed.");
 		// TODO annotations
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
@@ -44,7 +44,8 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		
 		// TODO set comments in calculateDistances()
 		// TODO visualize edges
-		// TODO AlgorithmDijkstra with undirected edges
+		// TDO bei Min-Auswahl: alle Auswahlmöglichkeiten fett marieren
+		// TODO multi-edges: findEdgeSet
 
 		Collection<? extends IRestrictedVertex> vertices = graph.getVertices();
 		IRestrictedVertex startVertex = graph.getStartVertex();
@@ -57,6 +58,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		this.setSuccessorMessage(graph, startVertex);
 		startVertex.appendComment("Für den Knoten " + startVertex.getId() + 
 				" wurde der kürzeste Weg berechnet: " + startVertex.getResult());
+		startVertex.setDone(true);
 		this.updateState(graph, startVertex, State.SOLUTION);
 		vertices.remove(startVertex);
 
@@ -125,13 +127,14 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			this.updateState(graph, selectedVertex, State.ACTIVATION);
 
 			this.setSuccessorMessage(graph, selectedVertex);
+			selectedVertex.setDone(true);
 			this.updateState(graph, selectedVertex, State.SOLUTION);
 
 			if (this.updateEndVertexMessage(graph, startVertex, selectedVertex)) {
 				return;
 			}
 
-			this.updateAdjacentDistances(graph, selectedVertex);
+			this.updateAdjacentVertexDistances(graph, selectedVertex);
 
 			prioQueue = this.newPriorityQueue(vertices, prioQueue,
 					selectedVertex);
@@ -140,30 +143,30 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 
 	/**
 	 * @param graph
-	 * @param selectedVertex
+	 * @param vertex
 	 */
-	private void updateAdjacentDistances(IRestrictedGraph graph,
-			IRestrictedVertex selectedVertex) {
+	private void updateAdjacentVertexDistances(IRestrictedGraph graph,
+			IRestrictedVertex vertex) {
 
 		double newDistance = 0.0;
 		double oldDistance = 0.0;
 
 		for (IRestrictedVertex adjacentVertex : graph
-				.getSuccessors(selectedVertex)) {
+				.getSuccessors(vertex)) {
 			
-			if (adjacentVertex.getState() != State.SOLUTION) {
-				
+			if (!adjacentVertex.isDone()) {
 				this.updateState(graph, adjacentVertex, State.ACTIVATION);
 
-				newDistance = selectedVertex.getPaintedResult()
-						+ graph.findEdge(selectedVertex, adjacentVertex)
+				newDistance = vertex.getPaintedResult()
+						+ graph.findEdge(vertex, adjacentVertex)
 								.getWeight();
 				oldDistance = adjacentVertex.getPaintedResult();
 
 				adjacentVertex
-						.setResult(newDistance < oldDistance ? newDistance
-								: oldDistance);
+						.setResult(Math.min(newDistance, oldDistance));
 				this.updateState(graph, adjacentVertex, State.VISIT);
+				
+				this.updateState(graph, vertex, State.ACTIVATION);
 			}
 		}
 	}

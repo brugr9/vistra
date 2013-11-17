@@ -74,13 +74,13 @@ public interface IRestrictedGraphItem {
 	/**
 	 * @return boolean
 	 */
-	public abstract boolean isVisited();
+	public abstract boolean isDone();
 
 	/**
 	 * 
 	 * @param value
 	 */
-	public abstract void setVisited(boolean value);
+	public abstract void setDone(boolean value);
 
 	/**
 	 * 
