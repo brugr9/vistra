@@ -10,6 +10,7 @@ import org.apache.commons.collections15.bidimap.DualHashBidiMap;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
@@ -110,14 +111,8 @@ final class RestrictedGraph implements IRestrictedGraph {
 		return verticesList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphItemUpdate#updateState
-	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem)
-	 */
 	@Override
-	public void updateState(IRestrictedGraphItem item) {
+	public void updateState(IRestrictedGraphItem item, State state) {
 		IGraphItem original = null;
 
 		if (item instanceof IRestrictedVertex) {
@@ -129,7 +124,7 @@ final class RestrictedGraph implements IRestrictedGraph {
 		}
 
 		if (original != null) {
-			this.observableGraph.updateState(original);
+			this.observableGraph.updateState(original, state);
 		}
 	}
 

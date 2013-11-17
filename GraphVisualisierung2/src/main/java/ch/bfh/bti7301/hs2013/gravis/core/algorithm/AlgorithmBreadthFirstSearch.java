@@ -48,18 +48,17 @@ public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm {
 		while (!vertexQueue.isEmpty()) {
 			IRestrictedVertex selectedVertex = vertexQueue.poll();
 			
-//			graph.update(graph, selectedVertex, State.ACTIVATION);
-			this.updateState(graph, selectedVertex, State.ACTIVATION);
+			graph.updateState(selectedVertex, State.ACTIVATION);
 			
 			selectedVertex.setResult(++this.counter);
-			this.updateState(graph, selectedVertex, State.SOLUTION);
+			graph.updateState(selectedVertex, State.SOLUTION);
 			
 			for (IRestrictedVertex successor : graph.getSuccessors(selectedVertex)) {
 				if (!successor.isDone()) {
-					this.updateState(graph, successor, State.ACTIVATION);
+					graph.updateState(successor, State.ACTIVATION);
 					
 					successor.setDone(true);
-					this.updateState(graph, successor, State.VISIT);
+					graph.updateState(successor, State.VISIT);
 					
 					vertexQueue.offer(successor);
 				}

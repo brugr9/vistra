@@ -84,12 +84,6 @@ public interface IRestrictedGraphItem {
 
 	/**
 	 * 
-	 * @param state
-	 */
-	public abstract void setState(State state);
-
-	/**
-	 * 
 	 * @return State
 	 */
 	public abstract State getState();

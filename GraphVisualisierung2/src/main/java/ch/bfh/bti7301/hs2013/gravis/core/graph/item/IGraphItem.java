@@ -45,4 +45,10 @@ public interface IGraphItem extends IRestrictedGraphItem {
 	 */
 	public abstract boolean hasNoComment();
 	
+	/**
+	 * 
+	 * @param state
+	 */
+	public abstract void setState(State state);
+	
 }

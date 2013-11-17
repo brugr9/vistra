@@ -1,6 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.ObservableGraph;
@@ -71,17 +72,6 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphItemUpdate#updateState
-	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem)
-	 */
-	@Override
-	public void updateState(IGraphItem item) {
-		this.fireGraphEvent(GraphFactory.createGraphEvent(this, item));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#getGraphId()
 	 */
 	@Override
@@ -113,6 +103,15 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 	@Override
 	public void setEdgeType(EdgeType edgeType) {
 		this.gravisGraph.setEdgeType(edgeType);
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphItemUpdate#updateState(ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem, ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
+	 */
+	@Override
+	public void updateState(IGraphItem graphItem, State state) {
+		graphItem.setState(state);
+		this.fireGraphEvent(GraphFactory.createGraphEvent(this, graphItem));
 	}
 
 }

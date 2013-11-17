@@ -124,16 +124,4 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 		// Does nothing on execute.
 	}
 
-	/**
-	 * 
-	 * @param graph
-	 * @param graphItem
-	 * @param state
-	 */
-	protected final void updateState(IRestrictedGraph graph,
-			IRestrictedGraphItem graphItem, State state) {
-		graphItem.setState(state);
-		graph.updateState(graphItem);
-	}
-
 }

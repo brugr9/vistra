@@ -51,7 +51,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		IRestrictedVertex startVertex = graph.getStartVertex();
 
 		startVertex.setComment(startVertex.getId() + " ist der Startknoten.");
-		this.updateState(graph, startVertex, State.ACTIVATION);
+		graph.updateState(startVertex, State.ACTIVATION);
 
 		// start vertex has distance 0
 		startVertex.setResult(0.0);
@@ -59,7 +59,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		startVertex.appendComment("Für den Knoten " + startVertex.getId() + 
 				" wurde der kürzeste Weg berechnet: " + startVertex.getResult());
 		startVertex.setDone(true);
-		this.updateState(graph, startVertex, State.SOLUTION);
+		graph.updateState(startVertex, State.SOLUTION);
 		vertices.remove(startVertex);
 
 		if (this.updateEndVertexMessage(graph, startVertex, startVertex)) {
@@ -84,27 +84,27 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			vertex.setResult(Double.POSITIVE_INFINITY);
 			vertex.setComment("Der Knoten " + vertex.getId() + 
 					" wurde mit folgendem Wert initialisiert: " + vertex.getResult());
-			this.updateState(graph, vertex, State.ACTIVATION);
+			graph.updateState(vertex, State.ACTIVATION);
 		}
 
 		startVertex.setComment("Rückkehr zum Startknoten " + startVertex.getId() + ".");
-		this.updateState(graph, startVertex, State.ACTIVATION);
+		graph.updateState(startVertex, State.ACTIVATION);
 
 		// init edge weight as distance for all successors of start vertex
 		for (IRestrictedVertex vertex : graph.getSuccessors(startVertex)) {
 			vertex.setComment("Der Knoten " + vertex.getId() + 
 					" wird aktiviert.");
-			this.updateState(graph, vertex, State.ACTIVATION);
+			graph.updateState(vertex, State.ACTIVATION);
 
 			vertex.setResult(graph.findEdge(startVertex, vertex).getWeight());
 			vertex.setComment("Der Knoten " + vertex.getId() + 
 					" wurde besucht. Der neue kürzeste Weg vom Startknoten aus ist: " +
 					vertex.getResult());
-			this.updateState(graph, vertex, State.VISIT);
+			graph.updateState(vertex, State.VISIT);
 			
 			startVertex.setComment("Der Knoten " + startVertex.getId() + 
 					" wird aktiviert.");
-			this.updateState(graph, startVertex, State.ACTIVATION);
+			graph.updateState(startVertex, State.ACTIVATION);
 		}
 	}
 	
@@ -124,11 +124,11 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		while (!prioQueue.isEmpty()) {
 			IRestrictedVertex selectedVertex = prioQueue.poll();
 
-			this.updateState(graph, selectedVertex, State.ACTIVATION);
+			graph.updateState(selectedVertex, State.ACTIVATION);
 
 			this.setSuccessorMessage(graph, selectedVertex);
 			selectedVertex.setDone(true);
-			this.updateState(graph, selectedVertex, State.SOLUTION);
+			graph.updateState(selectedVertex, State.SOLUTION);
 
 			if (this.updateEndVertexMessage(graph, startVertex, selectedVertex)) {
 				return;
@@ -155,7 +155,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 				.getSuccessors(vertex)) {
 			
 			if (!adjacentVertex.isDone()) {
-				this.updateState(graph, adjacentVertex, State.ACTIVATION);
+				graph.updateState(adjacentVertex, State.ACTIVATION);
 
 				newDistance = vertex.getPaintedResult()
 						+ graph.findEdge(vertex, adjacentVertex)
@@ -164,9 +164,9 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 
 				adjacentVertex
 						.setResult(Math.min(newDistance, oldDistance));
-				this.updateState(graph, adjacentVertex, State.VISIT);
+				graph.updateState(adjacentVertex, State.VISIT);
 				
-				this.updateState(graph, vertex, State.ACTIVATION);
+				graph.updateState(vertex, State.ACTIVATION);
 			}
 		}
 	}
@@ -218,16 +218,16 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 	/**
 	 * @param graph
 	 * @param startVertex
-	 * @param selectedVertex
+	 * @param endVertex
 	 */
 	private boolean updateEndVertexMessage(IRestrictedGraph graph,
-			IRestrictedVertex startVertex, IRestrictedVertex selectedVertex) {
+			IRestrictedVertex startVertex, IRestrictedVertex endVertex) {
 
-		if (selectedVertex.isEnd()) {
-			selectedVertex.setComment("Der kürzeste Weg von "
-					+ startVertex.getId() + " nach " + selectedVertex.getId()
+		if (endVertex.isEnd()) {
+			endVertex.setComment("Der kürzeste Weg von "
+					+ startVertex.getId() + " nach " + endVertex.getId()
 					+ " wurde gefunden.");
-			graph.updateState(selectedVertex);
+			graph.updateState(endVertex, endVertex.getState());
 			return true;
 		}
 		return false;

@@ -111,17 +111,6 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#setState(ch.bfh
-	 * .bti7301.hs2013.gravis.core.graph.item.IGraphItem.ItemState)
-	 */
-	@Override
-	public void setState(State state) {
-		this.item.setState(state);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#getState()
 	 */
 	@Override
