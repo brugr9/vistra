@@ -119,5 +119,13 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 		return super.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#clone()
+	 */
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
 	
 }

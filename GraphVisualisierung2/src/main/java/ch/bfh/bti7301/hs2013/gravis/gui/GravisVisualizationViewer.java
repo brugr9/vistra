@@ -49,6 +49,13 @@ public class GravisVisualizationViewer extends
 		this.setPreferredSize(new Dimension(1350, 430));
 		this.setBackground(Color.white);
 
+		// vertex visualization
+		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
+		this.getRenderContext().setVertexFillPaintTransformer(
+				new VertexColorTransformer());
+		this.getRenderContext().setVertexShapeTransformer(
+				new ShapeTransformer());
+
 		Transformer<IVertex, String> vertexLabelTransformer = new Transformer<IVertex, String>() {
 			@Override
 			public String transform(IVertex vertex) {
@@ -60,22 +67,35 @@ public class GravisVisualizationViewer extends
 		this.getRenderContext().setVertexLabelTransformer(
 				vertexLabelTransformer);
 
-		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
+		this.getRenderContext().setVertexStrokeTransformer(
+				new Transformer<IVertex, Stroke>() {
+					@Override
+					public Stroke transform(IVertex vertex) {
+						return new BasicStroke(vertex.getStrokeWidth());
+					}
+				});
 
-		this.getRenderContext().setVertexFillPaintTransformer(
-				new VertexColorTransformer());
-		this.getRenderContext().setVertexShapeTransformer(
-				new ShapeTransformer());
-
-		this.getRenderContext().setVertexStrokeTransformer(new Transformer<IVertex, Stroke>() {
+		Transformer<IVertex, String> vertexToolTipTransformer = new Transformer<IVertex, String>() {
 			@Override
-			public Stroke transform(IVertex vertex) {
-				// TODO Auto-generated method stub
-				
-				return new BasicStroke(vertex.getState() == State.ACTIVATION ? 1.0f : 1.0f);
+			public String transform(IVertex vertex) {
+				return vertex.getId();
 			}
-		});
-		
+		};
+		this.setVertexToolTipTransformer(vertexToolTipTransformer);
+
+		// edge visualization
+		EdgeColorTransformer edgeColorTransformer = new EdgeColorTransformer();
+		this.getRenderContext().setEdgeShapeTransformer(
+				new EdgeShape.Line<IVertex, IEdge>());
+		this.getRenderContext().setEdgeDrawPaintTransformer(edgeColorTransformer
+				);
+		this.getRenderContext().setArrowDrawPaintTransformer(
+				edgeColorTransformer);
+		// centers edge label
+		this.getRenderContext().setEdgeLabelClosenessTransformer(
+				new ConstantDirectionalEdgeValueTransformer<IVertex, IEdge>(
+						0.5, 0.5));
+
 		Transformer<IEdge, String> edgeLabelTransformer = new Transformer<IEdge, String>() {
 			@Override
 			public String transform(IEdge edge) {
@@ -86,53 +106,32 @@ public class GravisVisualizationViewer extends
 		};
 		this.getRenderContext().setEdgeLabelTransformer(edgeLabelTransformer);
 
-		Transformer<IVertex, String> vertexToolTipTransformer = new Transformer<IVertex, String>() {
-			@Override
-			public String transform(IVertex vertex) {
-				return vertex.getId();
-			}
-		};
-		this.setVertexToolTipTransformer(vertexToolTipTransformer);
-
 		Transformer<IEdge, String> edgeToolTipTransformer = new Transformer<IEdge, String>() {
 			@Override
 			public String transform(IEdge edge) {
-				return edge.toString();
+				return edge.getId();
 			}
 		};
 		this.setEdgeToolTipTransformer(edgeToolTipTransformer);
 
-		this.getRenderContext().setEdgeShapeTransformer(
-				new EdgeShape.Line<IVertex, IEdge>());
+		this.getRenderContext().setEdgeStrokeTransformer(
+				new Transformer<IEdge, Stroke>() {
+					@Override
+					public Stroke transform(IEdge edge) {
+						return new BasicStroke(edge.getStrokeWidth());
+					}
+				});
 
-		// centers edge label
-		this.getRenderContext().setEdgeLabelClosenessTransformer(
-				new ConstantDirectionalEdgeValueTransformer<IVertex, IEdge>(
-						0.5, 0.5));
+		this.getRenderContext().setEdgeArrowStrokeTransformer(
+				new Transformer<IEdge, Stroke>() {
+					@Override
+					public Stroke transform(IEdge edge) {
+						return new BasicStroke(edge.getStrokeWidth());
+					}
+				});
 
-		 this.getRenderContext().setEdgeDrawPaintTransformer(
-		 new EdgeColorTransformer());
-		 
-//		this.getRenderContext().setEdgeFillPaintTransformer(
-//				new EdgeColorTransformer());
-
-		 this.getRenderContext().setEdgeStrokeTransformer(new Transformer<IEdge, Stroke>() {
-				@Override
-				public Stroke transform(IEdge input) {
-					// TODO Auto-generated method stub
-					return new BasicStroke(3.0f);
-				}
-			});
-		 
-		 this.getRenderContext().setArrowDrawPaintTransformer(new EdgeColorTransformer());
-		 this.getRenderContext().setEdgeArrowStrokeTransformer(new Transformer<IEdge, Stroke>() {
-				@Override
-				public Stroke transform(IEdge input) {
-					// TODO Auto-generated method stub
-					return new BasicStroke(3.0f);
-				}
-			});
-
+		// this.getRenderContext().setEdgeFillPaintTransformer(
+		// new EdgeColorTransformer());
 		// RenderContext<IVertex, IEdge> context = this.getRenderContext();
 		// context.setEdgeDrawPaintTransformer(new
 		// KeyframeGradientTransformer());

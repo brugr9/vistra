@@ -44,4 +44,5 @@ public interface IVertex extends IGraphItem, IRestrictedVertex {
 	 * @param location
 	 */
 	public abstract void setLocation(Point2D location);
+
 }

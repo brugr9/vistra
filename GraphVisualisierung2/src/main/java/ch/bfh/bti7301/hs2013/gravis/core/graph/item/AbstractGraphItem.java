@@ -6,7 +6,6 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
- * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public abstract class AbstractGraphItem implements IGraphItem {
@@ -18,6 +17,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	private String comment;
 	private double result;
 	private double paintedResult;
+	private float strokeWidth;
 	private boolean done;
 	private State state;
 	private Color color;
@@ -29,6 +29,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		this.id = String.valueOf(counter++);
 		this.info = this.comment = "";
 		this.paintedResult = this.result = Double.NaN;
+		this.strokeWidth = 1.0f;
 		this.done = false;
 		this.state = State.INITIAL;
 		this.color = GravisColor.red;
@@ -166,6 +167,30 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void appendComment(String comment) {
 		this.comment += System.getProperty("line.separator") + comment;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#getStrokeWidth()
+	 */
+	@Override
+	public float getStrokeWidth() {
+		return this.strokeWidth;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#setStrokeWidth(float)
+	 */
+	@Override
+	public void setStrokeWidth(float strokeWidth) {
+		this.strokeWidth = strokeWidth;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 	

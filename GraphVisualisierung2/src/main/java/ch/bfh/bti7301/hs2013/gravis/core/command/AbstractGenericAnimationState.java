@@ -13,17 +13,13 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
  */
 abstract class AbstractGenericAnimationState extends AbstractAnimationState {
 
-	protected final List<IGraphItem> graphItemHistory;
-
 	/**
 	 * @param stateColor
 	 * @param changeListener 
 	 */
 	protected AbstractGenericAnimationState(Color stateColor,
 			List<IGraphItem> graphItemHistory, TraversalChangeListener changeListener) {
-		super(stateColor, changeListener);
-		
-		this.graphItemHistory = graphItemHistory;
+		super(stateColor, graphItemHistory, changeListener);
 	}
 
 	/*
@@ -51,6 +47,10 @@ abstract class AbstractGenericAnimationState extends AbstractAnimationState {
 		}
 
 		this.addVisualizationCommands(currentItem, complexCommand);
+		
+		this.predecessorCommand = new ComplexCommand(
+				new StrokeWidthCommand(currentItem, this.getItemStrokeWidth(currentItem),
+						DEFAULT_STROKE_WIDTH));
 		
 		return complexCommand;
 	}

@@ -7,7 +7,7 @@ import java.awt.Color;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IGraphItem extends IRestrictedGraphItem {
+public interface IGraphItem extends IRestrictedGraphItem, Cloneable {
 
 	/**
 	 * 
@@ -51,4 +51,21 @@ public interface IGraphItem extends IRestrictedGraphItem {
 	 */
 	public abstract void setState(State state);
 	
+	/**
+	 * @return
+	 */
+	public abstract float getStrokeWidth();
+	
+	/**
+	 * 
+	 * @param width
+	 */
+	public abstract void setStrokeWidth(float width);
+	
+	/**
+	 * 
+	 * @return clone
+	 * @throws CloneNotSupportedException
+	 */
+	public Object clone() throws CloneNotSupportedException;
 }

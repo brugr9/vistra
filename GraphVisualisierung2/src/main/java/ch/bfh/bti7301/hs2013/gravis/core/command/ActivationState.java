@@ -1,7 +1,10 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
+import java.util.List;
+
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
 /**
@@ -12,10 +15,12 @@ class ActivationState extends AbstractAnimationState {
 
 	/**
 	 * 
+	 * @param graphItemHistory
 	 * @param changeListener
 	 */
-	protected ActivationState(TraversalChangeListener changeListener) {
-		super(GravisColor.BLUE, changeListener);
+	protected ActivationState(List<IGraphItem> graphItemHistory, 
+			TraversalChangeListener changeListener) {
+		super(GravisColor.BLUE, graphItemHistory, changeListener);
 	}
 
 	/*
@@ -31,11 +36,16 @@ class ActivationState extends AbstractAnimationState {
 			IGraphItem currentItem) {
 		ComplexCommand complexCommand = new ComplexCommand(
 				oldState.getPredecessorCommand());
-
-		this.addVisualizationCommands(currentItem, complexCommand);
 		
-		this.predecessorCommand = new ColorCommand(currentItem,
-				this.stateColor, currentItem.getColor());
+		this.addVisualizationCommands(currentItem, complexCommand);
+
+		ComplexCommand predecessorComplexCommand = new ComplexCommand(
+				new StrokeWidthCommand(currentItem, this.getItemStrokeWidth(currentItem),
+						currentItem.getStrokeWidth()));
+		predecessorComplexCommand.add(new ColorCommand(currentItem,
+				this.stateColor, currentItem.getColor()));
+		this.predecessorCommand = predecessorComplexCommand;
+
 		return complexCommand;
 	}
 

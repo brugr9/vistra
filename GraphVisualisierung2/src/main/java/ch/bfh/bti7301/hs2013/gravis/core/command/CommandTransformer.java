@@ -18,7 +18,7 @@ class CommandTransformer implements Transformer<IGraphItem, ICommand> {
 	private final Map<State, IAnimationState> states;
 	
 	private IAnimationState currentState;
-
+	
 	/**
 	 * 
 	 * @param graphItemHistory
@@ -28,7 +28,7 @@ class CommandTransformer implements Transformer<IGraphItem, ICommand> {
 			TraversalChangeListener changeListener) {
 		this.states = new HashedMap<>();
 		this.states.put(State.INITIAL, new InitialState(graphItemHistory, changeListener));
-		this.states.put(State.ACTIVATION, new ActivationState(changeListener));
+		this.states.put(State.ACTIVATION, new ActivationState(graphItemHistory, changeListener));
 		this.states.put(State.VISIT, new VisitState(graphItemHistory, changeListener));
 		this.states.put(State.SOLUTION, new SolutionState(graphItemHistory, changeListener));
 		
@@ -44,10 +44,10 @@ class CommandTransformer implements Transformer<IGraphItem, ICommand> {
 	@Override
 	public ICommand transform(IGraphItem currentItem) {
 		IAnimationState nextState = this.states.get(currentItem.getState());
-		ICommand command = nextState.createCommand(this.currentState,
+		ICommand currentCommand = nextState.createCommand(this.currentState,
 				currentItem);
 		this.currentState = nextState;
-		return command;
+		return currentCommand;
 	}
 
 }

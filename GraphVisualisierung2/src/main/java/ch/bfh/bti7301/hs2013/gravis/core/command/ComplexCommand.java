@@ -15,8 +15,13 @@ class ComplexCommand extends EmptyCommand {
 	 * @param predecessorCommand
 	 */
 	protected ComplexCommand(ICommand command) {
-		this.nestedCommands = new ArrayList<>();
+		this();
 		this.nestedCommands.add(command);
+	}
+
+	public ComplexCommand() {
+		super();
+		this.nestedCommands = new ArrayList<>();
 	}
 
 	/*
