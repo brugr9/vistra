@@ -1,12 +1,13 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.util.Collection;
-import java.util.PriorityQueue;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.ItemPaintedResultComparator;
+import ch.bfh.bti7301.hs2013.gravis.core.util.VertexPaintedResultComparator;
+import edu.uci.ics.jung.algorithms.util.MapBinaryHeap;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -14,19 +15,19 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.ItemPaintedResultComparator;
  */
 class AlgorithmDijkstra extends AbstractAlgorithm {
 
-	private final ItemPaintedResultComparator itemResultComparator;
+	private final VertexPaintedResultComparator vertexResultComparator;
 
 	protected AlgorithmDijkstra() {
 		super();
 		super.setName("Dijkstra algorithm");
 		super.setDescription("Dijkstra algorithm for DIRECTED and UNDIRECTED edges. "
-				+ "Multi-edges not supported, negative weights not allowed.");
+				+ "Negative weights are not allowed.");
 		// TODO annotations
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
 		super.setId(2);
 
-		this.itemResultComparator = new ItemPaintedResultComparator();
+		this.vertexResultComparator = new VertexPaintedResultComparator();
 	}
 
 	/*
@@ -41,11 +42,12 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 	public void execute(IRestrictedGraph graph) throws Exception {
 
 		// TODO bitte an dieser Methode nichts ändern (pk)
-		
-		// TODO set comments in calculateDistances()
+
 		// TODO visualize edges
-		// TDO bei Min-Auswahl: alle Auswahlmöglichkeiten fett marieren
-		// TODO multi-edges: findEdgeSet
+		// TODO bei Min-Auswahl: alle Auswahlmöglichkeiten fett marieren
+		// TODO set comments in calculateDistances()
+
+		this.checkPositiveWeights(graph.getEdges());
 
 		Collection<? extends IRestrictedVertex> vertices = graph.getVertices();
 		IRestrictedVertex startVertex = graph.getStartVertex();
@@ -56,16 +58,18 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		// start vertex has distance 0
 		startVertex.setResult(0.0);
 		this.setSuccessorMessage(graph, startVertex);
-		startVertex.appendComment("Für den Knoten " + startVertex.getId() + 
-				" wurde der kürzeste Weg berechnet: " + startVertex.getResult());
+		startVertex.appendComment("Für den Knoten " + startVertex.getId()
+				+ " wurde der kürzeste Weg berechnet: "
+				+ startVertex.getResult());
 		startVertex.setDone(true);
-		graph.updateState(startVertex, State.SOLUTION);
-		vertices.remove(startVertex);
 
 		if (this.updateEndVertexMessage(graph, startVertex, startVertex)) {
 			return;
 		}
 
+		graph.updateState(startVertex, State.SOLUTION);
+		vertices.remove(startVertex);
+		
 		this.initializeDistances(graph, vertices, startVertex);
 		this.calculateDistances(graph, vertices, startVertex);
 	}
@@ -82,32 +86,42 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		// initialize infinite distance from start vertex
 		for (IRestrictedVertex vertex : vertices) {
 			vertex.setResult(Double.POSITIVE_INFINITY);
-			vertex.setComment("Der Knoten " + vertex.getId() + 
-					" wurde mit folgendem Wert initialisiert: " + vertex.getResult());
+			vertex.setComment("Der Knoten " + vertex.getId()
+					+ " wurde mit folgendem Wert initialisiert: "
+					+ vertex.getResult());
 			graph.updateState(vertex, State.ACTIVATION);
 		}
 
-		startVertex.setComment("Rückkehr zum Startknoten " + startVertex.getId() + ".");
+		startVertex.setComment("Rückkehr zum Startknoten "
+				+ startVertex.getId() + ".");
 		graph.updateState(startVertex, State.ACTIVATION);
 
 		// init edge weight as distance for all successors of start vertex
 		for (IRestrictedVertex vertex : graph.getSuccessors(startVertex)) {
-			vertex.setComment("Der Knoten " + vertex.getId() + 
-					" wird aktiviert.");
-			graph.updateState(vertex, State.ACTIVATION);
-
-			vertex.setResult(graph.findEdge(startVertex, vertex).getWeight());
-			vertex.setComment("Der Knoten " + vertex.getId() + 
-					" wurde besucht. Der neue kürzeste Weg vom Startknoten aus ist: " +
-					vertex.getResult());
-			graph.updateState(vertex, State.VISIT);
+			IRestrictedEdge edge = graph.findEdge(startVertex, vertex);
+			graph.updateState(edge, State.ACTIVATION);
 			
-			startVertex.setComment("Der Knoten " + startVertex.getId() + 
-					" wird aktiviert.");
+			vertex.setComment("Der Knoten " + vertex.getId()
+					+ " wird aktiviert.");
+			graph.updateState(vertex, State.ACTIVATION);
+			
+			vertex.setResult(this.findMinEdge(graph, startVertex, vertex)
+					.getWeight());
+			vertex.setComment("Der Knoten " + vertex.getId()
+					+ " wurde als besucht markiert. "
+					+ "Der neue kürzeste Weg vom Startknoten aus ist: "
+					+ vertex.getResult());
+			graph.updateState(vertex, State.VISIT);
+
+			edge = graph.findEdge(startVertex, vertex);
+			graph.updateState(edge, State.ACTIVATION);
+			
+			startVertex.setComment("Der Knoten " + startVertex.getId()
+					+ " wird aktiviert.");
 			graph.updateState(startVertex, State.ACTIVATION);
 		}
 	}
-	
+
 	/**
 	 * @param graph
 	 * @param vertices
@@ -117,8 +131,8 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			Collection<? extends IRestrictedVertex> vertices,
 			IRestrictedVertex startVertex) {
 
-		PriorityQueue<IRestrictedVertex> prioQueue = new PriorityQueue<>(
-				vertices.size(), this.itemResultComparator);
+		MapBinaryHeap<IRestrictedVertex> prioQueue = new MapBinaryHeap<>(
+				this.vertexResultComparator);
 		prioQueue.addAll(vertices);
 
 		while (!prioQueue.isEmpty()) {
@@ -128,69 +142,46 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 
 			this.setSuccessorMessage(graph, selectedVertex);
 			selectedVertex.setDone(true);
-			graph.updateState(selectedVertex, State.SOLUTION);
-
 			if (this.updateEndVertexMessage(graph, startVertex, selectedVertex)) {
 				return;
 			}
-
-			this.updateAdjacentVertexDistances(graph, selectedVertex);
-
-			prioQueue = this.newPriorityQueue(vertices, prioQueue,
-					selectedVertex);
+			graph.updateState(selectedVertex, State.SOLUTION);
+			
+			this.updateAdjacentVertexDistances(graph, selectedVertex, prioQueue);
 		}
 	}
 
 	/**
 	 * @param graph
 	 * @param vertex
+	 * @param prioQueue
 	 */
 	private void updateAdjacentVertexDistances(IRestrictedGraph graph,
-			IRestrictedVertex vertex) {
+			IRestrictedVertex vertex, MapBinaryHeap<IRestrictedVertex> prioQueue) {
 
 		double newDistance = 0.0;
 		double oldDistance = 0.0;
 
-		for (IRestrictedVertex adjacentVertex : graph
-				.getSuccessors(vertex)) {
-			
+		for (IRestrictedVertex adjacentVertex : graph.getSuccessors(vertex)) {
+
 			if (!adjacentVertex.isDone()) {
 				graph.updateState(adjacentVertex, State.ACTIVATION);
 
 				newDistance = vertex.getPaintedResult()
-						+ graph.findEdge(vertex, adjacentVertex)
+						+ this.findMinEdge(graph, vertex, adjacentVertex)
 								.getWeight();
 				oldDistance = adjacentVertex.getPaintedResult();
 
-				adjacentVertex
-						.setResult(Math.min(newDistance, oldDistance));
+				adjacentVertex.setResult(Math.min(newDistance, oldDistance));
 				graph.updateState(adjacentVertex, State.VISIT);
-				
+
+				if (Double.compare(newDistance, oldDistance) != 0) {
+					prioQueue.update(adjacentVertex);
+				}
+
 				graph.updateState(vertex, State.ACTIVATION);
 			}
 		}
-	}
-
-	/**
-	 * @param vertices
-	 * @param prioQueue
-	 * @param selectedVertex
-	 * @return a new instance of PriorityQueue<IRestrictedVertex>
-	 */
-	private PriorityQueue<IRestrictedVertex> newPriorityQueue(
-			Collection<? extends IRestrictedVertex> vertices,
-			PriorityQueue<IRestrictedVertex> prioQueue,
-			IRestrictedVertex selectedVertex) {
-
-		vertices.remove(selectedVertex);
-
-		if (!vertices.isEmpty()) {
-			prioQueue = new PriorityQueue<>(vertices.size(),
-					this.itemResultComparator);
-			prioQueue.addAll(vertices);
-		}
-
-		return prioQueue;
 	}
 
 	/**
@@ -224,12 +215,48 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			IRestrictedVertex startVertex, IRestrictedVertex endVertex) {
 
 		if (endVertex.isEnd()) {
-			endVertex.setComment("Der kürzeste Weg von "
-					+ startVertex.getId() + " nach " + endVertex.getId()
-					+ " wurde gefunden.");
-			graph.updateState(endVertex, endVertex.getState());
+			endVertex.appendComment("Der kürzeste Weg von " + startVertex.getId()
+					+ " nach " + endVertex.getId() + " wurde gefunden.");
+			graph.updateState(endVertex, State.SOLUTION);
 			return true;
 		}
 		return false;
 	}
+
+	/**
+	 * @param graph
+	 * @param vertex1
+	 * @param vertex2
+	 * @return IRestrictedEdge
+	 */
+	private IRestrictedEdge findMinEdge(IRestrictedGraph graph,
+			IRestrictedVertex vertex1, IRestrictedVertex vertex2) {
+
+		Collection<? extends IRestrictedEdge> edgeSet = graph.findEdgeSet(
+				vertex1, vertex2);
+		IRestrictedEdge minEdge = graph.findEdge(vertex1, vertex2);
+
+		for (IRestrictedEdge edge : edgeSet) {
+			minEdge = edge.getWeight() < minEdge.getWeight() ? edge : minEdge;
+		}
+
+		return minEdge;
+	}
+
+	/**
+	 * @param edges
+	 * @throws AlgorithmException
+	 */
+	private void checkPositiveWeights(
+			Collection<? extends IRestrictedEdge> edges)
+			throws AlgorithmException {
+
+		for (IRestrictedEdge edge : edges) {
+			if (edge.getWeight() < 0) {
+				throw new AlgorithmException("Dijkstra algorithm: "
+						+ "Negative weights are not allowed!");
+			}
+		}
+	}
+
 }

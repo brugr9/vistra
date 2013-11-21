@@ -1,15 +1,18 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Paint;
+import java.awt.Stroke;
 import java.util.Observable;
 import java.util.Observer;
 
 import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeColorTransformer;
@@ -41,83 +44,115 @@ public class GravisVisualizationViewer extends
 		super(layout);
 
 		// TODO bitte an dieser Klasse nichts ändern (pk)
-		
+
 		// TODO preferredSize bitte nur auskommentieren und nicht löschen
 		this.setPreferredSize(new Dimension(1350, 430));
 		this.setBackground(Color.white);
-		
-		Transformer<IVertex, String> vertexLabelTransformer = 
-				new Transformer<IVertex, String>() {
+
+		Transformer<IVertex, String> vertexLabelTransformer = new Transformer<IVertex, String>() {
 			@Override
 			public String transform(IVertex vertex) {
-				return  vertex.getId() + (Double.isNaN(vertex.getPaintedResult()) ? "" : ": "
-						+ vertex.getPaintedResult());
+				return vertex.getId()
+						+ (Double.isNaN(vertex.getPaintedResult()) ? "" : ": "
+								+ vertex.getPaintedResult());
 			}
 		};
-		this.getRenderContext().setVertexLabelTransformer(vertexLabelTransformer);
+		this.getRenderContext().setVertexLabelTransformer(
+				vertexLabelTransformer);
+
+		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
+
+		this.getRenderContext().setVertexFillPaintTransformer(
+				new VertexColorTransformer());
+		this.getRenderContext().setVertexShapeTransformer(
+				new ShapeTransformer());
+
+		this.getRenderContext().setVertexStrokeTransformer(new Transformer<IVertex, Stroke>() {
+			@Override
+			public Stroke transform(IVertex vertex) {
+				// TODO Auto-generated method stub
+				
+				return new BasicStroke(vertex.getState() == State.ACTIVATION ? 1.0f : 1.0f);
+			}
+		});
 		
-		Transformer<IEdge, String> edgeLabelTransformer = 
-				new Transformer<IEdge, String>() {
+		Transformer<IEdge, String> edgeLabelTransformer = new Transformer<IEdge, String>() {
 			@Override
 			public String transform(IEdge edge) {
-				return  edge.getWeight() + (Double.isNaN(edge.getPaintedResult()) ? "" : "| "
+				return edge.getWeight()
+						+ (Double.isNaN(edge.getPaintedResult()) ? "" : "| "
 								+ edge.getPaintedResult());
 			}
 		};
 		this.getRenderContext().setEdgeLabelTransformer(edgeLabelTransformer);
-		
-		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
-		
-		this.getRenderContext().setVertexFillPaintTransformer(
-				new VertexColorTransformer());
-		this.getRenderContext().setVertexFillPaintTransformer(
-				new VertexColorTransformer());
-		this.getRenderContext().setEdgeDrawPaintTransformer(
-				new EdgeColorTransformer());
-		this.getRenderContext().setVertexShapeTransformer(new ShapeTransformer());
-		
-		Transformer<IVertex,String> vertexToolTipTransformer = 
-				new Transformer<IVertex,String>() {
-					@Override
-					public String transform(IVertex vertex) {
-						return vertex.getId();
-					}
+
+		Transformer<IVertex, String> vertexToolTipTransformer = new Transformer<IVertex, String>() {
+			@Override
+			public String transform(IVertex vertex) {
+				return vertex.getId();
+			}
 		};
 		this.setVertexToolTipTransformer(vertexToolTipTransformer);
-		
-		Transformer<IEdge,String> edgeToolTipTransformer = 
-				new Transformer<IEdge,String>() {
-					@Override
-					public String transform(IEdge edge) {
-						return edge.toString();
-					}
+
+		Transformer<IEdge, String> edgeToolTipTransformer = new Transformer<IEdge, String>() {
+			@Override
+			public String transform(IEdge edge) {
+				return edge.toString();
+			}
 		};
 		this.setEdgeToolTipTransformer(edgeToolTipTransformer);
-		
-		this.getRenderContext().setEdgeShapeTransformer(new EdgeShape.Line<IVertex,IEdge>());
-		
+
+		this.getRenderContext().setEdgeShapeTransformer(
+				new EdgeShape.Line<IVertex, IEdge>());
+
 		// centers edge label
 		this.getRenderContext().setEdgeLabelClosenessTransformer(
-				new ConstantDirectionalEdgeValueTransformer<IVertex,IEdge>(0.5, 0.5));
-		
-//		RenderContext<IVertex, IEdge> context = this.getRenderContext();
-//		context.setEdgeDrawPaintTransformer(new KeyframeGradientTransformer());
+				new ConstantDirectionalEdgeValueTransformer<IVertex, IEdge>(
+						0.5, 0.5));
+
+		 this.getRenderContext().setEdgeDrawPaintTransformer(
+		 new EdgeColorTransformer());
+		 
+//		this.getRenderContext().setEdgeFillPaintTransformer(
+//				new EdgeColorTransformer());
+
+		 this.getRenderContext().setEdgeStrokeTransformer(new Transformer<IEdge, Stroke>() {
+				@Override
+				public Stroke transform(IEdge input) {
+					// TODO Auto-generated method stub
+					return new BasicStroke(3.0f);
+				}
+			});
+		 
+		 this.getRenderContext().setArrowDrawPaintTransformer(new EdgeColorTransformer());
+		 this.getRenderContext().setEdgeArrowStrokeTransformer(new Transformer<IEdge, Stroke>() {
+				@Override
+				public Stroke transform(IEdge input) {
+					// TODO Auto-generated method stub
+					return new BasicStroke(3.0f);
+				}
+			});
+
+		// RenderContext<IVertex, IEdge> context = this.getRenderContext();
+		// context.setEdgeDrawPaintTransformer(new
+		// KeyframeGradientTransformer());
 
 	}
 
 	class KeyframeGradientTransformer implements Transformer<IEdge, Paint> {
-        @Override
-        public Paint transform(IEdge edge) {
-            // TODO: Here you would determine the gradient information
-            // based on the edge.getKeyframe().
-        	int x = 5;
-            int y = 7;
-            // fill RoundRectangle2D.Double
-            Paint gradient = new GradientPaint(x, y, Color.red, 200, y,  Color.blue);
-            return gradient;
-        }
+		@Override
+		public Paint transform(IEdge edge) {
+			// TODO: Here you would determine the gradient information
+			// based on the edge.getKeyframe().
+			int x = 5;
+			int y = 7;
+			// fill RoundRectangle2D.Double
+			Paint gradient = new GradientPaint(x, y, Color.red, 200, y,
+					Color.blue);
+			return gradient;
+		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -139,7 +174,7 @@ public class GravisVisualizationViewer extends
 				// TODO add dynamic layout
 				Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph,
 						new PointTransformer());
-				//layout.setSize(new Dimension(250, 350));
+				// layout.setSize(new Dimension(250, 350));
 				this.setGraphLayout(layout);
 			} catch (Exception e) {
 				// TODO Exception handling

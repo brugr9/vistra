@@ -1,5 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -14,7 +15,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
 public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm {
 
 	private int counter = 0;
-	
+
 	public AlgorithmBreadthFirstSearch() {
 		super();
 		super.setName("Breadth-first search (BFS)");
@@ -36,34 +37,58 @@ public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm {
 	public void execute(IRestrictedGraph graph) throws Exception {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
-		// TODO BFS with forest
-		
 		this.counter = 0;
 		Queue<IRestrictedVertex> vertexQueue = new LinkedList<>();
+		Collection<? extends IRestrictedVertex> vertices = graph.getVertices();
 		IRestrictedVertex startVertex = graph.getStartVertex();
-		
+
 		startVertex.setDone(true);
 		vertexQueue.offer(startVertex);
-		
-		while (!vertexQueue.isEmpty()) {
-			IRestrictedVertex selectedVertex = vertexQueue.poll();
-			
-			graph.updateState(selectedVertex, State.ACTIVATION);
-			
-			selectedVertex.setResult(++this.counter);
-			graph.updateState(selectedVertex, State.SOLUTION);
-			
-			for (IRestrictedVertex successor : graph.getSuccessors(selectedVertex)) {
-				if (!successor.isDone()) {
-					graph.updateState(successor, State.ACTIVATION);
-					
-					successor.setDone(true);
-					graph.updateState(successor, State.VISIT);
-					
-					vertexQueue.offer(successor);
+		vertices.remove(startVertex);
+
+		for (IRestrictedVertex rVertex : vertices) {
+			while (!vertexQueue.isEmpty()) {
+				IRestrictedVertex selectedVertex = vertexQueue.poll();
+
+				graph.updateState(selectedVertex, State.ACTIVATION);
+
+				selectedVertex.setResult(++this.counter);
+				if (this.updateEndVertexMessage(graph, selectedVertex)) {
+					return;
 				}
+				graph.updateState(selectedVertex, State.SOLUTION);
+
+				for (IRestrictedVertex successor : graph
+						.getSuccessors(selectedVertex)) {
+					if (!successor.isDone()) {
+						graph.updateState(successor, State.ACTIVATION);
+
+						successor.setDone(true);
+						graph.updateState(successor, State.VISIT);
+
+						vertexQueue.offer(successor);
+					}
+				}
+			}
+			
+			if (!rVertex.isDone()) {
+				vertexQueue.offer(rVertex);
 			}
 		}
 	}
 
+	/**
+	 * @param graph
+	 * @param endVertex
+	 */
+	private boolean updateEndVertexMessage(IRestrictedGraph graph,
+			IRestrictedVertex endVertex) {
+		if (endVertex.isEnd()) {
+			endVertex.appendComment("Der Endknoten " + endVertex.getId()
+					+ " wurde erreicht.");
+			graph.updateState(endVertex, State.SOLUTION);
+			return true;
+		}
+		return false;
+	}
 }

@@ -13,7 +13,8 @@ import edu.uci.ics.jung.graph.util.Pair;
  * 
  */
 // TODO add comments from Graph class in JUNG API doc
-public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem> {
+public interface IRestrictedGraph extends
+		IGraphItemUpdate<IRestrictedGraphItem> {
 
 	/**
 	 * 
@@ -56,7 +57,8 @@ public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem>
 	 * @param v2
 	 * @return Collection
 	 */
-	public Collection<? extends IRestrictedEdge> findEdgeSet(IRestrictedVertex v1, IRestrictedVertex v2);
+	public Collection<? extends IRestrictedEdge> findEdgeSet(
+			IRestrictedVertex v1, IRestrictedVertex v2);
 
 	/**
 	 * 
@@ -109,14 +111,16 @@ public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem>
 	 * @param vertex
 	 * @return Collection
 	 */
-	public Collection<? extends IRestrictedEdge> getIncidentEdges(IRestrictedVertex vertex);
+	public Collection<? extends IRestrictedEdge> getIncidentEdges(
+			IRestrictedVertex vertex);
 
 	/**
 	 * 
 	 * @param edge
 	 * @return Collection
 	 */
-	public Collection<? extends IRestrictedVertex> getIncidentVertices(IRestrictedEdge edge);
+	public Collection<? extends IRestrictedVertex> getIncidentVertices(
+			IRestrictedEdge edge);
 
 	/**
 	 * 
@@ -130,7 +134,8 @@ public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem>
 	 * @param vertex
 	 * @return Collection
 	 */
-	public Collection<? extends IRestrictedVertex> getNeighbors(IRestrictedVertex vertex);
+	public Collection<? extends IRestrictedVertex> getNeighbors(
+			IRestrictedVertex vertex);
 
 	/**
 	 * 
@@ -139,6 +144,7 @@ public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem>
 	public int getVertexCount();
 
 	/**
+	 * The first vertex in the collection is the start vertex.
 	 * 
 	 * @return Collection
 	 */
@@ -179,7 +185,8 @@ public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem>
 	 * @param vertex
 	 * @return Collection
 	 */
-	public Collection<? extends IRestrictedEdge> getInEdges(IRestrictedVertex vertex);
+	public Collection<? extends IRestrictedEdge> getInEdges(
+			IRestrictedVertex vertex);
 
 	/**
 	 * 
@@ -187,14 +194,16 @@ public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem>
 	 * @param edge
 	 * @return IRestrictedVertex
 	 */
-	public IRestrictedVertex getOpposite(IRestrictedVertex vertex, IRestrictedEdge edge);
+	public IRestrictedVertex getOpposite(IRestrictedVertex vertex,
+			IRestrictedEdge edge);
 
 	/**
 	 * 
 	 * @param vertex
 	 * @return Collection<IRestrictedEdge>
 	 */
-	public Collection<? extends IRestrictedEdge> getOutEdges(IRestrictedVertex vertex);
+	public Collection<? extends IRestrictedEdge> getOutEdges(
+			IRestrictedVertex vertex);
 
 	/**
 	 * 
@@ -208,7 +217,8 @@ public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem>
 	 * @param vertex
 	 * @return Collection
 	 */
-	public Collection<? extends IRestrictedVertex> getPredecessors(IRestrictedVertex vertex);
+	public Collection<? extends IRestrictedVertex> getPredecessors(
+			IRestrictedVertex vertex);
 
 	/**
 	 * 
@@ -229,7 +239,8 @@ public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem>
 	 * @param vertex
 	 * @return Collection
 	 */
-	public Collection<? extends IRestrictedVertex> getSuccessors(IRestrictedVertex vertex);
+	public Collection<? extends IRestrictedVertex> getSuccessors(
+			IRestrictedVertex vertex);
 
 	/**
 	 * 
@@ -282,5 +293,11 @@ public interface IRestrictedGraph extends IGraphItemUpdate<IRestrictedGraphItem>
 	 * @return IRestrictedVertex
 	 */
 	public IRestrictedVertex getStartVertex();
+	
+	/**
+	 * 
+	 * @return EdgeType
+	 */
+	public abstract EdgeType getEdgeType();
 
 }

@@ -61,7 +61,6 @@
 		<node id="D">
 			<data key="vertexLocation.x">150</data>
 			<data key="vertexLocation.y">200</data>
-			<data key="endVertex">true</data>
 		</node>
 		<node id="E">
 			<data key="vertexLocation.x">300</data>
@@ -78,7 +77,7 @@
 		<node id="H">
 			<data key="vertexLocation.x">350</data>
 			<data key="vertexLocation.y">150</data>
-			<data key="endVertex">true</data>
+		<!--	<data key="endVertex">true</data> -->
 		</node>
 		<node id="I">
 			<data key="vertexLocation.x">350</data>
@@ -98,7 +97,6 @@
 		</node>
 
 		<edge id="ab" source="A" target="B">
-			<!-- <data key="edgeColor">green</data> -->
 			<data key="weight">5.0</data>
 		</edge>
 		<edge id="bc" source="B" target="C"/>

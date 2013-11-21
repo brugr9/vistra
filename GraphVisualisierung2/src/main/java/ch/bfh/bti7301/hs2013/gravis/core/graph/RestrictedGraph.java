@@ -61,16 +61,18 @@ final class RestrictedGraph implements IRestrictedGraph {
 
 		// Adds restricted edge instances to the edges list
 		for (IEdge edge : coll) {
-			if (this.edgesMap.containsKey(edge)) {
-				edgesList.add(this.edgesMap.get(edge));
-			} else {
-				IRestrictedEdge restrictedEdge = EdgeFactory
-						.createRestrictedEdge(edge);
-				this.edgesMap.put(edge, restrictedEdge);
-				edgesList.add(restrictedEdge);
+			if (edge != null) {
+				if (this.edgesMap.containsKey(edge)) {
+					edgesList.add(this.edgesMap.get(edge));
+				} else {
+					IRestrictedEdge restrictedEdge = EdgeFactory
+							.createRestrictedEdge(edge);
+					this.edgesMap.put(edge, restrictedEdge);
+					edgesList.add(restrictedEdge);
+				}
 			}
 		}
-
+		
 		// Sorts the vertices in lexicographical id order
 		Collections.sort(edgesList, this.itemComparator);
 
@@ -87,13 +89,15 @@ final class RestrictedGraph implements IRestrictedGraph {
 
 		// Adds restricted vertex instances to the vertices list
 		for (IVertex vertex : coll) {
-			if (this.verticesMap.containsKey(vertex)) {
-				verticesList.add(this.verticesMap.get(vertex));
-			} else {
-				IRestrictedVertex restrictedVertex = VertexFactory
-						.createRestrictedVertex(vertex);
-				this.verticesMap.put(vertex, restrictedVertex);
-				verticesList.add(restrictedVertex);
+			if (vertex != null) {
+				if (this.verticesMap.containsKey(vertex)) {
+					verticesList.add(this.verticesMap.get(vertex));
+				} else {
+					IRestrictedVertex restrictedVertex = VertexFactory
+							.createRestrictedVertex(vertex);
+					this.verticesMap.put(vertex, restrictedVertex);
+					verticesList.add(restrictedVertex);
+				}
 			}
 		}
 
@@ -200,6 +204,7 @@ final class RestrictedGraph implements IRestrictedGraph {
 	@Override
 	public Collection<? extends IRestrictedEdge> findEdgeSet(
 			IRestrictedVertex v1, IRestrictedVertex v2) {
+		
 		return this.getRestrictedSortedEdgesList(this.observableGraph
 				.findEdgeSet(this.verticesMap.getKey(v1),
 						this.verticesMap.getKey(v2)));
@@ -621,6 +626,14 @@ final class RestrictedGraph implements IRestrictedGraph {
 		}
 
 		return this.verticesList.get(0);
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getEdgeType()
+	 */
+	@Override
+	public EdgeType getEdgeType() {
+		return this.observableGraph.getEdgeType();
 	}
 
 }

@@ -12,6 +12,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.EdgeWeightComparator;
 import ch.bfh.bti7301.hs2013.gravis.core.util.Partition;
+import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
 
 /**
@@ -21,7 +22,7 @@ import edu.uci.ics.jung.graph.util.Pair;
 public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 
 	private int counter = 0;
-	
+
 	public AlgorithmKruskalMinSpanningForest() {
 		super();
 		super.setName("Kruskal algorithm");
@@ -45,6 +46,9 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		this.counter = 0;
+
+		this.checkEdgeType(graph);
+
 		Map<IRestrictedVertex, Partition<IRestrictedVertex>> partitionMap = new HashedMap<>();
 		Collection<? extends IRestrictedVertex> vertices = graph.getVertices();
 		PriorityQueue<IRestrictedEdge> prioQueue = new PriorityQueue<>(
@@ -52,48 +56,63 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 
 		for (IRestrictedVertex vertex : vertices) {
 			partitionMap.put(vertex, Partition.singleton(vertex));
-			
-//			this.updateState(graph, vertex, State.ACTIVATION);
+
+			// this.updateState(graph, vertex, State.ACTIVATION);
 		}
-		
-//		if (vertices.iterator().hasNext()) {
-//			this.updateState(graph, vertices.iterator().next(),
-//					State.ACTIVATION);
-//		}
-		
+
+		// if (vertices.iterator().hasNext()) {
+		// this.updateState(graph, vertices.iterator().next(),
+		// State.ACTIVATION);
+		// }
+
 		prioQueue.addAll(graph.getEdges());
-		
+
 		while (!prioQueue.isEmpty()) {
 			IRestrictedEdge selectedEdge = prioQueue.poll();
 			Pair<? extends IRestrictedVertex> pair = graph
 					.getEndpoints(selectedEdge);
-			
+
 			graph.updateState(selectedEdge, State.ACTIVATION);
-			
-			if (!partitionMap.get(pair.getFirst()).find().equals(
-					partitionMap.get(pair.getSecond()).find())) {
-				
+
+			if (!partitionMap.get(pair.getFirst()).find()
+					.equals(partitionMap.get(pair.getSecond()).find())) {
+
 				selectedEdge.setResult(++this.counter);
-				selectedEdge.setComment("Die Kante " + selectedEdge.getId() + 
-						" wird zur Lösung hinzugefügt.");
+				selectedEdge.setComment("Die Kante " + selectedEdge.getId()
+						+ " wird zur Lösung hinzugefügt.");
 				graph.updateState(selectedEdge, State.SOLUTION);
-				
+
 				if (!pair.getFirst().isDone()) {
 					pair.getFirst().setDone(true);
 					graph.updateState(pair.getFirst(), State.SOLUTION);
 				}
-				
+
 				if (!pair.getSecond().isDone()) {
 					pair.getSecond().setDone(true);
 					graph.updateState(pair.getSecond(), State.SOLUTION);
 				}
-				
-				partitionMap.get(pair.getFirst()).merge(partitionMap.get(pair.getSecond()));
+
+				partitionMap.get(pair.getFirst()).merge(
+						partitionMap.get(pair.getSecond()));
 			} else {
 				graph.updateState(selectedEdge, State.VISIT);
 			}
-			
+
 		}
+	}
+
+	/**
+	 * @param graph
+	 * @throws AlgorithmException
+	 */
+	private void checkEdgeType(IRestrictedGraph graph)
+			throws AlgorithmException {
+		
+			if (graph.getEdgeType() == EdgeType.DIRECTED) {
+			throw new AlgorithmException(
+					"Kruskal algorithm: DIRECTED edges are not allowed!");
+		}
+
 	}
 
 }
