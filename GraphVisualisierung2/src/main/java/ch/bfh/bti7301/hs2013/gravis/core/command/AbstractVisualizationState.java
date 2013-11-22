@@ -11,14 +11,14 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-abstract class AbstractAnimationState implements IAnimationState {
+abstract class AbstractVisualizationState implements IVisualizationState {
 
 	private final static float VERTEX_STROKE_WIDTH = 3.0f;
 
 	private final static float EDGE_STROKE_WIDTH = 4.0f;
 	
 	protected final static float DEFAULT_STROKE_WIDTH = 1.0f;
-
+	
 	protected final Color stateColor;
 
 	protected final TraversalChangeListener changeListener;
@@ -33,7 +33,7 @@ abstract class AbstractAnimationState implements IAnimationState {
 	 * @param graphItemHistory
 	 * @param changeListener
 	 */
-	protected AbstractAnimationState(Color color,
+	protected AbstractVisualizationState(Color color,
 			List<IGraphItem> graphItemHistory,
 			TraversalChangeListener changeListener) {
 		this.stateColor = color;

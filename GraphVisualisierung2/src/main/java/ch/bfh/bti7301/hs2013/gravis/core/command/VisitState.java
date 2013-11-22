@@ -10,7 +10,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class VisitState extends AbstractGenericAnimationState {
+class VisitState extends AbstractCommonVisualizationState {
 
 	/**
 	 * @param graphItemHistory

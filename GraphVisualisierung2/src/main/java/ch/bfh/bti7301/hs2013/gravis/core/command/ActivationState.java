@@ -4,14 +4,13 @@ import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class ActivationState extends AbstractAnimationState {
+class ActivationState extends AbstractVisualizationState {
 
 	/**
 	 * 
@@ -27,12 +26,12 @@ class ActivationState extends AbstractAnimationState {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.IAnimationState#createCommand
-	 * (ch.bfh.bti7301.hs2013.gravis.core.command.IAnimationState,
+	 * ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#createCommand
+	 * (ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem)
 	 */
 	@Override
-	public ICommand createCommand(IAnimationState oldState,
+	public ICommand createCommand(IVisualizationState oldState,
 			IGraphItem currentItem) {
 		ComplexCommand complexCommand = new ComplexCommand(
 				oldState.getPredecessorCommand());
