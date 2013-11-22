@@ -85,7 +85,7 @@ public class OldMainWindowListener extends Observable implements
 		if (e.getActionCommand().equals(BACKWARD_ANIMATION.toString())) {
 			try {
 				System.out.println(this.gravisCore.goBackward());
-				// System.out.println("goBackward");
+//				System.out.println("goBackward");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -105,7 +105,7 @@ public class OldMainWindowListener extends Observable implements
 			try {
 				System.out.println(this.gravisCore.goForward());
 				
-				// System.out.println("goForward");
+//				System.out.println("goForward");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -124,6 +124,7 @@ public class OldMainWindowListener extends Observable implements
 
 			try {
 				System.out.println(this.gravisCore.goToEnd());
+//				System.out.println("goEnd");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -142,6 +143,7 @@ public class OldMainWindowListener extends Observable implements
 
 			try {
 				System.out.println(this.gravisCore.goToBeginning());
+//				System.out.println("goBeginning");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

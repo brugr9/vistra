@@ -154,14 +154,6 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#hasNoComment()
-	 */
-	@Override
-	public boolean hasNoComment() {
-		return this.comment.length() == 0;
-	}
-
-	/* (non-Javadoc)
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#appendComment(java.lang.String)
 	 */
 	@Override

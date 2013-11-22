@@ -31,9 +31,11 @@ class CommandTransformer implements Transformer<IGraphItem, IStep> {
 	 */
 	protected CommandTransformer(List<IGraphItem> graphItemHistory) {
 		this.states = new HashedMap<>();
-		this.states.put(State.INITIAL.toString() + V_SUFFIX, new InitialState(GravisColor.RED,
+		this.states.put(State.INITIAL.toString() + V_SUFFIX, new 
+				InitialVertexState(GravisColor.RED,
 				graphItemHistory));
-		this.states.put(State.INITIAL.toString() + E_SUFFIX, new InitialState(GravisColor.BLACK,
+		this.states.put(State.INITIAL.toString() + E_SUFFIX, new 
+				InitialEdgeState(GravisColor.BLACK,
 				graphItemHistory));
 		this.states.put(State.ACTIVATION.toString(), new ActivationState(
 				graphItemHistory));

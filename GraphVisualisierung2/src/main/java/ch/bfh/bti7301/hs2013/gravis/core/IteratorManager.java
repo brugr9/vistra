@@ -41,13 +41,13 @@ class IteratorManager implements IIteratorManager {
 		try {
 			StringBuilder stringBuilder = new StringBuilder();
 			String stepString = "";
-			
-			do {
-				stepString = this.goForward();
-				stringBuilder.append(stepString);
-			} while (!stepString.isEmpty());
-			
-			return stringBuilder.toString();
+
+			while (this.graphIterator.hasPrevious()) {
+				stepString = this.goBackward();
+				stringBuilder.append(stepString + System.lineSeparator());
+			}
+
+			return stringBuilder.toString().trim();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -65,13 +65,13 @@ class IteratorManager implements IIteratorManager {
 		try {
 			StringBuilder stringBuilder = new StringBuilder();
 			String stepString = "";
-			
-			do {
-				stepString = this.goBackward();
-				stringBuilder.append(stepString);
-			} while (!stepString.isEmpty());
-			
-			return stringBuilder.toString();
+
+			while (this.graphIterator.hasNext()) {
+				stepString = this.goForward();
+				stringBuilder.append(stepString + System.lineSeparator());
+			}
+
+			return stringBuilder.toString().trim();
 		} catch (Exception e) {
 			throw e;
 		}

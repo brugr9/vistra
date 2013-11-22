@@ -41,11 +41,6 @@ public interface IGraphItem extends IRestrictedGraphItem, Cloneable {
 	public abstract boolean hasNoResult();
 
 	/**
-	 * @return boolean
-	 */
-	public abstract boolean hasNoComment();
-	
-	/**
 	 * 
 	 * @param state
 	 */

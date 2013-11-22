@@ -46,6 +46,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		// TODO visualize edges
 		// TODO bei Min-Auswahl: alle Auswahlmöglichkeiten fett marieren
 		// TODO set comments in calculateDistances()
+		// TODO falls kein start vertex, wähle default start
 
 		this.checkPositiveWeights(graph.getEdges());
 

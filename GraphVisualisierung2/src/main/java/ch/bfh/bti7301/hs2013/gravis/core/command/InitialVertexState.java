@@ -1,23 +1,22 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
+import java.awt.Color;
 import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class SolutionState extends AbstractCommonVisualizationState {
+class InitialVertexState extends AbstractCommonVisualizationState {
 
 	/**
 	 * @param graphItemHistory
-	 * @param changeListener
+	 * @param color
 	 */
-	protected SolutionState(List<IGraphItem> graphItemHistory) {
-		super(GravisColor.GREEN, graphItemHistory);
+	protected InitialVertexState(Color color, List<IGraphItem> graphItemHistory) {
+		super(color, graphItemHistory);
 	}
 
 	/*
@@ -29,13 +28,8 @@ class SolutionState extends AbstractCommonVisualizationState {
 	 */
 	@Override
 	public String stateDoMessage(IGraphItem currentItem) {
-		if (currentItem instanceof IVertex) {
-			return "Der Knoten " + currentItem.getId()
-					+ " wurde zur Lösung hinzugefügt.";
-		}
-		
-		return "Die Kante " + currentItem.getId()
-				+ " wurde zur Lösung hinzugefügt.";
+		return "Der Knoten " + currentItem.getId()
+				+ " wurde in den Anfangszustand versetzt.";
 	}
 
 	/*
@@ -47,11 +41,8 @@ class SolutionState extends AbstractCommonVisualizationState {
 	 */
 	@Override
 	public String stateUndoMessage(IGraphItem currentItem) {
-		if (currentItem instanceof IVertex) {
-			return "Der Knoten " + currentItem.getId()
-					+ " gehört nicht mehr zur Lösung.";
-		}
-		return "Die Kante " + currentItem.getId()
-				+ " gehört nicht mehr zur Lösung.";
+		return "Der Knoten " + currentItem.getId()
+				+ " befindet sich nicht mehr im  Anfangszustand.";
 	}
+
 }

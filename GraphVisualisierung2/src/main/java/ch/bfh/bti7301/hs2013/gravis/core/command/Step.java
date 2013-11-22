@@ -35,14 +35,14 @@ class Step extends EmptyStep {
 		String commandComment = "";
 		
 		for (IStep command : this.nestedCommands) {
-			commandComment = command.execute();
+			commandComment = command.execute().trim();
 			
 			if (!commandComment.isEmpty()) {
 				totalComment.append(commandComment + System.lineSeparator());
 			}
 		}
 		
-		return totalComment.toString();
+		return totalComment.toString().trim();
 	}
 
 	/*
@@ -56,14 +56,14 @@ class Step extends EmptyStep {
 		String commandComment = "";
 		
 		for (int i = this.nestedCommands.size() - 1; i >= 0; i--) {
-			commandComment = this.nestedCommands.get(i).unExecute();
+			commandComment = this.nestedCommands.get(i).unExecute().trim();
 			
 			if (!commandComment.isEmpty()) {
 				totalComment.append(commandComment + System.lineSeparator());
 			}
 		}
 		
-		return totalComment.toString();
+		return totalComment.toString().trim();
 	}
 
 	/**

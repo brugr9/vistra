@@ -36,7 +36,7 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 		this.stateColor = color;
 		this.graphItemHistory = graphItemHistory;
 
-		// Null Object
+		// null object
 		this.predecessorCommand = new EmptyStep();
 		// default graph item
 		this.oldGraphItemClone = new VertexFactory().create();
@@ -81,12 +81,16 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	protected void addVisualizationCommands(IGraphItem currentItem,
 			Step complexCommand) {
 
+		complexCommand.add(new CommentCommand(currentItem, this
+				.stateUndoMessage(currentItem), this
+				.stateDoMessage(currentItem)));
+
 		if (!currentItem.hasNoResult()) {
 			complexCommand.add(new ResultCommand(currentItem, currentItem
 					.getPaintedResult(), currentItem.getResult()));
 		}
 
-		if (!currentItem.hasNoComment()) {
+		if (!currentItem.getComment().isEmpty()) {
 			complexCommand.add(new CommentCommand(currentItem, currentItem
 					.getInfo(), currentItem.getComment()));
 		}
@@ -120,4 +124,18 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 				&& currentItem == this.graphItemHistory
 						.get(this.graphItemHistory.size() - 1);
 	}
+
+	/**
+	 * 
+	 * @param currentItem
+	 * @return stateDoMessage
+	 */
+	public abstract String stateDoMessage(IGraphItem currentItem);
+
+	/**
+	 * 
+	 * @param currentItem
+	 * @return stateUndoMessage
+	 */
+	public abstract String stateUndoMessage(IGraphItem currentItem);
 }

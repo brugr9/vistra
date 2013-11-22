@@ -34,8 +34,12 @@ class CommentCommand extends EmptyStep {
 	 */
 	@Override
 	public String execute() {
-		this.item.setInfo(this.newComment);
-		return this.item.getInfo();
+		if (!this.newComment.trim().isEmpty()) {
+			this.item.setInfo(this.newComment.trim());
+			return this.item.getInfo();
+		} else {
+			return "";
+		}
 	}
 
 	/*
@@ -45,17 +49,12 @@ class CommentCommand extends EmptyStep {
 	 */
 	@Override
 	public String unExecute() {
-		String comment = "";
-		
-		if (!this.item.getInfo().isEmpty()) {
-			// TODO bitte an dieser Methode nichts ändern (pk)
-			// TODO set message for undo
-			comment = "Zurücksetzen: " + this.item.getInfo();
+		if (!this.oldComment.trim().isEmpty()) {
+			this.item.setInfo(this.oldComment.trim());
+			return this.item.getInfo();
+		} else {
+			return "";
 		}
-
-		this.item.setInfo(this.oldComment);
-		
-		return comment;
 	}
 
 }
