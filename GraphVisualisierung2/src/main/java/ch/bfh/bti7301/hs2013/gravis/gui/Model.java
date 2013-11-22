@@ -18,7 +18,7 @@ public final class Model extends Observable {
 
 	// gravis
 	private IGravisGraph graph;
-	// private IGravisListIterator<ICommand> traversal;
+	// private IGravisListIterator<IStep> traversal;
 
 	// i18n
 	private String i18nBaseName;

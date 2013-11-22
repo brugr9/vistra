@@ -203,9 +203,9 @@ public final class OldApplicationFactory {
 	//
 	// /**
 	// * @param graphItem
-	// * @returna new instance of type ICommand
+	// * @returna new instance of type IStep
 	// */
-	// public static ICommand createCommand(IGraphItem graphItem) {
+	// public static IStep createCommand(IGraphItem graphItem) {
 	// return new GravisCommand(graphItem);
 	// }
 	//
@@ -214,7 +214,7 @@ public final class OldApplicationFactory {
 	// * @return a new instance of type GraphEventListener<IVertex, IEdge>
 	// */
 	// public static GraphEventListener<IVertex, IEdge> createCommandCreator(
-	// List<ICommand> traverserList) {
+	// List<IStep> traverserList) {
 	// return new CommandCreator(traverserList);
 	// }
 	//
@@ -224,7 +224,7 @@ public final class OldApplicationFactory {
 	// * @return a new instance of type ITraverserCollection
 	// */
 	// public static ITraverserCollection
-	// createTraverserCollection(List<ICommand> list) {
+	// createTraverserCollection(List<IStep> list) {
 	// return new TraverserCollection(list);
 	// }
 

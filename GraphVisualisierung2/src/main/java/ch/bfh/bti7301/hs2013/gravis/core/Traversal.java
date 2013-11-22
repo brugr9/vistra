@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
+import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
@@ -24,7 +24,6 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
  */
 class Traversal implements ITraversal {
 
-	// TODO read string from property file
 	private final static String SUCCESS_MESSAGE = "Die Durchführung der Traversierung "
 			+ "wurde erfolgreich abgeschlossen!";
 	
@@ -110,12 +109,12 @@ class Traversal implements ITraversal {
 	 * .bfh.bti7301.hs2013.gravis.core.TraversalChangeListener)
 	 */
 	@Override
-	public IGravisListIterator<ICommand> execute(TraversalChangeListener changeListener)
+	public IGravisListIterator<IStep> execute(TraversalChangeListener changeListener)
 			throws Exception {
 		try {
-			List<ICommand> commandList = new ArrayList<>();
+			List<IStep> commandList = new ArrayList<>();
 			GraphEventListener<IVertex, IEdge> graphEventListener = 
-					createGravisGraphEventListener(commandList, changeListener);
+					createGravisGraphEventListener(commandList);
 			
 			IObservableGravisGraph observableGraph = createObservableGraph(this.graph);
 			observableGraph.addGraphEventListener(graphEventListener);
@@ -128,7 +127,7 @@ class Traversal implements ITraversal {
 				commandList.get(i).unExecute();
 			}
 			
-			IGravisListIterator<ICommand> listIterator = createGravisListIterator(
+			IGravisListIterator<IStep> listIterator = createGravisListIterator(
 					commandList);
 			
 			changeListener.stateChanged(CoreFactory.createTraversalChangeEvent(

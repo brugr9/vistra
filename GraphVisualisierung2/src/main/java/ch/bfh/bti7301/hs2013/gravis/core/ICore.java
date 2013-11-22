@@ -102,15 +102,17 @@ public interface ICore {
 
 	/**
 	 * 
+	 * @return String
 	 * @throws Exception
 	 */
-	public abstract void goToBeginning() throws Exception;
+	public abstract String goToBeginning() throws Exception;
 
 	/**
 	 * 
+	 * @return String
 	 * @throws Exception
 	 */
-	public abstract void goToEnd() throws Exception;
+	public abstract String goToEnd() throws Exception;
 
 	/**
 	 * 
@@ -118,7 +120,7 @@ public interface ICore {
 	 *         reach in direction forward after this operation
 	 * @throws Exception
 	 */
-	public abstract boolean goForward() throws Exception;
+	public abstract String goForward() throws Exception;
 
 	/**
 	 * 
@@ -126,7 +128,7 @@ public interface ICore {
 	 *         reach in direction backward after this operation
 	 * @throws Exception
 	 */
-	public abstract boolean goBackward() throws Exception;
+	public abstract String goBackward() throws Exception;
 
 	/**
 	 * Removes all vertices and edges from the graph with the given id and

@@ -3,7 +3,6 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 import java.awt.Color;
 import java.util.List;
 
-import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
@@ -20,11 +19,9 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 
 	protected final Color stateColor;
 
-	protected final TraversalChangeListener changeListener;
-
 	protected final List<IGraphItem> graphItemHistory;
 
-	private ICommand predecessorCommand;
+	private IStep predecessorCommand;
 
 	private IGraphItem oldGraphItemClone;
 
@@ -32,24 +29,21 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	 * 
 	 * @param color
 	 * @param graphItemHistory
-	 * @param changeListener
 	 */
 	protected AbstractVisualizationState(Color color,
-			List<IGraphItem> graphItemHistory,
-			TraversalChangeListener changeListener) {
+			List<IGraphItem> graphItemHistory) {
 
 		this.stateColor = color;
 		this.graphItemHistory = graphItemHistory;
-		this.changeListener = changeListener;
 
 		// Null Object
-		this.predecessorCommand = new EmptyCommand();
+		this.predecessorCommand = new EmptyStep();
 		// default graph item
 		this.oldGraphItemClone = new VertexFactory().create();
 	}
 
 	@Override
-	public ICommand getPredecessorCommand() {
+	public IStep getPredecessorCommand() {
 		return this.predecessorCommand;
 	}
 
@@ -57,7 +51,7 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	 * @param predecessorCommand
 	 *            the predecessorCommand to set
 	 */
-	protected void setPredecessorCommand(ICommand predecessorCommand) {
+	protected void setPredecessorCommand(IStep predecessorCommand) {
 		this.predecessorCommand = predecessorCommand;
 	}
 
@@ -85,7 +79,7 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	 * @param complexCommand
 	 */
 	protected void addVisualizationCommands(IGraphItem currentItem,
-			ComplexCommand complexCommand) {
+			Step complexCommand) {
 
 		if (!currentItem.hasNoResult()) {
 			complexCommand.add(new ResultCommand(currentItem, currentItem
@@ -94,7 +88,7 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 
 		if (!currentItem.hasNoComment()) {
 			complexCommand.add(new CommentCommand(currentItem, currentItem
-					.getInfo(), currentItem.getComment(), this.changeListener));
+					.getInfo(), currentItem.getComment()));
 		}
 	}
 

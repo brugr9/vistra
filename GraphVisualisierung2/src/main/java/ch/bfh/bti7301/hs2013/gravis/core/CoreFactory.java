@@ -7,7 +7,7 @@ import java.util.Properties;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.AlgorithmFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithmManager;
-import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
+import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
@@ -98,10 +98,10 @@ public final class CoreFactory {
 	 * @return a new instance of type IGravisListIterator
 	 * @throws Exception
 	 */
-	private static IGravisListIterator<ICommand> createListIterator()
+	private static IGravisListIterator<IStep> createListIterator()
 			throws Exception {
 		try {
-			return new GravisListIterator<ICommand>();
+			return new GravisListIterator<IStep>();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -113,7 +113,7 @@ public final class CoreFactory {
 	 * @throws Exception
 	 */
 	private static IIteratorManager createIteratorManager(
-			IGravisListIterator<ICommand> listIterator) throws Exception {
+			IGravisListIterator<IStep> listIterator) throws Exception {
 		try {
 			return new IteratorManager(listIterator);
 		} catch (Exception e) {
@@ -127,10 +127,10 @@ public final class CoreFactory {
 	 * @return a new instance of type IGravisListIterator
 	 * @throws Exception
 	 */
-	public static IGravisListIterator<ICommand> createGravisListIterator(
-			List<ICommand> list) throws Exception {
+	public static IGravisListIterator<IStep> createGravisListIterator(
+			List<IStep> list) throws Exception {
 		try {
-			return new GravisListIterator<ICommand>(list);
+			return new GravisListIterator<IStep>(list);
 		} catch (Exception e) {
 			throw e;
 		}

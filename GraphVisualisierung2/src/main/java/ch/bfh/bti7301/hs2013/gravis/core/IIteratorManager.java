@@ -1,6 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core;
 
-import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
+import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -11,15 +11,17 @@ public interface IIteratorManager {
 
 	/**
 	 * 
+	 * @return String
 	 * @throws Exception
 	 */
-	public abstract void goToBeginning() throws Exception;
+	public abstract String goToBeginning() throws Exception;
 
 	/**
 	 * 
+	 * @return String
 	 * @throws Exception
 	 */
-	public abstract void goToEnd() throws Exception;
+	public abstract String goToEnd() throws Exception;
 
 	/**
 	 * 
@@ -27,7 +29,7 @@ public interface IIteratorManager {
 	 *         reach in direction forward after this operation
 	 * @throws Exception
 	 */
-	public abstract boolean goForward() throws Exception;
+	public abstract String goForward() throws Exception;
 
 	/**
 	 * 
@@ -35,7 +37,7 @@ public interface IIteratorManager {
 	 *         reach in direction backward after this operation
 	 * @throws Exception
 	 */
-	public abstract boolean goBackward() throws Exception;
+	public abstract String goBackward() throws Exception;
 
 	/**
 	 * 
@@ -43,7 +45,7 @@ public interface IIteratorManager {
 	 * @throws Exception
 	 */
 	public abstract void setListIterator(
-			IGravisListIterator<ICommand> listIterator) throws Exception;
+			IGravisListIterator<IStep> listIterator) throws Exception;
 
 	/**
 	 * @return int

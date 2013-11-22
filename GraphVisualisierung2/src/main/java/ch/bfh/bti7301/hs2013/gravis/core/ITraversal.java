@@ -1,7 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core;
 
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
+import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 
 /**
@@ -18,7 +18,7 @@ public interface ITraversal {
 	 * @return the list of commands
 	 * @throws Exception
 	 */
-	public abstract IGravisListIterator<ICommand> execute(
+	public abstract IGravisListIterator<IStep> execute(
 			TraversalChangeListener graphItemStateChangeListener) throws Exception;
 
 	/**

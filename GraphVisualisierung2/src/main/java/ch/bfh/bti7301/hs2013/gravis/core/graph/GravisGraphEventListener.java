@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.collections15.Transformer;
 
-import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
+import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
@@ -17,11 +17,11 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
  */
 class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 
-	private final List<ICommand> commandList;
+	private final List<IStep> commandList;
 	
 	private final List<IGraphItem> graphItemHistory;
 
-	private final Transformer<IGraphItem, ICommand> commandTransformer;
+	private final Transformer<IGraphItem, IStep> commandTransformer;
 
 	/**
 	 * 
@@ -29,9 +29,9 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 	 * @param graphItemHistory
 	 * @param commandTransformer
 	 */
-	protected GravisGraphEventListener(List<ICommand> commandList, 
+	protected GravisGraphEventListener(List<IStep> commandList, 
 			List<IGraphItem> graphItemHistory, 
-			Transformer<IGraphItem, ICommand> commandTransformer) {
+			Transformer<IGraphItem, IStep> commandTransformer) {
 		
 		this.commandList = commandList;
 		this.graphItemHistory = graphItemHistory;
@@ -50,7 +50,7 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 		if (evt instanceof GravisGraphEvent) {
 			IGraphItem currentItem = ((GravisGraphEvent) evt).getIGraphItem();
 
-			ICommand command = this.commandTransformer.transform(currentItem);
+			IStep command = this.commandTransformer.transform(currentItem);
 			command.execute();
 			
 			this.graphItemHistory.add(currentItem);

@@ -11,15 +11,15 @@ public interface IVisualizationState {
 	/**
 	 * @param oldState
 	 * @param currentItem
-	 * @return ICommand
+	 * @return IStep
 	 */
-	public abstract ICommand createCommand(IVisualizationState oldState,
+	public abstract IStep createCommand(IVisualizationState oldState,
 			IGraphItem currentItem);
 
 	/**
-	 * @return ICommand
+	 * @return IStep
 	 */
-	public abstract ICommand getPredecessorCommand();
+	public abstract IStep getPredecessorCommand();
 	
 	/**
 	 * @return old graph item clone

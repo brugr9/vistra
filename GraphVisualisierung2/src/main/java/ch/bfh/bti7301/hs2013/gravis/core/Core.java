@@ -215,9 +215,9 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#goToBeginning()
 	 */
 	@Override
-	public void goToBeginning() throws Exception {
+	public String goToBeginning() throws Exception {
 		try {
-			this.iteratorManager.goToBeginning();
+			return this.iteratorManager.goToBeginning();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -229,9 +229,9 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#goToEnd()
 	 */
 	@Override
-	public void goToEnd() throws Exception {
+	public String goToEnd() throws Exception {
 		try {
-			this.iteratorManager.goToEnd();
+			return this.iteratorManager.goToEnd();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -243,7 +243,7 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#goForward()
 	 */
 	@Override
-	public boolean goForward() throws Exception {
+	public String goForward() throws Exception {
 		try {
 			return this.iteratorManager.goForward();
 		} catch (Exception e) {
@@ -257,7 +257,7 @@ class Core implements ICore {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#goBackward()
 	 */
 	@Override
-	public boolean goBackward() throws Exception {
+	public String goBackward() throws Exception {
 		try {
 			return this.iteratorManager.goBackward();
 		} catch (Exception e) {

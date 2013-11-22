@@ -14,7 +14,7 @@ import org.apache.commons.collections15.Transformer;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.command.CommandTransformerFactory;
-import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
+import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
@@ -119,14 +119,13 @@ public final class GraphFactory {
 	/**
 	 * 
 	 * @param commandList
-	 * @param changeListener
 	 * @return a new instance of type GraphEventListener<IVertex, IEdge>
 	 */
 	public static GraphEventListener<IVertex, IEdge> createGravisGraphEventListener(
-			List<ICommand> commandList, TraversalChangeListener changeListener) {
+			List<IStep> commandList) {
 		List<IGraphItem> graphItemHistory = new ArrayList<>();
-		Transformer<IGraphItem, ICommand> commandTransformer = CommandTransformerFactory
-				.createCommandTransformer(graphItemHistory, changeListener);
+		Transformer<IGraphItem, IStep> commandTransformer = CommandTransformerFactory
+				.createCommandTransformer(graphItemHistory);
 		
 		return new GravisGraphEventListener(commandList, graphItemHistory,
 				commandTransformer);

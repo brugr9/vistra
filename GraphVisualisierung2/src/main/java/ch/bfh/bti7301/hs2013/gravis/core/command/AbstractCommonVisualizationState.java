@@ -3,7 +3,6 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 import java.awt.Color;
 import java.util.List;
 
-import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 
 /**
@@ -15,12 +14,10 @@ abstract class AbstractCommonVisualizationState extends
 
 	/**
 	 * @param stateColor
-	 * @param changeListener
 	 */
 	protected AbstractCommonVisualizationState(Color stateColor,
-			List<IGraphItem> graphItemHistory,
-			TraversalChangeListener changeListener) {
-		super(stateColor, graphItemHistory, changeListener);
+			List<IGraphItem> graphItemHistory) {
+		super(stateColor, graphItemHistory);
 	}
 
 	/*
@@ -32,10 +29,10 @@ abstract class AbstractCommonVisualizationState extends
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem)
 	 */
 	@Override
-	public ICommand createCommand(IVisualizationState oldState,
+	public IStep createCommand(IVisualizationState oldState,
 			IGraphItem currentItem) {
 
-		ComplexCommand complexCommand = new ComplexCommand(
+		Step complexCommand = new Step(
 				oldState.getPredecessorCommand());
 		IGraphItem graphReference = this.checkOldObject(oldState.getOldGraphItemClone(), 
 				currentItem);
@@ -48,7 +45,7 @@ abstract class AbstractCommonVisualizationState extends
 		
 		this.addVisualizationCommands(currentItem, complexCommand);
 		
-		this.setPredecessorCommand(new ComplexCommand(new StrokeWidthCommand(
+		this.setPredecessorCommand(new Step(new StrokeWidthCommand(
 				currentItem, this.getItemStrokeWidth(graphReference),
 				graphReference.getStrokeWidth())));
 		

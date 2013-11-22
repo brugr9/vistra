@@ -1,6 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core;
 
-import ch.bfh.bti7301.hs2013.gravis.core.command.ICommand;
+import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -11,12 +11,12 @@ class IteratorManager implements IIteratorManager {
 	/**
 	 * A field for a graph iterator.
 	 */
-	private IGravisListIterator<ICommand> graphIterator;
+	private IGravisListIterator<IStep> graphIterator;
 
 	/**
 	 * A field for a current command.
 	 */
-	private ICommand currentCommand;
+	private IStep currentCommand;
 
 	/**
 	 * Main constructor.
@@ -24,7 +24,7 @@ class IteratorManager implements IIteratorManager {
 	 * @param graphIterator
 	 * 
 	 */
-	protected IteratorManager(IGravisListIterator<ICommand> graphIterator) {
+	protected IteratorManager(IGravisListIterator<IStep> graphIterator) {
 		this.graphIterator = graphIterator;
 		this.currentCommand = null;
 
@@ -37,10 +37,17 @@ class IteratorManager implements IIteratorManager {
 	 * goToBeginning ()
 	 */
 	@Override
-	public void goToBeginning() throws Exception {
+	public String goToBeginning() throws Exception {
 		try {
-			while (this.goBackward())
-				;
+			StringBuilder stringBuilder = new StringBuilder();
+			String stepString = "";
+			
+			do {
+				stepString = this.goForward();
+				stringBuilder.append(stepString);
+			} while (!stepString.isEmpty());
+			
+			return stringBuilder.toString();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -54,10 +61,17 @@ class IteratorManager implements IIteratorManager {
 	 * ()
 	 */
 	@Override
-	public void goToEnd() throws Exception {
+	public String goToEnd() throws Exception {
 		try {
-			while (this.goForward())
-				;
+			StringBuilder stringBuilder = new StringBuilder();
+			String stepString = "";
+			
+			do {
+				stepString = this.goBackward();
+				stringBuilder.append(stepString);
+			} while (!stepString.isEmpty());
+			
+			return stringBuilder.toString();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -71,14 +85,13 @@ class IteratorManager implements IIteratorManager {
 	 * ()
 	 */
 	@Override
-	public boolean goForward() throws Exception {
+	public String goForward() throws Exception {
 		try {
 			if (this.graphIterator.hasNext()) {
 				this.currentCommand = this.graphIterator.next();
-				this.currentCommand.execute();
-				return true;
+				return this.currentCommand.execute();
 			}
-			return false;
+			return "";
 		} catch (Exception e) {
 			throw e;
 		}
@@ -92,14 +105,13 @@ class IteratorManager implements IIteratorManager {
 	 * ()
 	 */
 	@Override
-	public boolean goBackward() throws Exception {
+	public String goBackward() throws Exception {
 		try {
 			if (this.graphIterator.hasPrevious()) {
 				this.currentCommand = this.graphIterator.previous();
-				this.currentCommand.unExecute();
-				return true;
+				return this.currentCommand.unExecute();
 			}
-			return false;
+			return "";
 		} catch (Exception e) {
 			throw e;
 		}
@@ -113,7 +125,7 @@ class IteratorManager implements IIteratorManager {
 	 * .bfh.bti7301.hs2013.gravis.core.IImmutListIterator)
 	 */
 	@Override
-	public void setListIterator(IGravisListIterator<ICommand> listIterator)
+	public void setListIterator(IGravisListIterator<IStep> listIterator)
 			throws Exception {
 		try {
 			this.graphIterator = listIterator;

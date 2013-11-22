@@ -6,7 +6,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class ResultCommand extends EmptyCommand {
+class ResultCommand extends EmptyStep {
 
 	private final IGraphItem item;
 
@@ -30,21 +30,23 @@ class ResultCommand extends EmptyCommand {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyCommand#execute()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyStep#execute()
 	 */
 	@Override
-	public void execute() {
+	public String execute() {
 		this.item.setPaintedResult(this.newResult);
+		return "";
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyCommand#unExecute()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyStep#unExecute()
 	 */
 	@Override
-	public void unExecute() {
+	public String unExecute() {
 		this.item.setPaintedResult(this.oldResult);
+		return "";
 	}
 
 }
