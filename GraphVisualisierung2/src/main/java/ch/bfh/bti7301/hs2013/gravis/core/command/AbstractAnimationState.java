@@ -69,7 +69,6 @@ abstract class AbstractAnimationState implements IAnimationState {
 				currentItem.getColor(), this.stateColor));
 		complexCommand.add(new StrokeWidthCommand(currentItem, DEFAULT_STROKE_WIDTH, 
 				this.getItemStrokeWidth(currentItem)));
-		currentItem.resetVisualizationValues();
 		
 		currentItem.resetVisualizationValues();
 	}
