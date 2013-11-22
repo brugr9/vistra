@@ -8,59 +8,39 @@
 % 
 % 
 \subsection{Architektonische Entscheidungen}
+% 
+\subsubsection{Matrixmultiplikation}
+Brainstorming zu Beginn des Projektes: Kybernetisches System mit
 \begin{itemize}
+  \item Operand: Graph als Adjazenz-Matrix
+  \item Operator: e.g. Dijkstra-Algorithmus (als Matrix)
+  \item Transition: Ein Schritt der Traversierung
+  \item Transformierte: Graph im neuen Zustand
+\end{itemize}
+Berechnung der Traversierung per Matrixmultiplikation:
+\begin{itemize}
+  \item Definition der Operatoren (Algorithmen) allgemein g\"ultig als Matrizen
+  \item Anwenden der Operatoren (Algorithmen) auf Operanden (Graphen) als Matrixmultiplikation
+  \item Resultat: Liste von (bijektiven, also eineindeutigen) Transformationen ('Steps') als Matrizenmechanik
+\end{itemize}
+% 
+\subsubsection{Entscheidungen}
+% 
+\begin{itemize}
+  \item Themenkreis Matrizen: Entscheid, dass keine Matrizen-Multiplikation. Implementation mit Bezug auf \textit{Algorithm Design} von M. Goodrich und R. Tamassia~\cite{goodrichtamassia:2002}.
   \item Zu Projektbeginn wurde relativ bald eine Drei-Schichten-Architektur entworfen.
   \item In der Woche 45 wurde entschieden, das Projekt als Maven-Projekt zu halten. Der Entscheid wurde vorallem getroffen, da Properties zentral verwaltet und Tests sauber vom restlichen Sourcecode getrennt gehalten werden k\"onnen.
 \end{itemize}
 % 
-\subsection{Logical View}
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{diagrams/package-diagram.pdf}
-    \caption{Software Architecture, Package Diagram}
-    \label{fig:package-diagram}
-\end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{diagrams/component-diagram.pdf}
-    \caption{Software Architecture, Component Diagram}
-    \label{fig:component-diagram}
-\end{figure}
-\subsubsection{Beschreibung und Motivation}
-Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren. Die Drei-Schichten-Architektur hat sich aus den Requirements ergeben. Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit, die Komponente Gui enth\"alt die (grafische) Benutzerschnittstelle und schliesslich die Komponente Core: das Herzst\"uck des Systems k\"ummert sich um das Initialisieren der Komponenten, I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
+% \subsection{Logical View}
+% 
+% \subsubsection{Beschreibung und Motivation}
 % 
 % \subsection{Deployment View}
 % 
+% \subsubsection{Beschreibung und Motivation}
 % 
 \subsection{Process View}
-% 
-\subsubsection{Common}
-\label{subsubsec:Common}
-Die Komponente h\"alt die f\"ur die Implementation eines Algorithmus zu verwendende Schnittstellen bereit. Diese sind f\"ur Algorithmen zu verwenden, welche importiert werden wollen.
-% 
-\subsubsection{Core}
-\label{subsubsec:Core}
-Die Komponente implementiert:
-\begin{itemize}
-  \item Data Model: Datenhaltung f\"ur Graph (Datenelemente Knoten und Kanten), Algorithmus und berechnete Traversierung, Traversierungsschritte als Resultat der Operation eines Algorithmus auf einen Graphen
-  \item Business Logik: 
-  \begin{itemize}
-      \item Handling von Daten-Import und L\"oschen von Daten
-      \item Validierung Graphen und Algorithmen beim Import
-      \item Handling von Graphen und Algorithmen
-      \item Traversierung und damit Erstellen der visualisierbaren L\"osung
-  \end{itemize}
-  \item Core Inteface: eine Schnittstelle, welche der Komponente GUI zur Verf\"ugung steht
-\end{itemize}
-% 
-\subsubsection{Gui}
-\label{subsubsec:Gui}
-Die Komponente implementiert ein Model-View-Control (MVC) unter Verwendung des Java-Observer-Pattern:
-\begin{itemize}
-  \item Model: Observable mit s\"amtlichen GUI-Attributen und deren Getter- und Setter-Methoden
-  \item View: Observer mit grafischen Elementen wie z.B. Menubar, Kn\"opfe, Regler und Text-Panelen
-  \item Control: Implementiert Listeners und deren Methoden
-\end{itemize}
 % 
 \begin{figure}[H]
     \centering
@@ -117,6 +97,3 @@ Folgende Use Cases wurden implementiert:
     \caption{Gui, View: Component Diagram}
     \label{fig:gui-view-cd}
 \end{figure}
-% 
-% \section{Data Model}
-% \label{sec:Data Model}

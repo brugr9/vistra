@@ -1,4 +1,74 @@
-\subsection{UC1 Import Graph}
+\section{Design Model}
+\label{sec:Design Model}
+% 
+\subsection{Systemkomponenten}
+\label{subsec:Systemkomponenten}
+% 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{diagrams/package-diagram.pdf}
+    \caption{Software Architecture, Package Diagram}
+    \label{fig:package-diagram}
+\end{figure}
+% 
+Die Systemkomponenten sind in Schichten unterteilt, wobei nur eine h\"oher liegende Schicht direkten Zugriff auf eine darunterliegende Schicht hat (Schichtenarchitektur). F\"ur die Architektur lassen sich von (unten nach oben) grob die Systemkomponenten \textit{Common}, \textit{Core} und \textit{Gui} identifizieren. Die Drei-Schichten-Architektur ergibt sich aus den Requirements:
+\begin{itemize}
+  \item Die Komponente Common h\"alt die Interfaces f\"ur einen Actor 'Algorithm Developer' (offstage) bereit,
+  \item die Komponente Gui enth\"alt die (grafische) Benutzerschnittstelle und 
+  \item die Komponente Core k\"ummert sich um das Initialisieren s\"amtlicher Komponenten, I/O, Verwaltung der Parameter sowie der Berechnung der Traversierung.
+\end{itemize}
+% 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{diagrams/component-diagram.pdf}
+    \caption{Software Architecture, Component Diagram}
+    \label{fig:component-diagram}
+\end{figure}
+% 
+\subsubsection{Common}
+\label{subsubsec:Common}
+Die Komponente h\"alt die f\"ur die Implementation eines Algorithmus zu verwendende Schnittstellen bereit. Diese sind f\"ur Algorithmen zu verwenden, welche importiert werden wollen.
+% 
+\subsubsection{Core}
+\label{subsubsec:Core}
+Die Komponente implementiert:
+\begin{itemize}
+  \item Data Model: Datenhaltung f\"ur Graph (Datenelemente Knoten und Kanten), Algorithmus und berechnete Traversierung, Traversierungsschritte als Resultat der Operation eines Algorithmus auf einen Graphen
+  \item Business Logik: 
+  \begin{itemize}
+      \item Handling von Daten-Import und L\"oschen von Daten
+      \item Validierung Graphen und Algorithmen beim Import
+      \item Handling von Graphen und Algorithmen
+      \item Traversierung und damit Erstellen der visualisierbaren L\"osung
+  \end{itemize}
+  \item Core Inteface: eine Schnittstelle, welche der Komponente GUI zur Verf\"ugung steht
+\end{itemize}
+% 
+\subsubsection{Gui}
+\label{subsubsec:Gui}
+Die Komponente implementiert ein Model-View-Control (MVC) unter Verwendung des Java-Observer-Pattern:
+\begin{itemize}
+  \item Model: Observable mit Attributen und deren getter- und setter-Methoden
+  \item View: Observer mit grafischen Elementen wie z.B. Menubar, Kn\"opfe, Regler und Text-Panelen
+  \item Control: Implementiert Listeners mit deren Methoden und evtl. private Methoden
+\end{itemize}
+% 
+\subsection{Elaboration}
+\label{subsec:Elaboration}
+Zur Elaboration des Designs werden die sechs Use Cases \textit{Import Graph}, \textit{Import Algorithm}, \textit{Delete Graph}, \textit{Delete Algorithm}, \textit{Select Graph} und \textit{Select Algorithm} erarbeitet und je mit einem System Sequence Diagram (SSD), einem Sequence Diagram (SD) und einem Design Class Diagram (DCD) illustriert.
+\begin{itemize}
+  \item Ein System Sequence Diagram zeigt, wie eine Benutzerinteraktion vom System verarbeitet wird.
+  \item Ein Sequence Diagram zeigt, wie Objekte miteinander arbeiten und erl\"autert die Zust\"andigkeiten der Klassen. 
+  \item Ein Design Class Diagram zeigt die Elemente des Systems unter Ber\"ucksichtigung ihrer Funktionalit\"at.
+\end{itemize}
+
+F\"ur die Use Cases \textit{Select Graph} und \textit{Select Algorithm} wird zudem die Konzeptklasse \textit{Traversal Controller} als State Machine (SM) betrachtet und mit einem State Diagram illustriert.
+
+Ein weiteres State Diagram zeigt die Konzeptklasse \textit{Parameter Controller} als State Machine. Dieses illustriert die Use Cases \textit{Set Steplength}, \textit{Set Delay}, \textit{Forward}, \textit{Backward}, \textit{Goto Beginning}, \textit{Goto End}, \textit{Play}, \textit{Pause}, \textit{Resume} und \textit{Stop}.
+
+Generell implementiert ein Controller ausschliesslich System-Operationen (und eventuell einige private Methoden). Jeder System-Event wird mit einer einzigen System-Operation eines Controllers assoziiert. Controller sind im System GRAVIS die implementierten Klassen \textit{gui::Control} und \textit{core::Core}.
+% 
+\subsubsection{UC1 Import Graph}
 \begin{figure}[H]
     \centering
     \includegraphics[
@@ -48,7 +118,7 @@
 % ----------------------------------------------------------------------------
 % \newpage
 % 
-\subsection{UC2 Import Algorithm}
+\subsubsection{UC2 Import Algorithm}
 \begin{figure}[H]
     \centering
     \includegraphics[
@@ -98,7 +168,7 @@
 % ----------------------------------------------------------------------------
 % \newpage
 % 
-\subsection{UC3 Delete Graph}
+\subsubsection{UC3 Delete Graph}
 \begin{figure}[H]
     \centering
     \includegraphics[
@@ -148,7 +218,7 @@
 % ----------------------------------------------------------------------------
 % \newpage
 % 
-\subsection{UC4 Delete Algorithm}
+\subsubsection{UC4 Delete Algorithm}
 \begin{figure}[H]
     \centering
     \includegraphics[
@@ -198,7 +268,7 @@
 % ----------------------------------------------------------------------------
 % \newpage
 % 
-\subsection{Parameter Controller}
+\subsubsection{Parameter Controller}
 \begin{figure}[H]
     \centering
     \includegraphics[
@@ -214,7 +284,7 @@
 % ----------------------------------------------------------------------------
 % \newpage
 % 
-\subsection{UC5 Select Graph}
+\subsubsection{UC5 Select Graph}
 \begin{figure}[H]
     \centering
     \includegraphics[
@@ -264,7 +334,7 @@
 % ----------------------------------------------------------------------------
 % \newpage
 % 
-\subsection{UC6 Select Algorithm}
+\subsubsection{UC6 Select Algorithm}
 \begin{figure}[H]
     \centering
     \includegraphics[
@@ -314,7 +384,7 @@
 % ----------------------------------------------------------------------------
 % \newpage
 % 
-\subsection{Traversal Controller}
+\subsubsection{Traversal Controller}
 \begin{figure}[H]
     \centering
     \includegraphics[

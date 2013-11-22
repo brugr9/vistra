@@ -5,27 +5,27 @@
 % Descibes the high-level goals and constraints, the business case, and provides an executive summary.
 Es soll eine Software erstellt werden, welche das Traversieren von Graphen mit verschiedenen Algorithmen darstellen kann. 
 
-Ein beliebiger Algorithmus, wie etwa derjenige von Dijkstra soll mit diesem Werkzeug so auf einfache Weise visualisiert werden. Das Werkzeug soll sich als didaktisches Hilfsmittel eignen. Neue Algorithmen sollen ohne grossen Aufwand hinzugef\"ugt werden k\"onnen. Zudem soll die Software Graphen aus einer Datei importieren k\"onnen.
+Ein beliebiger Algorithmus, wie etwa derjenige von Dijkstra soll mit diesem Werkzeug auf einfache Weise visualisiert werden. Das Werkzeug soll sich als didaktisches Hilfsmittel eignen. Neue Algorithmen sollen ohne grossen Aufwand hinzugef\"ugt werden k\"onnen. Zudem soll die Software Graphen aus einer Datei importieren k\"onnen.
 % 
 \subsection{Problem Statement}
 \label{subsec:Problem Statement}
 % 
 \subsubsection{Daten}
 \label{subsubsec:Daten}
-Es stehen verschiedene Graphen und Algorithmen als Vorgaben zur Verf\"ugung.
+Das System soll folgende Graphen und Algorithmen verarbeiten k\"onnen:
 \begin{itemize}
-    \item Es k\"onnen gerichtete, ungerichtete, gewichtete und ungewichtete Graphen mit Einfach- und Mehrfachkanten traversiert werden.  
-    \item Nebst den im System als Vorgaben zur Verf\"ugung stehenden Graphen k\"onnen weitere Graphen importiert werden.
+    \item Das System h\"alt mehrere Graphen und Algorithmen als Vorgaben zur Auswahl bereit (Templates).
+    \item Es k\"onnen ungerichtete, gerichtete, ungewichtete und (positiv) gewichtete einfache Graphen (simple connected graphs, neither self-loops nor parallel edges) traversiert werden.
     \item Es stehen mindestens folgende, bereits implementierte Algorithmen zur Verf\"ugung:
   \begin{itemize}
-    \item Dijkstra: Suchen des k\"urzesten Weges zwischen zwei als Start und Ende festgelegten Knoten in einem gerichteten und gewichteten Graphen
-    \item Kruskal: minimaler Spannbaum berechnen
-    \item Rekursive Tiefensuche
-    \item Breitensuche
+    \item Rekursive Tiefensuche (Depth-First Search, DFS)
+    \item Breitensuche (Breadth-First Search, BFS)
+    \item Dijkstra: Suchen des k\"urzesten Weges zwischen zwei als Start und Ende festgelegten Knoten in einem gerichteten und gewichteten Graphen (Shortest Path)
+    \item Kruskal: minimaler Spannbaum berechnen (Spanning Tree)
   \end{itemize}
-  \item Nebst den im System als Vorgaben zur Verf\"ugung stehenden Algorithmen k\"onnen weitere Algorithmen importiert werden.
-  \item Importierte Daten bleiben dem System persistent erhalten.
-  \item Importierte Daten k\"onnen auch wieder gel\"oscht werden.
+  \item Nebst den als Vorgaben zur Verf\"ugung stehenden Graphen und Algorithmen k\"onnen weitere Graphen und Algorithmen importiert werden.
+  \item Importierte Graphen und Algorithmen bleiben dem System persistent erhalten.
+  \item Importierte Graphen und Algorithmen k\"onnen auch wieder gel\"oscht werden.
 \end{itemize}
 % 
 \subsubsection{Traversierung}
@@ -35,11 +35,11 @@ Es stehen verschiedene Graphen und Algorithmen als Vorgaben zur Verf\"ugung.
   \item Ein Graph wird durch Kreise (Knoten), Geraden (ungerichtete Kanten), Pfeile (gerichtete Kanten) und Beschriftungen (Knotenbezeichnungen, Kantenbezeichnungen und Kantengewichte) dargestellt.
   \item Je nach Typ von Graph werden die Knoten als Kreis oder als Baum angeordnet.
   \item Die Anordnung der Knoten kann ver\"andert werden: Diese k\"onnen mit der Maus verschoben werden.
-  \item Mit der Wahl des Graphen wird eine Liste mit Algorithmen erstellt und dem Benutzer zugg\"anglich gemacht. Es sind nur diejenigen Algorithmen ausw\"ahlbar, die auf den Graph-Typ angewendet werden k\"onnen.
+  \item Mit der Wahl des Graphen wird eine Liste mit Algorithmen erstellt und dem Benutzer zug\"anglich gemacht. Es sind nur diejenigen Algorithmen ausw\"ahlbar, die auf den Graph-Typ angewendet werden k\"onnen.
   \item Aus der Liste mit Algorithmen kann ausgew\"ahlt werden, welche Traversierung erfolgen soll.
-  \item F\"ur manche Algorithmen muss ein Start-, z.T. auch ein Endknoten angegebenn werden.
-  \item Mit der Wahl des Algorithmus (und evtl. von Start- resp. Endknoten) wird die Traversierung ausgel\"ost.
-  \item Die Traversierung erstellt eine visualisierbare L\"osung.
+%   \item F\"ur manche Algorithmen muss ein Start-, z.T. auch ein Endknoten angegebenn werden.
+  \item Mit der Wahl des Algorithmus wird die Berechnung der Traversierung ausgel\"ost.
+  \item Die Berechnung der Traversierung erstellt eine visualisierbare L\"osung.
   \item Mit Abschluss der Traversierung wird dem Benutzer die Visualisierung zug\"anglich gemacht.
 \end{itemize}
 % 
@@ -48,7 +48,7 @@ Es stehen verschiedene Graphen und Algorithmen als Vorgaben zur Verf\"ugung.
 \begin{itemize}
   \item Die Visualisierung kann Schrittweise erfolgen ('Step-by-step'): Dabei kann der Benutzer vor, zur\"uck, zum Anfang oder zum Ende der Visualisierung gelangen.
   \item Die Schrittl\"ange der Visualisierung kann eingestellt werden.
-  \item Die Visualisierung kann auch abgespielt werden. Dabei kann der Benutzer die Animation starten, pausieren oder stoppen.
+  \item Die Visualisierung kann auch abgespielt werden ('Animation'). Dabei kann der Benutzer die Animation starten, pausieren oder stoppen.
   \item Das Tempo der abgespielten Visualisierung kann eingestellt werden.
 \end{itemize}
 % 
@@ -57,7 +57,8 @@ Es stehen verschiedene Graphen und Algorithmen als Vorgaben zur Verf\"ugung.
 \begin{itemize}
   \item Zu importierende Graphen werden validiert.
   \item Zu importierende Algorithmen m\"ussen ein gegebenes Interface implementieren.
-  \item Ein Algorithmus gibt \"uber Annotations an, welche Graph-Typen damit traversiert werden k\"onnen (gerichtet, ungerichtet, gewichtet, ungewichtet).
+  \item Ein Algorithmus gibt \"uber Annotations an, welche Graph-Typen damit traversiert werden k\"onnen (gerichtet, ungerichtet).
+  \item F\"ur ungewichtete Graphen wird ein Kanten-Gewicht der Gr\"osse 1 angenommen, es wird also nicht unterschieden zwischen ungewichtet und gewichtet.
   \item Die Visualisierung zeigt Schrittweise Farb\"anderungen von Knoten und Kanten, evtl. auch errechnete Zwischenergebnisse.
   \item Mit jedem Step der Visualisierung wird auf einer Protokollpanele eine Statusmeldung ausgegeben, die die begangenen Traversierungsschritte erl\"autert.
 \end{itemize}

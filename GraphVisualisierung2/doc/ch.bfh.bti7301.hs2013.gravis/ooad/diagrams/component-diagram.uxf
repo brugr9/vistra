@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
-  <zoom_level>9</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>414</x>
-      <y>324</y>
-      <w>206</w>
-      <h>44</h>
+      <x>228</x>
+      <y>432</y>
+      <w>96</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=())</panel_attributes>
-    <additional_attributes>189;27;27;27</additional_attributes>
+    <additional_attributes>84;18;18;18</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.Component</type>
     <coordinates>
-      <x>324</x>
-      <y>243</y>
-      <w>117</w>
-      <h>63</h>
+      <x>168</x>
+      <y>306</y>
+      <w>78</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes> 
 'View</panel_attributes>
@@ -26,10 +26,10 @@
   <element>
     <type>com.umlet.element.custom.Component</type>
     <coordinates>
-      <x>324</x>
-      <y>315</y>
-      <w>117</w>
-      <h>63</h>
+      <x>168</x>
+      <y>426</y>
+      <w>78</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes> 
 'Control</panel_attributes>
@@ -38,10 +38,10 @@
   <element>
     <type>com.umlet.element.custom.Component</type>
     <coordinates>
-      <x>603</x>
-      <y>324</y>
-      <w>108</w>
-      <h>63</h>
+      <x>312</x>
+      <y>378</y>
+      <w>72</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes> 
 'Core</panel_attributes>
@@ -50,10 +50,10 @@
   <element>
     <type>com.umlet.element.custom.Component</type>
     <coordinates>
-      <x>324</x>
-      <y>171</y>
-      <w>117</w>
-      <h>63</h>
+      <x>72</x>
+      <y>366</y>
+      <w>78</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes> 
 'Model</panel_attributes>
@@ -62,13 +62,165 @@
   <element>
     <type>com.umlet.element.custom.Component</type>
     <coordinates>
-      <x>279</x>
-      <y>126</y>
-      <w>198</w>
-      <h>270</h>
+      <x>48</x>
+      <y>264</y>
+      <w>216</w>
+      <h>228</h>
     </coordinates>
     <panel_attributes> 
 'Gui</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Component</type>
+    <coordinates>
+      <x>294</x>
+      <y>198</y>
+      <w>318</w>
+      <h>294</h>
+    </coordinates>
+    <panel_attributes> 
+'Core</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>72</x>
+      <y>306</y>
+      <w>108</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=(()
+ 
+ update()</panel_attributes>
+    <additional_attributes>36;60;36;30;96;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>168</x>
+      <y>330</y>
+      <w>70</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=())
+ 
+ 
+ Listeners
+
+</panel_attributes>
+    <additional_attributes>36;96;36;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>36</x>
+      <y>390</y>
+      <w>144</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=())
+ 
+ 
+ Setter-Methods
+ notifyObservers()</panel_attributes>
+    <additional_attributes>54;18;54;60;132;60</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>42</x>
+      <y>288</y>
+      <w>138</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=())
+ Getter-Methods
+
+</panel_attributes>
+    <additional_attributes>48;78;48;30;126;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Component</type>
+    <coordinates>
+      <x>450</x>
+      <y>378</y>
+      <w>114</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes> 
+'GraphManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Component</type>
+    <coordinates>
+      <x>450</x>
+      <y>426</y>
+      <w>114</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes> 
+'AlgorithmManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Component</type>
+    <coordinates>
+      <x>450</x>
+      <y>264</y>
+      <w>114</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes> 
+'GraphFactory</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Component</type>
+    <coordinates>
+      <x>450</x>
+      <y>312</y>
+      <w>114</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes> 
+'AlgorithmFactory</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>366</x>
+      <y>378</y>
+      <w>96</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=())</panel_attributes>
+    <additional_attributes>84;18;18;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>366</x>
+      <y>426</y>
+      <w>96</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=())</panel_attributes>
+    <additional_attributes>84;18;18;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Component</type>
+    <coordinates>
+      <x>450</x>
+      <y>216</y>
+      <w>114</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes> 
+'CoreFactory</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
