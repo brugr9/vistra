@@ -189,8 +189,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
+	public AbstractGraphItem clone() throws CloneNotSupportedException {
+		return (AbstractGraphItem) super.clone();
 	}
 
 	

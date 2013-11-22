@@ -67,5 +67,5 @@ public interface IGraphItem extends IRestrictedGraphItem, Cloneable {
 	 * @return clone
 	 * @throws CloneNotSupportedException
 	 */
-	public Object clone() throws CloneNotSupportedException;
+	public IGraphItem clone() throws CloneNotSupportedException;
 }

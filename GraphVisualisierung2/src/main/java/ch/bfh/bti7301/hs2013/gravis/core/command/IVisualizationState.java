@@ -20,5 +20,10 @@ public interface IVisualizationState {
 	 * @return ICommand
 	 */
 	public abstract ICommand getPredecessorCommand();
+	
+	/**
+	 * @return old graph item clone
+	 */
+	public abstract IGraphItem getOldGraphItemClone();
 
 }

@@ -57,9 +57,9 @@ class CommandTransformer implements Transformer<IGraphItem, ICommand> {
 	@Override
 	public ICommand transform(IGraphItem currentItem) {
 		IVisualizationState nextState = this.states.get(this.getKeyString(currentItem));
-		System.out.println("state: " + nextState);
 		ICommand currentCommand = nextState.createCommand(this.currentState,
 				currentItem);
+		
 		this.currentState = nextState;
 		return currentCommand;
 	}

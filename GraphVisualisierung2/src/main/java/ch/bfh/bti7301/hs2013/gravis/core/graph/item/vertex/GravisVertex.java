@@ -123,8 +123,10 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#clone()
 	 */
 	@Override
-	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
+	public GravisVertex clone() throws CloneNotSupportedException {
+		GravisVertex vertexClone = (GravisVertex) super.clone();
+		vertexClone.setLocation((Point2D) this.location.clone());
+		return vertexClone;
 	}
 
 	

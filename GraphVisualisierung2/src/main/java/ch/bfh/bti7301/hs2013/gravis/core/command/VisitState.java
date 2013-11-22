@@ -14,9 +14,10 @@ class VisitState extends AbstractCommonVisualizationState {
 
 	/**
 	 * @param graphItemHistory
-	 * @param changeListener 
+	 * @param changeListener
 	 */
-	protected VisitState(List<IGraphItem> graphItemHistory, TraversalChangeListener changeListener) {
+	protected VisitState(List<IGraphItem> graphItemHistory,
+			TraversalChangeListener changeListener) {
 		super(GravisColor.YELLOW, graphItemHistory, changeListener);
 	}
 
