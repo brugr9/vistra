@@ -43,22 +43,22 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
-		// TODO visualize edges
 		// TODO bei Min-Auswahl: alle Auswahlmöglichkeiten fett marieren
 		// TODO set comments in calculateDistances()
-		// TODO falls kein start vertex, wähle default start
 
 		this.checkPositiveWeights(graph.getEdges());
 
 		Collection<? extends IRestrictedVertex> vertices = graph.getVertices();
 		IRestrictedVertex startVertex = graph.getStartVertex();
+		if (startVertex == null) {
+			return;
+		}
 
 		startVertex.setComment(startVertex.getId() + " ist der Startknoten.");
 		graph.updateState(startVertex, State.ACTIVATION);
 
 		// start vertex has distance 0
 		startVertex.setResult(0.0);
-		this.setSuccessorMessage(graph, startVertex);
 		startVertex.appendComment("Für den Knoten " + startVertex.getId()
 				+ " wurde der kürzeste Weg berechnet: "
 				+ startVertex.getResult());
@@ -70,7 +70,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 
 		graph.updateState(startVertex, State.SOLUTION);
 		vertices.remove(startVertex);
-		
+
 		this.initializeDistances(graph, vertices, startVertex);
 		this.calculateDistances(graph, vertices, startVertex);
 	}
@@ -93,32 +93,24 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			graph.updateState(vertex, State.ACTIVATION);
 		}
 
-		startVertex.setComment("Rückkehr zum Startknoten "
-				+ startVertex.getId() + ".");
+		this.setSuccessorMessage(graph, startVertex);
 		graph.updateState(startVertex, State.ACTIVATION);
 
 		// init edge weight as distance for all successors of start vertex
 		for (IRestrictedVertex vertex : graph.getSuccessors(startVertex)) {
 			IRestrictedEdge edge = graph.findEdge(startVertex, vertex);
 			graph.updateState(edge, State.ACTIVATION);
-			
-			vertex.setComment("Der Knoten " + vertex.getId()
-					+ " wird aktiviert.");
+
 			graph.updateState(vertex, State.ACTIVATION);
-			
+
 			vertex.setResult(this.findMinEdge(graph, startVertex, vertex)
 					.getWeight());
-			vertex.setComment("Der Knoten " + vertex.getId()
-					+ " wurde als besucht markiert. "
-					+ "Der neue kürzeste Weg vom Startknoten aus ist: "
-					+ vertex.getResult());
+			vertex.setComment("Der neue kürzeste Weg vom Startknoten zum Knoten "
+					+ vertex.getId() + " ist: " + vertex.getResult());
 			graph.updateState(vertex, State.VISIT);
 
-			edge = graph.findEdge(startVertex, vertex);
 			graph.updateState(edge, State.ACTIVATION);
-			
-			startVertex.setComment("Der Knoten " + startVertex.getId()
-					+ " wird aktiviert.");
+
 			graph.updateState(startVertex, State.ACTIVATION);
 		}
 	}
@@ -139,6 +131,12 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		while (!prioQueue.isEmpty()) {
 			IRestrictedVertex selectedVertex = prioQueue.poll();
 
+			selectedVertex
+					.setComment("Das Minimum aller noch nicht zur Lösung gehörenden"
+							+ " Knoten ist "
+							+ selectedVertex.getId()
+							+ " mit der aktuellen Distanz: "
+							+ selectedVertex.getPaintedResult());
 			graph.updateState(selectedVertex, State.ACTIVATION);
 
 			this.setSuccessorMessage(graph, selectedVertex);
@@ -146,8 +144,9 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			if (this.updateEndVertexMessage(graph, startVertex, selectedVertex)) {
 				return;
 			}
+
 			graph.updateState(selectedVertex, State.SOLUTION);
-			
+
 			this.updateAdjacentVertexDistances(graph, selectedVertex, prioQueue);
 		}
 	}
@@ -166,6 +165,9 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		for (IRestrictedVertex adjacentVertex : graph.getSuccessors(vertex)) {
 
 			if (!adjacentVertex.isDone()) {
+				IRestrictedEdge edge = graph.findEdge(vertex, adjacentVertex);
+				graph.updateState(edge, State.ACTIVATION);
+
 				graph.updateState(adjacentVertex, State.ACTIVATION);
 
 				newDistance = vertex.getPaintedResult()
@@ -174,13 +176,19 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 				oldDistance = adjacentVertex.getPaintedResult();
 
 				adjacentVertex.setResult(Math.min(newDistance, oldDistance));
+				adjacentVertex
+						.setComment("Der neue kürzeste Weg vom Startknoten zum Knoten "
+								+ adjacentVertex.getId()
+								+ " ist: "
+								+ adjacentVertex.getResult());
 				graph.updateState(adjacentVertex, State.VISIT);
+
+				graph.updateState(edge, State.ACTIVATION);
+				graph.updateState(vertex, State.ACTIVATION);
 
 				if (Double.compare(newDistance, oldDistance) != 0) {
 					prioQueue.update(adjacentVertex);
 				}
-
-				graph.updateState(vertex, State.ACTIVATION);
 			}
 		}
 	}
@@ -216,8 +224,9 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			IRestrictedVertex startVertex, IRestrictedVertex endVertex) {
 
 		if (endVertex.isEnd()) {
-			endVertex.appendComment("Der kürzeste Weg von " + startVertex.getId()
-					+ " nach " + endVertex.getId() + " wurde gefunden.");
+			endVertex.appendComment("Der kürzeste Weg von "
+					+ startVertex.getId() + " nach " + endVertex.getId()
+					+ " wurde gefunden.");
 			graph.updateState(endVertex, State.SOLUTION);
 			return true;
 		}
