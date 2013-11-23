@@ -185,35 +185,4 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		return (AbstractGraphItem) super.clone();
 	}
 
-	
-	
-	// TODO bitte an dieser Klasse nichts ändern (pk)
-
-	// TODO problem in method VisualizationViewer.setLayout() with equals() and
-	// hash code()
-
-	// @Override
-	// public int hashCode() {
-	// return this.id.hashCode();
-	// }
-	//
-	// /* (non-Javadoc)
-	// * @see java.lang.Object#equals(java.lang.Object)
-	// */
-	// @Override
-	// public boolean equals(Object obj) {
-	// if (this == obj)
-	// return true;
-	// if (obj == null)
-	// return false;
-	// if (getClass() != obj.getClass())
-	// return false;
-	// AbstractGraphItem other = (AbstractGraphItem) obj;
-	// if (this.id == null) {
-	// if (other.id != null)
-	// return false;
-	// } else if (!this.id.equals(other.id))
-	// return false;
-	// return true;
-	// }
 }

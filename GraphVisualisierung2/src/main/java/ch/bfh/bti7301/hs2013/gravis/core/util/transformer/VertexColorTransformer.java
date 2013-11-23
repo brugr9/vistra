@@ -1,16 +1,15 @@
-package ch.bfh.bti7301.hs2013.gravis.core.util;
+package ch.bfh.bti7301.hs2013.gravis.core.util.transformer;
 
 import java.awt.Paint;
 
 import org.apache.commons.collections15.Transformer;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
- * 
  */
-public class EdgeColorTransformer implements Transformer<IEdge, Paint> {
+public class VertexColorTransformer implements Transformer<IVertex, Paint> {
 
 	/*
 	 * (non-Javadoc)
@@ -19,8 +18,8 @@ public class EdgeColorTransformer implements Transformer<IEdge, Paint> {
 	 * Object)
 	 */
 	@Override
-	public Paint transform(IEdge edge) {
-		return edge.getColor();
+	public Paint transform(IVertex vertex) {
+		return vertex.getColor();
 	}
 
 }

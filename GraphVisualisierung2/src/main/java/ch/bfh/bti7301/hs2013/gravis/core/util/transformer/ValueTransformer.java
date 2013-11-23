@@ -1,8 +1,10 @@
-package ch.bfh.bti7301.hs2013.gravis.core.util;
+package ch.bfh.bti7301.hs2013.gravis.core.util.transformer;
 
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Point2D;
+
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
 /**
  * A utility class, therefore serving with static method only.

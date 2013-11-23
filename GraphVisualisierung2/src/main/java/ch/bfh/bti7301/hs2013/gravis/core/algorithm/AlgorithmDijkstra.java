@@ -6,7 +6,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.VertexPaintedResultComparator;
+import ch.bfh.bti7301.hs2013.gravis.core.util.comparator.VertexPaintedResultComparator;
 import edu.uci.ics.jung.algorithms.util.MapBinaryHeap;
 
 /**

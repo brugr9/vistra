@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.util;
+package ch.bfh.bti7301.hs2013.gravis.core.util.comparator;
 
 import java.util.Comparator;
 

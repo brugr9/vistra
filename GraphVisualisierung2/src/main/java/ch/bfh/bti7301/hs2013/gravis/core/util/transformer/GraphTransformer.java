@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.util;
+package ch.bfh.bti7301.hs2013.gravis.core.util.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
