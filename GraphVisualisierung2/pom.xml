@@ -14,10 +14,6 @@
 	<organization>
 		<name>BFH-TI, HS 2013, Modul BTI7301</name>
 	</organization>
-	<scm>
-		<developerConnection>Roland Bruggmann, Patrick Kofmel</developerConnection>
-		<url>https://github.com/brugr9/gravis</url>
-	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.jung</groupId>
