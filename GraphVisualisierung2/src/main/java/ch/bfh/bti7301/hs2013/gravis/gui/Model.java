@@ -226,7 +226,7 @@ public final class Model extends Observable {
 	/**
 	 * @return the resourceBundle
 	 */
-	protected ResourceBundle getResourceBundle() {
+	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
 

@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.gui;
+package ch.bfh.bti7301.hs2013.gravis.gui.visualization;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -19,6 +19,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeColorTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.PointTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ShapeTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexColorTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.GuiFactory;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.RenderContext;

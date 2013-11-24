@@ -9,6 +9,8 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.PointTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.visualization.GravisVisualizationViewer;
+import ch.bfh.bti7301.hs2013.gravis.gui.visualization.VisualizationPanel;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.StaticLayout;

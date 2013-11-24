@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import ch.bfh.bti7301.hs2013.gravis.gui.visualization.VisualizationPanel;
+
 /**
  * A view as in MVC.
  * <p>
