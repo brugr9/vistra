@@ -82,7 +82,7 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			IGravisGraph newGraph = graphReader.readGraph();
 
 			graphReader.close();
-
+			
 			return newGraph;
 		} catch (GraphIOException e) {
 			throw new GraphException("I/O error in GraphML-file "

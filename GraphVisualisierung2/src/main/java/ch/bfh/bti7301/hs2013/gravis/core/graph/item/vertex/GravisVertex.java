@@ -1,9 +1,11 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
 /**
  * A vertex.
@@ -14,6 +16,14 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem;
  */
 class GravisVertex extends AbstractGraphItem implements IVertex {
 
+	private final static Color START_COLOR = GravisColor.GRAY;
+	
+	private final static Color END_COLOR = GravisColor.ORANGE;
+	
+	private final static  double DEFAULT_WIDTH = 60.0;
+	
+	private final static double DEFAULT_HEIGHT = 40.0;
+	
 	/**
 	 * A field for the start position.
 	 */
@@ -30,16 +40,19 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	
 	private Point2D location;
 	
+	private Color tempColor;
+	
 	/**
 	 * Main constructor setting start and end to false both by default.
 	 */
 	protected GravisVertex() {
 		super();
 		
-		this.start = false;
-		this.end = false;
-		this.width = 60.0;
-		this.height = 40.0;
+		this.tempColor = this.getColor();
+		this.setStart(false);
+		this.setEnd(false);
+		this.width = DEFAULT_WIDTH;
+		this.height = DEFAULT_HEIGHT;
 		this.location = new Point();
 	}
 
@@ -55,12 +68,24 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 
 	@Override
 	public void setStart(boolean start) {
+		super.setColor(start ? START_COLOR : (this.isEnd() ? END_COLOR : this.tempColor));
 		this.start = start;
 	}
 
 	@Override
 	public void setEnd(boolean end) {
+		super.setColor(end ? (this.isStart() ? START_COLOR : END_COLOR) : 
+			(this.isStart() ? START_COLOR : this.tempColor));
 		this.end = end;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#setColor(java.awt.Color)
+	 */
+	@Override
+	public void setColor(Color color) {
+		super.setColor(color);
+		this.tempColor = color;
 	}
 
 	/* (non-Javadoc)
