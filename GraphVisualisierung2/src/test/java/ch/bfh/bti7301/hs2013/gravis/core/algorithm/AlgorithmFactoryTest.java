@@ -22,8 +22,8 @@ import org.junit.runner.RunWith;
 public class AlgorithmFactoryTest {
 
 	// parameter
-	private static String pathname;
-	private static String classname;
+//	private static String pathname;
+//	private static String classname;
 
 	/**
 	 * @throws java.lang.Exception
@@ -37,8 +37,8 @@ public class AlgorithmFactoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		pathname = "ch.bfh.bti7301.hs2013.gravis.core.algorithm.test.data";
-		classname = "AlgorithmDefault";
+//		pathname = "ch.bfh.bti7301.hs2013.gravis.core.algorithm.test.data";
+//		classname = "AlgorithmDefault";
 	}
 
 	/**
@@ -71,9 +71,9 @@ public class AlgorithmFactoryTest {
 	 */
 	@Test(expected = ClassNotFoundException.class)
 	public final void testNewInstanceFailurePath() throws Exception {
-		pathname = "wrong.path";
-		File file = new File(pathname + "." + classname);
-		IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
+//		pathname = "wrong.path";
+//		File file = new File(pathname + "." + classname);
+//		IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
 	}
 
 	/**
@@ -87,9 +87,9 @@ public class AlgorithmFactoryTest {
 	 */
 	@Test(expected = ClassNotFoundException.class)
 	public final void testNewInstanceFailureFilename() throws Exception {
-		classname = "WrongFileName";
-		File file = new File(pathname + "." + classname);
-		IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
+		// classname = "WrongFileName";
+		// File file = new File(pathname + "." + classname);
+		// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
 	}
 
 	/**
