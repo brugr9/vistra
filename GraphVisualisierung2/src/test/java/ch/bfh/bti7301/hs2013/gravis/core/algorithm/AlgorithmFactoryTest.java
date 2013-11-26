@@ -22,24 +22,24 @@ import org.junit.runner.RunWith;
 public class AlgorithmFactoryTest {
 
 	// parameter
-//	private static String pathname;
-//	private static String classname;
+	// private static String pathname;
+	// private static String classname;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
+	// @BeforeClass
+	// public static void setUpBeforeClass() throws Exception {
+	// }
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@Before
-	public void setUp() throws Exception {
-//		pathname = "ch.bfh.bti7301.hs2013.gravis.core.algorithm.test.data";
-//		classname = "AlgorithmDefault";
-	}
+	// @Before
+	// public void setUp() throws Exception {
+	// pathname = "ch.bfh.bti7301.hs2013.gravis.core.algorithm.test.data";
+	// classname = "AlgorithmDefault";
+	// }
 
 	/**
 	 * Tutti paletti: the class can be loaded and implements the interface
@@ -51,14 +51,14 @@ public class AlgorithmFactoryTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test
-	public final void testNewInstanceSuccess() throws Exception {
-		// pathname = "ch.bfh.bti7301.hs2013.gravis.core.algorithm";
-		// File file = new File(pathname + "." + classname);
-		// IAlgorithm expected = new AlgorithmDefault();
-		// IAlgorithm actual = AlgorithmFactory.createAlgorithm(file);
-		// assertEquals(expected.getClass(), actual.getClass());
-	}
+	// @Test
+	// public final void testNewInstanceSuccess() throws Exception {
+	// pathname = "ch.bfh.bti7301.hs2013.gravis.core.algorithm";
+	// File file = new File(pathname + "." + classname);
+	// IAlgorithm expected = new AlgorithmDefault();
+	// IAlgorithm actual = AlgorithmFactory.createAlgorithm(file);
+	// assertEquals(expected.getClass(), actual.getClass());
+	// }
 
 	/**
 	 * Parameter: wrong path.
@@ -69,12 +69,12 @@ public class AlgorithmFactoryTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected = ClassNotFoundException.class)
-	public final void testNewInstanceFailurePath() throws Exception {
-//		pathname = "wrong.path";
-//		File file = new File(pathname + "." + classname);
-//		IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
-	}
+	// @Test(expected = ClassNotFoundException.class)
+	// public final void testNewInstanceFailurePath() throws Exception {
+	// pathname = "wrong.path";
+	// File file = new File(pathname + "." + classname);
+	// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
+	// }
 
 	/**
 	 * Parameter: wrong filename.
@@ -85,12 +85,12 @@ public class AlgorithmFactoryTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected = ClassNotFoundException.class)
-	public final void testNewInstanceFailureFilename() throws Exception {
-		// classname = "WrongFileName";
-		// File file = new File(pathname + "." + classname);
-		// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
-	}
+	// @Test(expected = ClassNotFoundException.class)
+	// public final void testNewInstanceFailureFilename() throws Exception {
+	// classname = "WrongFileName";
+	// File file = new File(pathname + "." + classname);
+	// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
+	// }
 
 	/**
 	 * File: abstract class.
@@ -101,12 +101,13 @@ public class AlgorithmFactoryTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected = InstantiationException.class)
-	public final void testNewInstanceFailureInstantiation() throws Exception {
-		// classname = "AlgorithmIsAbstract";
-		// File file = new File(pathname + "." + classname);
-		// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
-	}
+	// @Test(expected = InstantiationException.class)
+	// public final void testNewInstanceFailureInstantiation() throws Exception
+	// {
+	// classname = "AlgorithmIsAbstract";
+	// File file = new File(pathname + "." + classname);
+	// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
+	// }
 
 	/**
 	 * File: private constructor.
@@ -117,12 +118,12 @@ public class AlgorithmFactoryTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected = IllegalAccessException.class)
-	public final void testNewInstanceFailureAccess() throws Exception {
-		// classname = "AlgorithmNoConstructor";
-		// File file = new File(pathname + "." + classname);
-		// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
-	}
+	// @Test(expected = IllegalAccessException.class)
+	// public final void testNewInstanceFailureAccess() throws Exception {
+	// classname = "AlgorithmNoConstructor";
+	// File file = new File(pathname + "." + classname);
+	// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
+	// }
 
 	/**
 	 * File: interface not implemented.
@@ -133,11 +134,11 @@ public class AlgorithmFactoryTest {
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected = ClassCastException.class)
-	public final void testNewInstanceFailureInterface() throws Exception {
-		// classname = "AlgorithmNoInterface";
-		// File file = new File(pathname + "." + classname);
-		// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
-	}
+	// @Test(expected = ClassCastException.class)
+	// public final void testNewInstanceFailureInterface() throws Exception {
+	// classname = "AlgorithmNoInterface";
+	// File file = new File(pathname + "." + classname);
+	// IAlgorithm a = AlgorithmFactory.createAlgorithm(file);
+	// }
 
 }
