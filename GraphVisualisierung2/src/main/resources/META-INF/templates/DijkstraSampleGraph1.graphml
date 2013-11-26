@@ -44,7 +44,7 @@
 		</data>
 
 		<node id="V1">
-			<data key="vertexColor">gray</data>
+			<!-- <data key="vertexColor">gray</data> -->
 			<data key="startVertex">true</data>
 			<data key="vertexLocation.x">300</data>
 			<data key="vertexLocation.y">50</data>

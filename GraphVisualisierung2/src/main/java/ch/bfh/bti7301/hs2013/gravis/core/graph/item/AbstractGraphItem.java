@@ -10,6 +10,10 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
  */
 public abstract class AbstractGraphItem implements IGraphItem {
 
+	protected final static Color DEFAULT_COLOR = GravisColor.RED;
+	
+	protected final static float DEFAULT_STROKE_WIDTH = 1.0f;
+	
 	private static int counter = 0;
 
 	private String id;
@@ -29,10 +33,10 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		this.id = String.valueOf(counter++);
 		this.info = this.comment = "";
 		this.paintedResult = this.result = Double.NaN;
-		this.strokeWidth = 1.0f;
+		this.strokeWidth = DEFAULT_STROKE_WIDTH;
 		this.done = false;
 		this.state = State.INITIAL;
-		this.color = GravisColor.red;
+		this.color = DEFAULT_COLOR;
 	}
 
 	/*

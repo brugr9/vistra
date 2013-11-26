@@ -1,6 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.gui.visualization;
 
 import java.awt.BorderLayout;
+import java.awt.geom.Point2D;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.TitledBorder;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
@@ -18,6 +20,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.gui.Model;
 import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
+import ch.bfh.bti7301.hs2013.gravis.gui.visualization.popup.VertexMenu;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -64,44 +67,37 @@ public class VisualizationPanel extends JPanel implements Observer {
 		// viewer
 		this.viewer = visualizationViewer;
 
-		JButton dirGraphBtn = new JButton("Neuer gerichteter Graph");
-		JButton undirGraphBtn = new JButton("Neuer ungerichteter Graph");
-		
-		EditingModalGraphMouse<IVertex, IEdge> graphMouse = new EditingModalGraphMouse<>(
-				this.viewer.getRenderContext(), new VertexFactory(),
-				new EdgeFactory());
-//		DefaultModalGraphMouse<IVertex, IEdge> graphMouse = new DefaultModalGraphMouse<>();
-		
-//		PluggableGraphMouse graphMouse = new PluggableGraphMouse();
-//		graphMouse.add(new EditingGraphMousePlugin<IVertex, IEdge>(new VertexFactory(),
-//				new EdgeFactory()));
-//		graphMouse.add(new GravisEditingPopupGraphMousePlugin<IVertex, IEdge>(new VertexFactory(),
-//				new EdgeFactory()));
-//		graphMouse.add(new ScalingGraphMousePlugin(new CrossoverScalingControl(), 0, 1.1f, 0.9f));
-
 		JPanel controls = new JPanel();
-		JComboBox modeBox = graphMouse.getModeComboBox();
-		modeBox.removeAllItems();
-		modeBox.addItem(Mode.PICKING);
-		modeBox.addItem(Mode.EDITING);
-		modeBox.addItem(Mode.TRANSFORMING);
-		modeBox.addItemListener(graphMouse.getModeListener());
-		controls.add(dirGraphBtn);
-		controls.add(undirGraphBtn);
-		controls.add(modeBox);
-		this.add(controls, BorderLayout.NORTH);
 
-//		graphMouse.remove(graphMouse.getPopupEditingPlugin());
-		graphMouse.setMode(Mode.EDITING);
 		
+		EditingModalGraphMouse<IVertex, IEdge> graphMouse = new GravisModalGraphMouse(
+				this.viewer.getRenderContext(), new VertexFactory(),
+				new EdgeFactory(), new VertexMenu(this.viewer), new VertexMenu(this.viewer));
+		JComboBox<Mode> modeBox = graphMouse.getModeComboBox();
+
+		graphMouse.setMode(Mode.PICKING);
 		this.viewer.setGraphMouse(graphMouse);
 		this.viewer.addKeyListener(graphMouse.getModeKeyListener());
+
+		controls.add(modeBox);
 		
+		this.add(controls, BorderLayout.NORTH);
+
 		GraphZoomScrollPane pane = new GraphZoomScrollPane(viewer);
 		this.add(pane, BorderLayout.CENTER);
-		
-		
-//		modeBox.setEnabled(false);
+
+//		JPopupMenu edgeMenu = new MyMouseMenus.EdgeMenu(frame);
+//		JPopupMenu vertexMenu = new MyMouseMenus.VertexMenu();
+//		myPlugin.setEdgePopup(edgeMenu);
+//		myPlugin.setVertexPopup(vertexMenu);
+//		gm.remove(gm.getPopupEditingPlugin()); // Removes the existing popup
+//		gm.add(myPlugin); // Add our new plugin to the mouse
+
+		// Point2D p = visualizationViewer.getRenderContext()
+		// .getMultiLayerTransformer().inverseTransform(new Point2D(2,2));
+		// System.out.println(p);
+
+		// modeBox.setEnabled(false);
 	}
 
 	/*
