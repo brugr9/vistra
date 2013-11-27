@@ -17,7 +17,7 @@ class SolutionState extends AbstractCommonVisualizationState {
 	 * @param changeListener
 	 */
 	protected SolutionState(List<IGraphItem> graphItemHistory) {
-		super(GravisColor.GREEN, graphItemHistory);
+		super(GravisColor.LIGHT_GREEN, graphItemHistory);
 	}
 
 	/*

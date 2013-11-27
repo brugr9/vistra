@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
 /**
@@ -49,21 +50,52 @@ public final class ValueTransformer {
 	 * @param stringValue
 	 * @return Color
 	 */
-	public static Color transformColor(String stringValue) {
-		// TODO replace string literals
+	public static Color transformStringToColor(String stringValue) {
 		switch (stringValue) {
-		case "green":
-			return GravisColor.green;
-		case "yellow":
-			return GravisColor.yellow;
-		case "blue":
-			return GravisColor.blue;
-		case "gray":
-			return GravisColor.gray;
-		case "black":
-			return GravisColor.black;
+		case GravisConstants.GREEN:
+			return GravisColor.LIGHT_GREEN;
+		case GravisConstants.YELLOW:
+			return GravisColor.LIGHT_YELLOW;
+		case GravisConstants.BLUE:
+			return GravisColor.LIGHT_BLUE;
+		case GravisConstants.GRAY:
+			return GravisColor.LIGHT_GRAY;
+		case GravisConstants.ORANGE:
+			return GravisColor.LIGHT_ORANGE;
+		case GravisConstants.BLACK:
+			return GravisColor.BLACK;
+		case GravisConstants.WHITE:
+			return GravisColor.WHITE;
+		case GravisConstants.ANTIQUE:
+			return GravisColor.ANTIQUE;
 		default:
-			return GravisColor.red;
+			return GravisColor.RED;
+		}
+	}
+	
+	/**
+	 * @param stringValue
+	 * @return Color
+	 */
+	public static String transformColorToString(Color color) {
+		if (color.equals(GravisColor.LIGHT_GREEN)) {
+			return GravisConstants.GREEN;
+		} else if (color.equals(GravisColor.LIGHT_YELLOW)) {
+			return GravisConstants.YELLOW;
+		} else if (color.equals(GravisColor.LIGHT_BLUE)) {
+			return GravisConstants.BLUE;
+		} else if (color.equals(GravisColor.LIGHT_GRAY)) {
+			return GravisConstants.GRAY;
+		} else if (color.equals(GravisColor.LIGHT_ORANGE)) {
+			return GravisConstants.ORANGE;
+		} else if (color.equals(GravisColor.BLACK)) {
+			return GravisConstants.BLACK;
+		} else if (color.equals(GravisColor.WHITE)) {
+			return GravisConstants.WHITE;
+		} else if (color.equals(GravisColor.ANTIQUE)) {
+			return GravisConstants.ANTIQUE;
+		} else {
+			return GravisConstants.RED;
 		}
 	}
 
@@ -78,6 +110,14 @@ public final class ValueTransformer {
 		} catch (Exception e) {
 			return new Point();
 		}
+	}
+
+	/**
+	 * @param value
+	 * @return
+	 */
+	public static double round2Decimals(double value) {
+		return Math.rint(value * 100.0) / 100.0;
 	}
 
 }

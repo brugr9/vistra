@@ -17,7 +17,7 @@ class ActivationState extends AbstractVisualizationState {
 	 * @param graphItemHistory
 	 */
 	protected ActivationState(List<IGraphItem> graphItemHistory) {
-		super(GravisColor.BLUE, graphItemHistory);
+		super(GravisColor.LIGHT_BLUE, graphItemHistory);
 	}
 
 	/*

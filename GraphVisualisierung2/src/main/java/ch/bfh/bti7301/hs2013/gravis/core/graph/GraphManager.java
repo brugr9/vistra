@@ -14,10 +14,23 @@ import org.apache.commons.io.FileUtils;
 import ch.bfh.bti7301.hs2013.gravis.core.AbstractParameterManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeColorStringTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeIDTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeWeightTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EndVertexTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.GraphDescriptionTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.GraphTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.HyperEdgeTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.StartVertexTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexColorStringTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexHeightTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexIDTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexLocationXTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexLocationYTransformer;
 import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexTransformer;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexWidthTransformer;
 import edu.uci.ics.jung.graph.Hypergraph;
 import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.GraphMLWriter;
@@ -82,10 +95,10 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			IGravisGraph newGraph = graphReader.readGraph();
 
 			graphReader.close();
-			
+
 			return newGraph;
 		} catch (GraphIOException e) {
-			throw new GraphException("I/O error in GraphML-file "
+			throw new GraphException("I/O Exception in GraphML-file "
 					+ file.getName() + "!", e);
 		} catch (FileNotFoundException e) {
 			throw new GraphException("GraphML-file not found: "
@@ -99,40 +112,61 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 
 	/**
 	 * @param file
+	 * @throws GraphException 
 	 */
-	private void store(File file, IGravisGraph graph) {
-		// TODO write GraphName from graphml
-		// TODO write GraphType from graphml: <graph id="Sample Graph 1"
-		// edgedefault="directed">
-		// TODO to implement
-
-		GraphMLWriter<IVertex, IEdge> graphWriter = new GraphMLWriter<>();
+	private void store(File file, IGravisGraph graph) throws GraphException {
+		GravisGraphMLWriter graphWriter = new GravisGraphMLWriter();
 		PrintWriter writer = null;
+		
 		try {
 			writer = new PrintWriter(file);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		Transformer<Hypergraph<IVertex, IEdge>, String> graphTransformer = new Transformer<Hypergraph<IVertex, IEdge>, String>() {
-			@Override
-			public String transform(Hypergraph<IVertex, IEdge> graph) {
-				if (graph instanceof IGravisGraph) {
-					return ((IGravisGraph) graph).getId();
-				}
-				return "";
-			}
-		};
-
-		graphWriter.addGraphData("id", "", "", graphTransformer);
-		try {
+			
+			graphWriter.setVertexIDs(new VertexIDTransformer());
+			graphWriter.setEdgeIDs(new EdgeIDTransformer());
+			
+			graphWriter.addGraphData(GravisConstants.G_DESCRIPTION, "", "", 
+					new GraphDescriptionTransformer());
+			
+			graphWriter.addEdgeData(GravisConstants.E_COLOR, "", GravisConstants.BLACK, 
+					new EdgeColorStringTransformer());
+			graphWriter.addEdgeData(GravisConstants.E_WEIGHT, "", 
+					String.valueOf(GravisConstants.E_WEIGHT_DEFAULT), 
+					new EdgeWeightTransformer());
+			
+			graphWriter.addVertexData(GravisConstants.V_COLOR, "", 
+					GravisConstants.RED, new VertexColorStringTransformer());
+			graphWriter.addVertexData(GravisConstants.V_START, "", 
+					String.valueOf(GravisConstants.V_START_DEFAULT), 
+					new StartVertexTransformer());
+			graphWriter.addVertexData(GravisConstants.V_END, "", 
+					String.valueOf(GravisConstants.V_END_DEFAULT), 
+					new EndVertexTransformer());
+			graphWriter.addVertexData(GravisConstants.V_LOC_X, "", 
+					String.valueOf(GravisConstants.V_LOC_X_DEFAULT), 
+					new VertexLocationXTransformer());
+			graphWriter.addVertexData(GravisConstants.V_LOC_Y, "", 
+					String.valueOf(GravisConstants.V_LOC_Y_DEFAULT), 
+					new VertexLocationYTransformer());
+			graphWriter.addVertexData(GravisConstants.V_WIDTH, "", 
+					String.valueOf(GravisConstants.V_WIDTH_DEFAULT), 
+					new VertexWidthTransformer());
+			graphWriter.addVertexData(GravisConstants.V_HEIGHT, "", 
+					String.valueOf(GravisConstants.V_HEIGHT_DEFAULT), 
+					new VertexHeightTransformer());
+			
 			graphWriter.save(graph, writer);
 
 			writer.close();
+		} catch (FileNotFoundException e) {
+			throw new GraphException("Exception while creating GraphML-file "
+					+ file.getName() + "!", e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new GraphException("I/O Exception while saving GraphML-file "
+					+ file.getName() + "!", e);
+		} catch (Exception e) {
+			throw new GraphException(
+					"Exception while storing data to GraphML-file "
+							+ file.getName() + "!", e);
 		}
 	}
 
@@ -148,18 +182,21 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 			// return this.load(file);
 
 			// TODO bitte dummy value auskommentieren und nicht löschen (pk)
-			
-//			return this
-//					.load(new File(
-//							"src/main/resources/META-INF/templates/EmptyGraph.graphml"));
-			
+
+			// return this
+			// .load(new File(
+			// "src/main/resources/META-INF/templates/EmptyGraph.graphml"));
+
 			return this
 					.load(new File(
 							"src/main/resources/META-INF/templates/DijkstraSampleGraph1.graphml"));
-			
-//			 return this
-//			 .load(new File(
-//			 "src/main/resources/META-INF/templates/SampleTree1.graphml"));
+//			return this
+//					.load(new File(
+//							"src/main/resources/META-INF/templates/SaveGraph.graphml"));
+
+			// return this
+			// .load(new File(
+			// "src/main/resources/META-INF/templates/SampleTree1.graphml"));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -219,11 +256,12 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	}
 
 	@Override
-	public void saveGraph(IGravisGraph graph) {
+	public void saveGraph(IGravisGraph graph) throws GraphException {
 		// TODO bitte diesen code nur auskommentieren und nicht löschen
-		this.store(
-				new File(
-						"src/main/resources/META-INF/templates/SampleTree1_out.graphml"),
+		
+		// TODO update ParameterManager
+		this.store(new File(
+				"src/main/resources/META-INF/templates/SaveGraph.graphml"),
 				graph);
 	}
 
@@ -232,15 +270,11 @@ class GraphManager extends AbstractParameterManager implements IGraphManager {
 	 * 
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager#exportGraph(ch.
-	 * bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph)
+	 * bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph, java.io.File)
 	 */
 	@Override
-	public void exportGraph(IGravisGraph graph) throws Exception {
-		// TODO bitte diesen code nur auskommentieren und nicht löschen
-		this.store(
-				new File(
-						"src/main/resources/META-INF/templates/SampleTree1_out.graphml"),
-				graph);
+	public void exportGraph(IGravisGraph graph, File file) throws GraphException {
+		this.store(file, graph);
 	}
 
 }

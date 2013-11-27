@@ -197,9 +197,15 @@ public interface ICore {
 
 	/**
 	 * 
-	 * @return Graph<IVertex, IEdge>
+	 * @param graph
+	 * @param file
 	 * @throws Exception
 	 */
-	public abstract void exportGraph(IGravisGraph graph) throws Exception;
+	public abstract void exportGraph(IGravisGraph graph, File file) throws Exception;
+
+	/**
+	 * @param graph
+	 */
+	public abstract void selectGraph(IGravisGraph graph);
 
 }

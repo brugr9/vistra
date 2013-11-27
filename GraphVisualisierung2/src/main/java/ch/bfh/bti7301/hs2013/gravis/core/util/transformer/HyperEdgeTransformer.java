@@ -4,6 +4,7 @@ import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 import edu.uci.ics.jung.io.graphml.HyperEdgeMetadata;
 
 /**
@@ -11,9 +12,6 @@ import edu.uci.ics.jung.io.graphml.HyperEdgeMetadata;
  *
  */
 public class HyperEdgeTransformer implements Transformer<HyperEdgeMetadata, IEdge> {
-
-	private final static String WEIGHT_PROPERTY = "weight";
-	private final static String EDGE_COLOR_PROPERTY = "edgeColor";
 
 	private final EdgeFactory edgeFactory;
 	
@@ -29,10 +27,10 @@ public class HyperEdgeTransformer implements Transformer<HyperEdgeMetadata, IEdg
 		IEdge edge = this.edgeFactory.create();
 
 		edge.setId(hEdgeMeta.getId());
-		edge.setColor(ValueTransformer.transformColor(hEdgeMeta
-				.getProperty(EDGE_COLOR_PROPERTY)));
+		edge.setColor(ValueTransformer.transformStringToColor(hEdgeMeta
+				.getProperty(GravisConstants.E_COLOR)));
 		edge.setWeight(ValueTransformer.transformDouble(hEdgeMeta
-				.getProperty(WEIGHT_PROPERTY)));
+				.getProperty(GravisConstants.E_WEIGHT)));
 		return edge;
 	}
 

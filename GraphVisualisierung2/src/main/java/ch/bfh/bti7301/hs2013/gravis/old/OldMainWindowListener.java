@@ -19,9 +19,12 @@ import static ch.bfh.bti7301.hs2013.gravis.old.OldIGravisMainListener.EventSourc
 import static ch.bfh.bti7301.hs2013.gravis.old.OldIGravisMainListener.EventSource.STEP_INCREMENT;
 import static ch.bfh.bti7301.hs2013.gravis.old.OldIGravisMainListener.EventSource.STOP_ANIMATION;
 import static ch.bfh.bti7301.hs2013.gravis.old.OldIGravisMainListener.EventSource.TIME_INTERVALL;
+import static ch.bfh.bti7301.hs2013.gravis.old.OldIGravisMainListener.EventSource.NEW_DIR_GRAPH;
+import static ch.bfh.bti7301.hs2013.gravis.old.OldIGravisMainListener.EventSource.NEW_UNDIR_GRAPH;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
+import java.io.File;
 import java.util.Observable;
 
 import javax.swing.JComboBox;
@@ -32,10 +35,14 @@ import javax.swing.event.ChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.gui.visualization.GravisVisualizationViewer;
+import ch.bfh.bti7301.hs2013.gravis.gui.visualization.VisualizationPanel;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -44,13 +51,18 @@ import edu.uci.ics.jung.graph.Graph;
 public class OldMainWindowListener extends Observable implements
 		OldIGravisMainListener {
 
-	private ICore gravisCore;
+	final private ICore gravisCore;
+
+	final private GravisVisualizationViewer vViewer;
 
 	/**
 	 * @param gravisCore
+	 * @param vViewer
 	 */
-	public OldMainWindowListener(ICore gravisCore) {
+	public OldMainWindowListener(ICore gravisCore,
+			GravisVisualizationViewer vViewer) {
 		this.gravisCore = gravisCore;
+		this.vViewer = vViewer;
 	}
 
 	/*
@@ -76,6 +88,25 @@ public class OldMainWindowListener extends Observable implements
 		this.toEndListener(e);
 		this.forwardListener(e);
 		this.backwardListener(e);
+		
+		if (e.getActionCommand().equals(NEW_DIR_GRAPH.toString())) {
+			System.out.println(NEW_DIR_GRAPH);
+			
+			IGravisGraph graph = GraphFactory.createIGravisGraph();
+			graph.setEdgeType(EdgeType.DIRECTED);
+			this.gravisCore.selectGraph(graph);
+			this.setChanged();
+			this.notifyObservers(graph);
+		}
+		if (e.getActionCommand().equals(NEW_UNDIR_GRAPH.toString())) {
+			System.out.println(NEW_UNDIR_GRAPH);
+			
+			IGravisGraph graph = GraphFactory.createIGravisGraph();
+			graph.setEdgeType(EdgeType.UNDIRECTED);
+			this.gravisCore.selectGraph(graph);
+			this.setChanged();
+			this.notifyObservers(graph);
+		}
 	}
 
 	/**
@@ -85,7 +116,7 @@ public class OldMainWindowListener extends Observable implements
 		if (e.getActionCommand().equals(BACKWARD_ANIMATION.toString())) {
 			try {
 				System.out.println(this.gravisCore.goBackward());
-//				System.out.println("goBackward");
+				// System.out.println("goBackward");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -104,8 +135,8 @@ public class OldMainWindowListener extends Observable implements
 		if (e.getActionCommand().equals(FORWARD_ANIMATION.toString())) {
 			try {
 				System.out.println(this.gravisCore.goForward());
-				
-//				System.out.println("goForward");
+
+				// System.out.println("goForward");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -124,12 +155,12 @@ public class OldMainWindowListener extends Observable implements
 
 			try {
 				System.out.println(this.gravisCore.goToEnd());
-//				System.out.println("goEnd");
+				// System.out.println("goEnd");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
+
 			this.setChanged();
 			this.notifyObservers();
 		}
@@ -143,12 +174,12 @@ public class OldMainWindowListener extends Observable implements
 
 			try {
 				System.out.println(this.gravisCore.goToBeginning());
-//				System.out.println("goBeginning");
+				// System.out.println("goBeginning");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
+
 			this.setChanged();
 			this.notifyObservers();
 		}
@@ -197,6 +228,27 @@ public class OldMainWindowListener extends Observable implements
 	 */
 	private void exportGraphListener(ActionEvent e) {
 		if (e.getActionCommand().equals(EXPORT_GRAPH.toString())) {
+			try {
+				this.gravisCore
+						.exportGraph(
+								(IGravisGraph) this.vViewer.getGraphLayout()
+										.getGraph(),
+								new File(
+										"src/main/resources/META-INF/templates/ExportGraph.graphml"));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			System.out.println("Graph exportiert: "
+					+ ((IGravisGraph) this.vViewer.getGraphLayout().getGraph())
+							.getId());
+
+			// for (IVertex vertex : this.vViewer
+			// .getGraphLayout().getGraph().getVertices()) {
+			// System.out.println(vertex.getLocation());
+			// }
+
 			// TODO read path from FileChooser
 			// IGravisGraph<IVertex, IEdge> graph =
 			// this.gravisCore.exportCurrentGraph("path");
@@ -208,6 +260,23 @@ public class OldMainWindowListener extends Observable implements
 	 */
 	private void saveGraphListener(ActionEvent e) {
 		if (e.getActionCommand().equals(SAVE_GRAPH.toString())) {
+			try {
+				this.gravisCore.saveGraph((IGravisGraph) this.vViewer
+						.getGraphLayout().getGraph());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			System.out.println("Graph gespeichert: "
+					+ ((IGravisGraph) this.vViewer.getGraphLayout().getGraph())
+							.getId());
+
+			// for (IVertex vertex : this.vViewer
+			// .getGraphLayout().getGraph().getVertices()) {
+			// System.out.println(vertex.getLocation());
+			// }
+
 			// TODO read name from dialog
 			// IGravisGraph<IVertex, IEdge> graph =
 			// this.gravisCore.saveCurrentGraph("graph name");
@@ -427,7 +496,7 @@ public class OldMainWindowListener extends Observable implements
 					IGravisGraph graph;
 					try {
 						graph = this.gravisCore.selectGraph(1);
-						this.gravisCore.saveGraph(graph);
+						// this.gravisCore.saveGraph(graph);
 
 						this.setChanged();
 						this.notifyObservers(graph);

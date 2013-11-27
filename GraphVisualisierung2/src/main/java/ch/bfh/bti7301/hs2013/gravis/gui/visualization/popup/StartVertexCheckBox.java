@@ -9,19 +9,18 @@ import javax.swing.JCheckBoxMenuItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.gui.visualization.GraphItemMenuListener;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public class StartVertexCheckBox extends JCheckBoxMenuItem implements
+class StartVertexCheckBox extends JCheckBoxMenuItem implements
 			GraphItemMenuListener {
 
 		private static final long serialVersionUID = 6641658478963193492L;
 
-		private VisualizationViewer<IVertex, IEdge> vViewer;
+		private final VisualizationViewer<IVertex, IEdge> vViewer;
 		
 		private IVertex vertex = null;
 		
@@ -29,7 +28,7 @@ public class StartVertexCheckBox extends JCheckBoxMenuItem implements
 		 * 
 		 * @param vViewer
 		 */
-		public StartVertexCheckBox(VisualizationViewer<IVertex, IEdge> vViewer) {
+		protected StartVertexCheckBox(VisualizationViewer<IVertex, IEdge> vViewer) {
 			super("Startknoten");
 
 			this.vViewer = vViewer;

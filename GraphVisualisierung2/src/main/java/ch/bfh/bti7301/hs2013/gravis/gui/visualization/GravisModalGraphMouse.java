@@ -10,14 +10,13 @@ import org.apache.commons.collections15.Factory;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.gui.visualization.popup.CreateVertexMenu;
 import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.annotations.AnnotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.AnimatedPickingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
-import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.LabelEditingGraphMousePlugin;
-import edu.uci.ics.jung.visualization.control.PickingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.RotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.ShearingGraphMousePlugin;
@@ -36,10 +35,12 @@ class GravisModalGraphMouse extends EditingModalGraphMouse<IVertex, IEdge> {
 	 * @param edgeFactory
 	 * @param edgePopup
 	 * @param vertexPopup
+	 * @param vertexCreatePopup
 	 */
 	public GravisModalGraphMouse(RenderContext<IVertex, IEdge> rc,
 			Factory<IVertex> vertexFactory, Factory<IEdge> edgeFactory,
-			JPopupMenu edgePopup, JPopupMenu vertexPopup) {
+			JPopupMenu edgePopup, JPopupMenu vertexPopup,
+			CreateVertexMenu vertexCreatePopup) {
 
 		super(rc, vertexFactory, edgeFactory);
 
@@ -47,7 +48,9 @@ class GravisModalGraphMouse extends EditingModalGraphMouse<IVertex, IEdge> {
 			((GravisPopupGraphMousePlugin) this.popupEditingPlugin)
 					.setEdgePopup(edgePopup);
 			((GravisPopupGraphMousePlugin) this.popupEditingPlugin)
-			.setVertexPopup(vertexPopup);
+					.setVertexPopup(vertexPopup);
+			((GravisPopupGraphMousePlugin) this.popupEditingPlugin)
+			.setVertexCreatePopup(vertexCreatePopup);
 		}
 	}
 
@@ -60,7 +63,8 @@ class GravisModalGraphMouse extends EditingModalGraphMouse<IVertex, IEdge> {
 	 */
 	@Override
 	protected void loadPlugins() {
-		this.pickingPlugin = new PickingGraphMousePlugin<IVertex, IEdge>();
+		// GravisPickingGraphMousePlugin class used
+		this.pickingPlugin = new GravisPickingGraphMousePlugin();
 		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<IVertex, IEdge>();
 		this.translatingPlugin = new TranslatingGraphMousePlugin(
 				InputEvent.BUTTON1_MASK);
@@ -68,15 +72,64 @@ class GravisModalGraphMouse extends EditingModalGraphMouse<IVertex, IEdge> {
 				new CrossoverScalingControl(), 0, this.in, this.out);
 		this.rotatingPlugin = new RotatingGraphMousePlugin();
 		this.shearingPlugin = new ShearingGraphMousePlugin();
-		this.editingPlugin = new EditingGraphMousePlugin<IVertex, IEdge>(
+		// GravisEditingGraphMousePlugin class used
+		this.editingPlugin = new GravisEditingGraphMousePlugin(
 				this.vertexFactory, this.edgeFactory);
 		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<IVertex, IEdge>();
-		this.annotatingPlugin = new AnnotatingGraphMousePlugin<IVertex, IEdge>(rc);
-		// GravisPopupGraphMousePlugin class needed
+		this.annotatingPlugin = new AnnotatingGraphMousePlugin<IVertex, IEdge>(
+				rc);
+		// GravisPopupGraphMousePlugin class used
 		this.popupEditingPlugin = new GravisPopupGraphMousePlugin(
 				this.vertexFactory, this.edgeFactory);
 		this.add(scalingPlugin);
 		this.setMode(Mode.EDITING);
+	}
+
+	@Override
+	protected void setPickingMode() {
+		remove(this.translatingPlugin);
+		remove(this.rotatingPlugin);
+		remove(this.shearingPlugin);
+		remove(this.editingPlugin);
+		remove(this.annotatingPlugin);
+		add(this.pickingPlugin);
+		add(this.animatedPickingPlugin);
+		add(this.popupEditingPlugin);
+	}
+
+	@Override
+	protected void setTransformingMode() {
+		remove(this.pickingPlugin);
+		remove(this.animatedPickingPlugin);
+		remove(this.editingPlugin);
+		remove(this.annotatingPlugin);
+		add(this.translatingPlugin);
+		add(this.rotatingPlugin);
+		add(this.shearingPlugin);
+		add(this.popupEditingPlugin);
+	}
+
+	protected void setEditingMode() {
+		remove(this.pickingPlugin);
+		remove(this.animatedPickingPlugin);
+		remove(this.translatingPlugin);
+		remove(this.rotatingPlugin);
+		remove(this.shearingPlugin);
+		remove(this.labelEditingPlugin);
+		remove(this.annotatingPlugin);
+		add(this.editingPlugin);
+		add(this.popupEditingPlugin);
+	}
+
+	protected void setAnnotatingMode() {
+		remove(this.pickingPlugin);
+		remove(this.animatedPickingPlugin);
+		remove(this.translatingPlugin);
+		remove(this.rotatingPlugin);
+		remove(this.shearingPlugin);
+		remove(this.labelEditingPlugin);
+		remove(this.editingPlugin);
+		remove(this.popupEditingPlugin);
 	}
 
 	/*

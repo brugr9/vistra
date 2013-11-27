@@ -189,7 +189,8 @@ class Core implements ICore {
 	}
 
 	@Override
-	public void executeTraverser(TraversalChangeListener listener) throws Exception {
+	public void executeTraverser(TraversalChangeListener listener)
+			throws Exception {
 		try {
 			this.iteratorManager.setListIterator(this.traversal
 					.execute(listener));
@@ -346,12 +347,32 @@ class Core implements ICore {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.ICore#exportGraph(ch.bfh.bti7301.hs2013
+	 * .gravis.core.graph.IGravisGraph, java.io.File)
+	 */
 	@Override
-	public void exportGraph(IGravisGraph graph) throws Exception {
+	public void exportGraph(IGravisGraph graph, File file) throws Exception {
 		try {
-			this.graphManager.exportGraph(graph);
+			this.graphManager.exportGraph(graph, file);
 		} catch (Exception e) {
 			throw e;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#selectGraph(ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph)
+	 */
+	@Override
+	public void selectGraph(IGravisGraph graph) {
+		try {
+			this.traversal.setParameter(graph);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

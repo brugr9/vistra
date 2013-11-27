@@ -1,5 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.gui.visualization.popup;
 
+import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
@@ -14,16 +15,28 @@ public class VertexMenu extends JPopupMenu {
 
 	private static final long serialVersionUID = 3273304014704565148L;
 
+	private final VertexPropertyMenuItem vertexPropertyMenuItem;
+	
 	/**
 	 * 
 	 * @param vViewer
 	 */
 	public VertexMenu(VisualizationViewer<IVertex, IEdge> vViewer) {
 		super("Knoten");
+		
+		this.vertexPropertyMenuItem = new VertexPropertyMenuItem(vViewer);
 		this.add(new StartVertexCheckBox(vViewer));
 		this.add(new EndVertexCheckBox(vViewer));
-		//this.add(new tdmCheckBox());
-		// this.addSeparator();
-		// this.add(new DeleteVertexMenuItem<GraphElements.MyVertex>());
+		this.addSeparator();
+		this.add(this.vertexPropertyMenuItem);
+		this.addSeparator();
+		this.add(new DeleteVertexMenuItem(vViewer));
+	}
+
+	/**
+	 * @param rootFrame
+	 */
+	public void setRootFrame(JFrame rootFrame) {
+		this.vertexPropertyMenuItem.setRootFrame(rootFrame);
 	}
 }

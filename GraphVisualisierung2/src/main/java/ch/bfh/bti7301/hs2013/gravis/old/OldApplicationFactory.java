@@ -83,20 +83,22 @@ public final class OldApplicationFactory {
 			e.printStackTrace();
 		}
 
-		Graph<IVertex, IEdge> graph = GraphFactory.createGraph();
+		Graph<IVertex, IEdge> graph = GraphFactory.createIGravisGraph();
 		Layout<IVertex, IEdge> layout = GuiFactory.createLayout(graph, new PointTransformer());
 		GravisVisualizationViewer visualizationViewer = new
 		GravisVisualizationViewer(layout);
-		VisualizationPanel visualizationPanel = new VisualizationPanel(
-		visualizationViewer);
 		
-		OldIGravisMainListener mainWindowListener = new OldMainWindowListener(
-				gravisCore);
+		
+		OldMainWindowListener mainWindowListener = new OldMainWindowListener(
+				gravisCore, visualizationViewer);
+		VisualizationPanel visualizationPanel = new VisualizationPanel(
+				visualizationViewer, mainWindowListener);
 		JFrame mainWindow = new OldGravisMainWindow("Test", visualizationPanel,
 				mainWindowListener);
 		// new OldGravisMainWindow(title, graphPanel, mainWindowListener);
 
 		mainWindowListener.addObserver(visualizationPanel);
+		visualizationPanel.setRootFrame(mainWindow);
 
 		return mainWindow;
 	}

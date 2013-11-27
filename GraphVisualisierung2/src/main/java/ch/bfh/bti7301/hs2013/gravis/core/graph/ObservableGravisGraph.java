@@ -89,7 +89,9 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 		this.gravisGraph.setId(graphId);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#getEdgeType()
 	 */
 	@Override
@@ -97,21 +99,54 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 		return this.gravisGraph.getEdgeType();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#setEdgeType(edu.uci.ics.jung.graph.util.EdgeType)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#setEdgeType(edu.
+	 * uci.ics.jung.graph.util.EdgeType)
 	 */
 	@Override
 	public void setEdgeType(EdgeType edgeType) {
 		this.gravisGraph.setEdgeType(edgeType);
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphItemUpdate#updateState(ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem, ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphItemUpdate#updateState(
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem,
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
 	 */
 	@Override
 	public void updateState(IGraphItem graphItem, State state) {
 		graphItem.setState(state);
 		this.fireGraphEvent(GraphFactory.createGraphEvent(this, graphItem));
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsVertexId(java.lang.String)
+	 */
+	@Override
+	public boolean containsVertexId(String vertexId) {
+		return this.gravisGraph.containsVertexId(vertexId);
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsEdgeId(java.lang.String)
+	 */
+	@Override
+	public boolean containsEdgeId(String edgeId) {
+		return this.gravisGraph.containsEdgeId(edgeId);
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsItemId(java.lang.String)
+	 */
+	@Override
+	public boolean containsItemId(String itemId) {
+		return this.gravisGraph.containsItemId(itemId);
 	}
 
 }

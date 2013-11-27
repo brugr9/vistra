@@ -4,6 +4,7 @@ import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.graphml.GraphMetadata;
 import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;
@@ -14,8 +15,6 @@ import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;
  */
 public class GraphTransformer implements Transformer<GraphMetadata, IGravisGraph> {
 
-	private final static String DESCRIPTION_PROPERTY = "description";
-	
 	/* (non-Javadoc)
 	 * @see org.apache.commons.collections15.Transformer#transform(java.lang.Object)
 	 */
@@ -28,8 +27,8 @@ public class GraphTransformer implements Transformer<GraphMetadata, IGravisGraph
 		newGraph.setId(graphMeta.getId());
 		newGraph.setEdgeType(edgeType);
 		
-		if (graphMeta.getProperty(DESCRIPTION_PROPERTY) != null) {
-			newGraph.setDescription(graphMeta.getProperty(DESCRIPTION_PROPERTY)
+		if (graphMeta.getProperty(GravisConstants.G_DESCRIPTION) != null) {
+			newGraph.setDescription(graphMeta.getProperty(GravisConstants.G_DESCRIPTION)
 					.trim());
 		}
 		

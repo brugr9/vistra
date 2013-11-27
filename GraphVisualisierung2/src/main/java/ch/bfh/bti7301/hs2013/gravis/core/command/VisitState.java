@@ -17,7 +17,7 @@ class VisitState extends AbstractCommonVisualizationState {
 	 * @param changeListener
 	 */
 	protected VisitState(List<IGraphItem> graphItemHistory) {
-		super(GravisColor.YELLOW, graphItemHistory);
+		super(GravisColor.LIGHT_YELLOW, graphItemHistory);
 	}
 
 	/*

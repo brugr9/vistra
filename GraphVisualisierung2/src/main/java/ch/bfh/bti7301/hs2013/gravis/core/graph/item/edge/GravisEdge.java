@@ -1,9 +1,8 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge;
 
-import java.awt.Color;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -11,15 +10,13 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
  */
 class GravisEdge extends AbstractGraphItem implements IEdge {
 
-	private final static Color DEFAULT_EDGE_COLOR = GravisColor.BLACK;
-	
 	private double weight;
 
 	protected GravisEdge() {
 		super();
 
-		this.weight = 1.0;
-		this.setColor(DEFAULT_EDGE_COLOR);
+		this.weight = GravisConstants.E_WEIGHT_DEFAULT;
+		this.setColor(GravisConstants.E_COLOR_DEFAULT);
 	}
 
 	/*

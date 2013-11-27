@@ -31,9 +31,10 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	protected GravisGraph(Graph<IVertex, IEdge> delegate) {
 		super(delegate);
 
-		this.graphId = "Graph " + counter++;
-		this.graphDescription = "Graph " + counter++;
+		this.graphId = "Graph " + counter;
+		this.graphDescription = "Graph " + counter;
 		this.edgeType = EdgeType.DIRECTED;
+		counter++;
 	}
 
 	/*
@@ -80,8 +81,8 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * .lang.String)
 	 */
 	@Override
-	public void setDescription(String graphName) {
-		this.graphDescription = graphName;
+	public void setDescription(String graphDescription) {
+		this.graphDescription = graphDescription.trim();
 	}
 
 	/*
@@ -101,7 +102,7 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	 */
 	@Override
 	public void setId(String graphId) {
-		this.graphId = graphId;
+		this.graphId = graphId.trim();
 	}
 
 	/* (non-Javadoc)
@@ -120,4 +121,46 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 		this.edgeType = edgeType;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsVertexId
+	 * (java.lang.String)
+	 */
+	@Override
+	public boolean containsVertexId(String vertexId) {
+		for (IVertex vertex : this.getVertices()) {
+			if (vertex.getId().equals(vertexId.trim())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsEdgeId(java
+	 * .lang.String)
+	 */
+	@Override
+	public boolean containsEdgeId(String edgeId) {
+		for (IEdge edge : this.getEdges()) {
+			if (edge.getId().equals(edgeId.trim())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsItemId(java.lang.String)
+	 */
+	@Override
+	public boolean containsItemId(String itemId) {
+		return this.containsVertexId(itemId) || this.containsEdgeId(itemId);
+	}
+	
 }

@@ -6,7 +6,10 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 import ch.bfh.bti7301.hs2013.gravis.core.util.comparator.VertexPaintedResultComparator;
+import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeWeightNumberTransformer;
+import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
 import edu.uci.ics.jung.algorithms.util.MapBinaryHeap;
 
 /**
@@ -142,10 +145,12 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			this.setSuccessorMessage(graph, selectedVertex);
 			selectedVertex.setDone(true);
 			if (this.updateEndVertexMessage(graph, startVertex, selectedVertex)) {
+				this.showShortestPath(graph, startVertex, selectedVertex);
 				return;
 			}
 
 			graph.updateState(selectedVertex, State.SOLUTION);
+			this.updatePathColor(graph, selectedVertex);
 
 			this.updateAdjacentVertexDistances(graph, selectedVertex, prioQueue);
 		}
@@ -269,4 +274,43 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		}
 	}
 
+	/**
+	 * @param graph
+	 * @param selectedVertex
+	 */
+	private void updatePathColor(IRestrictedGraph graph,
+			IRestrictedVertex selectedVertex) {
+		
+		Collection<? extends IRestrictedVertex> predecessors = graph.
+				getPredecessors(selectedVertex);
+		
+		for (IRestrictedVertex vertex : predecessors) {
+			
+			if (vertex.getColor() == GravisColor.LIGHT_GREEN) {
+				Collection<? extends IRestrictedEdge> edgeSet = graph.
+						findEdgeSet(vertex, selectedVertex);
+				
+				for (IRestrictedEdge edge : edgeSet) {
+					// TODO in einem Schritt und mit fetter Markierung auf guen wechseln
+					// TODO bei visit auch markieren
+					graph.updateState(edge, State.SOLUTION);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * @param graph
+	 * @param startVertex
+	 * @param selectedVertex
+	 */
+	private void showShortestPath(IRestrictedGraph graph,
+			IRestrictedVertex startVertex, IRestrictedVertex selectedVertex) {
+		
+		// TODO
+//		DijkstraShortestPath<IRestrictedVertex, IRestrictedEdge> path = 
+//				new DijkstraShortestPath<IRestrictedVertex, IRestrictedEdge>(graph, 
+//						null);
+	}
+	
 }

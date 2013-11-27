@@ -56,7 +56,8 @@ public interface IGraphManager extends IParameterManager {
 
 	/**
 	 * @param graph
+	 * @param file 
 	 */
-	public abstract void exportGraph(IGravisGraph graph) throws Exception;
+	public abstract void exportGraph(IGravisGraph graph, File file) throws Exception;
 
 }

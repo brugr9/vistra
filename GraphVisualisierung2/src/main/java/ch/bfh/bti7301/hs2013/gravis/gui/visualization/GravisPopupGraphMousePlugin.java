@@ -11,6 +11,7 @@ import org.apache.commons.collections15.Factory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.gui.visualization.popup.GraphItemMenuListener;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;
@@ -25,9 +26,11 @@ import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;
 public class GravisPopupGraphMousePlugin extends
 		EditingPopupGraphMousePlugin<IVertex, IEdge> {
 
-	private JPopupMenu edgePopup;
+	private JPopupMenu edgePopup = null;
 
-	private JPopupMenu vertexPopup;
+	private JPopupMenu vertexPopup = null;
+
+	private JPopupMenu vertexCreatePopup = null;
 
 	/**
 	 * 
@@ -72,6 +75,15 @@ public class GravisPopupGraphMousePlugin extends
 					this.edgePopup.show(vViewer, e.getX(), e.getY());
 
 				}
+
+				if (edge == null && vertex == null
+						&& this.vertexCreatePopup != null) {
+					if (this.vertexCreatePopup instanceof GraphItemMenuListener) {
+						((GraphItemMenuListener) this.vertexCreatePopup)
+								.setGraphItemLocation(point);
+					}
+					this.vertexCreatePopup.show(vViewer, e.getX(), e.getY());
+				}
 			}
 		}
 	}
@@ -83,10 +95,6 @@ public class GravisPopupGraphMousePlugin extends
 	 * @param popUp
 	 */
 	private void updateItemMenu(IGraphItem item, Point2D point, JPopupMenu popUp) {
-		if (popUp == null) {
-			return;
-		}
-
 		for (Component comp : popUp.getComponents()) {
 			if (comp instanceof GraphItemMenuListener) {
 				((GraphItemMenuListener) comp).setGraphItemAndView(item);
@@ -111,6 +119,15 @@ public class GravisPopupGraphMousePlugin extends
 	 */
 	public void setVertexPopup(JPopupMenu vertexPopup) {
 		this.vertexPopup = vertexPopup;
+	}
+
+	/**
+	 * Setter for the vertex create popup.
+	 * 
+	 * @param vertexPopup
+	 */
+	public void setVertexCreatePopup(JPopupMenu vertexCreatePopup) {
+		this.vertexCreatePopup = vertexCreatePopup;
 	}
 
 }

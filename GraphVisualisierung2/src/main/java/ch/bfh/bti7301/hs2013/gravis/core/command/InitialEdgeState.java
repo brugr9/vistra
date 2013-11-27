@@ -12,11 +12,11 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 public class InitialEdgeState extends AbstractCommonVisualizationState {
 
 	/**
-	 * @param stateColor
+	 * @param color
 	 * @param graphItemHistory
 	 */
-	public InitialEdgeState(Color stateColor, List<IGraphItem> graphItemHistory) {
-		super(stateColor, graphItemHistory);
+	public InitialEdgeState(Color color, List<IGraphItem> graphItemHistory) {
+		super(color, graphItemHistory);
 	}
 
 	/*

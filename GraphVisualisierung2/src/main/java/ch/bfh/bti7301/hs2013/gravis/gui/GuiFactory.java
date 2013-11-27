@@ -2,6 +2,8 @@ package ch.bfh.bti7301.hs2013.gravis.gui;
 
 import java.awt.geom.Point2D;
 
+import javax.swing.JFrame;
+
 import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
@@ -154,6 +156,7 @@ public final class GuiFactory {
 		visualizationViewer);
 		 
 		model.addObserver(visualizationPanel);
+		// TODO set root JFram for visualizationPanel
 		return visualizationPanel;
 	}
 

@@ -4,6 +4,7 @@ import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 import edu.uci.ics.jung.io.graphml.NodeMetadata;
 
 /**
@@ -11,14 +12,6 @@ import edu.uci.ics.jung.io.graphml.NodeMetadata;
  *
  */
 public class VertexTransformer implements Transformer<NodeMetadata, IVertex> {
-
-	private final static String VERTEX_COLOR_PROPERTY = "vertexColor";
-	private final static String VERTEX_LOCATION_X_PROPERTY = "vertexLocation.x";
-	private final static String VERTEX_LOCATION_Y_PROPERTY = "vertexLocation.y";
-	private final static String START_VERTEX_PROPERTY = "startVertex";
-	private final static String END_VERTEX_PROPERTY = "endVertex";
-	private final static String VERTEX_WIDTH_PROPERTY = "vertexWidth";
-	private final static String VERTEX_HEIGHT_PROPERTY = "vertexHeight";
 
 	private final VertexFactory vertexFactory;
 	
@@ -34,20 +27,20 @@ public class VertexTransformer implements Transformer<NodeMetadata, IVertex> {
 		IVertex vertex = this.vertexFactory.create();
 
 		vertex.setId(vertexMeta.getId());
-		vertex.setColor(ValueTransformer.transformColor(vertexMeta
-				.getProperty(VERTEX_COLOR_PROPERTY)));
+		vertex.setColor(ValueTransformer.transformStringToColor(vertexMeta
+				.getProperty(GravisConstants.V_COLOR)));
 		
 		vertex.setLocation(ValueTransformer.transformLocation(vertexMeta
-				.getProperty(VERTEX_LOCATION_X_PROPERTY), vertexMeta
-				.getProperty(VERTEX_LOCATION_Y_PROPERTY)));
+				.getProperty(GravisConstants.V_LOC_X), vertexMeta
+				.getProperty(GravisConstants.V_LOC_Y)));
 		vertex.setStart(ValueTransformer.transformBoolean(vertexMeta
-				.getProperty(START_VERTEX_PROPERTY)));
+				.getProperty(GravisConstants.V_START)));
 		vertex.setEnd(ValueTransformer.transformBoolean(vertexMeta
-				.getProperty(END_VERTEX_PROPERTY)));
+				.getProperty(GravisConstants.V_END)));
 		vertex.setWidth(ValueTransformer.transformDouble(vertexMeta
-				.getProperty(VERTEX_WIDTH_PROPERTY)));
+				.getProperty(GravisConstants.V_WIDTH)));
 		vertex.setHeight(ValueTransformer.transformDouble(vertexMeta
-				.getProperty(VERTEX_HEIGHT_PROPERTY)));
+				.getProperty(GravisConstants.V_HEIGHT)));
 		
 		return vertex;
 	}

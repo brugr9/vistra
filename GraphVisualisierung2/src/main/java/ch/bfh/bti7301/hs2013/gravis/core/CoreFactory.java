@@ -146,11 +146,4 @@ public final class CoreFactory {
 		return new TraversalChangeEvent(source, message);
 	}
 
-	/**
-	 * @param source
-	 * @return TraversalChangeEvent
-	 */
-	public static TraversalChangeEvent createTraversalChangeEvent(Object source) {
-		return new TraversalChangeEvent(source);
-	}
 }

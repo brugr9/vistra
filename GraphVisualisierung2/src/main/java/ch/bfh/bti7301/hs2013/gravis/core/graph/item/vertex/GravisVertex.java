@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
 /**
  * A vertex.
@@ -16,44 +16,37 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
  */
 class GravisVertex extends AbstractGraphItem implements IVertex {
 
-	private final static Color START_COLOR = GravisColor.GRAY;
-	
-	private final static Color END_COLOR = GravisColor.ORANGE;
-	
-	private final static  double DEFAULT_WIDTH = 60.0;
-	
-	private final static double DEFAULT_HEIGHT = 40.0;
-	
 	/**
 	 * A field for the start position.
 	 */
 	private boolean start;
-	
+
 	/**
 	 * A field for the end position.
 	 */
 	private boolean end;
-	
+
 	private double width;
-	
+
 	private double height;
-	
+
 	private Point2D location;
-	
+
 	private Color tempColor;
-	
+
 	/**
 	 * Main constructor setting start and end to false both by default.
 	 */
 	protected GravisVertex() {
 		super();
-		
+
 		this.tempColor = this.getColor();
-		this.setStart(false);
-		this.setEnd(false);
-		this.width = DEFAULT_WIDTH;
-		this.height = DEFAULT_HEIGHT;
-		this.location = new Point();
+		this.setStart(GravisConstants.V_START_DEFAULT);
+		this.setEnd(GravisConstants.V_END_DEFAULT);
+		this.width = GravisConstants.V_WIDTH_DEFAULT;
+		this.height = GravisConstants.V_HEIGHT_DEFAULT;
+		this.location = new Point(GravisConstants.V_LOC_X_DEFAULT,
+				GravisConstants.V_LOC_Y_DEFAULT);
 	}
 
 	@Override
@@ -68,19 +61,26 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 
 	@Override
 	public void setStart(boolean start) {
-		super.setColor(start ? START_COLOR : (this.isEnd() ? END_COLOR : this.tempColor));
+		super.setColor(start ? GravisConstants.V_START_COLOR
+				: (this.isEnd() ? GravisConstants.V_END_COLOR : this.tempColor));
 		this.start = start;
 	}
 
 	@Override
 	public void setEnd(boolean end) {
-		super.setColor(end ? (this.isStart() ? START_COLOR : END_COLOR) : 
-			(this.isStart() ? START_COLOR : this.tempColor));
+		super.setColor(end ? (this.isStart() ? GravisConstants.V_START_COLOR
+				: GravisConstants.V_END_COLOR)
+				: (this.isStart() ? GravisConstants.V_START_COLOR
+						: this.tempColor));
 		this.end = end;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#setColor(java.awt.Color)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#setColor
+	 * (java.awt.Color)
 	 */
 	@Override
 	public void setColor(Color color) {
@@ -88,7 +88,9 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 		this.tempColor = color;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.common.IVertex#getLocation()
 	 */
 	@Override
@@ -96,47 +98,67 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 		return this.location;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.common.IVertex#setLocation(java.awt.geom.Point2D)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.common.IVertex#setLocation(java.awt.geom
+	 * .Point2D)
 	 */
 	@Override
 	public void setLocation(Point2D location) {
 		this.location = location;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#getWidth()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#getWidth()
 	 */
 	@Override
 	public double getWidth() {
 		return this.width;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#setWidth(double)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#setWidth(
+	 * double)
 	 */
 	@Override
 	public void setWidth(double width) {
 		this.width = width;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#getHeight()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#getHeight()
 	 */
 	@Override
 	public double getHeight() {
 		return this.height;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#setHeight(double)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex#setHeight
+	 * (double)
 	 */
 	@Override
 	public void setHeight(double height) {
 		this.height = height;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -144,8 +166,11 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 		return super.toString();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#clone()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#clone()
 	 */
 	@Override
 	public GravisVertex clone() throws CloneNotSupportedException {
@@ -154,5 +179,4 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 		return vertexClone;
 	}
 
-	
 }
