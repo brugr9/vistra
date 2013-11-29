@@ -37,16 +37,16 @@ abstract class AbstractCommonVisualizationState extends
 		IGraphItem oldGraphItemRef = this.checkOldObject(
 				oldState.getOldGraphItemClone(), currentItem);
 
-		if (currentItem.isTagged()) {
-			complexCommand.add(new StrokeWidthCommand(currentItem, currentItem
-					.getStrokeWidth(), this.getItemStrokeWidth(currentItem)));
-		}
-
-		IGraphItem tempRef = currentItem.isTagged() ? currentItem
-				: oldGraphItemRef;
+		System.out.println("common: " + currentItem.getId() + ", " + currentItem.isTagged() + ", " +
+				currentItem.getStrokeWidth() + ", old: " + oldState.getOldGraphItemClone().getId() + ", " + 
+				oldState.getOldGraphItemClone().isTagged() + ", " + 
+				oldState.getOldGraphItemClone().getStrokeWidth());
 		
-		complexCommand.add(new StrokeWidthCommand(currentItem, tempRef
-				.getStrokeWidth(), this.getItemStrokeWidth(tempRef)));
+		if (!currentItem.isTagged()) {
+			complexCommand.add(new StrokeWidthCommand(currentItem,
+					oldGraphItemRef.getStrokeWidth(), this
+							.getItemStrokeWidth(oldGraphItemRef)));
+		}
 		complexCommand.add(new ColorCommand(currentItem,
 				currentItem.getColor(), this.stateColor));
 		complexCommand.add(new StateCommand(currentItem,
@@ -54,10 +54,12 @@ abstract class AbstractCommonVisualizationState extends
 
 		this.addVisualizationCommands(currentItem, complexCommand);
 
-		this.setPredecessorCommand(new Step(new StrokeWidthCommand(currentItem,
-				this.getItemStrokeWidth(tempRef), tempRef
-						.getStrokeWidth())));
-
+		if (!currentItem.isTagged()) {
+			this.setPredecessorCommand(new Step(new StrokeWidthCommand(
+					currentItem, this.getItemStrokeWidth(oldGraphItemRef),
+					oldGraphItemRef.getStrokeWidth())));
+		}
+		
 		try {
 			this.setOldGraphItemClone(this.isSameObject(currentItem) ? oldState
 					.getOldGraphItemClone() : currentItem.clone());

@@ -89,6 +89,11 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 					.getColor(), GravisColor.WHITE));
 		} 
 		
+		if (currentItem.isTagged()) {
+			complexCommand.add(new StrokeWidthCommand(currentItem, currentItem
+					.getStrokeWidth(), this.getItemStrokeWidth(currentItem)));
+		}
+		
 		complexCommand.add(new CommentCommand(currentItem, this
 				.stateUndoMessage(currentItem), this
 				.stateDoMessage(currentItem)));

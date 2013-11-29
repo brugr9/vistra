@@ -42,35 +42,35 @@ class ActivationState extends AbstractVisualizationState {
 		IGraphItem graphItemRef = this.checkOldObject(
 				oldState.getOldGraphItemClone(), currentItem);
 
-		if (currentItem.isTagged()) {
-			complexCommand.add(new StrokeWidthCommand(currentItem, currentItem
-					.getStrokeWidth(), this.getItemStrokeWidth(currentItem)));
+		System.out.println("active: " + currentItem.getId() + ", " + currentItem.isTagged() + ", " +
+					currentItem.getStrokeWidth() + ", old: " + oldState.getOldGraphItemClone().getId() + ", " + 
+							oldState.getOldGraphItemClone().isTagged() + ", " + 
+							oldState.getOldGraphItemClone().getStrokeWidth() + ", " +
+							graphItemRef.getStrokeWidth());
+		
+		if (!currentItem.isTagged()) {
+			complexCommand.add(new StrokeWidthCommand(currentItem, graphItemRef
+					.getStrokeWidth(), this.getItemStrokeWidth(graphItemRef)));
 		}
-
-		IGraphItem tempItem = currentItem.isTagged() ? currentItem
-				: graphItemRef;
-		complexCommand.add(new StrokeWidthCommand(currentItem, tempItem
-				.getStrokeWidth(), this.getItemStrokeWidth(tempItem)));
-
 		if (currentItem.isVisible()) {
-			complexCommand.add(new ColorCommand(currentItem, tempItem
+			complexCommand.add(new ColorCommand(currentItem, graphItemRef
 					.getColor(), this.stateColor));
 		}
-
 		complexCommand.add(new StateCommand(currentItem, graphItemRef
 				.getState(), this.getState()));
 
 		this.addVisualizationCommands(currentItem, complexCommand);
 
-		Step predecessorComplexCommand = new Step(new StrokeWidthCommand(
-				currentItem, this.getItemStrokeWidth(tempItem),
-				tempItem.getStrokeWidth()));
-
+		Step predecessorComplexCommand = new Step();
+		if (!currentItem.isTagged()) {
+			predecessorComplexCommand.add(new Step(new StrokeWidthCommand(
+					currentItem, this.getItemStrokeWidth(graphItemRef),
+					graphItemRef.getStrokeWidth())));
+		}
 		if (currentItem.isVisible()) {
 			predecessorComplexCommand.add(new ColorCommand(currentItem,
-					this.stateColor, tempItem.getColor()));
+					this.stateColor, graphItemRef.getColor()));
 		}
-
 		predecessorComplexCommand.add(new StateCommand(currentItem, this
 				.getState(), graphItemRef.getState()));
 		this.setPredecessorCommand(predecessorComplexCommand);
