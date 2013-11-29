@@ -8,13 +8,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class ColorCommand extends EmptyStep {
-
-	private final IGraphItem item;
-
-	private final Color newColor;
-	
-	private final Color oldColor;
+class ColorCommand extends VisibleCommand {
 
 	/**
 	 * 
@@ -23,33 +17,17 @@ class ColorCommand extends EmptyStep {
 	 * @param newColor
 	 */
 	protected ColorCommand(IGraphItem item, Color oldColor, Color newColor) {
-		super();
-
-		this.item = item;
-		this.oldColor = oldColor;
-		this.newColor = newColor;
+		super(item, oldColor, newColor);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStep#execute()
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyStep#isLocked()
 	 */
 	@Override
-	public String execute() {
-		this.item.setColor(this.newColor);
-		return "";
+	public boolean isLocked() {
+		return !this.item.isVisible();
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStep#unExecute()
-	 */
-	@Override
-	public String unExecute() {
-		this.item.setColor(this.oldColor);
-		return "";
-	}
-
+	
+	
+	
 }

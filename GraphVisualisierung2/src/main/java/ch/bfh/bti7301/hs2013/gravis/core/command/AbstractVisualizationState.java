@@ -1,11 +1,11 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import java.awt.Color;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
@@ -17,22 +17,71 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 
 	protected final Color stateColor;
 
-	protected final List<IGraphItem> graphItemHistory;
+	private final Queue<IStep> queuedCommands;
 
-	private IStep predecessorCommand;
+	private boolean taggedDone, visibleDone;
+
+	private IStep reverseVisibleCommand, reverseTaggedCommand;
 
 	/**
 	 * 
 	 * @param color
-	 * @param graphItemHistory
 	 */
-	protected AbstractVisualizationState(Color color,
-			List<IGraphItem> graphItemHistory) {
+	protected AbstractVisualizationState(Color color) {
+		super();
 
 		this.stateColor = color;
-		this.graphItemHistory = graphItemHistory;
 		// null object
-		this.predecessorCommand = new EmptyStep();
+		this.queuedCommands = new LinkedList<>();
+		this.taggedDone = this.visibleDone = false;
+	}
+
+	/**
+	 * @param currentItem
+	 * @param complexCommand
+	 */
+	protected void addVisibleTaggedCommands(IGraphItem currentItem,
+			Step complexCommand) {
+		IStep command = null;
+
+		if (!currentItem.isVisible() && !this.visibleDone) {
+			// execute only one time
+			this.visibleDone = true;
+			command = new VisibleCommand(currentItem, currentItem.getColor(),
+					GravisColor.WHITE);
+			this.reverseVisibleCommand = new VisibleCommand(currentItem,
+					GravisColor.WHITE, currentItem.getColor());
+			command.execute();
+			complexCommand.add(command);
+		}
+
+		if (currentItem.isTagged() && !this.taggedDone) {
+			// execute only one time
+			this.taggedDone = true;
+			command = new TaggedStrokeCommand(currentItem,
+					currentItem.getStrokeWidth(),
+					this.getItemStrokeWidth(currentItem));
+			this.reverseTaggedCommand = new TaggedStrokeCommand(currentItem,
+					this.getItemStrokeWidth(currentItem),
+					currentItem.getStrokeWidth());
+			command.execute();
+			complexCommand.add(command);
+		}
+
+		if (!currentItem.isTagged()) {
+			this.taggedDone = false;
+			if (this.reverseTaggedCommand != null) {
+				this.reverseTaggedCommand.execute();
+			}
+		}
+
+		if (currentItem.isVisible()) {
+			this.visibleDone = false;
+			if (this.reverseVisibleCommand != null) {
+				this.reverseVisibleCommand.execute();
+			}
+		}
+
 	}
 
 	/**
@@ -41,26 +90,11 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	 */
 	protected void addVisualizationCommands(IGraphItem currentItem,
 			Step complexCommand) {
-
 		IStep command = null;
+
 		if (!currentItem.hasNoResult()) {
 			command = new ResultCommand(currentItem,
 					currentItem.getPaintedResult(), currentItem.getResult());
-			command.execute();
-			complexCommand.add(command);
-		}
-
-		if (!currentItem.isVisible()) {
-			command = new ColorCommand(currentItem, currentItem.getColor(),
-					GravisColor.WHITE);
-			command.execute();
-			complexCommand.add(command);
-		}
-
-		if (currentItem.isTagged()) {
-			command = new StrokeWidthCommand(currentItem,
-					currentItem.getStrokeWidth(),
-					this.getItemStrokeWidth(currentItem));
 			command.execute();
 			complexCommand.add(command);
 		}
@@ -89,16 +123,29 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	}
 
 	@Override
-	public IStep getPredecessorCommand() {
-		return this.predecessorCommand;
+	public Queue<IStep> getQueuedCommands() {
+		return this.queuedCommands;
 	}
 
 	/**
-	 * @param predecessorCommand
-	 *            the predecessorCommand to set
+	 * 
+	 * @param oldState
 	 */
-	protected void setPredecessorCommand(IStep predecessorCommand) {
-		this.predecessorCommand = predecessorCommand;
+	protected void processQueuedCommands(IVisualizationState oldState) {
+		Queue<IStep> tempQueue = new LinkedList<>();
+
+		while (!oldState.getQueuedCommands().isEmpty()) {
+			IStep step = oldState.getQueuedCommands().poll();
+
+			if (!step.isLocked()) {
+				step.execute();
+			} else if (oldState != this) {
+				this.getQueuedCommands().offer(step);
+			} else {
+				tempQueue.offer(step);
+			}
+		}
+		this.getQueuedCommands().addAll(tempQueue);
 	}
 
 	/**

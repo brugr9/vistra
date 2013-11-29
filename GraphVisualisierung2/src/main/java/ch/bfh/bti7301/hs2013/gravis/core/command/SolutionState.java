@@ -1,6 +1,5 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
-import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
@@ -16,11 +15,10 @@ class SolutionState extends AbstractCommonVisualizationState {
 	private State state;
 	
 	/**
-	 * @param graphItemHistory
 	 * @param changeListener
 	 */
-	protected SolutionState(List<IGraphItem> graphItemHistory) {
-		super(GravisConstants.SOLUTION_COLOR, graphItemHistory);
+	protected SolutionState() {
+		super(GravisConstants.SOLUTION_COLOR);
 		
 		this.state = State.SOLUTION;
 	}

@@ -18,4 +18,9 @@ public interface IStep {
 	 */
 	public abstract String unExecute();
 
+	/**
+	 * 
+	 * @return boolean
+	 */
+	public abstract boolean isLocked();
 }

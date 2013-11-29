@@ -20,22 +20,17 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 
 	private final List<IStep> commandList;
 	
-	private final List<IGraphItem> graphItemHistory;
-
 	private final Transformer<IGraphItem, IStep> commandTransformer;
 
 	/**
 	 * 
 	 * @param commandList
-	 * @param graphItemHistory
 	 * @param commandTransformer
 	 */
 	protected GravisGraphEventListener(List<IStep> commandList, 
-			List<IGraphItem> graphItemHistory, 
 			Transformer<IGraphItem, IStep> commandTransformer) {
 		
 		this.commandList = commandList;
-		this.graphItemHistory = graphItemHistory;
 		this.commandTransformer = commandTransformer;
 	}
 

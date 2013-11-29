@@ -1,6 +1,5 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections15.Transformer;
@@ -25,25 +24,16 @@ class CommandTransformer implements Transformer<IGraphItem, IStep> {
 
 	private IVisualizationState currentState;
 
-	/**
-	 * 
-	 * @param graphItemHistory
-	 */
-	protected CommandTransformer(List<IGraphItem> graphItemHistory) {
+	protected CommandTransformer() {
 		this.states = new HashedMap<>();
 		
 		this.states.put(State.INITIAL.toString() + V_SUFFIX, new 
-				InitialVertexState(GravisConstants.V_INITIAL_COLOR,
-				graphItemHistory));
+				InitialVertexState(GravisConstants.V_INITIAL_COLOR));
 		this.states.put(State.INITIAL.toString() + E_SUFFIX, new 
-				InitialEdgeState(GravisConstants.E_INITIAL_COLOR,
-				graphItemHistory));
-		this.states.put(State.ACTIVATION.toString(), new ActivationState(
-				graphItemHistory));
-		this.states.put(State.VISIT.toString(), new VisitState(
-				graphItemHistory));
-		this.states.put(State.SOLUTION.toString(), new SolutionState(
-				graphItemHistory));
+				InitialEdgeState(GravisConstants.E_INITIAL_COLOR));
+		this.states.put(State.ACTIVATION.toString(), new ActivationState());
+		this.states.put(State.VISIT.toString(), new VisitState());
+		this.states.put(State.SOLUTION.toString(), new SolutionState());
 
 		this.currentState = this.states.get(State.INITIAL.toString() + V_SUFFIX);
 	}

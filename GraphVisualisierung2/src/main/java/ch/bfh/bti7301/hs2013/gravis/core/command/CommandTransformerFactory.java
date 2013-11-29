@@ -1,7 +1,5 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
-import java.util.List;
-
 import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
@@ -17,12 +15,10 @@ public final class CommandTransformerFactory {
 
 	/**
 	 * 
-	 * @param graphItemHistory
 	 * @return an instance of Transformer<IGraphItem, IStep>
 	 */
-	public static Transformer<IGraphItem, IStep> createCommandTransformer(
-			List<IGraphItem> graphItemHistory) {
-		return new CommandTransformer(graphItemHistory);
+	public static Transformer<IGraphItem, IStep> createCommandTransformer() {
+		return new CommandTransformer();
 	}
 
 }

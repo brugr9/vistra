@@ -72,7 +72,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		if (this.updateEndVertexMessage(graph, startVertex, startVertex)) {
 			return;
 		}
-
+		
 		graph.updateState(State.SOLUTION, startVertex);
 		vertices.remove(startVertex);
 
@@ -97,7 +97,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 					+ vertex.getResult());
 			graph.updateState(State.ACTIVATION, vertex);
 		}
-
+		
 		this.setSuccessorMessage(graph, startVertex);
 		graph.updateState(State.ACTIVATION, startVertex);
 
@@ -140,7 +140,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 
 		while (!prioQueue.isEmpty()) {
 			IRestrictedVertex selectedVertex = prioQueue.poll();
-
+			
 			selectedVertex
 					.setComment("Das Minimum aller noch nicht zur Lösung gehörenden"
 							+ " Knoten ist "

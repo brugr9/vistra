@@ -31,4 +31,12 @@ class EmptyStep implements IStep {
 		return "";
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStep#isLocked()
+	 */
+	@Override
+	public boolean isLocked() {
+		return false;
+	}
+
 }

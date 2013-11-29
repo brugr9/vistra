@@ -1,5 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
+import java.util.Queue;
+
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 
@@ -23,7 +25,7 @@ public interface IVisualizationState {
 	public abstract State getState();
 
 	/**
-	 * @return IStep
+	 * @return Queue<IStep>
 	 */
-	public abstract IStep getPredecessorCommand();
+	public abstract Queue<IStep> getQueuedCommands();
 }

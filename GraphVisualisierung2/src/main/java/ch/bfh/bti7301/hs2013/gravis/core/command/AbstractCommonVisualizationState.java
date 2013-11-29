@@ -1,7 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import java.awt.Color;
-import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 
@@ -15,9 +14,8 @@ abstract class AbstractCommonVisualizationState extends
 	/**
 	 * @param stateColor
 	 */
-	protected AbstractCommonVisualizationState(Color stateColor,
-			List<IGraphItem> graphItemHistory) {
-		super(stateColor, graphItemHistory);
+	protected AbstractCommonVisualizationState(Color stateColor) {
+		super(stateColor);
 	}
 
 	/*
@@ -31,40 +29,45 @@ abstract class AbstractCommonVisualizationState extends
 	@Override
 	public IStep createCommand(IVisualizationState oldState,
 			IGraphItem currentItem) {
-
-		IStep command = this.getPredecessorCommand();
-		command.execute();
-		Step complexCommand = new Step(command);
+		
+		Step complexCommand = new Step();
+		IStep command = null;
+		
+		this.addVisibleTaggedCommands(currentItem, complexCommand);
+		this.processQueuedCommands(oldState);
 
 		if (!currentItem.isTagged()) {
 			command = new StrokeWidthCommand(currentItem,
 					currentItem.getStrokeWidth(), this
 							.getItemStrokeWidth(currentItem));
+			this.getQueuedCommands().offer(new StrokeWidthCommand(
+					currentItem, this.getItemStrokeWidth(currentItem),
+					currentItem.getStrokeWidth()));
 			command.execute();
 			complexCommand.add(command);
 		}
 		
-		command = new ColorCommand(currentItem,
-				currentItem.getColor(), this.stateColor);
-		command.execute();
-		complexCommand.add(command);
+		if (currentItem.isVisible()) {
+			command = new ColorCommand(currentItem, currentItem.getColor(),
+					this.stateColor);
+			command.execute();
+			complexCommand.add(command);
+		} else {
+			this.getQueuedCommands().offer(new ColorCommand(currentItem, currentItem.getColor(),
+					this.stateColor));
+		}
 		
-		command = (new StateCommand(currentItem,
-				currentItem.getState(), this.getState()));
+		command = new StateCommand(currentItem,
+				currentItem.getState(), this.getState());
 		command.execute();
 		complexCommand.add(command);
 
 		this.addVisualizationCommands(currentItem, complexCommand);
-
-		if (!currentItem.isTagged()) {
-			this.setPredecessorCommand(new StrokeWidthCommand(
-					currentItem, this.getItemStrokeWidth(currentItem),
-					currentItem.getStrokeWidth()));
-		}
-
 		currentItem.resetVisualizationValues();
 
 		return complexCommand;
 	}
+
+	
 
 }

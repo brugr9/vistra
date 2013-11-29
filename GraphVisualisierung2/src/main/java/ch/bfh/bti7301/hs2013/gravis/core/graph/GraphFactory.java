@@ -124,12 +124,10 @@ public final class GraphFactory {
 	 */
 	public static GraphEventListener<IVertex, IEdge> createGravisGraphEventListener(
 			List<IStep> commandList) {
-		List<IGraphItem> graphItemHistory = new ArrayList<>();
 		Transformer<IGraphItem, IStep> commandTransformer = CommandTransformerFactory
-				.createCommandTransformer(graphItemHistory);
+				.createCommandTransformer();
 		
-		return new GravisGraphEventListener(commandList, graphItemHistory,
-				commandTransformer);
+		return new GravisGraphEventListener(commandList, commandTransformer);
 	}
 
 }

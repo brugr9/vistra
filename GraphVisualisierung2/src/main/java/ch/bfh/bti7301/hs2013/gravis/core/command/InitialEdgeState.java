@@ -1,7 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import java.awt.Color;
-import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
@@ -16,10 +15,9 @@ public class InitialEdgeState extends AbstractCommonVisualizationState {
 	
 	/**
 	 * @param color
-	 * @param graphItemHistory
 	 */
-	public InitialEdgeState(Color color, List<IGraphItem> graphItemHistory) {
-		super(color, graphItemHistory);
+	public InitialEdgeState(Color color) {
+		super(color);
 		
 		this.state = State.INITIAL;
 	}
