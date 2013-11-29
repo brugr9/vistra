@@ -6,16 +6,14 @@ import java.util.List;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
 abstract class AbstractVisualizationState implements IVisualizationState {
-
-	private final static float VERTEX_STROKE_WIDTH = 3.0f;
-
-	private final static float EDGE_STROKE_WIDTH = 4.0f;
 
 	protected final Color stateColor;
 
@@ -24,7 +22,7 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	private IStep predecessorCommand;
 
 	private IGraphItem oldGraphItemClone;
-
+	
 	/**
 	 * 
 	 * @param color
@@ -81,14 +79,19 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	protected void addVisualizationCommands(IGraphItem currentItem,
 			Step complexCommand) {
 
-		complexCommand.add(new CommentCommand(currentItem, this
-				.stateUndoMessage(currentItem), this
-				.stateDoMessage(currentItem)));
-
 		if (!currentItem.hasNoResult()) {
 			complexCommand.add(new ResultCommand(currentItem, currentItem
 					.getPaintedResult(), currentItem.getResult()));
 		}
+		
+		if (!currentItem.isVisible()) {
+			complexCommand.add(new ColorCommand(currentItem, currentItem
+					.getColor(), GravisColor.WHITE));
+		} 
+		
+		complexCommand.add(new CommentCommand(currentItem, this
+				.stateUndoMessage(currentItem), this
+				.stateDoMessage(currentItem)));
 
 		if (!currentItem.getComment().isEmpty()) {
 			complexCommand.add(new CommentCommand(currentItem, currentItem
@@ -101,8 +104,8 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	 * @return float
 	 */
 	protected float getItemStrokeWidth(IGraphItem currentItem) {
-		return currentItem instanceof IVertex ? VERTEX_STROKE_WIDTH
-				: EDGE_STROKE_WIDTH;
+		return currentItem instanceof IVertex ? GravisConstants.V_TAGGED_STROKE
+				: GravisConstants.E_TAGGED_STROKE;
 	}
 
 	/**

@@ -7,14 +7,14 @@ import java.util.List;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class Step extends EmptyStep {
+public class Step extends EmptyStep {
 
 	private final List<IStep> nestedCommands;
 
 	/**
 	 * @param predecessorCommand
 	 */
-	protected Step(IStep command) {
+	public Step(IStep command) {
 		this();
 		this.nestedCommands.add(command);
 	}

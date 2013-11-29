@@ -56,6 +56,7 @@
 		<node id="V3">
 			<data key="vertexLocation.x">200</data>
 			<data key="vertexLocation.y">400</data>
+			<data key="endVertex">true</data>
 		</node>
 		<node id="V4">
 			<data key="vertexLocation.x">400</data>

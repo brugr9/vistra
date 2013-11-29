@@ -10,9 +10,23 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 public interface IGraphItemUpdate<I extends IRestrictedGraphItem> {
 
 	/**
-	 * @param graphItem
+	 * Traversal state will be set to the value of state argument for all
+	 * graphItems.
+	 * 
+	 * @param array
+	 *            of graphItems
 	 * @param state
 	 */
-	public abstract void updateState(I graphItem, State state);
+	@SuppressWarnings("unchecked")
+	public abstract void updateState(State state, I... graphItems);
+
+	/**
+	 * Each graphItem has own traversal state.
+	 * 
+	 * @param array
+	 *            of graphItems
+	 */
+	@SuppressWarnings("unchecked")
+	public abstract void updateState(I... graphItems);
 
 }

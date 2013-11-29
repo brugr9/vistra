@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -11,12 +12,16 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
  */
 class InitialVertexState extends AbstractCommonVisualizationState {
 
+	private State state;
+	
 	/**
 	 * @param graphItemHistory
 	 * @param color
 	 */
 	protected InitialVertexState(Color color, List<IGraphItem> graphItemHistory) {
 		super(color, graphItemHistory);
+		
+		this.state = State.INITIAL;
 	}
 
 	/*
@@ -43,6 +48,14 @@ class InitialVertexState extends AbstractCommonVisualizationState {
 	public String stateUndoMessage(IGraphItem currentItem) {
 		return "Der Knoten " + currentItem.getId()
 				+ " befindet sich nicht mehr im  Anfangszustand.";
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#getState()
+	 */
+	@Override
+	public State getState() {
+		return this.state;
 	}
 
 }

@@ -3,6 +3,8 @@
  */
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
+import java.util.List;
+
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;

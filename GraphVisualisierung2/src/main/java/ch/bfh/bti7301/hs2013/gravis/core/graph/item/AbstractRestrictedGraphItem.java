@@ -2,6 +2,9 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph.item;
 
 import java.awt.Color;
 
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
+
+
 /**
  * An restricted item.
  * 
@@ -118,6 +121,22 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 		return this.item.getState();
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#getTraversalState()
+	 */
+	@Override
+	public State getTraversalState() {
+		return this.item.getTraversalState();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setTraversalState(ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
+	 */
+	@Override
+	public void setTraversalState(State traversalState) {
+		this.item.setTraversalState(traversalState);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -159,4 +178,53 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 		return this.item.getPaintedResult();
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#getValue()
+	 */
+	@Override
+	public Object getValue() {
+		return this.item.getValue();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setValue(java.lang.Object)
+	 */
+	@Override
+	public void setValue(Object value) {
+		this.item.setValue(value);
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setVisible(boolean)
+	 */
+	@Override
+	public void setVisible(boolean visible) {
+		this.item.setVisible(visible);
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#isVisible()
+	 */
+	@Override
+	public boolean isVisible() {
+		return this.item.isVisible();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setTagged(boolean)
+	 */
+	@Override
+	public void setTagged(boolean tagged) {
+		this.item.setTagged(tagged);
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#isTagged()
+	 */
+	@Override
+	public boolean isTagged() {
+		return this.item.isTagged();
+	}
+
+	
 }

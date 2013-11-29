@@ -67,7 +67,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	private boolean visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
 		vertex1.setDone(true);
 		vertex1.appendComment("Der Knoten " + vertex1 + " wird aktiviert.");
-		graph.updateState(vertex1, State.ACTIVATION);
+		graph.updateState(State.ACTIVATION, vertex1);
 
 		vertex1.setResult(++this.counter);
 		vertex1.setComment("Der Knoten " + vertex1
@@ -77,7 +77,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 		if (this.updateEndVertexMessage(graph, vertex1)) {
 			return true;
 		}
-		graph.updateState(vertex1, State.SOLUTION);
+		graph.updateState(State.SOLUTION, vertex1);
 
 		for (IRestrictedVertex vertex2 : graph.getSuccessors(vertex1)) {
 			if (!vertex2.isDone()) {
@@ -88,7 +88,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 				}
 
 				vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
-				graph.updateState(vertex1, State.ACTIVATION);
+				graph.updateState(State.ACTIVATION, vertex1);
 			}
 		}
 
@@ -104,7 +104,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 		if (endVertex.isEnd()) {
 			endVertex.appendComment("Der Endknoten " + endVertex.getId()
 					+ " wurde erreicht.");
-			graph.updateState(endVertex, State.SOLUTION);
+			graph.updateState(State.SOLUTION, endVertex);
 			return true;
 		}
 		return false;

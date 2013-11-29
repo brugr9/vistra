@@ -60,11 +60,11 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	 */
 	private boolean visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
 		vertex1.appendComment("Der Knoten " + vertex1 + " wird aktiviert.");
-		graph.updateState(vertex1, State.ACTIVATION);
+		graph.updateState(State.ACTIVATION, vertex1);
 
 		vertex1.setDone(true);
 		vertex1.setComment("Der Knoten " + vertex1 + " wurde besucht.");
-		graph.updateState(vertex1, State.VISIT);
+		graph.updateState(State.VISIT, vertex1);
 
 		for (IRestrictedVertex vertex2 : graph.getSuccessors(vertex1)) {
 			if (!vertex2.isDone()) {
@@ -75,7 +75,7 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 				}
 				
 				vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
-				graph.updateState(vertex1, State.ACTIVATION);
+				graph.updateState(State.ACTIVATION, vertex1);
 			}
 		}
 
@@ -85,7 +85,7 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 		if (this.updateEndVertexMessage(graph, vertex1)) {
 			return true;
 		}
-		graph.updateState(vertex1, State.SOLUTION);
+		graph.updateState(State.SOLUTION, vertex1);
 		
 		return false;
 	}
@@ -99,7 +99,7 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 		if (endVertex.isEnd()) {
 			endVertex.appendComment("Der Endknoten " + endVertex.getId()
 					+ " wurde erreicht.");
-			graph.updateState(endVertex, State.SOLUTION);
+			graph.updateState(State.SOLUTION, endVertex);
 			return true;
 		}
 		return false;

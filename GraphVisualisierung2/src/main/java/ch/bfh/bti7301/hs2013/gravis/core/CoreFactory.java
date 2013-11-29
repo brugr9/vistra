@@ -50,10 +50,10 @@ public final class CoreFactory {
 			ITraversal traversal = createTraveral(GraphFactory.createIGravisGraph(),
 					algorithmManager.getDefaultAlgorithm());
 			// Iteration
-			IIteratorManager iteratorManager = createIteratorManager(createListIterator());
+//			IGravisListIterator<String> iterator = 
+//					createIteratorManager(createListIterator());
 
-			return createCore(graphManager, algorithmManager, traversal,
-					iteratorManager);
+			return createCore(graphManager, algorithmManager, traversal);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -62,17 +62,14 @@ public final class CoreFactory {
 	/**
 	 * @param graphManager
 	 * @param algorithmManager
-	 * @param traversal
-	 * @param iteratorManager
+	 * @param traversal 
 	 * @return
 	 * @throws Exception
 	 */
 	private static ICore createCore(IGraphManager graphManager,
-			IAlgorithmManager algorithmManager, ITraversal traversal,
-			IIteratorManager iteratorManager) throws Exception {
+			IAlgorithmManager algorithmManager, ITraversal traversal) throws Exception {
 		try {
-			return new Core(graphManager, algorithmManager, traversal,
-					iteratorManager);
+			return new Core(graphManager, algorithmManager, traversal);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -109,13 +106,13 @@ public final class CoreFactory {
 
 	/**
 	 * @param listIterator
-	 * @return a new instance of type IIteratorManager
+	 * @return a new instance of type IStepIterator
 	 * @throws Exception
 	 */
-	private static IIteratorManager createIteratorManager(
+	private static IGravisListIterator<String> createIteratorManager(
 			IGravisListIterator<IStep> listIterator) throws Exception {
 		try {
-			return new IteratorManager(listIterator);
+			return new StepIterator(listIterator);
 		} catch (Exception e) {
 			throw e;
 		}

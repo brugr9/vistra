@@ -107,7 +107,7 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	 */
 	@Override
 	public void setLocation(Point2D location) {
-		this.location = location;
+		this.location = (Point2D) location.clone();
 	}
 
 	/*

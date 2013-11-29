@@ -50,21 +50,21 @@ public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm {
 			while (!vertexQueue.isEmpty()) {
 				IRestrictedVertex selectedVertex = vertexQueue.poll();
 
-				graph.updateState(selectedVertex, State.ACTIVATION);
+				graph.updateState(State.ACTIVATION, selectedVertex);
 
 				selectedVertex.setResult(++this.counter);
 				if (this.updateEndVertexMessage(graph, selectedVertex)) {
 					return;
 				}
-				graph.updateState(selectedVertex, State.SOLUTION);
+				graph.updateState(State.SOLUTION, selectedVertex);
 
 				for (IRestrictedVertex successor : graph
 						.getSuccessors(selectedVertex)) {
 					if (!successor.isDone()) {
-						graph.updateState(successor, State.ACTIVATION);
+						graph.updateState(State.ACTIVATION, successor);
 
 						successor.setDone(true);
-						graph.updateState(successor, State.VISIT);
+						graph.updateState(State.VISIT, successor);
 
 						vertexQueue.offer(successor);
 					}
@@ -86,7 +86,7 @@ public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm {
 		if (endVertex.isEnd()) {
 			endVertex.appendComment("Der Endknoten " + endVertex.getId()
 					+ " wurde erreicht.");
-			graph.updateState(endVertex, State.SOLUTION);
+			graph.updateState(State.SOLUTION, endVertex);
 			return true;
 		}
 		return false;

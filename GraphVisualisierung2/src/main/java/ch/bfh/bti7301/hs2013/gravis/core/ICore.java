@@ -94,43 +94,6 @@ public interface ICore {
 	public abstract String[] getAlgorithms() throws Exception;
 
 	/**
-	 * Returns the number of steps the traversal has.
-	 * 
-	 * @return the number of steps
-	 */
-	public abstract int getGraphIteratorSize();
-
-	/**
-	 * 
-	 * @return String
-	 * @throws Exception
-	 */
-	public abstract String goToBeginning() throws Exception;
-
-	/**
-	 * 
-	 * @return String
-	 * @throws Exception
-	 */
-	public abstract String goToEnd() throws Exception;
-
-	/**
-	 * 
-	 * @return <code>true</code> if there is one more element in minimum to
-	 *         reach in direction forward after this operation
-	 * @throws Exception
-	 */
-	public abstract String goForward() throws Exception;
-
-	/**
-	 * 
-	 * @return <code>true</code> if there is one more element in minimum to
-	 *         reach in direction backward after this operation
-	 * @throws Exception
-	 */
-	public abstract String goBackward() throws Exception;
-
-	/**
 	 * Removes all vertices and edges from the graph with the given id and
 	 * returns the empty graph.
 	 * 
@@ -186,7 +149,7 @@ public interface ICore {
 	 * @param listener
 	 * @throws Exception
 	 */
-	public abstract void executeTraverser(TraversalChangeListener listener) throws Exception;
+	public abstract IGravisListIterator<String> executeTraverser(TraversalChangeListener listener) throws Exception;
 
 	/**
 	 * 
@@ -207,5 +170,23 @@ public interface ICore {
 	 * @param graph
 	 */
 	public abstract void selectGraph(IGravisGraph graph);
+	
+//	/**
+//     * Renders a traversal by executing an algorithm as given over a graph as
+//     * given. Returns an immutable list of steps generated during the execution
+//     * of the algorithm. A step contains several commands which modifies the
+//     * graph.
+//     *
+//     * @param graph
+//     * the graph to traverse
+//     * @param algorithm
+//     * the algorithm to execute
+//     * @return the traversal as a list of steps
+//     * @throws Exception
+//     */
+//    public IGravisListIterator<String> renderTraversal(IGravisGraph graph,
+//                    IAlgorithm algorithm) throws Exception;
+
+
 
 }

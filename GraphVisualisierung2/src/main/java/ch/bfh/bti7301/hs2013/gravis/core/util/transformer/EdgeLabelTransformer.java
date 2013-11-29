@@ -15,10 +15,10 @@ public class EdgeLabelTransformer implements Transformer<IEdge, String> {
 	 */
 	@Override
 	public String transform(IEdge edge) {
-		return edge.getWeight()
+		return edge.isVisible() ? (edge.getWeight()
 				+ (Double.isNaN(edge.getPaintedResult()) ? "" : " | "
 						+ ValueTransformer.round2Decimals(
-								edge.getPaintedResult()));
+								edge.getPaintedResult()))) : "";
 	}
 
 }

@@ -72,7 +72,6 @@ public class GravisVisualizationViewer extends
 		this.getRenderContext().setEdgeLabelTransformer(new EdgeLabelTransformer());
 		this.getRenderContext().setEdgeStrokeTransformer(new EdgeStrokeTransformer());
 		this.getRenderContext().setEdgeArrowStrokeTransformer(new EdgeStrokeTransformer());
-
 	}
 
 	/*

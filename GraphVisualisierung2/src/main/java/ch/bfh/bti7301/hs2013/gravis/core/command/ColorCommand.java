@@ -13,6 +13,7 @@ class ColorCommand extends EmptyStep {
 	private final IGraphItem item;
 
 	private final Color newColor;
+	
 	private final Color oldColor;
 
 	/**

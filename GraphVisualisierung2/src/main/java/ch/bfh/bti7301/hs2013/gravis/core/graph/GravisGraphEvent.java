@@ -12,23 +12,24 @@ import edu.uci.ics.jung.graph.event.GraphEvent;
  */
 class GravisGraphEvent extends GraphEvent<IVertex, IEdge> {
 
-	private IGraphItem item;
-
+	private IGraphItem[] items;
+	
 	/**
 	 * 
 	 * @param graph
-	 * @param item
+	 * @param items
 	 */
-	protected GravisGraphEvent(Graph<IVertex, IEdge> graph, IGraphItem item) {
-		super(graph, item instanceof IEdge ? Type.EDGE_ADDED: Type.VERTEX_ADDED);
-		this.item = item;
+	protected GravisGraphEvent(Graph<IVertex, IEdge> graph, IGraphItem[] items) {
+		super(graph, null);
+		
+		this.items = items;
 	}
 
 	/**
 	 * @return IGraphItem
 	 */
-	public IGraphItem getIGraphItem() {
-		return this.item;
+	public IGraphItem[] getGraphItems() {
+		return this.items;
 	}
-
+	
 }

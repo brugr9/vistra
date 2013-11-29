@@ -1,15 +1,17 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 import ch.bfh.bti7301.hs2013.gravis.core.util.comparator.VertexPaintedResultComparator;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeWeightNumberTransformer;
-import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
+import static ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ValueTransformer.toArray;
 import edu.uci.ics.jung.algorithms.util.MapBinaryHeap;
 
 /**
@@ -58,7 +60,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		}
 
 		startVertex.setComment(startVertex.getId() + " ist der Startknoten.");
-		graph.updateState(startVertex, State.ACTIVATION);
+		graph.updateState(State.ACTIVATION, startVertex);
 
 		// start vertex has distance 0
 		startVertex.setResult(0.0);
@@ -71,7 +73,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			return;
 		}
 
-		graph.updateState(startVertex, State.SOLUTION);
+		graph.updateState(State.SOLUTION, startVertex);
 		vertices.remove(startVertex);
 
 		this.initializeDistances(graph, vertices, startVertex);
@@ -93,28 +95,33 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			vertex.setComment("Der Knoten " + vertex.getId()
 					+ " wurde mit folgendem Wert initialisiert: "
 					+ vertex.getResult());
-			graph.updateState(vertex, State.ACTIVATION);
+			graph.updateState(State.ACTIVATION, vertex);
 		}
 
 		this.setSuccessorMessage(graph, startVertex);
-		graph.updateState(startVertex, State.ACTIVATION);
+		graph.updateState(State.ACTIVATION, startVertex);
 
 		// init edge weight as distance for all successors of start vertex
 		for (IRestrictedVertex vertex : graph.getSuccessors(startVertex)) {
 			IRestrictedEdge edge = graph.findEdge(startVertex, vertex);
-			graph.updateState(edge, State.ACTIVATION);
+			graph.updateState(State.ACTIVATION, edge);
 
-			graph.updateState(vertex, State.ACTIVATION);
+			graph.updateState(State.ACTIVATION, vertex);
 
+			vertex.setValue(startVertex);
 			vertex.setResult(this.findMinEdge(graph, startVertex, vertex)
 					.getWeight());
 			vertex.setComment("Der neue kürzeste Weg vom Startknoten zum Knoten "
 					+ vertex.getId() + " ist: " + vertex.getResult());
-			graph.updateState(vertex, State.VISIT);
 
-			graph.updateState(edge, State.ACTIVATION);
+			List<IRestrictedGraphItem> visited = new ArrayList<>();
+			visited.add(vertex);
+			this.updatePathColor(graph, vertex, visited);
+			graph.updateState(State.VISIT, toArray(visited));
 
-			graph.updateState(startVertex, State.ACTIVATION);
+			graph.updateState(State.ACTIVATION, edge);
+
+			graph.updateState(State.ACTIVATION, startVertex);
 		}
 	}
 
@@ -140,17 +147,19 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 							+ selectedVertex.getId()
 							+ " mit der aktuellen Distanz: "
 							+ selectedVertex.getPaintedResult());
-			graph.updateState(selectedVertex, State.ACTIVATION);
+			graph.updateState(State.ACTIVATION, selectedVertex);
 
 			this.setSuccessorMessage(graph, selectedVertex);
 			selectedVertex.setDone(true);
 			if (this.updateEndVertexMessage(graph, startVertex, selectedVertex)) {
-				this.showShortestPath(graph, startVertex, selectedVertex);
+				this.showShortestPath(graph, selectedVertex);
 				return;
 			}
 
-			graph.updateState(selectedVertex, State.SOLUTION);
-			this.updatePathColor(graph, selectedVertex);
+			List<IRestrictedGraphItem> solved = new ArrayList<>();
+			solved.add(selectedVertex);
+			this.updatePathColor(graph, selectedVertex, solved);
+			graph.updateState(State.SOLUTION, toArray(solved));
 
 			this.updateAdjacentVertexDistances(graph, selectedVertex, prioQueue);
 		}
@@ -171,14 +180,19 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 
 			if (!adjacentVertex.isDone()) {
 				IRestrictedEdge edge = graph.findEdge(vertex, adjacentVertex);
-				graph.updateState(edge, State.ACTIVATION);
+				graph.updateState(State.ACTIVATION, edge);
 
-				graph.updateState(adjacentVertex, State.ACTIVATION);
+				graph.updateState(State.ACTIVATION, adjacentVertex);
 
 				newDistance = vertex.getPaintedResult()
 						+ this.findMinEdge(graph, vertex, adjacentVertex)
 								.getWeight();
 				oldDistance = adjacentVertex.getPaintedResult();
+
+				// set new predecessor for shortest path
+				if (newDistance < oldDistance) {
+					adjacentVertex.setValue(vertex);
+				}
 
 				adjacentVertex.setResult(Math.min(newDistance, oldDistance));
 				adjacentVertex
@@ -186,10 +200,14 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 								+ adjacentVertex.getId()
 								+ " ist: "
 								+ adjacentVertex.getResult());
-				graph.updateState(adjacentVertex, State.VISIT);
 
-				graph.updateState(edge, State.ACTIVATION);
-				graph.updateState(vertex, State.ACTIVATION);
+				List<IRestrictedGraphItem> visited = new ArrayList<>();
+				visited.add(adjacentVertex);
+				this.updatePathColor(graph, adjacentVertex, visited);
+				graph.updateState(State.VISIT, toArray(visited));
+
+				graph.updateState(State.ACTIVATION, edge);
+				graph.updateState(State.ACTIVATION, vertex);
 
 				if (Double.compare(newDistance, oldDistance) != 0) {
 					prioQueue.update(adjacentVertex);
@@ -229,10 +247,14 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			IRestrictedVertex startVertex, IRestrictedVertex endVertex) {
 
 		if (endVertex.isEnd()) {
+			List<IRestrictedGraphItem> solved = new ArrayList<>();
+			solved.add(endVertex);
+			this.updatePathColor(graph, endVertex, solved);
+			
 			endVertex.appendComment("Der kürzeste Weg von "
 					+ startVertex.getId() + " nach " + endVertex.getId()
 					+ " wurde gefunden.");
-			graph.updateState(endVertex, State.SOLUTION);
+			graph.updateState(State.SOLUTION, toArray(solved));
 			return true;
 		}
 		return false;
@@ -278,39 +300,55 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 	 * @param graph
 	 * @param selectedVertex
 	 */
-	private void updatePathColor(IRestrictedGraph graph,
+	private void showShortestPath(IRestrictedGraph graph,
 			IRestrictedVertex selectedVertex) {
+
+		List<IRestrictedGraphItem> edgeList = new ArrayList<>();
 		
-		Collection<? extends IRestrictedVertex> predecessors = graph.
-				getPredecessors(selectedVertex);
+		for (IRestrictedEdge edge : graph.getEdges()) {
+//			edge.setTagged(true);
+			edge.setVisible(false);
+			edgeList.add(edge);
+		}
+//		graph.updateState(State.SOLUTION, toArray(edgeList));
+		
+//		edgeList = new ArrayList<>();
+		IRestrictedVertex currentVertex = null;
+		while (selectedVertex.getValue() != null) {
+			currentVertex = (IRestrictedVertex) selectedVertex.getValue();
+			IRestrictedEdge edge = this.findMinEdge(graph, currentVertex, selectedVertex);
+			edge.setVisible(true);
+			edgeList.add(edge);
+			selectedVertex = currentVertex;
+		}
+		graph.updateState(State.SOLUTION, toArray(edgeList));
+	}
+
+	/**
+	 * 
+	 * @param graph
+	 * @param selectedVertex
+	 * @param graphItems
+	 */
+	private void updatePathColor(IRestrictedGraph graph,
+			IRestrictedVertex selectedVertex,
+			List<IRestrictedGraphItem> graphItems) {
+
+		Collection<? extends IRestrictedVertex> predecessors = graph
+				.getPredecessors(selectedVertex);
 		
 		for (IRestrictedVertex vertex : predecessors) {
 			
-			if (vertex.getColor() == GravisColor.LIGHT_GREEN) {
-				Collection<? extends IRestrictedEdge> edgeSet = graph.
-						findEdgeSet(vertex, selectedVertex);
-				
+			if (vertex.getState() == State.SOLUTION) {
+				Collection<? extends IRestrictedEdge> edgeSet = graph
+						.findEdgeSet(vertex, selectedVertex);
+
 				for (IRestrictedEdge edge : edgeSet) {
-					// TODO in einem Schritt und mit fetter Markierung auf guen wechseln
-					// TODO bei visit auch markieren
-					graph.updateState(edge, State.SOLUTION);
+					edge.setTagged(true);
+					graphItems.add(edge);
 				}
 			}
 		}
 	}
-	
-	/**
-	 * @param graph
-	 * @param startVertex
-	 * @param selectedVertex
-	 */
-	private void showShortestPath(IRestrictedGraph graph,
-			IRestrictedVertex startVertex, IRestrictedVertex selectedVertex) {
-		
-		// TODO
-//		DijkstraShortestPath<IRestrictedVertex, IRestrictedEdge> path = 
-//				new DijkstraShortestPath<IRestrictedVertex, IRestrictedEdge>(graph, 
-//						null);
-	}
-	
+
 }

@@ -33,6 +33,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
+import ch.bfh.bti7301.hs2013.gravis.core.IGravisListIterator;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
@@ -54,6 +55,8 @@ public class OldMainWindowListener extends Observable implements
 	final private ICore gravisCore;
 
 	final private GravisVisualizationViewer vViewer;
+	
+	private IGravisListIterator<String> stepIterator = null;
 
 	/**
 	 * @param gravisCore
@@ -115,7 +118,10 @@ public class OldMainWindowListener extends Observable implements
 	private void backwardListener(ActionEvent e) {
 		if (e.getActionCommand().equals(BACKWARD_ANIMATION.toString())) {
 			try {
-				System.out.println(this.gravisCore.goBackward());
+				if (this.stepIterator.hasPrevious()) {
+					System.out.println(this.stepIterator.previous());
+				}
+				
 				// System.out.println("goBackward");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -134,7 +140,10 @@ public class OldMainWindowListener extends Observable implements
 	private void forwardListener(ActionEvent e) {
 		if (e.getActionCommand().equals(FORWARD_ANIMATION.toString())) {
 			try {
-				System.out.println(this.gravisCore.goForward());
+				if (this.stepIterator.hasNext()) {
+					System.out.println(this.stepIterator.next());
+				}
+				
 
 				// System.out.println("goForward");
 			} catch (Exception e1) {
@@ -154,7 +163,7 @@ public class OldMainWindowListener extends Observable implements
 		if (e.getActionCommand().equals(END_ANIMATION.toString())) {
 
 			try {
-				System.out.println(this.gravisCore.goToEnd());
+				System.out.println(this.stepIterator.last());
 				// System.out.println("goEnd");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -173,7 +182,7 @@ public class OldMainWindowListener extends Observable implements
 		if (e.getActionCommand().equals(BEGINNING_ANIMATION.toString())) {
 
 			try {
-				System.out.println(this.gravisCore.goToBeginning());
+				System.out.println(this.stepIterator.first());
 				// System.out.println("goBeginning");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -313,7 +322,7 @@ public class OldMainWindowListener extends Observable implements
 			};
 
 			try {
-				this.gravisCore.executeTraverser(listener);
+				this.stepIterator = this.gravisCore.executeTraverser(listener);
 
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

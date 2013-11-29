@@ -15,7 +15,7 @@ public interface IRestrictedGraphItem {
 	 * 
 	 */
 	public static enum State {
-		INITIAL, ACTIVATION, VISIT, SOLUTION
+		INITIAL, ACTIVATION, VISIT, SOLUTION;
 	}
 
 	/**
@@ -25,6 +25,7 @@ public interface IRestrictedGraphItem {
 	public abstract String getId();
 
 	/**
+	 * The last comment printed in the visualization.
 	 * 
 	 * @return String info
 	 */
@@ -37,6 +38,7 @@ public interface IRestrictedGraphItem {
 	public abstract Color getColor();
 
 	/**
+	 * The last result printed in the visualization.
 	 * 
 	 * @return double
 	 */
@@ -87,5 +89,54 @@ public interface IRestrictedGraphItem {
 	 * @return State
 	 */
 	public abstract State getState();
+	
+	/**
+	 * 
+	 * @return State
+	 */
+	public abstract State getTraversalState();
+	
+	/**
+	 * 
+	 * @param state
+	 */
+	public abstract void setTraversalState(State state);
+	
+	/**
+	 * 
+	 * @return State
+	 */
+	public abstract Object getValue();
+	
+	/**
+	 * 
+	 * @param value
+	 */
+	public abstract void setValue(Object value);
+	
+	/**
+	 * 
+	 * @param visible
+	 */
+	public abstract void setVisible(boolean visible);
+	
+	/**
+	 * 
+	 * @return boolean
+	 */
+	public abstract boolean isVisible();
+	
+	/**
+	 * 
+	 * @param notTagged
+	 */
+	public abstract void setTagged(boolean tagged);
+	
+	/**
+	 * 
+	 * @return boolean
+	 */
+	public abstract boolean isTagged();
 
+	
 }

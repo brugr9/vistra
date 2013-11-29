@@ -72,7 +72,7 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 			Pair<? extends IRestrictedVertex> pair = graph
 					.getEndpoints(selectedEdge);
 
-			graph.updateState(selectedEdge, State.ACTIVATION);
+			graph.updateState(State.ACTIVATION, selectedEdge);
 
 			if (!partitionMap.get(pair.getFirst()).find()
 					.equals(partitionMap.get(pair.getSecond()).find())) {
@@ -80,22 +80,22 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 				selectedEdge.setResult(++this.counter);
 				selectedEdge.setComment("Die Kante " + selectedEdge.getId()
 						+ " wird zur Lösung hinzugefügt.");
-				graph.updateState(selectedEdge, State.SOLUTION);
+				graph.updateState(State.SOLUTION, selectedEdge);
 
 				if (!pair.getFirst().isDone()) {
 					pair.getFirst().setDone(true);
-					graph.updateState(pair.getFirst(), State.SOLUTION);
+					graph.updateState(State.SOLUTION, pair.getFirst());
 				}
 
 				if (!pair.getSecond().isDone()) {
 					pair.getSecond().setDone(true);
-					graph.updateState(pair.getSecond(), State.SOLUTION);
+					graph.updateState(State.SOLUTION, pair.getSecond());
 				}
 
 				partitionMap.get(pair.getFirst()).merge(
 						partitionMap.get(pair.getSecond()));
 			} else {
-				graph.updateState(selectedEdge, State.VISIT);
+				graph.updateState(State.VISIT, selectedEdge);
 			}
 
 		}

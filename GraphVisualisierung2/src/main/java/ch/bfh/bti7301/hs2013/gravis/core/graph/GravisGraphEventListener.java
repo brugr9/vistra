@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
+import ch.bfh.bti7301.hs2013.gravis.core.command.Step;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
@@ -48,13 +49,16 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 	@Override
 	public void handleGraphEvent(GraphEvent<IVertex, IEdge> evt) {
 		if (evt instanceof GravisGraphEvent) {
-			IGraphItem currentItem = ((GravisGraphEvent) evt).getIGraphItem();
+			IGraphItem[] currentItems = ((GravisGraphEvent) evt).getGraphItems();
 
-			IStep command = this.commandTransformer.transform(currentItem);
-			command.execute();
+			Step step = new Step();
+			for (IGraphItem item : currentItems) {
+				step.add(this.commandTransformer.transform(item));
+				this.graphItemHistory.add(item);
+			}
 			
-			this.graphItemHistory.add(currentItem);
-			this.commandList.add(command);
+			step.execute();
+			this.commandList.add(step);
 		}
 
 	}

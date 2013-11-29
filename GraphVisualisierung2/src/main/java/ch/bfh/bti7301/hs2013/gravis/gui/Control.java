@@ -340,7 +340,7 @@ public final class Control implements IControl {
 				this.setViewBusy();
 				this.core.selectAlgorithm(index);
 				this.core.executeTraverser(this.traversalListener);
-				this.model.setProgressMaximum(this.core.getGraphIteratorSize());
+//				this.model.setProgressMaximum(this.core.getGraphIteratorSize());
 				this.setViewStop();
 			}
 
@@ -708,7 +708,7 @@ public final class Control implements IControl {
 				int min = 0;
 				for (int i = 0; i < step; i++) {
 					if (min < progress) {
-						core.goBackward();
+//						core.goBackward();
 						model.setProgress(--progress);
 					}
 				}
@@ -730,7 +730,7 @@ public final class Control implements IControl {
 				int max = model.getProgressMaximum();
 				for (int i = 0; i < step; i++) {
 					if (progress < max) {
-						core.goForward();
+//						core.goForward();
 						model.setProgress(++progress);
 					}
 				}
@@ -750,7 +750,7 @@ public final class Control implements IControl {
 						int progress = model.getProgress();
 						int max = model.getProgressMaximum();
 						if (progress == max) {
-							core.goToBeginning();
+//							core.goToBeginning();
 							progress = model.getProgress();
 						}
 						while (progress < max) {
@@ -802,11 +802,11 @@ public final class Control implements IControl {
 					setViewStop();
 				} else if (c.equals(EventSource.GOTO_BEGINNING.toString())) {
 					setViewPlay();
-					core.goToBeginning();
+//					core.goToBeginning();
 					setViewStop();
 				} else if (c.equals(EventSource.GOTO_END.toString())) {
 					setViewPlay();
-					core.goToEnd();
+//					core.goToEnd();
 					setViewStop();
 				}
 

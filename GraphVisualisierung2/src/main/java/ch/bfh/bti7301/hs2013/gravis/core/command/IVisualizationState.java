@@ -1,6 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -25,5 +26,10 @@ public interface IVisualizationState {
 	 * @return old graph item clone
 	 */
 	public abstract IGraphItem getOldGraphItemClone();
+	
+	/**
+	 * @return State
+	 */
+	public abstract State getState();
 
 }

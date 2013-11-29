@@ -3,8 +3,9 @@ package ch.bfh.bti7301.hs2013.gravis.core.command;
 import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -12,12 +13,16 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
  */
 class SolutionState extends AbstractCommonVisualizationState {
 
+	private State state;
+	
 	/**
 	 * @param graphItemHistory
 	 * @param changeListener
 	 */
 	protected SolutionState(List<IGraphItem> graphItemHistory) {
-		super(GravisColor.LIGHT_GREEN, graphItemHistory);
+		super(GravisConstants.SOLUTION_COLOR, graphItemHistory);
+		
+		this.state = State.SOLUTION;
 	}
 
 	/*
@@ -53,5 +58,13 @@ class SolutionState extends AbstractCommonVisualizationState {
 		}
 		return "Die Kante " + currentItem.getId()
 				+ " gehört nicht mehr zur Lösung.";
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#getState()
+	 */
+	@Override
+	public State getState() {
+		return this.state;
 	}
 }

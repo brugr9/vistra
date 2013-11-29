@@ -3,7 +3,9 @@ package ch.bfh.bti7301.hs2013.gravis.core.util.transformer;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.util.List;
 
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 
@@ -120,4 +122,11 @@ public final class ValueTransformer {
 		return Math.rint(value * 100.0) / 100.0;
 	}
 
+	/**
+	 * @param itemList
+	 * @return IRestrictedGraphItem[]
+	 */
+	public static IRestrictedGraphItem[] toArray(List<IRestrictedGraphItem> itemList) {
+		return itemList.toArray(new IRestrictedGraphItem[itemList.size()]);
+	}
 }

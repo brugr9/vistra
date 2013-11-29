@@ -39,9 +39,9 @@ public class CreateVertexMenu extends JPopupMenu implements
 		this.vertexFactory = new VertexFactory();
 		this.vViewer = viewer;
 
-		JMenuItem newVertex = new JMenuItem("Neuer Knoten");
-		this.add(newVertex);
-		newVertex.addActionListener(new ActionListener() {
+		JMenuItem newVertexMenuItem = new JMenuItem("Neuer Knoten");
+		this.add(newVertexMenuItem);
+		newVertexMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CreateVertexMenu.this.createVertex();
@@ -53,10 +53,12 @@ public class CreateVertexMenu extends JPopupMenu implements
 		if (this.point != null) {
 			IVertex newVertex = this.vertexFactory.create();
 			Layout<IVertex, IEdge> layout = this.vViewer.getGraphLayout();
-
+			Point2D newPoint = this.vViewer.getRenderContext()
+			. getMultiLayerTransformer().inverseTransform(this.point);
+			
+			newVertex.setLocation(newPoint);
 			layout.getGraph().addVertex(newVertex);
-			layout.setLocation(newVertex, this.vViewer.getRenderContext()
-					. getMultiLayerTransformer().inverseTransform(this.point));
+			layout.setLocation(newVertex, newPoint);
 			this.vViewer.repaint();
 		}
 	}

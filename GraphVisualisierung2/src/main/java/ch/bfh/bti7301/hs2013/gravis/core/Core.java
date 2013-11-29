@@ -24,7 +24,6 @@ class Core implements ICore {
 	private IGraphManager graphManager;
 	private IAlgorithmManager algorithmManager;
 	private ITraversal traversal;
-	private IIteratorManager iteratorManager;
 
 	/**
 	 * @param graphManager
@@ -33,12 +32,10 @@ class Core implements ICore {
 	 * @param iteratorManager
 	 */
 	protected Core(IGraphManager graphManager,
-			IAlgorithmManager algorithmManager, ITraversal traversal,
-			IIteratorManager iteratorManager) {
+			IAlgorithmManager algorithmManager, ITraversal traversal) {
 		this.graphManager = graphManager;
 		this.algorithmManager = algorithmManager;
 		this.traversal = traversal;
-		this.iteratorManager = iteratorManager;
 	}
 
 	@Override
@@ -189,82 +186,17 @@ class Core implements ICore {
 	}
 
 	@Override
-	public void executeTraverser(TraversalChangeListener listener)
+	public IGravisListIterator<String> executeTraverser(TraversalChangeListener listener)
 			throws Exception {
 		try {
-			this.iteratorManager.setListIterator(this.traversal
-					.execute(listener));
+			return new StepIterator(this.traversal.execute(listener));
 		} catch (Exception e) {
 			throw e;
 		}
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#getGraphIteratorSize()
-	 */
-	@Override
-	public int getGraphIteratorSize() {
-		return this.iteratorManager.getGraphIteratorSize();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#goToBeginning()
-	 */
-	@Override
-	public String goToBeginning() throws Exception {
-		try {
-			return this.iteratorManager.goToBeginning();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#goToEnd()
-	 */
-	@Override
-	public String goToEnd() throws Exception {
-		try {
-			return this.iteratorManager.goToEnd();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#goForward()
-	 */
-	@Override
-	public String goForward() throws Exception {
-		try {
-			return this.iteratorManager.goForward();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.ICore#goBackward()
-	 */
-	@Override
-	public String goBackward() throws Exception {
-		try {
-			return this.iteratorManager.goBackward();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
+	
 
 	/*
 	 * (non-Javadoc)

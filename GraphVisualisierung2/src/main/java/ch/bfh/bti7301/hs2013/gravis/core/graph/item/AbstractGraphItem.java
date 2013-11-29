@@ -19,18 +19,23 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	private double paintedResult;
 	private float strokeWidth;
 	private boolean done;
+	private boolean tagged;
+	private boolean visible;
 	private State state;
+	private State traversalState = null;
 	private Color color;
+	private Object value = null;
 
 	/**
 	 * Main constructor.
 	 */
 	protected AbstractGraphItem() {
-		this.id = String.valueOf(counter++);
+		this.id = String.valueOf(++counter);
 		this.info = this.comment = "";
 		this.paintedResult = this.result = Double.NaN;
 		this.strokeWidth = GravisConstants.STROKE_WIDTH_DEFAULT;
-		this.done = false;
+		this.done = this.tagged = false;
+		this.visible = true;
 		this.state = State.INITIAL;
 		this.color = GravisConstants.V_COLOR_DEFAULT;
 	}
@@ -96,6 +101,29 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	}
 
 	@Override
+	public void setTraversalState(State traversalState) {
+		this.traversalState = traversalState;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#
+	 * getTraversalState()
+	 */
+	@Override
+	public State getTraversalState() {
+		return this.traversalState;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#setState(ch.bfh
+	 * .bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
+	 */
+	@Override
 	public void setState(State state) {
 		this.state = state;
 	}
@@ -136,53 +164,144 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		this.paintedResult = result;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#resetVisualizationValues()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#
+	 * resetVisualizationValues()
 	 */
 	@Override
 	public void resetVisualizationValues() {
 		this.comment = "";
 		this.result = Double.NaN;
+		this.traversalState = null;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#hasNoResult()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#hasNoResult()
 	 */
 	@Override
 	public boolean hasNoResult() {
 		return Double.isNaN(this.result);
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#appendComment(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#
+	 * appendComment(java.lang.String)
 	 */
 	@Override
 	public void appendComment(String comment) {
 		this.comment += System.getProperty("line.separator") + comment;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#getStrokeWidth()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#getStrokeWidth()
 	 */
 	@Override
 	public float getStrokeWidth() {
 		return this.strokeWidth;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#setStrokeWidth(float)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#setStrokeWidth
+	 * (float)
 	 */
 	@Override
 	public void setStrokeWidth(float strokeWidth) {
 		this.strokeWidth = strokeWidth;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
 	public AbstractGraphItem clone() throws CloneNotSupportedException {
 		return (AbstractGraphItem) super.clone();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#getValue
+	 * ()
+	 */
+	@Override
+	public Object getValue() {
+		return this.value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setValue
+	 * (java.lang.Object)
+	 */
+	@Override
+	public void setValue(Object value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setVisible
+	 * (boolean)
+	 */
+	@Override
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#isVisible
+	 * ()
+	 */
+	@Override
+	public boolean isVisible() {
+		return this.visible;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setTagged
+	 * (boolean)
+	 */
+	@Override
+	public void setTagged(boolean tagged) {
+		this.tagged = tagged;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#isTagged
+	 * ()
+	 */
+	@Override
+	public boolean isTagged() {
+		return this.tagged;
 	}
 
 }

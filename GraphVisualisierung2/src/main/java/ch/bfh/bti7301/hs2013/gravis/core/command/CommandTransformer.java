@@ -9,7 +9,7 @@ import org.apache.commons.collections15.map.HashedMap;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -31,11 +31,12 @@ class CommandTransformer implements Transformer<IGraphItem, IStep> {
 	 */
 	protected CommandTransformer(List<IGraphItem> graphItemHistory) {
 		this.states = new HashedMap<>();
+		
 		this.states.put(State.INITIAL.toString() + V_SUFFIX, new 
-				InitialVertexState(GravisColor.RED,
+				InitialVertexState(GravisConstants.V_INITIAL_COLOR,
 				graphItemHistory));
 		this.states.put(State.INITIAL.toString() + E_SUFFIX, new 
-				InitialEdgeState(GravisColor.BLACK,
+				InitialEdgeState(GravisConstants.E_INITIAL_COLOR,
 				graphItemHistory));
 		this.states.put(State.ACTIVATION.toString(), new ActivationState(
 				graphItemHistory));
@@ -68,14 +69,19 @@ class CommandTransformer implements Transformer<IGraphItem, IStep> {
 	 * @return String
 	 */
 	private String getKeyString(IGraphItem currentItem) {
-		if (currentItem.getState() == State.INITIAL) {
+		// if traversal state is null, use state from last step
+		State currentState = currentItem.getTraversalState() == null ? currentItem.getState()
+				: currentItem.getTraversalState();
+		
+		if (currentState == State.INITIAL) {
 			if (currentItem instanceof IVertex) {
-				return currentItem.getState().toString() + V_SUFFIX;
+				return currentState.toString() + V_SUFFIX;
 			} else {
-				return currentItem.getState().toString() + E_SUFFIX;
+				return currentState.toString() + E_SUFFIX;
 			}
 		} 
-		return currentItem.getState().toString();
+		
+		return currentState.toString();
 	}
 
 }

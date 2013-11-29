@@ -32,33 +32,42 @@ abstract class AbstractCommonVisualizationState extends
 	public IStep createCommand(IVisualizationState oldState,
 			IGraphItem currentItem) {
 
-		Step complexCommand = new Step(
-				oldState.getPredecessorCommand());
-		IGraphItem graphReference = this.checkOldObject(oldState.getOldGraphItemClone(), 
-				currentItem);
+		Step complexCommand = new Step(oldState.getPredecessorCommand());
+		// graphItemRef used by commands from predecessor state
+		IGraphItem oldGraphItemRef = this.checkOldObject(
+				oldState.getOldGraphItemClone(), currentItem);
+
+		if (currentItem.isTagged()) {
+			complexCommand.add(new StrokeWidthCommand(currentItem, currentItem
+					.getStrokeWidth(), this.getItemStrokeWidth(currentItem)));
+		}
+
+		IGraphItem tempRef = currentItem.isTagged() ? currentItem
+				: oldGraphItemRef;
 		
-		complexCommand.add(new StrokeWidthCommand(currentItem, graphReference
-				.getStrokeWidth(), this.getItemStrokeWidth(graphReference)));
-		
+		complexCommand.add(new StrokeWidthCommand(currentItem, tempRef
+				.getStrokeWidth(), this.getItemStrokeWidth(tempRef)));
 		complexCommand.add(new ColorCommand(currentItem,
 				currentItem.getColor(), this.stateColor));
-		
+		complexCommand.add(new StateCommand(currentItem,
+				currentItem.getState(), this.getState()));
+
 		this.addVisualizationCommands(currentItem, complexCommand);
-		
-		this.setPredecessorCommand(new Step(new StrokeWidthCommand(
-				currentItem, this.getItemStrokeWidth(graphReference),
-				graphReference.getStrokeWidth())));
-		
+
+		this.setPredecessorCommand(new Step(new StrokeWidthCommand(currentItem,
+				this.getItemStrokeWidth(tempRef), tempRef
+						.getStrokeWidth())));
+
 		try {
-			this.setOldGraphItemClone(this.isSameObject(currentItem) ? 
-					oldState.getOldGraphItemClone() : currentItem.clone());
+			this.setOldGraphItemClone(this.isSameObject(currentItem) ? oldState
+					.getOldGraphItemClone() : currentItem.clone());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
+
 		currentItem.resetVisualizationValues();
-		
+
 		return complexCommand;
 	}
 

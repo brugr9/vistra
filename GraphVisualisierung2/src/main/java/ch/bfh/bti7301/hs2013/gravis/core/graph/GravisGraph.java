@@ -31,10 +31,10 @@ class GravisGraph extends GraphDecorator<IVertex, IEdge> implements
 	protected GravisGraph(Graph<IVertex, IEdge> delegate) {
 		super(delegate);
 
+		counter++;
 		this.graphId = "Graph " + counter;
 		this.graphDescription = "Graph " + counter;
 		this.edgeType = EdgeType.DIRECTED;
-		counter++;
 	}
 
 	/*

@@ -16,6 +16,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.command.CommandTransformerFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
@@ -85,12 +86,12 @@ public final class GraphFactory {
 	/**
 	 * 
 	 * @param graph
-	 * @param item
+	 * @param items
 	 * @return a new instance of type GraphEvent<IVertex, IEdge>
 	 */
 	public static GraphEvent<IVertex, IEdge> createGraphEvent(
-			Graph<IVertex, IEdge> graph, IGraphItem item) {
-		return new GravisGraphEvent(graph, item);
+			Graph<IVertex, IEdge> graph, IGraphItem[] items) {
+		return new GravisGraphEvent(graph, items);
 	}
 
 	/**

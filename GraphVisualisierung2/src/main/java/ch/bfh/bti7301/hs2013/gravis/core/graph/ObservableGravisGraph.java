@@ -111,38 +111,57 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 		this.gravisGraph.setEdgeType(edgeType);
 	}
 
+	@Override
+	public void updateState(State state, IGraphItem... graphItems) {
+		for (IGraphItem item : graphItems) {
+			item.setTraversalState(state);
+		}
+
+		this.fireGraphEvent(GraphFactory.createGraphEvent(this, graphItems));
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphItemUpdate#updateState(
-	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem,
-	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem[])
 	 */
 	@Override
-	public void updateState(IGraphItem graphItem, State state) {
-		graphItem.setState(state);
-		this.fireGraphEvent(GraphFactory.createGraphEvent(this, graphItem));
+	public void updateState(IGraphItem... graphItems) {
+		this.fireGraphEvent(GraphFactory.createGraphEvent(this, graphItems));
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsVertexId(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsVertexId
+	 * (java.lang.String)
 	 */
 	@Override
 	public boolean containsVertexId(String vertexId) {
 		return this.gravisGraph.containsVertexId(vertexId);
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsEdgeId(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsEdgeId(java
+	 * .lang.String)
 	 */
 	@Override
 	public boolean containsEdgeId(String edgeId) {
 		return this.gravisGraph.containsEdgeId(edgeId);
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsItemId(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph#containsItemId(java
+	 * .lang.String)
 	 */
 	@Override
 	public boolean containsItemId(String itemId) {
