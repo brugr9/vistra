@@ -65,7 +65,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		// start vertex has distance 0
 		startVertex.setResult(0.0);
 		startVertex.appendComment("Für den Knoten " + startVertex.getId()
-				+ " wurde der kürzeste Weg berechnet: "
+				+ " wurde der kürzeste Weg vom Startknoten zum Endknoten berechnet berechnet: "
 				+ startVertex.getResult());
 		startVertex.setDone(true);
 
