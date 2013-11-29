@@ -21,8 +21,6 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 
 	private IStep predecessorCommand;
 
-	private IGraphItem oldGraphItemClone;
-	
 	/**
 	 * 
 	 * @param color
@@ -33,11 +31,61 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 
 		this.stateColor = color;
 		this.graphItemHistory = graphItemHistory;
-
 		// null object
 		this.predecessorCommand = new EmptyStep();
-		// default graph item
-		this.oldGraphItemClone = new VertexFactory().create();
+	}
+
+	/**
+	 * @param currentItem
+	 * @param complexCommand
+	 */
+	protected void addVisualizationCommands(IGraphItem currentItem,
+			Step complexCommand) {
+
+		IStep command = null;
+		if (!currentItem.hasNoResult()) {
+			command = new ResultCommand(currentItem,
+					currentItem.getPaintedResult(), currentItem.getResult());
+			command.execute();
+			complexCommand.add(command);
+		}
+
+		if (!currentItem.isVisible()) {
+			command = new ColorCommand(currentItem, currentItem.getColor(),
+					GravisColor.WHITE);
+			command.execute();
+			complexCommand.add(command);
+		}
+
+		if (currentItem.isTagged()) {
+			command = new StrokeWidthCommand(currentItem,
+					currentItem.getStrokeWidth(),
+					this.getItemStrokeWidth(currentItem));
+			command.execute();
+			complexCommand.add(command);
+		}
+
+		command = new CommentCommand(currentItem,
+				this.stateUndoMessage(currentItem),
+				this.stateDoMessage(currentItem));
+		command.execute();
+		complexCommand.add(command);
+
+		if (!currentItem.getComment().isEmpty()) {
+			command = new CommentCommand(currentItem, currentItem.getInfo(),
+					currentItem.getComment());
+			command.execute();
+			complexCommand.add(command);
+		}
+	}
+
+	/**
+	 * @param currentItem
+	 * @return float
+	 */
+	protected float getItemStrokeWidth(IGraphItem currentItem) {
+		return currentItem instanceof IVertex ? GravisConstants.V_TAGGED_STROKE
+				: GravisConstants.E_TAGGED_STROKE;
 	}
 
 	@Override
@@ -51,86 +99,6 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	 */
 	protected void setPredecessorCommand(IStep predecessorCommand) {
 		this.predecessorCommand = predecessorCommand;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#
-	 * getOldGraphItemClone()
-	 */
-	@Override
-	public IGraphItem getOldGraphItemClone() {
-		return this.oldGraphItemClone;
-	}
-
-	/**
-	 * @param oldGraphItemClone
-	 *            the oldGraphItemClone to set
-	 */
-	protected void setOldGraphItemClone(IGraphItem oldGraphItemClone) {
-		this.oldGraphItemClone = oldGraphItemClone;
-	}
-
-	/**
-	 * @param currentItem
-	 * @param complexCommand
-	 */
-	protected void addVisualizationCommands(IGraphItem currentItem,
-			Step complexCommand) {
-
-		if (!currentItem.hasNoResult()) {
-			complexCommand.add(new ResultCommand(currentItem, currentItem
-					.getPaintedResult(), currentItem.getResult()));
-		}
-		
-		if (!currentItem.isVisible()) {
-			complexCommand.add(new ColorCommand(currentItem, currentItem
-					.getColor(), GravisColor.WHITE));
-		} 
-		
-		if (currentItem.isTagged()) {
-			complexCommand.add(new StrokeWidthCommand(currentItem, currentItem
-					.getStrokeWidth(), this.getItemStrokeWidth(currentItem)));
-		}
-		
-		complexCommand.add(new CommentCommand(currentItem, this
-				.stateUndoMessage(currentItem), this
-				.stateDoMessage(currentItem)));
-
-		if (!currentItem.getComment().isEmpty()) {
-			complexCommand.add(new CommentCommand(currentItem, currentItem
-					.getInfo(), currentItem.getComment()));
-		}
-	}
-
-	/**
-	 * @param currentItem
-	 * @return float
-	 */
-	protected float getItemStrokeWidth(IGraphItem currentItem) {
-		return currentItem instanceof IVertex ? GravisConstants.V_TAGGED_STROKE
-				: GravisConstants.E_TAGGED_STROKE;
-	}
-
-	/**
-	 * @param oldGraphItemClone
-	 * @param currentItem
-	 * @return IGraphItem
-	 */
-	protected IGraphItem checkOldObject(IGraphItem oldGraphItemClone,
-			IGraphItem currentItem) {
-		return this.isSameObject(currentItem) ? oldGraphItemClone : currentItem;
-	}
-
-	/**
-	 * @param currentItem
-	 * @return boolean
-	 */
-	protected boolean isSameObject(IGraphItem currentItem) {
-		return !this.graphItemHistory.isEmpty()
-				&& currentItem == this.graphItemHistory
-						.get(this.graphItemHistory.size() - 1);
 	}
 
 	/**

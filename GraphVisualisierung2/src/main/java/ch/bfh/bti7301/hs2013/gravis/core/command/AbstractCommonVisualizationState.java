@@ -32,42 +32,34 @@ abstract class AbstractCommonVisualizationState extends
 	public IStep createCommand(IVisualizationState oldState,
 			IGraphItem currentItem) {
 
-		Step complexCommand = new Step(oldState.getPredecessorCommand());
-		// graphItemRef used by commands from predecessor state
-		IGraphItem oldGraphItemRef = this.checkOldObject(
-				oldState.getOldGraphItemClone(), currentItem);
+		IStep command = this.getPredecessorCommand();
+		command.execute();
+		Step complexCommand = new Step(command);
 
-		System.out.println("common: " + currentItem.getId() + ", " + currentItem.isTagged() + ", " +
-				currentItem.getStrokeWidth() + ", " + currentItem.getColor() +
-				", old: " + oldState.getOldGraphItemClone().getId() + ", " + 
-				oldState.getOldGraphItemClone().isTagged() + ", " + 
-				oldState.getOldGraphItemClone().getStrokeWidth() + ", " +
-				oldGraphItemRef.getStrokeWidth());
-		
 		if (!currentItem.isTagged()) {
-			complexCommand.add(new StrokeWidthCommand(currentItem,
-					oldGraphItemRef.getStrokeWidth(), this
-							.getItemStrokeWidth(oldGraphItemRef)));
+			command = new StrokeWidthCommand(currentItem,
+					currentItem.getStrokeWidth(), this
+							.getItemStrokeWidth(currentItem));
+			command.execute();
+			complexCommand.add(command);
 		}
-		complexCommand.add(new ColorCommand(currentItem,
-				currentItem.getColor(), this.stateColor));
-		complexCommand.add(new StateCommand(currentItem,
+		
+		command = new ColorCommand(currentItem,
+				currentItem.getColor(), this.stateColor);
+		command.execute();
+		complexCommand.add(command);
+		
+		command = (new StateCommand(currentItem,
 				currentItem.getState(), this.getState()));
+		command.execute();
+		complexCommand.add(command);
 
 		this.addVisualizationCommands(currentItem, complexCommand);
 
 		if (!currentItem.isTagged()) {
-			this.setPredecessorCommand(new Step(new StrokeWidthCommand(
-					currentItem, this.getItemStrokeWidth(oldGraphItemRef),
-					oldGraphItemRef.getStrokeWidth())));
-		}
-		
-		try {
-			this.setOldGraphItemClone(this.isSameObject(currentItem) ? oldState
-					.getOldGraphItemClone() : currentItem.clone());
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			this.setPredecessorCommand(new StrokeWidthCommand(
+					currentItem, this.getItemStrokeWidth(currentItem),
+					currentItem.getStrokeWidth()));
 		}
 
 		currentItem.resetVisualizationValues();

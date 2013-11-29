@@ -18,18 +18,12 @@ public interface IVisualizationState {
 			IGraphItem currentItem);
 
 	/**
-	 * @return IStep
-	 */
-	public abstract IStep getPredecessorCommand();
-	
-	/**
-	 * @return old graph item clone
-	 */
-	public abstract IGraphItem getOldGraphItemClone();
-	
-	/**
 	 * @return State
 	 */
 	public abstract State getState();
 
+	/**
+	 * @return IStep
+	 */
+	public abstract IStep getPredecessorCommand();
 }

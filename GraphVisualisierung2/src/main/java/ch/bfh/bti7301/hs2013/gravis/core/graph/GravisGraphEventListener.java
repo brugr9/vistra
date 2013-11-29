@@ -54,9 +54,7 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 			Step step = new Step();
 			for (IGraphItem item : currentItems) {
 				IStep command = this.commandTransformer.transform(item);
-				command.execute();
 				step.add(command);
-				this.graphItemHistory.add(item);
 			}
 			
 			this.commandList.add(step);

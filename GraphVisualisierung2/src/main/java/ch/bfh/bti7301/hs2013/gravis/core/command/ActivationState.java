@@ -37,53 +37,48 @@ class ActivationState extends AbstractVisualizationState {
 	public IStep createCommand(IVisualizationState oldState,
 			IGraphItem currentItem) {
 
-		Step complexCommand = new Step(oldState.getPredecessorCommand());
-		// graphItemRef used by commands from predecessor state
-		IGraphItem graphItemRef = this.checkOldObject(
-				oldState.getOldGraphItemClone(), currentItem);
+		IStep command = this.getPredecessorCommand();
+		command.execute();
+		Step complexCommand = new Step(command);
 
-		System.out.println("active: " + currentItem.getId() + ", " + currentItem.isTagged() + ", " +
-					currentItem.getStrokeWidth()+ ", " + currentItem.getColor() + ", old: " + 
-				oldState.getOldGraphItemClone().getId() + ", " + 
-							oldState.getOldGraphItemClone().isTagged() + ", " + 
-							oldState.getOldGraphItemClone().getStrokeWidth() + ", " +
-							graphItemRef.getStrokeWidth());
-		
 		if (!currentItem.isTagged()) {
-			complexCommand.add(new StrokeWidthCommand(currentItem, graphItemRef
-					.getStrokeWidth(), this.getItemStrokeWidth(graphItemRef)));
+			command = new StrokeWidthCommand(currentItem,
+					currentItem.getStrokeWidth(),
+					this.getItemStrokeWidth(currentItem));
+			command.execute();
+			complexCommand.add(command);
 		}
+
 		if (currentItem.isVisible()) {
-			complexCommand.add(new ColorCommand(currentItem, graphItemRef
-					.getColor(), this.stateColor));
+			command = new ColorCommand(currentItem, currentItem
+					.getColor(), this.stateColor);
+			command.execute();
+			complexCommand.add(command);
 		}
-		complexCommand.add(new StateCommand(currentItem, graphItemRef
-				.getState(), this.getState()));
+		
+		command = new StateCommand(currentItem,
+				currentItem.getState(), this.getState());
+		command.execute();
+		complexCommand.add(command);
 
 		this.addVisualizationCommands(currentItem, complexCommand);
 
-		Step predecessorComplexCommand = new Step();
+		Step predCommand = new Step();
 		if (!currentItem.isTagged()) {
-			predecessorComplexCommand.add(new Step(new StrokeWidthCommand(
-					currentItem, this.getItemStrokeWidth(graphItemRef),
-					graphItemRef.getStrokeWidth())));
+			predCommand.add(new StrokeWidthCommand(
+					currentItem, this.getItemStrokeWidth(currentItem),
+					currentItem.getStrokeWidth()));
 		}
+		
 		if (currentItem.isVisible()) {
-			predecessorComplexCommand.add(new ColorCommand(currentItem,
-					this.stateColor, graphItemRef.getColor()));
+			predCommand.add(new ColorCommand(currentItem,
+					this.stateColor, currentItem.getColor()));
 		}
-		predecessorComplexCommand.add(new StateCommand(currentItem, this
-				.getState(), graphItemRef.getState()));
-		this.setPredecessorCommand(predecessorComplexCommand);
-
-		try {
-			this.setOldGraphItemClone(this.isSameObject(currentItem) ? oldState
-					.getOldGraphItemClone() : currentItem.clone());
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-
+		
+		predCommand.add(new StateCommand(currentItem, this
+				.getState(), currentItem.getState()));
+		this.setPredecessorCommand(predCommand);
+		
 		currentItem.resetVisualizationValues();
 
 		return complexCommand;
