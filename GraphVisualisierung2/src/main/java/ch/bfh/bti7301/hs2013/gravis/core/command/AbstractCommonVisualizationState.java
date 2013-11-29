@@ -38,9 +38,11 @@ abstract class AbstractCommonVisualizationState extends
 				oldState.getOldGraphItemClone(), currentItem);
 
 		System.out.println("common: " + currentItem.getId() + ", " + currentItem.isTagged() + ", " +
-				currentItem.getStrokeWidth() + ", old: " + oldState.getOldGraphItemClone().getId() + ", " + 
+				currentItem.getStrokeWidth() + ", " + currentItem.getColor() +
+				", old: " + oldState.getOldGraphItemClone().getId() + ", " + 
 				oldState.getOldGraphItemClone().isTagged() + ", " + 
-				oldState.getOldGraphItemClone().getStrokeWidth());
+				oldState.getOldGraphItemClone().getStrokeWidth() + ", " +
+				oldGraphItemRef.getStrokeWidth());
 		
 		if (!currentItem.isTagged()) {
 			complexCommand.add(new StrokeWidthCommand(currentItem,

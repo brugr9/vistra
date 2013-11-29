@@ -43,7 +43,8 @@ class ActivationState extends AbstractVisualizationState {
 				oldState.getOldGraphItemClone(), currentItem);
 
 		System.out.println("active: " + currentItem.getId() + ", " + currentItem.isTagged() + ", " +
-					currentItem.getStrokeWidth() + ", old: " + oldState.getOldGraphItemClone().getId() + ", " + 
+					currentItem.getStrokeWidth()+ ", " + currentItem.getColor() + ", old: " + 
+				oldState.getOldGraphItemClone().getId() + ", " + 
 							oldState.getOldGraphItemClone().isTagged() + ", " + 
 							oldState.getOldGraphItemClone().getStrokeWidth() + ", " +
 							graphItemRef.getStrokeWidth());
