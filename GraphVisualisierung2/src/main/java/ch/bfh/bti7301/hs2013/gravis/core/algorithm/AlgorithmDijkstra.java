@@ -25,10 +25,14 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 			+ "found in graph %s!";
 
 	private final static String START_VERTEX = "%s ist der Startknoten.";
-	private final static String SHORTEST_PATH = "Für den Knoten %s wurde der kürzeste Weg "
-			+ "berechnet: %.1f";
-	private final static String SHORTEST_PATH_OK = "Der kürzeste Weg von %s nach " + 
-			"%s wurde gefunden.";
+	private final static String SHORTEST_PATH_OK = "Der kürzeste Weg von %s nach "
+			+ "%s wurde gefunden: %.1f";
+	private final static String SHORTEST_PATH_UPDATE = "Der neue kürzeste Weg von %s nach "
+			+ "%s ist: %.1f";
+	private final static String RESULT_INIT = "Der Knoten %s wurde mit folgendem Wert "
+			+ "initialisiert: %.1f";
+	private final static String SUCCESSOR_MSG = "Der Knoten %s hat die folgenden "
+			+ "Nachfolger: %s";
 
 	private final VertexPaintedResultComparator vertexResultComparator;
 
@@ -56,7 +60,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 	@Override
 	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 		this.checkPositiveWeights(graph.getEdges());
-		
+
 		Collection<? extends IRestrictedVertex> vertices = graph.getVertices();
 		IRestrictedVertex startVertex = graph.getStartVertex();
 
@@ -67,11 +71,10 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		startVertex.setNewComment(String.format(START_VERTEX,
 				startVertex.getId()));
 		startVertex.setNewResult(0.0);
+		startVertex.setTagged(true);
 		graph.updateState(State.VISIT, startVertex);
 
 		// start vertex has distance 0
-		startVertex.setNewComment(String.format(SHORTEST_PATH,
-				startVertex.getId(), startVertex.getCurrentResult()));
 		startVertex.setDone(true);
 		if (this.updateEndVertexMessage(graph, startVertex, startVertex)) {
 			return;
@@ -79,65 +82,88 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		graph.updateState(State.SOLUTION, startVertex);
 		vertices.remove(startVertex);
 
-		this.initializeDistances(graph, vertices, startVertex);
-		this.calculateDistances(graph, vertices, startVertex);
+		List<IRestrictedGraphItem> itemList = this.initializeDistances(graph,
+				vertices, startVertex);
+		this.calculateDistances(graph, vertices, itemList, startVertex);
+	}
+
+	/**
+	 * 
+	 * @param graph
+	 * @param vertices
+	 * @param startVertex
+	 * @return List<IRestrictedGraphItem>
+	 */
+	private List<IRestrictedGraphItem> initializeDistances(
+			IRestrictedGraph graph,
+			Collection<? extends IRestrictedVertex> vertices,
+			IRestrictedVertex startVertex) {
+		List<IRestrictedGraphItem> itemList = new ArrayList<IRestrictedGraphItem>();
+
+		this.tagGraphItems(vertices, true);
+		startVertex.setTagged(false);
+		itemList.add(startVertex);
+		// initialize infinite distance from start vertex
+		for (IRestrictedVertex vertex : vertices) {
+			vertex.setNewResult(Double.POSITIVE_INFINITY);
+			vertex.setNewComment(String.format(RESULT_INIT, vertex.getId(),
+					vertex.getNewResult()));
+			itemList.add(vertex);
+		}
+		graph.updateState(toArray(itemList));
+		itemList.clear();
+		
+		this.tagGraphItems(vertices, itemList, false);
+		startVertex.setTagged(true);
+		itemList.add(startVertex);
+		this.setSuccessorMessage(graph, startVertex);
+		graph.updateState(toArray(itemList));
+		itemList.clear();
+
+		this.calculateStartDistances(graph, itemList, startVertex);
+		return itemList;
 	}
 
 	/**
 	 * @param graph
-	 * @param vertices
+	 * @param itemList
 	 * @param startVertex
 	 */
-	private void initializeDistances(IRestrictedGraph graph,
-			Collection<? extends IRestrictedVertex> vertices,
-			IRestrictedVertex startVertex) {
+	private void calculateStartDistances(IRestrictedGraph graph,
+			List<IRestrictedGraphItem> itemList, IRestrictedVertex startVertex) {
 
-		// initialize infinite distance from start vertex
-		for (IRestrictedVertex vertex : vertices) {
-			vertex.setNewResult(Double.POSITIVE_INFINITY);
-			vertex.setNewComment("Der Knoten " + vertex.getId()
-					+ " wurde mit folgendem Wert initialisiert: "
-					+ vertex.getNewResult());
-			graph.updateState(State.ACTIVATION, vertex);
-		}
-
-		this.setSuccessorMessage(graph, startVertex);
-		graph.updateState(State.ACTIVATION, startVertex);
-		graph.updateState(State.SOLUTION, startVertex);
-
+		startVertex.setTagged(false);
+		itemList.add(startVertex);
 		// init edge weight as distance for all successors of start vertex
 		for (IRestrictedVertex vertex : graph.getSuccessors(startVertex)) {
 			IRestrictedEdge edge = graph.findEdge(startVertex, vertex);
 			edge.setTagged(true);
-			graph.updateState(State.VISIT, edge);
-
-			graph.updateState(State.VISIT, vertex);
-
+			edge.setNewState(State.VISIT);
+			itemList.add(edge);
 			vertex.setValue(startVertex);
-			vertex.setNewResult(this.findMinEdge(graph, startVertex, vertex)
-					.getWeight());
-			vertex.setNewComment("Der neue kürzeste Weg vom Startknoten zum Knoten "
-					+ vertex.getId() + " ist: " + vertex.getNewResult());
+			vertex.setTagged(true);
+			vertex.setNewResult(graph.findEdge(startVertex, vertex).getWeight());
+			vertex.setNewComment(String.format(SHORTEST_PATH_UPDATE,
+					startVertex.getId(), vertex.getId(), vertex.getNewResult()));
+			vertex.setNewState(State.VISIT);
+			itemList.add(vertex);
+			graph.updateState(toArray(itemList));
+			itemList.clear();
 
-			List<IRestrictedGraphItem> visited = new ArrayList<>();
-			visited.add(vertex);
-			// this.updatePathColor(graph, vertex, visited);
-			graph.updateState(State.VISIT, toArray(visited));
-
-			graph.updateState(State.VISIT, edge);
-
-			graph.updateState(State.SOLUTION, startVertex);
+			vertex.setTagged(false);
+			itemList.add(vertex);
 		}
 	}
 
 	/**
 	 * @param graph
 	 * @param vertices
+	 * @param itemList
 	 * @param startVertex
 	 */
 	private void calculateDistances(IRestrictedGraph graph,
 			Collection<? extends IRestrictedVertex> vertices,
-			IRestrictedVertex startVertex) {
+			List<IRestrictedGraphItem> itemList, IRestrictedVertex startVertex) {
 
 		MapBinaryHeap<IRestrictedVertex> prioQueue = new MapBinaryHeap<>(
 				this.vertexResultComparator);
@@ -152,7 +178,11 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 							+ selectedVertex.getId()
 							+ " mit der aktuellen Distanz: "
 							+ selectedVertex.getCurrentResult());
-			graph.updateState(State.ACTIVATION, selectedVertex);
+			itemList.add(selectedVertex);
+			selectedVertex.setTagged(true);
+			selectedVertex.setNewState(State.ACTIVATION);
+			graph.updateState(toArray(itemList));
+			itemList.clear();
 
 			this.setSuccessorMessage(graph, selectedVertex);
 			selectedVertex.setDone(true);
@@ -190,8 +220,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 				// graph.updateState(State.VISIT, adjacentVertex);
 
 				newDistance = vertex.getCurrentResult()
-						+ this.findMinEdge(graph, vertex, adjacentVertex)
-								.getWeight();
+						+ graph.findEdge(vertex, adjacentVertex).getWeight();
 				oldDistance = adjacentVertex.getCurrentResult();
 
 				// set new predecessor for shortest path
@@ -223,11 +252,79 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 
 	/**
 	 * @param graph
+	 * @param startVertex
+	 * @param endVertex
+	 */
+	private boolean updateEndVertexMessage(IRestrictedGraph graph,
+			IRestrictedVertex startVertex, IRestrictedVertex endVertex) {
+
+		if (endVertex.isEnd()) {
+			List<IRestrictedGraphItem> solvedItems = new ArrayList<>();
+			solvedItems.add(endVertex);
+			this.updatePathColor(graph, endVertex, solvedItems);
+
+			endVertex.appendToNewComment(String.format(SHORTEST_PATH_OK,
+					startVertex.getId(), endVertex.getId(),
+					endVertex.getCurrentResult()));
+			graph.updateState(State.SOLUTION, toArray(solvedItems));
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @param graph
+	 * @param selectedVertex
+	 * @param graphItems
+	 */
+	private void updatePathColor(IRestrictedGraph graph,
+			IRestrictedVertex selectedVertex,
+			List<IRestrictedGraphItem> graphItems) {
+
+		Collection<? extends IRestrictedVertex> predecessors = graph
+				.getPredecessors(selectedVertex);
+
+		for (IRestrictedVertex vertex : predecessors) {
+			if (vertex.isDone()) {
+				IRestrictedEdge edge = graph.findEdge(vertex, selectedVertex);
+				edge.setTagged(true);
+				graphItems.add(edge);
+			}
+		}
+	}
+
+	/**
+	 * @param vertices
+	 * @param value
+	 */
+	private void tagGraphItems(
+			Collection<? extends IRestrictedVertex> vertices, boolean value) {
+		for (IRestrictedVertex vertex : vertices) {
+			vertex.setTagged(value);
+		}
+	}
+
+	/**
+	 * @param vertices
+	 * @param graphItems
+	 * @param value
+	 */
+	private void tagGraphItems(
+			Collection<? extends IRestrictedVertex> vertices,
+			List<IRestrictedGraphItem> graphItems, boolean value) {
+		for (IRestrictedVertex vertex : vertices) {
+			vertex.setTagged(value);
+			graphItems.add(vertex);
+		}
+	}
+
+	/**
+	 * @param graph
 	 * @param vertex
 	 */
 	private void setSuccessorMessage(IRestrictedGraph graph,
 			IRestrictedVertex vertex) {
-
 		StringBuilder successors = new StringBuilder();
 
 		for (IRestrictedVertex adjacentVertex : graph.getSuccessors(vertex)) {
@@ -238,50 +335,9 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 				Math.max(0, successors.length()));
 
 		if (successors.length() != 0) {
-			vertex.setNewComment("Der Knoten " + vertex.getId()
-					+ " hat die folgenden Nachfolger: " + successors);
+			vertex.setNewComment(String.format(SUCCESSOR_MSG, vertex.getId(),
+					successors));
 		}
-	}
-
-	/**
-	 * @param graph
-	 * @param startVertex
-	 * @param endVertex
-	 */
-	private boolean updateEndVertexMessage(IRestrictedGraph graph,
-			IRestrictedVertex startVertex, IRestrictedVertex endVertex) {
-
-		if (endVertex.isEnd()) {
-			List<IRestrictedGraphItem> solved = new ArrayList<>();
-			solved.add(endVertex);
-			this.updatePathColor(graph, endVertex, solved);
-
-			endVertex.appendToNewComment(String.format(SHORTEST_PATH_OK, 
-					startVertex.getId(), endVertex.getId()));
-			graph.updateState(State.SOLUTION, toArray(solved));
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * @param graph
-	 * @param vertex1
-	 * @param vertex2
-	 * @return IRestrictedEdge
-	 */
-	private IRestrictedEdge findMinEdge(IRestrictedGraph graph,
-			IRestrictedVertex vertex1, IRestrictedVertex vertex2) {
-
-		Collection<? extends IRestrictedEdge> edgeSet = graph.findEdgeSet(
-				vertex1, vertex2);
-		IRestrictedEdge minEdge = graph.findEdge(vertex1, vertex2);
-
-		for (IRestrictedEdge edge : edgeSet) {
-			minEdge = edge.getWeight() < minEdge.getWeight() ? edge : minEdge;
-		}
-
-		return minEdge;
 	}
 
 	/**
@@ -315,40 +371,18 @@ class AlgorithmDijkstra extends AbstractAlgorithm {
 		// }
 		// graph.updateState(State.SOLUTION, toArray(edgeList));
 
+		// TODO Kanten und Knoten zurück zu init zustand
 		// edgeList = new ArrayList<>();
 		IRestrictedVertex currentVertex = null;
 		while (selectedVertex.getValue() != null) {
 			currentVertex = (IRestrictedVertex) selectedVertex.getValue();
-			IRestrictedEdge edge = this.findMinEdge(graph, currentVertex,
-					selectedVertex);
+			IRestrictedEdge edge = graph
+					.findEdge(currentVertex, selectedVertex);
 			edge.setTagged(true);
 			edgeList.add(edge);
 			selectedVertex = currentVertex;
 		}
 		graph.updateState(State.SOLUTION, toArray(edgeList));
-	}
-
-	/**
-	 * 
-	 * @param graph
-	 * @param selectedVertex
-	 * @param graphItems
-	 */
-	private void updatePathColor(IRestrictedGraph graph,
-			IRestrictedVertex selectedVertex,
-			List<IRestrictedGraphItem> graphItems) {
-
-		Collection<? extends IRestrictedVertex> predecessors = graph
-				.getPredecessors(selectedVertex);
-		
-		// TODO Kanten und Knoten zurück zu init zustand
-		for (IRestrictedVertex vertex : predecessors) {
-			if (vertex.isDone()) {
-				IRestrictedEdge edge = graph.findEdge(vertex, selectedVertex);
-				edge.setTagged(true);
-				graphItems.add(edge);
-			}
-		}
 	}
 
 }
