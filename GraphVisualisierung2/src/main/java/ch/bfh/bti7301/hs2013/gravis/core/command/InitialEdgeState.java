@@ -4,55 +4,53 @@ import java.awt.Color;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
- *
+ * 
  */
-public class InitialEdgeState extends AbstractCommonVisualizationState {
+public class InitialEdgeState extends AbstractVisualizationState {
 
-	private State state;
-	
-	/**
-	 * @param color
-	 */
-	public InitialEdgeState(Color color) {
-		super(color);
-		
-		this.state = State.INITIAL;
+	private final static String E_DO_MSG = 
+			"Die Kante %s wurde in den Anfangszustand versetzt.";
+	private final static String E_UNDO_MSG = 
+			"Die Kante %s befindet sich nicht mehr im Anfangszustand.";
+
+	public InitialEdgeState() {
+		super();
+	}
+
+	@Override
+	public String getStateDoMessage(IGraphItem currentItem) {
+		return String.format(E_DO_MSG, currentItem.getId());
+	}
+
+	@Override
+	public String getStateUndoMessage(IGraphItem currentItem) {
+		return String.format(E_UNDO_MSG, currentItem.getId());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.AbstractVisualizationState#
-	 * stateDoMessage(ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem)
-	 */
-	@Override
-	public String stateDoMessage(IGraphItem currentItem) {
-		return "Die Kante " + currentItem.getId()
-				+ " wurde in den Anfangszustand versetzt.";
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.AbstractVisualizationState#
-	 * stateUndoMessage(ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem)
-	 */
-	@Override
-	public String stateUndoMessage(IGraphItem currentItem) {
-		return "Die Kante " + currentItem.getId()
-				+ " befindet sich nicht mehr im  Anfangszustand.";
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#getState()
+	 * ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#getState()
 	 */
 	@Override
 	public State getState() {
-		return this.state;
+		return State.INITIAL;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.command.AbstractVisualizationState#
+	 * getStateColor()
+	 */
+	@Override
+	protected Color getStateColor() {
+		return GravisConstants.E_INITIAL_COLOR;
 	}
 }

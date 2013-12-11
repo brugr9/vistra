@@ -44,7 +44,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 
 		IRestrictedVertex startVertex = graph.getStartVertex();
 		if (startVertex != null) {
-			startVertex.setComment("Die Knoten werden in Preorder-Reihenfolge nummeriert.");
+			startVertex.setNewComment("Die Knoten werden in Preorder-Reihenfolge nummeriert.");
 		}
 		
 		for (IRestrictedVertex vertex : graph.getVertices()) {
@@ -66,14 +66,14 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	 */
 	private boolean visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
 		vertex1.setDone(true);
-		vertex1.appendComment("Der Knoten " + vertex1 + " wird aktiviert.");
+		vertex1.appendToNewComment("Der Knoten " + vertex1 + " wird aktiviert.");
 		graph.updateState(State.ACTIVATION, vertex1);
 
-		vertex1.setResult(++this.counter);
-		vertex1.setComment("Der Knoten " + vertex1
+		vertex1.setNewResult(++this.counter);
+		vertex1.setNewComment("Der Knoten " + vertex1
 				+ " wurde traversiert und zur Lösung "
 				+ "hinzugefügt. Er hat die Traversierungs-Nr.: "
-				+ vertex1.getResult());
+				+ vertex1.getNewResult());
 		if (this.updateEndVertexMessage(graph, vertex1)) {
 			return true;
 		}
@@ -87,7 +87,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 					return true;
 				}
 
-				vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
+				vertex1.setNewComment("Der Knoten " + vertex1 + " wird aktiviert.");
 				graph.updateState(State.ACTIVATION, vertex1);
 			}
 		}
@@ -102,7 +102,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	private boolean updateEndVertexMessage(IRestrictedGraph graph,
 			IRestrictedVertex endVertex) {
 		if (endVertex.isEnd()) {
-			endVertex.appendComment("Der Endknoten " + endVertex.getId()
+			endVertex.appendToNewComment("Der Endknoten " + endVertex.getId()
 					+ " wurde erreicht.");
 			graph.updateState(State.SOLUTION, endVertex);
 			return true;

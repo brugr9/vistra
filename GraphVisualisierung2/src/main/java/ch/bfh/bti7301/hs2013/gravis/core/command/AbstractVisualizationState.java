@@ -1,13 +1,8 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
 import java.awt.Color;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -15,99 +10,52 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
  */
 abstract class AbstractVisualizationState implements IVisualizationState {
 
-	protected final Color stateColor;
+	private final static String UNDO_MSG = "Folgender Schritt wurde rückgängig gemacht: %s";
 
-	private final Queue<IStep> queuedCommands;
+	protected AbstractVisualizationState() {
+	}
 
-	private boolean taggedDone, visibleDone;
-
-	private IStep reverseVisibleCommand, reverseTaggedCommand;
-
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param color
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#createCommand
+	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem)
 	 */
-	protected AbstractVisualizationState(Color color) {
-		super();
+	@Override
+	public IStep createCommand(IGraphItem currentItem) {
+		Step complexCommand = new Step();
 
-		this.stateColor = color;
-		// null object
-		this.queuedCommands = new LinkedList<>();
-		this.taggedDone = this.visibleDone = false;
+		this.createGeneralStateCommands(currentItem, complexCommand);
+		this.createSpecialCommands(currentItem, complexCommand);
+
+		currentItem.resetVisualizationValues();
+		return complexCommand;
 	}
 
 	/**
 	 * @param currentItem
 	 * @param complexCommand
 	 */
-	protected void addVisibleTaggedCommands(IGraphItem currentItem,
+	private void createSpecialCommands(IGraphItem currentItem,
 			Step complexCommand) {
-		IStep command = null;
 
-		if (!currentItem.isVisible() && !this.visibleDone) {
-			// execute only one time
-			this.visibleDone = true;
-			command = new VisibleCommand(currentItem, currentItem.getColor(),
-					GravisColor.WHITE);
-			this.reverseVisibleCommand = new VisibleCommand(currentItem,
-					GravisColor.WHITE, currentItem.getColor());
-			command.execute();
-			complexCommand.add(command);
-		}
-
-		if (currentItem.isTagged() && !this.taggedDone) {
-			// execute only one time
-			this.taggedDone = true;
-			command = new TaggedStrokeCommand(currentItem,
-					currentItem.getStrokeWidth(),
-					this.getItemStrokeWidth(currentItem));
-			this.reverseTaggedCommand = new TaggedStrokeCommand(currentItem,
-					this.getItemStrokeWidth(currentItem),
-					currentItem.getStrokeWidth());
-			command.execute();
-			complexCommand.add(command);
-		}
-
-		if (!currentItem.isTagged()) {
-			this.taggedDone = false;
-			if (this.reverseTaggedCommand != null) {
-				this.reverseTaggedCommand.execute();
-			}
-		}
-
-		if (currentItem.isVisible()) {
-			this.visibleDone = false;
-			if (this.reverseVisibleCommand != null) {
-				this.reverseVisibleCommand.execute();
-			}
-		}
-
-	}
-
-	/**
-	 * @param currentItem
-	 * @param complexCommand
-	 */
-	protected void addVisualizationCommands(IGraphItem currentItem,
-			Step complexCommand) {
-		IStep command = null;
-
-		if (!currentItem.hasNoResult()) {
-			command = new ResultCommand(currentItem,
-					currentItem.getPaintedResult(), currentItem.getResult());
-			command.execute();
-			complexCommand.add(command);
-		}
-
-		command = new CommentCommand(currentItem,
-				this.stateUndoMessage(currentItem),
-				this.stateDoMessage(currentItem));
+		IStep command = new StrokeWidthCommand(currentItem,
+				currentItem.getCurrentStrokeWidth(),
+				currentItem.getNewStrokeWidth());
 		command.execute();
 		complexCommand.add(command);
 
-		if (!currentItem.getComment().isEmpty()) {
-			command = new CommentCommand(currentItem, currentItem.getInfo(),
-					currentItem.getComment());
+		if (!currentItem.hasNoResult()) {
+			command = new ResultCommand(currentItem,
+					currentItem.getCurrentResult(), currentItem.getNewResult());
+			command.execute();
+			complexCommand.add(command);
+		}
+
+		if (!currentItem.getNewComment().isEmpty()) {
+			command = new CommentCommand(String.format(UNDO_MSG,
+					currentItem.getNewComment()), currentItem.getNewComment());
 			command.execute();
 			complexCommand.add(command);
 		}
@@ -115,50 +63,47 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 
 	/**
 	 * @param currentItem
-	 * @return float
+	 * @param complexCommand
 	 */
-	protected float getItemStrokeWidth(IGraphItem currentItem) {
-		return currentItem instanceof IVertex ? GravisConstants.V_TAGGED_STROKE
-				: GravisConstants.E_TAGGED_STROKE;
-	}
+	private void createGeneralStateCommands(IGraphItem currentItem,
+			Step complexCommand) {
 
-	@Override
-	public Queue<IStep> getQueuedCommands() {
-		return this.queuedCommands;
+		if (currentItem.isVisible()) {
+			currentItem.setNewColor(this.getStateColor());
+		}
+		
+		IStep command = new StateCommand(currentItem,
+				currentItem.getCurrentState(), this.getState());
+		command.execute();
+		complexCommand.add(command);
+
+		command = new ColorCommand(currentItem,
+				currentItem.getCurrentColor(), currentItem.getNewColor());
+		command.execute();
+		complexCommand.add(command);
+		
+		command = new CommentCommand(this.getStateUndoMessage(currentItem),
+				this.getStateDoMessage(currentItem));
+		command.execute();
+		complexCommand.add(command);
 	}
 
 	/**
-	 * 
-	 * @param oldState
+	 * @return Color
 	 */
-	protected void processQueuedCommands(IVisualizationState oldState) {
-		Queue<IStep> tempQueue = new LinkedList<>();
-
-		while (!oldState.getQueuedCommands().isEmpty()) {
-			IStep step = oldState.getQueuedCommands().poll();
-
-			if (!step.isLocked()) {
-				step.execute();
-			} else if (oldState != this) {
-				this.getQueuedCommands().offer(step);
-			} else {
-				tempQueue.offer(step);
-			}
-		}
-		this.getQueuedCommands().addAll(tempQueue);
-	}
+	protected abstract Color getStateColor();
 
 	/**
 	 * 
 	 * @param currentItem
 	 * @return stateDoMessage
 	 */
-	public abstract String stateDoMessage(IGraphItem currentItem);
+	protected abstract String getStateDoMessage(IGraphItem currentItem);
 
 	/**
 	 * 
 	 * @param currentItem
 	 * @return stateUndoMessage
 	 */
-	public abstract String stateUndoMessage(IGraphItem currentItem);
+	protected abstract String getStateUndoMessage(IGraphItem currentItem);
 }

@@ -16,9 +16,9 @@ public class EdgeLabelTransformer implements Transformer<IEdge, String> {
 	@Override
 	public String transform(IEdge edge) {
 		return edge.isVisible() ? (edge.getWeight()
-				+ (Double.isNaN(edge.getPaintedResult()) ? "" : " | "
+				+ (Double.isNaN(edge.getCurrentResult()) ? "" : " | "
 						+ ValueTransformer.round2Decimals(
-								edge.getPaintedResult()))) : "";
+								edge.getCurrentResult()))) : "";
 	}
 
 }

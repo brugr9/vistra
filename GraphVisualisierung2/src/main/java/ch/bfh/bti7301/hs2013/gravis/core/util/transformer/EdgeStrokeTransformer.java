@@ -18,7 +18,7 @@ public class EdgeStrokeTransformer implements Transformer<IEdge, Stroke> {
 	 */
 	@Override
 	public Stroke transform(IEdge edge) {
-		return new BasicStroke(edge.getStrokeWidth());
+		return new BasicStroke(edge.getCurrentStrokeWidth());
 	}
 
 }

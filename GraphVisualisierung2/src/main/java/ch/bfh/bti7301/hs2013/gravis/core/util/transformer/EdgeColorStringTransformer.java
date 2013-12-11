@@ -15,7 +15,7 @@ public class EdgeColorStringTransformer implements Transformer<IEdge, String> {
 	 */
 	@Override
 	public String transform(IEdge edge) {
-		return ValueTransformer.transformColorToString(edge.getColor());
+		return ValueTransformer.transformColorToString(edge.getCurrentColor());
 	}
 
 }

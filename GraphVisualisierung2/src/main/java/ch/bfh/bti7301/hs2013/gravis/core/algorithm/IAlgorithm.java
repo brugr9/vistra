@@ -40,7 +40,7 @@ public interface IAlgorithm {
 	 * @param graph
 	 * @throws Exception
 	 */
-	public abstract void execute(IRestrictedGraph graph) throws Exception;
+	public abstract void execute(IRestrictedGraph graph) throws AlgorithmException;
 
 	/**
 	 * @return annotations

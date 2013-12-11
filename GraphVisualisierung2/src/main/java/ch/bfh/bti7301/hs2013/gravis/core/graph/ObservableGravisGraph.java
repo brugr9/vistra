@@ -114,7 +114,7 @@ class ObservableGravisGraph extends ObservableGraph<IVertex, IEdge> implements
 	@Override
 	public void updateState(State state, IGraphItem... graphItems) {
 		for (IGraphItem item : graphItems) {
-			item.setTraversalState(state);
+			item.setNewState(state);
 		}
 
 		this.fireGraphEvent(GraphFactory.createGraphEvent(this, graphItems));

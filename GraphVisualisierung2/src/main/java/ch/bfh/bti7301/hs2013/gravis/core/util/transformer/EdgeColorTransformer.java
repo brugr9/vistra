@@ -20,7 +20,7 @@ public class EdgeColorTransformer implements Transformer<IEdge, Paint> {
 	 */
 	@Override
 	public Paint transform(IEdge edge) {
-		return edge.getColor();
+		return edge.getCurrentColor();
 	}
 
 }

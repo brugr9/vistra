@@ -28,7 +28,7 @@ public class AlgorithmNoConstructor implements IAlgorithm {
 	}
 
 	@Override
-	public void execute(IRestrictedGraph graph) throws Exception {
+	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 	}
 
 	@Override

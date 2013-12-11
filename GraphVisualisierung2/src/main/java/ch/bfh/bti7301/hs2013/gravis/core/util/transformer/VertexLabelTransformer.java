@@ -19,9 +19,9 @@ public class VertexLabelTransformer implements Transformer<IVertex, String> {
 	@Override
 	public String transform(IVertex vertex) {
 		return vertex.getId()
-				+ (Double.isNaN(vertex.getPaintedResult()) ? "" : ": "
+				+ (Double.isNaN(vertex.getCurrentResult()) ? "" : ": "
 						+ ValueTransformer.round2Decimals(vertex
-								.getPaintedResult()));
+								.getCurrentResult()));
 	}
 
 }

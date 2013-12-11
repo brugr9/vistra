@@ -42,7 +42,7 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph)
 	 */
 	@Override
-	public void execute(IRestrictedGraph graph) throws Exception {
+	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		this.counter = 0;
@@ -77,8 +77,8 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 			if (!partitionMap.get(pair.getFirst()).find()
 					.equals(partitionMap.get(pair.getSecond()).find())) {
 
-				selectedEdge.setResult(++this.counter);
-				selectedEdge.setComment("Die Kante " + selectedEdge.getId()
+				selectedEdge.setNewResult(++this.counter);
+				selectedEdge.setNewComment("Die Kante " + selectedEdge.getId()
 						+ " wird zur Lösung hinzugefügt.");
 				graph.updateState(State.SOLUTION, selectedEdge);
 

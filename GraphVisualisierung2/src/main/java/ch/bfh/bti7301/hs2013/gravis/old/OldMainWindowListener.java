@@ -163,7 +163,9 @@ public class OldMainWindowListener extends Observable implements
 		if (e.getActionCommand().equals(END_ANIMATION.toString())) {
 
 			try {
+//				this.stepIterator.last();
 				System.out.println(this.stepIterator.last());
+//				System.err.println(this.stepIterator.last() == null);
 				// System.out.println("goEnd");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

@@ -19,7 +19,7 @@ public class VertexColorTransformer implements Transformer<IVertex, Paint> {
 	 */
 	@Override
 	public Paint transform(IVertex vertex) {
-		return vertex.getColor();
+		return vertex.getCurrentColor();
 	}
 
 }

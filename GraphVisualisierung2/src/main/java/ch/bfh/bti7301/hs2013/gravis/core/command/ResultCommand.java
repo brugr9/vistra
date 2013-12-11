@@ -15,38 +15,28 @@ class ResultCommand extends EmptyStep {
 
 	/**
 	 * @param currentItem
-	 * @param paintedResult
-	 * @param result
+	 * @param oldResult
+	 * @param newResult
 	 */
-	protected ResultCommand(IGraphItem currentItem, double paintedResult,
-			double result) {
+	protected ResultCommand(IGraphItem currentItem, double oldResult,
+			double newResult) {
 		super();
 
 		this.item = currentItem;
-		this.oldResult = paintedResult;
-		this.newResult = result;
+		this.oldResult = oldResult;
+		this.newResult = newResult;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyStep#execute()
-	 */
 	@Override
-	public String execute() {
-		this.item.setPaintedResult(this.newResult);
-		return "";
+	public IStepResult execute() {
+		this.item.setCurrentResult(this.newResult);
+		return new StepResult();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyStep#unExecute()
-	 */
 	@Override
-	public String unExecute() {
-		this.item.setPaintedResult(this.oldResult);
-		return "";
+	public IStepResult unExecute() {
+		this.item.setCurrentResult(this.oldResult);
+		return new StepResult();
 	}
 
 }

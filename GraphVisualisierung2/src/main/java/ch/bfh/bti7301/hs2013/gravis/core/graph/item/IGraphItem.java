@@ -13,7 +13,7 @@ public interface IGraphItem extends IRestrictedGraphItem, Cloneable {
 	 * 
 	 * @param result
 	 */
-	public abstract void setPaintedResult(double result);
+	public abstract void setCurrentResult(double result);
 	
 	/**
 	 * 
@@ -23,15 +23,21 @@ public interface IGraphItem extends IRestrictedGraphItem, Cloneable {
 
 	/**
 	 * 
-	 * @param info
+	 * @param currentColor
 	 */
-	public abstract void setInfo(String info);
-
+	public abstract void setCurrentColor(Color currentColor);
+	
 	/**
 	 * 
-	 * @param color
+	 * @param newColor
 	 */
-	public abstract void setColor(Color color);
+	public abstract void setNewColor(Color newColor);
+	
+	/**
+	 * 
+	 * @return Color
+	 */
+	public abstract Color getNewColor();
 
 	public abstract void resetVisualizationValues();
 
@@ -42,20 +48,31 @@ public interface IGraphItem extends IRestrictedGraphItem, Cloneable {
 
 	/**
 	 * 
-	 * @param state
+	 * @param currentState
 	 */
-	public abstract void setState(State state);
+	public abstract void setCurrentState(State currentState);
 	
 	/**
-	 * @return
+	 * @return float
 	 */
-	public abstract float getStrokeWidth();
+	public abstract float getCurrentStrokeWidth();
 	
 	/**
 	 * 
 	 * @param width
 	 */
-	public abstract void setStrokeWidth(float width);
+	public abstract void setCurrentStrokeWidth(float width);
+	
+	/**
+	 * @return float
+	 */
+	public abstract float getNewStrokeWidth();
+	
+	/**
+	 * 
+	 * @param width
+	 */
+	public abstract void setNewStrokeWidth(float width);
 	
 	/**
 	 * 

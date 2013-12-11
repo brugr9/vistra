@@ -17,7 +17,7 @@ public class VertexPaintedResultComparator implements Comparator<IRestrictedVert
 	 */
 	@Override
 	public int compare(IRestrictedVertex v1, IRestrictedVertex v2) {
-		return Double.compare(v1.getPaintedResult(), v2.getPaintedResult());
+		return Double.compare(v1.getCurrentResult(), v2.getCurrentResult());
 	}
 
 }

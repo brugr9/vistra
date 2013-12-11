@@ -30,7 +30,7 @@ public class EdgeTransformer implements Transformer<EdgeMetadata, IEdge> {
 		IEdge edge = this.edgeFactory.create();
 
 		edge.setId(edgeMeta.getId());
-		edge.setColor(ValueTransformer.transformStringToColor(edgeMeta
+		edge.setCurrentColor(ValueTransformer.transformStringToColor(edgeMeta
 				.getProperty(GravisConstants.E_COLOR)));
 		edge.setWeight(ValueTransformer.transformDouble(edgeMeta
 				.getProperty(GravisConstants.E_WEIGHT)));

@@ -12,7 +12,6 @@ public class StateCommand extends EmptyStep {
 	private final IGraphItem item;
 
 	private final State newState;
-	
 	private final State oldState;
 	
 	/**
@@ -27,22 +26,16 @@ public class StateCommand extends EmptyStep {
 		this.newState = newState;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyStep#execute()
-	 */
 	@Override
-	public String execute() {
-		this.item.setState(this.newState);
-		return "";
+	public IStepResult execute() {
+		this.item.setCurrentState(this.newState);
+		return new StepResult();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyStep#unExecute()
-	 */
 	@Override
-	public String unExecute() {
-		this.item.setState(this.oldState);
-		return "";
+	public IStepResult unExecute() {
+		this.item.setCurrentState(this.oldState);
+		return new StepResult();
 	}
 
 	

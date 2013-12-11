@@ -9,34 +9,16 @@ class EmptyStep implements IStep {
 	protected EmptyStep() {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStep#execute()
-	 */
 	@Override
-	public String execute() {
+	public IStepResult execute() {
 		// no operation
-		return "";
+		return new StepResult();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStep#unExecute()
-	 */
 	@Override
-	public String unExecute() {
+	public IStepResult unExecute() {
 		// no operation
-		return "";
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStep#isLocked()
-	 */
-	@Override
-	public boolean isLocked() {
-		return false;
+		return new StepResult();
 	}
 
 }

@@ -24,46 +24,36 @@ public class Step extends EmptyStep {
 		this.nestedCommands = new ArrayList<>();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStep#execute()
-	 */
 	@Override
-	public String execute() {
+	public IStepResult execute() {
 		StringBuilder totalComment = new StringBuilder();
-		String commandComment = "";
+		IStepResult stepResult = null;
 		
 		for (IStep command : this.nestedCommands) {
-			commandComment = command.execute().trim();
+			stepResult = command.execute();
 			
-			if (!commandComment.isEmpty()) {
-				totalComment.append(commandComment + System.lineSeparator());
+			if (stepResult.hasComment()) {
+				totalComment.append(stepResult.getComment() + System.lineSeparator());
 			}
 		}
 		
-		return totalComment.toString().trim();
+		return new StepResult(totalComment.toString().trim());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStep#unExecute()
-	 */
 	@Override
-	public String unExecute() {
+	public IStepResult unExecute() {
 		StringBuilder totalComment = new StringBuilder();
-		String commandComment = "";
+		IStepResult stepResult = null;
 		
 		for (int i = this.nestedCommands.size() - 1; i >= 0; i--) {
-			commandComment = this.nestedCommands.get(i).unExecute().trim();
+			stepResult = this.nestedCommands.get(i).unExecute();
 			
-			if (!commandComment.isEmpty()) {
-				totalComment.append(commandComment + System.lineSeparator());
+			if (stepResult.hasComment()) {
+				totalComment.append(stepResult.getComment() + System.lineSeparator());
 			}
 		}
 		
-		return totalComment.toString().trim();
+		return new StepResult(totalComment.toString().trim());
 	}
 
 	/**

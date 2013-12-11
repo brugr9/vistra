@@ -1,6 +1,5 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge;
 
-
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
@@ -16,7 +15,7 @@ class GravisEdge extends AbstractGraphItem implements IEdge {
 		super();
 
 		this.weight = GravisConstants.E_WEIGHT_DEFAULT;
-		this.setColor(GravisConstants.E_COLOR_DEFAULT);
+		this.setCurrentColor(GravisConstants.E_COLOR_DEFAULT);
 	}
 
 	/*
@@ -52,13 +51,26 @@ class GravisEdge extends AbstractGraphItem implements IEdge {
 		this.weight = weight;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#clone()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#clone()
 	 */
 	@Override
 	public GravisEdge clone() throws CloneNotSupportedException {
 		return (GravisEdge) super.clone();
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#
+	 * getItemStrokeWidth()
+	 */
+	@Override
+	protected float getDefaultStrokeWidth() {
+		return GravisConstants.E_TAGGED_STROKE;
+	}
+
 }

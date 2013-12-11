@@ -34,7 +34,7 @@ public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm {
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph)
 	 */
 	@Override
-	public void execute(IRestrictedGraph graph) throws Exception {
+	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 		// TODO bitte an dieser Methode nichts ändern (pk)
 
 		this.counter = 0;
@@ -52,7 +52,7 @@ public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm {
 
 				graph.updateState(State.ACTIVATION, selectedVertex);
 
-				selectedVertex.setResult(++this.counter);
+				selectedVertex.setNewResult(++this.counter);
 				if (this.updateEndVertexMessage(graph, selectedVertex)) {
 					return;
 				}
@@ -84,7 +84,7 @@ public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm {
 	private boolean updateEndVertexMessage(IRestrictedGraph graph,
 			IRestrictedVertex endVertex) {
 		if (endVertex.isEnd()) {
-			endVertex.appendComment("Der Endknoten " + endVertex.getId()
+			endVertex.appendToNewComment("Der Endknoten " + endVertex.getId()
 					+ " wurde erreicht.");
 			graph.updateState(State.SOLUTION, endVertex);
 			return true;

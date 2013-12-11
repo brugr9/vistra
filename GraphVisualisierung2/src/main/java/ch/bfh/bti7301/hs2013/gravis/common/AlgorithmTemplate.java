@@ -1,5 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.common;
 
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.AlgorithmException;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 
@@ -32,7 +33,7 @@ public class AlgorithmTemplate implements IAlgorithm {
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#execute(ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph)
 	 */
 	@Override
-	public void execute(IRestrictedGraph graph) throws Exception {
+	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 		// TODO implement algorithm
 		
 	}

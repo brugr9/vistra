@@ -165,6 +165,14 @@ final class RestrictedGraph implements IRestrictedGraph {
 		return this.observableGraph.isEmpty();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.observableGraph.getId();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

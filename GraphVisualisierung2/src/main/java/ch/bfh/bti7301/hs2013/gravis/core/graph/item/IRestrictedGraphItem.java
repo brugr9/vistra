@@ -25,53 +25,46 @@ public interface IRestrictedGraphItem {
 	public abstract String getId();
 
 	/**
-	 * The last comment printed in the visualization.
 	 * 
-	 * @return String info
+	 * @return current color
 	 */
-	public abstract String getInfo();
+	public abstract Color getCurrentColor();
 
 	/**
-	 * 
-	 * @return color
-	 */
-	public abstract Color getColor();
-
-	/**
-	 * The last result printed in the visualization.
+	 * The current result of this item.
 	 * 
 	 * @return double
 	 */
-	public abstract double getPaintedResult();
+	public abstract double getCurrentResult();
 	
 	/**
 	 * 
 	 * @return double value
 	 */
-	public abstract double getResult();
+	public abstract double getNewResult();
 
 	/**
 	 * 
 	 * @param value
 	 */
-	public abstract void setResult(double value);
+	public abstract void setNewResult(double value);
 
 	/**
 	 * 
 	 * @return comment
 	 */
-	public abstract String getComment();
+	public abstract String getNewComment();
 
 	/**
 	 * 
 	 * @param comment
 	 */
-	public abstract void setComment(String comment);
+	public abstract void setNewComment(String newComment);
 
 	/**
 	 * @param comment
 	 */
-	public abstract void appendComment(String comment);
+	public abstract void appendToNewComment(String comment);
 	
 	/**
 	 * @return boolean
@@ -88,19 +81,19 @@ public interface IRestrictedGraphItem {
 	 * 
 	 * @return State
 	 */
-	public abstract State getState();
+	public abstract State getCurrentState();
 	
 	/**
 	 * 
 	 * @return State
 	 */
-	public abstract State getTraversalState();
+	public abstract State getNewState();
 	
 	/**
 	 * 
 	 * @param state
 	 */
-	public abstract void setTraversalState(State state);
+	public abstract void setNewState(State newState);
 	
 	/**
 	 * 

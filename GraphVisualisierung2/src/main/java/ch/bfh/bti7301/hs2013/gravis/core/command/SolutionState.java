@@ -1,5 +1,6 @@
 package ch.bfh.bti7301.hs2013.gravis.core.command;
 
+import java.awt.Color;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
@@ -10,59 +11,54 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class SolutionState extends AbstractCommonVisualizationState {
+class SolutionState extends AbstractVisualizationState {
 
-	private State state;
+	private final static String V_DO_MSG = "Der Knoten %s wurde zur Lösung hinzugefügt.";
+	private final static String E_DO_MSG = "Die Kante %s wurde zur Lösung hinzugefügt.";
+	private final static String V_UNDO_MSG = "Der Knoten %s gehört nicht mehr zur Lösung.";
+	private final static String E_UNDO_MSG = "Die Kante %s gehört nicht mehr zur Lösung.";
 	
-	/**
-	 * @param changeListener
-	 */
 	protected SolutionState() {
-		super(GravisConstants.SOLUTION_COLOR);
-		
-		this.state = State.SOLUTION;
+		super();
+	}
+
+	@Override
+	public String getStateDoMessage(IGraphItem currentItem) {
+		if (currentItem instanceof IVertex) {
+			return String.format(V_DO_MSG, currentItem.getId());
+		}
+
+		return String.format(E_DO_MSG, currentItem.getId());
+	}
+
+	@Override
+	public String getStateUndoMessage(IGraphItem currentItem) {
+		if (currentItem instanceof IVertex) {
+			return String.format(V_UNDO_MSG, currentItem.getId());
+		}
+		return String.format(E_UNDO_MSG, currentItem.getId());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.AbstractVisualizationState#
-	 * stateDoMessage(ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem)
-	 */
-	@Override
-	public String stateDoMessage(IGraphItem currentItem) {
-		if (currentItem instanceof IVertex) {
-			return "Der Knoten " + currentItem.getId()
-					+ " wurde zur Lösung hinzugefügt.";
-		}
-		
-		return "Die Kante " + currentItem.getId()
-				+ " wurde zur Lösung hinzugefügt.";
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.AbstractVisualizationState#
-	 * stateUndoMessage(ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem)
-	 */
-	@Override
-	public String stateUndoMessage(IGraphItem currentItem) {
-		if (currentItem instanceof IVertex) {
-			return "Der Knoten " + currentItem.getId()
-					+ " gehört nicht mehr zur Lösung.";
-		}
-		return "Die Kante " + currentItem.getId()
-				+ " gehört nicht mehr zur Lösung.";
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#getState()
+	 * ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#getState()
 	 */
 	@Override
 	public State getState() {
-		return this.state;
+		return State.SOLUTION;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.command.AbstractVisualizationState#
+	 * getStateColor()
+	 */
+	@Override
+	protected Color getStateColor() {
+		return GravisConstants.SOLUTION_COLOR;
 	}
 }

@@ -40,7 +40,7 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	protected GravisVertex() {
 		super();
 
-		this.tempColor = this.getColor();
+		this.tempColor = this.getCurrentColor();
 		this.setStart(GravisConstants.V_START_DEFAULT);
 		this.setEnd(GravisConstants.V_END_DEFAULT);
 		this.width = GravisConstants.V_WIDTH_DEFAULT;
@@ -61,14 +61,14 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 
 	@Override
 	public void setStart(boolean start) {
-		super.setColor(start ? GravisConstants.V_START_COLOR
-				: (this.isEnd() ? GravisConstants.V_END_COLOR : this.tempColor));
+		super.setCurrentColor(start ? GravisConstants.V_START_COLOR : (this
+				.isEnd() ? GravisConstants.V_END_COLOR : this.tempColor));
 		this.start = start;
 	}
 
 	@Override
 	public void setEnd(boolean end) {
-		super.setColor(end ? (this.isStart() ? GravisConstants.V_START_COLOR
+		super.setCurrentColor(end ? (this.isStart() ? GravisConstants.V_START_COLOR
 				: GravisConstants.V_END_COLOR)
 				: (this.isStart() ? GravisConstants.V_START_COLOR
 						: this.tempColor));
@@ -83,8 +83,8 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	 * (java.awt.Color)
 	 */
 	@Override
-	public void setColor(Color color) {
-		super.setColor(color);
+	public void setCurrentColor(Color color) {
+		super.setCurrentColor(color);
 		this.tempColor = color;
 	}
 
@@ -177,6 +177,17 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 		GravisVertex vertexClone = (GravisVertex) super.clone();
 		vertexClone.setLocation((Point2D) this.location.clone());
 		return vertexClone;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem#
+	 * getItemStrokeWidth()
+	 */
+	@Override
+	protected float getDefaultStrokeWidth() {
+		return GravisConstants.V_TAGGED_STROKE;
 	}
 
 }

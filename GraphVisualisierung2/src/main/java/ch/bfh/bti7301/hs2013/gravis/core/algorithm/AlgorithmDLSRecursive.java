@@ -38,7 +38,7 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 
 		IRestrictedVertex startVertex = graph.getStartVertex();
 		if (startVertex != null) {
-			startVertex.setComment("Die Knoten werden in Postorder-Reihenfolge nummeriert.");
+			startVertex.setNewComment("Die Knoten werden in Postorder-Reihenfolge nummeriert.");
 		}
 		
 		for (IRestrictedVertex vertex : graph.getVertices()) {
@@ -59,11 +59,11 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	 * @return boolean
 	 */
 	private boolean visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
-		vertex1.appendComment("Der Knoten " + vertex1 + " wird aktiviert.");
+		vertex1.appendToNewComment("Der Knoten " + vertex1 + " wird aktiviert.");
 		graph.updateState(State.ACTIVATION, vertex1);
 
 		vertex1.setDone(true);
-		vertex1.setComment("Der Knoten " + vertex1 + " wurde besucht.");
+		vertex1.setNewComment("Der Knoten " + vertex1 + " wurde besucht.");
 		graph.updateState(State.VISIT, vertex1);
 
 		for (IRestrictedVertex vertex2 : graph.getSuccessors(vertex1)) {
@@ -74,14 +74,14 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 					return true;
 				}
 				
-				vertex1.setComment("Der Knoten " + vertex1 + " wird aktiviert.");
+				vertex1.setNewComment("Der Knoten " + vertex1 + " wird aktiviert.");
 				graph.updateState(State.ACTIVATION, vertex1);
 			}
 		}
 
-		vertex1.setResult(++this.counter);
-		vertex1.setComment("Der Knoten " + vertex1 + " wurde traversiert und zur Lösung "
-				+ "hinzugefügt. Er hat die Traversierungs-Nr.: " + vertex1.getResult());
+		vertex1.setNewResult(++this.counter);
+		vertex1.setNewComment("Der Knoten " + vertex1 + " wurde traversiert und zur Lösung "
+				+ "hinzugefügt. Er hat die Traversierungs-Nr.: " + vertex1.getNewResult());
 		if (this.updateEndVertexMessage(graph, vertex1)) {
 			return true;
 		}
@@ -97,7 +97,7 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	private boolean updateEndVertexMessage(IRestrictedGraph graph,
 			IRestrictedVertex endVertex) {
 		if (endVertex.isEnd()) {
-			endVertex.appendComment("Der Endknoten " + endVertex.getId()
+			endVertex.appendToNewComment("Der Endknoten " + endVertex.getId()
 					+ " wurde erreicht.");
 			graph.updateState(State.SOLUTION, endVertex);
 			return true;

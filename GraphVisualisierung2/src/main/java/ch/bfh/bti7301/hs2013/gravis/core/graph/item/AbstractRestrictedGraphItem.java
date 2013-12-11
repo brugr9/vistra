@@ -2,8 +2,6 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph.item;
 
 import java.awt.Color;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
-
 
 /**
  * An restricted item.
@@ -42,21 +40,11 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#getInfo()
-	 */
-	@Override
-	public String getInfo() {
-		return this.item.getInfo();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#getColor()
 	 */
 	@Override
-	public Color getColor() {
-		return this.item.getColor();
+	public Color getCurrentColor() {
+		return this.item.getCurrentColor();
 	}
 
 	/*
@@ -65,8 +53,8 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#getComment()
 	 */
 	@Override
-	public String getComment() {
-		return this.item.getComment();
+	public String getNewComment() {
+		return this.item.getNewComment();
 	}
 
 	/*
@@ -76,8 +64,8 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	 * .lang.String)
 	 */
 	@Override
-	public void setComment(String comment) {
-		this.item.setComment(comment);
+	public void setNewComment(String comment) {
+		this.item.setNewComment(comment);
 	}
 
 	
@@ -86,8 +74,8 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#appendComment(java.lang.String)
 	 */
 	@Override
-	public void appendComment(String comment) {
-		this.item.appendComment(comment);
+	public void appendToNewComment(String comment) {
+		this.item.appendToNewComment(comment);
 	}
 
 	/*
@@ -117,24 +105,24 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#getState()
 	 */
 	@Override
-	public State getState() {
-		return this.item.getState();
+	public State getCurrentState() {
+		return this.item.getCurrentState();
 	}
 
 	/* (non-Javadoc)
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#getTraversalState()
 	 */
 	@Override
-	public State getTraversalState() {
-		return this.item.getTraversalState();
+	public State getNewState() {
+		return this.item.getNewState();
 	}
 
 	/* (non-Javadoc)
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setTraversalState(ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
 	 */
 	@Override
-	public void setTraversalState(State traversalState) {
-		this.item.setTraversalState(traversalState);
+	public void setNewState(State traversalState) {
+		this.item.setNewState(traversalState);
 	}
 
 	/*
@@ -143,8 +131,8 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IItem#getTempResult()
 	 */
 	@Override
-	public double getResult() {
-		return this.item.getResult();
+	public double getNewResult() {
+		return this.item.getNewResult();
 	}
 
 	/*
@@ -154,8 +142,8 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	 * (double)
 	 */
 	@Override
-	public void setResult(double value) {
-		this.item.setResult(value);
+	public void setNewResult(double value) {
+		this.item.setNewResult(value);
 	}
 
 	/*
@@ -174,8 +162,8 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 	 * @see ch.bfh.bti7301.hs2013.gravis.common.IGraphItem#getPaintedResult()
 	 */
 	@Override
-	public double getPaintedResult() {
-		return this.item.getPaintedResult();
+	public double getCurrentResult() {
+		return this.item.getCurrentResult();
 	}
 
 	/* (non-Javadoc)

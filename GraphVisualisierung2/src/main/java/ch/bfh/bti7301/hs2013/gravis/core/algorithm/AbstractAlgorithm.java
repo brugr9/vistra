@@ -122,7 +122,7 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	 * #execute(edu.uci.ics.jung.graph.Graph)
 	 */
 	@Override
-	public void execute(IRestrictedGraph graph) throws Exception {
+	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 		// Does nothing on execute.
 	}
 

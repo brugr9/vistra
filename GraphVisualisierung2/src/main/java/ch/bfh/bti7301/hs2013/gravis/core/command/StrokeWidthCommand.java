@@ -6,8 +6,13 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  *
  */
-class StrokeWidthCommand extends TaggedStrokeCommand {
+class StrokeWidthCommand extends EmptyStep {
 
+	private final IGraphItem item;
+
+	private final float oldStrokeWidth;
+	private final float newStrokeWidth;
+	
 	/**
 	 * 
 	 * @param currentItem
@@ -16,16 +21,23 @@ class StrokeWidthCommand extends TaggedStrokeCommand {
 	 */
 	protected StrokeWidthCommand(IGraphItem currentItem, float oldStrokeWidth, 
 			float newStrokeWidth) {
-		super(currentItem, oldStrokeWidth, newStrokeWidth);
+		super();
 		
+		this.item = currentItem;
+		this.oldStrokeWidth = oldStrokeWidth;
+		this.newStrokeWidth = newStrokeWidth;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.EmptyStep#isLocked()
-	 */
 	@Override
-	public boolean isLocked() {
-		return this.item.isTagged();
+	public IStepResult execute() {
+		this.item.setCurrentStrokeWidth(this.newStrokeWidth);
+		return new StepResult();
+	}
+
+	@Override
+	public IStepResult unExecute() {
+		this.item.setCurrentStrokeWidth(this.oldStrokeWidth);
+		return new StepResult();
 	}
 
 	

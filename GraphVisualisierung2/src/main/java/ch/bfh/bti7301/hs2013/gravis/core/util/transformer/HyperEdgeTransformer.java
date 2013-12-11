@@ -27,7 +27,7 @@ public class HyperEdgeTransformer implements Transformer<HyperEdgeMetadata, IEdg
 		IEdge edge = this.edgeFactory.create();
 
 		edge.setId(hEdgeMeta.getId());
-		edge.setColor(ValueTransformer.transformStringToColor(hEdgeMeta
+		edge.setCurrentColor(ValueTransformer.transformStringToColor(hEdgeMeta
 				.getProperty(GravisConstants.E_COLOR)));
 		edge.setWeight(ValueTransformer.transformDouble(hEdgeMeta
 				.getProperty(GravisConstants.E_WEIGHT)));

@@ -10,17 +10,12 @@ public interface IStep {
 	 * 
 	 * @return message
 	 */
-	public abstract String execute();
+	public abstract IStepResult execute();
 
 	/**
 	 * 
 	 * @return message
 	 */
-	public abstract String unExecute();
+	public abstract IStepResult unExecute();
 
-	/**
-	 * 
-	 * @return boolean
-	 */
-	public abstract boolean isLocked();
 }

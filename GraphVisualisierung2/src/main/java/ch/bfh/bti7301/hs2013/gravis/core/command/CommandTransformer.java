@@ -8,7 +8,6 @@ import org.apache.commons.collections15.map.HashedMap;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -16,26 +15,22 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
  */
 class CommandTransformer implements Transformer<IGraphItem, IStep> {
 
-	private final String V_SUFFIX = "_VERTEX";
-	
-	private final String E_SUFFIX = "_EDGE";
-	
-	private final Map<String, IVisualizationState> states;
+	private final static String V_SUFFIX = "_VERTEX";
 
-	private IVisualizationState currentState;
+	private final static String E_SUFFIX = "_EDGE";
+
+	private final Map<String, IVisualizationState> states;
 
 	protected CommandTransformer() {
 		this.states = new HashedMap<>();
-		
-		this.states.put(State.INITIAL.toString() + V_SUFFIX, new 
-				InitialVertexState(GravisConstants.V_INITIAL_COLOR));
-		this.states.put(State.INITIAL.toString() + E_SUFFIX, new 
-				InitialEdgeState(GravisConstants.E_INITIAL_COLOR));
+
+		this.states.put(State.INITIAL.toString() + V_SUFFIX,
+				new InitialVertexState());
+		this.states.put(State.INITIAL.toString() + E_SUFFIX,
+				new InitialEdgeState());
 		this.states.put(State.ACTIVATION.toString(), new ActivationState());
 		this.states.put(State.VISIT.toString(), new VisitState());
 		this.states.put(State.SOLUTION.toString(), new SolutionState());
-
-		this.currentState = this.states.get(State.INITIAL.toString() + V_SUFFIX);
 	}
 
 	/*
@@ -46,12 +41,10 @@ class CommandTransformer implements Transformer<IGraphItem, IStep> {
 	 */
 	@Override
 	public IStep transform(IGraphItem currentItem) {
-		IVisualizationState nextState = this.states.get(this.getKeyString(currentItem));
-		IStep currentCommand = nextState.createCommand(this.currentState,
-				currentItem);
-		
-		this.currentState = nextState;
-		return currentCommand;
+		IVisualizationState nextState = this.states.get(this
+				.getKeyString(currentItem));
+		IStep nextCommand = nextState.createCommand(currentItem);
+		return nextCommand;
 	}
 
 	/**
@@ -59,19 +52,19 @@ class CommandTransformer implements Transformer<IGraphItem, IStep> {
 	 * @return String
 	 */
 	private String getKeyString(IGraphItem currentItem) {
-		// if traversal state is null, use state from last step
-		State currentState = currentItem.getTraversalState() == null ? currentItem.getState()
-				: currentItem.getTraversalState();
-		
-		if (currentState == State.INITIAL) {
+		// if newState is null, use state from last step
+		State newState = currentItem.getNewState() == null ? currentItem
+				.getCurrentState() : currentItem.getNewState();
+
+		if (newState == State.INITIAL) {
 			if (currentItem instanceof IVertex) {
-				return currentState.toString() + V_SUFFIX;
+				return newState.toString() + V_SUFFIX;
 			} else {
-				return currentState.toString() + E_SUFFIX;
+				return newState.toString() + E_SUFFIX;
 			}
-		} 
-		
-		return currentState.toString();
+		}
+
+		return newState.toString();
 	}
 
 }

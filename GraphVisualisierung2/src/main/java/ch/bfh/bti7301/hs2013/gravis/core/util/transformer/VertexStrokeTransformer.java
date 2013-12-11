@@ -18,7 +18,7 @@ public class VertexStrokeTransformer implements Transformer<IVertex, Stroke> {
 	 */
 	@Override
 	public Stroke transform(IVertex vertex) {
-		return new BasicStroke(vertex.getStrokeWidth());
+		return new BasicStroke(vertex.getCurrentStrokeWidth());
 	}
 
 }

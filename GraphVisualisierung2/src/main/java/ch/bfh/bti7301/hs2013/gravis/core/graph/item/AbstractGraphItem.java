@@ -2,6 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph.item;
 
 import java.awt.Color;
 
+import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
 import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
 
 /**
@@ -13,17 +14,22 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	private static int counter = 0;
 
 	private String id;
-	private String info;
-	private String comment;
-	private double result;
-	private double paintedResult;
-	private float strokeWidth;
+
+	private String newComment;
+	private double currentResult;
+	private double newResult;
+	private State currentState;
+	private State newState = null;
+	private Color currentColor;
+	private Color newColor;
+	private Color oldColor;
+	private float currentStrokeWidth;
+	private float newStrokeWidth;
+	private float oldStrokeWidth;
+
 	private boolean done;
 	private boolean tagged;
 	private boolean visible;
-	private State state;
-	private State traversalState = null;
-	private Color color;
 	private Object value = null;
 
 	/**
@@ -31,13 +37,17 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 */
 	protected AbstractGraphItem() {
 		this.id = String.valueOf(++counter);
-		this.info = this.comment = "";
-		this.paintedResult = this.result = Double.NaN;
-		this.strokeWidth = GravisConstants.STROKE_WIDTH_DEFAULT;
-		this.done = this.tagged = false;
-		this.visible = true;
-		this.state = State.INITIAL;
-		this.color = GravisConstants.V_COLOR_DEFAULT;
+		this.newComment = "";
+		this.currentResult = this.newResult = Double.NaN;
+		this.currentState = State.INITIAL;
+		this.currentColor = this.oldColor = GravisConstants.V_COLOR_DEFAULT;
+		this.currentStrokeWidth = this.oldStrokeWidth = GravisConstants.STROKE_WIDTH_DEFAULT;
+		this.done = false;
+
+		this.setNewColor(GravisConstants.V_COLOR_DEFAULT);
+		this.setNewStrokeWidth(GravisConstants.STROKE_WIDTH_DEFAULT);
+		this.setVisible(true);
+		this.setTagged(false);
 	}
 
 	/*
@@ -56,13 +66,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	}
 
 	@Override
-	public String getInfo() {
-		return this.info;
-	}
-
-	@Override
-	public Color getColor() {
-		return this.color;
+	public Color getCurrentColor() {
+		return this.currentColor;
 	}
 
 	@Override
@@ -71,23 +76,46 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	}
 
 	@Override
-	public void setInfo(String info) {
-		this.info = info.trim();
+	public void setCurrentColor(Color color) {
+		this.currentColor = color;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#setNewColor(java
+	 * .awt.Color)
+	 */
+	@Override
+	public void setNewColor(Color newColor) {
+		if (newColor != GravisColor.WHITE) {
+			this.oldColor = newColor;
+		}
+		
+		this.newColor = newColor;
+		this.visible = newColor != GravisColor.WHITE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#getNewColor()
+	 */
+	@Override
+	public Color getNewColor() {
+		return this.newColor;
 	}
 
 	@Override
-	public void setColor(Color color) {
-		this.color = color;
+	public String getNewComment() {
+		return this.newComment;
 	}
 
 	@Override
-	public String getComment() {
-		return this.comment;
-	}
-
-	@Override
-	public void setComment(String comment) {
-		this.comment = comment.trim();
+	public void setNewComment(String comment) {
+		this.newComment = comment.trim();
 	}
 
 	@Override
@@ -101,8 +129,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	}
 
 	@Override
-	public void setTraversalState(State traversalState) {
-		this.traversalState = traversalState;
+	public void setNewState(State traversalState) {
+		this.newState = traversalState;
 	}
 
 	/*
@@ -112,8 +140,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * getTraversalState()
 	 */
 	@Override
-	public State getTraversalState() {
-		return this.traversalState;
+	public State getNewState() {
+		return this.newState;
 	}
 
 	/*
@@ -124,23 +152,23 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * .bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
 	 */
 	@Override
-	public void setState(State state) {
-		this.state = state;
+	public void setCurrentState(State state) {
+		this.currentState = state;
 	}
 
 	@Override
-	public State getState() {
-		return this.state;
+	public State getCurrentState() {
+		return this.currentState;
 	}
 
 	@Override
-	public double getResult() {
-		return this.result;
+	public double getNewResult() {
+		return this.currentResult;
 	}
 
 	@Override
-	public void setResult(double value) {
-		this.result = value;
+	public void setNewResult(double value) {
+		this.currentResult = value;
 	}
 
 	/*
@@ -149,8 +177,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * @see ch.bfh.bti7301.hs2013.gravis.common.IGraphItem#getPaintedResult()
 	 */
 	@Override
-	public double getPaintedResult() {
-		return this.paintedResult;
+	public double getCurrentResult() {
+		return this.newResult;
 	}
 
 	/*
@@ -160,8 +188,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * ch.bfh.bti7301.hs2013.gravis.common.IGraphItem#setPaintedResult(double)
 	 */
 	@Override
-	public void setPaintedResult(double result) {
-		this.paintedResult = result;
+	public void setCurrentResult(double result) {
+		this.newResult = result;
 	}
 
 	/*
@@ -172,9 +200,9 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 */
 	@Override
 	public void resetVisualizationValues() {
-		this.comment = "";
-		this.result = Double.NaN;
-		this.traversalState = null;
+		this.newComment = "";
+		this.currentResult = Double.NaN;
+		this.newState = null;
 	}
 
 	/*
@@ -185,7 +213,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 */
 	@Override
 	public boolean hasNoResult() {
-		return Double.isNaN(this.result);
+		return Double.isNaN(this.currentResult);
 	}
 
 	/*
@@ -195,8 +223,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * appendComment(java.lang.String)
 	 */
 	@Override
-	public void appendComment(String comment) {
-		this.comment += System.getProperty("line.separator") + comment;
+	public void appendToNewComment(String comment) {
+		this.newComment += System.getProperty("line.separator") + comment;
 	}
 
 	/*
@@ -206,8 +234,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#getStrokeWidth()
 	 */
 	@Override
-	public float getStrokeWidth() {
-		return this.strokeWidth;
+	public float getCurrentStrokeWidth() {
+		return this.currentStrokeWidth;
 	}
 
 	/*
@@ -218,8 +246,37 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * (float)
 	 */
 	@Override
-	public void setStrokeWidth(float strokeWidth) {
-		this.strokeWidth = strokeWidth;
+	public void setCurrentStrokeWidth(float strokeWidth) {
+		this.currentStrokeWidth = strokeWidth;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#getNewStrokeWidth
+	 * ()
+	 */
+	@Override
+	public float getNewStrokeWidth() {
+		return this.newStrokeWidth;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem#setNewStrokeWidth
+	 * (float)
+	 */
+	@Override
+	public void setNewStrokeWidth(float width) {
+		if (width != this.getDefaultStrokeWidth()) {
+			this.oldStrokeWidth = width;
+		}
+		
+		this.newStrokeWidth = width;
+		this.tagged = width == this.getDefaultStrokeWidth();
 	}
 
 	/*
@@ -266,6 +323,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+		this.newColor = visible ? this.oldColor : GravisColor.WHITE;
 	}
 
 	/*
@@ -290,6 +348,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setTagged(boolean tagged) {
 		this.tagged = tagged;
+		this.newStrokeWidth = tagged ? this.getDefaultStrokeWidth() : this.oldStrokeWidth;
 	}
 
 	/*
@@ -303,5 +362,10 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	public boolean isTagged() {
 		return this.tagged;
 	}
+
+	/**
+	 * @return float
+	 */
+	protected abstract float getDefaultStrokeWidth();
 
 }
