@@ -13,6 +13,10 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
  */
 class AlgorithmDFSRecursive extends AbstractAlgorithm {
 
+	private final static String ALGO_NAME = "Rekursiver Depth-First-Search Algorithmus (DFS)";
+	private final static String ALGO_DESCRIPTION = "Der Graph wird in Preorder traversiert. "
+			+ "Es sind sowohl gerichtete als auch ungerichtete Graphen zulässig.";
+	
 	private int counter = 0;
 
 	/**
@@ -20,9 +24,12 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	 */
 	protected AlgorithmDFSRecursive() {
 		super();
-		super.setName("Depth-first search (DFS), recursive");
-		super.setDescription("Depth-first search (DFS) for DIRECTED and UNDIRECTED edges, "
-				+ "implemented recursively.");
+		super.setName(ALGO_NAME);
+		super.setDescription(ALGO_DESCRIPTION);
+		
+//		super.setName("Depth-first search (DFS), recursive");
+//		super.setDescription("Depth-first search (DFS) for DIRECTED and UNDIRECTED edges, "
+//				+ "implemented recursively.");
 		// TODO annotations
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
