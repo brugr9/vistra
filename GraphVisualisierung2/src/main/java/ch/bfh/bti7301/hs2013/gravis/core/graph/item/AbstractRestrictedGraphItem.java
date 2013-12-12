@@ -2,7 +2,6 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph.item;
 
 import java.awt.Color;
 
-
 /**
  * An restricted item.
  * 
@@ -10,7 +9,8 @@ import java.awt.Color;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphItem {
+public abstract class AbstractRestrictedGraphItem implements
+		IRestrictedGraphItem {
 
 	/**
 	 * A field for an item.
@@ -68,10 +68,11 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 		this.item.setNewComment(comment);
 	}
 
-	
-	
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#appendComment(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#
+	 * appendComment(java.lang.String)
 	 */
 	@Override
 	public void appendToNewComment(String comment) {
@@ -109,16 +110,23 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 		return this.item.getCurrentState();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#getTraversalState()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#
+	 * getTraversalState()
 	 */
 	@Override
 	public State getNewState() {
 		return this.item.getNewState();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setTraversalState(ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#
+	 * setTraversalState
+	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State)
 	 */
 	@Override
 	public void setNewState(State traversalState) {
@@ -166,53 +174,98 @@ public abstract class AbstractRestrictedGraphItem implements IRestrictedGraphIte
 		return this.item.getCurrentResult();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#getValue()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#getValue
+	 * ()
 	 */
 	@Override
 	public Object getValue() {
 		return this.item.getValue();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setValue(java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setValue
+	 * (java.lang.Object)
 	 */
 	@Override
 	public void setValue(Object value) {
 		this.item.setValue(value);
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setVisible(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setVisible
+	 * (boolean)
 	 */
 	@Override
 	public void setVisible(boolean visible) {
 		this.item.setVisible(visible);
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#isVisible()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#isVisible
+	 * ()
 	 */
 	@Override
 	public boolean isVisible() {
 		return this.item.isVisible();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setTagged(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#setTagged
+	 * (boolean)
 	 */
 	@Override
 	public void setTagged(boolean tagged) {
 		this.item.setTagged(tagged);
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#isTagged()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#isTagged
+	 * ()
 	 */
 	@Override
 	public boolean isTagged() {
 		return this.item.isTagged();
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#
+	 * setStateCommentEnabled(boolean)
+	 */
+	@Override
+	public void setStateCommentEnabled(boolean value) {
+		this.item.setStateCommentEnabled(value);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#
+	 * isStateCommentEnabled()
+	 */
+	@Override
+	public boolean isStateCommentEnabled() {
+		return this.item.isStateCommentEnabled();
+	}
+
 }

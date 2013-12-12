@@ -12,10 +12,9 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
  */
 public class InitialEdgeState extends AbstractVisualizationState {
 
-	private final static String E_DO_MSG = 
-			"Die Kante %s wurde in den Anfangszustand versetzt.";
-	private final static String E_UNDO_MSG = 
-			"Die Kante %s befindet sich nicht mehr im Anfangszustand.";
+	private final static String E_DO_MSG = "Die Kante %s befindet sich im Anfangszustand.";
+	private final static String E_UNDO_MSG = "Die Kante %s befindet sich nicht mehr im "
+			+ "Anfangszustand.";
 
 	public InitialEdgeState() {
 		super();
@@ -53,4 +52,5 @@ public class InitialEdgeState extends AbstractVisualizationState {
 	protected Color getStateColor() {
 		return GravisConstants.E_INITIAL_COLOR;
 	}
+
 }

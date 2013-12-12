@@ -40,7 +40,7 @@
 	
 	<graph id="Dijkstra Sample Graph 1" edgedefault="directed">
 		<data key="description">
-			This sample graph can be used with the Dijkstra shortest path algorithm.
+			This directed sample graph can be used with the Dijkstra shortest path algorithm.
 		</data>
 
 		<node id="V1">

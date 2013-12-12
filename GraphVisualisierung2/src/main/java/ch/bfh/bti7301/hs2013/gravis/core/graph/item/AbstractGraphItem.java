@@ -13,23 +13,18 @@ public abstract class AbstractGraphItem implements IGraphItem {
 
 	private static int counter = 0;
 
-	private String id;
+	private String id, newComment;
 
-	private String newComment;
-	private double currentResult;
-	private double newResult;
-	private State currentState;
-	private State newState = null;
-	private Color currentColor;
-	private Color newColor;
-	private Color oldColor;
-	private float currentStrokeWidth;
-	private float newStrokeWidth;
-	private float oldStrokeWidth;
+	private double currentResult, newResult;
 
-	private boolean done;
-	private boolean tagged;
-	private boolean visible;
+	private State currentState, newState = null;
+
+	private Color currentColor, newColor, oldColor;
+
+	private float currentStrokeWidth, newStrokeWidth, oldStrokeWidth;
+
+	private boolean done, tagged, visible, stateCommentEnabled;
+
 	private Object value = null;
 
 	/**
@@ -42,7 +37,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		this.currentState = State.INITIAL;
 		this.currentColor = this.oldColor = GravisConstants.V_COLOR_DEFAULT;
 		this.currentStrokeWidth = this.oldStrokeWidth = GravisConstants.STROKE_WIDTH_DEFAULT;
-		this.done = false;
+		this.stateCommentEnabled = this.done = false;
 
 		this.setNewColor(GravisConstants.V_COLOR_DEFAULT);
 		this.setNewStrokeWidth(GravisConstants.STROKE_WIDTH_DEFAULT);
@@ -92,7 +87,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		if (newColor != GravisColor.WHITE) {
 			this.oldColor = newColor;
 		}
-		
+
 		this.newColor = newColor;
 		this.visible = newColor != GravisColor.WHITE;
 	}
@@ -203,6 +198,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		this.newComment = "";
 		this.currentResult = Double.NaN;
 		this.newState = null;
+		this.stateCommentEnabled = false;
 	}
 
 	/*
@@ -274,7 +270,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		if (width != this.getDefaultStrokeWidth()) {
 			this.oldStrokeWidth = width;
 		}
-		
+
 		this.newStrokeWidth = width;
 		this.tagged = width == this.getDefaultStrokeWidth();
 	}
@@ -348,7 +344,8 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setTagged(boolean tagged) {
 		this.tagged = tagged;
-		this.newStrokeWidth = tagged ? this.getDefaultStrokeWidth() : this.oldStrokeWidth;
+		this.newStrokeWidth = tagged ? this.getDefaultStrokeWidth()
+				: this.oldStrokeWidth;
 	}
 
 	/*
@@ -367,5 +364,27 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	 * @return float
 	 */
 	protected abstract float getDefaultStrokeWidth();
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#
+	 * setStateCommentEnabled(boolean)
+	 */
+	@Override
+	public void setStateCommentEnabled(boolean value) {
+		this.stateCommentEnabled = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem#
+	 * isStateCommentEnabled()
+	 */
+	@Override
+	public boolean isStateCommentEnabled() {
+		return this.stateCommentEnabled;
+	}
 
 }

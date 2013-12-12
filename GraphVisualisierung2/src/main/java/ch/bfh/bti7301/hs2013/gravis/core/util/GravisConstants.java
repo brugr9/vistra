@@ -54,5 +54,5 @@ public interface GravisConstants {
 	
 	public final static float STROKE_WIDTH_DEFAULT = 1.0f;
 	public final static float V_TAGGED_STROKE = 3.0f;
-	public final static float E_TAGGED_STROKE = 4.0f;
+	public final static float E_TAGGED_STROKE = 5.0f;
 }

@@ -131,5 +131,14 @@ public interface IRestrictedGraphItem {
 	 */
 	public abstract boolean isTagged();
 
+	/**
+	 * @param value
+	 */
+	public abstract void setStateCommentEnabled(boolean value);
 	
+	/**
+	 * 
+	 * @return boolean
+	 */
+	public abstract boolean isStateCommentEnabled();
 }
