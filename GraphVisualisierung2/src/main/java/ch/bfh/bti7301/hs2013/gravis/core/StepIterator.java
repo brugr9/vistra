@@ -2,7 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.core;
 
 import java.util.Iterator;
 
-import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
+import ch.bfh.bti7301.hs2013.gravis.core.step.IStep;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)

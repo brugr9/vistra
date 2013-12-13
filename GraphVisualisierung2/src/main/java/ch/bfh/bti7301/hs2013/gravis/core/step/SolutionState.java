@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.command;
+package ch.bfh.bti7301.hs2013.gravis.core.step;
 
 import java.awt.Color;
 
@@ -11,14 +11,14 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class ActivationState extends AbstractVisualizationState {
+class SolutionState extends AbstractVisualizationState {
 
-	private final static String V_DO_MSG = "Der Knoten %s wurde aktiviert.";
-	private final static String E_DO_MSG = "Die Kante %s wurde aktiviert.";
-	private final static String V_UNDO_MSG = "Der Knoten %s ist nicht mehr aktiviert.";
-	private final static String E_UNDO_MSG = "Die Kante %s ist nicht mehr aktiviert.";
+	private final static String V_DO_MSG = "Der Knoten %s wurde zur Lösung hinzugefügt.";
+	private final static String E_DO_MSG = "Die Kante %s wurde zur Lösung hinzugefügt.";
+	private final static String V_UNDO_MSG = "Der Knoten %s gehört nicht mehr zur Lösung.";
+	private final static String E_UNDO_MSG = "Die Kante %s gehört nicht mehr zur Lösung.";
 	
-	protected ActivationState() {
+	protected SolutionState() {
 		super();
 	}
 
@@ -36,7 +36,6 @@ class ActivationState extends AbstractVisualizationState {
 		if (currentItem instanceof IVertex) {
 			return String.format(V_UNDO_MSG, currentItem.getId());
 		}
-		
 		return String.format(E_UNDO_MSG, currentItem.getId());
 	}
 
@@ -44,22 +43,22 @@ class ActivationState extends AbstractVisualizationState {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#getState()
+	 * ch.bfh.bti7301.hs2013.gravis.core.step.IVisualizationState#getState()
 	 */
 	@Override
 	public State getState() {
-		return State.ACTIVATION;
+		return State.SOLUTION;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.AbstractVisualizationState#
+	 * ch.bfh.bti7301.hs2013.gravis.core.step.AbstractVisualizationState#
 	 * getStateColor()
 	 */
 	@Override
 	protected Color getStateColor() {
-		return GravisConstants.ACTIVATION_COLOR;
+		return GravisConstants.SOLUTION_COLOR;
 	}
 }

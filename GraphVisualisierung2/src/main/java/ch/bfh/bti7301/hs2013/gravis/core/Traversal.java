@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.step.IStep;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 
 /**

@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Properties;
 
 
+
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.AlgorithmFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithmManager;
-import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.step.IStep;
 
 /**
  * This factory class creates and composes all necessary objects used in the

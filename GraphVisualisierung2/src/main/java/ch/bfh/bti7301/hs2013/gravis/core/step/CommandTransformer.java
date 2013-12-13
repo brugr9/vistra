@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.command;
+package ch.bfh.bti7301.hs2013.gravis.core.step;
 
 import java.util.Map;
 

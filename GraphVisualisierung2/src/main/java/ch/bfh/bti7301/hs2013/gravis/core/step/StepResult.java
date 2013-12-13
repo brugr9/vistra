@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.command;
+package ch.bfh.bti7301.hs2013.gravis.core.step;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -21,7 +21,7 @@ public class StepResult implements IStepResult {
 	}
 	
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStepResult#hasComment()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.step.IStepResult#hasComment()
 	 */
 	@Override
 	public boolean hasComment() {
@@ -29,7 +29,7 @@ public class StepResult implements IStepResult {
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.command.IStepResult#getComment()
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.step.IStepResult#getComment()
 	 */
 	@Override
 	public String getComment() {

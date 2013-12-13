@@ -13,14 +13,14 @@ import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
 import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
-import ch.bfh.bti7301.hs2013.gravis.core.command.CommandTransformerFactory;
-import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
+import ch.bfh.bti7301.hs2013.gravis.core.step.CommandTransformerFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.step.IStep;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseGraph;

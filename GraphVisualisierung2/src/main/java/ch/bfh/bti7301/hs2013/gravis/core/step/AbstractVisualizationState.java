@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.command;
+package ch.bfh.bti7301.hs2013.gravis.core.step;
 
 import java.awt.Color;
 
@@ -19,7 +19,7 @@ abstract class AbstractVisualizationState implements IVisualizationState {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#createCommand
+	 * ch.bfh.bti7301.hs2013.gravis.core.step.IVisualizationState#createCommand
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem)
 	 */
 	@Override

@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core.command;
+package ch.bfh.bti7301.hs2013.gravis.core.step;
 
 import java.awt.Color;
 
@@ -43,7 +43,7 @@ class VisitState extends AbstractVisualizationState {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.IVisualizationState#getState()
+	 * ch.bfh.bti7301.hs2013.gravis.core.step.IVisualizationState#getState()
 	 */
 	@Override
 	public State getState() {
@@ -54,7 +54,7 @@ class VisitState extends AbstractVisualizationState {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.command.AbstractVisualizationState#
+	 * ch.bfh.bti7301.hs2013.gravis.core.step.AbstractVisualizationState#
 	 * getStateColor()
 	 */
 	@Override

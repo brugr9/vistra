@@ -1,8 +1,8 @@
 package ch.bfh.bti7301.hs2013.gravis.core;
 
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
-import ch.bfh.bti7301.hs2013.gravis.core.command.IStep;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.step.IStep;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
