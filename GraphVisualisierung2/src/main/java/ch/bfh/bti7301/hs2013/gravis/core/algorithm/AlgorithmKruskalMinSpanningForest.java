@@ -33,7 +33,8 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 	private final static String ALGO_DESCRIPTION = "Diese Implementation "
 			+ "berechnet einen minimalen Spann-Wald für einen gegebenen Graphen. "
 			+ "Der Graph muss ungerichtet sein. Ein Start- und Endknoten muss nicht "
-			+ "angegeben werden";
+			+ "angegeben werden. Die Kanten der Lösung zeigen neben dem Gewicht auch "
+			+ "an, in welcher Reihenfolge sie zur Lösung hinzugefügt wurden.";
 	private final static String MIN_EDGE = "Die aktuelle Kante mit dem kleinsten "
 			+ "Gewicht: %s";
 	private final static String CIRCLE_EDGE = "Die Kante %s kann nicht zur Lösung "
