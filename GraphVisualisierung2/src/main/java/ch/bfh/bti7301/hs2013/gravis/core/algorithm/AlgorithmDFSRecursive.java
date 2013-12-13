@@ -1,8 +1,15 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
+import static ch.bfh.bti7301.hs2013.gravis.core.util.GraphItemUtils.setGraphItemValues;
+import static ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ValueTransformer.toArray;
 
 /**
  * Depth-first search (DFS) algorithm, implemented recursively
@@ -15,8 +22,12 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 
 	private final static String ALGO_NAME = "Rekursiver Depth-First-Search Algorithmus (DFS)";
 	private final static String ALGO_DESCRIPTION = "Der Graph wird in Preorder traversiert. "
-			+ "Es sind sowohl gerichtete als auch ungerichtete Graphen zulässig.";
-	
+			+ "Es sind sowohl gerichtete als auch ungerichtete Graphen zulässig."
+			+ "Die Knoten werden in Preorder-Reihenfolge nummeriert.";
+	private final static String END_MSG1 = "Der Endknoten %s wurde erreicht.";
+	private final static String END_MSG2 = "Die Preorder-Traversierung wurde erfolgreich "
+			+ "beendet.";
+
 	private int counter = 0;
 
 	/**
@@ -26,10 +37,10 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);
-		
-//		super.setName("Depth-first search (DFS), recursive");
-//		super.setDescription("Depth-first search (DFS) for DIRECTED and UNDIRECTED edges, "
-//				+ "implemented recursively.");
+
+		// super.setName("Depth-first search (DFS), recursive");
+		// super.setDescription("Depth-first search (DFS) for DIRECTED and UNDIRECTED edges, "
+		// + "implemented recursively.");
 		// TODO annotations
 		super.setGraphTypes(new GraphType[] {});
 		// TODO init id
@@ -45,57 +56,65 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 	 */
 	@Override
 	public void execute(IRestrictedGraph graph) {
-		// TODO bitte an dieser Methode nichts ändern (pk)
-
+		List<IRestrictedGraphItem> itemList = new ArrayList<IRestrictedGraphItem>();
 		this.counter = 0;
 
-		IRestrictedVertex startVertex = graph.getStartVertex();
-		if (startVertex != null) {
-			startVertex.setNewComment("Die Knoten werden in Preorder-Reihenfolge nummeriert.");
-		}
-		
 		for (IRestrictedVertex vertex : graph.getVertices()) {
 			if (!vertex.isDone()) {
-				boolean abort = this.visit(graph, vertex);
+				boolean abort = this.visit(graph, itemList, vertex);
 
 				if (abort) {
 					return;
 				}
 			}
 		}
+		
+		if (!itemList.isEmpty()) {
+			itemList.get(itemList.size() - 1).setNewComment(END_MSG2);
+		}
+		graph.updateState(toArray(itemList));
 	}
 
 	/**
 	 * 
 	 * @param graph
+	 * @param itemList
 	 * @param vertex1
 	 * @return boolean
 	 */
-	private boolean visit(IRestrictedGraph graph, IRestrictedVertex vertex1) {
+	private boolean visit(IRestrictedGraph graph,
+			List<IRestrictedGraphItem> itemList, IRestrictedVertex vertex1) {
 		vertex1.setDone(true);
-		vertex1.appendToNewComment("Der Knoten " + vertex1 + " wird aktiviert.");
-		graph.updateState(State.ACTIVATION, vertex1);
-
-		vertex1.setNewResult(++this.counter);
-		vertex1.setNewComment("Der Knoten " + vertex1
-				+ " wurde traversiert und zur Lösung "
-				+ "hinzugefügt. Er hat die Traversierungs-Nr.: "
-				+ vertex1.getNewResult());
-		if (this.updateEndVertexMessage(graph, vertex1)) {
+		setGraphItemValues(vertex1, ++this.counter, true, true, State.SOLUTION);
+		itemList.add(vertex1);
+		if (this.updateEndVertexMessage(graph, itemList, vertex1)) {
 			return true;
 		}
-		graph.updateState(State.SOLUTION, vertex1);
+		graph.updateState(toArray(itemList));
+		itemList.clear();
+		
+		setGraphItemValues(vertex1, false, false, State.SOLUTION);
+		itemList.add(vertex1);
 
 		for (IRestrictedVertex vertex2 : graph.getSuccessors(vertex1)) {
 			if (!vertex2.isDone()) {
-				boolean abort = this.visit(graph, vertex2);
+				IRestrictedEdge edge = graph.findEdge(vertex1, vertex2);
+				setGraphItemValues(edge, true, true, State.SOLUTION);
+				itemList.add(edge);
 				
+				boolean abort = this.visit(graph, itemList, vertex2);
+
 				if (abort) {
 					return true;
 				}
 
-				vertex1.setNewComment("Der Knoten " + vertex1 + " wird aktiviert.");
-				graph.updateState(State.ACTIVATION, vertex1);
+				setGraphItemValues(vertex1, true, true, State.ACTIVATION);
+				itemList.add(vertex1);
+				graph.updateState(toArray(itemList));
+				itemList.clear();
+				
+				setGraphItemValues(vertex1, false, false, State.SOLUTION);
+				itemList.add(vertex1);
 			}
 		}
 
@@ -104,14 +123,16 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm {
 
 	/**
 	 * @param graph
+	 * @param itemList 
 	 * @param endVertex
 	 */
 	private boolean updateEndVertexMessage(IRestrictedGraph graph,
-			IRestrictedVertex endVertex) {
+			List<IRestrictedGraphItem> itemList, IRestrictedVertex endVertex) {
+		
 		if (endVertex.isEnd()) {
-			endVertex.appendToNewComment("Der Endknoten " + endVertex.getId()
-					+ " wurde erreicht.");
-			graph.updateState(State.SOLUTION, endVertex);
+			endVertex.setNewComment(String.format(END_MSG1, endVertex.getId()));
+			graph.updateState(toArray(itemList));
+			itemList.clear();
 			return true;
 		}
 		return false;

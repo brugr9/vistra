@@ -143,8 +143,8 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 				graph.updateState(toArray(itemList));
 				itemList.clear();
 
+				selectedEdge.setVisible(false);
 				setGraphItemValues(selectedEdge, false, false, State.INITIAL);
-				//selectedEdge.setVisible(false);
 				itemList.add(selectedEdge);
 			}
 		}

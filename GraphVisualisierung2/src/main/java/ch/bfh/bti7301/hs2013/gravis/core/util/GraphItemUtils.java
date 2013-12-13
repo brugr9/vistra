@@ -51,6 +51,23 @@ public final class GraphItemUtils {
 		item.setNewComment(newComment);
 		item.setNewState(newState);
 	}
+	
+	/**
+	 * 
+	 * @param item
+	 * @param newResult
+	 * @param isTagged
+	 * @param isStateCommentEnabled
+	 * @param newState
+	 */
+	public static void setGraphItemValues(IRestrictedGraphItem item,
+			double newResult, boolean isTagged, boolean isStateCommentEnabled,
+			State newState) {
+		item.setNewResult(newResult);
+		item.setTagged(isTagged);
+		item.setStateCommentEnabled(isStateCommentEnabled);
+		item.setNewState(newState);
+	}
 
 	/**
 	 * 
