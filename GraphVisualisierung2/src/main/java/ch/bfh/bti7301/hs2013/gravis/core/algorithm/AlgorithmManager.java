@@ -89,8 +89,8 @@ class AlgorithmManager extends AbstractParameterManager implements
 //			 return new AlgorithmDLSRecursive();
 //			 return new AlgorithmDFSRecursive();
 //			 return new AlgorithmBreadthFirstSearch();
-//			 return new AlgorithmKruskalMinSpanningForest();
-			 return new AlgorithmDijkstra();
+			 return new AlgorithmKruskalMinSpanningForest();
+//			 return new AlgorithmDijkstra();
 		} catch (Exception e) {
 			throw e;
 		}
