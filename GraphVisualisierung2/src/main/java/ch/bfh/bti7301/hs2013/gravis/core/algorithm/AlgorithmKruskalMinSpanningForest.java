@@ -113,38 +113,59 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 					String.format(MIN_EDGE, selectedEdge.getId()),
 					State.ACTIVATION);
 			itemList.add(selectedEdge);
+//			setGraphItemValues(pair.getFirst(), true, false, State.ACTIVATION);
+//			itemList.add(pair.getFirst());
+//			setGraphItemValues(pair.getSecond(), true, false, State.ACTIVATION);
+//			itemList.add(pair.getSecond());
 			graph.updateState(toArray(itemList));
 			itemList.clear();
 
+//			setGraphItemValues(pair.getFirst(), false, false);
+//			itemList.add(pair.getFirst());
+//			setGraphItemValues(pair.getSecond(), false, false);
+//			itemList.add(pair.getSecond());
 			if (!Partition.areMerged(partitionMap.get(pair.getFirst()).find(),
 					partitionMap.get(pair.getSecond()).find())) {
 
-				setGraphItemValues(selectedEdge, ++this.counter, true, true);
+				setGraphItemValues(selectedEdge, ++this.counter, true, true, State.SOLUTION);
 				itemList.add(selectedEdge);
 				if (!pair.getFirst().isDone()) {
 					pair.getFirst().setDone(true);
-					setGraphItemValues(pair.getFirst(), false, true);
+					setGraphItemValues(pair.getFirst(), false, true, State.SOLUTION);
 					itemList.add(pair.getFirst());
 				}
 				if (!pair.getSecond().isDone()) {
 					pair.getSecond().setDone(true);
-					setGraphItemValues(pair.getSecond(), false, true);
+					setGraphItemValues(pair.getSecond(), false, true, State.SOLUTION);
 					itemList.add(pair.getSecond());
 				}
-				graph.updateState(State.SOLUTION, toArray(itemList));
+				graph.updateState(toArray(itemList));
 				itemList.clear();
 
+//				setGraphItemValues(pair.getFirst(), false, false);
+//				itemList.add(pair.getFirst());
+//				setGraphItemValues(pair.getSecond(), false, false);
+//				itemList.add(pair.getSecond());
 				partitionMap.get(pair.getFirst()).merge(
 						partitionMap.get(pair.getSecond()));
 			} else {
-				setGraphItemValues(selectedEdge, true, false, State.VISIT);
+				setGraphItemValues(selectedEdge, true, false, String.format(CIRCLE_EDGE, 
+						selectedEdge.getId()), State.VISIT);
 				itemList.add(selectedEdge);
 				this.showCircle(graph, partitionMap, itemList, pair.getFirst());
+//				setGraphItemValues(pair.getFirst(), true, false, State.VISIT);
+//				itemList.add(pair.getFirst());
+//				setGraphItemValues(pair.getSecond(), true, false, State.VISIT);
+//				itemList.add(pair.getSecond());
 				graph.updateState(toArray(itemList));
 				itemList.clear();
 
 				selectedEdge.setVisible(false);
 				setGraphItemValues(selectedEdge, false, false, State.INITIAL);
+//				setGraphItemValues(pair.getFirst(), false, false);
+//				itemList.add(pair.getFirst());
+//				setGraphItemValues(pair.getSecond(), false, false);
+//				itemList.add(pair.getSecond());
 				itemList.add(selectedEdge);
 			}
 		}
