@@ -38,7 +38,7 @@
 	</key> 
 
 	
-	<graph id="Dijkstra Sample Graph 1" edgedefault="undirected">
+	<graph id="Dijkstra Sample Graph 1" edgedefault="directed">
 		<data key="description">
 			This directed sample graph can be used with the Dijkstra shortest path algorithm.
 		</data>
