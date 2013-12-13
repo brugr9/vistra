@@ -73,6 +73,7 @@ public abstract class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setCurrentColor(Color color) {
 		this.currentColor = color;
+		this.visible = color != GravisColor.WHITE;
 	}
 
 	/*
