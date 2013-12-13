@@ -83,7 +83,7 @@ public abstract class GravisColor {
     /**
      * A field for the colour light_yellow.
      */
-    public final static Color light_yellow = new Color(250, 250, 190);
+    public final static Color light_yellow = new Color(250, 250, 160);
     /**
      * A field for the colour light_yellow.
      */

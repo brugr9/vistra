@@ -31,7 +31,7 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 
 	private final static String ALGO_NAME = "Algorithmus von Kruskal";
 	private final static String ALGO_DESCRIPTION = "Diese Implementation "
-			+ "berechnet einen minimalen Spann-Wald für einen gegebenen Graphen. "
+			+ "berechnet einen minimalen Spannwald für einen gegebenen Graphen. "
 			+ "Der Graph muss ungerichtet sein. Ein Start- und Endknoten muss nicht "
 			+ "angegeben werden. Die Kanten der Lösung zeigen neben dem Gewicht auch "
 			+ "an, in welcher Reihenfolge sie zur Lösung hinzugefügt wurden.";
@@ -39,7 +39,7 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 			+ "Gewicht: %s";
 	private final static String CIRCLE_EDGE = "Die Kante %s kann nicht zur Lösung "
 			+ "hinzugefügt werden, da sonst ein Kreis ensteht.";
-	private final static String END_MSG = "Der minimale Spann-Wald wurde erfolgreich "
+	private final static String END_MSG = "Der minimale Spannwald wurde erfolgreich "
 			+ "berechnet.";
 
 	private int counter = 0;
@@ -116,8 +116,8 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 			graph.updateState(toArray(itemList));
 			itemList.clear();
 
-			if (!partitionMap.get(pair.getFirst()).find()
-					.equals(partitionMap.get(pair.getSecond()).find())) {
+			if (!Partition.areMerged(partitionMap.get(pair.getFirst()).find(),
+					partitionMap.get(pair.getSecond()).find())) {
 
 				setGraphItemValues(selectedEdge, ++this.counter, true, true);
 				itemList.add(selectedEdge);
@@ -137,10 +137,9 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 				partitionMap.get(pair.getFirst()).merge(
 						partitionMap.get(pair.getSecond()));
 			} else {
-				setGraphItemValues(selectedEdge, true, false,
-						String.format(CIRCLE_EDGE, selectedEdge.getId()),
-						State.VISIT);
+				setGraphItemValues(selectedEdge, true, false, State.VISIT);
 				itemList.add(selectedEdge);
+				this.showCircle(graph, partitionMap, itemList, pair.getFirst());
 				graph.updateState(toArray(itemList));
 				itemList.clear();
 
@@ -151,6 +150,36 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm {
 		}
 
 		return selectedEdge;
+	}
+
+	/**
+	 * @param graph
+	 * @param itemList
+	 * @param partitionMap
+	 * @param currentVertex
+	 * 
+	 */
+	private void showCircle(IRestrictedGraph graph,
+			Map<IRestrictedVertex, Partition<IRestrictedVertex>> partitionMap,
+			List<IRestrictedGraphItem> itemList, IRestrictedVertex currentVertex) {
+
+//		for (IRestrictedEdge edge : graph.getEdges()) {
+//			Pair<? extends IRestrictedVertex> pair = graph.getEndpoints(edge);
+//
+//			if (edge.getCurrentState() == State.SOLUTION
+//					&& Partition.areMerged(partitionMap.get(currentVertex)
+//							.find(), partitionMap.get(pair.getFirst()).find())) {
+//
+//				setGraphItemValues(edge, true, false, State.ACTIVATION);
+//				itemList.add(edge);
+//				setGraphItemValues(pair.getFirst(), true, false,
+//						State.ACTIVATION);
+//				itemList.add(pair.getFirst());
+//				setGraphItemValues(pair.getSecond(), true, false,
+//						State.ACTIVATION);
+//				itemList.add(pair.getSecond());
+//			}
+//		}
 	}
 
 	/**
