@@ -1,13 +1,13 @@
 package ch.bfh.bti7301.hs2013.gravis;
 
-import java.io.InputStream;
+import java.io.File;
 import java.util.Properties;
 
-import ch.bfh.bti7301.hs2013.gravis.core.CoreFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.Core;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.gui.GuiFactory;
 import ch.bfh.bti7301.hs2013.gravis.gui.GuiFactory.ViewType;
-import ch.bfh.bti7301.hs2013.gravis.gui.IView;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.IView;
 
 /**
  * 
@@ -18,72 +18,77 @@ import ch.bfh.bti7301.hs2013.gravis.gui.IView;
 final class ApplicationFactory {
 
 	/**
-	 * The default name of the property file name relative to the CLASSPATH.
-	 */
-	public final static String APPLICATION_PROPERTIES = "META-INF/Application.properties";
-
-	/**
 	 * A main (no-)constructor.
 	 */
 	private ApplicationFactory() {
 	}
 
 	/**
-	 * Creates a default Application with core and GUI.
+	 * Creates an application with core and a default gui (MVC) of frame size as
+	 * given by values.
 	 * 
-	 * @return a default Application with core and GUI
-	 */
-	protected static IView createApplication(int width, int height)
-			throws Exception {
-		try {
-			Properties properties = loadProperties();
-			ICore core = CoreFactory.createCore(properties);
-			IView view = GuiFactory.createGui(core, width, height);
-			return view;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Creates an Application with core and a GUI of given type.
-	 * 
-	 * @return an Application with core and a GUI of given type
-	 */
-	protected static IView createApplication(int width, int height,
-			ViewType viewType) throws Exception {
-		try {
-			Properties properties = loadProperties();
-			ICore core = CoreFactory.createCore(properties);
-			IView view = GuiFactory.createGui(core, width, height, viewType);
-			return view;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Creates properties.
-	 * 
-	 * @return the properties
+	 * @return the view
 	 * @throws Exception
 	 */
-	private static Properties loadProperties() throws Exception {
-
-		Properties properties = null;
-		properties = new Properties();
-		ClassLoader classLoader = Thread.currentThread()
-				.getContextClassLoader();
-		InputStream is = classLoader
-				.getResourceAsStream(APPLICATION_PROPERTIES);
+	protected static IView createApplication() throws Exception {
 		try {
-			properties.load(is);
+			Properties properties = createProperties();
+			ICore core = new Core(properties);
+			IView view = GuiFactory.createGui(core);
+			return view;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Creates an application with core and a gui (MVC) of given type and of
+	 * frame size as given by values.
+	 * 
+	 * @param viewType
+	 * @return the view
+	 * @throws Exception
+	 */
+	protected static IView createApplication(ViewType viewType)
+			throws Exception {
+		try {
+			Properties properties = createProperties();
+			ICore core = new Core(properties);
+			IView view = GuiFactory.createGui(core, viewType);
+			return view;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Creates properties for this application.
+	 * 
+	 * @throws Exception
+	 */
+	private static Properties createProperties() throws Exception {
+
+		String propertiesName = ApplicationFactory.class.getPackage().getName()
+				.replace(".", File.separator)
+				+ File.separator + "Application.properties";
+
+		try {
+
+			Properties properties = null;
+			properties = new Properties();
+			properties.load(ApplicationFactory.class.getClassLoader()
+					.getResourceAsStream(propertiesName));
+			return properties;
+
+		} catch (SecurityException e) {
+			throw new Exception(ApplicationFactory.class.getName(), e);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(
-					"Cannot load properties file for core: "
-							+ APPLICATION_PROPERTIES + ". ");
+					ApplicationFactory.class.getName()
+							+ ": \nCannot load properties file "
+							+ propertiesName + "\n", e);
 		}
-		return properties;
 
 	}
+
 }
