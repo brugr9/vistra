@@ -1,11 +1,15 @@
 package ch.bfh.bti7301.hs2013.gravis.gui;
 
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
-import javax.swing.KeyStroke;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
-import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
+import ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal;
+import ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource;
+import ch.bfh.bti7301.hs2013.gravis.gui.control.animation.IAnimationStateHandler;
+import ch.bfh.bti7301.hs2013.gravis.gui.control.parameter.IParameterStateHandler;
+import ch.bfh.bti7301.hs2013.gravis.gui.control.stepbystep.IStepByStepStateHandler;
 
 /**
  * A model as in MVC containing some fields and its getter and setter methods.
@@ -13,41 +17,55 @@ import ch.bfh.bti7301.hs2013.gravis.gui.IControl.EventSource;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-// TODO IModel
-public final class Model extends Observable {
+public final class Model extends Observable implements IModel {
 
-	// gravis
+	// Graph
 	private IGravisGraph graph;
-	// private IGravisListIterator<IStep> traversal;
+	private boolean graphSaved;
+	private Traversal traversal;
+
+	// action listener
+	private ActionListener i18nListener;
+	private ActionListener helpListener;
+	private ActionListener aboutListener;
+	private ActionListener quitListener;
+	// state handler
+	private IParameterStateHandler parameterStateHandler;
+	private IAnimationStateHandler animationStateHandler;
+	private IStepByStepStateHandler stepByStepStateHandler;
 
 	// i18n
-	private String i18nBaseName;
 	private ResourceBundle resourceBundle;
-
-	// Menu
-	private boolean fileEnabled;
 	private boolean i18nEnabled;
 	private boolean deDEEnabled;
 	private boolean frFREnabled;
 	private boolean enUSEnabled;
-	private boolean infoEnabled;
-	private boolean helpEnabled;
-	private boolean aboutEnabled;
-	private boolean quitEnabled;
 
-	// IO
+	// File
+	private boolean fileEnabled;
+	private boolean newMenuEnabled;
+	private boolean undirectedGraphEnabled;
+	private boolean directedGraphEnabled;
+	private boolean openEnabled;
+	private boolean saveEnabled;
+	private boolean saveAsEnabled;
+	private boolean algorithmMenuEnabled;
 	private boolean importAlgorithmEnabled;
 	private boolean deleteAlgorithmEnabled;
 	private boolean importGraphEnabled;
 	private boolean deleteGraphEnabled;
+	private boolean quitEnabled;
 
-	// Parameter
-	private String[] graphs;
+	// Info
+	private boolean infoEnabled;
+	private boolean helpEnabled;
+	private boolean aboutEnabled;
+
+	// Algorithm
 	private String[] algorithms;
-	private boolean graphsEnabled;
 	private boolean algorithmsEnabled;
-	private int selectedGraph;
-	private int selectedAlgorithm;
+	private int selectedAlgorithmIndex;
+	private String algorithmDescription;
 
 	// Player
 	private int delay;
@@ -58,7 +76,6 @@ public final class Model extends Observable {
 	private int progressMaximum;
 
 	private String pauseLabel;
-	private KeyStroke pauseAccelerator;
 	private EventSource pauseEvent;
 
 	private boolean playEnabled;
@@ -71,47 +88,62 @@ public final class Model extends Observable {
 	private boolean toEndEnabled;
 
 	// Protocol
-	private String protocol;
+	private StringBuilder stringBuilder;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param i18nBaseName
-	 *            an i18n base name
+	 * @param graph
+	 *            a graph
 	 */
-	public Model(String i18nBaseName) {
+	public Model(IGravisGraph graph) {
 		super();
 
-		this.graph = null;
+		// graph
+		this.graph = graph;
+		this.graphSaved = false;
+		this.traversal = null;
+
+		// simple listener
+		this.i18nListener = null;
+		this.helpListener = null;
+		this.aboutListener = null;
+		this.quitListener = null;
+		// state handler as listener
+		this.parameterStateHandler = null;
+		this.stepByStepStateHandler = null;
+		this.animationStateHandler = null;
 
 		// i18n
-		this.i18nBaseName = i18nBaseName;
 		this.resourceBundle = null;
-
-		// Menu
-		this.fileEnabled = false;
 		this.i18nEnabled = false;
 		this.deDEEnabled = false;
 		this.frFREnabled = false;
 		this.enUSEnabled = false;
+
+		// File
+		this.fileEnabled = false;
+		this.newMenuEnabled = false;
+		this.undirectedGraphEnabled = false;
+		this.directedGraphEnabled = false;
+		this.openEnabled = false;
+		this.saveEnabled = false;
+		this.saveAsEnabled = false;
+		this.algorithmMenuEnabled = false;
+		this.importAlgorithmEnabled = false;
+		this.deleteAlgorithmEnabled = false;
+		this.quitEnabled = false;
+
+		// Info
 		this.infoEnabled = false;
 		this.helpEnabled = false;
 		this.aboutEnabled = false;
-		this.quitEnabled = false;
-
-		// IO
-		this.importAlgorithmEnabled = false;
-		this.deleteAlgorithmEnabled = false;
-		this.importGraphEnabled = false;
-		this.deleteGraphEnabled = false;
 
 		// Parameter
-		this.graphs = null;
 		this.algorithms = null;
-		this.graphsEnabled = false;
 		this.algorithmsEnabled = false;
-		this.selectedGraph = 0;
-		this.selectedAlgorithm = 0;
+		this.selectedAlgorithmIndex = -1;
+		this.algorithmDescription = " ";
 
 		// Player
 		this.delay = 1;
@@ -122,714 +154,1208 @@ public final class Model extends Observable {
 		this.progressMaximum = 0;
 
 		this.pauseLabel = "";
-		this.pauseAccelerator = null;
 		this.pauseEvent = null;
 
+		this.animationStateHandler = null;
 		this.playEnabled = false;
 		this.pauseEnabled = false;
 		this.stopEnabled = false;
 
+		this.stepByStepStateHandler = null;
 		this.toBeginningEnabled = false;
 		this.backwardEnabled = false;
 		this.forwardEnabled = false;
 		this.toEndEnabled = false;
 
 		// Protocol
-		this.protocol = "";
+		this.stringBuilder = new StringBuilder();
 
 	}
 
-	/**
-	 * Disables or enables menu elements.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param enabled
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setMenuEnabled(boolean)
 	 */
-	public void setMenuEnabled(boolean enabled) {
+	@Override
+	public void setMenuEnabled(boolean menuEnabled) {
 		// Menu
-		this.setFileEnabled(enabled);
-		this.setI18nEnabled(enabled);
-		this.setInfoEnabled(enabled);
+		this.setFileEnabled(menuEnabled);
+		this.setI18nEnabled(menuEnabled);
+		this.setInfoEnabled(menuEnabled);
 		// MenuItem
 		// (...)
-		this.setImportAlgorithmEnabled(enabled);
-		this.setDeleteAlgorithmEnabled(enabled);
-		this.setImportGraphEnabled(enabled);
-		this.setDeleteGraphEnabled(enabled);
-		this.setQuitEnabled(enabled);
+		this.setNewMenuEnabled(menuEnabled);
+		this.setUndirectedGraphEnabled(menuEnabled);
+		this.setDirectedGraphEnabled(menuEnabled);
+		this.setOpenEnabled(menuEnabled);
+		this.setSaveEnabled(menuEnabled);
+		this.setSaveAsEnabled(menuEnabled);
+		this.setAlgorithmMenuEnabled(menuEnabled);
+		this.setImportAlgorithmEnabled(menuEnabled);
+		this.setDeleteAlgorithmEnabled(menuEnabled);
+		this.setQuitEnabled(menuEnabled);
 		// (...)
-		this.setDeDEEnabled(enabled);
-		this.setFrFREnabled(enabled);
-		this.setEnUSEnabled(enabled);
+		this.setDeDEEnabled(menuEnabled);
+		this.setFrFREnabled(menuEnabled);
+		this.setEnUSEnabled(menuEnabled);
 		// (...)
-		this.setHelpEnabled(enabled);
-		this.setAboutEnabled(enabled);
+		this.setHelpEnabled(menuEnabled);
+		this.setAboutEnabled(menuEnabled);
 
 		this.setChanged();
 	}
 
-	/**
-	 * Disables or enables parameter elements.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param enabled
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setPlayerEnabled(boolean)
 	 */
-	public void setParameterEnabled(boolean enabled) {
-		this.setGraphsEnabled(enabled);
-		this.setAlgorithmsEnabled(enabled);
+	@Override
+	public void setPlayerEnabled(boolean menuEnabled) {
+		this.setSteplengthEnabled(menuEnabled);
+		this.setDelayEnabled(menuEnabled);
+		this.setAnimationEnabled(menuEnabled);
+		this.setStepByStepEnabled(menuEnabled);
 
 		this.setChanged();
 	}
 
-	/**
-	 * Disables or enables player elements.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param enabled
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setAnimationEnabled(boolean)
 	 */
-	public void setPlayerEnabled(boolean enabled) {
-		this.setSteplengthEnabled(enabled);
-		this.setDelayEnabled(enabled);
-		this.setPlayEnabled(enabled);
-		this.setPauseEnabled(enabled);
-		this.setStopEnabled(enabled);
-		this.setStepByStepEnabled(enabled);
+	@Override
+	public void setAnimationEnabled(boolean menuEnabled) {
+		this.setPlayEnabled(menuEnabled);
+		this.setPauseEnabled(menuEnabled);
+		this.setStopEnabled(menuEnabled);
 
 		this.setChanged();
 	}
 
-	/**
-	 * Disables or enables the players step-by-step elements.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param enabled
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setStepByStepEnabled(boolean)
 	 */
-	public void setStepByStepEnabled(boolean enabled) {
-		this.setToBeginningEnabled(enabled);
-		this.setBackwardEnabled(enabled);
-		this.setForwardEnabled(enabled);
-		this.setToEndEnabled(enabled);
+	@Override
+	public void setStepByStepEnabled(boolean menuEnabled) {
+		this.setToBeginningEnabled(menuEnabled);
+		this.setBackwardEnabled(menuEnabled);
+		this.setForwardEnabled(menuEnabled);
+		this.setToEndEnabled(menuEnabled);
 
 		this.setChanged();
 	}
 
-	/**
-	 * @return the graph
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getGraph()
 	 */
-	protected IGravisGraph getGraph() {
+	@Override
+	public IGravisGraph getGraph() {
 		return graph;
 	}
 
-	/**
-	 * @return the i18nBaseName
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isGraphSaved()
 	 */
-	protected String getI18nBaseName() {
-		return i18nBaseName;
+	@Override
+	public boolean isGraphSaved() {
+		return graphSaved;
 	}
 
-	/**
-	 * @return the resourceBundle
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getTraversal()
 	 */
+	@Override
+	public Traversal getTraversal() {
+		return traversal;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getI18nListener()
+	 */
+	@Override
+	public ActionListener getI18nListener() {
+		return i18nListener;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getHelpListener()
+	 */
+	@Override
+	public ActionListener getHelpListener() {
+		return helpListener;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getAboutListener()
+	 */
+	@Override
+	public ActionListener getAboutListener() {
+		return aboutListener;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getQuitListener()
+	 */
+	@Override
+	public ActionListener getQuitListener() {
+		return quitListener;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getParameterStateHandler()
+	 */
+	@Override
+	public IParameterStateHandler getParameterStateHandler() {
+		return parameterStateHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getAnimationStateHandler()
+	 */
+	@Override
+	public IAnimationStateHandler getAnimationStateHandler() {
+		return animationStateHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getStepByStepStateHandler()
+	 */
+	@Override
+	public IStepByStepStateHandler getStepByStepStateHandler() {
+		return stepByStepStateHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getResourceBundle()
+	 */
+	@Override
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
 
-	/**
-	 * @return the fileEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isI18nEnabled()
 	 */
-	protected boolean isFileEnabled() {
-		return fileEnabled;
-	}
-
-	/**
-	 * @return the i18nEnabled
-	 */
-	protected boolean isI18nEnabled() {
+	@Override
+	public boolean isI18nEnabled() {
 		return i18nEnabled;
 	}
 
-	/**
-	 * @return the deDEEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isDeDEEnabled()
 	 */
-	protected boolean isDeDEEnabled() {
+	@Override
+	public boolean isDeDEEnabled() {
 		return deDEEnabled;
 	}
 
-	/**
-	 * @return the frFREnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isFrFREnabled()
 	 */
-	protected boolean isFrFREnabled() {
+	@Override
+	public boolean isFrFREnabled() {
 		return frFREnabled;
 	}
 
-	/**
-	 * @return the enUSEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isEnUSEnabled()
 	 */
-	protected boolean isEnUSEnabled() {
+	@Override
+	public boolean isEnUSEnabled() {
 		return enUSEnabled;
 	}
 
-	/**
-	 * @return the infoEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isFileEnabled()
 	 */
-	protected boolean isInfoEnabled() {
-		return infoEnabled;
+	@Override
+	public boolean isFileEnabled() {
+		return fileEnabled;
 	}
 
-	/**
-	 * @return the helpEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isNewMenuEnabled()
 	 */
-	protected boolean isHelpEnabled() {
-		return helpEnabled;
+	@Override
+	public boolean isNewMenuEnabled() {
+		return newMenuEnabled;
 	}
 
-	/**
-	 * @return the aboutEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isUndirectedGraphEnabled()
 	 */
-	protected boolean isAboutEnabled() {
-		return aboutEnabled;
+	@Override
+	public boolean isUndirectedGraphEnabled() {
+		return undirectedGraphEnabled;
 	}
 
-	/**
-	 * @return the quitEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isDirectedGraphEnabled()
 	 */
-	protected boolean isQuitEnabled() {
-		return quitEnabled;
+	@Override
+	public boolean isDirectedGraphEnabled() {
+		return directedGraphEnabled;
 	}
 
-	/**
-	 * @return the importAlgorithmEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isOpenEnabled()
 	 */
-	protected boolean isImportAlgorithmEnabled() {
+	@Override
+	public boolean isOpenEnabled() {
+		return openEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isSaveEnabled()
+	 */
+	@Override
+	public boolean isSaveEnabled() {
+		return saveEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isSaveAsEnabled()
+	 */
+	@Override
+	public boolean isSaveAsEnabled() {
+		return saveAsEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isAlgorithmMenuEnabled()
+	 */
+	@Override
+	public boolean isAlgorithmMenuEnabled() {
+		return algorithmMenuEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isImportAlgorithmEnabled()
+	 */
+	@Override
+	public boolean isImportAlgorithmEnabled() {
 		return importAlgorithmEnabled;
 	}
 
-	/**
-	 * @return the deleteAlgorithmEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isDeleteAlgorithmEnabled()
 	 */
-	protected boolean isDeleteAlgorithmEnabled() {
+	@Override
+	public boolean isDeleteAlgorithmEnabled() {
 		return deleteAlgorithmEnabled;
 	}
 
-	/**
-	 * @return the importGraphEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isImportGraphEnabled()
 	 */
-	protected boolean isImportGraphEnabled() {
+	@Override
+	public boolean isImportGraphEnabled() {
 		return importGraphEnabled;
 	}
 
-	/**
-	 * @return the deleteGraphEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isDeleteGraphEnabled()
 	 */
-	protected boolean isDeleteGraphEnabled() {
+	@Override
+	public boolean isDeleteGraphEnabled() {
 		return deleteGraphEnabled;
 	}
 
-	/**
-	 * @return the graphs
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isQuitEnabled()
 	 */
-	protected String[] getGraphs() {
-		return graphs;
+	@Override
+	public boolean isQuitEnabled() {
+		return quitEnabled;
 	}
 
-	/**
-	 * @return the algorithms
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isInfoEnabled()
 	 */
-	protected String[] getAlgorithms() {
+	@Override
+	public boolean isInfoEnabled() {
+		return infoEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isHelpEnabled()
+	 */
+	@Override
+	public boolean isHelpEnabled() {
+		return helpEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isAboutEnabled()
+	 */
+	@Override
+	public boolean isAboutEnabled() {
+		return aboutEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getAlgorithms()
+	 */
+	@Override
+	public String[] getAlgorithms() {
 		return algorithms;
 	}
 
-	/**
-	 * @return the graphsEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isAlgorithmsEnabled()
 	 */
-	protected boolean isGraphsEnabled() {
-		return graphsEnabled;
-	}
-
-	/**
-	 * @return the algorithmsEnabled
-	 */
-	protected boolean isAlgorithmsEnabled() {
+	@Override
+	public boolean isAlgorithmsEnabled() {
 		return algorithmsEnabled;
 	}
 
-	/**
-	 * @return the selectedGraph
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getSelectedAlgorithmIndex()
 	 */
-	protected int getSelectedGraph() {
-		return selectedGraph;
+	@Override
+	public int getSelectedAlgorithmIndex() {
+		return selectedAlgorithmIndex;
 	}
 
-	/**
-	 * @return the selectedAlgorithm
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getAlgorithmDescription()
 	 */
-	protected int getSelectedAlgorithm() {
-		return selectedAlgorithm;
+	@Override
+	public String getAlgorithmDescription() {
+		return algorithmDescription;
 	}
 
-	/**
-	 * @return the delay
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getDelay()
 	 */
-	protected int getDelay() {
+	@Override
+	public int getDelay() {
 		return delay;
 	}
 
-	/**
-	 * @return the steplength
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getSteplength()
 	 */
-	protected int getSteplength() {
+	@Override
+	public int getSteplength() {
 		return steplength;
 	}
 
-	/**
-	 * @return the delayEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isDelayEnabled()
 	 */
-	protected boolean isDelayEnabled() {
+	@Override
+	public boolean isDelayEnabled() {
 		return delayEnabled;
 	}
 
-	/**
-	 * @return the steplengthEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isSteplengthEnabled()
 	 */
-	protected boolean isSteplengthEnabled() {
+	@Override
+	public boolean isSteplengthEnabled() {
 		return steplengthEnabled;
 	}
 
-	/**
-	 * @return the progress
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getProgress()
 	 */
-	protected int getProgress() {
+	@Override
+	public int getProgress() {
 		return progress;
 	}
 
-	/**
-	 * @return the progressMaximum
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getProgressMaximum()
 	 */
-	protected int getProgressMaximum() {
+	@Override
+	public int getProgressMaximum() {
 		return progressMaximum;
 	}
 
-	/**
-	 * @return the pauseLabel
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getPauseLabel()
 	 */
-	protected String getPauseLabel() {
+	@Override
+	public String getPauseLabel() {
 		return pauseLabel;
 	}
 
-	/**
-	 * @return the pauseAccelerator
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getPauseEvent()
 	 */
-	protected KeyStroke getPauseAccelerator() {
-		return pauseAccelerator;
-	}
-
-	/**
-	 * @return the pauseEvent
-	 */
-	protected EventSource getPauseEvent() {
+	@Override
+	public EventSource getPauseEvent() {
 		return pauseEvent;
 	}
 
-	/**
-	 * @return the playEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isPlayEnabled()
 	 */
-	protected boolean isPlayEnabled() {
+	@Override
+	public boolean isPlayEnabled() {
 		return playEnabled;
 	}
 
-	/**
-	 * @return the pauseEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isPauseEnabled()
 	 */
-	protected boolean isPauseEnabled() {
+	@Override
+	public boolean isPauseEnabled() {
 		return pauseEnabled;
 	}
 
-	/**
-	 * @return the stopEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isStopEnabled()
 	 */
-	protected boolean isStopEnabled() {
+	@Override
+	public boolean isStopEnabled() {
 		return stopEnabled;
 	}
 
-	/**
-	 * @return the toBeginningEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isToBeginningEnabled()
 	 */
-	protected boolean isToBeginningEnabled() {
+	@Override
+	public boolean isToBeginningEnabled() {
 		return toBeginningEnabled;
 	}
 
-	/**
-	 * @return the backwardEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isBackwardEnabled()
 	 */
-	protected boolean isBackwardEnabled() {
+	@Override
+	public boolean isBackwardEnabled() {
 		return backwardEnabled;
 	}
 
-	/**
-	 * @return the forwardEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isForwardEnabled()
 	 */
-	protected boolean isForwardEnabled() {
+	@Override
+	public boolean isForwardEnabled() {
 		return forwardEnabled;
 	}
 
-	/**
-	 * @return the toEndEnabled
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#isToEndEnabled()
 	 */
-	protected boolean isToEndEnabled() {
+	@Override
+	public boolean isToEndEnabled() {
 		return toEndEnabled;
 	}
 
-	/**
-	 * @return the protocol
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#getStringBuilder()
 	 */
-	protected String getProtocol() {
-		return protocol;
+	@Override
+	public StringBuilder getStringBuilder() {
+		return stringBuilder;
 	}
 
-	/**
-	 * @param graph
-	 *            the graph to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setGraph(ch.bfh.bti7301.hs2013
+	 * .gravis.core.graph.IGravisGraph)
 	 */
-	protected void setGraph(IGravisGraph graph) {
+	@Override
+	public void setGraph(IGravisGraph graph) {
 		this.graph = graph;
 		this.setChanged();
 	}
 
-	/**
-	 * @param i18nBaseName
-	 *            the i18nBaseName to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setGraphSaved(boolean)
 	 */
-	protected void setI18nBaseName(String i18nBaseName) {
-		this.i18nBaseName = i18nBaseName;
+	@Override
+	public void setGraphSaved(boolean graphSaved) {
+		this.graphSaved = graphSaved;
 		this.setChanged();
 	}
 
-	/**
-	 * @param resourceBundle
-	 *            the resourceBundle to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setTraversal(ch.bfh.bti7301.hs2013
+	 * .gravis.core.traversal.Traversal)
 	 */
-	protected void setResourceBundle(ResourceBundle resourceBundle) {
+	@Override
+	public void setTraversal(Traversal traversal) {
+		this.traversal = traversal;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setI18nListener(java.awt.event
+	 * .ActionListener)
+	 */
+	@Override
+	public void setI18nListener(ActionListener i18nListener) {
+		this.i18nListener = i18nListener;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setHelpListener(java.awt.event
+	 * .ActionListener)
+	 */
+	@Override
+	public void setHelpListener(ActionListener helpListener) {
+		this.helpListener = helpListener;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setAboutListener(java.awt.event
+	 * .ActionListener)
+	 */
+	@Override
+	public void setAboutListener(ActionListener aboutListener) {
+		this.aboutListener = aboutListener;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setQuitListener(java.awt.event
+	 * .ActionListener)
+	 */
+	@Override
+	public void setQuitListener(ActionListener quitListener) {
+		this.quitListener = quitListener;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setParameterStateHandler(ch.bfh
+	 * .bti7301.hs2013.gravis.gui.control.parameter.IParameterStateHandler)
+	 */
+	@Override
+	public void setParameterStateHandler(
+			IParameterStateHandler parameterStateHandler) {
+		this.parameterStateHandler = parameterStateHandler;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setAnimationStateHandler(ch.bfh
+	 * .bti7301.hs2013.gravis.gui.control.animation.IAnimationStateHandler)
+	 */
+	@Override
+	public void setAnimationStateHandler(
+			IAnimationStateHandler animationStateHandler) {
+		this.animationStateHandler = animationStateHandler;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setStepByStepStateHandler(ch.bfh
+	 * .bti7301.hs2013.gravis.gui.control.stepbystep.IStepByStepStateHandler)
+	 */
+	@Override
+	public void setStepByStepStateHandler(
+			IStepByStepStateHandler stepByStepStateHandler) {
+		this.stepByStepStateHandler = stepByStepStateHandler;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setResourceBundle(java.util.
+	 * ResourceBundle)
+	 */
+	@Override
+	public void setResourceBundle(ResourceBundle resourceBundle) {
 		this.resourceBundle = resourceBundle;
 		this.setChanged();
 	}
 
-	/**
-	 * @param fileEnabled
-	 *            the fileEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setI18nEnabled(boolean)
 	 */
-	protected void setFileEnabled(boolean fileEnabled) {
-		this.fileEnabled = fileEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param i18nEnabled
-	 *            the i18nEnabled to set
-	 */
-	protected void setI18nEnabled(boolean i18nEnabled) {
+	@Override
+	public void setI18nEnabled(boolean i18nEnabled) {
 		this.i18nEnabled = i18nEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param deDEEnabled
-	 *            the deDEEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setDeDEEnabled(boolean)
 	 */
-	protected void setDeDEEnabled(boolean deDEEnabled) {
+	@Override
+	public void setDeDEEnabled(boolean deDEEnabled) {
 		this.deDEEnabled = deDEEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param frFREnabled
-	 *            the frFREnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setFrFREnabled(boolean)
 	 */
-	protected void setFrFREnabled(boolean frFREnabled) {
+	@Override
+	public void setFrFREnabled(boolean frFREnabled) {
 		this.frFREnabled = frFREnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param enUSEnabled
-	 *            the enUSEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setEnUSEnabled(boolean)
 	 */
-	protected void setEnUSEnabled(boolean enUSEnabled) {
+	@Override
+	public void setEnUSEnabled(boolean enUSEnabled) {
 		this.enUSEnabled = enUSEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param infoEnabled
-	 *            the infoEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setFileEnabled(boolean)
 	 */
-	protected void setInfoEnabled(boolean infoEnabled) {
-		this.infoEnabled = infoEnabled;
+	@Override
+	public void setFileEnabled(boolean fileEnabled) {
+		this.fileEnabled = fileEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param helpEnabled
-	 *            the helpEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setNewMenuEnabled(boolean)
 	 */
-	protected void setHelpEnabled(boolean helpEnabled) {
-		this.helpEnabled = helpEnabled;
+	@Override
+	public void setNewMenuEnabled(boolean newMenuEnabled) {
+		this.newMenuEnabled = newMenuEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param aboutEnabled
-	 *            the aboutEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setUndirectedGraphEnabled(boolean)
 	 */
-	protected void setAboutEnabled(boolean aboutEnabled) {
-		this.aboutEnabled = aboutEnabled;
+	@Override
+	public void setUndirectedGraphEnabled(boolean undirectedGraphEnabled) {
+		this.undirectedGraphEnabled = undirectedGraphEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param quitEnabled
-	 *            the quitEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setDirectedGraphEnabled(boolean)
 	 */
-	protected void setQuitEnabled(boolean quitEnabled) {
-		this.quitEnabled = quitEnabled;
+	@Override
+	public void setDirectedGraphEnabled(boolean directedGraphEnabled) {
+		this.directedGraphEnabled = directedGraphEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param importAlgorithmEnabled
-	 *            the importAlgorithmEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setOpenEnabled(boolean)
 	 */
-	protected void setImportAlgorithmEnabled(boolean importAlgorithmEnabled) {
+	@Override
+	public void setOpenEnabled(boolean openEnabled) {
+		this.openEnabled = openEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setSaveEnabled(boolean)
+	 */
+	@Override
+	public void setSaveEnabled(boolean saveEnabled) {
+		this.saveEnabled = saveEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setSaveAsEnabled(boolean)
+	 */
+	@Override
+	public void setSaveAsEnabled(boolean saveAsEnabled) {
+		this.saveAsEnabled = saveAsEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setAlgorithmMenuEnabled(boolean)
+	 */
+	@Override
+	public void setAlgorithmMenuEnabled(boolean algorithmMenuEnabled) {
+		this.algorithmMenuEnabled = algorithmMenuEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setImportAlgorithmEnabled(boolean)
+	 */
+	@Override
+	public void setImportAlgorithmEnabled(boolean importAlgorithmEnabled) {
 		this.importAlgorithmEnabled = importAlgorithmEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param deleteAlgorithmEnabled
-	 *            the deleteAlgorithmEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setDeleteAlgorithmEnabled(boolean)
 	 */
-	protected void setDeleteAlgorithmEnabled(boolean deleteAlgorithmEnabled) {
+	@Override
+	public void setDeleteAlgorithmEnabled(boolean deleteAlgorithmEnabled) {
 		this.deleteAlgorithmEnabled = deleteAlgorithmEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param importGraphEnabled
-	 *            the importGraphEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setImportGraphEnabled(boolean)
 	 */
-	protected void setImportGraphEnabled(boolean importGraphEnabled) {
+	@Override
+	public void setImportGraphEnabled(boolean importGraphEnabled) {
 		this.importGraphEnabled = importGraphEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param deleteGraphEnabled
-	 *            the deleteGraphEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setDeleteGraphEnabled(boolean)
 	 */
-	protected void setDeleteGraphEnabled(boolean deleteGraphEnabled) {
+	@Override
+	public void setDeleteGraphEnabled(boolean deleteGraphEnabled) {
 		this.deleteGraphEnabled = deleteGraphEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param graphs
-	 *            the graphs to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setQuitEnabled(boolean)
 	 */
-	protected void setGraphs(String[] graphs) {
-		this.graphs = graphs;
+	@Override
+	public void setQuitEnabled(boolean quitEnabled) {
+		this.quitEnabled = quitEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param algorithms
-	 *            the algorithms to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setInfoEnabled(boolean)
 	 */
-	protected void setAlgorithms(String[] algorithms) {
+	@Override
+	public void setInfoEnabled(boolean infoEnabled) {
+		this.infoEnabled = infoEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setHelpEnabled(boolean)
+	 */
+	@Override
+	public void setHelpEnabled(boolean helpEnabled) {
+		this.helpEnabled = helpEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setAboutEnabled(boolean)
+	 */
+	@Override
+	public void setAboutEnabled(boolean aboutEnabled) {
+		this.aboutEnabled = aboutEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setAlgorithms(java.lang.String[])
+	 */
+	@Override
+	public void setAlgorithms(String[] algorithms) {
 		this.algorithms = algorithms;
 		this.setChanged();
 	}
 
-	/**
-	 * @param graphsEnabled
-	 *            the graphsEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setAlgorithmsEnabled(boolean)
 	 */
-	protected void setGraphsEnabled(boolean graphsEnabled) {
-		this.graphsEnabled = graphsEnabled;
-		this.setChanged();
-	}
-
-	/**
-	 * @param algorithmsEnabled
-	 *            the algorithmsEnabled to set
-	 */
-	protected void setAlgorithmsEnabled(boolean algorithmsEnabled) {
+	@Override
+	public void setAlgorithmsEnabled(boolean algorithmsEnabled) {
 		this.algorithmsEnabled = algorithmsEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param selectedGraph
-	 *            the selectedGraph to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setSelectedAlgorithmIndex(int)
 	 */
-	protected void setSelectedGraph(int selectedGraph) {
-		this.selectedGraph = selectedGraph;
+	@Override
+	public void setSelectedAlgorithmIndex(int selectedAlgorithmIndex) {
+		this.selectedAlgorithmIndex = selectedAlgorithmIndex;
 		this.setChanged();
 	}
 
-	/**
-	 * @param selectedAlgorithm
-	 *            the selectedAlgorithm to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setAlgorithmDescription(java.lang
+	 * .String)
 	 */
-	protected void setSelectedAlgorithm(int selectedAlgorithm) {
-		this.selectedAlgorithm = selectedAlgorithm;
+	@Override
+	public void setAlgorithmDescription(String algorithmDescription) {
+		this.algorithmDescription = algorithmDescription;
 		this.setChanged();
 	}
 
-	/**
-	 * @param delay
-	 *            the delay to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setDelay(int)
 	 */
-	protected void setDelay(int delay) {
+	@Override
+	public void setDelay(int delay) {
 		this.delay = delay;
 		this.setChanged();
 	}
 
-	/**
-	 * @param steplength
-	 *            the steplength to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setSteplength(int)
 	 */
-	protected void setSteplength(int steplength) {
+	@Override
+	public void setSteplength(int steplength) {
 		this.steplength = steplength;
 		this.setChanged();
 	}
 
-	/**
-	 * @param delayEnabled
-	 *            the delayEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setDelayEnabled(boolean)
 	 */
-	protected void setDelayEnabled(boolean delayEnabled) {
+	@Override
+	public void setDelayEnabled(boolean delayEnabled) {
 		this.delayEnabled = delayEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param steplengthEnabled
-	 *            the steplengthEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setSteplengthEnabled(boolean)
 	 */
-	protected void setSteplengthEnabled(boolean steplengthEnabled) {
+	@Override
+	public void setSteplengthEnabled(boolean steplengthEnabled) {
 		this.steplengthEnabled = steplengthEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param progress
-	 *            the progress to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setProgress(int)
 	 */
-	protected void setProgress(int progress) {
+	@Override
+	public void setProgress(int progress) {
 		this.progress = progress;
 		this.setChanged();
 	}
 
-	/**
-	 * @param progressMaximum
-	 *            the progressMaximum to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setProgressMaximum(int)
 	 */
-	protected void setProgressMaximum(int progressMaximum) {
+	@Override
+	public void setProgressMaximum(int progressMaximum) {
 		this.progressMaximum = progressMaximum;
 		this.setChanged();
 	}
 
-	/**
-	 * @param pauseLabel
-	 *            the pauseLabel to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setPauseLabel(java.lang.String)
 	 */
-	protected void setPauseLabel(String pauseLabel) {
+	@Override
+	public void setPauseLabel(String pauseLabel) {
 		this.pauseLabel = pauseLabel;
 		this.setChanged();
 	}
 
-	/**
-	 * @param pauseAccelerator
-	 *            the pauseAccelerator to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setPauseEvent(ch.bfh.bti7301.hs2013
+	 * .gravis.gui.control.IControl.EventSource)
 	 */
-	protected void setPauseAccelerator(KeyStroke pauseAccelerator) {
-		this.pauseAccelerator = pauseAccelerator;
-		this.setChanged();
-	}
-
-	/**
-	 * @param pauseEvent
-	 *            the pauseEvent to set
-	 */
-	protected void setPauseEvent(EventSource pauseEvent) {
+	@Override
+	public void setPauseEvent(EventSource pauseEvent) {
 		this.pauseEvent = pauseEvent;
 		this.setChanged();
 	}
 
-	/**
-	 * @param playEnabled
-	 *            the playEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setPlayEnabled(boolean)
 	 */
-	protected void setPlayEnabled(boolean playEnabled) {
+	@Override
+	public void setPlayEnabled(boolean playEnabled) {
 		this.playEnabled = playEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param pauseEnabled
-	 *            the pauseEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setPauseEnabled(boolean)
 	 */
-	protected void setPauseEnabled(boolean pauseEnabled) {
+	@Override
+	public void setPauseEnabled(boolean pauseEnabled) {
 		this.pauseEnabled = pauseEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param stopEnabled
-	 *            the stopEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setStopEnabled(boolean)
 	 */
-	protected void setStopEnabled(boolean stopEnabled) {
+	@Override
+	public void setStopEnabled(boolean stopEnabled) {
 		this.stopEnabled = stopEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param toBeginningEnabled
-	 *            the toBeginningEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IMode#setToBeginningEnabled(boolean)
 	 */
-	protected void setToBeginningEnabled(boolean toBeginningEnabled) {
+	@Override
+	public void setToBeginningEnabled(boolean toBeginningEnabled) {
 		this.toBeginningEnabled = toBeginningEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param backwardEnabled
-	 *            the backwardEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setBackwardEnabled(boolean)
 	 */
-	protected void setBackwardEnabled(boolean backwardEnabled) {
+	@Override
+	public void setBackwardEnabled(boolean backwardEnabled) {
 		this.backwardEnabled = backwardEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param forwardEnabled
-	 *            the forwardEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setForwardEnabled(boolean)
 	 */
-	protected void setForwardEnabled(boolean forwardEnabled) {
+	@Override
+	public void setForwardEnabled(boolean forwardEnabled) {
 		this.forwardEnabled = forwardEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param toEndEnabled
-	 *            the toEndEnabled to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setToEndEnabled(boolean)
 	 */
-	protected void setToEndEnabled(boolean toEndEnabled) {
+	@Override
+	public void setToEndEnabled(boolean toEndEnabled) {
 		this.toEndEnabled = toEndEnabled;
 		this.setChanged();
 	}
 
-	/**
-	 * @param protocol
-	 *            the protocol to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IMode#setStringBuilder(java.lang.
+	 * StringBuilder)
 	 */
-	protected void setProtocol(String protocol) {
-		this.protocol = protocol;
+	@Override
+	public void setStringBuilder(StringBuilder stringBuilder) {
+		this.stringBuilder = stringBuilder;
 		this.setChanged();
 	}
 
