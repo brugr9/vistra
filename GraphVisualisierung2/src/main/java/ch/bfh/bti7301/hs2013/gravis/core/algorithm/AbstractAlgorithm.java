@@ -3,20 +3,17 @@
  */
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
-import java.util.List;
-
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * Abstract algorithm, does nothing on execute().
+ * An abstract algorithm, does nothing on execute.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-abstract class AbstractAlgorithm implements IAlgorithm {
+public abstract class AbstractAlgorithm implements IAlgorithm {
 
 	/**
 	 * A filed for the name.
@@ -29,49 +26,17 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	private String description;
 
 	/**
-	 * A filed for the id.
+	 * A field for the edge type(s).
 	 */
-	private int id;
+	private EdgeType[] edgeTypes;
 
 	/**
-	 * A field for the graphtypes.
-	 */
-	private GraphType[] graphtypes;
-
-	/**
-	 * 
+	 * Main constructor.
 	 */
 	protected AbstractAlgorithm() {
 		this.name = "";
 		this.description = "";
-		this.id = -1;
-		this.graphtypes = new GraphType[] {};
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getName()
-	 */
-	@Override
-	public final String getName() {
-		return this.name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getDescription()
-	 */
-	@Override
-	public final String getDescription() {
-		return this.description;
-	}
-
-	@Override
-	public final GraphType[] getGraphTypes() {
-		return this.graphtypes;
+		this.edgeTypes = null;
 	}
 
 	/**
@@ -95,23 +60,51 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	}
 
 	/**
-	 * Sets the id.
-	 * 
-	 * @param id
-	 *            the id to set
-	 */
-	protected final void setId(int id) {
-		this.id = id;
-	}
-
-	/**
-	 * Sets the graphtypes.
+	 * Sets the edgeTypes.
 	 * 
 	 * @param graphtypes
-	 *            the graphtypes to set
+	 *            the edgeTypes to set
 	 */
-	protected final void setGraphTypes(GraphType[] annotations) {
-		this.graphtypes = annotations;
+	protected final void setEdgeTypes(EdgeType[] edgeTypes) {
+		this.edgeTypes = edgeTypes;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getName()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final String getName() {
+		return this.name;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getDescription()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final String getDescription() {
+		return this.description;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getEdgeTypes()
+	 */
+	@Override
+	public final EdgeType[] getEdgeTypes() {
+		return this.edgeTypes;
 	}
 
 	/*
@@ -120,6 +113,9 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.processing.algorithms.IGraphAlgorithm
 	 * #execute(edu.uci.ics.jung.graph.Graph)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void execute(IRestrictedGraph graph) throws AlgorithmException {

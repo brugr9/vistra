@@ -2,8 +2,8 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph.item;
 
 import java.awt.Color;
 
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GraphPropertyConstants;
+import ch.bfh.bti7301.hs2013.gravis.util.GravisColor;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -35,12 +35,12 @@ public abstract class AbstractGraphItem implements IGraphItem {
 		this.newComment = "";
 		this.currentResult = this.newResult = Double.NaN;
 		this.currentState = State.INITIAL;
-		this.currentColor = this.oldColor = GravisConstants.V_COLOR_DEFAULT;
-		this.currentStrokeWidth = this.oldStrokeWidth = GravisConstants.STROKE_WIDTH_DEFAULT;
+		this.currentColor = this.oldColor = GraphPropertyConstants.V_COLOR_DEFAULT;
+		this.currentStrokeWidth = this.oldStrokeWidth = GraphPropertyConstants.STROKE_WIDTH_DEFAULT;
 		this.stateCommentEnabled = this.done = false;
 
-		this.setNewColor(GravisConstants.V_COLOR_DEFAULT);
-		this.setNewStrokeWidth(GravisConstants.STROKE_WIDTH_DEFAULT);
+		this.setNewColor(GraphPropertyConstants.V_COLOR_DEFAULT);
+		this.setNewStrokeWidth(GraphPropertyConstants.STROKE_WIDTH_DEFAULT);
 		this.setVisible(true);
 		this.setTagged(false);
 	}

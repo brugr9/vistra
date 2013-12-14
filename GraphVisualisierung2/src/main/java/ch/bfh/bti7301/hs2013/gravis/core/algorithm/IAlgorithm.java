@@ -1,6 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * An algorithm able to operate on a <code>Graph</code>.
@@ -10,16 +11,6 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;;
  * 
  */
 public interface IAlgorithm {
-
-	/**
-	 * Graph types.
-	 * 
-	 * @author Roland Bruggmann (brugr9@bfh.ch)
-	 * 
-	 */
-	public static enum GraphType {
-		UNDIRECTED, DIRECTED,
-	}
 
 	/**
 	 * Returns the algorithm name.
@@ -37,14 +28,20 @@ public interface IAlgorithm {
 	public abstract String getDescription();
 
 	/**
+	 * Executes the algorithm, a traversal gets created.
+	 * 
 	 * @param graph
-	 * @throws Exception
+	 *            the graph to traverse
+	 * @throws AlgorithmException
 	 */
-	public abstract void execute(IRestrictedGraph graph) throws AlgorithmException;
+	public abstract void execute(IRestrictedGraph graph)
+			throws AlgorithmException;
 
 	/**
-	 * @return annotations
+	 * Returns the edge type(s) the algorithm is capable to handle.
+	 * 
+	 * @return the edge type(s)
 	 */
-	public abstract GraphType[] getGraphTypes();
+	public abstract EdgeType[] getEdgeTypes();
 
 }

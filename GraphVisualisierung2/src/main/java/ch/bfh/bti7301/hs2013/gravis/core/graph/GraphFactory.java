@@ -11,16 +11,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.collections15.Transformer;
 
-import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeEvent;
-import ch.bfh.bti7301.hs2013.gravis.core.TraversalChangeListener;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.step.CommandTransformerFactory;
-import ch.bfh.bti7301.hs2013.gravis.core.step.IStep;
+import ch.bfh.bti7301.hs2013.gravis.core.traversal.step.CommandTransformerFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.traversal.step.IStep;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseGraph;
@@ -99,22 +97,17 @@ public final class GraphFactory {
 	 * 
 	 * @param p
 	 *            the core properties
-	 * @return a graph manager
+	 * @return the graph manager
 	 */
 	public static IGraphManager createGraphManager(Properties p)
 			throws Exception {
+
 		try {
-			// TODO activate properties
-//			File templatesDir = new File(p.getProperty("dir.templates.graph"));
-//			templatesDir.setReadOnly();
-//			File workbenchDir = new File(p.getProperty("dir.workbench.graph"));
-//			FileNameExtensionFilter filter = new FileNameExtensionFilter(
-//					p.getProperty("suffix.graph.description"),
-//					p.getProperty("suffix.graph"));
-			return new GraphManager(null, null, null);
+			return new GraphManager(p);
 		} catch (Exception e) {
 			throw e;
 		}
+
 	}
 
 	/**
@@ -126,7 +119,7 @@ public final class GraphFactory {
 			List<IStep> commandList) {
 		Transformer<IGraphItem, IStep> commandTransformer = CommandTransformerFactory
 				.createCommandTransformer();
-		
+
 		return new GravisGraphEventListener(commandList, commandTransformer);
 	}
 

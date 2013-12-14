@@ -7,8 +7,8 @@ import org.apache.commons.collections15.Transformer;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.step.IStep;
-import ch.bfh.bti7301.hs2013.gravis.core.step.Step;
+import ch.bfh.bti7301.hs2013.gravis.core.traversal.step.IStep;
+import ch.bfh.bti7301.hs2013.gravis.core.traversal.step.Step;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 

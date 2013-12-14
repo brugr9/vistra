@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.core;
+package ch.bfh.bti7301.hs2013.gravis.core.traversal;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,24 +11,23 @@ import java.util.ListIterator;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class GravisListIterator<E> implements IGravisListIterator<E> {
+public class GravisListIterator<E> implements IGravisListIterator<E> {
 
 	private final ListIterator<E> listIterator;
 
 	private int size;
 
 	/**
-	 * 
+	 *
 	 */
-	protected GravisListIterator() {
+	public GravisListIterator() {
 		this(new ArrayList<E>());
 	}
 
 	/**
-	 * 
 	 * @param list
 	 */
-	protected GravisListIterator(List<E> list) {
+	public GravisListIterator(List<E> list) {
 		this.listIterator = list.listIterator();
 		this.size = list.size();
 	}
@@ -135,43 +134,12 @@ class GravisListIterator<E> implements IGravisListIterator<E> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.IGravisListIterator#previousIndex()
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.core.IGravisListIterator#previousIndex()
 	 */
 	@Override
 	public int previousIndex() {
 		return this.listIterator.previousIndex();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.IGravisListIterator#first()
-	 */
-	@Override
-	public E first() {
-		E element = null;
-
-		while (this.listIterator.hasPrevious()) {
-			element = this.listIterator.previous();
-		}
-
-		return element;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.core.IGravisListIterator#last()
-	 */
-	@Override
-	public E last() {
-		E element = null;
-
-		while (this.listIterator.hasNext()) {
-			element = this.listIterator.next();
-		}
-
-		return element;
 	}
 
 }

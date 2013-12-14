@@ -2,65 +2,81 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import java.io.File;
 
-import ch.bfh.bti7301.hs2013.gravis.core.IParameterManager;
-import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm.GraphType;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * An algorithm manager.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IAlgorithmManager extends IParameterManager {
+public interface IAlgorithmManager {
 
 	/**
-	 * Returns the names of available parameters.
+	 * Returns the templates directory.
 	 * 
-	 * @param edgetype
-	 * @return the names of available parameters
-	 * @throws Exception
+	 * @return the templates directory
 	 */
-	public abstract String[] getNames(EdgeType edgetype) throws Exception;
-	
-	/**
-	 * 
-	 * @param index
-	 * @return IAlgorithm
-	 * @throws Exception
-	 */
-	public abstract IAlgorithm getAlgorithm(int index) throws Exception;
+	public abstract String getTemplatesDir();
 
 	/**
-	 * Imports an algorithm class-file as given.
+	 * Returns the workbench directory.
+	 * 
+	 * @return the workbench directory
+	 */
+	public abstract String getWorkbenchDir();
+
+	/**
+	 * Returns the file name extension filter.
+	 * 
+	 * @return the file name extension filter
+	 */
+	public abstract FileNameExtensionFilter getFilter();
+
+	/**
+	 * Adds an algorithm file as given and returns the edge types the algorithm
+	 * can handle.
 	 * 
 	 * @param file
 	 *            the algorithm file
-	 * @return <code>true<code> if imported
+	 * @return the edge types
 	 * @throws Exception
 	 */
-	public abstract boolean addAlgorithm(File file) throws Exception;
+	public abstract EdgeType[] add(File file) throws Exception;
 
 	/**
-	 * @return IAlgorithm
-	 * @throws Exception
-	 */
-	public abstract IAlgorithm getDefaultAlgorithm() throws Exception;
-
-	/**
+	 * Returns the names of available algorithms able to operate on graphs with
+	 * edge type as given.
 	 * 
-	 * @param types
-	 *            an array of EdgeType
-	 */
-	public abstract void updateAlgorithmList(GraphType[] types);
-
-	/**
-	 * Deletes an imported algorithm.
-	 * 
-	 * @param file
-	 *            the algorithm
-	 * @return <code>true</code> if the algorithm got deleted
+	 * @param edgeType
+	 *            the graph type
+	 * @return the algorithm names
 	 * @throws Exception
 	 */
-	public abstract boolean deleteAlgorithm(File file) throws Exception;
+	public abstract String[] getNames(EdgeType edgeType) throws Exception;
+
+	/**
+	 * Selects an algorithm by index, loads and returns the algorithm.
+	 * 
+	 * @param index
+	 *            the algorithm index
+	 * @return the algorithm
+	 * @throws Exception
+	 */
+	public abstract IAlgorithm select(int index) throws Exception;
+
+	/**
+	 * Removes an imported algorithm file as given and returns the edge types
+	 * the removed algorithm can handle.
+	 * 
+	 * 
+	 * @param fileName
+	 *            the algorithm file name
+	 * @return the edge types
+	 * @throws Exception
+	 */
+	public abstract EdgeType[] remove(String fileName) throws Exception;
 
 }

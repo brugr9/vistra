@@ -2,62 +2,61 @@ package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
 import java.io.File;
 
-import ch.bfh.bti7301.hs2013.gravis.core.IParameterManager;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import edu.uci.ics.jung.graph.Graph;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * A parameter manager interface specialized on graphs.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IGraphManager extends IParameterManager {
+public interface IGraphManager {
 
 	/**
+	 * Creates and returns an empty graph.
 	 * 
-	 * @param index
-	 *            the graph index
-	 * @return IGravisGraph
+	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract IGravisGraph getGraph(int index) throws Exception;
+	public abstract IGravisGraph getNewGraph() throws Exception;
 
 	/**
-	 * Imports a graph from a GraphML-file into the system.
-	 * 
-	 * @param file
-	 *            the file to import
-	 * @return the names of available graphs
-	 * @throws Exception
-	 */
-	public abstract boolean addGraph(File file) throws Exception;
-
-	/**
-	 * Clears a graph as given by index and returns the empty graph.
-	 * 
-	 * @param index
-	 * @throws Exception
-	 */
-	public abstract void clearGraph(int index) throws Exception;
-
-	/**
+	 * Opens a GraphML-file as graph.
 	 * 
 	 * @param file
-	 * @return the names of available graphs
+	 *            the file to open
+	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract String[] deleteGraph(File file) throws Exception;
+	public abstract IGravisGraph open(File file) throws Exception;
 
 	/**
+	 * Saves a graph as GraphML-file.
+	 * 
 	 * @param graph
+	 *            the graph to save
+	 * @return <code>true</code> if success
+	 * @throws Exception
 	 */
-	public abstract void saveGraph(IGravisGraph graph) throws Exception;
+	public boolean save(IGravisGraph graph) throws Exception;
 
 	/**
+	 * Saves a graph into a GraphML-file.
+	 * 
 	 * @param graph
-	 * @param file 
+	 *            the graph to save
+	 * @param file
+	 *            the file to write into
+	 * @return <code>true</code> if success
+	 * @throws Exception
 	 */
-	public abstract void exportGraph(IGravisGraph graph, File file) throws Exception;
+	public boolean saveAs(IGravisGraph graph, File file) throws Exception;
+
+	/**
+	 * Returns the file name extension filter.
+	 * 
+	 * @return the file name extension filter
+	 */
+	public abstract FileNameExtensionFilter getFilter();
 
 }

@@ -4,7 +4,10 @@ import java.io.File;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * This interface gives access to all important core classes. It is a facade to
@@ -17,111 +20,52 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 public interface ICore {
 
 	/**
-	 * Selects a graph as parameter for the traversal, invokes the rebuild of
-	 * the list with available algorithms and returns the loaded graph.
-	 * 
-	 * @param index
-	 *            the graph index
-	 * @return the graph
-	 * @throws Exception
-	 */
-	public abstract IGravisGraph selectGraph(int index)
-			throws Exception;
-
-	/**
-	 * Imports a graph given as file.
-	 * 
-	 * @param source
-	 *            the graph file to import
-	 * @return the names of available graphs
-	 * @throws Exception
-	 */
-	public abstract String[] importGraph(File source) throws Exception;
-
-	/**
-	 * Deletes an imported graph file.
-	 * 
-	 * @param file
-	 *            the graph file to delete
-	 * @return the names of available graphs
-	 * @throws Exception
-	 */
-	public abstract String[] deleteGraph(File file) throws Exception;
-
-	/**
-	 * Returns the names of available graphs.
-	 * 
-	 * @return the names of available graphs
-	 * @throws Exception
-	 */
-	public abstract String[] getGraphs() throws Exception;
-
-	/**
-	 * Selects an algorithm as parameter for the traversal.
-	 * 
-	 * @param index
-	 *            the algorithm index
-	 * @throws Exception
-	 */
-	public abstract void selectAlgorithm(int index) throws Exception;
-
-	/**
-	 * Imports an algorithm given as file.
-	 * 
-	 * @param source
-	 *            the algorithm file to import
-	 * @return the names of available algorithms
-	 * @throws Exception
-	 */
-	public abstract String[] importAlgorithm(File source) throws Exception;
-
-	/**
-	 * Deletes an imported algorithm file.
-	 * 
-	 * @param file
-	 *            the algorithm file to delete
-	 * @return the names of available algorithms
-	 * @throws Exception
-	 */
-	public abstract String[] deleteAlgorithm(File file) throws Exception;
-
-	/**
-	 * Returns the names of available algorithms.
-	 * 
-	 * @return the names of available algorithms
-	 * @throws Exception
-	 */
-	public abstract String[] getAlgorithms() throws Exception;
-
-	/**
-	 * Removes all vertices and edges from the graph with the given id and
-	 * returns the empty graph.
-	 * 
-	 * @param index
-	 * @throws Exception
-	 */
-	public void clearGraph(int index) throws Exception;
-
-	/**
-	 * Returns the graph templates directory.
-	 * 
-	 * @return the graph templates directory
-	 */
-	public abstract File getGraphTemplatesDir();
-
-	/**
-	 * Returns the graph workbench directory.
-	 * 
-	 * @return the graph workbench directory
-	 */
-	public abstract File getGraphWorkbenchDir();
-
-	/**
 	 * Returns the graph filename filter.
 	 * 
 	 * @return the graph filename extension filter
 	 */
 	public abstract FileNameExtensionFilter getGraphFilter();
+
+	/**
+	 * Returns an empty graph of edge type as given.
+	 * 
+	 * @return the graph
+	 * @throws CoreException
+	 */
+	public abstract IGravisGraph getNewGraph() throws CoreException;
+
+	/**
+	 * Opens a graph given as file.
+	 * 
+	 * @param source
+	 *            the graph file to import
+	 * @return the graph
+	 * @throws CoreException
+	 */
+	public abstract IGravisGraph openGraph(File source) throws CoreException;
+
+	/**
+	 * Saves a graph as GraphML-file with the name as given.
+	 * 
+	 * @param graph
+	 *            the graph to save
+	 * @return <code>true</code> if success
+	 * @throws CoreException
+	 */
+	public abstract boolean save(IGravisGraph graph) throws CoreException;
+
+	/**
+	 * Saves a graph into a GraphML-file.
+	 * 
+	 * @param graph
+	 *            the graph to save
+	 * @param file
+	 *            the file to write into
+	 * @return <code>true</code> if success
+	 * @throws CoreException
+	 */
+	public abstract boolean saveAs(IGravisGraph graph, File file)
+			throws CoreException;
 
 	/**
 	 * Returns the algorithm templates directory.
@@ -145,48 +89,66 @@ public interface ICore {
 	public abstract FileNameExtensionFilter getAlgorithmFilter();
 
 	/**
+	 * Imports an algorithm given as file and returns the edge types the
+	 * algorithm can handle.
 	 * 
-	 * @param listener
-	 * @throws Exception
+	 * @param source
+	 *            the algorithm file to import
+	 * @return the edge types
+	 * @throws CoreException
 	 */
-	public abstract IGravisListIterator<String> executeTraverser(TraversalChangeListener listener) throws Exception;
+	public abstract EdgeType[] importAlgorithm(File source)
+			throws CoreException;
 
 	/**
+	 * Returns an array of available algorithms as names.
+	 * <p>
+	 * The list is filtered: it contains only the names of algorithms able to
+	 * traverse the edge type as given.
 	 * 
-	 * @param graph
-	 * @throws Exception
+	 * @param edgeType
+	 *            the edge type
+	 * @return the array of available algorithms
+	 * @throws CoreException
 	 */
-	public abstract void saveGraph(IGravisGraph graph) throws Exception;
+	public abstract String[] getAlgorithms(EdgeType edgeType)
+			throws CoreException;
 
 	/**
+	 * Selects and returns an algorithm.
 	 * 
-	 * @param graph
+	 * @param index
+	 *            the algorithm index
+	 * @return the algorithm
+	 * @throws CoreException
+	 */
+	public abstract IAlgorithm selectAlgorithm(int index) throws CoreException;
+
+	/**
+	 * Deletes an imported algorithm file and returns the edge types the
+	 * algorithm was able to handle.
+	 * 
 	 * @param file
-	 * @throws Exception
+	 *            the algorithm file to delete
+	 * @return the edge types if success (<code>null</code> else)
+	 * @throws CoreException
 	 */
-	public abstract void exportGraph(IGravisGraph graph, File file) throws Exception;
+	public abstract EdgeType[] deleteAlgorithm(File file) throws CoreException;
 
 	/**
+	 * Renders a traversal by executing an algorithm as given over a graph as
+	 * given. Returns an immutable list of steps generated during the execution
+	 * of the algorithm. A step contains several commands which modifies the
+	 * graph.
+	 * 
 	 * @param graph
+	 *            the graph to traverse
+	 * @param algorithm
+	 *            the algorithm to execute
+	 * @return the traversal
+	 * @throws CoreException
 	 */
-	public abstract void selectGraph(IGravisGraph graph);
-	
-//	/**
-//     * Renders a traversal by executing an algorithm as given over a graph as
-//     * given. Returns an immutable list of steps generated during the execution
-//     * of the algorithm. A step contains several commands which modifies the
-//     * graph.
-//     *
-//     * @param graph
-//     * the graph to traverse
-//     * @param algorithm
-//     * the algorithm to execute
-//     * @return the traversal as a list of steps
-//     * @throws Exception
-//     */
-//    public IGravisListIterator<String> renderTraversal(IGravisGraph graph,
-//                    IAlgorithm algorithm) throws Exception;
-
-
+	public Traversal renderTraversal(IGravisGraph graph, IAlgorithm algorithm)
+			throws CoreException;
 
 }

@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GraphPropertyConstants;
 
 /**
  * A vertex.
@@ -41,12 +41,12 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 		super();
 
 		this.tempColor = this.getCurrentColor();
-		this.setStart(GravisConstants.V_START_DEFAULT);
-		this.setEnd(GravisConstants.V_END_DEFAULT);
-		this.width = GravisConstants.V_WIDTH_DEFAULT;
-		this.height = GravisConstants.V_HEIGHT_DEFAULT;
-		this.location = new Point(GravisConstants.V_LOC_X_DEFAULT,
-				GravisConstants.V_LOC_Y_DEFAULT);
+		this.setStart(GraphPropertyConstants.V_START_DEFAULT);
+		this.setEnd(GraphPropertyConstants.V_END_DEFAULT);
+		this.width = GraphPropertyConstants.V_WIDTH_DEFAULT;
+		this.height = GraphPropertyConstants.V_HEIGHT_DEFAULT;
+		this.location = new Point(GraphPropertyConstants.V_LOC_X_DEFAULT,
+				GraphPropertyConstants.V_LOC_Y_DEFAULT);
 	}
 
 	@Override
@@ -61,16 +61,16 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 
 	@Override
 	public void setStart(boolean start) {
-		super.setCurrentColor(start ? GravisConstants.V_START_COLOR : (this
-				.isEnd() ? GravisConstants.V_END_COLOR : this.tempColor));
+		super.setCurrentColor(start ? GraphPropertyConstants.V_START_COLOR : (this
+				.isEnd() ? GraphPropertyConstants.V_END_COLOR : this.tempColor));
 		this.start = start;
 	}
 
 	@Override
 	public void setEnd(boolean end) {
-		super.setCurrentColor(end ? (this.isStart() ? GravisConstants.V_START_COLOR
-				: GravisConstants.V_END_COLOR)
-				: (this.isStart() ? GravisConstants.V_START_COLOR
+		super.setCurrentColor(end ? (this.isStart() ? GraphPropertyConstants.V_START_COLOR
+				: GraphPropertyConstants.V_END_COLOR)
+				: (this.isStart() ? GraphPropertyConstants.V_START_COLOR
 						: this.tempColor));
 		this.end = end;
 	}
@@ -187,7 +187,7 @@ class GravisVertex extends AbstractGraphItem implements IVertex {
 	 */
 	@Override
 	protected float getDefaultStrokeWidth() {
-		return GravisConstants.V_TAGGED_STROKE;
+		return GraphPropertyConstants.V_TAGGED_STROKE;
 	}
 
 }

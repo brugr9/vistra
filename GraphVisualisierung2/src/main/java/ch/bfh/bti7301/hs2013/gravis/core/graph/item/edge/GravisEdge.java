@@ -1,7 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.AbstractGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GraphPropertyConstants;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -14,8 +14,8 @@ class GravisEdge extends AbstractGraphItem implements IEdge {
 	protected GravisEdge() {
 		super();
 
-		this.weight = GravisConstants.E_WEIGHT_DEFAULT;
-		this.setCurrentColor(GravisConstants.E_COLOR_DEFAULT);
+		this.weight = GraphPropertyConstants.E_WEIGHT_DEFAULT;
+		this.setCurrentColor(GraphPropertyConstants.E_COLOR_DEFAULT);
 	}
 
 	/*
@@ -70,7 +70,7 @@ class GravisEdge extends AbstractGraphItem implements IEdge {
 	 */
 	@Override
 	protected float getDefaultStrokeWidth() {
-		return GravisConstants.E_TAGGED_STROKE;
+		return GraphPropertyConstants.E_TAGGED_STROKE;
 	}
 
 }
