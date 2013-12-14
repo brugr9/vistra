@@ -4,16 +4,24 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 /**
+ * An input verifier for the vertex size.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
 public class VertexSizeVerifier extends AbstractGravisVerifier {
 
+	/**
+	 * A field for the minimum value.
+	 */
 	private static final double MIN_VALUE = 10.0;
-
+	/**
+	 * A field for the maximum value.
+	 */
 	private static final double MAX_VALUE = 500.0;
 
 	/**
+	 * Main constructor.
 	 * 
 	 * @param lastGood
 	 */
@@ -25,6 +33,9 @@ public class VertexSizeVerifier extends AbstractGravisVerifier {
 	 * (non-Javadoc)
 	 * 
 	 * @see javax.swing.InputVerifier#verify(javax.swing.JComponent)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean verify(JComponent input) {

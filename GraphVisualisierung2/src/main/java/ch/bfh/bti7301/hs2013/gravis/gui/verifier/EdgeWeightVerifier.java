@@ -4,12 +4,16 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 /**
+ * An input verifier for the edge weight.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
 public class EdgeWeightVerifier extends AbstractGravisVerifier {
 
 	/**
+	 * Main constructor.
+	 * 
 	 * @param lastGood
 	 */
 	public EdgeWeightVerifier(String lastGood) {
@@ -20,6 +24,9 @@ public class EdgeWeightVerifier extends AbstractGravisVerifier {
 	 * (non-Javadoc)
 	 * 
 	 * @see javax.swing.InputVerifier#verify(javax.swing.JComponent)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean verify(JComponent input) {
@@ -34,7 +41,7 @@ public class EdgeWeightVerifier extends AbstractGravisVerifier {
 
 			return true;
 		}
-		
+
 		return false;
 	}
 }
