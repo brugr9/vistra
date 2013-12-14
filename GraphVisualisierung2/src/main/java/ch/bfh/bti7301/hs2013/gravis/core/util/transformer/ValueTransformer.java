@@ -6,8 +6,8 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisColor;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GraphPropertyConstants;
+import ch.bfh.bti7301.hs2013.gravis.util.GravisColor;
 
 /**
  * A utility class, therefore serving with static method only.
@@ -54,57 +54,57 @@ public final class ValueTransformer {
 	 */
 	public static Color transformStringToColor(String stringValue) {
 		switch (stringValue) {
-		case GravisConstants.GREEN:
+		case GraphPropertyConstants.GREEN:
 			return GravisColor.LIGHT_GREEN;
-		case GravisConstants.YELLOW:
+		case GraphPropertyConstants.YELLOW:
 			return GravisColor.LIGHT_YELLOW;
-		case GravisConstants.BLUE:
+		case GraphPropertyConstants.BLUE:
 			return GravisColor.LIGHT_BLUE;
-		case GravisConstants.GRAY:
+		case GraphPropertyConstants.GRAY:
 			return GravisColor.LIGHT_GRAY;
-		case GravisConstants.ORANGE:
+		case GraphPropertyConstants.ORANGE:
 			return GravisColor.LIGHT_ORANGE;
-		case GravisConstants.BLACK:
+		case GraphPropertyConstants.BLACK:
 			return GravisColor.BLACK;
-		case GravisConstants.WHITE:
+		case GraphPropertyConstants.WHITE:
 			return GravisColor.WHITE;
-		case GravisConstants.ANTIQUE:
+		case GraphPropertyConstants.ANTIQUE:
 			return GravisColor.ANTIQUE;
 		default:
 			return GravisColor.RED;
 		}
 	}
-	
+
 	/**
-	 * @param stringValue
-	 * @return Color
+	 * @param color
+	 * @return String
 	 */
 	public static String transformColorToString(Color color) {
 		if (color.equals(GravisColor.LIGHT_GREEN)) {
-			return GravisConstants.GREEN;
+			return GraphPropertyConstants.GREEN;
 		} else if (color.equals(GravisColor.LIGHT_YELLOW)) {
-			return GravisConstants.YELLOW;
+			return GraphPropertyConstants.YELLOW;
 		} else if (color.equals(GravisColor.LIGHT_BLUE)) {
-			return GravisConstants.BLUE;
+			return GraphPropertyConstants.BLUE;
 		} else if (color.equals(GravisColor.LIGHT_GRAY)) {
-			return GravisConstants.GRAY;
+			return GraphPropertyConstants.GRAY;
 		} else if (color.equals(GravisColor.LIGHT_ORANGE)) {
-			return GravisConstants.ORANGE;
+			return GraphPropertyConstants.ORANGE;
 		} else if (color.equals(GravisColor.BLACK)) {
-			return GravisConstants.BLACK;
+			return GraphPropertyConstants.BLACK;
 		} else if (color.equals(GravisColor.WHITE)) {
-			return GravisConstants.WHITE;
+			return GraphPropertyConstants.WHITE;
 		} else if (color.equals(GravisColor.ANTIQUE)) {
-			return GravisConstants.ANTIQUE;
+			return GraphPropertyConstants.ANTIQUE;
 		} else {
-			return GravisConstants.RED;
+			return GraphPropertyConstants.RED;
 		}
 	}
 
 	/**
 	 * @param xValue
 	 * @param yValue
-	 * @return
+	 * @return Point2D
 	 */
 	public static Point2D transformLocation(String xValue, String yValue) {
 		try {
@@ -116,7 +116,7 @@ public final class ValueTransformer {
 
 	/**
 	 * @param value
-	 * @return
+	 * @return double
 	 */
 	public static double round2Decimals(double value) {
 		return Math.rint(value * 100.0) / 100.0;
@@ -126,7 +126,8 @@ public final class ValueTransformer {
 	 * @param itemList
 	 * @return IRestrictedGraphItem[]
 	 */
-	public static IRestrictedGraphItem[] toArray(List<IRestrictedGraphItem> itemList) {
+	public static IRestrictedGraphItem[] toArray(
+			List<IRestrictedGraphItem> itemList) {
 		return itemList.toArray(new IRestrictedGraphItem[itemList.size()]);
 	}
 }

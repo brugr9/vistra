@@ -4,7 +4,7 @@ import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GraphPropertyConstants;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.graphml.GraphMetadata;
 import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;
@@ -27,8 +27,8 @@ public class GraphTransformer implements Transformer<GraphMetadata, IGravisGraph
 		newGraph.setId(graphMeta.getId());
 		newGraph.setEdgeType(edgeType);
 		
-		if (graphMeta.getProperty(GravisConstants.G_DESCRIPTION) != null) {
-			newGraph.setDescription(graphMeta.getProperty(GravisConstants.G_DESCRIPTION)
+		if (graphMeta.getProperty(GraphPropertyConstants.G_DESCRIPTION) != null) {
+			newGraph.setDescription(graphMeta.getProperty(GraphPropertyConstants.G_DESCRIPTION)
 					.trim());
 		}
 		

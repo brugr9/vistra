@@ -13,6 +13,9 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
  */
 public final class GraphItemUtils {
 
+	/**
+	 * A main (no-)constructor.
+	 */
 	private GraphItemUtils() {
 	}
 
@@ -51,7 +54,7 @@ public final class GraphItemUtils {
 		item.setNewComment(newComment);
 		item.setNewState(newState);
 	}
-	
+
 	/**
 	 * 
 	 * @param item
