@@ -21,16 +21,11 @@ public class AlgorithmNoInterface {
 		return null;
 	}
 
-
-	public int getId() {
-		// Auto-generated method stub
-		return 0;
-	}
-		
 	public void execute(IRestrictedGraph graph) throws Exception {
+
 	}
 
-	public EdgeType[] getAnnotations() {
+	public EdgeType[] getEdgeTypes() {
 		return null;
 	}
 
