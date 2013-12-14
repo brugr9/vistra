@@ -16,6 +16,9 @@ public class AlgorithmTemplate implements IAlgorithm {
 	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getName()
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getName() {
 		// TODO set Algorithm name
@@ -27,6 +30,9 @@ public class AlgorithmTemplate implements IAlgorithm {
 	 * 
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getDescription()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String getDescription() {
@@ -41,6 +47,9 @@ public class AlgorithmTemplate implements IAlgorithm {
 	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#execute(ch.bfh
 	 * .bti7301.hs2013.gravis.core.graph.IRestrictedGraph)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 		// TODO implement algorithm
@@ -52,6 +61,9 @@ public class AlgorithmTemplate implements IAlgorithm {
 	 * 
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm#getGraphTypes()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public EdgeType[] getEdgeTypes() {
