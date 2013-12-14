@@ -55,6 +55,9 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.processing.algorithms.IGraphAlgorithm
 	 * #execute(edu.uci.ics.jung.graph.Graph)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(IRestrictedGraph graph) {
 		List<IRestrictedGraphItem> itemList = new ArrayList<IRestrictedGraphItem>();

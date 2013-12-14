@@ -51,6 +51,9 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.AbstractAlgorithm#execute
 	 * (ch.bfh .bti7301.hs2013.gravis.graph.IImmutableGraph)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(IRestrictedGraph graph) {
 		List<IRestrictedGraphItem> itemList = new ArrayList<IRestrictedGraphItem>();

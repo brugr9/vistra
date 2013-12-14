@@ -57,6 +57,9 @@ public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm implements
 	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.AbstractAlgorithm#execute
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 		this.counter = 0;

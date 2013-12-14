@@ -75,6 +75,9 @@ class AlgorithmDijkstra extends AbstractAlgorithm implements IAlgorithm {
 	 * (ch.bfh.bti7301.hs2013.gravis.common.IImmutableGraph,
 	 * java.util.PriorityQueue)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 		this.checkPositiveWeights(graph.getEdges());
