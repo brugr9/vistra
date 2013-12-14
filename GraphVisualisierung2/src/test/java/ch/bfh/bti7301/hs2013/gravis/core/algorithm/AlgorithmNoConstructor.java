@@ -1,6 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * A dummy algorithm implementing the interface <code>IAlgorithm</code>. Since
@@ -36,7 +37,7 @@ public class AlgorithmNoConstructor implements IAlgorithm {
 	}
 
 	@Override
-	public GraphType[] getGraphTypes() {
+	public EdgeType[] getEdgeTypes() {
 		// TODO Auto-generated method stub
 		return null;
 	}
