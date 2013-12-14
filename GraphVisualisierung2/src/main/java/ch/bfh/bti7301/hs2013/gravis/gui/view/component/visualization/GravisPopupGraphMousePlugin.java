@@ -17,7 +17,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;
 
 /**
- * A JUNG mouse plugin plugin that uses popup menus to create vertices, undirected
+ * A JUNG mouse plugin that uses popup menus to create vertices, undirected
  * edges, and directed edges, adapted for GRAVIS.
  * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
