@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.util;
+package ch.bfh.bti7301.hs2013.gravis.gui.util;
 
 import java.io.*;
 import javax.swing.filechooser.*;

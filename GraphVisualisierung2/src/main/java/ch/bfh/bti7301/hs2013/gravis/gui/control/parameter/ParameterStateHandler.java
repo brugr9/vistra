@@ -24,7 +24,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal;
 import ch.bfh.bti7301.hs2013.gravis.gui.Model;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource;
-import ch.bfh.bti7301.hs2013.gravis.util.SingleRootFileSystemView;
+import ch.bfh.bti7301.hs2013.gravis.gui.util.SingleRootFileSystemView;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
 

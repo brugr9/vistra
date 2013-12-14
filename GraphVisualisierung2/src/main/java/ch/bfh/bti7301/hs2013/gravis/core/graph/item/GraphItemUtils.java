@@ -1,9 +1,8 @@
-package ch.bfh.bti7301.hs2013.gravis.core.util;
+package ch.bfh.bti7301.hs2013.gravis.core.graph.item;
 
 import java.util.Collection;
 import java.util.List;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
 

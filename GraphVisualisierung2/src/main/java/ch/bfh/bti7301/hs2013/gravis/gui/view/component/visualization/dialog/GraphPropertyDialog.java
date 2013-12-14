@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
-import ch.bfh.bti7301.hs2013.gravis.gui.verifier.GraphIdVerifier;
+import ch.bfh.bti7301.hs2013.gravis.gui.util.GraphIdVerifier;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)

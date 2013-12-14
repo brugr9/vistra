@@ -13,8 +13,8 @@ import javax.swing.border.EmptyBorder;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ValueTransformer;
-import ch.bfh.bti7301.hs2013.gravis.gui.verifier.GraphItemIdVerifier;
-import ch.bfh.bti7301.hs2013.gravis.gui.verifier.VertexSizeVerifier;
+import ch.bfh.bti7301.hs2013.gravis.gui.util.GraphItemIdVerifier;
+import ch.bfh.bti7301.hs2013.gravis.gui.util.VertexSizeVerifier;
 
 import java.awt.GridLayout;
 

@@ -1,4 +1,4 @@
-package ch.bfh.bti7301.hs2013.gravis.gui.verifier;
+package ch.bfh.bti7301.hs2013.gravis.gui.util;
 
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;

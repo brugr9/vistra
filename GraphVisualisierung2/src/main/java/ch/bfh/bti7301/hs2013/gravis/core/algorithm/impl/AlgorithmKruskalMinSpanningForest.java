@@ -20,7 +20,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.util.Partition;
 import ch.bfh.bti7301.hs2013.gravis.core.util.comparator.EdgeWeightComparator;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
-import static ch.bfh.bti7301.hs2013.gravis.core.util.GraphItemUtils.setGraphItemValues;
+import static ch.bfh.bti7301.hs2013.gravis.core.graph.item.GraphItemUtils.setGraphItemValues;
 import static ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ValueTransformer.toArray;
 
 /**
