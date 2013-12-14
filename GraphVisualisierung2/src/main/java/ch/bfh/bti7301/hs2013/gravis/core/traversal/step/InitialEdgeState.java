@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
-import ch.bfh.bti7301.hs2013.gravis.core.util.GravisConstants;
+import ch.bfh.bti7301.hs2013.gravis.core.util.GraphPropertyConstants;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
@@ -50,7 +50,7 @@ public class InitialEdgeState extends AbstractVisualizationState {
 	 */
 	@Override
 	protected Color getStateColor() {
-		return GravisConstants.E_INITIAL_COLOR;
+		return GraphPropertyConstants.E_INITIAL_COLOR;
 	}
 
 }
