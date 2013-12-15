@@ -33,7 +33,7 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm
 	private final static String DIRECTED_EDGE = "Kruskal algorithm: DIRECTED "
 			+ "edges are not allowed!";
 
-	private final static String ALGO_NAME = "Algorithmus von Kruskal";
+	private final static String ALGO_NAME = "Kruskal";
 	private final static String ALGO_DESCRIPTION = "Diese Implementation "
 			+ "berechnet einen minimalen Spannwald für einen gegebenen Graphen. "
 			+ "Der Graph muss ungerichtet sein. Ein Start- und Endknoten muss nicht "
