@@ -20,7 +20,7 @@ public class AlgorithmDefault extends AbstractAlgorithm implements IAlgorithm {
 	 */
 	public AlgorithmDefault() {
 		super.setName("----------");
-		super.setDescription("");
+		super.setDescription(" ");
 		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
 				EdgeType.DIRECTED });
 	}

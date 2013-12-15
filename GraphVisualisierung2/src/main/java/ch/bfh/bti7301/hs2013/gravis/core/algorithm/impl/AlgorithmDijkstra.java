@@ -57,7 +57,6 @@ public class AlgorithmDijkstra extends AbstractAlgorithm implements IAlgorithm {
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);
-		// TODO annotations
 		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
 				EdgeType.DIRECTED });
 
