@@ -6,10 +6,10 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.gui.Model;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.Control;
 import ch.bfh.bti7301.hs2013.gravis.gui.view.component.MenuBar;
-import ch.bfh.bti7301.hs2013.gravis.gui.view.component.ParameterPanel;
-import ch.bfh.bti7301.hs2013.gravis.gui.view.component.PlayerPanel;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.AlgorithmPanel;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.TraversalPanel;
 import ch.bfh.bti7301.hs2013.gravis.gui.view.component.ProtocolPanel;
-import ch.bfh.bti7301.hs2013.gravis.gui.view.component.VisualizationPanel;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.GraphPanel;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 
 /**
@@ -18,9 +18,9 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
  * This view instantiates
  * <ul>
  * <li>a {@link MenuBar}
- * <li>a {@link VisualizationPanel}
- * <li>a controller panel with a {@link ParameterPanel} and a
- * {@link PlayerPanel}
+ * <li>a {@link GraphPanel}
+ * <li>a controller panel with a {@link AlgorithmPanel} and a
+ * {@link TraversalPanel}
  * <li>a {@link ProtocolPanel}
  * </ul>
  * 

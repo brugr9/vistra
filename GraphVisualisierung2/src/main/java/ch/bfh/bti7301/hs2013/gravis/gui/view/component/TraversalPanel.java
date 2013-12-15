@@ -33,13 +33,13 @@ import ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource;
 import ch.bfh.bti7301.hs2013.gravis.util.GravisColor;
 
 /**
- * A player panel.
+ * A traversal panel.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public final class PlayerPanel extends JPanel implements Observer {
+public final class TraversalPanel extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 
@@ -130,11 +130,13 @@ public final class PlayerPanel extends JPanel implements Observer {
 	 * @param height
 	 *            the panel height
 	 */
-	public PlayerPanel(IModel model, int width, int height) {
+	public TraversalPanel(IModel model, int width, int height) {
 		super();
 		this.setSize(new Dimension(width, height));
+		this.titledBorder = BorderFactory.createTitledBorder("traversalPanel");
+		this.setBorder(titledBorder);
 
-		// steplength
+		// step length
 		this.steplengthLabel = new JLabel("steplength");
 		this.steplengthSpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
 		this.steplengthSpinner = new JSpinner(this.steplengthSpinnerNumberModel);
@@ -148,7 +150,7 @@ public final class PlayerPanel extends JPanel implements Observer {
 		((JSpinner.NumberEditor) this.delaySpinner.getEditor()).getTextField()
 				.addFocusListener(model.getAnimationStateHandler());
 
-		// buttons
+		// button
 		this.toBeginningButton = new JButton(new ImageIcon(this.getClass()
 				.getResource("toBeginning.png")));
 		this.backwardButton = new JButton(new ImageIcon(this.getClass()
@@ -163,7 +165,7 @@ public final class PlayerPanel extends JPanel implements Observer {
 				.getResource("pause.png")));
 		this.stopButton = new JButton(new ImageIcon(this.getClass()
 				.getResource("stop.png")));
-		// actions command
+		// action command
 		this.toBeginningButton.setActionCommand(TO_BEGINNING.toString());
 		this.backwardButton.setActionCommand(BACKWARD.toString());
 		this.forwardButton.setActionCommand(FORWARD.toString());
@@ -171,15 +173,13 @@ public final class PlayerPanel extends JPanel implements Observer {
 		this.playButton.setActionCommand(PLAY.toString());
 		this.pauseButton.setActionCommand(PAUSE.toString());
 		this.stopButton.setActionCommand(STOP.toString());
-		/* action listener */
-		// step-by-step
+		// action listener
 		this.toBeginningButton.addActionListener(model
 				.getStepByStepStateHandler());
 		this.backwardButton
 				.addActionListener(model.getStepByStepStateHandler());
 		this.forwardButton.addActionListener(model.getStepByStepStateHandler());
 		this.toEndButton.addActionListener(model.getStepByStepStateHandler());
-		// animation
 		this.playButton.addActionListener(model.getAnimationStateHandler());
 		this.pauseButton.addActionListener(model.getAnimationStateHandler());
 		this.stopButton.addActionListener(model.getAnimationStateHandler());
@@ -193,38 +193,35 @@ public final class PlayerPanel extends JPanel implements Observer {
 		// Panel
 		//
 		this.stepsPanel = new JPanel();
-		this.stepByStepPanel = new JPanel();
 		this.delayPanel = new JPanel();
+		this.stepByStepPanel = new JPanel();
 		this.animationPanel = new JPanel();
 		//
 		this.stepsPanel.setLayout(new GridLayout(1, 2));
-		this.stepByStepPanel.setLayout(new GridLayout(1, 4));
 		this.delayPanel.setLayout(new GridLayout(1, 2));
+		this.stepByStepPanel.setLayout(new GridLayout(1, 4));
 		this.animationPanel.setLayout(new GridLayout(1, 3));
 		//
 		this.stepsPanel.setBackground((Color) GravisColor.ANTIQUE);
-		this.stepByStepPanel.setBackground((Color) GravisColor.ANTIQUE);
 		this.delayPanel.setBackground((Color) GravisColor.ANTIQUE);
+		this.stepByStepPanel.setBackground((Color) GravisColor.ANTIQUE);
 		this.animationPanel.setBackground((Color) GravisColor.ANTIQUE);
 		//
 		this.stepsPanel.add(this.steplengthLabel);
 		this.stepsPanel.add(this.steplengthSpinner);
+		//
+		this.delayPanel.add(this.delayLabel);
+		this.delayPanel.add(this.delaySpinner);
 		//
 		this.stepByStepPanel.add(this.toBeginningButton);
 		this.stepByStepPanel.add(this.backwardButton);
 		this.stepByStepPanel.add(this.forwardButton);
 		this.stepByStepPanel.add(this.toEndButton);
 		//
-		this.delayPanel.add(this.delayLabel);
-		this.delayPanel.add(this.delaySpinner);
-		//
 		this.animationPanel.add(this.playButton);
 		this.animationPanel.add(this.pauseButton);
 		this.animationPanel.add(this.stopButton);
-
-		// tutti
-		this.titledBorder = BorderFactory.createTitledBorder("playerPanel");
-		this.setBorder(titledBorder);
+		// this
 		this.setLayout(new GridLayout(5, 1));
 		this.setBackground((Color) GravisColor.ANTIQUE);
 		this.add(this.stepsPanel);
@@ -252,6 +249,7 @@ public final class PlayerPanel extends JPanel implements Observer {
 					this.titledBorder.setTitle(b.getString("player.label"));
 					//
 					this.steplengthLabel.setText(b.getString("setStep.label"));
+					this.delayLabel.setText(b.getString("setDelay.label"));
 					//
 					this.toBeginningButton.setToolTipText(b
 							.getString("home.label"));
@@ -260,8 +258,6 @@ public final class PlayerPanel extends JPanel implements Observer {
 					this.forwardButton.setToolTipText(b
 							.getString("forward.label"));
 					this.toEndButton.setToolTipText(b.getString("end.label"));
-					//
-					this.delayLabel.setText(b.getString("setDelay.label"));
 					//
 					this.playButton.setToolTipText(b.getString("play.label"));
 					this.pauseButton.setToolTipText(b.getString("pause.label"));
@@ -288,8 +284,8 @@ public final class PlayerPanel extends JPanel implements Observer {
 					if (m.getPauseEvent() == EventSource.PAUSE)
 						this.pauseButton.setSelected(false);
 				}
-				this.progressBar.setMaximum(m.getProgressMaximum());
 				this.progressBar.setValue(m.getProgress());
+				this.progressBar.setMaximum(m.getProgressMaximum());
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

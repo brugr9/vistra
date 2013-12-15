@@ -5,7 +5,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -13,18 +12,18 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.EdgeFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeColorTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeLabelTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeStrokeTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ShapeTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexColorTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexLabelTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexStrokeTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexToolTipTransformer;
 import ch.bfh.bti7301.hs2013.gravis.gui.IModel;
 import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.popup.EdgeMenu;
 import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.popup.VertexMenu;
 import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.popup.VertexMenuFactory;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.EdgeColorTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.EdgeLabelTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.EdgeStrokeTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.ShapeTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.VertexColorTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.VertexLabelTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.VertexStrokeTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.VertexToolTipTransformer;
 import ch.bfh.bti7301.hs2013.gravis.util.GravisColor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -47,10 +46,6 @@ public class GravisVisualizationViewer extends
 	private static final long serialVersionUID = 1145648259547595925L;
 
 	/**
-	 * A field for a vertex-menu factory.
-	 */
-	private VertexMenuFactory vertexMenuFactory;
-	/**
 	 * A field for a vertex menu.
 	 */
 	private VertexMenu vertexMenu;
@@ -58,6 +53,10 @@ public class GravisVisualizationViewer extends
 	 * A field for an edge menu.
 	 */
 	private EdgeMenu edgeMenu;
+	/**
+	 * A field for a vertex-menu factory.
+	 */
+	private VertexMenuFactory vertexMenuFactory;
 	/**
 	 * A field for an editing modal graph mouse.
 	 */
@@ -78,7 +77,7 @@ public class GravisVisualizationViewer extends
 		super(layout, dimension);
 		super.setBackground(GravisColor.WHITE);
 
-		/* vertex visualization */
+		/* Vertex layout */
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
 		this.getRenderContext().setVertexFillPaintTransformer(
 				new VertexColorTransformer());
@@ -90,14 +89,14 @@ public class GravisVisualizationViewer extends
 				new VertexStrokeTransformer());
 		this.setVertexToolTipTransformer(new VertexToolTipTransformer());
 
-		/* edge visualization */
+		/* Edge layout */
 		this.getRenderContext().setEdgeShapeTransformer(
 				new EdgeShape.Line<IVertex, IEdge>());
 		this.getRenderContext().setEdgeDrawPaintTransformer(
 				new EdgeColorTransformer());
 		this.getRenderContext().setArrowDrawPaintTransformer(
 				new EdgeColorTransformer());
-		// centers edge label
+		// Edge label: center
 		this.getRenderContext().setEdgeLabelClosenessTransformer(
 				new ConstantDirectionalEdgeValueTransformer<IVertex, IEdge>(
 						0.5, 0.5));
@@ -111,25 +110,17 @@ public class GravisVisualizationViewer extends
 		/* context menu */
 		this.vertexMenu = new VertexMenu(this);
 		this.vertexMenu.setRootFrame(top);
-		this.vertexMenuFactory = new VertexMenuFactory(this);
 		this.edgeMenu = new EdgeMenu(this);
 		this.edgeMenu.setRootFrame(top);
+
+		/* mouse */
+		this.vertexMenuFactory = new VertexMenuFactory(this);
 		this.mouse = new GravisModalGraphMouse(this.getRenderContext(),
 				new VertexFactory(), new EdgeFactory(), this.edgeMenu,
 				this.vertexMenu, this.vertexMenuFactory);
-		this.mouse.setMode(Mode.PICKING);
 		this.setGraphMouse(this.mouse);
 		this.addKeyListener(this.mouse.getModeKeyListener());
 
-	}
-
-	/**
-	 * Returns the mode box.
-	 * 
-	 * @return the mode box
-	 */
-	public JComboBox<?> getModeComboBox() {
-		return this.mouse.getModeComboBox();
 	}
 
 	/*
@@ -147,6 +138,10 @@ public class GravisVisualizationViewer extends
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
+			if (m.isEditGraphEnabled())
+				this.mouse.setMode(Mode.EDITING);
+			else
+				this.mouse.setMode(Mode.PICKING);
 			this.repaint();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),

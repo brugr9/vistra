@@ -23,12 +23,12 @@ import ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource;
 import ch.bfh.bti7301.hs2013.gravis.util.GravisColor;
 
 /**
- * A parameter panel.
+ * An algorithm panel.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class ParameterPanel extends JPanel implements Observer {
+public final class AlgorithmPanel extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +59,7 @@ public final class ParameterPanel extends JPanel implements Observer {
 	 * @param model
 	 *            the model as in MVC
 	 */
-	public ParameterPanel(IModel model, int width, int height) {
+	public AlgorithmPanel(IModel model, int width, int height) {
 		super();
 		this.setSize(new Dimension(width, height));
 

@@ -7,7 +7,6 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,13 +24,13 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 
 /**
- * A visualization panel.
+ * A graph panel.
  * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VisualizationPanel extends JPanel implements Observer {
+public class GraphPanel extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 177109739873034494L;
 
@@ -60,7 +59,7 @@ public class VisualizationPanel extends JPanel implements Observer {
 	 * @param dimension
 	 *            the dimension
 	 */
-	public VisualizationPanel(JFrame top, Model model,
+	public GraphPanel(JFrame top, Model model,
 			Layout<IVertex, IEdge> layout, Dimension dimension) {
 		this.setSize(dimension);
 		this.titledBorder = BorderFactory
@@ -110,15 +109,6 @@ public class VisualizationPanel extends JPanel implements Observer {
 			e.printStackTrace();
 		}
 
-	}
-
-	/**
-	 * Returns the mode box.
-	 * 
-	 * @return the mode box
-	 */
-	public JComboBox<?> getModeComboBox() {
-		return this.visualizationViewer.getModeComboBox();
 	}
 
 }

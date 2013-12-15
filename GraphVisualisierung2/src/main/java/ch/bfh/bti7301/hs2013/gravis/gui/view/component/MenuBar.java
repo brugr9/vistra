@@ -5,12 +5,11 @@ import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.DE_D
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.EN_US;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.FR_FR;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.I18N;
-import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.GRAPH_DESCRIPION;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.IMPORT_ALGORITHM;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.OPEN_GRAPH;
-import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.SAVE_AS_GRAPH;
+import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.SAVE_GRAPH_AS;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.SAVE_GRAPH;
 
 import java.util.Observable;
@@ -61,21 +60,17 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 */
 	private final JMenuItem directedGraphMenuItem;
 	/**
-	 * A field for the menu item 'open'.
+	 * A field for the menu item 'open graph'.
 	 */
-	private final JMenuItem openMenuItem;
+	private final JMenuItem openGraphMenuItem;
 	/**
 	 * A field for the menu item 'save'.
 	 */
 	private final JMenuItem saveMenuItem;
 	/**
-	 * A field for the menu item 'save as'.
+	 * A field for the menu item 'save graph as'.
 	 */
-	private final JMenuItem saveAsMenuItem;
-	/**
-	 * A field for the menu item 'graphDescription'.
-	 */
-	private final JMenuItem graphDescriptionMenuItem;
+	private final JMenuItem saveGraphAsMenuItem;
 	/**
 	 * A field for the menu 'algorithm'.
 	 */
@@ -126,11 +121,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.undirectedGraphMenuItem = new JMenuItem(
 					"undirectedGraphMenuItem");
 			this.directedGraphMenuItem = new JMenuItem("directedGraphMenuItem");
-			this.openMenuItem = new JMenuItem("openMenuItem");
+			this.openGraphMenuItem = new JMenuItem("openMenuItem");
 			this.saveMenuItem = new JMenuItem("saveMenuItem");
-			this.saveAsMenuItem = new JMenuItem("saveAsMenuItem");
-			this.graphDescriptionMenuItem = new JMenuItem(
-					"graphDescriptionMenuItem");
+			this.saveGraphAsMenuItem = new JMenuItem("saveAsMenuItem");
 			this.importAlgorithmMenuItem = new JMenuItem(
 					"importAlgorithmMenuItem");
 			this.deleteAlgorithmMenuItem = new JMenuItem(
@@ -141,13 +134,11 @@ public final class MenuBar extends JMenuBar implements Observer {
 					.getParameterStateHandler());
 			this.directedGraphMenuItem.addActionListener(model
 					.getParameterStateHandler());
-			this.openMenuItem.addActionListener(model
+			this.openGraphMenuItem.addActionListener(model
 					.getParameterStateHandler());
 			this.saveMenuItem.addActionListener(model
 					.getParameterStateHandler());
-			this.saveAsMenuItem.addActionListener(model
-					.getParameterStateHandler());
-			this.graphDescriptionMenuItem.addActionListener(model
+			this.saveGraphAsMenuItem.addActionListener(model
 					.getParameterStateHandler());
 			this.importAlgorithmMenuItem.addActionListener(model
 					.getParameterStateHandler());
@@ -159,11 +150,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 					.toString());
 			this.directedGraphMenuItem.setActionCommand(NEW_GRAPH_DIRECTED
 					.toString());
-			this.openMenuItem.setActionCommand(OPEN_GRAPH.toString());
+			this.openGraphMenuItem.setActionCommand(OPEN_GRAPH.toString());
 			this.saveMenuItem.setActionCommand(SAVE_GRAPH.toString());
-			this.saveAsMenuItem.setActionCommand(SAVE_AS_GRAPH.toString());
-			this.graphDescriptionMenuItem.setActionCommand(GRAPH_DESCRIPION
-					.toString());
+			this.saveGraphAsMenuItem.setActionCommand(SAVE_GRAPH_AS.toString());
 			this.importAlgorithmMenuItem.setActionCommand(IMPORT_ALGORITHM
 					.toString());
 			this.deleteAlgorithmMenuItem.setActionCommand(DELETE_ALGORITHM
@@ -177,10 +166,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.algorithmMenu.add(this.deleteAlgorithmMenuItem);
 			//
 			this.fileMenu.add(this.newMenu);
-			this.fileMenu.add(this.openMenuItem);
+			this.fileMenu.add(this.openGraphMenuItem);
 			this.fileMenu.add(this.saveMenuItem);
-			this.fileMenu.add(this.saveAsMenuItem);
-			this.fileMenu.add(this.graphDescriptionMenuItem);
+			this.fileMenu.add(this.saveGraphAsMenuItem);
 			this.fileMenu.add(this.algorithmMenu);
 			this.fileMenu.add(this.quitMenuItem);
 		}
@@ -244,12 +232,10 @@ public final class MenuBar extends JMenuBar implements Observer {
 								.getString("undirected.label"));
 						this.directedGraphMenuItem.setText(b
 								.getString("directed.label"));
-						this.openMenuItem.setText(b.getString("open.label"));
+						this.openGraphMenuItem.setText(b.getString("open.label"));
 						this.saveMenuItem.setText(b.getString("save.label"));
-						this.saveAsMenuItem
+						this.saveGraphAsMenuItem
 								.setText(b.getString("saveas.label"));
-						this.graphDescriptionMenuItem.setText(b
-								.getString("graphDescription.label"));
 						this.algorithmMenu.setText(b
 								.getString("algorithm.label"));
 						this.importAlgorithmMenuItem.setText(b
@@ -262,20 +248,20 @@ public final class MenuBar extends JMenuBar implements Observer {
 								.toCharArray()[0]);
 						this.newMenu.setMnemonic(b.getString("new.mnemonic")
 								.toCharArray()[0]);
-						this.openMenuItem.setMnemonic(b.getString(
+						this.openGraphMenuItem.setMnemonic(b.getString(
 								"open.mnemonic").toCharArray()[0]);
 						this.saveMenuItem.setMnemonic(b.getString(
 								"save.mnemonic").toCharArray()[0]);
-						this.saveAsMenuItem.setMnemonic(b.getString(
+						this.saveGraphAsMenuItem.setMnemonic(b.getString(
 								"saveas.mnemonic").toCharArray()[0]);
 						this.quitMenuItem.setMnemonic(b.getString(
 								"quit.mnemonic").toCharArray()[0]);
 						// setAccelerator
-						this.openMenuItem.setAccelerator(KeyStroke
+						this.openGraphMenuItem.setAccelerator(KeyStroke
 								.getKeyStroke(b.getString("open.accelerator")));
 						this.saveMenuItem.setAccelerator(KeyStroke
 								.getKeyStroke(b.getString("save.accelerator")));
-						this.saveAsMenuItem
+						this.saveGraphAsMenuItem
 								.setAccelerator(KeyStroke.getKeyStroke(b
 										.getString("saveas.accelerator")));
 						this.quitMenuItem.setAccelerator(KeyStroke
@@ -321,7 +307,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 					}
 
 				} else if (arg == EventSource.PARAMETER_CHANGED) {
-					this.saveAsMenuItem.setEnabled(m.isSaveEnabled());
+					this.saveGraphAsMenuItem.setEnabled(m.isSaveGraphEnabled());
 				} else {
 
 					// file
@@ -331,11 +317,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 							.isUndirectedGraphEnabled());
 					this.directedGraphMenuItem.setEnabled(m
 							.isDirectedGraphEnabled());
-					this.openMenuItem.setEnabled(m.isOpenEnabled());
-					this.saveMenuItem.setEnabled(m.isSaveEnabled());
-					this.saveAsMenuItem.setEnabled(m.isSaveAsEnabled());
-					this.graphDescriptionMenuItem.setEnabled(m
-							.isGraphDescriptionEnabled());
+					this.openGraphMenuItem.setEnabled(m.isOpenGraphEnabled());
+					this.saveMenuItem.setEnabled(m.isSaveGraphEnabled());
+					this.saveGraphAsMenuItem.setEnabled(m.isSaveGraphAsEnabled());
 					this.algorithmMenu.setEnabled(m.isAlgorithmMenuEnabled());
 					this.importAlgorithmMenuItem.setEnabled(m
 							.isImportAlgorithmEnabled());
