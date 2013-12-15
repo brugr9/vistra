@@ -310,9 +310,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @throws Exception
 	 */
 	void idle() throws Exception {
-		this.updateGraphSaved(true);
-		this.model.setEditGraphEnabled(true);
-		this.model.notifyObservers(EDIT_GRAPH);
+		this.setGraphSaved(true);
+		this.setGraphEditable(true);
 	}
 
 	/**
@@ -336,7 +335,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				graph.setDescription(" ");
 				graph.setEdgeType(edgeType);
 				this.model.setGraph(graph);
-				this.updateGraphSaved(false);
+				this.setGraphSaved(false);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -374,7 +373,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				if (option == JFileChooser.APPROVE_OPTION) {
 					File source = fileChooser.getSelectedFile();
 					this.model.setGraph(this.core.openGraph(source));
-					this.updateGraphSaved(true);
+					this.setGraphSaved(true);
 				}
 			}
 			return option;
@@ -394,7 +393,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			IGravisGraph graph = this.model.getGraph();
 			this.core.save(graph);
-			this.updateGraphSaved(true);
+			this.setGraphSaved(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -433,7 +432,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				File file = fileChooser.getSelectedFile();
 				IGravisGraph graph = this.model.getGraph();
 				this.core.saveAs(graph, file);
-				this.updateGraphSaved(true);
+				this.setGraphSaved(true);
 			}
 			return option;
 
@@ -449,7 +448,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void editGraph() throws Exception {
 		try {
-			this.updateGraphSaved(false);
+			this.setGraphSaved(false);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -636,13 +635,13 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * A helper method: Updates the view elements related to saving a graph.
+	 * A helper method: Sets the view elements related to saving a graph.
 	 * 
 	 * @param saved
 	 *            the saved status
 	 * @throws Exception
 	 */
-	private void updateGraphSaved(boolean saved) throws Exception {
+	private void setGraphSaved(boolean saved) throws Exception {
 		try {
 			this.model.setGraphSaved(saved);
 			this.model.setSaveGraphEnabled(!saved);
@@ -651,6 +650,17 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+
+	/**
+	 * A helper method: Handles setting the graph editable.
+	 * 
+	 * @param enabled
+	 *            the editable to set
+	 */
+	private void setGraphEditable(boolean editable) {
+		this.model.setEditGraphEnabled(editable);
+		this.model.notifyObservers(EDIT_GRAPH);
 	}
 
 	/**
@@ -729,8 +739,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void setViewGraphEdited() {
 		this.enableMenu(true);
-		this.model.setAlgorithmsEnabled(false);
-		this.model.notifyObservers(EventSource.PARAMETER_CHANGED);
+		if (this.model.isAlgorithmsEnabled()) {
+			this.model.setAlgorithmsEnabled(false);
+			this.model.notifyObservers(EventSource.PARAMETER_CHANGED);
+		}
 	}
 
 	/**
@@ -765,12 +777,11 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		this.enableMenu(false);
 		this.model.setAlgorithmsEnabled(false);
 		this.model.notifyObservers(EventSource.PARAMETER_CHANGED);
-		this.model.setEditGraphEnabled(false);
-		this.model.notifyObservers(EDIT_GRAPH);
+		this.setGraphEditable(false);
 	}
 
 	/**
-	 * A helper method for the state view setter: Handles enabling/disabling the
+	 * A helper method for state view setter: Handles enabling/disabling the
 	 * menu elements. Does <b>not</b> tell the model to notify
 	 * <code>Observer</code>s.
 	 * 
