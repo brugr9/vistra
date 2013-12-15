@@ -19,6 +19,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal;
@@ -141,7 +142,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	@Override
 	public void handleGraphEvent(GraphEvent<IVertex, IEdge> evt) {
 		try {
-			this.state.handleEditGraph();
+			this.handleEditGraph();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -327,7 +328,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingTheGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
-				IGravisGraph graph = GraphFactory.createIGravisGraph();
+				IObservableGravisGraph graph = GraphFactory
+						.createObservableGraph();
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
 				graph.setId(name);

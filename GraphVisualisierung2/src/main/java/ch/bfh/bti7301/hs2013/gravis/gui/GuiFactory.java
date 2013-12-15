@@ -2,7 +2,7 @@ package ch.bfh.bti7301.hs2013.gravis.gui;
 
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.Control;
@@ -55,7 +55,7 @@ public final class GuiFactory {
 	public static IView createGui(ICore core, ViewType type) throws Exception {
 		try {
 			// graph and layout
-			IGravisGraph graph = GraphFactory.createIGravisGraph();
+			IObservableGravisGraph graph = GraphFactory.createObservableGraph();
 			Layout<IVertex, IEdge> layout = new StaticLayout<IVertex, IEdge>(
 					graph);
 			// model and control

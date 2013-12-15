@@ -18,7 +18,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * 
  */
 class VertexPropertyMenuItem extends JMenuItem implements
-		GraphItemMenuListener {
+		IGraphItemModifier {
 
 	private static final long serialVersionUID = 3448304253580836407L;
 

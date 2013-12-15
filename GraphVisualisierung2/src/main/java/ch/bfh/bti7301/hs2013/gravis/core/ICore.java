@@ -6,6 +6,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -32,7 +33,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	public abstract IGravisGraph getNewGraph() throws CoreException;
+	public abstract IObservableGravisGraph getNewGraph() throws CoreException;
 
 	/**
 	 * Opens a graph given as file.
@@ -42,7 +43,8 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	public abstract IGravisGraph openGraph(File source) throws CoreException;
+	public abstract IObservableGravisGraph openGraph(File source)
+			throws CoreException;
 
 	/**
 	 * Saves a graph as GraphML-file with the name as given.

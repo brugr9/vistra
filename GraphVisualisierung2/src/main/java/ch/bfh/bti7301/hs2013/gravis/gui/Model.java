@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.animation.IAnimationStateHandler;
@@ -51,7 +51,7 @@ public final class Model extends Observable implements IModel {
 	/* Parameter */
 	private IParameterStateHandler parameterStateHandler;
 	// Graph
-	private IGravisGraph graph;
+	private IObservableGravisGraph graph;
 	private boolean editGraphEnabled;
 	private boolean graphSaved;
 	// Algorithm
@@ -89,9 +89,9 @@ public final class Model extends Observable implements IModel {
 	 * Main constructor.
 	 * 
 	 * @param graph
-	 *            a graph
+	 *            an observable gravis graph
 	 */
-	public Model(IGravisGraph graph) {
+	public Model(IObservableGravisGraph graph) {
 		super();
 
 		/* Menu */
@@ -163,7 +163,9 @@ public final class Model extends Observable implements IModel {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setMenuEnabled(boolean)
 	 */
 	@Override
@@ -195,7 +197,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPlayerEnabled(boolean)
 	 */
 	@Override
@@ -208,7 +212,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAnimationEnabled(boolean)
 	 */
 	@Override
@@ -220,8 +226,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStepByStepEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStepByStepEnabled(boolean)
 	 */
 	@Override
 	public void setStepByStepEnabled(boolean menuEnabled) {
@@ -233,7 +242,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getI18nListener()
 	 */
 	@Override
@@ -241,7 +252,9 @@ public final class Model extends Observable implements IModel {
 		return i18nListener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getHelpListener()
 	 */
 	@Override
@@ -249,7 +262,9 @@ public final class Model extends Observable implements IModel {
 		return helpListener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAboutListener()
 	 */
 	@Override
@@ -257,7 +272,9 @@ public final class Model extends Observable implements IModel {
 		return aboutListener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getQuitListener()
 	 */
 	@Override
@@ -265,7 +282,9 @@ public final class Model extends Observable implements IModel {
 		return quitListener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getResourceBundle()
 	 */
 	@Override
@@ -273,7 +292,9 @@ public final class Model extends Observable implements IModel {
 		return resourceBundle;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isI18nEnabled()
 	 */
 	@Override
@@ -281,7 +302,9 @@ public final class Model extends Observable implements IModel {
 		return i18nEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDeDEEnabled()
 	 */
 	@Override
@@ -289,7 +312,9 @@ public final class Model extends Observable implements IModel {
 		return deDEEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isFrFREnabled()
 	 */
 	@Override
@@ -297,7 +322,9 @@ public final class Model extends Observable implements IModel {
 		return frFREnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isEnUSEnabled()
 	 */
 	@Override
@@ -305,7 +332,9 @@ public final class Model extends Observable implements IModel {
 		return enUSEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isFileEnabled()
 	 */
 	@Override
@@ -313,7 +342,9 @@ public final class Model extends Observable implements IModel {
 		return fileEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isNewMenuEnabled()
 	 */
 	@Override
@@ -321,7 +352,9 @@ public final class Model extends Observable implements IModel {
 		return newMenuEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isUndirectedGraphEnabled()
 	 */
 	@Override
@@ -329,7 +362,9 @@ public final class Model extends Observable implements IModel {
 		return undirectedGraphEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDirectedGraphEnabled()
 	 */
 	@Override
@@ -337,7 +372,9 @@ public final class Model extends Observable implements IModel {
 		return directedGraphEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isOpenGraphEnabled()
 	 */
 	@Override
@@ -345,7 +382,9 @@ public final class Model extends Observable implements IModel {
 		return openGraphEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSaveGraphEnabled()
 	 */
 	@Override
@@ -353,7 +392,9 @@ public final class Model extends Observable implements IModel {
 		return saveGraphEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSaveGraphAsEnabled()
 	 */
 	@Override
@@ -361,7 +402,9 @@ public final class Model extends Observable implements IModel {
 		return saveGraphAsEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isAlgorithmMenuEnabled()
 	 */
 	@Override
@@ -369,7 +412,9 @@ public final class Model extends Observable implements IModel {
 		return algorithmMenuEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isImportAlgorithmEnabled()
 	 */
 	@Override
@@ -377,7 +422,9 @@ public final class Model extends Observable implements IModel {
 		return importAlgorithmEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDeleteAlgorithmEnabled()
 	 */
 	@Override
@@ -385,7 +432,9 @@ public final class Model extends Observable implements IModel {
 		return deleteAlgorithmEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isQuitEnabled()
 	 */
 	@Override
@@ -393,7 +442,9 @@ public final class Model extends Observable implements IModel {
 		return quitEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isInfoEnabled()
 	 */
 	@Override
@@ -401,7 +452,9 @@ public final class Model extends Observable implements IModel {
 		return infoEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isHelpEnabled()
 	 */
 	@Override
@@ -409,7 +462,9 @@ public final class Model extends Observable implements IModel {
 		return helpEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isAboutEnabled()
 	 */
 	@Override
@@ -417,7 +472,9 @@ public final class Model extends Observable implements IModel {
 		return aboutEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getParameterStateHandler()
 	 */
 	@Override
@@ -425,15 +482,19 @@ public final class Model extends Observable implements IModel {
 		return parameterStateHandler;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getGraph()
 	 */
 	@Override
-	public IGravisGraph getGraph() {
+	public IObservableGravisGraph getGraph() {
 		return graph;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isEditGraphEnabled()
 	 */
 	@Override
@@ -441,7 +502,9 @@ public final class Model extends Observable implements IModel {
 		return editGraphEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isGraphSaved()
 	 */
 	@Override
@@ -449,7 +512,9 @@ public final class Model extends Observable implements IModel {
 		return graphSaved;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAlgorithms()
 	 */
 	@Override
@@ -457,7 +522,9 @@ public final class Model extends Observable implements IModel {
 		return algorithms;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isAlgorithmsEnabled()
 	 */
 	@Override
@@ -465,7 +532,9 @@ public final class Model extends Observable implements IModel {
 		return algorithmsEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getSelectedAlgorithmIndex()
 	 */
 	@Override
@@ -473,7 +542,9 @@ public final class Model extends Observable implements IModel {
 		return selectedAlgorithmIndex;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAlgorithmDescription()
 	 */
 	@Override
@@ -481,7 +552,9 @@ public final class Model extends Observable implements IModel {
 		return algorithmDescription;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getTraversal()
 	 */
 	@Override
@@ -489,7 +562,9 @@ public final class Model extends Observable implements IModel {
 		return traversal;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getProgress()
 	 */
 	@Override
@@ -497,7 +572,9 @@ public final class Model extends Observable implements IModel {
 		return progress;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getProgressMaximum()
 	 */
 	@Override
@@ -505,7 +582,9 @@ public final class Model extends Observable implements IModel {
 		return progressMaximum;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getStepByStepStateHandler()
 	 */
 	@Override
@@ -513,7 +592,9 @@ public final class Model extends Observable implements IModel {
 		return stepByStepStateHandler;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getSteplength()
 	 */
 	@Override
@@ -521,7 +602,9 @@ public final class Model extends Observable implements IModel {
 		return steplength;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSteplengthEnabled()
 	 */
 	@Override
@@ -529,7 +612,9 @@ public final class Model extends Observable implements IModel {
 		return steplengthEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isToBeginningEnabled()
 	 */
 	@Override
@@ -537,7 +622,9 @@ public final class Model extends Observable implements IModel {
 		return toBeginningEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isBackwardEnabled()
 	 */
 	@Override
@@ -545,7 +632,9 @@ public final class Model extends Observable implements IModel {
 		return backwardEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isForwardEnabled()
 	 */
 	@Override
@@ -553,7 +642,9 @@ public final class Model extends Observable implements IModel {
 		return forwardEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isToEndEnabled()
 	 */
 	@Override
@@ -561,7 +652,9 @@ public final class Model extends Observable implements IModel {
 		return toEndEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAnimationStateHandler()
 	 */
 	@Override
@@ -569,7 +662,9 @@ public final class Model extends Observable implements IModel {
 		return animationStateHandler;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getDelay()
 	 */
 	@Override
@@ -577,7 +672,9 @@ public final class Model extends Observable implements IModel {
 		return delay;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDelayEnabled()
 	 */
 	@Override
@@ -585,7 +682,9 @@ public final class Model extends Observable implements IModel {
 		return delayEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isPlayEnabled()
 	 */
 	@Override
@@ -593,7 +692,9 @@ public final class Model extends Observable implements IModel {
 		return playEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getPauseLabel()
 	 */
 	@Override
@@ -601,7 +702,9 @@ public final class Model extends Observable implements IModel {
 		return pauseLabel;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getPauseEvent()
 	 */
 	@Override
@@ -609,7 +712,9 @@ public final class Model extends Observable implements IModel {
 		return pauseEvent;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isPauseEnabled()
 	 */
 	@Override
@@ -617,7 +722,9 @@ public final class Model extends Observable implements IModel {
 		return pauseEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isStopEnabled()
 	 */
 	@Override
@@ -625,7 +732,9 @@ public final class Model extends Observable implements IModel {
 		return stopEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getStringBuilder()
 	 */
 	@Override
@@ -633,8 +742,12 @@ public final class Model extends Observable implements IModel {
 		return stringBuilder;
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setI18nListener(java.awt.event.ActionListener)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setI18nListener(java.awt.event
+	 * .ActionListener)
 	 */
 	@Override
 	public void setI18nListener(ActionListener i18nListener) {
@@ -642,8 +755,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setHelpListener(java.awt.event.ActionListener)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setHelpListener(java.awt.event
+	 * .ActionListener)
 	 */
 	@Override
 	public void setHelpListener(ActionListener helpListener) {
@@ -651,8 +768,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAboutListener(java.awt.event.ActionListener)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAboutListener(java.awt.event
+	 * .ActionListener)
 	 */
 	@Override
 	public void setAboutListener(ActionListener aboutListener) {
@@ -660,8 +781,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setQuitListener(java.awt.event.ActionListener)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setQuitListener(java.awt.event
+	 * .ActionListener)
 	 */
 	@Override
 	public void setQuitListener(ActionListener quitListener) {
@@ -669,8 +794,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setResourceBundle(java.util.ResourceBundle)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setResourceBundle(java.util.
+	 * ResourceBundle)
 	 */
 	@Override
 	public void setResourceBundle(ResourceBundle resourceBundle) {
@@ -678,7 +806,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setI18nEnabled(boolean)
 	 */
 	@Override
@@ -687,7 +817,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDeDEEnabled(boolean)
 	 */
 	@Override
@@ -696,7 +828,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setFrFREnabled(boolean)
 	 */
 	@Override
@@ -705,7 +839,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setEnUSEnabled(boolean)
 	 */
 	@Override
@@ -714,7 +850,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setFileEnabled(boolean)
 	 */
 	@Override
@@ -723,7 +861,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setNewMenuEnabled(boolean)
 	 */
 	@Override
@@ -732,8 +872,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setUndirectedGraphEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setUndirectedGraphEnabled(boolean
+	 * )
 	 */
 	@Override
 	public void setUndirectedGraphEnabled(boolean undirectedGraphEnabled) {
@@ -741,8 +885,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDirectedGraphEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDirectedGraphEnabled(boolean)
 	 */
 	@Override
 	public void setDirectedGraphEnabled(boolean directedGraphEnabled) {
@@ -750,7 +897,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setOpenGraphEnabled(boolean)
 	 */
 	@Override
@@ -759,7 +908,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSaveGraphEnabled(boolean)
 	 */
 	@Override
@@ -768,8 +919,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSaveGraphAsEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSaveGraphAsEnabled(boolean)
 	 */
 	@Override
 	public void setSaveGraphAsEnabled(boolean saveGraphAsEnabled) {
@@ -777,8 +931,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithmMenuEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithmMenuEnabled(boolean)
 	 */
 	@Override
 	public void setAlgorithmMenuEnabled(boolean algorithmMenuEnabled) {
@@ -786,8 +943,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setImportAlgorithmEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setImportAlgorithmEnabled(boolean
+	 * )
 	 */
 	@Override
 	public void setImportAlgorithmEnabled(boolean importAlgorithmEnabled) {
@@ -795,8 +956,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDeleteAlgorithmEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDeleteAlgorithmEnabled(boolean
+	 * )
 	 */
 	@Override
 	public void setDeleteAlgorithmEnabled(boolean deleteAlgorithmEnabled) {
@@ -804,7 +969,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setQuitEnabled(boolean)
 	 */
 	@Override
@@ -813,7 +980,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setInfoEnabled(boolean)
 	 */
 	@Override
@@ -822,7 +991,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setHelpEnabled(boolean)
 	 */
 	@Override
@@ -831,7 +1002,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAboutEnabled(boolean)
 	 */
 	@Override
@@ -840,8 +1013,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setParameterStateHandler(ch.bfh.bti7301.hs2013.gravis.gui.control.parameter.IParameterStateHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setParameterStateHandler(ch.bfh
+	 * .bti7301.hs2013.gravis.gui.control.parameter.IParameterStateHandler)
 	 */
 	@Override
 	public void setParameterStateHandler(
@@ -850,16 +1027,22 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraph(ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraph(ch.bfh.bti7301.hs2013
+	 * .gravis.core.graph.IObservableGravisGraph)
 	 */
 	@Override
-	public void setGraph(IGravisGraph graph) {
+	public void setGraph(IObservableGravisGraph graph) {
 		this.graph = graph;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setEditGraphEnabled(boolean)
 	 */
 	@Override
@@ -868,7 +1051,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraphSaved(boolean)
 	 */
 	@Override
@@ -877,8 +1062,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithms(java.lang.String[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithms(java.lang.String[])
 	 */
 	@Override
 	public void setAlgorithms(String[] algorithms) {
@@ -886,8 +1074,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithmsEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithmsEnabled(boolean)
 	 */
 	@Override
 	public void setAlgorithmsEnabled(boolean algorithmsEnabled) {
@@ -895,8 +1086,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSelectedAlgorithmIndex(int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSelectedAlgorithmIndex(int)
 	 */
 	@Override
 	public void setSelectedAlgorithmIndex(int selectedAlgorithmIndex) {
@@ -904,8 +1098,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithmDescription(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithmDescription(java.
+	 * lang.String)
 	 */
 	@Override
 	public void setAlgorithmDescription(String algorithmDescription) {
@@ -913,8 +1111,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setTraversal(ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setTraversal(ch.bfh.bti7301.hs2013
+	 * .gravis.core.traversal.Traversal)
 	 */
 	@Override
 	public void setTraversal(Traversal traversal) {
@@ -922,7 +1124,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setProgress(int)
 	 */
 	@Override
@@ -931,7 +1135,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setProgressMaximum(int)
 	 */
 	@Override
@@ -940,8 +1146,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStepByStepStateHandler(ch.bfh.bti7301.hs2013.gravis.gui.control.stepbystep.IStepByStepStateHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStepByStepStateHandler(ch.
+	 * bfh.bti7301.hs2013.gravis.gui.control.stepbystep.IStepByStepStateHandler)
 	 */
 	@Override
 	public void setStepByStepStateHandler(
@@ -950,7 +1160,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSteplength(int)
 	 */
 	@Override
@@ -959,8 +1171,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSteplengthEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSteplengthEnabled(boolean)
 	 */
 	@Override
 	public void setSteplengthEnabled(boolean steplengthEnabled) {
@@ -968,8 +1183,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setToBeginningEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setToBeginningEnabled(boolean)
 	 */
 	@Override
 	public void setToBeginningEnabled(boolean toBeginningEnabled) {
@@ -977,7 +1195,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setBackwardEnabled(boolean)
 	 */
 	@Override
@@ -986,7 +1206,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setForwardEnabled(boolean)
 	 */
 	@Override
@@ -995,7 +1217,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setToEndEnabled(boolean)
 	 */
 	@Override
@@ -1004,8 +1228,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAnimationStateHandler(ch.bfh.bti7301.hs2013.gravis.gui.control.animation.IAnimationStateHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAnimationStateHandler(ch.bfh
+	 * .bti7301.hs2013.gravis.gui.control.animation.IAnimationStateHandler)
 	 */
 	@Override
 	public void setAnimationStateHandler(
@@ -1014,7 +1242,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDelay(int)
 	 */
 	@Override
@@ -1023,7 +1253,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDelayEnabled(boolean)
 	 */
 	@Override
@@ -1032,7 +1264,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPlayEnabled(boolean)
 	 */
 	@Override
@@ -1041,8 +1275,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseLabel(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseLabel(java.lang.String)
 	 */
 	@Override
 	public void setPauseLabel(String pauseLabel) {
@@ -1050,8 +1287,12 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseEvent(ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseEvent(ch.bfh.bti7301.
+	 * hs2013.gravis.gui.control.IControl.EventSource)
 	 */
 	@Override
 	public void setPauseEvent(EventSource pauseEvent) {
@@ -1059,7 +1300,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseEnabled(boolean)
 	 */
 	@Override
@@ -1068,7 +1311,9 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStopEnabled(boolean)
 	 */
 	@Override
@@ -1077,8 +1322,11 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStringBuilder(java.lang.StringBuilder)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStringBuilder(java.lang.
+	 * StringBuilder)
 	 */
 	@Override
 	public void setStringBuilder(StringBuilder stringBuilder) {

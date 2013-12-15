@@ -46,12 +46,12 @@ public interface GraphPropertyConstants {
 	public final static Color V_END_COLOR = GravisColor.YELLOW;
 
 	public final static Color V_COLOR_DEFAULT = GravisColor.LIGHT_ORANGE;
-	public final static Color E_COLOR_DEFAULT = GravisColor.LIGHT_BLUE;
+	public final static Color E_COLOR_DEFAULT = GravisColor.DARK_BLUE;
 
-	public final static Color V_INITIAL_COLOR = GravisColor.LIGHT_ORANGE;
-	public final static Color E_INITIAL_COLOR = GravisColor.LIGHT_BLUE;
-	public final static Color ACTIVATION_COLOR = GravisColor.LIGHT_BLUE;
-	public final static Color VISIT_COLOR = GravisColor.LIGHT_YELLOW;
+	public final static Color V_INITIAL_COLOR = GravisColor.LIGHT_BLUE;
+	public final static Color E_INITIAL_COLOR = GravisColor.LIGHT_YELLOW;
+	public final static Color ACTIVATION_COLOR = GravisColor.RED;
+	public final static Color VISIT_COLOR = GravisColor.RED;
 	public final static Color SOLUTION_COLOR = GravisColor.LIGHT_GREEN;
 
 	public final static float STROKE_WIDTH_DEFAULT = 1.5f;

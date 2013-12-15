@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.gui.Model;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.animation.AnimationStateHandler;
+import ch.bfh.bti7301.hs2013.gravis.gui.control.parameter.IParameterStateHandler;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.parameter.ParameterStateHandler;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.stepbystep.StepByStepStateHandler;
 
@@ -40,8 +41,9 @@ public final class Control implements IControl {
 			this.model.setAboutListener(new ActionListenerAbout(model));
 			this.model.setQuitListener(new ActionListenerQuit(model));
 			// state handler
-			this.model.setParameterStateHandler(new ParameterStateHandler(core,
-					model));
+			IParameterStateHandler psh = new ParameterStateHandler(core, model);
+			this.model.setParameterStateHandler(psh);
+			this.model.getGraph().addGraphEventListener(psh);
 			this.model.setStepByStepStateHandler(new StepByStepStateHandler(
 					model));
 			this.model

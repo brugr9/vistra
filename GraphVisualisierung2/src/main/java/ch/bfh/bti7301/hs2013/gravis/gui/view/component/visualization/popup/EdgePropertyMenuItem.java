@@ -17,7 +17,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class EdgePropertyMenuItem extends JMenuItem implements GraphItemMenuListener {
+class EdgePropertyMenuItem extends JMenuItem implements IGraphItemModifier {
 
 	private static final long serialVersionUID = -1894264493446725645L;
 	/**

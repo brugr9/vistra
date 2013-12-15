@@ -81,7 +81,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IGravisGraph openGraph(File source) throws CoreException {
+	public IObservableGravisGraph openGraph(File source) throws CoreException {
 		try {
 			return this.graphManager.open(source);
 		} catch (Exception e) {
@@ -93,7 +93,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IGravisGraph getNewGraph() throws CoreException {
+	public IObservableGravisGraph getNewGraph() throws CoreException {
 		try {
 			return this.graphManager.getNewGraph();
 		} catch (Exception e) {

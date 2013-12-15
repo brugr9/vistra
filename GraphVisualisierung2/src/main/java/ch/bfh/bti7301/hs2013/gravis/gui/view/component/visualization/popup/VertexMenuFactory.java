@@ -22,7 +22,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * 
  */
 public class VertexMenuFactory extends JPopupMenu implements
-		GraphItemMenuListener {
+		IGraphItemModifier {
 
 	private static final long serialVersionUID = 6897658442329318591L;
 	/**

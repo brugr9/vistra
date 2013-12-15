@@ -86,10 +86,11 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IGravisGraph getNewGraph() throws Exception {
+	public IObservableGravisGraph getNewGraph() throws Exception {
 		try {
 			this.graph = null;
-			IGravisGraph newGraph = GraphFactory.createIGravisGraph();
+			IObservableGravisGraph newGraph = GraphFactory
+					.createObservableGraph();
 			newGraph.setId(this.defaultName);
 			return newGraph;
 		} catch (Exception e) {
@@ -101,7 +102,7 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IGravisGraph open(File file) throws Exception {
+	public IObservableGravisGraph open(File file) throws Exception {
 		try {
 			this.graph = file;
 			return this.read(file);
@@ -144,7 +145,7 @@ class GraphManager implements IGraphManager {
 	 *            the file to load
 	 * @return the loaded graph
 	 */
-	private IGravisGraph read(final File file) throws GraphException {
+	private IObservableGravisGraph read(final File file) throws GraphException {
 		try {
 			GraphMLReader2<IGravisGraph, IVertex, IEdge> graphReader = new GraphMLReader2<>(
 					new FileReader(file), this.graphTransformer,
@@ -153,7 +154,7 @@ class GraphManager implements IGraphManager {
 
 			IGravisGraph graph = graphReader.readGraph();
 			graphReader.close();
-			return graph;
+			return GraphFactory.createObservableGraph(graph);
 		} catch (GraphIOException e) {
 			throw new GraphException("I/O error in GraphML-file "
 					+ file.getName(), e);

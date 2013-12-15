@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.gui.IModel;
@@ -59,8 +58,8 @@ public class GraphPanel extends JPanel implements Observer {
 	 * @param dimension
 	 *            the dimension
 	 */
-	public GraphPanel(JFrame top, Model model,
-			Layout<IVertex, IEdge> layout, Dimension dimension) {
+	public GraphPanel(JFrame top, Model model, Layout<IVertex, IEdge> layout,
+			Dimension dimension) {
 		this.setSize(dimension);
 		this.titledBorder = BorderFactory
 				.createTitledBorder("visualizationPanel");
@@ -97,10 +96,10 @@ public class GraphPanel extends JPanel implements Observer {
 
 		try {
 			if (arg == EventSource.I18N || arg == EventSource.PARAMETER_CHANGED) {
-				String title = b.getString("visualization.label") + ": "
-						+ ((IGravisGraph) m.getGraph()).getId();
+				String title = b.getString("visualization.label") + ": ";
 				if (!m.isGraphSaved())
-					title += " *";
+					title += "*";
+				title += m.getGraph().getId();
 				this.titledBorder.setTitle(title);
 			}
 		} catch (Exception e) {

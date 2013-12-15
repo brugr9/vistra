@@ -18,7 +18,7 @@ public interface IGraphManager {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract IGravisGraph getNewGraph() throws Exception;
+	public abstract IObservableGravisGraph getNewGraph() throws Exception;
 
 	/**
 	 * Opens a GraphML-file as graph.
@@ -28,7 +28,7 @@ public interface IGraphManager {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract IGravisGraph open(File file) throws Exception;
+	public abstract IObservableGravisGraph open(File file) throws Exception;
 
 	/**
 	 * Saves a graph as GraphML-file.

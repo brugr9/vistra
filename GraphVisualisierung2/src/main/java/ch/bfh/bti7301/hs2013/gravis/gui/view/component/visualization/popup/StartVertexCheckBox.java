@@ -16,7 +16,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * 
  */
 class StartVertexCheckBox extends JCheckBoxMenuItem implements
-		GraphItemMenuListener {
+		IGraphItemModifier {
 
 	/**
 	 * 

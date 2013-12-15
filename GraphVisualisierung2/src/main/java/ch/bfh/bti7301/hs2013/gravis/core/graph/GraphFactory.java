@@ -60,6 +60,16 @@ public final class GraphFactory {
 	}
 
 	/**
+	 * Creates an <code>IObservableGravisGraph</code> based on a JUNG
+	 * <code>SparseGraph</code>.
+	 * 
+	 * @return the observable graph
+	 */
+	public static IObservableGravisGraph createObservableGraph() {
+		return new ObservableGravisGraph(new GravisGraph(createGraph()));
+	}
+
+	/**
 	 * Creates an <code>IObservableGravisGraph</code> based on an already
 	 * existing <code>IGravisGraph</code>.
 	 * 

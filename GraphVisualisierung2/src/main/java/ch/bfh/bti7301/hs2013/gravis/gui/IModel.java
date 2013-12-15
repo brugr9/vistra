@@ -3,7 +3,7 @@ package ch.bfh.bti7301.hs2013.gravis.gui;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
-import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.animation.IAnimationStateHandler;
@@ -143,7 +143,7 @@ public interface IModel {
 	/**
 	 * @return the graph
 	 */
-	public abstract IGravisGraph getGraph();
+	public abstract IObservableGravisGraph getGraph();
 
 	/**
 	 * @return the editGraphEnabled
@@ -422,7 +422,7 @@ public interface IModel {
 	 * @param graph
 	 *            the graph to set
 	 */
-	public abstract void setGraph(IGravisGraph graph);
+	public abstract void setGraph(IObservableGravisGraph graph);
 
 	/**
 	 * @param editGraphEnabled
