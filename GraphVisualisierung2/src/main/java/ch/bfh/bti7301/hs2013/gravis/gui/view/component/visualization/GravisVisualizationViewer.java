@@ -13,6 +13,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.VertexFactory;
 import ch.bfh.bti7301.hs2013.gravis.gui.IModel;
+import ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource;
 import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.popup.EdgeMenu;
 import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.popup.VertexMenu;
 import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.popup.VertexMenuFactory;
@@ -138,11 +139,15 @@ public class GravisVisualizationViewer extends
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (m.isEditGraphEnabled())
-				this.mouse.setMode(Mode.EDITING);
-			else
-				this.mouse.setMode(Mode.PICKING);
+			if (arg == EventSource.EDIT_GRAPH) {
+				if (m.isEditGraphEnabled())
+					this.mouse.setMode(Mode.EDITING);
+				else
+					this.mouse.setMode(Mode.PICKING);
+			}
+
 			this.repaint();
+
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);
@@ -150,5 +155,4 @@ public class GravisVisualizationViewer extends
 		}
 
 	}
-
 }

@@ -12,7 +12,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import static ch.bfh.bti7301.hs2013.gravis.core.graph.item.GraphItemUtils.setGraphItemValues;
-import static ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ValueTransformer.toArray;
+import static ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.ValueTransformer.toArray;
 
 /**
  * Depth-first search (DFS) algorithm, implemented recursively

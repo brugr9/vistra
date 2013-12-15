@@ -8,10 +8,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.EdgeTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.GraphTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.HyperEdgeTransformer;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.VertexTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.EdgeTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.GraphTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.HyperEdgeTransformer;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.VertexTransformer;
 import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 

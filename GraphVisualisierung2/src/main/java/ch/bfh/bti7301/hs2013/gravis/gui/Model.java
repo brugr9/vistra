@@ -19,74 +19,68 @@ import ch.bfh.bti7301.hs2013.gravis.gui.control.stepbystep.IStepByStepStateHandl
  */
 public final class Model extends Observable implements IModel {
 
-	// Graph
-	private IGravisGraph graph;
-	private boolean graphSaved;
-	private Traversal traversal;
-
-	// action listener
+	/* Menu */
+	// Action listener
 	private ActionListener i18nListener;
 	private ActionListener helpListener;
 	private ActionListener aboutListener;
 	private ActionListener quitListener;
-	// state handler
-	private IParameterStateHandler parameterStateHandler;
-	private IAnimationStateHandler animationStateHandler;
-	private IStepByStepStateHandler stepByStepStateHandler;
-
 	// i18n
 	private ResourceBundle resourceBundle;
 	private boolean i18nEnabled;
 	private boolean deDEEnabled;
 	private boolean frFREnabled;
 	private boolean enUSEnabled;
-
 	// File
 	private boolean fileEnabled;
 	private boolean newMenuEnabled;
 	private boolean undirectedGraphEnabled;
 	private boolean directedGraphEnabled;
-	private boolean openEnabled;
-	private boolean saveEnabled;
-	private boolean saveAsEnabled;
-	private boolean graphDescriptionEnabled;
+	private boolean openGraphEnabled;
+	private boolean saveGraphEnabled;
+	private boolean saveGraphAsEnabled;
 	private boolean algorithmMenuEnabled;
 	private boolean importAlgorithmEnabled;
 	private boolean deleteAlgorithmEnabled;
-	private boolean importGraphEnabled;
-	private boolean deleteGraphEnabled;
 	private boolean quitEnabled;
-
 	// Info
 	private boolean infoEnabled;
 	private boolean helpEnabled;
 	private boolean aboutEnabled;
 
+	/* Parameter */
+	private IParameterStateHandler parameterStateHandler;
+	// Graph
+	private IGravisGraph graph;
+	private boolean editGraphEnabled;
+	private boolean graphSaved;
 	// Algorithm
 	private String[] algorithms;
 	private boolean algorithmsEnabled;
 	private int selectedAlgorithmIndex;
 	private String algorithmDescription;
 
-	// Player
-	private int delay;
-	private int steplength;
-	private boolean delayEnabled;
-	private boolean steplengthEnabled;
+	/* Traversal */
+	private Traversal traversal;
 	private int progress;
 	private int progressMaximum;
-
-	private String pauseLabel;
-	private EventSource pauseEvent;
-
-	private boolean playEnabled;
-	private boolean pauseEnabled;
-	private boolean stopEnabled;
-
+	// Step-by-Step
+	private IStepByStepStateHandler stepByStepStateHandler;
+	private int steplength;
+	private boolean steplengthEnabled;
 	private boolean toBeginningEnabled;
 	private boolean backwardEnabled;
 	private boolean forwardEnabled;
 	private boolean toEndEnabled;
+	// Animation
+	private IAnimationStateHandler animationStateHandler;
+	private int delay;
+	private boolean delayEnabled;
+	private boolean playEnabled;
+	private String pauseLabel;
+	private EventSource pauseEvent;
+	private boolean pauseEnabled;
+	private boolean stopEnabled;
 
 	// Protocol
 	private StringBuilder stringBuilder;
@@ -100,76 +94,71 @@ public final class Model extends Observable implements IModel {
 	public Model(IGravisGraph graph) {
 		super();
 
-		// graph
-		this.graph = graph;
-		this.graphSaved = false;
-		this.traversal = null;
-
-		// simple listener
+		/* Menu */
+		// Action listener
 		this.i18nListener = null;
 		this.helpListener = null;
 		this.aboutListener = null;
 		this.quitListener = null;
-		// state handler as listener
-		this.parameterStateHandler = null;
-		this.stepByStepStateHandler = null;
-		this.animationStateHandler = null;
-
 		// i18n
 		this.resourceBundle = null;
 		this.i18nEnabled = false;
 		this.deDEEnabled = false;
 		this.frFREnabled = false;
 		this.enUSEnabled = false;
-
 		// File
 		this.fileEnabled = false;
 		this.newMenuEnabled = false;
 		this.undirectedGraphEnabled = false;
 		this.directedGraphEnabled = false;
-		this.openEnabled = false;
-		this.saveEnabled = false;
-		this.saveAsEnabled = false;
-		this.graphDescriptionEnabled = false;
+		this.openGraphEnabled = false;
+		this.saveGraphEnabled = false;
+		this.saveGraphAsEnabled = false;
+		this.editGraphEnabled = false;
 		this.algorithmMenuEnabled = false;
 		this.importAlgorithmEnabled = false;
 		this.deleteAlgorithmEnabled = false;
 		this.quitEnabled = false;
-
 		// Info
 		this.infoEnabled = false;
 		this.helpEnabled = false;
 		this.aboutEnabled = false;
 
-		// Parameter
+		/* Parameter */
+		this.parameterStateHandler = null;
+		// Graph
+		this.graph = graph;
+		this.editGraphEnabled = false;
+		this.graphSaved = false;
+		// Algorithm
 		this.algorithms = null;
 		this.algorithmsEnabled = false;
 		this.selectedAlgorithmIndex = -1;
 		this.algorithmDescription = " ";
 
-		// Player
-		this.delay = 1;
-		this.steplength = 1;
-		this.delayEnabled = false;
-		this.steplengthEnabled = false;
+		/* Traversal */
+		this.traversal = null;
 		this.progress = 0;
 		this.progressMaximum = 0;
-
-		this.pauseLabel = "";
-		this.pauseEvent = null;
-
-		this.animationStateHandler = null;
-		this.playEnabled = false;
-		this.pauseEnabled = false;
-		this.stopEnabled = false;
-
+		// Step-by-Step
 		this.stepByStepStateHandler = null;
+		this.steplength = 1;
+		this.steplengthEnabled = false;
 		this.toBeginningEnabled = false;
 		this.backwardEnabled = false;
 		this.forwardEnabled = false;
 		this.toEndEnabled = false;
+		// Animation
+		this.animationStateHandler = null;
+		this.delay = 1;
+		this.delayEnabled = false;
+		this.playEnabled = false;
+		this.pauseLabel = "";
+		this.pauseEvent = null;
+		this.pauseEnabled = false;
+		this.stopEnabled = false;
 
-		// Protocol
+		/* Protocol */
 		this.stringBuilder = new StringBuilder();
 
 	}
@@ -188,10 +177,9 @@ public final class Model extends Observable implements IModel {
 		this.setNewMenuEnabled(menuEnabled);
 		this.setUndirectedGraphEnabled(menuEnabled);
 		this.setDirectedGraphEnabled(menuEnabled);
-		this.setOpenEnabled(menuEnabled);
-		this.setSaveEnabled(menuEnabled);
-		this.setSaveAsEnabled(menuEnabled);
-		this.setGraphDescriptionEnabled(menuEnabled);
+		this.setOpenGraphEnabled(menuEnabled);
+		this.setSaveGraphEnabled(menuEnabled);
+		this.setSaveGraphAsEnabled(menuEnabled);
 		this.setAlgorithmMenuEnabled(menuEnabled);
 		this.setImportAlgorithmEnabled(menuEnabled);
 		this.setDeleteAlgorithmEnabled(menuEnabled);
@@ -246,30 +234,6 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getGraph()
-	 */
-	@Override
-	public IGravisGraph getGraph() {
-		return graph;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isGraphSaved()
-	 */
-	@Override
-	public boolean isGraphSaved() {
-		return graphSaved;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getTraversal()
-	 */
-	@Override
-	public Traversal getTraversal() {
-		return traversal;
-	}
-
-	/* (non-Javadoc)
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getI18nListener()
 	 */
 	@Override
@@ -299,30 +263,6 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public ActionListener getQuitListener() {
 		return quitListener;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getParameterStateHandler()
-	 */
-	@Override
-	public IParameterStateHandler getParameterStateHandler() {
-		return parameterStateHandler;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAnimationStateHandler()
-	 */
-	@Override
-	public IAnimationStateHandler getAnimationStateHandler() {
-		return animationStateHandler;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getStepByStepStateHandler()
-	 */
-	@Override
-	public IStepByStepStateHandler getStepByStepStateHandler() {
-		return stepByStepStateHandler;
 	}
 
 	/* (non-Javadoc)
@@ -398,35 +338,27 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isOpenEnabled()
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isOpenGraphEnabled()
 	 */
 	@Override
-	public boolean isOpenEnabled() {
-		return openEnabled;
+	public boolean isOpenGraphEnabled() {
+		return openGraphEnabled;
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSaveEnabled()
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSaveGraphEnabled()
 	 */
 	@Override
-	public boolean isSaveEnabled() {
-		return saveEnabled;
+	public boolean isSaveGraphEnabled() {
+		return saveGraphEnabled;
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSaveAsEnabled()
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSaveGraphAsEnabled()
 	 */
 	@Override
-	public boolean isSaveAsEnabled() {
-		return saveAsEnabled;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isGraphDescriptionEnabled()
-	 */
-	@Override
-	public boolean isGraphDescriptionEnabled() {
-		return graphDescriptionEnabled;
+	public boolean isSaveGraphAsEnabled() {
+		return saveGraphAsEnabled;
 	}
 
 	/* (non-Javadoc)
@@ -451,22 +383,6 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public boolean isDeleteAlgorithmEnabled() {
 		return deleteAlgorithmEnabled;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isImportGraphEnabled()
-	 */
-	@Override
-	public boolean isImportGraphEnabled() {
-		return importGraphEnabled;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDeleteGraphEnabled()
-	 */
-	@Override
-	public boolean isDeleteGraphEnabled() {
-		return deleteGraphEnabled;
 	}
 
 	/* (non-Javadoc)
@@ -502,6 +418,38 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getParameterStateHandler()
+	 */
+	@Override
+	public IParameterStateHandler getParameterStateHandler() {
+		return parameterStateHandler;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getGraph()
+	 */
+	@Override
+	public IGravisGraph getGraph() {
+		return graph;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isEditGraphEnabled()
+	 */
+	@Override
+	public boolean isEditGraphEnabled() {
+		return editGraphEnabled;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isGraphSaved()
+	 */
+	@Override
+	public boolean isGraphSaved() {
+		return graphSaved;
+	}
+
+	/* (non-Javadoc)
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAlgorithms()
 	 */
 	@Override
@@ -534,35 +482,11 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getDelay()
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getTraversal()
 	 */
 	@Override
-	public int getDelay() {
-		return delay;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getSteplength()
-	 */
-	@Override
-	public int getSteplength() {
-		return steplength;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDelayEnabled()
-	 */
-	@Override
-	public boolean isDelayEnabled() {
-		return delayEnabled;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSteplengthEnabled()
-	 */
-	@Override
-	public boolean isSteplengthEnabled() {
-		return steplengthEnabled;
+	public Traversal getTraversal() {
+		return traversal;
 	}
 
 	/* (non-Javadoc)
@@ -582,43 +506,27 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getPauseLabel()
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getStepByStepStateHandler()
 	 */
 	@Override
-	public String getPauseLabel() {
-		return pauseLabel;
+	public IStepByStepStateHandler getStepByStepStateHandler() {
+		return stepByStepStateHandler;
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getPauseEvent()
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getSteplength()
 	 */
 	@Override
-	public EventSource getPauseEvent() {
-		return pauseEvent;
+	public int getSteplength() {
+		return steplength;
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isPlayEnabled()
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSteplengthEnabled()
 	 */
 	@Override
-	public boolean isPlayEnabled() {
-		return playEnabled;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isPauseEnabled()
-	 */
-	@Override
-	public boolean isPauseEnabled() {
-		return pauseEnabled;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isStopEnabled()
-	 */
-	@Override
-	public boolean isStopEnabled() {
-		return stopEnabled;
+	public boolean isSteplengthEnabled() {
+		return steplengthEnabled;
 	}
 
 	/* (non-Javadoc)
@@ -654,38 +562,75 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAnimationStateHandler()
+	 */
+	@Override
+	public IAnimationStateHandler getAnimationStateHandler() {
+		return animationStateHandler;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getDelay()
+	 */
+	@Override
+	public int getDelay() {
+		return delay;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDelayEnabled()
+	 */
+	@Override
+	public boolean isDelayEnabled() {
+		return delayEnabled;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isPlayEnabled()
+	 */
+	@Override
+	public boolean isPlayEnabled() {
+		return playEnabled;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getPauseLabel()
+	 */
+	@Override
+	public String getPauseLabel() {
+		return pauseLabel;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getPauseEvent()
+	 */
+	@Override
+	public EventSource getPauseEvent() {
+		return pauseEvent;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isPauseEnabled()
+	 */
+	@Override
+	public boolean isPauseEnabled() {
+		return pauseEnabled;
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isStopEnabled()
+	 */
+	@Override
+	public boolean isStopEnabled() {
+		return stopEnabled;
+	}
+
+	/* (non-Javadoc)
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getStringBuilder()
 	 */
 	@Override
 	public StringBuilder getStringBuilder() {
 		return stringBuilder;
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraph(ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph)
-	 */
-	@Override
-	public void setGraph(IGravisGraph graph) {
-		this.graph = graph;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraphSaved(boolean)
-	 */
-	@Override
-	public void setGraphSaved(boolean graphSaved) {
-		this.graphSaved = graphSaved;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setTraversal(ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal)
-	 */
-	@Override
-	public void setTraversal(Traversal traversal) {
-		this.traversal = traversal;
-		this.setChanged();
 	}
 
 	/* (non-Javadoc)
@@ -721,36 +666,6 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setQuitListener(ActionListener quitListener) {
 		this.quitListener = quitListener;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setParameterStateHandler(ch.bfh.bti7301.hs2013.gravis.gui.control.parameter.IParameterStateHandler)
-	 */
-	@Override
-	public void setParameterStateHandler(
-			IParameterStateHandler parameterStateHandler) {
-		this.parameterStateHandler = parameterStateHandler;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAnimationStateHandler(ch.bfh.bti7301.hs2013.gravis.gui.control.animation.IAnimationStateHandler)
-	 */
-	@Override
-	public void setAnimationStateHandler(
-			IAnimationStateHandler animationStateHandler) {
-		this.animationStateHandler = animationStateHandler;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStepByStepStateHandler(ch.bfh.bti7301.hs2013.gravis.gui.control.stepbystep.IStepByStepStateHandler)
-	 */
-	@Override
-	public void setStepByStepStateHandler(
-			IStepByStepStateHandler stepByStepStateHandler) {
-		this.stepByStepStateHandler = stepByStepStateHandler;
 		this.setChanged();
 	}
 
@@ -836,38 +751,29 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setOpenEnabled(boolean)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setOpenGraphEnabled(boolean)
 	 */
 	@Override
-	public void setOpenEnabled(boolean openEnabled) {
-		this.openEnabled = openEnabled;
+	public void setOpenGraphEnabled(boolean openGraphEnabled) {
+		this.openGraphEnabled = openGraphEnabled;
 		this.setChanged();
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSaveEnabled(boolean)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSaveGraphEnabled(boolean)
 	 */
 	@Override
-	public void setSaveEnabled(boolean saveEnabled) {
-		this.saveEnabled = saveEnabled;
+	public void setSaveGraphEnabled(boolean saveGraphEnabled) {
+		this.saveGraphEnabled = saveGraphEnabled;
 		this.setChanged();
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSaveAsEnabled(boolean)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSaveGraphAsEnabled(boolean)
 	 */
 	@Override
-	public void setSaveAsEnabled(boolean saveAsEnabled) {
-		this.saveAsEnabled = saveAsEnabled;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraphDescriptionEnabled(boolean)
-	 */
-	@Override
-	public void setGraphDescriptionEnabled(boolean graphDescriptionEnabled) {
-		this.graphDescriptionEnabled = graphDescriptionEnabled;
+	public void setSaveGraphAsEnabled(boolean saveGraphAsEnabled) {
+		this.saveGraphAsEnabled = saveGraphAsEnabled;
 		this.setChanged();
 	}
 
@@ -895,24 +801,6 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setDeleteAlgorithmEnabled(boolean deleteAlgorithmEnabled) {
 		this.deleteAlgorithmEnabled = deleteAlgorithmEnabled;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setImportGraphEnabled(boolean)
-	 */
-	@Override
-	public void setImportGraphEnabled(boolean importGraphEnabled) {
-		this.importGraphEnabled = importGraphEnabled;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDeleteGraphEnabled(boolean)
-	 */
-	@Override
-	public void setDeleteGraphEnabled(boolean deleteGraphEnabled) {
-		this.deleteGraphEnabled = deleteGraphEnabled;
 		this.setChanged();
 	}
 
@@ -953,6 +841,43 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setParameterStateHandler(ch.bfh.bti7301.hs2013.gravis.gui.control.parameter.IParameterStateHandler)
+	 */
+	@Override
+	public void setParameterStateHandler(
+			IParameterStateHandler parameterStateHandler) {
+		this.parameterStateHandler = parameterStateHandler;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraph(ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph)
+	 */
+	@Override
+	public void setGraph(IGravisGraph graph) {
+		this.graph = graph;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setEditGraphEnabled(boolean)
+	 */
+	@Override
+	public void setEditGraphEnabled(boolean editGraphEnabled) {
+		this.editGraphEnabled = editGraphEnabled;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraphSaved(boolean)
+	 */
+	@Override
+	public void setGraphSaved(boolean graphSaved) {
+		this.graphSaved = graphSaved;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithms(java.lang.String[])
 	 */
 	@Override
@@ -989,38 +914,11 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDelay(int)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setTraversal(ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal)
 	 */
 	@Override
-	public void setDelay(int delay) {
-		this.delay = delay;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSteplength(int)
-	 */
-	@Override
-	public void setSteplength(int steplength) {
-		this.steplength = steplength;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDelayEnabled(boolean)
-	 */
-	@Override
-	public void setDelayEnabled(boolean delayEnabled) {
-		this.delayEnabled = delayEnabled;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSteplengthEnabled(boolean)
-	 */
-	@Override
-	public void setSteplengthEnabled(boolean steplengthEnabled) {
-		this.steplengthEnabled = steplengthEnabled;
+	public void setTraversal(Traversal traversal) {
+		this.traversal = traversal;
 		this.setChanged();
 	}
 
@@ -1043,47 +941,30 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseLabel(java.lang.String)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStepByStepStateHandler(ch.bfh.bti7301.hs2013.gravis.gui.control.stepbystep.IStepByStepStateHandler)
 	 */
 	@Override
-	public void setPauseLabel(String pauseLabel) {
-		this.pauseLabel = pauseLabel;
+	public void setStepByStepStateHandler(
+			IStepByStepStateHandler stepByStepStateHandler) {
+		this.stepByStepStateHandler = stepByStepStateHandler;
 		this.setChanged();
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseEvent(ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSteplength(int)
 	 */
 	@Override
-	public void setPauseEvent(EventSource pauseEvent) {
-		this.pauseEvent = pauseEvent;
+	public void setSteplength(int steplength) {
+		this.steplength = steplength;
 		this.setChanged();
 	}
 
 	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPlayEnabled(boolean)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSteplengthEnabled(boolean)
 	 */
 	@Override
-	public void setPlayEnabled(boolean playEnabled) {
-		this.playEnabled = playEnabled;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseEnabled(boolean)
-	 */
-	@Override
-	public void setPauseEnabled(boolean pauseEnabled) {
-		this.pauseEnabled = pauseEnabled;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStopEnabled(boolean)
-	 */
-	@Override
-	public void setStopEnabled(boolean stopEnabled) {
-		this.stopEnabled = stopEnabled;
+	public void setSteplengthEnabled(boolean steplengthEnabled) {
+		this.steplengthEnabled = steplengthEnabled;
 		this.setChanged();
 	}
 
@@ -1120,6 +1001,79 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setToEndEnabled(boolean toEndEnabled) {
 		this.toEndEnabled = toEndEnabled;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAnimationStateHandler(ch.bfh.bti7301.hs2013.gravis.gui.control.animation.IAnimationStateHandler)
+	 */
+	@Override
+	public void setAnimationStateHandler(
+			IAnimationStateHandler animationStateHandler) {
+		this.animationStateHandler = animationStateHandler;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDelay(int)
+	 */
+	@Override
+	public void setDelay(int delay) {
+		this.delay = delay;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDelayEnabled(boolean)
+	 */
+	@Override
+	public void setDelayEnabled(boolean delayEnabled) {
+		this.delayEnabled = delayEnabled;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPlayEnabled(boolean)
+	 */
+	@Override
+	public void setPlayEnabled(boolean playEnabled) {
+		this.playEnabled = playEnabled;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseLabel(java.lang.String)
+	 */
+	@Override
+	public void setPauseLabel(String pauseLabel) {
+		this.pauseLabel = pauseLabel;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseEvent(ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource)
+	 */
+	@Override
+	public void setPauseEvent(EventSource pauseEvent) {
+		this.pauseEvent = pauseEvent;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseEnabled(boolean)
+	 */
+	@Override
+	public void setPauseEnabled(boolean pauseEnabled) {
+		this.pauseEnabled = pauseEnabled;
+		this.setChanged();
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStopEnabled(boolean)
+	 */
+	@Override
+	public void setStopEnabled(boolean stopEnabled) {
+		this.stopEnabled = stopEnabled;
 		this.setChanged();
 	}
 

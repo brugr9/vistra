@@ -21,21 +21,6 @@ public interface IModel {
 	public abstract void setStepByStepEnabled(boolean menuEnabled);
 
 	/**
-	 * @return the graph
-	 */
-	public abstract IGravisGraph getGraph();
-
-	/**
-	 * @return the graphSaved
-	 */
-	public abstract boolean isGraphSaved();
-
-	/**
-	 * @return the traversal
-	 */
-	public abstract Traversal getTraversal();
-
-	/**
 	 * @return the i18nListener
 	 */
 	public abstract ActionListener getI18nListener();
@@ -54,21 +39,6 @@ public interface IModel {
 	 * @return the quitListener
 	 */
 	public abstract ActionListener getQuitListener();
-
-	/**
-	 * @return the parameterStateHandler
-	 */
-	public abstract IParameterStateHandler getParameterStateHandler();
-
-	/**
-	 * @return the animationStateHandler
-	 */
-	public abstract IAnimationStateHandler getAnimationStateHandler();
-
-	/**
-	 * @return the stepByStepStateHandler
-	 */
-	public abstract IStepByStepStateHandler getStepByStepStateHandler();
 
 	/**
 	 * @return the resourceBundle
@@ -116,24 +86,19 @@ public interface IModel {
 	public abstract boolean isDirectedGraphEnabled();
 
 	/**
-	 * @return the openEnabled
+	 * @return the openGraphEnabled
 	 */
-	public abstract boolean isOpenEnabled();
+	public abstract boolean isOpenGraphEnabled();
 
 	/**
-	 * @return the saveEnabled
+	 * @return the saveGraphEnabled
 	 */
-	public abstract boolean isSaveEnabled();
+	public abstract boolean isSaveGraphEnabled();
 
 	/**
-	 * @return the saveAsEnabled
+	 * @return the saveGraphAsEnabled
 	 */
-	public abstract boolean isSaveAsEnabled();
-
-	/**
-	 * @return the graphDescriptionEnabled
-	 */
-	public abstract boolean isGraphDescriptionEnabled();
+	public abstract boolean isSaveGraphAsEnabled();
 
 	/**
 	 * @return the algorithmMenuEnabled
@@ -149,16 +114,6 @@ public interface IModel {
 	 * @return the deleteAlgorithmEnabled
 	 */
 	public abstract boolean isDeleteAlgorithmEnabled();
-
-	/**
-	 * @return the importGraphEnabled
-	 */
-	public abstract boolean isImportGraphEnabled();
-
-	/**
-	 * @return the deleteGraphEnabled
-	 */
-	public abstract boolean isDeleteGraphEnabled();
 
 	/**
 	 * @return the quitEnabled
@@ -181,6 +136,26 @@ public interface IModel {
 	public abstract boolean isAboutEnabled();
 
 	/**
+	 * @return the parameterStateHandler
+	 */
+	public abstract IParameterStateHandler getParameterStateHandler();
+
+	/**
+	 * @return the graph
+	 */
+	public abstract IGravisGraph getGraph();
+
+	/**
+	 * @return the editGraphEnabled
+	 */
+	public abstract boolean isEditGraphEnabled();
+
+	/**
+	 * @return the graphSaved
+	 */
+	public abstract boolean isGraphSaved();
+
+	/**
 	 * @return the algorithms
 	 */
 	public abstract String[] getAlgorithms();
@@ -201,24 +176,9 @@ public interface IModel {
 	public abstract String getAlgorithmDescription();
 
 	/**
-	 * @return the delay
+	 * @return the traversal
 	 */
-	public abstract int getDelay();
-
-	/**
-	 * @return the steplength
-	 */
-	public abstract int getSteplength();
-
-	/**
-	 * @return the delayEnabled
-	 */
-	public abstract boolean isDelayEnabled();
-
-	/**
-	 * @return the steplengthEnabled
-	 */
-	public abstract boolean isSteplengthEnabled();
+	public abstract Traversal getTraversal();
 
 	/**
 	 * @return the progress
@@ -231,29 +191,19 @@ public interface IModel {
 	public abstract int getProgressMaximum();
 
 	/**
-	 * @return the pauseLabel
+	 * @return the stepByStepStateHandler
 	 */
-	public abstract String getPauseLabel();
+	public abstract IStepByStepStateHandler getStepByStepStateHandler();
 
 	/**
-	 * @return the pauseEvent
+	 * @return the steplength
 	 */
-	public abstract EventSource getPauseEvent();
+	public abstract int getSteplength();
 
 	/**
-	 * @return the playEnabled
+	 * @return the steplengthEnabled
 	 */
-	public abstract boolean isPlayEnabled();
-
-	/**
-	 * @return the pauseEnabled
-	 */
-	public abstract boolean isPauseEnabled();
-
-	/**
-	 * @return the stopEnabled
-	 */
-	public abstract boolean isStopEnabled();
+	public abstract boolean isSteplengthEnabled();
 
 	/**
 	 * @return the toBeginningEnabled
@@ -276,27 +226,49 @@ public interface IModel {
 	public abstract boolean isToEndEnabled();
 
 	/**
+	 * @return the animationStateHandler
+	 */
+	public abstract IAnimationStateHandler getAnimationStateHandler();
+
+	/**
+	 * @return the delay
+	 */
+	public abstract int getDelay();
+
+	/**
+	 * @return the delayEnabled
+	 */
+	public abstract boolean isDelayEnabled();
+
+	/**
+	 * @return the playEnabled
+	 */
+	public abstract boolean isPlayEnabled();
+
+	/**
+	 * @return the pauseLabel
+	 */
+	public abstract String getPauseLabel();
+
+	/**
+	 * @return the pauseEvent
+	 */
+	public abstract EventSource getPauseEvent();
+
+	/**
+	 * @return the pauseEnabled
+	 */
+	public abstract boolean isPauseEnabled();
+
+	/**
+	 * @return the stopEnabled
+	 */
+	public abstract boolean isStopEnabled();
+
+	/**
 	 * @return the stringBuilder
 	 */
 	public abstract StringBuilder getStringBuilder();
-
-	/**
-	 * @param graph
-	 *            the graph to set
-	 */
-	public abstract void setGraph(IGravisGraph graph);
-
-	/**
-	 * @param graphSaved
-	 *            the graphSaved to set
-	 */
-	public abstract void setGraphSaved(boolean graphSaved);
-
-	/**
-	 * @param traversal
-	 *            the traversal to set
-	 */
-	public abstract void setTraversal(Traversal traversal);
 
 	/**
 	 * @param i18nListener
@@ -321,27 +293,6 @@ public interface IModel {
 	 *            the quitListener to set
 	 */
 	public abstract void setQuitListener(ActionListener quitListener);
-
-	/**
-	 * @param parameterStateHandler
-	 *            the parameterStateHandler to set
-	 */
-	public abstract void setParameterStateHandler(
-			IParameterStateHandler parameterStateHandler);
-
-	/**
-	 * @param animationStateHandler
-	 *            the animationStateHandler to set
-	 */
-	public abstract void setAnimationStateHandler(
-			IAnimationStateHandler animationStateHandler);
-
-	/**
-	 * @param stepByStepStateHandler
-	 *            the stepByStepStateHandler to set
-	 */
-	public abstract void setStepByStepStateHandler(
-			IStepByStepStateHandler stepByStepStateHandler);
 
 	/**
 	 * @param resourceBundle
@@ -399,29 +350,22 @@ public interface IModel {
 	public abstract void setDirectedGraphEnabled(boolean directedGraphEnabled);
 
 	/**
-	 * @param openEnabled
-	 *            the openEnabled to set
+	 * @param openGraphEnabled
+	 *            the openGraphEnabled to set
 	 */
-	public abstract void setOpenEnabled(boolean openEnabled);
+	public abstract void setOpenGraphEnabled(boolean openGraphEnabled);
 
 	/**
-	 * @param saveEnabled
-	 *            the saveEnabled to set
+	 * @param saveGraphEnabled
+	 *            the saveGraphEnabled to set
 	 */
-	public abstract void setSaveEnabled(boolean saveEnabled);
+	public abstract void setSaveGraphEnabled(boolean saveGraphEnabled);
 
 	/**
-	 * @param saveAsEnabled
-	 *            the saveAsEnabled to set
+	 * @param saveGraphAsEnabled
+	 *            the saveGraphAsEnabled to set
 	 */
-	public abstract void setSaveAsEnabled(boolean saveAsEnabled);
-
-	/**
-	 * @param graphDescriptionEnabled
-	 *            the graphDescriptionEnabled to set
-	 */
-	public abstract void setGraphDescriptionEnabled(
-			boolean graphDescriptionEnabled);
+	public abstract void setSaveGraphAsEnabled(boolean saveGraphAsEnabled);
 
 	/**
 	 * @param algorithmMenuEnabled
@@ -442,18 +386,6 @@ public interface IModel {
 	 */
 	public abstract void setDeleteAlgorithmEnabled(
 			boolean deleteAlgorithmEnabled);
-
-	/**
-	 * @param importGraphEnabled
-	 *            the importGraphEnabled to set
-	 */
-	public abstract void setImportGraphEnabled(boolean importGraphEnabled);
-
-	/**
-	 * @param deleteGraphEnabled
-	 *            the deleteGraphEnabled to set
-	 */
-	public abstract void setDeleteGraphEnabled(boolean deleteGraphEnabled);
 
 	/**
 	 * @param quitEnabled
@@ -480,6 +412,31 @@ public interface IModel {
 	public abstract void setAboutEnabled(boolean aboutEnabled);
 
 	/**
+	 * @param parameterStateHandler
+	 *            the parameterStateHandler to set
+	 */
+	public abstract void setParameterStateHandler(
+			IParameterStateHandler parameterStateHandler);
+
+	/**
+	 * @param graph
+	 *            the graph to set
+	 */
+	public abstract void setGraph(IGravisGraph graph);
+
+	/**
+	 * @param editGraphEnabled
+	 *            the editGraphEnabled to set
+	 */
+	public abstract void setEditGraphEnabled(boolean editGraphEnabled);
+
+	/**
+	 * @param graphSaved
+	 *            the graphSaved to set
+	 */
+	public abstract void setGraphSaved(boolean graphSaved);
+
+	/**
 	 * @param algorithms
 	 *            the algorithms to set
 	 */
@@ -504,28 +461,10 @@ public interface IModel {
 	public abstract void setAlgorithmDescription(String algorithmDescription);
 
 	/**
-	 * @param delay
-	 *            the delay to set
+	 * @param traversal
+	 *            the traversal to set
 	 */
-	public abstract void setDelay(int delay);
-
-	/**
-	 * @param steplength
-	 *            the steplength to set
-	 */
-	public abstract void setSteplength(int steplength);
-
-	/**
-	 * @param delayEnabled
-	 *            the delayEnabled to set
-	 */
-	public abstract void setDelayEnabled(boolean delayEnabled);
-
-	/**
-	 * @param steplengthEnabled
-	 *            the steplengthEnabled to set
-	 */
-	public abstract void setSteplengthEnabled(boolean steplengthEnabled);
+	public abstract void setTraversal(Traversal traversal);
 
 	/**
 	 * @param progress
@@ -540,34 +479,23 @@ public interface IModel {
 	public abstract void setProgressMaximum(int progressMaximum);
 
 	/**
-	 * @param pauseLabel
-	 *            the pauseLabel to set
+	 * @param stepByStepStateHandler
+	 *            the stepByStepStateHandler to set
 	 */
-	public abstract void setPauseLabel(String pauseLabel);
+	public abstract void setStepByStepStateHandler(
+			IStepByStepStateHandler stepByStepStateHandler);
 
 	/**
-	 * @param pauseEvent
-	 *            the pauseEvent to set
+	 * @param steplength
+	 *            the steplength to set
 	 */
-	public abstract void setPauseEvent(EventSource pauseEvent);
+	public abstract void setSteplength(int steplength);
 
 	/**
-	 * @param playEnabled
-	 *            the playEnabled to set
+	 * @param steplengthEnabled
+	 *            the steplengthEnabled to set
 	 */
-	public abstract void setPlayEnabled(boolean playEnabled);
-
-	/**
-	 * @param pauseEnabled
-	 *            the pauseEnabled to set
-	 */
-	public abstract void setPauseEnabled(boolean pauseEnabled);
-
-	/**
-	 * @param stopEnabled
-	 *            the stopEnabled to set
-	 */
-	public abstract void setStopEnabled(boolean stopEnabled);
+	public abstract void setSteplengthEnabled(boolean steplengthEnabled);
 
 	/**
 	 * @param toBeginningEnabled
@@ -592,6 +520,55 @@ public interface IModel {
 	 *            the toEndEnabled to set
 	 */
 	public abstract void setToEndEnabled(boolean toEndEnabled);
+
+	/**
+	 * @param animationStateHandler
+	 *            the animationStateHandler to set
+	 */
+	public abstract void setAnimationStateHandler(
+			IAnimationStateHandler animationStateHandler);
+
+	/**
+	 * @param delay
+	 *            the delay to set
+	 */
+	public abstract void setDelay(int delay);
+
+	/**
+	 * @param delayEnabled
+	 *            the delayEnabled to set
+	 */
+	public abstract void setDelayEnabled(boolean delayEnabled);
+
+	/**
+	 * @param playEnabled
+	 *            the playEnabled to set
+	 */
+	public abstract void setPlayEnabled(boolean playEnabled);
+
+	/**
+	 * @param pauseLabel
+	 *            the pauseLabel to set
+	 */
+	public abstract void setPauseLabel(String pauseLabel);
+
+	/**
+	 * @param pauseEvent
+	 *            the pauseEvent to set
+	 */
+	public abstract void setPauseEvent(EventSource pauseEvent);
+
+	/**
+	 * @param pauseEnabled
+	 *            the pauseEnabled to set
+	 */
+	public abstract void setPauseEnabled(boolean pauseEnabled);
+
+	/**
+	 * @param stopEnabled
+	 *            the stopEnabled to set
+	 */
+	public abstract void setStopEnabled(boolean stopEnabled);
 
 	/**
 	 * @param stringBuilder

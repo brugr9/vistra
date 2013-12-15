@@ -60,11 +60,11 @@ public interface IParameterStateHandler extends ActionListener, ItemListener,
 	abstract void handleSaveGraphAs() throws Exception;
 
 	/**
-	 * Handles an interaction: edit graph description.
+	 * Handles an interaction: edit graph.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleEditGraphDescription() throws Exception;
+	abstract void handleEditGraph() throws Exception;
 
 	/**
 	 * Handles an interaction: select algorithm.

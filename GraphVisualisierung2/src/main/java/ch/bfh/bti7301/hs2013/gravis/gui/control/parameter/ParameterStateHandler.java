@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -26,18 +25,17 @@ import ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal;
 import ch.bfh.bti7301.hs2013.gravis.gui.Model;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource;
 import ch.bfh.bti7301.hs2013.gravis.gui.util.SingleRootFileSystemView;
-import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.dialog.GraphPropertyDialog;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.DELETE_ALGORITHM;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.IMPORT_ALGORITHM;
-import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.GRAPH_DESCRIPION;
+import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.EDIT_GRAPH;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.OPEN_GRAPH;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.PARAMETER_CHANGED;
-import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.SAVE_AS_GRAPH;
+import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.SAVE_GRAPH_AS;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.SAVE_GRAPH;
 
 /**
@@ -97,10 +95,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.handleOpenGraph();
 			} else if (c.equals(SAVE_GRAPH.toString())) {
 				this.handleSaveGraph();
-			} else if (c.equals(SAVE_AS_GRAPH.toString())) {
+			} else if (c.equals(SAVE_GRAPH_AS.toString())) {
 				this.handleSaveGraphAs();
-			} else if (c.equals(GRAPH_DESCRIPION.toString())) {
-				this.handleEditGraphDescription();
+			} else if (c.equals(EDIT_GRAPH.toString())) {
+				this.handleEditGraph();
 			} else if (c.equals(IMPORT_ALGORITHM.toString())) {
 				this.handleImportAlgorithm();
 			} else if (c.equals(DELETE_ALGORITHM.toString())) {
@@ -234,10 +232,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleEditGraphDescription() throws Exception {
+	public void handleEditGraph() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleEditGraphDescription();
+			this.state.handleEditGraph();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -310,7 +308,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * Doing: Enables the possibility to edit the graph.
 	 */
 	void idle() {
-		// TODO enable graph events
+		this.model.setEditGraphEnabled(true);
+		this.model.notifyObservers(EDIT_GRAPH);
 	}
 
 	/**
@@ -383,50 +382,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * Doing: Sets the graph as edited.
-	 * 
-	 * @throws Exception
-	 */
-	void editGraph() throws Exception {
-		try {
-			this.updateGraphSaved(false);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Doing: Opens a dialog for editing the description of the graph.
-	 * 
-	 * @return the return state of the file chooser on popdown:
-	 *         <ul>
-	 *         <li>JFileChooser.CANCEL_OPTION = 1
-	 *         <li>JFileChooser.APPROVE_OPTION = 0
-	 *         <li>JFileChooser.ERROR_OPTION = -1 if an error occurs or the
-	 *         dialog is dismissed
-	 *         </ul>
-	 * @throws Exception
-	 */
-	int editGraphDescritpion() throws Exception {
-		try {
-			ResourceBundle b = this.model.getResourceBundle();
-			IGravisGraph graph = this.model.getGraph();
-			JOptionPane pane = new JOptionPane();
-			pane.setInitialValue(graph.getDescription());
-			String graphDescription = JOptionPane.showInputDialog(this.top,
-					b.getString("graphDescription.label") + ":",
-					b.getString("app.label"), JOptionPane.PLAIN_MESSAGE);
-			graph.setDescription(graphDescription);
-			// this.model.setGraph(graph);
-			this.model.setGraphSaved(false);
-			// TODO
-			return 0;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * Doing: Saves an already 'saved as' but edited graph.
 	 * 
 	 * @return <code>true</code> if success
@@ -480,6 +435,19 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			}
 			return option;
 
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Doing: Sets the graph as edited.
+	 * 
+	 * @throws Exception
+	 */
+	void editGraph() throws Exception {
+		try {
+			this.updateGraphSaved(false);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -675,7 +643,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private void updateGraphSaved(boolean saved) throws Exception {
 		try {
 			this.model.setGraphSaved(saved);
-			this.model.setSaveEnabled(!saved);
+			this.model.setSaveGraphEnabled(!saved);
 			this.model.setAlgorithmsEnabled(saved);
 			this.model.notifyObservers(PARAMETER_CHANGED);
 		} catch (Exception e) {
@@ -793,9 +761,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void setViewOff() {
 		this.enableMenu(false);
-		// TODO disable graph events
 		this.model.setAlgorithmsEnabled(false);
 		this.model.notifyObservers(EventSource.PARAMETER_CHANGED);
+		this.model.setEditGraphEnabled(false);
+		this.model.notifyObservers(EDIT_GRAPH);
 	}
 
 	/**
@@ -808,7 +777,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	private void enableMenu(boolean enabled) {
 		this.model.setMenuEnabled(enabled);
-		this.model.setSaveEnabled(!this.model.isGraphSaved());
+		this.model.setSaveGraphEnabled(!this.model.isGraphSaved());
 	}
 
 	/**

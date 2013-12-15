@@ -1,7 +1,7 @@
 package ch.bfh.bti7301.hs2013.gravis.core.algorithm.impl;
 
 import static ch.bfh.bti7301.hs2013.gravis.core.graph.item.GraphItemUtils.setGraphItemValues;
-import static ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ValueTransformer.toArray;
+import static ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.ValueTransformer.toArray;
 
 import java.util.ArrayList;
 import java.util.Iterator;

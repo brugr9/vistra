@@ -15,7 +15,7 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.util.comparator.VertexPaintedResultComparator;
 import static ch.bfh.bti7301.hs2013.gravis.core.graph.item.GraphItemUtils.setGraphItemValues;
 import static ch.bfh.bti7301.hs2013.gravis.core.graph.item.GraphItemUtils.tagGraphItems;
-import static ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ValueTransformer.toArray;
+import static ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.ValueTransformer.toArray;
 import edu.uci.ics.jung.algorithms.util.MapBinaryHeap;
 import edu.uci.ics.jung.graph.util.EdgeType;
 

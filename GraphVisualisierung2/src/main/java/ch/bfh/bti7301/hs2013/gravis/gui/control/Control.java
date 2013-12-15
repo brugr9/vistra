@@ -36,7 +36,7 @@ public final class Control implements IControl {
 			this.model = model;
 			// action listener
 			this.model.setI18nListener(new ActionListenerI18n(model));
-			this.model.setHelpListener(new ActionListenerShortcuts(model));
+			this.model.setHelpListener(new ActionListenerHelp(model));
 			this.model.setAboutListener(new ActionListenerAbout(model));
 			this.model.setQuitListener(new ActionListenerQuit(model));
 			// state handler as listener
