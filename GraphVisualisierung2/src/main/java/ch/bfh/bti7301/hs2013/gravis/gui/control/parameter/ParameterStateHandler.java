@@ -136,13 +136,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * Handles an interaction: edit graph. {@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void handleGraphEvent(GraphEvent<IVertex, IEdge> evt) {
 		try {
-			this.state.exit();
-			this.state.handleGraphEvent();
+			this.state.handleEditGraph();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -306,8 +305,11 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 
 	/**
 	 * Doing: Enables the possibility to edit the graph.
+	 * 
+	 * @throws Exception
 	 */
-	void idle() {
+	void idle() throws Exception {
+		this.updateGraphSaved(true);
 		this.model.setEditGraphEnabled(true);
 		this.model.notifyObservers(EDIT_GRAPH);
 	}

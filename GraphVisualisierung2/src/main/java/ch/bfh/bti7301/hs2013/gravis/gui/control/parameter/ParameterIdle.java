@@ -36,7 +36,12 @@ class ParameterIdle extends AbstractParameterState implements IState {
 	 */
 	@Override
 	protected void startDo() {
-		super.context.idle();
+		try {
+			super.context.idle();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

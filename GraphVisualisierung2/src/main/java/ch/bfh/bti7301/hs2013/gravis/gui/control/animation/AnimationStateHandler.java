@@ -60,7 +60,7 @@ public final class AnimationStateHandler extends Observable implements
 		this.animationListener = new AnimationListener();
 		int animationDelay = this.model.getDelay() * A_SECOND;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
-		this.setState(new AnimationIdle(this));
+		this.setState(new AnimationOff(this));
 	}
 
 	/**
