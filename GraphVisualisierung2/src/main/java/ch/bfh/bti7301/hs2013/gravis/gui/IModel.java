@@ -12,32 +12,12 @@ import ch.bfh.bti7301.hs2013.gravis.gui.control.stepbystep.IStepByStepStateHandl
 
 public interface IModel {
 
-	/**
-	 * 
-	 * @param menuEnabled
-	 *            the menuEnabled to set
-	 */
 	public abstract void setMenuEnabled(boolean menuEnabled);
 
-	/**
-	 * 
-	 * @param menuEnabled
-	 *            the menuEnabled to set
-	 */
 	public abstract void setPlayerEnabled(boolean menuEnabled);
 
-	/**
-	 * 
-	 * @param menuEnabled
-	 *            the menuEnabled to set
-	 */
 	public abstract void setAnimationEnabled(boolean menuEnabled);
 
-	/**
-	 * 
-	 * @param menuEnabled
-	 *            the menuEnabled to set
-	 */
 	public abstract void setStepByStepEnabled(boolean menuEnabled);
 
 	/**
@@ -149,6 +129,11 @@ public interface IModel {
 	 * @return the saveAsEnabled
 	 */
 	public abstract boolean isSaveAsEnabled();
+
+	/**
+	 * @return the graphDescriptionEnabled
+	 */
+	public abstract boolean isGraphDescriptionEnabled();
 
 	/**
 	 * @return the algorithmMenuEnabled
@@ -430,6 +415,13 @@ public interface IModel {
 	 *            the saveAsEnabled to set
 	 */
 	public abstract void setSaveAsEnabled(boolean saveAsEnabled);
+
+	/**
+	 * @param graphDescriptionEnabled
+	 *            the graphDescriptionEnabled to set
+	 */
+	public abstract void setGraphDescriptionEnabled(
+			boolean graphDescriptionEnabled);
 
 	/**
 	 * @param algorithmMenuEnabled

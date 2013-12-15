@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -49,6 +50,10 @@ public class MinimalView extends JFrame implements IView {
 	 */
 	private final JPanel controlPanel;
 	/**
+	 * A field for an edit mode combo box.
+	 */
+	private JComboBox<?> editModeComboBox;
+	/**
 	 * A field for the settings panel.
 	 */
 	private final ParameterPanel parameterPanel;
@@ -76,24 +81,26 @@ public class MinimalView extends JFrame implements IView {
 
 		/* Components */
 		this.menuBar = new MenuBar(model);
-		this.visualizationPanel = new VisualizationPanel(model, layout,
+		this.visualizationPanel = new VisualizationPanel(this, model, layout,
 				new Dimension(VISUALISATION_WIDTH, VISUALISATION_HEIGHT));
+		this.editModeComboBox = this.visualizationPanel.getModeComboBox();
 		int width = FRAME_WIDTH - VISUALISATION_WIDTH;
 		// TODO height
 		this.parameterPanel = new ParameterPanel(model, width, 200);
 		this.playerPanel = new PlayerPanel(model, width, 400);
 
-		// all components observe the model
-		model.addObserver(menuBar);
-		model.addObserver(visualizationPanel);
-		model.addObserver(parameterPanel);
-		model.addObserver(playerPanel);
+		// components observe the model
+		model.addObserver(this.menuBar);
+		model.addObserver(this.visualizationPanel);
+		model.addObserver(this.parameterPanel);
+		model.addObserver(this.playerPanel);
 
 		/* control panel */
 		this.controlPanel = new JPanel();
 		this.controlPanel.setLayout(new BorderLayout());
 		this.controlPanel.setBackground((Color) GravisColor.ANTIQUE);
-		this.controlPanel.add(this.parameterPanel, BorderLayout.NORTH);
+		this.controlPanel.add(this.editModeComboBox, BorderLayout.NORTH);
+		this.controlPanel.add(this.parameterPanel, BorderLayout.CENTER);
 		this.controlPanel.add(this.playerPanel, BorderLayout.SOUTH);
 
 		/* this */

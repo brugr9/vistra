@@ -133,6 +133,21 @@ abstract class AbstractParameterState extends State implements IState {
 	}
 
 	/**
+	 * Handles an interaction: edit graph description.
+	 * 
+	 * @throws Exception
+	 */
+	void handleEditGraphDescription() throws Exception {
+		try {
+			int option = this.context.editGraphDescritpion();
+			if (option == 0)
+				this.context.setState(new ParameterGraphEdited(this.context));
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
 	 * Handles an interaction: import algorithm.
 	 * 
 	 * @throws Exception

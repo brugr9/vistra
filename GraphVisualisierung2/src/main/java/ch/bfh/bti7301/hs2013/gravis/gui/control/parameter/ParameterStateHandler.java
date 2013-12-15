@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -25,11 +26,13 @@ import ch.bfh.bti7301.hs2013.gravis.core.traversal.Traversal;
 import ch.bfh.bti7301.hs2013.gravis.gui.Model;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource;
 import ch.bfh.bti7301.hs2013.gravis.gui.util.SingleRootFileSystemView;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.dialog.GraphPropertyDialog;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.DELETE_ALGORITHM;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.IMPORT_ALGORITHM;
+import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.GRAPH_DESCRIPION;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.OPEN_GRAPH;
@@ -96,6 +99,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.handleSaveGraph();
 			} else if (c.equals(SAVE_AS_GRAPH.toString())) {
 				this.handleSaveGraphAs();
+			} else if (c.equals(GRAPH_DESCRIPION.toString())) {
+				this.handleEditGraphDescription();
 			} else if (c.equals(IMPORT_ALGORITHM.toString())) {
 				this.handleImportAlgorithm();
 			} else if (c.equals(DELETE_ALGORITHM.toString())) {
@@ -220,6 +225,19 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			this.state.exit();
 			this.state.handleSaveGraphAs();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleEditGraphDescription() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleEditGraphDescription();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -365,13 +383,44 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * Doing: Sets a graph as edited.
+	 * Doing: Sets the graph as edited.
 	 * 
 	 * @throws Exception
 	 */
 	void editGraph() throws Exception {
 		try {
 			this.updateGraphSaved(false);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Doing: Opens a dialog for editing the description of the graph.
+	 * 
+	 * @return the return state of the file chooser on popdown:
+	 *         <ul>
+	 *         <li>JFileChooser.CANCEL_OPTION = 1
+	 *         <li>JFileChooser.APPROVE_OPTION = 0
+	 *         <li>JFileChooser.ERROR_OPTION = -1 if an error occurs or the
+	 *         dialog is dismissed
+	 *         </ul>
+	 * @throws Exception
+	 */
+	int editGraphDescritpion() throws Exception {
+		try {
+			ResourceBundle b = this.model.getResourceBundle();
+			IGravisGraph graph = this.model.getGraph();
+			JOptionPane pane = new JOptionPane();
+			pane.setInitialValue(graph.getDescription());
+			String graphDescription = JOptionPane.showInputDialog(this.top,
+					b.getString("graphDescription.label") + ":",
+					b.getString("app.label"), JOptionPane.PLAIN_MESSAGE);
+			graph.setDescription(graphDescription);
+			// this.model.setGraph(graph);
+			this.model.setGraphSaved(false);
+			// TODO
+			return 0;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -418,8 +467,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			fileChooser.addChoosableFileFilter(filter);
 			fileChooser.setFileFilter(filter);
 			// title
-			fileChooser.setDialogTitle(model.getResourceBundle().getString(
-					"saveas.label"));
+			fileChooser.setDialogTitle(this.model.getResourceBundle()
+					.getString("saveas.label"));
 
 			/* dialog */
 			int option = fileChooser.showSaveDialog(this.top);

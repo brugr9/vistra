@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+
+import ch.bfh.bti7301.hs2013.gravis.gui.IModel;
 import ch.bfh.bti7301.hs2013.gravis.gui.Model;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.I18N;
 
@@ -32,7 +34,7 @@ public class ActionListenerI18n extends AbstractActionListener {
 	 * @param model
 	 *            a gravis model
 	 */
-	public ActionListenerI18n(Model model) {
+	public ActionListenerI18n(IModel model) {
 		super(model);
 		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle")
 				.replace(".", File.separator);

@@ -27,6 +27,8 @@ public interface IControl {
 		I18N, DE_DE, FR_FR, EN_US,
 		// IO graph
 		NEW_GRAPH_UNDIRECTED, NEW_GRAPH_DIRECTED, OPEN_GRAPH, SAVE_GRAPH, SAVE_AS_GRAPH,
+		//
+		GRAPH_DESCRIPION,
 		// IO algorithm
 		IMPORT_ALGORITHM, DELETE_ALGORITHM,
 		// parameter

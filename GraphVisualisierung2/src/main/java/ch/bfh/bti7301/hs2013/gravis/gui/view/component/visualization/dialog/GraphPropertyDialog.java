@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -31,50 +32,53 @@ public class GraphPropertyDialog extends JDialog {
 	private static final long serialVersionUID = -1767385966504542230L;
 
 	private final JPanel contentPanel = new JPanel();
-	
+
 	private JTextField txtGraphName;
-	
+
 	private JTextArea textAreaGraphDescription;
+
+	private JOptionPane op;
 
 	/**
 	 * Create the dialog.
 	 * 
-	 * @param owner 
-	 * @param graph 
+	 * @param owner
+	 * @param graph
 	 */
 	public GraphPropertyDialog(IGravisGraph graph, JFrame owner) {
 		super(owner, true);
-		
+
 		// TODO remove string literals
 		this.setTitle(graph.getId() + " bearbeiten...");
-		
+
 		this.setResizable(false);
 		this.setBounds(100, 100, 500, 220);
 		this.getContentPane().setLayout(new BorderLayout());
 		this.contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(this.contentPanel, BorderLayout.CENTER);
 		this.contentPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panelGraphName = new JPanel();
 		this.contentPanel.add(panelGraphName, BorderLayout.NORTH);
 		panelGraphName.setLayout(new GridLayout(0, 2, 0, 0));
-		
+
 		JLabel lblGraphName = new JLabel("Name des Graphen:");
 		panelGraphName.add(lblGraphName);
-		
+
 		this.txtGraphName = new JTextField();
 		panelGraphName.add(this.txtGraphName);
 		this.txtGraphName.setColumns(10);
-		
+
 		JPanel panelGraphDescription = new JPanel();
 		this.contentPanel.add(panelGraphDescription, BorderLayout.CENTER);
 		panelGraphDescription.setLayout(new BorderLayout(0, 0));
-		
+
 		JLabel lblGraphDescription = new JLabel("Beschreibung zum Graphen:");
 		panelGraphDescription.add(lblGraphDescription, BorderLayout.NORTH);
-		
+
 		this.textAreaGraphDescription = new JTextArea();
-		panelGraphDescription.add(this.textAreaGraphDescription, BorderLayout.CENTER);
+		panelGraphDescription.add(this.textAreaGraphDescription,
+				BorderLayout.CENTER);
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -101,7 +105,7 @@ public class GraphPropertyDialog extends JDialog {
 	 */
 	private void setListeners(final IGravisGraph graph, final JButton okButton,
 			final JButton cancelButton) {
-		
+
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

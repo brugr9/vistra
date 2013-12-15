@@ -5,6 +5,7 @@ import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.DE_D
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.EN_US;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.FR_FR;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.I18N;
+import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.GRAPH_DESCRIPION;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.IMPORT_ALGORITHM;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
@@ -72,6 +73,10 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 */
 	private final JMenuItem saveAsMenuItem;
 	/**
+	 * A field for the menu item 'graphDescription'.
+	 */
+	private final JMenuItem graphDescriptionMenuItem;
+	/**
 	 * A field for the menu 'algorithm'.
 	 */
 	private final JMenu algorithmMenu;
@@ -100,9 +105,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 */
 	private final JMenuItem enUSMenuItem;
 	/**
-	 * A field for the menu item 'help'.
+	 * A field for the menu item 'shortcuts'.
 	 */
-	private final JMenuItem helpMenuItem;
+	private final JMenuItem shortcutsMenuItem;
 	/**
 	 * A field for the menu item 'about'.
 	 */
@@ -124,6 +129,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.openMenuItem = new JMenuItem("openMenuItem");
 			this.saveMenuItem = new JMenuItem("saveMenuItem");
 			this.saveAsMenuItem = new JMenuItem("saveAsMenuItem");
+			this.graphDescriptionMenuItem = new JMenuItem(
+					"graphDescriptionMenuItem");
 			this.importAlgorithmMenuItem = new JMenuItem(
 					"importAlgorithmMenuItem");
 			this.deleteAlgorithmMenuItem = new JMenuItem(
@@ -140,6 +147,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 					.getParameterStateHandler());
 			this.saveAsMenuItem.addActionListener(model
 					.getParameterStateHandler());
+			this.graphDescriptionMenuItem.addActionListener(model
+					.getParameterStateHandler());
 			this.importAlgorithmMenuItem.addActionListener(model
 					.getParameterStateHandler());
 			this.deleteAlgorithmMenuItem.addActionListener(model
@@ -153,6 +162,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.openMenuItem.setActionCommand(OPEN_GRAPH.toString());
 			this.saveMenuItem.setActionCommand(SAVE_GRAPH.toString());
 			this.saveAsMenuItem.setActionCommand(SAVE_AS_GRAPH.toString());
+			this.graphDescriptionMenuItem.setActionCommand(GRAPH_DESCRIPION
+					.toString());
 			this.importAlgorithmMenuItem.setActionCommand(IMPORT_ALGORITHM
 					.toString());
 			this.deleteAlgorithmMenuItem.setActionCommand(DELETE_ALGORITHM
@@ -169,6 +180,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.fileMenu.add(this.openMenuItem);
 			this.fileMenu.add(this.saveMenuItem);
 			this.fileMenu.add(this.saveAsMenuItem);
+			this.fileMenu.add(this.graphDescriptionMenuItem);
 			this.fileMenu.add(this.algorithmMenu);
 			this.fileMenu.add(this.quitMenuItem);
 		}
@@ -194,13 +206,13 @@ public final class MenuBar extends JMenuBar implements Observer {
 		{// JMenu infoMenu
 			this.infoMenu = new JMenu("infoMenu");
 			// JMenuItem
-			this.helpMenuItem = new JMenuItem("helpMenuItem");
+			this.shortcutsMenuItem = new JMenuItem("helpMenuItem");
 			this.aboutMenuItem = new JMenuItem("aboutMenuItem");
 			// addActionListener
-			this.helpMenuItem.addActionListener(model.getHelpListener());
+			this.shortcutsMenuItem.addActionListener(model.getHelpListener());
 			this.aboutMenuItem.addActionListener(model.getAboutListener());
 			// add
-			this.infoMenu.add(this.helpMenuItem);
+			this.infoMenu.add(this.shortcutsMenuItem);
 			this.infoMenu.add(this.aboutMenuItem);
 		}
 		// add
@@ -236,6 +248,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 						this.saveMenuItem.setText(b.getString("save.label"));
 						this.saveAsMenuItem
 								.setText(b.getString("saveas.label"));
+						this.graphDescriptionMenuItem.setText(b
+								.getString("graphDescription.label"));
 						this.algorithmMenu.setText(b
 								.getString("algorithm.label"));
 						this.importAlgorithmMenuItem.setText(b
@@ -288,17 +302,18 @@ public final class MenuBar extends JMenuBar implements Observer {
 					{// JMenu infoMenu
 						// setText
 						this.infoMenu.setText(b.getString("info.label"));
-						this.helpMenuItem.setText(b.getString("help.label"));
+						this.shortcutsMenuItem.setText(b
+								.getString("help.label"));
 						this.aboutMenuItem.setText(b.getString("about.label"));
 						// setMnemonic
 						this.infoMenu.setMnemonic(b.getString("info.mnemonic")
 								.toCharArray()[0]);
-						this.helpMenuItem.setMnemonic(b.getString(
+						this.shortcutsMenuItem.setMnemonic(b.getString(
 								"help.mnemonic").toCharArray()[0]);
 						this.aboutMenuItem.setMnemonic(b.getString(
 								"about.mnemonic").toCharArray()[0]);
 						// setAccelerator
-						this.helpMenuItem.setAccelerator(KeyStroke
+						this.shortcutsMenuItem.setAccelerator(KeyStroke
 								.getKeyStroke(b.getString("help.accelerator")));
 						this.aboutMenuItem
 								.setAccelerator(KeyStroke.getKeyStroke(b
@@ -319,6 +334,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 					this.openMenuItem.setEnabled(m.isOpenEnabled());
 					this.saveMenuItem.setEnabled(m.isSaveEnabled());
 					this.saveAsMenuItem.setEnabled(m.isSaveAsEnabled());
+					this.graphDescriptionMenuItem.setEnabled(m
+							.isGraphDescriptionEnabled());
 					this.algorithmMenu.setEnabled(m.isAlgorithmMenuEnabled());
 					this.importAlgorithmMenuItem.setEnabled(m
 							.isImportAlgorithmEnabled());
@@ -332,7 +349,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 					this.enUSMenuItem.setEnabled(m.isEnUSEnabled());
 					// info
 					this.infoMenu.setEnabled(m.isInfoEnabled());
-					this.helpMenuItem.setEnabled(m.isHelpEnabled());
+					this.shortcutsMenuItem.setEnabled(m.isHelpEnabled());
 					this.aboutMenuItem.setEnabled(m.isAboutEnabled());
 
 				}
