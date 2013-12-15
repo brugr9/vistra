@@ -19,7 +19,7 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
 class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 
 	private final List<IStep> commandList;
-	
+
 	private final Transformer<IGraphItem, IStep> commandTransformer;
 
 	/**
@@ -27,9 +27,9 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 	 * @param commandList
 	 * @param commandTransformer
 	 */
-	protected GravisGraphEventListener(List<IStep> commandList, 
+	protected GravisGraphEventListener(List<IStep> commandList,
 			Transformer<IGraphItem, IStep> commandTransformer) {
-		
+
 		this.commandList = commandList;
 		this.commandTransformer = commandTransformer;
 	}
@@ -41,17 +41,21 @@ class GravisGraphEventListener implements GraphEventListener<IVertex, IEdge> {
 	 * edu.uci.ics.jung.graph.event.GraphEventListener#handleGraphEvent(edu.
 	 * uci.ics.jung.graph.event.GraphEvent)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void handleGraphEvent(GraphEvent<IVertex, IEdge> evt) {
 		if (evt instanceof GravisGraphEvent) {
-			IGraphItem[] currentItems = ((GravisGraphEvent) evt).getGraphItems();
+			IGraphItem[] currentItems = ((GravisGraphEvent) evt)
+					.getGraphItems();
 
 			Step step = new Step();
 			for (IGraphItem item : currentItems) {
 				IStep command = this.commandTransformer.transform(item);
 				step.add(command);
 			}
-			
+
 			this.commandList.add(step);
 		}
 

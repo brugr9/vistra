@@ -1,8 +1,10 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.Writer;
 import java.util.Properties;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -51,6 +53,10 @@ class GraphManager implements IGraphManager {
 	 * A field for a hyper edge transformer.
 	 */
 	private final HyperEdgeTransformer hyperEdgeTransformer;
+	/**
+	 * A field for a GraphML writer.
+	 */
+	private GravisGraphMLWriter gravisGraphMLWriter;
 
 	/**
 	 * Main constructor.
@@ -72,6 +78,8 @@ class GraphManager implements IGraphManager {
 		this.vertexTransformer = new VertexTransformer();
 		this.edgeTransformer = new EdgeTransformer();
 		this.hyperEdgeTransformer = new HyperEdgeTransformer();
+		/* graphML writer */
+		this.gravisGraphMLWriter = new GravisGraphMLWriter();
 	}
 
 	/**
@@ -106,9 +114,10 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean save(IGravisGraph graph) throws Exception {
+	public void save(IGravisGraph graph) throws Exception {
 		try {
-			return this.write(graph, this.graph);
+			// TODO
+			// this.gravisGraphMLWriter.save(graph, w);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -118,13 +127,10 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean saveAs(IGravisGraph graph, File file) throws Exception {
+	public void saveAs(IGravisGraph graph, File file) throws Exception {
 		try {
-			this.graph = file;
-			boolean ok = this.write(graph, this.graph);
-			if (ok)
-				graph.setId(file.getName());
-			return ok;
+			this.save(graph);
+			graph.setId(file.getName());
 		} catch (Exception e) {
 			throw e;
 		}
@@ -159,20 +165,6 @@ class GraphManager implements IGraphManager {
 					"Exception while loading data from GraphML-file "
 							+ file.getName(), e);
 		}
-	}
-
-	/**
-	 * Writes a graph as given in an already existing GraphML-file.
-	 * 
-	 * @param graph
-	 *            the graph to write
-	 * @param file
-	 *            the file to write into
-	 * @return <code>true</code> if success
-	 */
-	private boolean write(IGravisGraph graph, File file) throws GraphException {
-		// TODO implement
-		return false;
 	}
 
 	/**

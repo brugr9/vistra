@@ -22,6 +22,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
 
 /**
+ * A restricted graph.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
@@ -29,16 +31,32 @@ final class RestrictedGraph implements IRestrictedGraph {
 
 	private final IObservableGravisGraph observableGraph;
 
+	/**
+	 * A field for a list of restricted vertices.
+	 */
 	private final List<IRestrictedVertex> verticesList;
+	/**
+	 * A field for a list of restricted edges.
+	 */
 	private final List<IRestrictedEdge> edgesList;
-
+	/**
+	 * A field for a map of vertices.
+	 */
 	private final BidiMap<IVertex, IRestrictedVertex> verticesMap;
+	/**
+	 * A field for a map of edges.
+	 */
 	private final BidiMap<IEdge, IRestrictedEdge> edgesMap;
-
+	/**
+	 * A field for an item comparator.
+	 */
 	private final ItemComparator itemComparator;
 
 	/**
+	 * Main constructor.
+	 * 
 	 * @param graph
+	 *            the graph to restrict
 	 */
 	RestrictedGraph(IObservableGravisGraph graph) {
 		this.observableGraph = graph;
@@ -51,9 +69,11 @@ final class RestrictedGraph implements IRestrictedGraph {
 	}
 
 	/**
+	 * Returns a list of sorted restricted edges.
+	 * 
 	 * @param coll
-	 * @param edgesMap
-	 * @return List<IRestrictedEdge>
+	 *            a collection of edges
+	 * @return the list of restricted edges
 	 */
 	private List<IRestrictedEdge> getRestrictedSortedEdgesList(
 			Collection<? extends IEdge> coll) {
@@ -80,8 +100,11 @@ final class RestrictedGraph implements IRestrictedGraph {
 	}
 
 	/**
+	 * Returns a list of sorted restricted vertices.
+	 * 
 	 * @param coll
-	 * @return List<IRestrictedVertex>
+	 *            a collection of vertices
+	 * @return the list of restricted vertices
 	 */
 	private List<IRestrictedVertex> getRestrictedSortedVerticesList(
 			Collection<? extends IVertex> coll) {
@@ -115,6 +138,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 		return verticesList;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void updateState(State state,
 			IRestrictedGraphItem... restrictedItems) {
@@ -129,6 +155,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphItemUpdate#updateState(
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem[])
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void updateState(IRestrictedGraphItem... restrictedItems) {
 		this.observableGraph
@@ -136,8 +165,11 @@ final class RestrictedGraph implements IRestrictedGraph {
 	}
 
 	/**
+	 * Returns the original items.
+	 * 
 	 * @param restrictedItems
-	 * @return
+	 *            the restricted items
+	 * @return the original items
 	 */
 	private IGraphItem[] getOriginalItems(IRestrictedGraphItem[] restrictedItems) {
 		List<IGraphItem> originalItems = new ArrayList<>();
@@ -160,13 +192,21 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#isEmpty()
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isEmpty() {
 		return this.observableGraph.isEmpty();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
@@ -180,6 +220,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#containsEdge(
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean containsEdge(IRestrictedEdge edge) {
 		return this.observableGraph.containsEdge(this.edgesMap.getKey(edge));
@@ -191,6 +234,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#containsVertex
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean containsVertex(IRestrictedVertex vertex) {
@@ -205,6 +251,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#degree(ch.bfh
 	 * .bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int degree(IRestrictedVertex vertex) {
 		return this.observableGraph.degree(this.verticesMap.getKey(vertex));
@@ -217,6 +266,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#findEdge(ch.bfh
 	 * .bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public IRestrictedEdge findEdge(IRestrictedVertex v1, IRestrictedVertex v2) {
@@ -231,6 +283,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#findEdgeSet(ch
 	 * .bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<? extends IRestrictedEdge> findEdgeSet(
@@ -248,6 +303,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getDefaultEdgeType
 	 * ()
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public EdgeType getDefaultEdgeType() {
 		return this.observableGraph.getDefaultEdgeType();
@@ -258,6 +316,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * 
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getEdgeCount()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int getEdgeCount() {
@@ -271,6 +332,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getEdgeCount(
 	 * edu.uci.ics.jung.graph.util.EdgeType)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getEdgeCount(EdgeType edge_type) {
 		return this.observableGraph.getEdgeCount(edge_type);
@@ -283,6 +347,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getEdgeType(ch
 	 * .bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public EdgeType getEdgeType(IRestrictedEdge edge) {
 		return this.observableGraph.getEdgeType(this.edgesMap.getKey(edge));
@@ -292,6 +359,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * (non-Javadoc)
 	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getEdges()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<? extends IRestrictedEdge> getEdges() {
@@ -304,6 +374,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getEdges(edu.
 	 * uci.ics.jung.graph.util.EdgeType)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<? extends IRestrictedEdge> getEdges(EdgeType edge_type) {
@@ -318,6 +391,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getIncidentCount
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getIncidentCount(IRestrictedEdge edge) {
 		return this.observableGraph
@@ -330,6 +406,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getIncidentEdges
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<? extends IRestrictedEdge> getIncidentEdges(
@@ -345,6 +424,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getIncidentVertices
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Collection<? extends IRestrictedVertex> getIncidentVertices(
 			IRestrictedEdge edge) {
@@ -359,6 +441,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getNeighborCount
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getNeighborCount(IRestrictedVertex vertex) {
 		return this.observableGraph.getNeighborCount(this.verticesMap
@@ -371,6 +456,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getNeighbors(
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<? extends IRestrictedVertex> getNeighbors(
@@ -385,6 +473,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getVertexCount()
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getVertexCount() {
 		return this.observableGraph.getVertexCount();
@@ -395,6 +486,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * 
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getVertices()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<? extends IRestrictedVertex> getVertices() {
@@ -408,6 +502,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#isIncident(ch
 	 * .bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isIncident(IRestrictedVertex vertex, IRestrictedEdge edge) {
@@ -423,6 +520,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * .bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isNeighbor(IRestrictedVertex v1, IRestrictedVertex v2) {
 		return this.observableGraph.isNeighbor(this.verticesMap.getKey(v1),
@@ -436,6 +536,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getDest(ch.bfh
 	 * .bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public IRestrictedVertex getDest(IRestrictedEdge directed_edge) {
 		return this.verticesMap.get(this.observableGraph.getDest(this.edgesMap
@@ -448,6 +551,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getEndpoints(
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Pair<? extends IRestrictedVertex> getEndpoints(IRestrictedEdge edge) {
@@ -466,6 +572,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getInEdges(ch
 	 * .bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Collection<? extends IRestrictedEdge> getInEdges(
 			IRestrictedVertex vertex) {
@@ -481,6 +590,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * .bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public IRestrictedVertex getOpposite(IRestrictedVertex vertex,
 			IRestrictedEdge edge) {
@@ -494,6 +606,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getOutEdges(ch
 	 * .bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<? extends IRestrictedEdge> getOutEdges(
@@ -509,6 +624,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getPredecessorCount
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getPredecessorCount(IRestrictedVertex vertex) {
 		return this.observableGraph.getPredecessorCount(this.verticesMap
@@ -521,6 +639,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getPredecessors
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<? extends IRestrictedVertex> getPredecessors(
@@ -536,6 +657,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getSource(ch.
 	 * bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public IRestrictedVertex getSource(IRestrictedEdge directed_edge) {
 		return this.verticesMap.get(this.observableGraph
@@ -549,6 +673,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getSuccessorCount
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getSuccessorCount(IRestrictedVertex vertex) {
 		return this.observableGraph.getSuccessorCount(this.verticesMap
@@ -561,6 +688,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getSuccessors
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Collection<? extends IRestrictedVertex> getSuccessors(
@@ -576,6 +706,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#inDegree(ch.bfh
 	 * .bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int inDegree(IRestrictedVertex vertex) {
 		return this.observableGraph.inDegree(this.verticesMap.getKey(vertex));
@@ -588,6 +721,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#isDest(ch.bfh
 	 * .bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isDest(IRestrictedVertex vertex, IRestrictedEdge edge) {
@@ -603,6 +739,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isPredecessor(IRestrictedVertex v1, IRestrictedVertex v2) {
 		return this.observableGraph.isPredecessor(this.verticesMap.getKey(v1),
@@ -616,6 +755,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#isSource(ch.bfh
 	 * .bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isSource(IRestrictedVertex vertex, IRestrictedEdge edge) {
@@ -631,6 +773,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * .bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex,
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isSuccessor(IRestrictedVertex v1, IRestrictedVertex v2) {
 		return this.observableGraph.isSuccessor(this.verticesMap.getKey(v1),
@@ -644,6 +789,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#outDegree(ch.
 	 * bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex)
 	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int outDegree(IRestrictedVertex vertex) {
 		return this.observableGraph.outDegree(this.verticesMap.getKey(vertex));
@@ -653,6 +801,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * (non-Javadoc)
 	 * 
 	 * @see ch.bfh.bti7301.hs2013.gravis.common.IImmutableGraph#getStartVertex()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public IRestrictedVertex getStartVertex() {
@@ -668,6 +819,9 @@ final class RestrictedGraph implements IRestrictedGraph {
 	 * 
 	 * @see
 	 * ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph#getEdgeType()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public EdgeType getEdgeType() {

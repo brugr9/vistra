@@ -49,10 +49,9 @@ public interface ICore {
 	 * 
 	 * @param graph
 	 *            the graph to save
-	 * @return <code>true</code> if success
 	 * @throws CoreException
 	 */
-	public abstract boolean save(IGravisGraph graph) throws CoreException;
+	public abstract void save(IGravisGraph graph) throws CoreException;
 
 	/**
 	 * Saves a graph into a GraphML-file.
@@ -61,10 +60,9 @@ public interface ICore {
 	 *            the graph to save
 	 * @param file
 	 *            the file to write into
-	 * @return <code>true</code> if success
 	 * @throws CoreException
 	 */
-	public abstract boolean saveAs(IGravisGraph graph, File file)
+	public abstract void saveAs(IGravisGraph graph, File file)
 			throws CoreException;
 
 	/**

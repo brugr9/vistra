@@ -105,9 +105,9 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean save(IGravisGraph graph) throws CoreException {
+	public void save(IGravisGraph graph) throws CoreException {
 		try {
-			return this.graphManager.save(graph);
+			this.graphManager.save(graph);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
@@ -117,9 +117,9 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean saveAs(IGravisGraph graph, File file) throws CoreException {
+	public void saveAs(IGravisGraph graph, File file) throws CoreException {
 		try {
-			return this.graphManager.saveAs(graph, file);
+			this.graphManager.saveAs(graph, file);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}

@@ -386,15 +386,13 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	/**
 	 * Doing: Saves an already 'saved as' but edited graph.
 	 * 
-	 * @return <code>true</code> if success
 	 * @throws Exception
 	 */
-	boolean saveGraph() throws Exception {
+	void saveGraph() throws Exception {
 		try {
 			IGravisGraph graph = this.model.getGraph();
-			boolean saved = this.core.save(graph);
-			this.updateGraphSaved(saved);
-			return saved;
+			this.core.save(graph);
+			this.updateGraphSaved(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -432,8 +430,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
 				IGravisGraph graph = this.model.getGraph();
-				boolean saved = this.core.saveAs(graph, file);
-				this.updateGraphSaved(saved);
+				this.core.saveAs(graph, file);
+				this.updateGraphSaved(true);
 			}
 			return option;
 

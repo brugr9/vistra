@@ -6,6 +6,8 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 
 /**
+ * An observable gravis graph interface.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */

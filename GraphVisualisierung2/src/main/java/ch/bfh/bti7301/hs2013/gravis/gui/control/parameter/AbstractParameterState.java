@@ -109,9 +109,8 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleSaveGraph() throws Exception {
 		try {
-			boolean ok = this.context.saveGraph();
-			if (ok)
-				this.context.setState(new ParameterGraphSaved(this.context));
+			this.context.saveGraph();
+			this.context.setState(new ParameterGraphSaved(this.context));
 		} catch (Exception e) {
 			throw e;
 		}

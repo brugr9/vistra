@@ -13,11 +13,16 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.GraphMLWriter;
 
 /**
+ * A JUNG GraphML writer adapted for GRAVIS.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
 public class GravisGraphMLWriter extends GraphMLWriter<IVertex, IEdge> {
 
+	/**
+	 * Main constructor.
+	 */
 	public GravisGraphMLWriter() {
 		super();
 	}
@@ -28,6 +33,9 @@ public class GravisGraphMLWriter extends GraphMLWriter<IVertex, IEdge> {
 	 * @see
 	 * edu.uci.ics.jung.io.GraphMLWriter#save(edu.uci.ics.jung.graph.Hypergraph,
 	 * java.io.Writer)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void save(Hypergraph<IVertex, IEdge> graph, Writer w)

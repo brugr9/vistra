@@ -9,6 +9,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
 
 /**
+ * A restricted graph interface.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
@@ -293,7 +295,7 @@ public interface IRestrictedGraph extends
 	 * @return IRestrictedVertex
 	 */
 	public IRestrictedVertex getStartVertex();
-	
+
 	/**
 	 * 
 	 * @return EdgeType

@@ -35,10 +35,9 @@ public interface IGraphManager {
 	 * 
 	 * @param graph
 	 *            the graph to save
-	 * @return <code>true</code> if success
 	 * @throws Exception
 	 */
-	public boolean save(IGravisGraph graph) throws Exception;
+	public void save(IGravisGraph graph) throws Exception;
 
 	/**
 	 * Saves a graph into a GraphML-file.
@@ -47,10 +46,9 @@ public interface IGraphManager {
 	 *            the graph to save
 	 * @param file
 	 *            the file to write into
-	 * @return <code>true</code> if success
 	 * @throws Exception
 	 */
-	public boolean saveAs(IGravisGraph graph, File file) throws Exception;
+	public void saveAs(IGravisGraph graph, File file) throws Exception;
 
 	/**
 	 * Returns the file name extension filter.
