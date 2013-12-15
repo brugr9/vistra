@@ -30,7 +30,7 @@ public class AlgorithmDijkstra extends AbstractAlgorithm implements IAlgorithm {
 	private final static String NO_START_VERTEX = "Dijkstra algorithm: no start vertex "
 			+ "found in graph %s!";
 
-	private final static String ALGO_NAME = "Dijkstra-Algorithmus";
+	private final static String ALGO_NAME = "Dijkstra";
 	private final static String ALGO_DESCRIPTION = "Der Dijkstra-Algorithmus findet den "
 			+ "kürzesten Weg zwischen zwei Knoten. Ein Startknoten muss im Graphen vorhanden "
 			+ "sein. Ist kein Endknoten vorhanden, so wird der kürteste Weg vom Startknoten "
@@ -57,12 +57,9 @@ public class AlgorithmDijkstra extends AbstractAlgorithm implements IAlgorithm {
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);
-
-		// super.setName("Dijkstra algorithm");
-		// super.setDescription("Dijkstra algorithm for DIRECTED and UNDIRECTED edges. "
-		// + "Negative weights and multi-edges are not allowed.");
 		// TODO annotations
-		super.setEdgeTypes(new EdgeType[] {});
+		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
+				EdgeType.DIRECTED });
 
 		this.vertexResultComparator = new VertexPaintedResultComparator();
 	}

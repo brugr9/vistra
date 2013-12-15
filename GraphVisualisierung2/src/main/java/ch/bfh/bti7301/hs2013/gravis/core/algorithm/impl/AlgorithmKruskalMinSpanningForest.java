@@ -52,12 +52,9 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);
-
-		// super.setName("Kruskal algorithm");
-		// super.setDescription("Kruskal algorithm: Calculates a minimal spanning forest from a "
-		// + "given graph. The graph must be UNDIRECTED.");
 		// TODO annotations
-		super.setEdgeTypes(new EdgeType[] {});
+		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
+				EdgeType.DIRECTED });
 	}
 
 	/*

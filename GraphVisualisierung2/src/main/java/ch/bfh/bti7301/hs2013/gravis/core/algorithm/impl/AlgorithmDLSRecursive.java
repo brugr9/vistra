@@ -23,7 +23,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public class AlgorithmDLSRecursive extends AbstractAlgorithm implements
 		IAlgorithm {
 
-	private final static String ALGO_NAME = "Rekursiver Depth-Last-Search Algorithmus (DLS)";
+	private final static String ALGO_NAME = "DLS rekursive";
 	private final static String ALGO_DESCRIPTION = "Der Graph wird in Postorder traversiert. "
 			+ "Es sind sowohl gerichtete als auch ungerichtete Graphen zulässig."
 			+ "Die Knoten werden in Postorder-Reihenfolge nummeriert.";
@@ -37,12 +37,9 @@ public class AlgorithmDLSRecursive extends AbstractAlgorithm implements
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);
-
-		// super.setName("Depth-last search (DLS), recursive");
-		// super.setDescription("Depth-last search (DLS) for DIRECTED and UNDIRECTED edges, "
-		// + "implemented recursively.");
 		// TODO annotations
-		super.setEdgeTypes(new EdgeType[] {});
+		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
+				EdgeType.DIRECTED });
 	}
 
 	/*

@@ -25,7 +25,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  */
 public class AlgorithmBFS extends AbstractAlgorithm implements IAlgorithm {
 
-	private final static String ALGO_NAME = "Breadth-First-Search Algorithmus (BFS)";
+	private final static String ALGO_NAME = "BFS";
 	private final static String ALGO_DESCRIPTION = "Die Breitensuche ist als Schleife "
 			+ "implementiert. Es sind sowohl gerichtete als auch ungerichtete Graphen "
 			+ "zulässig. Die Breitensuche wird für jede (schwache) Zusammenhangskomponente "
@@ -39,14 +39,9 @@ public class AlgorithmBFS extends AbstractAlgorithm implements IAlgorithm {
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);
-
-		// super.setName("Breadth-first search (BFS)");
-		// super.setDescription("Breadth-first search (BFS) for
-		// DIRECTED and UNDIRECTED edges.");
-		// Jede Zushang Komp Breitensuche
-
 		// TODO annotations
-		super.setEdgeTypes(new EdgeType[] {});
+		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
+				EdgeType.DIRECTED });
 	}
 
 	/*

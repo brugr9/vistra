@@ -24,7 +24,7 @@ import static ch.bfh.bti7301.hs2013.gravis.util.transformer.ValueTransformer.toA
 public class AlgorithmDFSRecursive extends AbstractAlgorithm implements
 		IAlgorithm {
 
-	private final static String ALGO_NAME = "Rekursiver Depth-First-Search Algorithmus (DFS)";
+	private final static String ALGO_NAME = "DFS recursive";
 	private final static String ALGO_DESCRIPTION = "Der Graph wird in Preorder traversiert. "
 			+ "Es sind sowohl gerichtete als auch ungerichtete Graphen zulässig."
 			+ "Die Knoten werden in Preorder-Reihenfolge nummeriert.";
@@ -41,12 +41,9 @@ public class AlgorithmDFSRecursive extends AbstractAlgorithm implements
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);
-
-		// super.setName("Depth-first search (DFS), recursive");
-		// super.setDescription("Depth-first search (DFS) for DIRECTED and UNDIRECTED edges, "
-		// + "implemented recursively.");
 		// TODO annotations
-		super.setEdgeTypes(new EdgeType[] {});
+		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
+				EdgeType.DIRECTED });
 	}
 
 	/*
