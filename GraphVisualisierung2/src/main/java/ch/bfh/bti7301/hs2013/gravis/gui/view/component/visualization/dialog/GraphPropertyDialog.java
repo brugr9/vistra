@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -38,14 +37,9 @@ public class GraphPropertyDialog extends JDialog {
 	 */
 	private final JPanel contentPanel = new JPanel();
 
-	/**
-	 * A field for a content panel.
-	 */
 	private JTextField txtGraphName;
 
 	private JTextArea textAreaGraphDescription;
-
-	private JOptionPane op;
 
 	/**
 	 * Create the dialog.
