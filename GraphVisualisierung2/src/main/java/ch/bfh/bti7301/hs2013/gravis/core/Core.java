@@ -15,7 +15,7 @@ import static ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory.createRestric
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.AlgorithmManagerFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithm;
 import ch.bfh.bti7301.hs2013.gravis.core.algorithm.IAlgorithmManager;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphFactory;
+import ch.bfh.bti7301.hs2013.gravis.core.graph.GraphManagerFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGraphManager;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.IObservableGravisGraph;
@@ -62,7 +62,7 @@ public class Core implements ICore {
 		try {
 			// TODO root
 			this.root = new File("");
-			this.graphManager = GraphFactory.createGraphManager(p);
+			this.graphManager = GraphManagerFactory.createGraphManager(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(root, p);
 		} catch (Exception e) {
 			e.printStackTrace();

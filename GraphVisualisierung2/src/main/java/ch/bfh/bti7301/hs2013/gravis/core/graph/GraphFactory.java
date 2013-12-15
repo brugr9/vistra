@@ -1,32 +1,22 @@
 package ch.bfh.bti7301.hs2013.gravis.core.graph;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.collections15.Transformer;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.IRestrictedGraphItem.State;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IRestrictedEdge;
-import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IRestrictedVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
 import ch.bfh.bti7301.hs2013.gravis.core.traversal.step.CommandTransformerFactory;
 import ch.bfh.bti7301.hs2013.gravis.core.traversal.step.IStep;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseGraph;
-import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 
 /**
+ * A graph factory.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -40,32 +30,42 @@ public final class GraphFactory {
 	}
 
 	/**
+	 * Returns a JUNG <code>SparseGraph</code>.
 	 * 
-	 * @return a new instance of type Graph<IVertex, IEdge>
+	 * @return the graph
 	 */
 	public static Graph<IVertex, IEdge> createGraph() {
 		return new SparseGraph<IVertex, IEdge>();
 	}
 
 	/**
+	 * Creates a <code>GravisGraph</code> based on an already existing graph.
+	 * 
 	 * @param graph
-	 * @return a new instance of type IGravisGraph
+	 *            the graph to extend
+	 * @return the extended graph
 	 */
 	public static IGravisGraph createIGravisGraph(Graph<IVertex, IEdge> graph) {
 		return new GravisGraph(graph);
 	}
 
 	/**
-	 * @return a new instance of type IGravisGraph
+	 * Creates a <code>GravisGraph</code> based on a JUNG
+	 * <code>SparseGraph</code>.
+	 * 
+	 * @return the graph
 	 */
 	public static IGravisGraph createIGravisGraph() {
 		return new GravisGraph(createGraph());
 	}
 
 	/**
+	 * Creates an <code>IObservableGravisGraph</code> based on an already
+	 * existing <code>IGravisGraph</code>.
 	 * 
 	 * @param graph
-	 * @return a new instance of type IObservableGravisGraph
+	 *            the graph to make observable
+	 * @return the observable graph
 	 */
 	public static IObservableGravisGraph createObservableGraph(
 			IGravisGraph graph) {
@@ -73,8 +73,12 @@ public final class GraphFactory {
 	}
 
 	/**
+	 * Creates an <code>IRestrictedGraph</code> based on an already existing
+	 * <code>IObservableGravisGraph</code>.
+	 * 
 	 * @param graph
-	 * @return a new instance of type IRestrictedGraph
+	 *            the graph to restrict
+	 * @return the restricted graph
 	 */
 	public static IRestrictedGraph createRestrictedGraph(
 			IObservableGravisGraph graph) {
@@ -82,9 +86,12 @@ public final class GraphFactory {
 	}
 
 	/**
+	 * Creates a graph event.
 	 * 
 	 * @param graph
+	 *            a graph the event is related to
 	 * @param items
+	 *            the graph items
 	 * @return a new instance of type GraphEvent<IVertex, IEdge>
 	 */
 	public static GraphEvent<IVertex, IEdge> createGraphEvent(
@@ -93,33 +100,16 @@ public final class GraphFactory {
 	}
 
 	/**
-	 * Creates a graph manager.
-	 * 
-	 * @param p
-	 *            the core properties
-	 * @return the graph manager
-	 */
-	public static IGraphManager createGraphManager(Properties p)
-			throws Exception {
-
-		try {
-			return new GraphManager(p);
-		} catch (Exception e) {
-			throw e;
-		}
-
-	}
-
-	/**
+	 * Creates a <code>GraphEventListener</code>.
 	 * 
 	 * @param commandList
-	 * @return a new instance of type GraphEventListener<IVertex, IEdge>
+	 *            a list of commands
+	 * @return the graph event listener
 	 */
 	public static GraphEventListener<IVertex, IEdge> createGravisGraphEventListener(
 			List<IStep> commandList) {
 		Transformer<IGraphItem, IStep> commandTransformer = CommandTransformerFactory
 				.createCommandTransformer();
-
 		return new GravisGraphEventListener(commandList, commandTransformer);
 	}
 

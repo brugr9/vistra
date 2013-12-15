@@ -7,29 +7,39 @@ import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 
 /**
+ * A JUNG graph event adapted for GRAVIS.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
 class GravisGraphEvent extends GraphEvent<IVertex, IEdge> {
 
-	private IGraphItem[] items;
-	
 	/**
+	 * A field for the graph items.
+	 */
+	private IGraphItem[] items;
+
+	/**
+	 * Main constructor.
 	 * 
 	 * @param graph
+	 *            a graph
 	 * @param items
+	 *            the graph items
 	 */
 	protected GravisGraphEvent(Graph<IVertex, IEdge> graph, IGraphItem[] items) {
 		super(graph, null);
-		
+
 		this.items = items;
 	}
 
 	/**
-	 * @return IGraphItem
+	 * Returns the graph items.
+	 * 
+	 * @return the graph items
 	 */
 	public IGraphItem[] getGraphItems() {
 		return this.items;
 	}
-	
+
 }
