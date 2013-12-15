@@ -95,7 +95,7 @@ public class GraphPanel extends JPanel implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == EventSource.I18N || arg == EventSource.PARAMETER_CHANGED) {
+			if (arg == EventSource.I18N || arg == EventSource.GRAPH) {
 				String title = b.getString("visualization.label") + ": ";
 				if (!m.isGraphSaved())
 					title += "*";

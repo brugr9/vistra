@@ -35,7 +35,8 @@ import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.EDIT
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.OPEN_GRAPH;
-import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.PARAMETER_CHANGED;
+import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.GRAPH;
+import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.ALGORITHM;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.SAVE_GRAPH_AS;
 import static ch.bfh.bti7301.hs2013.gravis.gui.control.IControl.EventSource.SAVE_GRAPH;
 
@@ -310,6 +311,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @throws Exception
 	 */
 	void idle() throws Exception {
+		if (this.model.getTraversal() == null)
+			this.model.getAnimationStateHandler().handleOff();
+		else
+			this.model.getAnimationStateHandler().handleIdle();
 		this.setGraphSaved(true);
 		this.setGraphEditable(true);
 	}
@@ -473,7 +478,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 
 			if (index == 0) {
 				/* settings */
-				this.model.setAlgorithmDescription("");
+				this.model.setAlgorithmDescription(" ");
 				this.model.setTraversal(null);
 				this.model.setProgressMaximum(0);
 			} else {
@@ -646,7 +651,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.model.setGraphSaved(saved);
 			this.model.setSaveGraphEnabled(!saved);
 			this.model.setAlgorithmsEnabled(saved);
-			this.model.notifyObservers(PARAMETER_CHANGED);
+			this.model.notifyObservers(GRAPH);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -730,8 +735,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void setViewIdle() {
 		this.enableMenu(true);
-		this.model.setAlgorithmsEnabled(this.model.isGraphSaved());
-		this.model.notifyObservers(EventSource.PARAMETER_CHANGED);
+		this.model.setAlgorithmsEnabled(false);
+		this.model.notifyObservers(EventSource.ALGORITHM);
 	}
 
 	/**
@@ -741,7 +746,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		this.enableMenu(true);
 		if (this.model.isAlgorithmsEnabled()) {
 			this.model.setAlgorithmsEnabled(false);
-			this.model.notifyObservers(EventSource.PARAMETER_CHANGED);
+			this.model.notifyObservers(EventSource.ALGORITHM);
 		}
 	}
 
@@ -751,7 +756,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void setViewGraphSaved() {
 		this.enableMenu(true);
 		this.model.setAlgorithmsEnabled(true);
-		this.model.notifyObservers(EventSource.PARAMETER_CHANGED);
+		this.model.notifyObservers(EventSource.ALGORITHM);
 	}
 
 	/**
@@ -761,7 +766,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void setViewAlgorithmSelected() {
 		this.enableMenu(true);
 		this.model.setAlgorithmsEnabled(true);
-		this.model.notifyObservers(EventSource.PARAMETER_CHANGED);
+		this.model.notifyObservers(EventSource.ALGORITHM);
 		/* enable traversal player */
 		this.model.getAnimationStateHandler().handleIdle();
 		/* render message */
@@ -776,7 +781,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void setViewOff() {
 		this.enableMenu(false);
 		this.model.setAlgorithmsEnabled(false);
-		this.model.notifyObservers(EventSource.PARAMETER_CHANGED);
+		this.model.notifyObservers(EventSource.ALGORITHM);
 		this.setGraphEditable(false);
 	}
 

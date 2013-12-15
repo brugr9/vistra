@@ -40,11 +40,6 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public class Core implements ICore {
 
 	/**
-	 * A field for the application root file.
-	 */
-	private File root;
-
-	/**
 	 * A field for a graph manager.
 	 */
 	private IGraphManager graphManager;
@@ -60,10 +55,8 @@ public class Core implements ICore {
 	 */
 	public Core(Properties p) {
 		try {
-			// TODO root
-			this.root = new File("");
-			this.graphManager = GraphManagerFactory.createGraphManager(p);
-			this.algorithmManager = AlgorithmManagerFactory.create(root, p);
+			this.graphManager = GraphManagerFactory.create(p);
+			this.algorithmManager = AlgorithmManagerFactory.create(p);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -129,16 +122,8 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public File getAlgorithmTemplatesDir() {
-		return new File(this.root, this.algorithmManager.getTemplatesDir());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public File getAlgorithmWorkbenchDir() {
-		return new File(this.root, this.algorithmManager.getWorkbenchDir());
+		return new File(this.algorithmManager.getWorkbenchDir());
 	}
 
 	/**

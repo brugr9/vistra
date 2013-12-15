@@ -68,13 +68,6 @@ public interface ICore {
 			throws CoreException;
 
 	/**
-	 * Returns the algorithm templates directory.
-	 * 
-	 * @return the algorithm templates directory
-	 */
-	public abstract File getAlgorithmTemplatesDir();
-
-	/**
 	 * Returns the algorithm workbench directory.
 	 * 
 	 * @return the algorithm workbench directory

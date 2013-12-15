@@ -15,13 +15,6 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public interface IAlgorithmManager {
 
 	/**
-	 * Returns the templates directory.
-	 * 
-	 * @return the templates directory
-	 */
-	public abstract String getTemplatesDir();
-
-	/**
 	 * Returns the workbench directory.
 	 * 
 	 * @return the workbench directory
@@ -47,8 +40,8 @@ public interface IAlgorithmManager {
 	public abstract EdgeType[] add(File file) throws Exception;
 
 	/**
-	 * Returns the names of available algorithms able to operate on graphs with
-	 * edge type as given.
+	 * Returns a list of names with algorithms capable to operate on graphs with
+	 * the edge type as given.
 	 * 
 	 * @param edgeType
 	 *            the graph type

@@ -133,7 +133,7 @@ public final class Model extends Observable implements IModel {
 		// Algorithm
 		this.algorithms = null;
 		this.algorithmsEnabled = false;
-		this.selectedAlgorithmIndex = -1;
+		this.selectedAlgorithmIndex = 0;
 		this.algorithmDescription = " ";
 
 		/* Traversal */

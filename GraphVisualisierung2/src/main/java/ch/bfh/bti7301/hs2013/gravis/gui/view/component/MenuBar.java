@@ -232,10 +232,11 @@ public final class MenuBar extends JMenuBar implements Observer {
 								.getString("undirected.label"));
 						this.directedGraphMenuItem.setText(b
 								.getString("directed.label"));
-						this.openGraphMenuItem.setText(b.getString("open.label"));
+						this.openGraphMenuItem.setText(b
+								.getString("open.label"));
 						this.saveMenuItem.setText(b.getString("save.label"));
-						this.saveGraphAsMenuItem
-								.setText(b.getString("saveas.label"));
+						this.saveGraphAsMenuItem.setText(b
+								.getString("saveas.label"));
 						this.algorithmMenu.setText(b
 								.getString("algorithm.label"));
 						this.importAlgorithmMenuItem.setText(b
@@ -306,7 +307,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 										.getString("about.accelerator")));
 					}
 
-				} else if (arg == EventSource.PARAMETER_CHANGED) {
+				} else if (arg == EventSource.GRAPH) {
 					this.saveGraphAsMenuItem.setEnabled(m.isSaveGraphEnabled());
 				} else {
 
@@ -319,7 +320,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 							.isDirectedGraphEnabled());
 					this.openGraphMenuItem.setEnabled(m.isOpenGraphEnabled());
 					this.saveMenuItem.setEnabled(m.isSaveGraphEnabled());
-					this.saveGraphAsMenuItem.setEnabled(m.isSaveGraphAsEnabled());
+					this.saveGraphAsMenuItem.setEnabled(m
+							.isSaveGraphAsEnabled());
 					this.algorithmMenu.setEnabled(m.isAlgorithmMenuEnabled());
 					this.importAlgorithmMenuItem.setEnabled(m
 							.isImportAlgorithmEnabled());

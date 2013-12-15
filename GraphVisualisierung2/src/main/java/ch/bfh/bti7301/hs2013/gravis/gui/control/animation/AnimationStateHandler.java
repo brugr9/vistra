@@ -60,6 +60,7 @@ public final class AnimationStateHandler extends Observable implements
 		this.animationListener = new AnimationListener();
 		int animationDelay = this.model.getDelay() * A_SECOND;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
+		// state
 		this.setState(new AnimationOff(this));
 	}
 
@@ -277,6 +278,7 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	void setViewOff() {
 		this.model.getStepByStepStateHandler().handleOff();
+		this.model.setDelayEnabled(false);
 		this.model.setAnimationEnabled(false);
 		this.model.notifyObservers(ANIMATION);
 	}
@@ -295,7 +297,7 @@ public final class AnimationStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			IModel model = AnimationStateHandler.this.model;
-			
+
 			if (model.getProgress() < model.getProgressMaximum())
 				((StepByStepStateHandler) model.getStepByStepStateHandler())
 						.goForward();

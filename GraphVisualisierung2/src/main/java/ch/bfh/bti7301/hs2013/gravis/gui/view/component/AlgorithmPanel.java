@@ -65,7 +65,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 
 		// combo
 		this.algorithmComboModel = new DefaultComboBoxModel<String>(
-				new String[] {});
+				model.getAlgorithms());
 		this.algorithmCombo = new JComboBox<String>(this.algorithmComboModel);
 		this.algorithmCombo.addItemListener(model.getParameterStateHandler());
 
@@ -75,7 +75,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 		this.algorithmDescriptionTextArea.setMinimumSize(new Dimension(width,
 				height / 3));
 		this.algorithmDescriptionTextArea.setColumns(10);
-		this.algorithmDescriptionTextArea.setRows(4);
+		this.algorithmDescriptionTextArea.setRows(10);
 		this.algorithmDescriptionTextArea.setLineWrap(true);
 		this.algorithmDescriptionTextArea.setWrapStyleWord(true);
 		this.algorithmDescriptionTextArea.setBackground(GravisColor.LIGHT_GRAY);
@@ -113,17 +113,14 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 
 				if (arg == EventSource.I18N) {
 					this.titledBorder.setTitle(b.getString("algorithm.label"));
-				} else if (arg == EventSource.PARAMETER_CHANGED) {
+				} else if (arg == EventSource.GRAPH) {
+					this.algorithmCombo.setEnabled(m.isAlgorithmsEnabled());
+				} else if (arg == EventSource.ALGORITHM) {
 					this.algorithmComboModel = new DefaultComboBoxModel<String>(
 							m.getAlgorithms());
 					this.algorithmCombo.setSelectedIndex(m
 							.getSelectedAlgorithmIndex());
 					this.algorithmCombo.setEnabled(m.isAlgorithmsEnabled());
-					if (m.isAlgorithmsEnabled())
-						this.algorithmCombo
-								.setBackground(GravisColor.LIGHT_GREEN);
-					else
-						this.algorithmCombo.setBackground(GravisColor.RED);
 					this.algorithmDescriptionTextArea.setText(m
 							.getAlgorithmDescription());
 					this.algorithmDescriptionTextArea.setCaretPosition(1);

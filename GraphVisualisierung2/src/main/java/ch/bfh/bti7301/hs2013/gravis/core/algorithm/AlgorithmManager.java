@@ -3,14 +3,19 @@ package ch.bfh.bti7301.hs2013.gravis.core.algorithm;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Properties;
-import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
-import org.apache.commons.collections15.map.HashedMap;
 import org.apache.maven.shared.utils.io.DirectoryScanner;
+
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.impl.AlgorithmBFS;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.impl.AlgorithmDFSRecursive;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.impl.AlgorithmDLSRecursive;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.impl.AlgorithmDefault;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.impl.AlgorithmDijkstra;
+import ch.bfh.bti7301.hs2013.gravis.core.algorithm.impl.AlgorithmKruskalMinSpanningForest;
 
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -23,90 +28,76 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 class AlgorithmManager implements IAlgorithmManager {
 
 	/**
-	 * A field for a templates directory.
-	 */
-	private String templatesDir;
-
-	/**
 	 * A field for a workbench directory.
 	 */
 	private String workbenchDir;
-
 	/**
 	 * A field for a filename extension filter.
 	 */
 	private FileNameExtensionFilter fileNameExtensionFilter;
-
 	/**
-	 * A field for a default name.
+	 * A field for a list of algorithms available.
 	 */
-	private String defaultName;
-
+	private ArrayList<IAlgorithm> algorithmsAvailable;
 	/**
-	 * A field for a list of algorithms.
+	 * A field for an list of algorithm out of algorithms available.
 	 */
-	private ArrayList<String> algorithms;
-
-	/**
-	 * A field for an algorithm map: maps an algorithm-path to an array of edge
-	 * types (the capabilities of the algorithms).
-	 */
-	private HashedMap<String, EdgeType[]> algorithmMap;
+	private ArrayList<IAlgorithm> algorithmsSupported;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param root
-	 *            the application root directory
 	 * @param p
 	 *            the properties
 	 */
-	public AlgorithmManager(File root, Properties p) {
+	public AlgorithmManager(Properties p) {
 		super();
 
-		/* directories */
 		String thisPath = this.getClass().getPackage().getName() + ".";
-		this.templatesDir = thisPath + "templates";
 		this.workbenchDir = thisPath + "workbench";
-
-		/* filename filter */
+		// filename filter
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				p.getProperty("extension.algorithm.description"),
 				new String[] { p.getProperty("extension.algorithm") });
 		this.fileNameExtensionFilter = filter;
 
-		/* default name */
-		this.defaultName = p.getProperty("noparameter");
+		/* supported */
+		this.algorithmsSupported = new ArrayList<IAlgorithm>();
+		/* available */
+		this.algorithmsAvailable = new ArrayList<IAlgorithm>();
+		this.addAlgorithmsAvailable();
 
-		/* algorithm */
-		this.algorithms = new ArrayList<String>();
-		this.algorithms.add(this.defaultName);
-		this.algorithmMap = new HashedMap<String, EdgeType[]>();
+	}
 
-		/* collect files */
-		DirectoryScanner directoryScanner = new DirectoryScanner();
-		directoryScanner.setIncludes(this.getFilter().getExtensions());
-		directoryScanner.setCaseSensitive(true);
-		try {
-			// templates
-			directoryScanner.setBasedir(this.getTemplatesDir());
-			this.addAll(directoryScanner.getIncludedFiles());
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, this.getClass().getName()
-					+ ", read files from " + this.getTemplatesDir()
-					+ " failed.\n" + e.toString(), "GRAVIS", 1, null);
-			e.printStackTrace();
-		}
-		try {
-			// workbench
-			directoryScanner.setBasedir(this.getWorkbenchDir());
-			this.addAll(directoryScanner.getIncludedFiles());
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, this.getClass().getName()
-					+ ", read files from " + this.getWorkbenchDir()
-					+ " failed.\n" + e.toString(), "GRAVIS", 1, null);
-			e.printStackTrace();
-		}
+	/**
+	 * Adds all algorithms available.
+	 */
+	private void addAlgorithmsAvailable() {
+		this.algorithmsAvailable.clear();
+		this.algorithmsAvailable.add(new AlgorithmDefault());
+		this.algorithmsAvailable.add(new AlgorithmBFS());
+		this.algorithmsAvailable.add(new AlgorithmDFSRecursive());
+		this.algorithmsAvailable.add(new AlgorithmDLSRecursive());
+		this.algorithmsAvailable.add(new AlgorithmDijkstra());
+		this.algorithmsAvailable.add(new AlgorithmKruskalMinSpanningForest());
+
+		// TODO collect files from workbench
+		// DirectoryScanner directoryScanner = new DirectoryScanner();
+		// directoryScanner.setIncludes(this.getFilter().getExtensions()[1]);
+		// directoryScanner.setCaseSensitive(true);
+		// try {
+		// directoryScanner.setBasedir(this.getWorkbenchDir());
+		// IAlgorithm algorithmToAdd;
+		// for (String algorithmClass : directoryScanner.getIncludedFiles()) {
+		// algorithmToAdd = this.load(algorithmClass);
+		// this.algorithmsAvailable.add(algorithmToAdd);
+		// }
+		// } catch (Exception e) {
+		// JOptionPane.showMessageDialog(null, this.getClass().getName()
+		// + ", read files from " + this.getWorkbenchDir()
+		// + " failed.\n" + e.toString(), "GRAVIS", 1, null);
+		// e.printStackTrace();
+		// }
 
 	}
 
@@ -116,18 +107,22 @@ class AlgorithmManager implements IAlgorithmManager {
 	@Override
 	public String[] getNames(EdgeType edgeType) throws Exception {
 		try {
-			this.updateAlgorithms(edgeType);
-			String parameter, name;
-			int first, length;
-			int size = this.algorithms.size();
-			String[] names = new String[size + 1];
-			names[0] = this.defaultName;
-			for (int index = 1; index < size; index++) {
-				parameter = this.algorithms.get(index);
-				first = parameter.lastIndexOf('.') + 1;
-				length = parameter.length();
-				name = parameter.subSequence(first, length).toString();
-				names[index + 1] = name;
+			/* update algorithmsSupported */
+			this.algorithmsSupported.clear();
+			EdgeType[] capabilities;
+			for (IAlgorithm a : this.algorithmsAvailable) {
+				capabilities = a.getEdgeTypes();
+				for (int i = 0; i < capabilities.length; i++) {
+					if (capabilities[i] == edgeType) {
+						this.algorithmsSupported.add(a);
+						break;
+					}
+				}
+			}
+			/* get names from algorithmsSupported */
+			String[] names = new String[this.algorithmsSupported.size()];
+			for (int i = 0; i < names.length; i++) {
+				names[i] = this.algorithmsSupported.get(i).getName();
 			}
 			return names;
 		} catch (Exception e) {
@@ -141,23 +136,10 @@ class AlgorithmManager implements IAlgorithmManager {
 	@Override
 	public IAlgorithm select(int index) throws Exception {
 		try {
-			if (index == 0) {
-				return null;
-			} else {
-				String fileName = this.algorithms.get(index);
-				return this.load(fileName);
-			}
+			return this.algorithmsSupported.get(index);
 		} catch (Exception e) {
 			throw e;
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getTemplatesDir() {
-		return this.templatesDir;
 	}
 
 	/**
@@ -174,35 +156,12 @@ class AlgorithmManager implements IAlgorithmManager {
 	@Override
 	public EdgeType[] add(File file) throws Exception {
 		try {
-			// compile
-			this.compile(file);
-			// load
-			IAlgorithm algorithmToAdd = this.load(file.getName());
-			// put
-			EdgeType[] edgeTypeToAdd = algorithmToAdd.getEdgeTypes();
-			return this.algorithmMap.put(file.getName(), edgeTypeToAdd);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Adds a bunch of files to the list of parameter files.
-	 * 
-	 * @param fileNames
-	 * @return
-	 * @throws Exception
-	 */
-	private boolean addAll(String[] fileNames) throws Exception {
-		try {
-			// TODO return value
-			for (String fileName : fileNames) {
-				IAlgorithm algorithmToAdd = this.load(fileName);
-				// put
-				EdgeType[] edgeTypeToAdd = algorithmToAdd.getEdgeTypes();
-				this.algorithmMap.put(fileName, edgeTypeToAdd);
-			}
-			return true;
+			if (this.compile(file) == 0) {
+				IAlgorithm algorithmToAdd = this.load(file.getName());
+				this.algorithmsAvailable.add(algorithmToAdd);
+				return algorithmToAdd.getEdgeTypes();
+			} else
+				return null;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -214,9 +173,11 @@ class AlgorithmManager implements IAlgorithmManager {
 	@Override
 	public EdgeType[] remove(String fileName) throws Exception {
 		try {
-			String file = this.getWorkbenchDir() + "." + fileName;
-			this.algorithms.remove(file);
-			return this.algorithmMap.remove(file);
+			// TODO
+			// String file = this.getWorkbenchDir() + "." + fileName;
+			// this.algorithmsAvailable.remove(fileName);
+			// return this.algorithm.remove(file);
+			return null;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -254,16 +215,16 @@ class AlgorithmManager implements IAlgorithmManager {
 	 * TODO Loads an algorithm *.class in runtime, the *.class has to implement
 	 * <code>IAlgorithm</code>.
 	 * 
-	 * @param file
-	 *            the algorithm file
+	 * @param algorithmClass
+	 *            the algorithm class
 	 * @return the algorithm
 	 * @throws Exception
 	 */
-	private IAlgorithm load(String file) throws Exception {
+	private IAlgorithm load(String algorithmClass) throws Exception {
 
 		try {
 			ClassLoader cl = this.getClass().getClassLoader();
-			Class<?> c = cl.loadClass(file.replace(".", File.separator));
+			Class<?> c = cl.loadClass(algorithmClass);
 			return (IAlgorithm) c.newInstance();
 
 		} catch (SecurityException e) {
@@ -278,37 +239,6 @@ class AlgorithmManager implements IAlgorithmManager {
 			throw e;
 		} catch (ClassCastException e) {
 			throw e;
-		} catch (Exception e) {
-			throw e;
-		}
-
-	}
-
-	/**
-	 * Collects the algorithms out of algorithmMap which have the capability to
-	 * handle an edge type as given an creates the list of algorithms.
-	 * 
-	 * @throws Exception
-	 */
-	private void updateAlgorithms(EdgeType edgeType) throws Exception {
-		// TODO return value?
-
-		try {
-			this.algorithms.clear();
-			this.algorithms.add(this.defaultName);
-			Set<String> filesAvailable = this.algorithmMap.keySet();
-			EdgeType[] capabilities;
-			for (String file : filesAvailable) {
-				// capabilities = new
-				// EdgeType[this.algorithmMap.get(file).length];
-				capabilities = this.algorithmMap.get(file);
-				for (int i = 0; i < capabilities.length; i++) {
-					if (capabilities[i] == edgeType) {
-						this.algorithms.add(file);
-						break;
-					}
-				}
-			}
 		} catch (Exception e) {
 			throw e;
 		}

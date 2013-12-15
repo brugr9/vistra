@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 import ch.bfh.bti7301.hs2013.gravis.core.ICore;
 import ch.bfh.bti7301.hs2013.gravis.gui.Model;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.animation.AnimationStateHandler;
-import ch.bfh.bti7301.hs2013.gravis.gui.control.parameter.IParameterStateHandler;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.parameter.ParameterStateHandler;
 import ch.bfh.bti7301.hs2013.gravis.gui.control.stepbystep.StepByStepStateHandler;
 
@@ -35,19 +34,24 @@ public final class Control implements IControl {
 		super();
 		try {
 			this.model = model;
-			// action listener
+			// Algorithms
+			this.model.setAlgorithms(core.getAlgorithms(this.model.getGraph()
+					.getEdgeType()));
+			// Action listener
 			this.model.setI18nListener(new ActionListenerI18n(model));
 			this.model.setHelpListener(new ActionListenerHelp(model));
 			this.model.setAboutListener(new ActionListenerAbout(model));
 			this.model.setQuitListener(new ActionListenerQuit(model));
-			// state handler
-			IParameterStateHandler psh = new ParameterStateHandler(core, model);
-			this.model.setParameterStateHandler(psh);
-			this.model.getGraph().addGraphEventListener(psh);
+			// State handler
 			this.model.setStepByStepStateHandler(new StepByStepStateHandler(
 					model));
 			this.model
 					.setAnimationStateHandler(new AnimationStateHandler(model));
+			this.model.setParameterStateHandler(new ParameterStateHandler(core,
+					model));
+			// Graph event listener
+			this.model.getGraph().addGraphEventListener(
+					this.model.getParameterStateHandler());
 		} catch (Exception e) {
 			throw e;
 		}
@@ -67,8 +71,7 @@ public final class Control implements IControl {
 			sb.append(b.getString("app.label")
 					+ System.lineSeparator()
 					+ b.getString("about.message").replaceAll("\n",
-							System.lineSeparator()) + System.lineSeparator()
-					+ "----" + System.lineSeparator());
+							System.lineSeparator()) + System.lineSeparator());
 			this.model.setStringBuilder(sb);
 			/* update the view */
 			this.model.notifyObservers();

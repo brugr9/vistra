@@ -24,7 +24,7 @@ public final class GraphManagerFactory {
 	 *            the core properties
 	 * @return the graph manager
 	 */
-	public static IGraphManager createGraphManager(Properties p)
+	public static IGraphManager create(Properties p)
 			throws Exception {
 
 		try {
