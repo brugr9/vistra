@@ -12,9 +12,9 @@ import javax.swing.border.EmptyBorder;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ValueTransformer;
 import ch.bfh.bti7301.hs2013.gravis.gui.util.GraphItemIdVerifier;
 import ch.bfh.bti7301.hs2013.gravis.gui.util.VertexSizeVerifier;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.ValueTransformer;
 
 import java.awt.GridLayout;
 
@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
+ * A vertex property dialog.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
@@ -33,12 +35,24 @@ public class VertexPropertyDialog extends JDialog {
 
 	private static final long serialVersionUID = -6919635847499019908L;
 
+	/**
+	 * A field for a content panel.
+	 */
 	private final JPanel contentPanel = new JPanel();
 
+	/**
+	 * A field for a vertext name text field.
+	 */
 	private JTextField txtVertexName;
 
+	/**
+	 * A field for a width value text field.
+	 */
 	private JTextField txtWidth;
 
+	/**
+	 * A field for a height value text field.
+	 */
 	private JTextField txtHeight;
 
 	/**
@@ -123,10 +137,12 @@ public class VertexPropertyDialog extends JDialog {
 	 */
 	private void updateTextFieldValues(final IVertex vertex,
 			final VisualizationViewer<IVertex, IEdge> vViewer) {
-		
+
 		vertex.setId(this.txtVertexName.getText().trim());
-		vertex.setWidth(ValueTransformer.transformDouble(this.txtWidth.getText()));
-		vertex.setHeight(ValueTransformer.transformDouble(this.txtHeight.getText()));
+		vertex.setWidth(ValueTransformer.transformDouble(this.txtWidth
+				.getText()));
+		vertex.setHeight(ValueTransformer.transformDouble(this.txtHeight
+				.getText()));
 		vViewer.repaint();
 		this.dispose();
 	}

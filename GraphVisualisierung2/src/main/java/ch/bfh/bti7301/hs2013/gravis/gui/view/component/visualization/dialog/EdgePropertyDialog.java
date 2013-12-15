@@ -11,9 +11,9 @@ import javax.swing.border.EmptyBorder;
 
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.edge.IEdge;
 import ch.bfh.bti7301.hs2013.gravis.core.graph.item.vertex.IVertex;
-import ch.bfh.bti7301.hs2013.gravis.core.util.transformer.ValueTransformer;
 import ch.bfh.bti7301.hs2013.gravis.gui.util.EdgeWeightVerifier;
 import ch.bfh.bti7301.hs2013.gravis.gui.util.GraphItemIdVerifier;
+import ch.bfh.bti7301.hs2013.gravis.gui.view.component.visualization.transformer.ValueTransformer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 import java.awt.GridLayout;
@@ -24,6 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 /**
+ * An edge property dialog.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
@@ -31,10 +33,19 @@ public class EdgePropertyDialog extends JDialog {
 
 	private static final long serialVersionUID = -6646549637907283799L;
 
+	/**
+	 * A field for a content panel.
+	 */
 	private final JPanel contentPanel = new JPanel();
 
+	/**
+	 * A field for an edge name text field.
+	 */
 	private JTextField txtEdgeName;
 
+	/**
+	 * A field for an edge weight text field.
+	 */
 	private JTextField txtEdgeWeight;
 
 	/**

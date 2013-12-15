@@ -24,6 +24,8 @@ import ch.bfh.bti7301.hs2013.gravis.core.graph.IGravisGraph;
 import ch.bfh.bti7301.hs2013.gravis.gui.util.GraphIdVerifier;
 
 /**
+ * A graph property dialog.
+ * 
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
@@ -31,8 +33,14 @@ public class GraphPropertyDialog extends JDialog {
 
 	private static final long serialVersionUID = -1767385966504542230L;
 
+	/**
+	 * A field for a content panel.
+	 */
 	private final JPanel contentPanel = new JPanel();
 
+	/**
+	 * A field for a content panel.
+	 */
 	private JTextField txtGraphName;
 
 	private JTextArea textAreaGraphDescription;
