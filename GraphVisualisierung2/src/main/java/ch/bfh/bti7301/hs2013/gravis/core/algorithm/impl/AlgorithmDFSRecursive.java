@@ -21,7 +21,8 @@ import static ch.bfh.bti7301.hs2013.gravis.util.transformer.ValueTransformer.toA
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class AlgorithmDFSRecursive extends AbstractAlgorithm implements IAlgorithm {
+public class AlgorithmDFSRecursive extends AbstractAlgorithm implements
+		IAlgorithm {
 
 	private final static String ALGO_NAME = "Rekursiver Depth-First-Search Algorithmus (DFS)";
 	private final static String ALGO_DESCRIPTION = "Der Graph wird in Preorder traversiert. "
@@ -36,7 +37,7 @@ class AlgorithmDFSRecursive extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * Constructor
 	 */
-	protected AlgorithmDFSRecursive() {
+	public AlgorithmDFSRecursive() {
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);

@@ -23,7 +23,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class AlgorithmDijkstra extends AbstractAlgorithm implements IAlgorithm {
+public class AlgorithmDijkstra extends AbstractAlgorithm implements IAlgorithm {
 
 	private final static String NEG_WEIGHT = "Dijkstra algorithm: "
 			+ "negative weights are not allowed!";
@@ -53,7 +53,7 @@ class AlgorithmDijkstra extends AbstractAlgorithm implements IAlgorithm {
 
 	private final VertexPaintedResultComparator vertexResultComparator;
 
-	protected AlgorithmDijkstra() {
+	public AlgorithmDijkstra() {
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);

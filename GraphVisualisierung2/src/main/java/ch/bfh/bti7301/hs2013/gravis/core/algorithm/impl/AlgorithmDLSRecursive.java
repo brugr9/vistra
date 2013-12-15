@@ -20,7 +20,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
+public class AlgorithmDLSRecursive extends AbstractAlgorithm implements
+		IAlgorithm {
 
 	private final static String ALGO_NAME = "Rekursiver Depth-Last-Search Algorithmus (DLS)";
 	private final static String ALGO_DESCRIPTION = "Der Graph wird in Postorder traversiert. "
@@ -32,7 +33,7 @@ class AlgorithmDLSRecursive extends AbstractAlgorithm implements IAlgorithm {
 
 	private int counter = 0;
 
-	protected AlgorithmDLSRecursive() {
+	public AlgorithmDLSRecursive() {
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);

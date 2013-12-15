@@ -23,8 +23,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm implements
-		IAlgorithm {
+public class AlgorithmBFS extends AbstractAlgorithm implements IAlgorithm {
 
 	private final static String ALGO_NAME = "Breadth-First-Search Algorithmus (BFS)";
 	private final static String ALGO_DESCRIPTION = "Die Breitensuche ist als Schleife "
@@ -36,7 +35,7 @@ public class AlgorithmBreadthFirstSearch extends AbstractAlgorithm implements
 
 	private int counter = 0;
 
-	public AlgorithmBreadthFirstSearch() {
+	public AlgorithmBFS() {
 		super();
 		super.setName(ALGO_NAME);
 		super.setDescription(ALGO_DESCRIPTION);
