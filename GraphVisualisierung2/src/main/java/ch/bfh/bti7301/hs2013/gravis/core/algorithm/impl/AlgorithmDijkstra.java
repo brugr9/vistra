@@ -395,6 +395,7 @@ public class AlgorithmDijkstra extends AbstractAlgorithm implements IAlgorithm {
 			setGraphItemValues(edge, true, false, State.SOLUTION);
 			itemList.add(edge);
 			setGraphItemValues(currentVertex, true, false, State.SOLUTION);
+			itemList.add(currentVertex);
 			selectedVertex = currentVertex;
 		}
 		graph.updateState(toArray(itemList));

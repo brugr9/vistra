@@ -62,9 +62,6 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm
 	 * ch.bfh.bti7301.hs2013.gravis.core.algorithm.AbstractAlgorithm#execute
 	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.IRestrictedGraph)
 	 */
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void execute(IRestrictedGraph graph) throws AlgorithmException {
 		this.checkEdgeType(graph);
@@ -184,9 +181,50 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm
 		itemList.add(pair.getFirst());
 		setGraphItemValues(pair.getSecond(), true, false, State.VISIT);
 		itemList.add(pair.getSecond());
+		// graph.updateState(toArray(itemList));
+		// itemList.clear();
+
+		for (IRestrictedEdge edge : graph.getEdges()) {
+			Pair<? extends IRestrictedVertex> currentPair = graph
+					.getEndpoints(edge);
+
+			if (currentPair.getFirst().isDone()
+					&& Partition.areMerged(partitionMap.get(pair.getFirst())
+							.find(), partitionMap.get(currentPair.getFirst())
+							.find())) {
+
+				setGraphItemValues(edge, true, false, State.VISIT);
+				itemList.add(edge);
+				setGraphItemValues(currentPair.getFirst(), true, false,
+						State.VISIT);
+				itemList.add(currentPair.getFirst());
+				setGraphItemValues(currentPair.getSecond(), true, false,
+						State.VISIT);
+				itemList.add(currentPair.getSecond());
+			}
+		}
 		graph.updateState(toArray(itemList));
 		itemList.clear();
 
+		for (IRestrictedEdge edge : graph.getEdges()) {
+			Pair<? extends IRestrictedVertex> currentPair = graph
+					.getEndpoints(edge);
+
+			if (currentPair.getFirst().isDone()
+					&& Partition.areMerged(partitionMap.get(pair.getFirst())
+							.find(), partitionMap.get(currentPair.getFirst())
+							.find())) {
+
+				setGraphItemValues(edge, true, false, State.SOLUTION);
+				itemList.add(edge);
+				setGraphItemValues(currentPair.getFirst(), false, false,
+						State.SOLUTION);
+				itemList.add(currentPair.getFirst());
+				setGraphItemValues(currentPair.getSecond(), false, false,
+						State.SOLUTION);
+				itemList.add(currentPair.getSecond());
+			}
+		}
 		selectedEdge.setVisible(false);
 		setGraphItemValues(selectedEdge, false, false, State.INITIAL);
 		itemList.add(selectedEdge);
@@ -194,24 +232,6 @@ public class AlgorithmKruskalMinSpanningForest extends AbstractAlgorithm
 		itemList.add(pair.getFirst());
 		setGraphItemValues(pair.getSecond(), false, false, State.SOLUTION);
 		itemList.add(pair.getSecond());
-
-		// for (IRestrictedEdge edge : graph.getEdges()) {
-		// Pair<? extends IRestrictedVertex> pair = graph.getEndpoints(edge);
-		//
-		// if (edge.getCurrentState() == State.SOLUTION
-		// && Partition.areMerged(partitionMap.get(currentVertex)
-		// .find(), partitionMap.get(pair.getFirst()).find())) {
-		//
-		// setGraphItemValues(edge, true, false, State.ACTIVATION);
-		// itemList.add(edge);
-		// setGraphItemValues(pair.getFirst(), true, false,
-		// State.ACTIVATION);
-		// itemList.add(pair.getFirst());
-		// setGraphItemValues(pair.getSecond(), true, false,
-		// State.ACTIVATION);
-		// itemList.add(pair.getSecond());
-		// }
-		// }
 	}
 
 	/**
