@@ -20,21 +20,20 @@ public class Startup {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					ApplicationFactory.createApplication(ViewType.FULL);
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(
-							null,
-							"Sorry, somthing went totally wrong:\n"
-									+ e.toString() + e.getCause(), this
-									.getClass().getName(), 1, null);
-					e.printStackTrace();
-				}
-			}
-		});
+		// EventQueue.invokeLater(new Runnable() {
+		// @Override
+		// public void run() {
+		try {
+			ApplicationFactory.createApplication(ViewType.FULL);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(
+					null,
+					"Sorry, somthing went totally wrong:\n" + e.toString()
+							+ e.getCause(), null, 1, null);
+			e.printStackTrace();
+		}
+		// }
+		// });
 	}
 
 }
