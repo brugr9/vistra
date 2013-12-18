@@ -2,10 +2,9 @@ package vistra.core.graph.item;
 
 import java.awt.Color;
 
-
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)
- *
+ * 
  */
 public interface IRestrictedGraphItem {
 
@@ -36,7 +35,7 @@ public interface IRestrictedGraphItem {
 	 * @return double
 	 */
 	public abstract double getCurrentResult();
-	
+
 	/**
 	 * 
 	 * @return double value
@@ -57,7 +56,7 @@ public interface IRestrictedGraphItem {
 
 	/**
 	 * 
-	 * @param comment
+	 * @param newComment
 	 */
 	public abstract void setNewComment(String newComment);
 
@@ -65,7 +64,7 @@ public interface IRestrictedGraphItem {
 	 * @param comment
 	 */
 	public abstract void appendToNewComment(String comment);
-	
+
 	/**
 	 * @return boolean
 	 */
@@ -82,49 +81,49 @@ public interface IRestrictedGraphItem {
 	 * @return State
 	 */
 	public abstract State getCurrentState();
-	
+
 	/**
 	 * 
 	 * @return State
 	 */
 	public abstract State getNewState();
-	
+
 	/**
 	 * 
-	 * @param state
+	 * @param newState
 	 */
 	public abstract void setNewState(State newState);
-	
+
 	/**
 	 * 
 	 * @return State
 	 */
 	public abstract Object getValue();
-	
+
 	/**
 	 * 
 	 * @param value
 	 */
 	public abstract void setValue(Object value);
-	
+
 	/**
 	 * 
 	 * @param visible
 	 */
 	public abstract void setVisible(boolean visible);
-	
+
 	/**
 	 * 
 	 * @return boolean
 	 */
 	public abstract boolean isVisible();
-	
+
 	/**
 	 * 
-	 * @param notTagged
+	 * @param tagged
 	 */
 	public abstract void setTagged(boolean tagged);
-	
+
 	/**
 	 * 
 	 * @return boolean
@@ -135,7 +134,7 @@ public interface IRestrictedGraphItem {
 	 * @param value
 	 */
 	public abstract void setStateCommentEnabled(boolean value);
-	
+
 	/**
 	 * 
 	 * @return boolean

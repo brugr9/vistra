@@ -1,9 +1,6 @@
 package vistra;
 
-import java.awt.EventQueue;
-
 import javax.swing.JOptionPane;
-
 import vistra.gui.GuiFactory.ViewType;
 
 /**

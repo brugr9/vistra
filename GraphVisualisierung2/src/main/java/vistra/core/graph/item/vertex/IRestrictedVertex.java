@@ -39,7 +39,7 @@ public interface IRestrictedVertex extends IRestrictedGraphItem {
 	public abstract double getHeight();
 	
 	/**
-	 * @return
+	 * @return Point2D
 	 */
 	public abstract Point2D getLocation();
 
