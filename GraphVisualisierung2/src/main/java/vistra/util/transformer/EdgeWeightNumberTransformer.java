@@ -2,7 +2,7 @@ package vistra.util.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.edge.IRestrictedEdge;
+import vistra.core.graph.obsolete.item.edge.IRestrictedEdge;
 
 
 /**

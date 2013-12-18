@@ -5,7 +5,7 @@ import java.awt.Stroke;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.obsolete.item.edge.IEdge;
 
 
 /**

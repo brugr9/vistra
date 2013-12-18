@@ -3,7 +3,7 @@ package vistra.util.transformer;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.IGravisGraph;
+import vistra.core.graph.obsolete.IGravisGraph;
 import vistra.core.util.GraphPropertyConstants;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.graphml.GraphMetadata;

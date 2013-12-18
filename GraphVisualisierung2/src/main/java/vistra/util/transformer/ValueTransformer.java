@@ -5,9 +5,9 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-import vistra.core.graph.item.IRestrictedGraphItem;
+import vistra.core.graph.obsolete.item.IRestrictedGraphItem;
 import vistra.core.util.GraphPropertyConstants;
-import vistra.util.TravisColor;
+import vistra.util.VistraColor;
 
 
 /**
@@ -56,23 +56,23 @@ public final class ValueTransformer {
 	public static Color transformStringToColor(String stringValue) {
 		switch (stringValue) {
 		case GraphPropertyConstants.GREEN:
-			return TravisColor.LIGHT_GREEN;
+			return VistraColor.LIGHT_GREEN;
 		case GraphPropertyConstants.YELLOW:
-			return TravisColor.LIGHT_YELLOW;
+			return VistraColor.LIGHT_YELLOW;
 		case GraphPropertyConstants.BLUE:
-			return TravisColor.LIGHT_BLUE;
+			return VistraColor.LIGHT_BLUE;
 		case GraphPropertyConstants.GRAY:
-			return TravisColor.LIGHT_GRAY;
+			return VistraColor.LIGHT_GRAY;
 		case GraphPropertyConstants.ORANGE:
-			return TravisColor.LIGHT_ORANGE;
+			return VistraColor.LIGHT_ORANGE;
 		case GraphPropertyConstants.BLACK:
-			return TravisColor.BLACK;
+			return VistraColor.BLACK;
 		case GraphPropertyConstants.WHITE:
-			return TravisColor.WHITE;
+			return VistraColor.WHITE;
 		case GraphPropertyConstants.ANTIQUE:
-			return TravisColor.ANTIQUE;
+			return VistraColor.ANTIQUE;
 		default:
-			return TravisColor.RED;
+			return VistraColor.RED;
 		}
 	}
 
@@ -81,21 +81,21 @@ public final class ValueTransformer {
 	 * @return String
 	 */
 	public static String transformColorToString(Color color) {
-		if (color.equals(TravisColor.LIGHT_GREEN)) {
+		if (color.equals(VistraColor.LIGHT_GREEN)) {
 			return GraphPropertyConstants.GREEN;
-		} else if (color.equals(TravisColor.LIGHT_YELLOW)) {
+		} else if (color.equals(VistraColor.LIGHT_YELLOW)) {
 			return GraphPropertyConstants.YELLOW;
-		} else if (color.equals(TravisColor.LIGHT_BLUE)) {
+		} else if (color.equals(VistraColor.LIGHT_BLUE)) {
 			return GraphPropertyConstants.BLUE;
-		} else if (color.equals(TravisColor.LIGHT_GRAY)) {
+		} else if (color.equals(VistraColor.LIGHT_GRAY)) {
 			return GraphPropertyConstants.GRAY;
-		} else if (color.equals(TravisColor.LIGHT_ORANGE)) {
+		} else if (color.equals(VistraColor.LIGHT_ORANGE)) {
 			return GraphPropertyConstants.ORANGE;
-		} else if (color.equals(TravisColor.BLACK)) {
+		} else if (color.equals(VistraColor.BLACK)) {
 			return GraphPropertyConstants.BLACK;
-		} else if (color.equals(TravisColor.WHITE)) {
+		} else if (color.equals(VistraColor.WHITE)) {
 			return GraphPropertyConstants.WHITE;
-		} else if (color.equals(TravisColor.ANTIQUE)) {
+		} else if (color.equals(VistraColor.ANTIQUE)) {
 			return GraphPropertyConstants.ANTIQUE;
 		} else {
 			return GraphPropertyConstants.RED;
