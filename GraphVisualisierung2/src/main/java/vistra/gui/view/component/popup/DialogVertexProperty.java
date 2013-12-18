@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization.dialog;
+package vistra.gui.view.component.popup;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -31,7 +31,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexPropertyDialog extends JDialog {
+public class DialogVertexProperty extends JDialog {
 
 	private static final long serialVersionUID = -6919635847499019908L;
 
@@ -62,7 +62,7 @@ public class VertexPropertyDialog extends JDialog {
 	 * @param owner
 	 * @param vViewer
 	 */
-	public VertexPropertyDialog(final IVertex vertex, final JFrame owner,
+	public DialogVertexProperty(final IVertex vertex, final JFrame owner,
 			final VisualizationViewer<IVertex, IEdge> vViewer) {
 		super(owner, true);
 		this.setResizable(false);
@@ -122,7 +122,7 @@ public class VertexPropertyDialog extends JDialog {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VertexPropertyDialog.this
+				DialogVertexProperty.this
 						.updateTextFieldValues(vertex, vViewer);
 			}
 		});
@@ -130,7 +130,7 @@ public class VertexPropertyDialog extends JDialog {
 		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VertexPropertyDialog.this.dispose();
+				DialogVertexProperty.this.dispose();
 			}
 		});
 	}

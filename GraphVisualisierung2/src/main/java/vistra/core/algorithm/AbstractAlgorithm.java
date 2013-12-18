@@ -55,7 +55,7 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	 */
 	@Override
 	public String getName() {
-		return this.getClass().getName();
+		return this.getClass().getSimpleName();
 	}
 
 	/**

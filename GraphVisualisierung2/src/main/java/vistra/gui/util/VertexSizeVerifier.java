@@ -9,7 +9,7 @@ import javax.swing.text.JTextComponent;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public class VertexSizeVerifier extends AbstractGravisVerifier {
+public class VertexSizeVerifier extends AbstractVerifier {
 
 	/**
 	 * A field for the minimum value.

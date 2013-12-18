@@ -17,7 +17,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public class GraphItemIdVerifier extends AbstractGravisVerifier {
+public class GraphItemIdVerifier extends AbstractVerifier {
 
 	/**
 	 * A field for a graph item.

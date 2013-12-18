@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization.popup;
+package vistra.gui.view.component.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,12 +9,13 @@ import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
- * A check box for setting an end vertex.
+ * A check box for setting a start vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class CheckBoxEndVertex extends AbstarctCheckBox implements IGraphItemModifier {
+class CheckBoxStartVertex extends AbstarctCheckBox implements
+		IItemModifier {
 
 	private static final long serialVersionUID = 6641658478963193492L;
 
@@ -24,12 +25,12 @@ class CheckBoxEndVertex extends AbstarctCheckBox implements IGraphItemModifier {
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	protected CheckBoxEndVertex(VisualizationViewer<IVertex, IEdge> viewer) {
+	protected CheckBoxStartVertex(VisualizationViewer<IVertex, IEdge> viewer) {
 		super(viewer);
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CheckBoxEndVertex.this.setValue();
+				CheckBoxStartVertex.this.setValue();
 			}
 		});
 	}
@@ -39,7 +40,7 @@ class CheckBoxEndVertex extends AbstarctCheckBox implements IGraphItemModifier {
 	 */
 	private void setValue() {
 		if (this.vertex != null) {
-			this.vertex.setEnd(this.isSelected());
+			this.vertex.setStart(this.isSelected());
 			this.viewer.repaint();
 		}
 	}
@@ -51,7 +52,7 @@ class CheckBoxEndVertex extends AbstarctCheckBox implements IGraphItemModifier {
 	public void setGraphItemAndView(IGraphItem item) {
 		if (item instanceof IVertex) {
 			this.vertex = (IVertex) item;
-			this.setSelected(this.vertex.isEnd());
+			this.setSelected(this.vertex.isStart());
 		}
 	}
 

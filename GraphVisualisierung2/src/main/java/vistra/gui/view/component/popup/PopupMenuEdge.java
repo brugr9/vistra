@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization.popup;
+package vistra.gui.view.component.popup;
 
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
@@ -9,12 +9,12 @@ import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
- * An edge menu.
+ * An edge pop up menu.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class MenuEdge extends JPopupMenu {
+public class PopupMenuEdge extends JPopupMenu {
 
 	private static final long serialVersionUID = 2640685878709501654L;
 
@@ -29,7 +29,8 @@ public class MenuEdge extends JPopupMenu {
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	public MenuEdge(JFrame rootFrame, VisualizationViewer<IVertex, IEdge> viewer) {
+	public PopupMenuEdge(JFrame rootFrame,
+			VisualizationViewer<IVertex, IEdge> viewer) {
 		super("Kanten");
 
 		this.menuItemEdgeProperty = new MenuItemEdgeProperty(viewer);

@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization;
+package vistra.gui.view.component.adapted;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -15,26 +15,19 @@ import edu.uci.ics.jung.visualization.picking.PickedState;
 /**
  * An adapted JUNG mouse plugin for picking a graph.
  * 
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GravisPickingGraphMousePlugin extends
+public class AdaptedPickingGraphMousePlugin extends
 		PickingGraphMousePlugin<IVertex, IEdge> {
 
 	/**
 	 * Main constructor.
 	 */
-	public GravisPickingGraphMousePlugin() {
+	public AdaptedPickingGraphMousePlugin() {
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * edu.uci.ics.jung.visualization.control.PickingGraphMousePlugin#mouseDragged
-	 * (java.awt.event.MouseEvent)
-	 */
 	/**
 	 * {@inheritDoc}
 	 */

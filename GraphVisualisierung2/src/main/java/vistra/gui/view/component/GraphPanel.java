@@ -18,7 +18,7 @@ import vistra.gui.IModel;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.IView;
-import vistra.gui.view.component.visualization.GravisVisualizationViewer;
+import vistra.gui.view.component.adapted.AdaptedVisualizationViewer;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
@@ -26,7 +26,6 @@ import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 /**
  * A graph panel.
  * 
- * @author Patrick Kofmel (kofmp1@bfh.ch)
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
@@ -39,9 +38,9 @@ public class GraphPanel extends JPanel implements Observer {
 	 */
 	private TitledBorder titledBorder;
 	/**
-	 * A field for a visualization viewer.
+	 * A field for an adapted visualization viewer.
 	 */
-	private GravisVisualizationViewer visualizationViewer;
+	private AdaptedVisualizationViewer visualizationViewer;
 	/**
 	 * A field for a graph zoom scroll pane.
 	 */
@@ -70,7 +69,7 @@ public class GraphPanel extends JPanel implements Observer {
 		int width = dimension.width;
 		int height = dimension.height - IView.BORDER;
 		Dimension visualizerDimension = new Dimension(width, height);
-		this.visualizationViewer = new GravisVisualizationViewer(top, layout,
+		this.visualizationViewer = new AdaptedVisualizationViewer(top, layout,
 				visualizerDimension);
 		model.addObserver(this.visualizationViewer);
 		this.graphZoomScrollPane = new GraphZoomScrollPane(

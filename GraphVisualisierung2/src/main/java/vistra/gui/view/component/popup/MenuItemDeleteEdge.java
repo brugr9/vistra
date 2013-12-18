@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization.popup;
+package vistra.gui.view.component.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,10 +13,10 @@ import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class MenuItemDeleteEdge extends JMenuItem implements IGraphItemModifier {
+class MenuItemDeleteEdge extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = -8344732316212412105L;
 	/**
@@ -53,14 +53,6 @@ class MenuItemDeleteEdge extends JMenuItem implements IGraphItemModifier {
 		this.vViewer.repaint();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.visualization.GraphItemMenuListener#
-	 * setGraphItemAndView
-	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem)
-	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -72,13 +64,6 @@ class MenuItemDeleteEdge extends JMenuItem implements IGraphItemModifier {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.visualization.GraphItemMenuListener#
-	 * setGraphItemLocation(java.awt.geom.Point2D)
-	 */
 	/**
 	 * {@inheritDoc}
 	 */

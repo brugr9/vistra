@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization;
+package vistra.gui.view.component.adapted;
 
 import java.awt.Component;
 import java.awt.event.MouseEvent;
@@ -11,7 +11,7 @@ import org.apache.commons.collections15.Factory;
 import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.view.component.visualization.popup.IGraphItemModifier;
+import vistra.gui.view.component.popup.IItemModifier;
 
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -21,10 +21,10 @@ import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;
  * An adapted JUNG mouse plugin that uses popup menus to create vertices,
  * undirected edges, and directed edges.
  * 
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GravisPopupGraphMousePlugin extends
+public class AdaptedEditingPopupGraphMousePlugin extends
 		EditingPopupGraphMousePlugin<IVertex, IEdge> {
 
 	/**
@@ -36,9 +36,9 @@ public class GravisPopupGraphMousePlugin extends
 	 */
 	private JPopupMenu vertexPopup = null;
 	/**
-	 * A field for a vertex-create popup menu.
+	 * A field for a create vertex popup menu.
 	 */
-	private JPopupMenu vertexCreatePopup = null;
+	private JPopupMenu createVertexPopup = null;
 
 	/**
 	 * Main constructor.
@@ -48,17 +48,11 @@ public class GravisPopupGraphMousePlugin extends
 	 * @param edgeFactory
 	 *            an edge factory
 	 */
-	public GravisPopupGraphMousePlugin(Factory<IVertex> vertexFactory,
+	public AdaptedEditingPopupGraphMousePlugin(Factory<IVertex> vertexFactory,
 			Factory<IEdge> edgeFactory) {
 		super(vertexFactory, edgeFactory);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin#
-	 * handlePopup(java.awt.event.MouseEvent)
-	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -91,12 +85,12 @@ public class GravisPopupGraphMousePlugin extends
 				}
 
 				if (edge == null && vertex == null
-						&& this.vertexCreatePopup != null) {
-					if (this.vertexCreatePopup instanceof IGraphItemModifier) {
-						((IGraphItemModifier) this.vertexCreatePopup)
+						&& this.createVertexPopup != null) {
+					if (this.createVertexPopup instanceof IItemModifier) {
+						((IItemModifier) this.createVertexPopup)
 								.setGraphItemLocation(point);
 					}
-					this.vertexCreatePopup.show(vViewer, e.getX(), e.getY());
+					this.createVertexPopup.show(vViewer, e.getX(), e.getY());
 				}
 			}
 		}
@@ -114,9 +108,9 @@ public class GravisPopupGraphMousePlugin extends
 	 */
 	private void updateItemMenu(IGraphItem item, Point2D point, JPopupMenu popUp) {
 		for (Component comp : popUp.getComponents()) {
-			if (comp instanceof IGraphItemModifier) {
-				((IGraphItemModifier) comp).setGraphItemAndView(item);
-				((IGraphItemModifier) comp).setGraphItemLocation(point);
+			if (comp instanceof IItemModifier) {
+				((IItemModifier) comp).setGraphItemAndView(item);
+				((IItemModifier) comp).setGraphItemLocation(point);
 			}
 		}
 	}
@@ -142,13 +136,13 @@ public class GravisPopupGraphMousePlugin extends
 	}
 
 	/**
-	 * Setter for the vertex create popup.
+	 * Setter for the create vertex popup.
 	 * 
-	 * @param vertexCreatePopup
-	 *            a vertex-create popup
+	 * @param createVertexPopup
+	 *            a createVertexPopup
 	 */
-	public void setVertexCreatePopup(JPopupMenu vertexCreatePopup) {
-		this.vertexCreatePopup = vertexCreatePopup;
+	public void setVertexCreatePopup(JPopupMenu createVertexPopup) {
+		this.createVertexPopup = createVertexPopup;
 	}
 
 }

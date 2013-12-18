@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization.dialog;
+package vistra.gui.view.component.popup;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -30,7 +30,7 @@ import vistra.util.transformer.ValueTransformer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgePropertyDialog extends JDialog {
+public class DialogEdgeProperty extends JDialog {
 
 	private static final long serialVersionUID = -6646549637907283799L;
 
@@ -56,7 +56,7 @@ public class EdgePropertyDialog extends JDialog {
 	 * @param owner
 	 * @param edge
 	 */
-	public EdgePropertyDialog(IEdge edge, JFrame owner,
+	public DialogEdgeProperty(IEdge edge, JFrame owner,
 			VisualizationViewer<IVertex, IEdge> viewer) {
 		super(owner, true);
 		this.contentPanel = new JPanel();
@@ -115,14 +115,14 @@ public class EdgePropertyDialog extends JDialog {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EdgePropertyDialog.this.updateTextFieldValues(edge, vViewer);
+				DialogEdgeProperty.this.updateTextFieldValues(edge, vViewer);
 			}
 		});
 
 		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EdgePropertyDialog.this.dispose();
+				DialogEdgeProperty.this.dispose();
 			}
 		});
 	}

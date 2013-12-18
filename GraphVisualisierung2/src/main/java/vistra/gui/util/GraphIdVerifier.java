@@ -9,7 +9,7 @@ import javax.swing.text.JTextComponent;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-public class GraphIdVerifier extends AbstractGravisVerifier {
+public class GraphIdVerifier extends AbstractVerifier {
 
 	/**
 	 * Main constructor.

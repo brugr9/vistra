@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization.popup;
+package vistra.gui.view.component.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +10,6 @@ import javax.swing.JMenuItem;
 import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.view.component.visualization.dialog.EdgePropertyDialog;
 
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -20,7 +19,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class MenuItemEdgeProperty extends JMenuItem implements IGraphItemModifier {
+class MenuItemEdgeProperty extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = -1894264493446725645L;
 
@@ -67,7 +66,7 @@ class MenuItemEdgeProperty extends JMenuItem implements IGraphItemModifier {
 	 */
 	protected void showDialog(JFrame owner) {
 		if (this.point != null && this.edge != null) {
-			EdgePropertyDialog dialog = new EdgePropertyDialog(this.edge,
+			DialogEdgeProperty dialog = new DialogEdgeProperty(this.edge,
 					owner, this.viewer);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());

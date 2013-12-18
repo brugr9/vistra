@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization;
+package vistra.gui.view.component.adapted;
 
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
@@ -20,10 +20,10 @@ import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
 /**
  * An adapted JUNG mouse plugin for editing a graph.
  * 
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GravisEditingGraphMousePlugin extends
+public class AdaptedEditingGraphMousePlugin extends
 		EditingGraphMousePlugin<IVertex, IEdge> {
 
 	/**
@@ -34,7 +34,7 @@ public class GravisEditingGraphMousePlugin extends
 	 * @param edgeFactory
 	 *            the edge factory
 	 */
-	public GravisEditingGraphMousePlugin(Factory<IVertex> vertexFactory,
+	public AdaptedEditingGraphMousePlugin(Factory<IVertex> vertexFactory,
 			Factory<IEdge> edgeFactory) {
 		super(vertexFactory, edgeFactory);
 	}

@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization.popup;
+package vistra.gui.view.component.popup;
 
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
@@ -9,31 +9,38 @@ import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
+ * A vertex pop up menu.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class MenuVertex extends JPopupMenu {
+public class PopupMenuVertex extends JPopupMenu {
 
 	private static final long serialVersionUID = 3273304014704565148L;
 
+	/**
+	 * A field for an vertex property menu item.
+	 */
 	private final MenuItemVertexProperty menuItemVertexProperty;
 
 	/**
+	 * Main constructor.
 	 * 
-	 * @param vViewer
+	 * @param viewer
+	 *            a visualization viewer
 	 */
-	public MenuVertex(JFrame rootFrame,
-			VisualizationViewer<IVertex, IEdge> vViewer) {
+	public PopupMenuVertex(JFrame rootFrame,
+			VisualizationViewer<IVertex, IEdge> viewer) {
 		super("Knoten");
 
-		this.menuItemVertexProperty = new MenuItemVertexProperty(vViewer);
+		this.menuItemVertexProperty = new MenuItemVertexProperty(viewer);
 		this.menuItemVertexProperty.setRootFrame(rootFrame);
-		this.add(new CheckBoxStartVertex(vViewer));
-		this.add(new CheckBoxEndVertex(vViewer));
+		this.add(new CheckBoxStartVertex(viewer));
+		this.add(new CheckBoxEndVertex(viewer));
 		this.addSeparator();
 		this.add(this.menuItemVertexProperty);
 		this.addSeparator();
-		this.add(new MenuItemDeleteVertex(vViewer));
+		this.add(new MenuItemDeleteVertex(viewer));
 	}
 
 }

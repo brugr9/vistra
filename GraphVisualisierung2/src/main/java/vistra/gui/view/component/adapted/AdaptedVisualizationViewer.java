@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization;
+package vistra.gui.view.component.adapted;
 
 import java.awt.Dimension;
 import java.util.Observable;
@@ -14,9 +14,9 @@ import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
 import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
-import vistra.gui.view.component.visualization.popup.MenuEdge;
-import vistra.gui.view.component.visualization.popup.MenuFactory;
-import vistra.gui.view.component.visualization.popup.MenuVertex;
+import vistra.gui.view.component.popup.MenuFactory;
+import vistra.gui.view.component.popup.PopupMenuEdge;
+import vistra.gui.view.component.popup.PopupMenuVertex;
 import vistra.util.TravisColor;
 import vistra.util.transformer.EdgeColorTransformer;
 import vistra.util.transformer.EdgeLabelTransformer;
@@ -41,7 +41,7 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GravisVisualizationViewer extends
+public class AdaptedVisualizationViewer extends
 		VisualizationViewer<IVertex, IEdge> implements Observer {
 
 	private static final long serialVersionUID = 1145648259547595925L;
@@ -49,11 +49,11 @@ public class GravisVisualizationViewer extends
 	/**
 	 * A field for a vertex menu.
 	 */
-	private MenuVertex vertexMenu;
+	private PopupMenuVertex vertexMenu;
 	/**
 	 * A field for an edge menu.
 	 */
-	private MenuEdge edgeMenu;
+	private PopupMenuEdge edgeMenu;
 	/**
 	 * A field for a vertex-menu factory.
 	 */
@@ -73,7 +73,7 @@ public class GravisVisualizationViewer extends
 	 * @param dimension
 	 *            the dimension
 	 */
-	public GravisVisualizationViewer(JFrame top, Layout<IVertex, IEdge> layout,
+	public AdaptedVisualizationViewer(JFrame top, Layout<IVertex, IEdge> layout,
 			Dimension dimension) {
 		super(layout, dimension);
 		super.setBackground(TravisColor.WHITE);
@@ -109,12 +109,12 @@ public class GravisVisualizationViewer extends
 				new EdgeStrokeTransformer());
 
 		/* context menu */
-		this.vertexMenu = new MenuVertex(top, this);
-		this.edgeMenu = new MenuEdge(top, this);
+		this.vertexMenu = new PopupMenuVertex(top, this);
+		this.edgeMenu = new PopupMenuEdge(top, this);
 
 		/* mouse */
 		this.vertexMenuFactory = new MenuFactory(this);
-		this.mouse = new GravisModalGraphMouse(this.getRenderContext(),
+		this.mouse = new AdaptedEditingModalGraphMouse(this.getRenderContext(),
 				new VertexFactory(), new EdgeFactory(), this.edgeMenu,
 				this.vertexMenu, this.vertexMenuFactory);
 		this.setGraphMouse(this.mouse);

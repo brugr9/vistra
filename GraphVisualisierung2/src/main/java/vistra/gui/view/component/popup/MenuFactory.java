@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization.popup;
+package vistra.gui.view.component.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,7 @@ import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
-import vistra.gui.view.component.visualization.GravisVisualizationViewer;
+import vistra.gui.view.component.adapted.AdaptedVisualizationViewer;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -22,7 +22,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class MenuFactory extends JPopupMenu implements IGraphItemModifier {
+public class MenuFactory extends JPopupMenu implements IItemModifier {
 
 	private static final long serialVersionUID = 6897658442329318591L;
 	/**
@@ -42,9 +42,9 @@ public class MenuFactory extends JPopupMenu implements IGraphItemModifier {
 	 * Main constructor.
 	 * 
 	 * @param viewer
-	 *            a gravis visualization viewer
+	 *            an adapted visualization viewer
 	 */
-	public MenuFactory(GravisVisualizationViewer viewer) {
+	public MenuFactory(AdaptedVisualizationViewer viewer) {
 		super("Neuer Knoten");
 
 		this.vertexFactory = new VertexFactory();
@@ -77,29 +77,14 @@ public class MenuFactory extends JPopupMenu implements IGraphItemModifier {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.visualization.GraphItemMenuListener#
-	 * setGraphItemAndView
-	 * (ch.bfh.bti7301.hs2013.gravis.core.graph.item.IGraphItem)
-	 */
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void setGraphItemAndView(IGraphItem item) {
-		// // does nothing
+		// does nothing
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.visualization.GraphItemMenuListener#
-	 * setGraphItemLocation(java.awt.geom.Point2D)
-	 */
 	/**
 	 * {@inheritDoc}
 	 */

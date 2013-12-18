@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visualization.popup;
+package vistra.gui.view.component.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +10,6 @@ import javax.swing.JMenuItem;
 import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.view.component.visualization.dialog.VertexPropertyDialog;
 
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -18,7 +17,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Patrick Kofmel (kofmp1@bfh.ch)
  * 
  */
-class MenuItemVertexProperty extends JMenuItem implements IGraphItemModifier {
+class MenuItemVertexProperty extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = 3448304253580836407L;
 
@@ -50,7 +49,7 @@ class MenuItemVertexProperty extends JMenuItem implements IGraphItemModifier {
 	 */
 	private void showDialog(JFrame owner) {
 		if (this.point != null && this.vertex != null) {
-			VertexPropertyDialog dialog = new VertexPropertyDialog(this.vertex,
+			DialogVertexProperty dialog = new DialogVertexProperty(this.vertex,
 					owner, this.vViewer);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());
@@ -58,6 +57,9 @@ class MenuItemVertexProperty extends JMenuItem implements IGraphItemModifier {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setGraphItemAndView(IGraphItem item) {
 		if (item instanceof IVertex) {
@@ -65,6 +67,9 @@ class MenuItemVertexProperty extends JMenuItem implements IGraphItemModifier {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setGraphItemLocation(Point2D point) {
 		if (point != null) {
