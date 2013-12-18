@@ -5,7 +5,6 @@ import org.apache.commons.collections15.Transformer;
 import vistra.core.graph.item.edge.EdgeFactory;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.util.GraphPropertyConstants;
-
 import edu.uci.ics.jung.io.graphml.EdgeMetadata;
 
 /**

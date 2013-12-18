@@ -18,7 +18,6 @@ import vistra.core.graph.item.vertex.IRestrictedVertex;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
 import vistra.core.util.comparator.ItemComparator;
-
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
 

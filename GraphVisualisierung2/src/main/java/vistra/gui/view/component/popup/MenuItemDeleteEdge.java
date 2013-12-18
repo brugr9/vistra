@@ -9,7 +9,6 @@ import javax.swing.JMenuItem;
 import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**

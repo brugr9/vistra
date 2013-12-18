@@ -3,6 +3,16 @@
  */
 package vistra.gui.control.parameter;
 
+import static vistra.gui.control.IControl.EventSource.DELETE_ALGORITHM;
+import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
+import static vistra.gui.control.IControl.EventSource.GRAPH;
+import static vistra.gui.control.IControl.EventSource.IMPORT_ALGORITHM;
+import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
+import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
+import static vistra.gui.control.IControl.EventSource.OPEN_GRAPH;
+import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH;
+import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH_AS;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.io.File;
@@ -26,20 +36,8 @@ import vistra.core.traversal.Traversal;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.util.SingleRootFileSystemView;
-
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
-
-import static vistra.gui.control.IControl.EventSource.ALGORITHM;
-import static vistra.gui.control.IControl.EventSource.DELETE_ALGORITHM;
-import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
-import static vistra.gui.control.IControl.EventSource.GRAPH;
-import static vistra.gui.control.IControl.EventSource.IMPORT_ALGORITHM;
-import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
-import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
-import static vistra.gui.control.IControl.EventSource.OPEN_GRAPH;
-import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH;
-import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH_AS;
 
 /**
  * A parameter state handler.

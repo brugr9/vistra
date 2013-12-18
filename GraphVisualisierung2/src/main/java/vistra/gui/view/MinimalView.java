@@ -16,7 +16,6 @@ import vistra.gui.view.component.GraphPanel;
 import vistra.gui.view.component.MenuBar;
 import vistra.gui.view.component.TraversalPanel;
 import vistra.util.TravisColor;
-
 import edu.uci.ics.jung.algorithms.layout.Layout;
 
 /**

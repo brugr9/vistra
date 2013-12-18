@@ -1,7 +1,8 @@
 package vistra.gui.util;
 
-import java.io.*;
-import javax.swing.filechooser.*;
+import java.io.File;
+
+import javax.swing.filechooser.FileSystemView;
 
 /**
  * A FileSystemView class that limits the file selection to a single root.

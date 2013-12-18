@@ -8,7 +8,6 @@ import vistra.common.IAlgorithm;
 import vistra.core.graph.IGravisGraph;
 import vistra.core.graph.IObservableGravisGraph;
 import vistra.core.traversal.Traversal;
-
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

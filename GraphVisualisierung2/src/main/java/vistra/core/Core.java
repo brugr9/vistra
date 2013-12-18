@@ -1,9 +1,14 @@
 package vistra.core;
 
+import static vistra.core.graph.GraphFactory.createGravisGraphEventListener;
+import static vistra.core.graph.GraphFactory.createObservableGraph;
+import static vistra.core.graph.GraphFactory.createRestrictedGraph;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
@@ -22,11 +27,6 @@ import vistra.core.traversal.GravisListIterator;
 import vistra.core.traversal.IGravisListIterator;
 import vistra.core.traversal.Traversal;
 import vistra.core.traversal.step.IStep;
-
-import static vistra.core.graph.GraphFactory.createGravisGraphEventListener;
-import static vistra.core.graph.GraphFactory.createObservableGraph;
-import static vistra.core.graph.GraphFactory.createRestrictedGraph;
-
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
 

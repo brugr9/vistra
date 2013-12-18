@@ -3,6 +3,13 @@
  */
 package vistra.gui.control.animation;
 
+import static vistra.gui.control.IControl.EventSource.ANIMATION;
+import static vistra.gui.control.IControl.EventSource.PAUSE;
+import static vistra.gui.control.IControl.EventSource.PLAY;
+import static vistra.gui.control.IControl.EventSource.RESUME;
+import static vistra.gui.control.IControl.EventSource.SET_DELAY;
+import static vistra.gui.control.IControl.EventSource.STOP;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -15,13 +22,6 @@ import javax.swing.Timer;
 import vistra.gui.IModel;
 import vistra.gui.Model;
 import vistra.gui.control.stepbystep.StepByStepStateHandler;
-
-import static vistra.gui.control.IControl.EventSource.ANIMATION;
-import static vistra.gui.control.IControl.EventSource.PAUSE;
-import static vistra.gui.control.IControl.EventSource.PLAY;
-import static vistra.gui.control.IControl.EventSource.RESUME;
-import static vistra.gui.control.IControl.EventSource.SET_DELAY;
-import static vistra.gui.control.IControl.EventSource.STOP;
 
 /**
  * An animation state handler.

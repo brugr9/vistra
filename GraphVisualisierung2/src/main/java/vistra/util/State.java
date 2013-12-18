@@ -1,6 +1,5 @@
 package vistra.util;
 
-import vistra.util.IState;
 
 /**
  * An abstract state.

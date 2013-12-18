@@ -5,8 +5,6 @@ import java.awt.event.ItemListener;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-
-
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 
 /**

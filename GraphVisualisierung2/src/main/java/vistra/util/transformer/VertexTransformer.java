@@ -5,7 +5,6 @@ import org.apache.commons.collections15.Transformer;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
 import vistra.core.util.GraphPropertyConstants;
-
 import edu.uci.ics.jung.io.graphml.NodeMetadata;
 
 /**

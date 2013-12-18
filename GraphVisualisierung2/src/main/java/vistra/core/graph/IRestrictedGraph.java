@@ -5,7 +5,6 @@ import java.util.Collection;
 import vistra.core.graph.item.IRestrictedGraphItem;
 import vistra.core.graph.item.edge.IRestrictedEdge;
 import vistra.core.graph.item.vertex.IRestrictedVertex;
-
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
 

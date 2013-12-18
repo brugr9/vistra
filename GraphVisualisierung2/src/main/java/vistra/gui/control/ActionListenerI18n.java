@@ -3,6 +3,8 @@
  */
 package vistra.gui.control;
 
+import static vistra.gui.control.IControl.EventSource.I18N;
+
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Locale;
@@ -13,8 +15,6 @@ import javax.swing.JOptionPane;
 
 import vistra.gui.IModel;
 import vistra.gui.Model;
-
-import static vistra.gui.control.IControl.EventSource.I18N;
 
 /**
  * An i18n listener.

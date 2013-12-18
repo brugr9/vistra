@@ -5,7 +5,6 @@ import org.apache.commons.collections15.Transformer;
 import vistra.core.graph.IGravisGraph;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-
 import edu.uci.ics.jung.graph.Hypergraph;
 
 /**

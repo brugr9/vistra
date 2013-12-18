@@ -19,7 +19,6 @@ import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.IView;
 import vistra.gui.view.component.adapted.AdaptedVisualizationViewer;
-
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 

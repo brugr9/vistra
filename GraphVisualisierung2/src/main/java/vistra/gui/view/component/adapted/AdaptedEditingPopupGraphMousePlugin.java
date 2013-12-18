@@ -12,7 +12,6 @@ import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.gui.view.component.popup.IItemModifier;
-
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;

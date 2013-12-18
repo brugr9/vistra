@@ -2,27 +2,24 @@ package vistra.gui.view.component.popup;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import edu.uci.ics.jung.visualization.VisualizationViewer;
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.gui.util.EdgeWeightVerifier;
 import vistra.gui.util.GraphItemIdVerifier;
 import vistra.util.transformer.ValueTransformer;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
  * An edge property dialog.

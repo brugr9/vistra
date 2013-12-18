@@ -1,10 +1,12 @@
 package vistra.gui.view.component.popup;
 
 import java.awt.geom.Point2D;
+
 import javax.swing.JCheckBoxMenuItem;
-import edu.uci.ics.jung.visualization.VisualizationViewer;
+
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
 		IItemModifier {

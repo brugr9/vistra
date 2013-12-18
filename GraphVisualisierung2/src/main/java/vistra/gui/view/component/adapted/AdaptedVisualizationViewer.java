@@ -26,7 +26,6 @@ import vistra.util.transformer.VertexColorTransformer;
 import vistra.util.transformer.VertexLabelTransformer;
 import vistra.util.transformer.VertexStrokeTransformer;
 import vistra.util.transformer.VertexToolTipTransformer;
-
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;

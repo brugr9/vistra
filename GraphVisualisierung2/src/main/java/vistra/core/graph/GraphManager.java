@@ -1,11 +1,10 @@
 package vistra.core.graph;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Writer;
 import java.util.Properties;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.core.graph.item.edge.IEdge;
@@ -14,7 +13,6 @@ import vistra.util.transformer.EdgeTransformer;
 import vistra.util.transformer.GraphTransformer;
 import vistra.util.transformer.HyperEdgeTransformer;
 import vistra.util.transformer.VertexTransformer;
-
 import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 

@@ -9,7 +9,6 @@ import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.traversal.step.CommandTransformerFactory;
 import vistra.core.traversal.step.IStep;
-
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseGraph;
 import edu.uci.ics.jung.graph.event.GraphEvent;

@@ -3,6 +3,7 @@ package vistra.core.algorithm;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Properties;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
@@ -14,7 +15,6 @@ import vistra.core.algorithm.impl.DLS;
 import vistra.core.algorithm.impl.Default;
 import vistra.core.algorithm.impl.Dijkstra;
 import vistra.core.algorithm.impl.Kruskal;
-
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

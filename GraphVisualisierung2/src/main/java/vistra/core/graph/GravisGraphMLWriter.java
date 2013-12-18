@@ -8,7 +8,6 @@ import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-
 import edu.uci.ics.jung.graph.Hypergraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.GraphMLWriter;
