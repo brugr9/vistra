@@ -39,7 +39,7 @@
 
 	<graph id="Sample Forrest 1" edgedefault="directed">
 		<data key="description">
-			This sample forrest can be used with DFS and DLS algorithms.
+			This sample forest, can be used with DFS and DLS algorithms.
 		</data>
 
 		<node id="A">

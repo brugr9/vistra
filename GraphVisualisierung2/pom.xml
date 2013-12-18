@@ -1,13 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ch.bfh.bti7301.hs2013.gravis</groupId>
+	<groupId>travis</groupId>
 	<artifactId>GraphVisualisierung2</artifactId>
-	<description>Software zur Visualisierung der Traversierung von Graphen. Ein Algorithmus, wie etwa derjenige von Dijkstra soll mit diesem Werkzeug so auf einfache Weise visualisiert werden. Das Werkzeug soll sich als didaktisches Hilfsmittel für beliebige Graphen-Algorithmen eignen.</description>
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>GraphVisualisierung2</name>
-	<url>https://github.com/brugr9/gravis</url>
+	<url>https://github.com/brugr9/travis</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -103,4 +102,14 @@
 	<ciManagement>
 		<system>none</system>
 	</ciManagement>
+	<description>Graph-Visualisierung (Gruppe 2, split brugr9)
+
+BFH-TI, HS 2013, Modul BTI7301
+
+Software zur Traversierung von Graphen.
+
+Ein Algorithmus, wie etwa derjenige von Dijkstra, soll mit diesem System visualisiert werden.
+Das System soll sich als didaktisches Hilfsmittel für beliebige Algorithmen eignen.
+
+Roland Bruggmann (brugr9)</description>
 </project>
