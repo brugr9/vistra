@@ -31,7 +31,7 @@ class MenuItemDeleteEdge extends JMenuItem implements IItemModifier {
 	 * @param vViewer
 	 */
 	protected MenuItemDeleteEdge(VisualizationViewer<IVertex, IEdge> vViewer) {
-		super("Kante löschen");
+		super("Delete edge");
 
 		this.vViewer = vViewer;
 

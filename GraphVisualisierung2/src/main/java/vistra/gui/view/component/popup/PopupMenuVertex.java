@@ -30,7 +30,7 @@ public class PopupMenuVertex extends JPopupMenu {
 	 */
 	public PopupMenuVertex(JFrame rootFrame,
 			VisualizationViewer<IVertex, IEdge> viewer) {
-		super("Knoten");
+		super("Vertex");
 
 		this.menuItemVertexProperty = new MenuItemVertexProperty(viewer);
 		this.menuItemVertexProperty.setRootFrame(rootFrame);

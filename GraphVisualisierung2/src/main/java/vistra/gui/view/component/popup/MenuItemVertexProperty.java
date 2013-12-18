@@ -36,7 +36,7 @@ class MenuItemVertexProperty extends JMenuItem implements IItemModifier {
 	 * @param vViewer
 	 */
 	protected MenuItemVertexProperty(VisualizationViewer<IVertex, IEdge> vViewer) {
-		super("Knoten bearbeiten...");
+		super("Edit vertex ...");
 		this.vViewer = vViewer;
 		this.vertex = null;
 		this.point = null;

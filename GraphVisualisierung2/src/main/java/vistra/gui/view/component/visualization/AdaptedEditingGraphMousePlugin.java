@@ -1,4 +1,4 @@
-package vistra.gui.view.component.adapted;
+package vistra.gui.view.component.visualization;
 
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;

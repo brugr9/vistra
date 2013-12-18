@@ -25,7 +25,7 @@ class CheckBoxEndVertex extends AbstarctCheckBox implements IItemModifier {
 	 *            a visualization viewer
 	 */
 	protected CheckBoxEndVertex(VisualizationViewer<IVertex, IEdge> viewer) {
-		super(viewer);
+		super(viewer, "End");
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

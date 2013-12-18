@@ -26,7 +26,7 @@ class CheckBoxStartVertex extends AbstarctCheckBox implements
 	 *            a visualization viewer
 	 */
 	protected CheckBoxStartVertex(VisualizationViewer<IVertex, IEdge> viewer) {
-		super(viewer);
+		super(viewer, "Start");
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -32,7 +32,7 @@ class MenuItemDeleteVertex extends JMenuItem implements IItemModifier {
 	 * @param vViewer
 	 */
 	protected MenuItemDeleteVertex(VisualizationViewer<IVertex, IEdge> vViewer) {
-		super("Knoten löschen");
+		super("Delete vertex");
 
 		this.vViewer = vViewer;
 

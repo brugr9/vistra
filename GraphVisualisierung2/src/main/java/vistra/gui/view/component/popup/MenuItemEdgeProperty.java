@@ -43,7 +43,7 @@ class MenuItemEdgeProperty extends JMenuItem implements IItemModifier {
 	 * 
 	 */
 	protected MenuItemEdgeProperty(VisualizationViewer<IVertex, IEdge> viewer) {
-		super("Kante bearbeiten...");
+		super("Edit edge ...");
 
 		this.viewer = viewer;
 	}

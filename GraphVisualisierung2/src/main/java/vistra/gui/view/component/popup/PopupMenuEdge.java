@@ -30,7 +30,7 @@ public class PopupMenuEdge extends JPopupMenu {
 	 */
 	public PopupMenuEdge(JFrame rootFrame,
 			VisualizationViewer<IVertex, IEdge> viewer) {
-		super("Kanten");
+		super("Edge");
 
 		this.menuItemEdgeProperty = new MenuItemEdgeProperty(viewer);
 		this.menuItemEdgeProperty.setRootFrame(rootFrame);

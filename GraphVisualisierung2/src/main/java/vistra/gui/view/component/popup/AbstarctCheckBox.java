@@ -31,8 +31,9 @@ public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	protected AbstarctCheckBox(VisualizationViewer<IVertex, IEdge> viewer) {
-		super();
+	protected AbstarctCheckBox(VisualizationViewer<IVertex, IEdge> viewer,
+			String label) {
+		super(label);
 		this.viewer = viewer;
 		this.vertex = null;
 	}

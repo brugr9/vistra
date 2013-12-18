@@ -11,7 +11,7 @@ import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
-import vistra.gui.view.component.adapted.AdaptedVisualizationViewer;
+import vistra.gui.view.component.visualization.AdaptedVisualizationViewer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -31,7 +31,7 @@ public class MenuFactory extends JPopupMenu implements IItemModifier {
 	/**
 	 * A field for a visualization viewer.
 	 */
-	private final VisualizationViewer<IVertex, IEdge> vViewer;
+	private final VisualizationViewer<IVertex, IEdge> viewer;
 	/**
 	 * A field for a 2D point.
 	 */
@@ -47,7 +47,7 @@ public class MenuFactory extends JPopupMenu implements IItemModifier {
 		super("Neuer Knoten");
 
 		this.vertexFactory = new VertexFactory();
-		this.vViewer = viewer;
+		this.viewer = viewer;
 
 		JMenuItem newVertexMenuItem = new JMenuItem("Neuer Knoten");
 		this.add(newVertexMenuItem);
@@ -65,14 +65,14 @@ public class MenuFactory extends JPopupMenu implements IItemModifier {
 	private void createVertex() {
 		if (this.point2D != null) {
 			IVertex newVertex = this.vertexFactory.create();
-			Layout<IVertex, IEdge> layout = this.vViewer.getGraphLayout();
-			Point2D newPoint = this.vViewer.getRenderContext()
+			Layout<IVertex, IEdge> layout = this.viewer.getGraphLayout();
+			Point2D newPoint = this.viewer.getRenderContext()
 					.getMultiLayerTransformer().inverseTransform(this.point2D);
 
 			newVertex.setLocation(newPoint);
 			layout.getGraph().addVertex(newVertex);
 			layout.setLocation(newVertex, newPoint);
-			this.vViewer.repaint();
+			this.viewer.repaint();
 		}
 	}
 
