@@ -4,7 +4,6 @@ import java.io.File;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.common.IAlgorithm;
 import vistra.core.graph.zobsolete.IGravisGraph;
 import vistra.core.graph.zobsolete.IObservableGraph;
 import vistra.core.traversal.Traversal;
@@ -23,7 +22,7 @@ public interface ICore {
 	 * 
 	 * @return the graph filename extension filter
 	 */
-	public abstract FileNameExtensionFilter getGraphFilter();
+	abstract FileNameExtensionFilter getGraphFilter();
 
 	/**
 	 * Returns an empty graph of edge type as given.
@@ -31,7 +30,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	public abstract IObservableGraph getNewGraph() throws CoreException;
+	abstract IObservableGraph getNewGraph() throws CoreException;
 
 	/**
 	 * Opens a graph given as file.
@@ -41,8 +40,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	public abstract IObservableGraph openGraph(File source)
-			throws CoreException;
+	abstract IObservableGraph openGraph(File source) throws CoreException;
 
 	/**
 	 * Saves a graph as GraphML-file with the name as given.
@@ -51,7 +49,7 @@ public interface ICore {
 	 *            the graph to save
 	 * @throws CoreException
 	 */
-	public abstract void save(IGravisGraph graph) throws CoreException;
+	abstract void save(IGravisGraph graph) throws CoreException;
 
 	/**
 	 * Saves a graph into a GraphML-file.
@@ -62,22 +60,21 @@ public interface ICore {
 	 *            the file to write into
 	 * @throws CoreException
 	 */
-	public abstract void saveAs(IGravisGraph graph, File file)
-			throws CoreException;
+	abstract void saveAs(IGravisGraph graph, File file) throws CoreException;
 
 	/**
 	 * Returns the algorithm workbench directory.
 	 * 
 	 * @return the algorithm workbench directory
 	 */
-	public abstract File getAlgorithmWorkbenchDir();
+	abstract File getAlgorithmWorkbenchDir();
 
 	/**
 	 * Returns the algorithm filename extension filter.
 	 * 
 	 * @return the algorithm filename extension filter
 	 */
-	public abstract FileNameExtensionFilter getAlgorithmFilter();
+	abstract FileNameExtensionFilter getAlgorithmFilter();
 
 	/**
 	 * Imports an algorithm given as file and returns the edge types the
@@ -88,8 +85,7 @@ public interface ICore {
 	 * @return the edge types
 	 * @throws CoreException
 	 */
-	public abstract EdgeType[] importAlgorithm(File source)
-			throws CoreException;
+	abstract EdgeType[] importAlgorithm(File source) throws CoreException;
 
 	/**
 	 * Returns an array of available algorithms as names.
@@ -102,18 +98,23 @@ public interface ICore {
 	 * @return the array of available algorithms
 	 * @throws CoreException
 	 */
-	public abstract String[] getAlgorithms(EdgeType edgeType)
-			throws CoreException;
+	abstract String[] getAlgorithms(EdgeType edgeType) throws CoreException;
 
 	/**
-	 * Selects and returns an algorithm.
+	 * Selects an algorithm.
 	 * 
 	 * @param index
 	 *            the algorithm index
-	 * @return the algorithm
 	 * @throws CoreException
 	 */
-	public abstract IAlgorithm selectAlgorithm(int index) throws CoreException;
+	abstract void selectAlgorithm(int index) throws CoreException;
+
+	/**
+	 * Returns the description of the selected algorithm.
+	 * 
+	 * @return the selected algorithm description
+	 */
+	abstract String getAlgorithmDescription();
 
 	/**
 	 * Deletes an imported algorithm file and returns the edge types the
@@ -124,22 +125,18 @@ public interface ICore {
 	 * @return the edge types if success (<code>null</code> else)
 	 * @throws CoreException
 	 */
-	public abstract EdgeType[] deleteAlgorithm(File file) throws CoreException;
+	abstract EdgeType[] deleteAlgorithm(File file) throws CoreException;
 
 	/**
-	 * Renders a traversal by executing an algorithm as given over a graph as
-	 * given. Returns an immutable list of steps generated during the execution
-	 * of the algorithm. A step contains several commands which modifies the
-	 * graph.
+	 * Renders a traversal by executing an algorithm over a graph as given.
+	 * Returns an immutable list of steps generated during the execution of the
+	 * algorithm. A step contains several commands which modifies the graph.
 	 * 
 	 * @param graph
 	 *            the graph to traverse
-	 * @param algorithm
-	 *            the algorithm to execute
 	 * @return the traversal
 	 * @throws CoreException
 	 */
-	public Traversal renderTraversal(IGravisGraph graph, IAlgorithm algorithm)
-			throws CoreException;
+	public Traversal executeAlgorithm(IGravisGraph graph) throws CoreException;
 
 }

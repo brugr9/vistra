@@ -49,6 +49,11 @@ public class Core implements ICore {
 	private IAlgorithmManager algorithmManager;
 
 	/**
+	 * A field for an algorithm.
+	 */
+	private IAlgorithm algorithm;
+
+	/**
 	 * Main constructor.
 	 * 
 	 */
@@ -151,12 +156,20 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IAlgorithm selectAlgorithm(int index) throws CoreException {
+	public void selectAlgorithm(int index) throws CoreException {
 		try {
-			return this.algorithmManager.select(index);
+			this.algorithm = this.algorithmManager.select(index);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getAlgorithmDescription() {
+		return this.algorithm.getDescription();
 	}
 
 	/**
@@ -192,8 +205,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Traversal renderTraversal(IGravisGraph graph, IAlgorithm algorithm)
-			throws CoreException {
+	public Traversal executeAlgorithm(IGravisGraph graph) throws CoreException {
 
 		try {
 			// the steps
@@ -204,7 +216,7 @@ public class Core implements ICore {
 			observableGraph.addGraphEventListener(graphEventListener);
 			IRestrictedGraph restrictedGraph = createRestrictedGraph(observableGraph);
 			// the algorithm
-			algorithm.execute(restrictedGraph);
+			this.algorithm.execute(restrictedGraph);
 			// undo all steps in reverse order
 			for (int index = steps.size() - 1; index > -1; index--)
 				steps.get(index).undo();

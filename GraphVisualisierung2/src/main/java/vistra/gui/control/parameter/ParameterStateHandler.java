@@ -331,8 +331,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingTheGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
-				IObservableGraph graph = GraphFactory
-						.createObservableGraph();
+				IObservableGraph graph = GraphFactory.createObservableGraph();
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
 				graph.setId(name);
@@ -484,17 +483,11 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				/* deny user interaction */
 				this.setState(new ParameterOff(this));
 				/* get the traversal */
+				this.core.selectAlgorithm(index);
 				IGravisGraph graph = this.model.getGraph();
-				IAlgorithm algorithm = this.core.selectAlgorithm(index);
-				Traversal traversal = this.core.renderTraversal(graph,
-						algorithm);
+				Traversal traversal = this.core.executeAlgorithm(graph);
 				/* settings */
-				String name = algorithm.getName();
-				String description = algorithm.getDescription();
-				StringBuilder stringBuilder = this.model.getStringBuilder();
-				stringBuilder.append(name + System.lineSeparator());
-				stringBuilder.append(description + System.lineSeparator());
-				this.model.setStringBuilder(stringBuilder);
+				String description = this.core.getAlgorithmDescription();
 				this.model.setAlgorithmDescription(description);
 				this.model.setTraversal(traversal);
 				this.model.setProgressMaximum(traversal.size());
