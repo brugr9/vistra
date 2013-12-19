@@ -2,9 +2,9 @@ package vistra.util.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.zobsolete.IGravisGraph;
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.IGravisGraph;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Hypergraph;
 
 /**

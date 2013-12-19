@@ -2,9 +2,9 @@ package vistra.util.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
-import vistra.core.graph.zobsolete.item.vertex.VertexFactory;
-import vistra.core.util.GraphPropertyConstants;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.item.vertex.VertexFactory;
+import vistra.core.zobsolete.graph.util.GraphPropertyConstants;
 import edu.uci.ics.jung.io.graphml.NodeMetadata;
 
 /**

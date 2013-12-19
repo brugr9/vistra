@@ -3,8 +3,8 @@ package vistra.util.transformer;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.zobsolete.IGravisGraph;
-import vistra.core.util.GraphPropertyConstants;
+import vistra.core.zobsolete.graph.IGravisGraph;
+import vistra.core.zobsolete.graph.util.GraphPropertyConstants;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.graphml.GraphMetadata;
 import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;

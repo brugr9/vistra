@@ -2,9 +2,9 @@ package vistra.util.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.zobsolete.item.edge.EdgeFactory;
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.util.GraphPropertyConstants;
+import vistra.core.zobsolete.graph.item.edge.EdgeFactory;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.util.GraphPropertyConstants;
 import edu.uci.ics.jung.io.graphml.HyperEdgeMetadata;
 
 /**
