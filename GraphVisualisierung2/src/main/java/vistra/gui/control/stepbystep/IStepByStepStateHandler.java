@@ -3,47 +3,43 @@ package vistra.gui.control.stepbystep;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
+import vistra.gui.control.IControlStateHandler;
+
 /**
  * An interface for a step-by-step state handler.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IStepByStepStateHandler extends FocusListener, ActionListener {
-
-	/**
-	 * A field for a second (in milliseconds).
-	 */
-	public final static int A_SECOND = 1000;
-
-	/**
-	 * Handles an interaction: idle.
-	 */
-	abstract void handleIdle();
+public interface IStepByStepStateHandler extends IControlStateHandler,
+		FocusListener, ActionListener {
 
 	/**
 	 * Handles an interaction: to beginning |<<.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleToBeginning();
+	abstract void handleToBeginning() throws Exception;
 
 	/**
 	 * Handles an interaction: backward <<.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleBackward();
+	abstract void handleBackward() throws Exception;
 
 	/**
 	 * Handles an interaction: forward >>.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleForward();
+	abstract void handleForward() throws Exception;
 
 	/**
 	 * Handles an interaction: to end (>>|.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleToEnd();
-
-	/**
-	 * Handles an interaction: off.
-	 */
-	abstract void handleOff();
+	abstract void handleToEnd() throws Exception;
 
 }

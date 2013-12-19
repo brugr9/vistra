@@ -16,19 +16,23 @@ class AnimationOff extends AbstractAnimationState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param animationStateHandler
-	 *            an animation handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	AnimationOff(IAnimationStateHandler animationStateHandler) {
-		super(animationStateHandler);
+	AnimationOff(IAnimationStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewOff();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.setViewOff();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 }

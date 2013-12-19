@@ -3,42 +3,36 @@ package vistra.gui.control.animation;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
+import vistra.gui.control.IControlStateHandler;
+
 /**
  * An interface for an animation state handler.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IAnimationStateHandler extends FocusListener, ActionListener {
-
-	/**
-	 * A field for a second (in milliseconds).
-	 */
-	public final static int A_SECOND = 1000;
-
-	/**
-	 * Handles an interaction: idle.
-	 */
-	abstract void handleIdle();
+public interface IAnimationStateHandler extends IControlStateHandler,
+		FocusListener, ActionListener {
 
 	/**
 	 * Handles an interaction: play.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handlePlay();
+	abstract void handlePlay() throws Exception;
 
 	/**
 	 * Handles an interaction: pause.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handlePause();
+	abstract void handlePause() throws Exception;
 
 	/**
 	 * Handles an interaction: stop.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleStop();
-
-	/**
-	 * Handles an interaction: off.
-	 */
-	abstract void handleOff();
+	abstract void handleStop() throws Exception;
 
 }

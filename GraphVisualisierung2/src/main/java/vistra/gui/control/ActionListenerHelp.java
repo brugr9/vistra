@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control;
 
 import java.awt.event.ActionEvent;
@@ -15,7 +12,7 @@ import vistra.gui.IModel;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class ActionListenerHelp extends AbstractActionListener {
+final class ActionListenerHelp extends AbstractActionListener {
 
 	/**
 	 * A field for a list of shortcuts.
@@ -53,7 +50,7 @@ public final class ActionListenerHelp extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	public ActionListenerHelp(IModel model) {
+	ActionListenerHelp(IModel model) {
 		super(model);
 	}
 

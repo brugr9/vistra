@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.core.graph.vertex.state;
 
 import vistra.util.IState;
@@ -15,46 +12,70 @@ import vistra.util.State;
 abstract class AbstractVertexState extends State implements IState {
 
 	/**
-	 * A field for a context.
+	 * A field for a state handler.
 	 */
-	protected VertexStateHandler context;
+	protected VertexStateHandler stateHandler;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param vertexStateHandler
-	 *            an edgeStateHandler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	AbstractVertexState(IVertexStateHandler vertexStateHandler) {
-		this.context = (VertexStateHandler) vertexStateHandler;
+	AbstractVertexState(IVertexStateHandler stateHandler) {
+		this.stateHandler = (VertexStateHandler) stateHandler;
 	}
 
 	/**
 	 * Handles initialise.
+	 * 
+	 * @throws Exception
 	 */
-	void handleInitialise() {
-		this.context.setState(new InitialVertex(this.context));
+	void handleInitialise() throws Exception {
+		try {
+			this.stateHandler.setState(new InitialVertex(this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Handles activate.
+	 * 
+	 * @throws Exception
 	 */
-	void handleActivate() {
-		this.context.setState(new ActiveVertex(this.context));
+	void handleActivate() throws Exception {
+		try {
+			this.stateHandler.setState(new ActiveVertex(this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Handles visiting.
+	 * 
+	 * @throws Exception
 	 */
-	void handleVisit() {
-		this.context.setState(new VisitedVertex(this.context));
+	void handleVisit() throws Exception {
+		try {
+			this.stateHandler.setState(new VisitedVertex(this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Handles solving.
+	 * 
+	 * @throws Exception
 	 */
-	void handleSolve() {
-		this.context.setState(new SolutionVertex(this.context));
+	void handleSolve() throws Exception {
+		try {
+			this.stateHandler.setState(new SolutionVertex(this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

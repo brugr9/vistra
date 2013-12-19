@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control;
 
 import java.awt.event.ActionEvent;
@@ -15,7 +12,7 @@ import vistra.gui.IModel;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class ActionListenerQuit extends AbstractActionListener {
+final class ActionListenerQuit extends AbstractActionListener {
 
 	/**
 	 * Main constructor.
@@ -23,7 +20,7 @@ public final class ActionListenerQuit extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	public ActionListenerQuit(IModel model) {
+	ActionListenerQuit(IModel model) {
 		super(model);
 	}
 

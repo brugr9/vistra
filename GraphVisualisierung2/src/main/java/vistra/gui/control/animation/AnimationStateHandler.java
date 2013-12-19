@@ -3,6 +3,7 @@
  */
 package vistra.gui.control.animation;
 
+import static vistra.gui.control.IControl.A_SECOND;
 import static vistra.gui.control.IControl.EventSource.ANIMATION;
 import static vistra.gui.control.IControl.EventSource.PAUSE;
 import static vistra.gui.control.IControl.EventSource.PLAY;
@@ -32,13 +33,13 @@ public final class AnimationStateHandler extends Observable implements
 		IAnimationStateHandler {
 
 	/**
+	 * A field for a state.
+	 */
+	private AbstractAnimationState state;
+	/**
 	 * A field for a model.
 	 */
 	private Model model;
-	/**
-	 * A field for an animation state.
-	 */
-	private AbstractAnimationState state;
 	/**
 	 * A field for an animation timer.
 	 */
@@ -52,16 +53,22 @@ public final class AnimationStateHandler extends Observable implements
 	 * Main constructor.
 	 * 
 	 * @param model
-	 *            a gravis gui model
+	 *            a model
 	 */
-	public AnimationStateHandler(IModel model) {
+	public AnimationStateHandler(Model model) {
 		super();
-		this.model = (Model) model;
+		this.model = model;
+
 		this.animationListener = new AnimationListener();
 		int animationDelay = this.model.getDelay() * A_SECOND;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
 		// state
-		this.setState(new AnimationOff(this));
+		try {
+			this.setState(new AnimationOff(this));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -97,6 +104,19 @@ public final class AnimationStateHandler extends Observable implements
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void handleIdle() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleIdle();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String c = e.getActionCommand();
@@ -119,45 +139,52 @@ public final class AnimationStateHandler extends Observable implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleIdle() {
-		this.state.exit();
-		this.state.handleIdle();
+	public void handlePlay() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handlePlay();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handlePlay() {
-		this.state.exit();
-		this.state.handlePlay();
+	public void handlePause() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handlePause();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handlePause() {
-		this.state.exit();
-		this.state.handlePause();
+	public void handleStop() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleStop();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleStop() {
-		this.state.exit();
-		this.state.handleStop();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void handleOff() {
-		this.state.exit();
-		this.state.handleOff();
+	public void handleOff() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleOff();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -166,121 +193,160 @@ public final class AnimationStateHandler extends Observable implements
 	 * @param state
 	 *            the state to set
 	 */
-	void setState(AbstractAnimationState state) {
-		this.state = state;
-		this.state.entry();
+	void setState(AbstractAnimationState state) throws Exception {
+		try {
+			this.state = state;
+			this.state.entry();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Doing: Starts the animation by starting the related timer. If the
 	 * progress is already at maximum, a 'go to beginning' will be performed
 	 * first.
+	 * 
+	 * @throws Exception
 	 */
-	void startAnimation() {
-		/* reset the traversal eventually */
-		if (this.model.getProgress() == this.model.getProgressMaximum())
-			((StepByStepStateHandler) this.model.getStepByStepStateHandler())
-					.goToBeginning();
-		/* simply start the timer */
-		this.animationTimer.start();
-		this.setChanged();
+	void startAnimation() throws Exception {
+		try {
+			/* reset the traversal eventually */
+			if (this.model.getProgress() == this.model.getProgressMaximum())
+				((StepByStepStateHandler) this.model
+						.getStepByStepStateHandler()).goToBeginning();
+			/* simply start the timer */
+			this.animationTimer.start();
+			this.setChanged();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing: Pauses the animation by stopping the related timer.
+	 * 
+	 * @throws Exception
 	 */
-	void pauseAnimation() {
-		/* simply stop the timer */
-		this.animationTimer.stop();
-		this.setChanged();
+	void pauseAnimation() throws Exception {
+		try {
+			/* simply stop the timer */
+			this.animationTimer.stop();
+			this.setChanged();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Doing: Stops the animation by stopping the related timer.
+	 * 
+	 * @throws Exception
 	 */
-	void stopAnimation() {
-		/* simply stop the timer */
-		this.animationTimer.stop();
-		this.setChanged();
+	void stopAnimation() throws Exception {
+		try {
+			/* simply stop the timer */
+			this.animationTimer.stop();
+			this.setChanged();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * State view setter: Sets the view elements for state: playing. In
 	 * addition, this method sets the state machines parameter and step-by-step
 	 * in state off.
+	 * 
+	 * @throws Exception
 	 */
-	void setViewPlaying() {
+	void setViewPlaying() throws Exception {
 		/* other state handlers */
 		try {
 			this.model.getParameterStateHandler().handleOff();
 			this.model.getStepByStepStateHandler().handleOff();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		/* animation state machine */
-		this.model.setDelayEnabled(false);
-		this.model.setAnimationEnabled(true);
-		this.model.setPlayEnabled(false);
-		// pause
-		String label = this.model.getResourceBundle().getString("pause.label");
-		this.model.setPauseLabel(label);
-		this.model.setPauseEvent(PAUSE);
+			/* animation state machine */
+			this.model.setDelayEnabled(false);
+			this.model.setAnimationEnabled(true);
+			this.model.setPlayEnabled(false);
+			// pause
+			String label = this.model.getResourceBundle().getString(
+					"pause.label");
+			this.model.setPauseLabel(label);
+			this.model.setPauseEvent(PAUSE);
 
-		this.model.notifyObservers(ANIMATION);
+			this.model.notifyObservers(ANIMATION);
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * State view setter: Sets the animation view elements for state: paused.
+	 * 
+	 * @throws Exception
 	 */
-	void setViewPaused() {
-		/* other state handlers */
-		// ... are already in state 'off' since coming from state 'playing'
-		/* animation state machine */
-		// ... is already setViewPlaying() since coming from state 'playing'
-		// pause
-		String label = this.model.getResourceBundle().getString("resume.label");
-		this.model.setPauseLabel(label);
-		this.model.setPauseEvent(RESUME);
+	void setViewPaused() throws Exception {
+		try {
+			/* other state handlers */
+			// ... are already in state 'off' since coming from state 'playing'
+			/* animation state machine */
+			// ... is already setViewPlaying() since coming from state 'playing'
+			// pause
+			String label = this.model.getResourceBundle().getString(
+					"resume.label");
+			this.model.setPauseLabel(label);
+			this.model.setPauseEvent(RESUME);
 
-		this.model.notifyObservers(ANIMATION);
+			this.model.notifyObservers(ANIMATION);
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * State view setter: Sets the view elements for state: stopped. In
 	 * addition, this method sets the state machines parameter and step-by-step
 	 * in state idle.
+	 * 
+	 * @throws Exception
 	 */
-	void setViewStopped() {
-		/* animation state machine */
-		this.model.setDelayEnabled(true);
-		this.model.setAnimationEnabled(false);
-		this.model.setPlayEnabled(true);
-		// pause
-		String label = this.model.getResourceBundle().getString("pause.label");
-		this.model.setPauseLabel(label);
-		this.model.setPauseEvent(PAUSE);
-		/* other state handlers */
+	void setViewStopped() throws Exception {
 		try {
+			/* animation state machine */
+			this.model.setDelayEnabled(true);
+			this.model.setAnimationEnabled(false);
+			this.model.setPlayEnabled(true);
+			// pause
+			String label = this.model.getResourceBundle().getString(
+					"pause.label");
+			this.model.setPauseLabel(label);
+			this.model.setPauseEvent(PAUSE);
+			/* other state handlers */
 			this.model.getParameterStateHandler().handleIdle();
 			this.model.getStepByStepStateHandler().handleIdle();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		this.model.notifyObservers(ANIMATION);
+			this.model.notifyObservers(ANIMATION);
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * State view setter: Sets the animation view elements for state: off. In
 	 * addition, his method sets the state machine step-by-step in state off.
+	 * 
+	 * @throws Exception
 	 */
-	void setViewOff() {
-		this.model.getStepByStepStateHandler().handleOff();
-		this.model.setDelayEnabled(false);
-		this.model.setAnimationEnabled(false);
-		this.model.notifyObservers(ANIMATION);
+	void setViewOff() throws Exception {
+		try {
+			this.model.getStepByStepStateHandler().handleOff();
+			this.model.setDelayEnabled(false);
+			this.model.setAnimationEnabled(false);
+			this.model.notifyObservers(ANIMATION);
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
@@ -296,13 +362,16 @@ public final class AnimationStateHandler extends Observable implements
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			IModel model = AnimationStateHandler.this.model;
-
-			if (model.getProgress() < model.getProgressMaximum())
-				((StepByStepStateHandler) model.getStepByStepStateHandler())
-						.goForward();
-			else
-				model.getAnimationStateHandler().handleStop();
+			try {
+				IModel model = AnimationStateHandler.this.model;
+				if (model.getProgress() < model.getProgressMaximum())
+					((StepByStepStateHandler) model.getStepByStepStateHandler())
+							.goForward();
+				else
+					model.getAnimationStateHandler().handleStop();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 
 	}

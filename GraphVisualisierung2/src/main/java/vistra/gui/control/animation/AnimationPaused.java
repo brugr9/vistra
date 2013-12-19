@@ -16,35 +16,48 @@ class AnimationPaused extends AbstractAnimationState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param animationStateHandler
-	 *            an animation handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	AnimationPaused(IAnimationStateHandler animationStateHandler) {
-		super(animationStateHandler);
+	AnimationPaused(IAnimationStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewPaused();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.setViewPaused();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void startDo() {
-		super.context.pauseAnimation();
+	protected void startDo() throws Exception {
+		try {
+			super.stateHandler.pauseAnimation();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	void handlePause() {
-		super.context.setState(new AnimationPlaying(super.context));
+	void handlePause() throws Exception {
+		try {
+			super.stateHandler
+					.setState(new AnimationPlaying(super.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 }

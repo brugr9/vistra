@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.stepbystep;
 
 import vistra.util.IState;
@@ -16,19 +13,23 @@ class StepByStepAtEnd extends AbstractStepByStepState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param stepByStepStateHandler
-	 *            a step-by-step handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	StepByStepAtEnd(IStepByStepStateHandler stepByStepStateHandler) {
-		super(stepByStepStateHandler);
+	StepByStepAtEnd(IStepByStepStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewEnd();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.setViewEnd();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

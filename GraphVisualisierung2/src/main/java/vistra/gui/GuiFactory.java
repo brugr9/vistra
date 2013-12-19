@@ -6,6 +6,7 @@ import vistra.core.graph.zobsolete.IObservableGraph;
 import vistra.core.graph.zobsolete.item.edge.IEdge;
 import vistra.core.graph.zobsolete.item.vertex.IVertex;
 import vistra.gui.control.Control;
+import vistra.gui.control.IControl;
 import vistra.gui.view.FullView;
 import vistra.gui.view.IView;
 import vistra.gui.view.MinimalView;
@@ -60,7 +61,7 @@ public final class GuiFactory {
 					graph);
 			// model and control
 			Model model = new Model(graph);
-			Control control = new Control(core, model);
+			IControl control = new Control(core, model);
 			// view
 			IView view;
 			if (type == ViewType.FULL)

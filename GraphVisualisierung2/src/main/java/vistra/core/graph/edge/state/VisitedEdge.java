@@ -13,19 +13,23 @@ class VisitedEdge extends AbstractEdgeState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param edgeStateHandler
-	 *            an edgeStateHandler
+	 * @param stateHandler
+	 *            a state handler
 	 */
-	VisitedEdge(IEdgeStateHandler edgeStateHandler) {
-		super(edgeStateHandler);
+	VisitedEdge(IEdgeStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.visit();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.visit();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

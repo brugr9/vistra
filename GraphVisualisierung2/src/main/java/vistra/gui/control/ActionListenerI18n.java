@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control;
 
 import static vistra.gui.control.IControl.EventSource.I18N;
@@ -22,7 +19,7 @@ import vistra.gui.Model;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class ActionListenerI18n extends AbstractActionListener {
+class ActionListenerI18n extends AbstractActionListener {
 
 	/**
 	 * A field for an i18n base name.
@@ -35,7 +32,7 @@ public class ActionListenerI18n extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	public ActionListenerI18n(IModel model) {
+	ActionListenerI18n(IModel model) {
 		super(model);
 		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle")
 				.replace(".", File.separator);

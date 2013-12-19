@@ -3,7 +3,7 @@ package vistra.core.graph.vertex.state;
 import vistra.util.IState;
 
 /**
- * A vertex state: initial  ('the initial state of a vertex').
+ * A vertex state: initial ('the initial state of a vertex').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -13,19 +13,23 @@ class InitialVertex extends AbstractVertexState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param contextHandler
-	 *            a contextHandler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	InitialVertex(IVertexStateHandler contextHandler) {
-		super(contextHandler);
+	InitialVertex(IVertexStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.initialise();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.initialise();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

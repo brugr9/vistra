@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.parameter;
 
 import vistra.util.IState;
@@ -16,19 +13,23 @@ class ParameterGraphEdited extends AbstractParameterState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param parameterStateHandler
-	 *            a parameter state handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	ParameterGraphEdited(IParameterStateHandler parameterStateHandler) {
-		super(parameterStateHandler);
+	ParameterGraphEdited(IParameterStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewGraphEdited();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.setViewGraphEdited();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

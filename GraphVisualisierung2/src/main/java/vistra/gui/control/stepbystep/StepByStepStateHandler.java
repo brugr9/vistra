@@ -1,8 +1,6 @@
-/**
- * 
- */
 package vistra.gui.control.stepbystep;
 
+import static vistra.gui.control.IControl.A_SECOND;
 import static vistra.gui.control.IControl.EventSource.BACKWARD;
 import static vistra.gui.control.IControl.EventSource.FORWARD;
 import static vistra.gui.control.IControl.EventSource.SET_STEPLENGTH;
@@ -33,14 +31,14 @@ public final class StepByStepStateHandler extends Observable implements
 		IStepByStepStateHandler {
 
 	/**
-	 * A field for a model.
-	 */
-	private Model model;
-
-	/**
 	 * A field for a step-by-step state.
 	 */
 	private AbstractStepByStepState state;
+
+	/**
+	 * A field for a model.
+	 */
+	private Model model;
 
 	/**
 	 * A field for a timer.
@@ -73,7 +71,12 @@ public final class StepByStepStateHandler extends Observable implements
 				/ (timeDivider * numberOfSteps * NUMBER_OF_BLINKS) * A_SECOND;
 		this.timer = new Timer(blinkDelay, this.blinkListener);
 		// state
-		this.setState(new StepByStepOff(this));
+		try {
+			this.setState(new StepByStepOff(this));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -130,54 +133,79 @@ public final class StepByStepStateHandler extends Observable implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleIdle() {
-		this.state.exit();
-		this.state.handleIdle();
+	public void handleIdle() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleIdle();
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void handleToBeginning() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleToBeginning();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleToBeginning() {
-		this.state.exit();
-		this.state.handleToBeginning();
+	public void handleBackward() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleBackward();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleBackward() {
-		this.state.exit();
-		this.state.handleBackward();
+	public void handleForward() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleForward();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleForward() {
-		this.state.exit();
-		this.state.handleForward();
+	public void handleToEnd() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleToEnd();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleToEnd() {
-		this.state.exit();
-		this.state.handleToEnd();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void handleOff() {
-		this.state.exit();
-		this.state.handleOff();
+	public void handleOff() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleOff();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
@@ -185,16 +213,23 @@ public final class StepByStepStateHandler extends Observable implements
 	 * 
 	 * @param state
 	 *            the state to set
+	 * @throws Exception
 	 */
-	void setState(AbstractStepByStepState state) {
-		this.state = state;
-		this.state.entry();
+	void setState(AbstractStepByStepState state) throws Exception {
+		try {
+			this.state = state;
+			this.state.entry();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Doing: Step-by-Step backward until reaching the beginning.
+	 * 
+	 * @throws Exception
 	 */
-	public void goToBeginning() {
+	public void goToBeginning() throws Exception {
 
 		Traversal traversal = this.model.getTraversal();
 
@@ -214,9 +249,7 @@ public final class StepByStepStateHandler extends Observable implements
 			this.model.notifyObservers();
 
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.toString(), this.model
-					.getResourceBundle().getString("app.label"), 1, null);
-			ex.printStackTrace();
+			throw ex;
 		}
 
 	}
@@ -225,8 +258,9 @@ public final class StepByStepStateHandler extends Observable implements
 	 * Doing: Step-by-Step backward for a step length.
 	 * 
 	 * @return <code>true</code> if the traversal has a previous step.
+	 * @throws Exception
 	 */
-	boolean goBackward() {
+	boolean goBackward() throws Exception {
 
 		Traversal traversal = this.model.getTraversal();
 
@@ -255,9 +289,7 @@ public final class StepByStepStateHandler extends Observable implements
 			this.model.notifyObservers();
 
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.toString(), this.model
-					.getResourceBundle().getString("app.label"), 1, null);
-			ex.printStackTrace();
+			throw ex;
 		}
 
 		return traversal.hasPrevious();
@@ -268,8 +300,9 @@ public final class StepByStepStateHandler extends Observable implements
 	 * Doing: Step-by-Step forward for a step length.
 	 * 
 	 * @return <code>true</code> if the traversal has a next step.
+	 * @throws Exception
 	 */
-	public boolean goForward() {
+	public boolean goForward() throws Exception {
 
 		Traversal traversal = this.model.getTraversal();
 
@@ -305,9 +338,7 @@ public final class StepByStepStateHandler extends Observable implements
 			}
 
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.toString(), this.model
-					.getResourceBundle().getString("app.label"), 1, null);
-			ex.printStackTrace();
+			throw ex;
 		}
 
 		return traversal.hasNext();
@@ -316,24 +347,28 @@ public final class StepByStepStateHandler extends Observable implements
 
 	/**
 	 * A helper method: Helping a step to blink by starting the related timer.
+	 * 
+	 * @throws InterruptedException
 	 */
-	private void doBlink() {
+	private void doBlink() throws InterruptedException {
 		// TODO
 		// if (this.model.isBlinkEnabled()) {
 		this.timer.start();
 		this.setChanged();
 		try {
 			this.wait();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (InterruptedException ex) {
+			throw ex;
 		}
 		// }
 	}
 
 	/**
 	 * Doing: Step-by-Step forward until reaching the end.
+	 * 
+	 * @throws Exception
 	 */
-	void goToEnd() {
+	void goToEnd() throws Exception {
 
 		Traversal traversal = this.model.getTraversal();
 
@@ -362,9 +397,7 @@ public final class StepByStepStateHandler extends Observable implements
 			this.model.notifyObservers();
 
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.toString(), this.model
-					.getResourceBundle().getString("app.label"), 1, null);
-			ex.printStackTrace();
+			throw ex;
 		}
 
 	}

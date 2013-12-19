@@ -1,6 +1,5 @@
 package vistra.util;
 
-
 /**
  * An abstract state.
  * 
@@ -13,45 +12,61 @@ public abstract class State implements IState {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final void entry() {
-		this.doEntry();
-		this.startDo();
+	public final void entry() throws Exception {
+		try {
+			this.doEntry();
+			this.startDo();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final void exit() {
-		this.stopDo();
-		this.doExit();
+	public final void exit() throws Exception {
+		try {
+			this.stopDo();
+			this.doExit();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Does the entry.
+	 * 
+	 * @throws Exception
 	 */
-	protected void doEntry() {
+	protected void doEntry() throws Exception {
 		// default empty implementation
 	}
 
 	/**
 	 * Starts doing.
+	 * 
+	 * @throws Exception
 	 */
-	protected void startDo() {
+	protected void startDo() throws Exception {
 		// default empty implementation
 	}
 
 	/**
 	 * Stops doing.
+	 * 
+	 * @throws Exception
 	 */
-	protected void stopDo() {
+	protected void stopDo() throws Exception {
 		// default empty implementation
 	}
 
 	/**
 	 * Does the exit.
+	 * 
+	 * @throws Exception
 	 */
-	protected void doExit() {
+	protected void doExit() throws Exception {
 		// default empty implementation
 	}
 

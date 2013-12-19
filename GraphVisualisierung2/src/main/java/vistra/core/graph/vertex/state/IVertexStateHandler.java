@@ -10,22 +10,30 @@ public interface IVertexStateHandler {
 
 	/**
 	 * Handles initialise.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleInitialise();
+	abstract void handleInitialise() throws Exception;
 
 	/**
 	 * Handles activate.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleActivate();
+	abstract void handleActivate() throws Exception;
 
 	/**
 	 * Handles visit.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleVisit();
+	abstract void handleVisit() throws Exception;
 
 	/**
 	 * Handles solve.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleSolve();
+	abstract void handleSolve() throws Exception;
 
 }

@@ -22,7 +22,12 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	public VertexStateHandler() {
 		super();
-		this.setState(new InitialVertex(this));
+		try {
+			this.setState(new InitialVertex(this));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.wasActivated = 0;
 	}
 
@@ -30,36 +35,52 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleInitialise() {
-		this.state.exit();
-		this.state.handleInitialise();
+	public void handleInitialise() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleInitialise();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleActivate() {
-		this.state.exit();
-		this.state.handleActivate();
+	public void handleActivate() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleActivate();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleVisit() {
-		this.state.exit();
-		this.state.handleVisit();
+	public void handleVisit() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleVisit();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolve() {
-		this.state.exit();
-		this.state.handleSolve();
+	public void handleSolve() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleSolve();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -68,37 +89,57 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 * @param state
 	 *            the state to set
 	 */
-	void setState(AbstractVertexState state) {
-		this.state = state;
-		this.state.entry();
+	void setState(AbstractVertexState state) throws Exception {
+		try {
+			this.state = state;
+			this.state.entry();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing:
 	 */
-	void initialise() {
-		// TODO
+	void initialise() throws Exception {
+		try {
+			// TODO
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing:
 	 */
-	void activate() {
-		// TODO
+	void activate() throws Exception {
+		try {
+			// TODO
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing:
 	 */
-	void visit() {
-		// TODO
+	void visit() throws Exception {
+		try {
+			// TODO
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing:
 	 */
-	void solve() {
-		// TODO
+	void solve() throws Exception {
+		try {
+			// TODO
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

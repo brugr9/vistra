@@ -5,6 +5,7 @@ import java.awt.event.ItemListener;
 
 import vistra.core.graph.zobsolete.item.edge.IEdge;
 import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.gui.control.IControlStateHandler;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 
 /**
@@ -13,15 +14,8 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IParameterStateHandler extends ActionListener, ItemListener,
-		GraphEventListener<IVertex, IEdge> {
-
-	/**
-	 * Handles an interaction: idle.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleIdle() throws Exception;
+public interface IParameterStateHandler extends IControlStateHandler,
+		ActionListener, ItemListener, GraphEventListener<IVertex, IEdge> {
 
 	/**
 	 * Handles an interaction: new undirected graph.
@@ -85,12 +79,5 @@ public interface IParameterStateHandler extends ActionListener, ItemListener,
 	 * @throws Exception
 	 */
 	abstract void handleDeleteAlgorithm() throws Exception;
-
-	/**
-	 * Handles an interaction: off.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleOff() throws Exception;
 
 }

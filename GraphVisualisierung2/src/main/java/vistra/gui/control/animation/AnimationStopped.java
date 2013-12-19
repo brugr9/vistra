@@ -16,27 +16,35 @@ class AnimationStopped extends AbstractAnimationState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param animationStateHandler
-	 *            an animation handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	AnimationStopped(IAnimationStateHandler animationStateHandler) {
-		super(animationStateHandler);
+	AnimationStopped(IAnimationStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewStopped();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.setViewStopped();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void startDo() {
-		super.context.stopAnimation();
+	protected void startDo() throws Exception {
+		try {
+			super.stateHandler.stopAnimation();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 }

@@ -32,7 +32,7 @@ public class AlgorithmTemplate implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(IRestrictedGraph graph) throws AlgorithmException {
+	public void traverse(IRestrictedGraph graph) throws AlgorithmException {
 		// TODO implement algorithm
 
 	}

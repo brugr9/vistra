@@ -10,27 +10,37 @@ public interface IEdgeStateHandler {
 
 	/**
 	 * Handles initialise.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleInitialise();
+	abstract void handleInitialise() throws Exception;
 
 	/**
 	 * Handles back.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleBack();
+	abstract void handleBack() throws Exception;
 
 	/**
 	 * Handles visit.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleVisit();
+	abstract void handleVisit() throws Exception;
 
 	/**
 	 * Handles discard.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleDiscard();
+	abstract void handleDiscard() throws Exception;
 
 	/**
 	 * Handles solve.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void handleSolve();
+	abstract void handleSolve() throws Exception;
 
 }

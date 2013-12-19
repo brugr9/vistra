@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.stepbystep;
 
 import vistra.util.IState;
@@ -16,19 +13,23 @@ class StepByStepIntermediate extends AbstractStepByStepState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param stepByStepStateHandler
-	 *            a step-by-step handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	StepByStepIntermediate(IStepByStepStateHandler stepByStepStateHandler) {
-		super(stepByStepStateHandler);
+	StepByStepIntermediate(IStepByStepStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewIntermediate();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.setViewIntermediate();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

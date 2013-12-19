@@ -13,19 +13,22 @@ class BackEdge extends AbstractEdgeState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param edgeStateHandler
-	 *            an edgeStateHandler
+	 * @param stateHandler
+	 *            a state handler
 	 */
-	BackEdge(IEdgeStateHandler edgeStateHandler) {
-		super(edgeStateHandler);
+	BackEdge(IEdgeStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.back();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.back();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
-
 }

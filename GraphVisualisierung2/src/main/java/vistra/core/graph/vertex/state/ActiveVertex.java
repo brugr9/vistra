@@ -13,19 +13,23 @@ class ActiveVertex extends AbstractVertexState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param contextHandler
-	 *            a contextHandler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	ActiveVertex(IVertexStateHandler contextHandler) {
-		super(contextHandler);
+	ActiveVertex(IVertexStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.activate();
+	protected void doEntry() throws Exception {
+		try {
+		super.stateHandler.activate();
+	} catch (Exception e) {
+		throw e;
 	}
+}
 
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.stepbystep;
 
 import vistra.util.IState;
@@ -16,19 +13,23 @@ class StepByStepIdle extends AbstractStepByStepState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param stepByStepStateHandler
-	 *            a step-by-step handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	StepByStepIdle(IStepByStepStateHandler stepByStepStateHandler) {
-		super(stepByStepStateHandler);
+	StepByStepIdle(IStepByStepStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewIdle();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.setViewIdle();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

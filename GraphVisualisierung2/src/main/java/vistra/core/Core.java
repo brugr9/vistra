@@ -207,7 +207,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Traversal executeAlgorithm(IGravisGraph graph) throws CoreException {
+	public Traversal traverse(IGravisGraph graph) throws CoreException {
 
 		try {
 			// the steps
@@ -218,7 +218,7 @@ public class Core implements ICore {
 			observableGraph.addGraphEventListener(graphEventListener);
 			IRestrictedGraph restrictedGraph = createRestrictedGraph(observableGraph);
 			// the algorithm
-			this.algorithm.execute(restrictedGraph);
+			this.algorithm.traverse(restrictedGraph);
 			// undo all steps in reverse order
 			for (int index = steps.size() - 1; index > -1; index--)
 				steps.get(index).undo();

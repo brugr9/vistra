@@ -35,41 +35,60 @@ class ImmutableEdge extends EdgeStateHandler implements IImmutableEdge {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleInitialise() {
-		this.edge.handleInitialise();
-
+	public void handleInitialise() throws Exception {
+		try {
+			this.edge.handleInitialise();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleBack() {
-		this.edge.handleBack();
+	public void handleBack() throws Exception {
+		try {
+			this.edge.handleBack();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleVisit() {
-		this.edge.handleVisit();
+	public void handleVisit() throws Exception {
+		try {
+			this.edge.handleVisit();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleDiscard() {
-		this.edge.handleDiscard();
+	public void handleDiscard() throws Exception {
+		try {
+			this.edge.handleDiscard();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolve() {
-		this.edge.handleSolve();
+	public void handleSolve() throws Exception {
+		try {
+			this.edge.handleSolve();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

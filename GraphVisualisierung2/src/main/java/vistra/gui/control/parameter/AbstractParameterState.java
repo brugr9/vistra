@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.parameter;
 
 import vistra.util.IState;
@@ -16,19 +13,18 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 abstract class AbstractParameterState extends State implements IState {
 
 	/**
-	 * A field for a context.
+	 * A field for a state handler.
 	 */
-	protected ParameterStateHandler context;
+	protected ParameterStateHandler stateHandler;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param parameterStateHandler
-	 *            a parameter handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	protected AbstractParameterState(
-			IParameterStateHandler parameterStateHandler) {
-		this.context = (ParameterStateHandler) parameterStateHandler;
+	protected AbstractParameterState(IParameterStateHandler stateHandler) {
+		this.stateHandler = (ParameterStateHandler) stateHandler;
 	}
 
 	/**
@@ -38,8 +34,8 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleIdle() throws Exception {
 		try {
-			this.context.idle();
-			this.context.setState(new ParameterIdle(this.context));
+			this.stateHandler.idle();
+			this.stateHandler.setState(new ParameterIdle(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -52,8 +48,8 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleNewGraphUndirected() throws Exception {
 		try {
-			this.context.newGraph(EdgeType.UNDIRECTED);
-			this.context.setState(new ParameterIdle(this.context));
+			this.stateHandler.newGraph(EdgeType.UNDIRECTED);
+			this.stateHandler.setState(new ParameterIdle(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -66,8 +62,8 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleNewGraphDirected() throws Exception {
 		try {
-			this.context.newGraph(EdgeType.DIRECTED);
-			this.context.setState(new ParameterIdle(this.context));
+			this.stateHandler.newGraph(EdgeType.DIRECTED);
+			this.stateHandler.setState(new ParameterIdle(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -80,9 +76,10 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleOpenGraph() throws Exception {
 		try {
-			int option = this.context.openGraph();
+			int option = this.stateHandler.openGraph();
 			if (option == 0)
-				this.context.setState(new ParameterGraphSaved(this.context));
+				this.stateHandler.setState(new ParameterGraphSaved(
+						this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -95,8 +92,9 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleSaveGraph() throws Exception {
 		try {
-			this.context.saveGraph();
-			this.context.setState(new ParameterGraphSaved(this.context));
+			this.stateHandler.saveGraph();
+			this.stateHandler.setState(new ParameterGraphSaved(
+					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -109,9 +107,10 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleSaveGraphAs() throws Exception {
 		try {
-			int option = this.context.saveGraphAs();
+			int option = this.stateHandler.saveGraphAs();
 			if (option == 0)
-				this.context.setState(new ParameterGraphSaved(this.context));
+				this.stateHandler.setState(new ParameterGraphSaved(
+						this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -124,8 +123,9 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleEditGraph() throws Exception {
 		try {
-			this.context.editGraph();
-			this.context.setState(new ParameterGraphEdited(this.context));
+			this.stateHandler.editGraph();
+			this.stateHandler.setState(new ParameterGraphEdited(
+					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -138,9 +138,10 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleImportAlgorithm() throws Exception {
 		try {
-			int option = this.context.importAlgorithm();
+			int option = this.stateHandler.importAlgorithm();
 			if (option == 0)
-				this.context.setState(new ParameterIdle(this.context));
+				this.stateHandler
+						.setState(new ParameterIdle(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -153,9 +154,10 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleDeleteAlgorithm() throws Exception {
 		try {
-			int option = this.context.deleteAlgorithm();
+			int option = this.stateHandler.deleteAlgorithm();
 			if (option == 0)
-				this.context.setState(new ParameterIdle(this.context));
+				this.stateHandler
+						.setState(new ParameterIdle(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -168,12 +170,13 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleSelectAlgorithm() throws Exception {
 		try {
-			int index = this.context.selectAlgorithm();
+			int index = this.stateHandler.selectAlgorithm();
 			if (index == 0)
-				this.context.setState(new ParameterIdle(this.context));
+				this.stateHandler
+						.setState(new ParameterIdle(this.stateHandler));
 			else
-				this.context.setState(new ParameterAlgorithmSelected(
-						this.context));
+				this.stateHandler.setState(new ParameterAlgorithmSelected(
+						this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -186,7 +189,7 @@ abstract class AbstractParameterState extends State implements IState {
 	 */
 	void handleOff() throws Exception {
 		try {
-			this.context.setState(new ParameterOff(this.context));
+			this.stateHandler.setState(new ParameterOff(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}

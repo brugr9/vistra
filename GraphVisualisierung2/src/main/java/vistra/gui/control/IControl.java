@@ -9,11 +9,9 @@ package vistra.gui.control;
 public interface IControl {
 
 	/**
-	 * Initializes the control.
-	 * 
-	 * @throws Exception
+	 * A field for a second (in milliseconds).
 	 */
-	public void init() throws Exception;
+	public final static int A_SECOND = 1000;
 
 	/**
 	 * Constants for different kind of GUI events.
@@ -35,5 +33,12 @@ public interface IControl {
 		// animation
 		ANIMATION, PLAY, PAUSE, RESUME, STOP,
 	}
+
+	/**
+	 * Initialises the control.
+	 * 
+	 * @throws Exception
+	 */
+	public void init() throws Exception;
 
 }

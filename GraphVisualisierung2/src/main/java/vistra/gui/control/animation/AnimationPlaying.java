@@ -16,27 +16,35 @@ class AnimationPlaying extends AbstractAnimationState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param animationStateHandler
-	 *            an animation handler
+	 * @param stateHandler
+	 *            s stateHandler
 	 */
-	AnimationPlaying(IAnimationStateHandler animationStateHandler) {
-		super(animationStateHandler);
+	AnimationPlaying(IAnimationStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewPlaying();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.setViewPlaying();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void startDo() {
-		super.context.startAnimation();
+	protected void startDo() throws Exception {
+		try {
+			super.stateHandler.startAnimation();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 }

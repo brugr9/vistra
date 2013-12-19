@@ -15,54 +15,83 @@ import vistra.util.State;
 abstract class AbstractAnimationState extends State implements IState {
 
 	/**
-	 * A field for a context.
+	 * A field for a state handler.
 	 */
-	protected AnimationStateHandler context;
+	protected AnimationStateHandler stateHandler;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param animationStateHandler
-	 *            an animation handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	protected AbstractAnimationState(
-			IAnimationStateHandler animationStateHandler) {
-		this.context = (AnimationStateHandler) animationStateHandler;
+	protected AbstractAnimationState(IAnimationStateHandler stateHandler) {
+		this.stateHandler = (AnimationStateHandler) stateHandler;
 	}
 
 	/**
 	 * Handles an interaction: idle.
+	 * 
+	 * @throws Exception
 	 */
-	void handleIdle() {
-		this.context.setState(new AnimationIdle(this.context));
+	void handleIdle() throws Exception {
+		try {
+			this.stateHandler.setState(new AnimationIdle(this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Handles an interaction: play.
+	 * 
+	 * @throws Exception
 	 */
-	void handlePlay() {
-		this.context.setState(new AnimationPlaying(this.context));
+	void handlePlay() throws Exception {
+		try {
+			this.stateHandler.setState(new AnimationPlaying(this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Handles an interaction: pause.
+	 * 
+	 * @throws Exception
 	 */
-	void handlePause() {
-		this.context.setState(new AnimationPaused(this.context));
+	void handlePause() throws Exception {
+		try {
+			this.stateHandler.setState(new AnimationPaused(this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Handles an interaction: stop.
+	 * 
+	 * @throws Exception
 	 */
-	void handleStop() {
-		this.context.setState(new AnimationStopped(this.context));
+	void handleStop() throws Exception {
+		try {
+			this.stateHandler.setState(new AnimationStopped(this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Handles an interaction: off.
+	 * 
+	 * @throws Exception
 	 */
-	void handleOff() {
-		this.context.setState(new AnimationOff(this.context));
+	void handleOff() throws Exception {
+		try {
+			this.stateHandler.setState(new AnimationOff(this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 }

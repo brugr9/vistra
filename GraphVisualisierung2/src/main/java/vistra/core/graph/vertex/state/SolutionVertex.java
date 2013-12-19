@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.core.graph.vertex.state;
 
 import vistra.util.IState;
@@ -16,19 +13,23 @@ class SolutionVertex extends AbstractVertexState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param contextHandler
-	 *            a contextHandler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	SolutionVertex(IVertexStateHandler contextHandler) {
-		super(contextHandler);
+	SolutionVertex(IVertexStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.solve();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.solve();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

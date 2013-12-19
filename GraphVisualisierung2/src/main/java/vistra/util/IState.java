@@ -10,12 +10,16 @@ public interface IState {
 
 	/**
 	 * Executes the entry behaviour.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void entry();
+	abstract void entry() throws Exception;
 
 	/**
 	 * Executes the exit behaviour.
+	 * 
+	 * @throws Exception
 	 */
-	abstract void exit();
+	abstract void exit() throws Exception;
 
 }

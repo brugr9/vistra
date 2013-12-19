@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.parameter;
 
 import vistra.util.IState;
@@ -16,19 +13,23 @@ class ParameterOff extends AbstractParameterState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param parameterStateHandler
-	 *            a parameter state handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	ParameterOff(IParameterStateHandler parameterStateHandler) {
-		super(parameterStateHandler);
+	ParameterOff(IParameterStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewOff();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.setViewOff();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

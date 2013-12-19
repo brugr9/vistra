@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.parameter;
 
 import vistra.util.IState;
@@ -16,31 +13,34 @@ class ParameterIdle extends AbstractParameterState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param parameterStateHandler
-	 *            a parameter state handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	ParameterIdle(IParameterStateHandler parameterStateHandler) {
-		super(parameterStateHandler);
+	ParameterIdle(IParameterStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewIdle();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void startDo() {
+	protected void doEntry() throws Exception {
 		try {
-			super.context.idle();
+			super.stateHandler.setViewIdle();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void startDo() throws Exception {
+		try {
+			super.stateHandler.idle();
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 

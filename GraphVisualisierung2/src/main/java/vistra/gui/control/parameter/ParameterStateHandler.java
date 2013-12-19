@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.parameter;
 
 import static vistra.gui.control.IControl.EventSource.DELETE_ALGORITHM;
@@ -47,6 +44,10 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public final class ParameterStateHandler implements IParameterStateHandler {
 
 	/**
+	 * A field for a state.
+	 */
+	private AbstractParameterState state;
+	/**
 	 * A field for a core.
 	 */
 	private ICore core;
@@ -54,10 +55,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * A field for a model.
 	 */
 	private Model model;
-	/**
-	 * A field for a state.
-	 */
-	private AbstractParameterState state;
 	/**
 	 * A field for a top component.
 	 */
@@ -67,14 +64,19 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * Main constructor.
 	 * 
 	 * @param model
-	 *            a gravis gui model
+	 *            a model
 	 */
 	public ParameterStateHandler(ICore core, Model model) {
 		super();
 		this.core = core;
 		this.model = model;
 		this.top = null;
-		this.setState(new ParameterIdle(this));
+		try {
+			this.setState(new ParameterIdle(this));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -299,9 +301,13 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @param state
 	 *            the state to set
 	 */
-	void setState(AbstractParameterState state) {
-		this.state = state;
-		this.state.entry();
+	void setState(AbstractParameterState state) throws Exception {
+		try {
+			this.state = state;
+			this.state.entry();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
@@ -489,7 +495,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setAlgorithmDescription(description);
 				/* get the traversal */
 				IGravisGraph graph = this.model.getGraph();
-				Traversal traversal = this.core.executeAlgorithm(graph);
+				Traversal traversal = this.core.traverse(graph);
 				this.model.setTraversal(traversal);
 				this.model.setProgressMaximum(traversal.size());
 			}
@@ -761,7 +767,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		this.model.setAlgorithmsEnabled(true);
 		this.model.notifyObservers(EventSource.ALGORITHM);
 		/* enable traversal player */
-		this.model.getAnimationStateHandler().handleIdle();
+		try {
+			this.model.getAnimationStateHandler().handleIdle();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		/* render message */
 		ResourceBundle b = this.model.getResourceBundle();
 		JOptionPane.showMessageDialog(null, b.getString("render.message"),

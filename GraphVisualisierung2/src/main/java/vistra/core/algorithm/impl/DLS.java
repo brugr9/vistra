@@ -34,7 +34,7 @@ public class DLS extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(IRestrictedGraph graph) {
+	public void traverse(IRestrictedGraph graph) {
 		// TODO
 	}
 

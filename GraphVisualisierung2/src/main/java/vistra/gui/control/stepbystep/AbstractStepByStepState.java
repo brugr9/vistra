@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.stepbystep;
 
 import vistra.util.IState;
@@ -15,71 +12,111 @@ import vistra.util.State;
 abstract class AbstractStepByStepState extends State implements IState {
 
 	/**
-	 * A field for a context.
+	 * A field for a state handler.
 	 */
-	protected StepByStepStateHandler context;
+	protected StepByStepStateHandler stateHandler;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param stepByStepStateHandler
-	 *            a step-by-step handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	protected AbstractStepByStepState(
-			IStepByStepStateHandler stepByStepStateHandler) {
-		this.context = (StepByStepStateHandler) stepByStepStateHandler;
+	protected AbstractStepByStepState(IStepByStepStateHandler stateHandler) {
+		this.stateHandler = (StepByStepStateHandler) stateHandler;
 	}
 
 	/**
 	 * Handles an interaction: idle.
+	 * 
+	 * @throws Exception
 	 */
-	void handleIdle() {
-		this.context.setState(new StepByStepIdle(this.context));
+	void handleIdle() throws Exception {
+		try {
+			this.stateHandler.setState(new StepByStepIdle(this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Handles an interaction: to beginning.
+	 * 
+	 * @throws Exception
 	 */
-	void handleToBeginning() {
-		this.context.goToBeginning();
-		this.context.setState(new StepByStepAtBeginning(this.context));
+	void handleToBeginning() throws Exception {
+		try {
+			this.stateHandler.goToBeginning();
+			this.stateHandler.setState(new StepByStepAtBeginning(
+					this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Handles an interaction: backward.
+	 * 
+	 * @throws Exception
 	 */
-	void handleBackward() {
-		boolean hasPrevious = this.context.goBackward();
-		if (hasPrevious)
-			this.context.setState(new StepByStepIntermediate(this.context));
-		else
-			this.context.setState(new StepByStepAtBeginning(this.context));
+	void handleBackward() throws Exception {
+		try {
+			boolean hasPrevious = this.stateHandler.goBackward();
+			if (hasPrevious)
+				this.stateHandler.setState(new StepByStepIntermediate(
+						this.stateHandler));
+			else
+				this.stateHandler.setState(new StepByStepAtBeginning(
+						this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Handles an interaction: forward.
+	 * 
+	 * @throws Exception
 	 */
-	void handleForward() {
-		boolean hasNext = this.context.goForward();
-		if (hasNext)
-			this.context.setState(new StepByStepIntermediate(this.context));
-		else
-			this.context.setState(new StepByStepAtEnd(this.context));
+	void handleForward() throws Exception {
+		try {
+			boolean hasNext = this.stateHandler.goForward();
+			if (hasNext)
+				this.stateHandler.setState(new StepByStepIntermediate(
+						this.stateHandler));
+			else
+				this.stateHandler.setState(new StepByStepAtEnd(
+						this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Handles an interaction: to end.
+	 * 
+	 * @throws Exception
 	 */
-	void handleToEnd() {
-		this.context.goToEnd();
-		this.context.setState(new StepByStepAtEnd(this.context));
+	void handleToEnd() throws Exception {
+		try {
+			this.stateHandler.goToEnd();
+			this.stateHandler.setState(new StepByStepAtEnd(this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
 	 * Handles an interaction: off.
+	 * 
+	 * @throws Exception
 	 */
-	void handleOff() {
-		this.context.setState(new StepByStepOff(this.context));
+	void handleOff() throws Exception {
+		try {
+			this.stateHandler.setState(new StepByStepOff(this.stateHandler));
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 }

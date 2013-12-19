@@ -131,8 +131,8 @@ public interface ICore {
 	abstract EdgeType[] deleteAlgorithm(File file) throws CoreException;
 
 	/**
-	 * Renders a traversal by executing an algorithm over a graph as given.
-	 * Returns an immutable list of steps generated during the execution of the
+	 * Traverses a graph as given by executing the algorithm. Returns traversal
+	 * as immutable list of steps generated during the execution of the
 	 * algorithm. A step contains several commands which modifies the graph.
 	 * 
 	 * @param graph
@@ -140,6 +140,6 @@ public interface ICore {
 	 * @return the traversal
 	 * @throws CoreException
 	 */
-	public Traversal executeAlgorithm(IGravisGraph graph) throws CoreException;
+	public Traversal traverse(IGravisGraph graph) throws CoreException;
 
 }

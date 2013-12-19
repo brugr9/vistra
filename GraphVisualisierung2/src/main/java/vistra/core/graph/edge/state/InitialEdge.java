@@ -13,19 +13,23 @@ class InitialEdge extends AbstractEdgeState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param edgeStateHandler
-	 *            an edgeStateHandler
+	 * @param stateHandler
+	 *            a state handler
 	 */
-	InitialEdge(IEdgeStateHandler edgeStateHandler) {
-		super(edgeStateHandler);
+	InitialEdge(IEdgeStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.initialise();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.initialise();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

@@ -53,29 +53,48 @@ class RestrictedVertex extends VertexStateHandler implements IRestrictedVertex {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleInitialise() {
-		this.vertex.handleInitialise();
+	public void handleInitialise() throws Exception {
+		try {
+			this.vertex.handleInitialise();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleActivate() {
-		this.vertex.handleActivate();
-	}
-
-	@Override
-	public void handleVisit() {
-		this.vertex.handleVisit();
+	public void handleActivate() throws Exception {
+		try {
+			this.vertex.handleActivate();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolve() {
-		this.vertex.handleSolve();
-	};
+	public void handleVisit() throws Exception {
+		try {
+			this.vertex.handleVisit();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleSolve() throws Exception {
+		try {
+			this.vertex.handleSolve();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 
 }

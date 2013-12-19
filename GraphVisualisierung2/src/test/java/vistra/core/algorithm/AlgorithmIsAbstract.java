@@ -33,7 +33,7 @@ public abstract class AlgorithmIsAbstract implements IAlgorithm {
 	}
 
 	@Override
-	public void execute(IRestrictedGraph graph) throws AlgorithmException {
+	public void traverse(IRestrictedGraph graph) throws AlgorithmException {
 		// TODO Auto-generated method stub
 
 	}

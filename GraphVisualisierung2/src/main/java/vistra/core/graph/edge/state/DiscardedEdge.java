@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.core.graph.edge.state;
 
 import vistra.util.IState;
@@ -16,19 +13,23 @@ class DiscardedEdge extends AbstractEdgeState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param edgeStateHandler
-	 *            an edgeStateHandler
+	 * @param stateHandler
+	 *            a state handler
 	 */
-	DiscardedEdge(IEdgeStateHandler edgeStateHandler) {
-		super(edgeStateHandler);
+	DiscardedEdge(IEdgeStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.discard();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.discard();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

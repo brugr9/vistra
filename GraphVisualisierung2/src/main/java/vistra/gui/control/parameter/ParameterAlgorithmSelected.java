@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.parameter;
 
 import vistra.util.IState;
@@ -17,31 +14,22 @@ class ParameterAlgorithmSelected extends AbstractParameterState implements
 	/**
 	 * Main constructor.
 	 * 
-	 * @param parameterStateHandler
-	 *            a parameter state handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	ParameterAlgorithmSelected(IParameterStateHandler parameterStateHandler) {
-		super(parameterStateHandler);
+	ParameterAlgorithmSelected(IParameterStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewAlgorithmSelected();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void startDo() {
+	protected void doEntry() throws Exception {
 		try {
-			super.context.enableTraversalPlayer(true);
+			super.stateHandler.setViewAlgorithmSelected();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
 		}
 	}
 
@@ -49,12 +37,23 @@ class ParameterAlgorithmSelected extends AbstractParameterState implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void stopDo() {
+	protected void startDo() throws Exception {
 		try {
-			super.context.enableTraversalPlayer(false);
+			super.stateHandler.enableTraversalPlayer(true);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void stopDo() throws Exception {
+		try {
+			super.stateHandler.enableTraversalPlayer(false);
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 

@@ -16,19 +16,23 @@ class SolutionEdge extends AbstractEdgeState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param edgeStateHandler
-	 *            an edgeStateHandler
+	 * @param stateHandler
+	 *            a state handler
 	 */
-	SolutionEdge(IEdgeStateHandler edgeStateHandler) {
-		super(edgeStateHandler);
+	SolutionEdge(IEdgeStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.solve();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.solve();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

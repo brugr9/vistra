@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.stepbystep;
 
 import vistra.util.IState;
@@ -16,19 +13,19 @@ class StepByStepOff extends AbstractStepByStepState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param stepByStepStateHandler
-	 *            a step-by-step handler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	StepByStepOff(IStepByStepStateHandler stepByStepStateHandler) {
-		super(stepByStepStateHandler);
+	StepByStepOff(IStepByStepStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.setViewOff();
+	protected void doEntry() throws Exception {
+		super.stateHandler.setViewOff();
 	}
 
 }

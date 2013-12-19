@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control;
 
 import java.awt.event.ActionListener;
@@ -13,10 +10,10 @@ import vistra.gui.IModel;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public abstract class AbstractActionListener implements ActionListener {
+abstract class AbstractActionListener implements ActionListener {
 
 	/**
-	 * A field for a gravis model.
+	 * A field for a model.
 	 */
 	protected final IModel model;
 
@@ -26,7 +23,7 @@ public abstract class AbstractActionListener implements ActionListener {
 	 * @param model
 	 *            the model
 	 */
-	public AbstractActionListener(IModel model) {
+	AbstractActionListener(IModel model) {
 		super();
 		this.model = model;
 	}

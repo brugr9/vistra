@@ -38,7 +38,7 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(IRestrictedGraph graph) throws AlgorithmException {
+	public void traverse(IRestrictedGraph graph) throws AlgorithmException {
 		// TODO
 	}
 

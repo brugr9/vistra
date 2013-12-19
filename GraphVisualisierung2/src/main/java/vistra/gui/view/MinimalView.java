@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import vistra.core.graph.zobsolete.item.edge.IEdge;
 import vistra.core.graph.zobsolete.item.vertex.IVertex;
 import vistra.gui.Model;
-import vistra.gui.control.Control;
+import vistra.gui.control.IControl;
 import vistra.gui.view.component.AlgorithmPanel;
 import vistra.gui.view.component.GraphPanel;
 import vistra.gui.view.component.MenuBar;
@@ -67,7 +67,7 @@ public class MinimalView extends JFrame implements IView {
 	 * @throws Exception
 	 */
 	public MinimalView(Layout<IVertex, IEdge> layout, Model model,
-			Control control) throws Exception {
+			IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(20, 20);

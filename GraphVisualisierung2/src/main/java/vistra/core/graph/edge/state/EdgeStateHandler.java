@@ -1,7 +1,7 @@
 package vistra.core.graph.edge.state;
 
 /**
- * An edge.
+ * An edge state handler.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  */
@@ -22,52 +22,77 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	public EdgeStateHandler() {
 		super();
-		this.setState(new InitialEdge(this));
+		try {
+			this.setState(new InitialEdge(this));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleInitialise() {
-		this.state.exit();
-		this.state.handleInitialise();
+	public void handleInitialise() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleInitialise();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleBack() {
-		this.state.exit();
-		this.state.handleBack();
+	public void handleBack() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleBack();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleVisit() {
-		this.state.exit();
-		this.state.handleVisit();
+	public void handleVisit() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleVisit();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleDiscard() {
-		this.state.exit();
-		this.state.handleDiscard();
+	public void handleDiscard() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleDiscard();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolve() {
-		this.state.exit();
-		this.state.handleSolve();
+	public void handleSolve() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleSolve();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -75,45 +100,80 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 * 
 	 * @param state
 	 *            the state to set
+	 * @throws Exception
 	 */
-	void setState(AbstractEdgeState state) {
-		this.state = state;
-		this.state.entry();
+	void setState(AbstractEdgeState state) throws Exception {
+		try {
+			this.state = state;
+			this.state.entry();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing:
+	 * 
+	 * @throws Exception
 	 */
-	void initialise() {
-		// TODO
+	void initialise() throws Exception {
+		try {
+			// TODO
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing:
+	 * 
+	 * @throws Exception
 	 */
-	void back() {
-		// TODO
+	void back() throws Exception {
+		try {
+			// TODO
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing:
+	 * 
+	 * @throws Exception
 	 */
-	void visit() {
-		// TODO
+	void visit() throws Exception {
+		try {
+			// TODO
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing:
+	 * 
+	 * @throws Exception
 	 */
-	void discard() {
-		// TODO
+	void discard() throws Exception {
+		try {
+			// TODO
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * Doing:
+	 * 
+	 * @throws Exception
 	 */
-	void solve() {
-		// TODO
+	void solve() throws Exception {
+		try {
+			// TODO
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

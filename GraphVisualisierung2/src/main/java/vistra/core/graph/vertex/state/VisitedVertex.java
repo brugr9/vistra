@@ -13,19 +13,23 @@ class VisitedVertex extends AbstractVertexState implements IState {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param contextHandler
-	 *            a contextHandler
+	 * @param stateHandler
+	 *            a stateHandler
 	 */
-	VisitedVertex(IVertexStateHandler contextHandler) {
-		super(contextHandler);
+	VisitedVertex(IVertexStateHandler stateHandler) {
+		super(stateHandler);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void doEntry() {
-		super.context.visit();
+	protected void doEntry() throws Exception {
+		try {
+			super.stateHandler.visit();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }
