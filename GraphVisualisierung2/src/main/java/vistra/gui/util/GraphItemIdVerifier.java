@@ -3,10 +3,10 @@ package vistra.gui.util;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
-import vistra.core.graph.zobsolete.IGravisGraph;
-import vistra.core.graph.zobsolete.item.IGraphItem;
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.IGravisGraph;
+import vistra.core.zobsolete.graph.item.IGraphItem;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 

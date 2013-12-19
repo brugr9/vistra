@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import vistra.core.graph.zobsolete.IObservableGraph;
-import vistra.core.traversal.Traversal;
+import vistra.core.zobsolete.graph.IObservableGraph;
+import vistra.core.zobsolete.traversal.Traversal;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.animation.IAnimationStateHandler;
 import vistra.gui.control.parameter.IParameterStateHandler;

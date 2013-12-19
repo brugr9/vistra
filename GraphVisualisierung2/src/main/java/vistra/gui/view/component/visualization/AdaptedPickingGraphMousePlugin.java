@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.PickingGraphMousePlugin;

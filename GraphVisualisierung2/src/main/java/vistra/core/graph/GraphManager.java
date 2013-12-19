@@ -7,11 +7,11 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.graph.zobsolete.GravisGraphMLWriter;
-import vistra.core.graph.zobsolete.IGravisGraph;
-import vistra.core.graph.zobsolete.IObservableGraph;
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.GravisGraphMLWriter;
+import vistra.core.zobsolete.graph.IGravisGraph;
+import vistra.core.zobsolete.graph.IObservableGraph;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
 import vistra.util.transformer.EdgeTransformer;
 import vistra.util.transformer.GraphTransformer;
 import vistra.util.transformer.HyperEdgeTransformer;

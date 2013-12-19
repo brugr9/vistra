@@ -5,9 +5,9 @@ import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.common.IAlgorithm;
-import vistra.core.graph.zobsolete.IGravisGraph;
-import vistra.core.graph.zobsolete.IObservableGraph;
-import vistra.core.traversal.Traversal;
+import vistra.core.zobsolete.graph.IGravisGraph;
+import vistra.core.zobsolete.graph.IObservableGraph;
+import vistra.core.zobsolete.traversal.Traversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

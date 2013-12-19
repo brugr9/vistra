@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
 import vistra.gui.util.EdgeWeightVerifier;
 import vistra.gui.util.GraphItemIdVerifier;
 import vistra.util.transformer.ValueTransformer;

@@ -8,10 +8,10 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import vistra.core.graph.zobsolete.item.edge.EdgeFactory;
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
-import vistra.core.graph.zobsolete.item.vertex.VertexFactory;
+import vistra.core.zobsolete.graph.item.edge.EdgeFactory;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.item.vertex.VertexFactory;
 import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.component.popup.MenuFactory;

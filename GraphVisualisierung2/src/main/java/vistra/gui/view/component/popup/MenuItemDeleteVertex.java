@@ -6,9 +6,9 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JMenuItem;
 
-import vistra.core.graph.zobsolete.item.IGraphItem;
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.item.IGraphItem;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**

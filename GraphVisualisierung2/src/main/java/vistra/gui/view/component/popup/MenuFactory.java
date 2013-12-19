@@ -7,10 +7,10 @@ import java.awt.geom.Point2D;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import vistra.core.graph.zobsolete.item.IGraphItem;
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
-import vistra.core.graph.zobsolete.item.vertex.VertexFactory;
+import vistra.core.zobsolete.graph.item.IGraphItem;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.item.vertex.VertexFactory;
 import vistra.gui.view.component.visualization.AdaptedVisualizationViewer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;

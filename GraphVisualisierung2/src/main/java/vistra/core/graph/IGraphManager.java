@@ -3,8 +3,8 @@ package vistra.core.graph;
 import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.graph.zobsolete.IGravisGraph;
-import vistra.core.graph.zobsolete.IObservableGraph;
+import vistra.core.zobsolete.graph.IGravisGraph;
+import vistra.core.zobsolete.graph.IObservableGraph;
 
 /**
  * A graph manager interface.

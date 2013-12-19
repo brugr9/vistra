@@ -2,9 +2,9 @@ package vistra.gui;
 
 import vistra.core.ICore;
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.zobsolete.IObservableGraph;
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.IObservableGraph;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
 import vistra.gui.control.Control;
 import vistra.gui.control.IControl;
 import vistra.gui.view.FullView;

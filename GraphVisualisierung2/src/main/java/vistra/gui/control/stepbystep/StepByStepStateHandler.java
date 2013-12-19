@@ -16,8 +16,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import vistra.core.traversal.Traversal;
-import vistra.core.traversal.step.IStepResult;
+import vistra.core.zobsolete.traversal.Traversal;
+import vistra.core.zobsolete.traversal.step.IStepResult;
 import vistra.gui.IModel;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;

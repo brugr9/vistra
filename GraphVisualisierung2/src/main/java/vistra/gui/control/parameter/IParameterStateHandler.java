@@ -3,8 +3,8 @@ package vistra.gui.control.parameter;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 
-import vistra.core.graph.zobsolete.item.edge.IEdge;
-import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.zobsolete.graph.item.edge.IEdge;
+import vistra.core.zobsolete.graph.item.vertex.IVertex;
 import vistra.gui.control.IControlStateHandler;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 

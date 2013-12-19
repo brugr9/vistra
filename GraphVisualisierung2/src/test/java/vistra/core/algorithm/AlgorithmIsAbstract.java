@@ -1,7 +1,7 @@
 package vistra.core.algorithm;
 
 import vistra.common.IAlgorithm;
-import vistra.core.graph.zobsolete.IRestrictedGraph;
+import vistra.core.zobsolete.graph.IRestrictedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
