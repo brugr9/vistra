@@ -5,9 +5,9 @@ import java.util.Map;
 import org.apache.commons.collections15.Transformer;
 import org.apache.commons.collections15.map.HashedMap;
 
-import vistra.core.graph.item.IGraphItem;
-import vistra.core.graph.item.IRestrictedGraphItem.State;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.item.IGraphItem;
+import vistra.core.graph.zobsolete.item.IRestrictedGraphItem.State;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
 
 
 /**

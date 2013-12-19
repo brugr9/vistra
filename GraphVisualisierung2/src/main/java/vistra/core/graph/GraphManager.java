@@ -7,8 +7,11 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.GravisGraphMLWriter;
+import vistra.core.graph.zobsolete.IGravisGraph;
+import vistra.core.graph.zobsolete.IObservableGraph;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
 import vistra.util.transformer.EdgeTransformer;
 import vistra.util.transformer.GraphTransformer;
 import vistra.util.transformer.HyperEdgeTransformer;
@@ -85,10 +88,10 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IObservableGravisGraph getNewGraph() throws Exception {
+	public IObservableGraph getNewGraph() throws Exception {
 		try {
 			this.graph = null;
-			IObservableGravisGraph newGraph = GraphFactory
+			IObservableGraph newGraph = GraphFactory
 					.createObservableGraph();
 			newGraph.setId(this.defaultName);
 			return newGraph;
@@ -101,7 +104,7 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IObservableGravisGraph open(File file) throws Exception {
+	public IObservableGraph open(File file) throws Exception {
 		try {
 			this.graph = file;
 			return this.read(file);
@@ -144,7 +147,7 @@ class GraphManager implements IGraphManager {
 	 *            the file to load
 	 * @return the loaded graph
 	 */
-	private IObservableGravisGraph read(final File file) throws GraphException {
+	private IObservableGraph read(final File file) throws GraphException {
 		try {
 			GraphMLReader2<IGravisGraph, IVertex, IEdge> graphReader = new GraphMLReader2<>(
 					new FileReader(file), this.graphTransformer,

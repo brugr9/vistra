@@ -28,10 +28,10 @@ import javax.swing.filechooser.FileSystemView;
 import vistra.common.IAlgorithm;
 import vistra.core.ICore;
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.IGravisGraph;
-import vistra.core.graph.IObservableGravisGraph;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.IGravisGraph;
+import vistra.core.graph.zobsolete.IObservableGraph;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
 import vistra.core.traversal.Traversal;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
@@ -331,7 +331,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingTheGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
-				IObservableGravisGraph graph = GraphFactory
+				IObservableGraph graph = GraphFactory
 						.createObservableGraph();
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");

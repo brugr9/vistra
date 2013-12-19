@@ -6,9 +6,9 @@ import java.awt.geom.Point2D;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.core.graph.IGravisGraph;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.IGravisGraph;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;

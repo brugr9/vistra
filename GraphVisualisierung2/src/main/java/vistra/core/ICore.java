@@ -5,8 +5,8 @@ import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.common.IAlgorithm;
-import vistra.core.graph.IGravisGraph;
-import vistra.core.graph.IObservableGravisGraph;
+import vistra.core.graph.zobsolete.IGravisGraph;
+import vistra.core.graph.zobsolete.IObservableGraph;
 import vistra.core.traversal.Traversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -31,7 +31,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	public abstract IObservableGravisGraph getNewGraph() throws CoreException;
+	public abstract IObservableGraph getNewGraph() throws CoreException;
 
 	/**
 	 * Opens a graph given as file.
@@ -41,7 +41,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	public abstract IObservableGravisGraph openGraph(File source)
+	public abstract IObservableGraph openGraph(File source)
 			throws CoreException;
 
 	/**

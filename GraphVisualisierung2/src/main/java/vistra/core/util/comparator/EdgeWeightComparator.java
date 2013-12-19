@@ -2,7 +2,7 @@ package vistra.core.util.comparator;
 
 import java.util.Comparator;
 
-import vistra.core.graph.item.edge.IRestrictedEdge;
+import vistra.core.graph.zobsolete.item.edge.IRestrictedEdge;
 
 
 /**

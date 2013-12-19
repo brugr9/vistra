@@ -2,7 +2,7 @@ package vistra.core.util;
 
 import java.awt.Color;
 
-import vistra.util.TravisColor;
+import vistra.util.VistraColor;
 
 
 /**
@@ -43,17 +43,17 @@ public interface GraphPropertyConstants {
 	public final static double E_WEIGHT_DEFAULT = 1.0;
 
 	/* colors */
-	public final static Color V_START_COLOR = TravisColor.YELLOW;
-	public final static Color V_END_COLOR = TravisColor.YELLOW;
+	public final static Color V_START_COLOR = VistraColor.YELLOW;
+	public final static Color V_END_COLOR = VistraColor.YELLOW;
 
-	public final static Color V_COLOR_DEFAULT = TravisColor.LIGHT_ORANGE;
-	public final static Color E_COLOR_DEFAULT = TravisColor.DARK_BLUE;
+	public final static Color V_COLOR_DEFAULT = VistraColor.LIGHT_ORANGE;
+	public final static Color E_COLOR_DEFAULT = VistraColor.DARK_BLUE;
 
-	public final static Color V_INITIAL_COLOR = TravisColor.LIGHT_BLUE;
-	public final static Color E_INITIAL_COLOR = TravisColor.LIGHT_YELLOW;
-	public final static Color ACTIVATION_COLOR = TravisColor.RED;
-	public final static Color VISIT_COLOR = TravisColor.RED;
-	public final static Color SOLUTION_COLOR = TravisColor.LIGHT_GREEN;
+	public final static Color V_INITIAL_COLOR = VistraColor.LIGHT_BLUE;
+	public final static Color E_INITIAL_COLOR = VistraColor.LIGHT_YELLOW;
+	public final static Color ACTIVATION_COLOR = VistraColor.RED;
+	public final static Color VISIT_COLOR = VistraColor.RED;
+	public final static Color SOLUTION_COLOR = VistraColor.LIGHT_GREEN;
 
 	public final static float STROKE_WIDTH_DEFAULT = 1.5f;
 	public final static float V_TAGGED_STROKE = 3.0f;

@@ -3,9 +3,9 @@ package vistra.gui.view.component.popup;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vistra.core.graph.item.IGraphItem;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.item.IGraphItem;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**

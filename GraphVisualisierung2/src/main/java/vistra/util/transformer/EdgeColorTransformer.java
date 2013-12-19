@@ -4,7 +4,7 @@ import java.awt.Paint;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.obsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
 
 
 /**

@@ -2,8 +2,8 @@ package vistra.util.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.obsolete.item.vertex.IVertex;
-import vistra.core.graph.obsolete.item.vertex.VertexFactory;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.item.vertex.VertexFactory;
 import vistra.core.util.GraphPropertyConstants;
 import edu.uci.ics.jung.io.graphml.NodeMetadata;
 

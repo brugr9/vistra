@@ -2,8 +2,8 @@ package vistra.gui.view;
 
 import java.awt.BorderLayout;
 
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
 import vistra.gui.Model;
 import vistra.gui.control.Control;
 import vistra.gui.view.component.AlgorithmPanel;

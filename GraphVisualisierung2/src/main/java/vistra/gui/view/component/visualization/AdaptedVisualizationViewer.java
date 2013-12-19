@@ -8,16 +8,16 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import vistra.core.graph.item.edge.EdgeFactory;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.graph.item.vertex.VertexFactory;
+import vistra.core.graph.zobsolete.item.edge.EdgeFactory;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.item.vertex.VertexFactory;
 import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.component.popup.MenuFactory;
 import vistra.gui.view.component.popup.PopupMenuEdge;
 import vistra.gui.view.component.popup.PopupMenuVertex;
-import vistra.util.TravisColor;
+import vistra.util.VistraColor;
 import vistra.util.transformer.EdgeColorTransformer;
 import vistra.util.transformer.EdgeLabelTransformer;
 import vistra.util.transformer.EdgeStrokeTransformer;
@@ -75,7 +75,7 @@ public class AdaptedVisualizationViewer extends
 	public AdaptedVisualizationViewer(JFrame top, Layout<IVertex, IEdge> layout,
 			Dimension dimension) {
 		super(layout, dimension);
-		super.setBackground(TravisColor.WHITE);
+		super.setBackground(VistraColor.WHITE);
 
 		/* Vertex layout */
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);

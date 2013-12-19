@@ -5,7 +5,7 @@ import java.awt.Stroke;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.obsolete.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
 
 
 /**

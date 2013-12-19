@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-import vistra.core.graph.obsolete.item.IRestrictedGraphItem;
+import vistra.core.graph.zobsolete.item.IRestrictedGraphItem;
 import vistra.core.util.GraphPropertyConstants;
 import vistra.util.VistraColor;
 

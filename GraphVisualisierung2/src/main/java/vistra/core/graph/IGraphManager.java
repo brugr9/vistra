@@ -1,11 +1,13 @@
 package vistra.core.graph;
 
 import java.io.File;
-
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import vistra.core.graph.zobsolete.IGravisGraph;
+import vistra.core.graph.zobsolete.IObservableGraph;
+
 /**
- * A parameter manager interface specialized on graphs.
+ * A graph manager interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -18,7 +20,7 @@ public interface IGraphManager {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract IObservableGravisGraph getNewGraph() throws Exception;
+	public abstract IObservableGraph getNewGraph() throws Exception;
 
 	/**
 	 * Opens a GraphML-file as graph.
@@ -28,7 +30,7 @@ public interface IGraphManager {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract IObservableGravisGraph open(File file) throws Exception;
+	public abstract IObservableGraph open(File file) throws Exception;
 
 	/**
 	 * Saves a graph as GraphML-file.

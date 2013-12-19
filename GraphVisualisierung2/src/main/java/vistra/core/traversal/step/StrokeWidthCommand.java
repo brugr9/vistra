@@ -1,6 +1,6 @@
 package vistra.core.traversal.step;
 
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.zobsolete.item.IGraphItem;
 
 /**
  * @author Patrick Kofmel (kofmp1@bfh.ch)

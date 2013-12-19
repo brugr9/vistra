@@ -20,7 +20,7 @@ import javax.swing.border.TitledBorder;
 
 import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
-import vistra.util.TravisColor;
+import vistra.util.VistraColor;
 
 
 /**
@@ -79,8 +79,8 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 		this.algorithmDescriptionTextArea.setRows(10);
 		this.algorithmDescriptionTextArea.setLineWrap(true);
 		this.algorithmDescriptionTextArea.setWrapStyleWord(true);
-		this.algorithmDescriptionTextArea.setBackground(TravisColor.LIGHT_GRAY);
-		this.algorithmDescriptionTextArea.setForeground(TravisColor.DARK_BLUE);
+		this.algorithmDescriptionTextArea.setBackground(VistraColor.LIGHT_GRAY);
+		this.algorithmDescriptionTextArea.setForeground(VistraColor.DARK_BLUE);
 		// algorithmDescriptionScrollPane
 		this.algorithmDescriptionScrollPane = new JScrollPane(
 				this.algorithmDescriptionTextArea);
@@ -92,7 +92,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 		// this
 		this.titledBorder = BorderFactory.createTitledBorder("algorithmPanel");
 		this.setBorder(titledBorder);
-		this.setBackground((Color) TravisColor.ANTIQUE);
+		this.setBackground((Color) VistraColor.ANTIQUE);
 		this.setLayout(new BorderLayout());
 		this.add(this.algorithmCombo, BorderLayout.NORTH);
 		this.add(this.algorithmDescriptionTextArea, BorderLayout.SOUTH);

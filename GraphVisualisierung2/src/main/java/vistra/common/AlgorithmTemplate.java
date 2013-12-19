@@ -1,12 +1,13 @@
 package vistra.common;
 
 import vistra.core.algorithm.AlgorithmException;
-import vistra.core.graph.IRestrictedGraph;
+import vistra.core.graph.zobsolete.IRestrictedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * @author // TODO set developer name
+ * @author TODO set developer name
  * 
+ *         TODO rename the class
  */
 public class AlgorithmTemplate implements IAlgorithm {
 

@@ -18,13 +18,13 @@ import vistra.core.algorithm.AlgorithmManagerFactory;
 import vistra.core.algorithm.IAlgorithmManager;
 import vistra.core.graph.GraphManagerFactory;
 import vistra.core.graph.IGraphManager;
-import vistra.core.graph.IGravisGraph;
-import vistra.core.graph.IObservableGravisGraph;
-import vistra.core.graph.IRestrictedGraph;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.traversal.GravisListIterator;
-import vistra.core.traversal.IGravisListIterator;
+import vistra.core.graph.zobsolete.IGravisGraph;
+import vistra.core.graph.zobsolete.IObservableGraph;
+import vistra.core.graph.zobsolete.IRestrictedGraph;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
+import vistra.core.traversal.ImmutableBidirectionalIterator;
+import vistra.core.traversal.IImmutableBidirectionalIterator;
 import vistra.core.traversal.Traversal;
 import vistra.core.traversal.step.IStep;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
@@ -73,7 +73,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IObservableGravisGraph openGraph(File source) throws CoreException {
+	public IObservableGraph openGraph(File source) throws CoreException {
 		try {
 			return this.graphManager.open(source);
 		} catch (Exception e) {
@@ -85,7 +85,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IObservableGravisGraph getNewGraph() throws CoreException {
+	public IObservableGraph getNewGraph() throws CoreException {
 		try {
 			return this.graphManager.getNewGraph();
 		} catch (Exception e) {
@@ -200,7 +200,7 @@ public class Core implements ICore {
 			List<IStep> steps = new ArrayList<IStep>();
 			// the graph
 			GraphEventListener<IVertex, IEdge> graphEventListener = createGravisGraphEventListener(steps);
-			IObservableGravisGraph observableGraph = createObservableGraph(graph);
+			IObservableGraph observableGraph = createObservableGraph(graph);
 			observableGraph.addGraphEventListener(graphEventListener);
 			IRestrictedGraph restrictedGraph = createRestrictedGraph(observableGraph);
 			// the algorithm
@@ -209,7 +209,7 @@ public class Core implements ICore {
 			for (int index = steps.size() - 1; index > -1; index--)
 				steps.get(index).undo();
 			// the traversal
-			IGravisListIterator<IStep> stepIterator = new GravisListIterator<IStep>(
+			IImmutableBidirectionalIterator<IStep> stepIterator = new ImmutableBidirectionalIterator<IStep>(
 					steps);
 			return new Traversal(stepIterator);
 		} catch (Exception e) {

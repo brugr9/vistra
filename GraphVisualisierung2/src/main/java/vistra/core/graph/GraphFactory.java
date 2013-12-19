@@ -4,9 +4,17 @@ import java.util.List;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.IGraphItem;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.GravisGraph;
+import vistra.core.graph.zobsolete.GravisGraphEvent;
+import vistra.core.graph.zobsolete.GravisGraphEventListener;
+import vistra.core.graph.zobsolete.IGravisGraph;
+import vistra.core.graph.zobsolete.IObservableGraph;
+import vistra.core.graph.zobsolete.IRestrictedGraph;
+import vistra.core.graph.zobsolete.ObservableGravisGraph;
+import vistra.core.graph.zobsolete.RestrictedGraph;
+import vistra.core.graph.zobsolete.item.IGraphItem;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
 import vistra.core.traversal.step.CommandTransformerFactory;
 import vistra.core.traversal.step.IStep;
 import edu.uci.ics.jung.graph.Graph;
@@ -65,7 +73,7 @@ public final class GraphFactory {
 	 * 
 	 * @return the observable graph
 	 */
-	public static IObservableGravisGraph createObservableGraph() {
+	public static IObservableGraph createObservableGraph() {
 		return new ObservableGravisGraph(new GravisGraph(createGraph()));
 	}
 
@@ -77,7 +85,7 @@ public final class GraphFactory {
 	 *            the graph to make observable
 	 * @return the observable graph
 	 */
-	public static IObservableGravisGraph createObservableGraph(
+	public static IObservableGraph createObservableGraph(
 			IGravisGraph graph) {
 		return new ObservableGravisGraph(graph);
 	}
@@ -91,7 +99,7 @@ public final class GraphFactory {
 	 * @return the restricted graph
 	 */
 	public static IRestrictedGraph createRestrictedGraph(
-			IObservableGravisGraph graph) {
+			IObservableGraph graph) {
 		return new RestrictedGraph(graph);
 	}
 

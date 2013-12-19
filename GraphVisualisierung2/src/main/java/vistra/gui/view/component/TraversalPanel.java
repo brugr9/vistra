@@ -30,7 +30,7 @@ import javax.swing.border.TitledBorder;
 
 import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
-import vistra.util.TravisColor;
+import vistra.util.VistraColor;
 
 /**
  * A traversal panel.
@@ -185,8 +185,8 @@ public final class TraversalPanel extends JPanel implements Observer {
 
 		// progress
 		this.progressBar = new JProgressBar();
-		this.progressBar.setBackground(TravisColor.DARK_GRAY);
-		this.progressBar.setForeground(TravisColor.LIGHT_GREEN);
+		this.progressBar.setBackground(VistraColor.DARK_GRAY);
+		this.progressBar.setForeground(VistraColor.LIGHT_GREEN);
 		this.progressBar.setVisible(true);
 
 		// Panel
@@ -201,10 +201,10 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.stepByStepPanel.setLayout(new GridLayout(1, 4));
 		this.animationPanel.setLayout(new GridLayout(1, 3));
 		//
-		this.stepsPanel.setBackground((Color) TravisColor.ANTIQUE);
-		this.delayPanel.setBackground((Color) TravisColor.ANTIQUE);
-		this.stepByStepPanel.setBackground((Color) TravisColor.ANTIQUE);
-		this.animationPanel.setBackground((Color) TravisColor.ANTIQUE);
+		this.stepsPanel.setBackground((Color) VistraColor.ANTIQUE);
+		this.delayPanel.setBackground((Color) VistraColor.ANTIQUE);
+		this.stepByStepPanel.setBackground((Color) VistraColor.ANTIQUE);
+		this.animationPanel.setBackground((Color) VistraColor.ANTIQUE);
 		//
 		this.stepsPanel.add(this.steplengthLabel);
 		this.stepsPanel.add(this.steplengthSpinner);
@@ -222,7 +222,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.animationPanel.add(this.stopButton);
 		// this
 		this.setLayout(new GridLayout(5, 1));
-		this.setBackground((Color) TravisColor.ANTIQUE);
+		this.setBackground((Color) VistraColor.ANTIQUE);
 		this.add(this.stepsPanel);
 		this.add(this.delayPanel);
 		this.add(this.progressBar);

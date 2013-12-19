@@ -11,12 +11,12 @@ import vistra.core.traversal.step.IStepResult;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Traversal implements IGravisListIterator<IStepResult> {
+public class Traversal implements IImmutableBidirectionalIterator<IStepResult> {
 
 	/**
 	 * A field for an iterator over steps.
 	 */
-	private IGravisListIterator<IStep> steps;
+	private IImmutableBidirectionalIterator<IStep> steps;
 
 	/**
 	 * Main constructor.
@@ -25,7 +25,7 @@ public class Traversal implements IGravisListIterator<IStepResult> {
 	 *            an iterator over steps
 	 * 
 	 */
-	public Traversal(IGravisListIterator<IStep> steps) {
+	public Traversal(IImmutableBidirectionalIterator<IStep> steps) {
 		this.steps = steps;
 
 	}

@@ -2,7 +2,7 @@ package vistra.core.traversal.step;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.zobsolete.item.IGraphItem;
 
 
 /**

@@ -7,15 +7,15 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.zobsolete.item.edge.IEdge;
+import vistra.core.graph.zobsolete.item.vertex.IVertex;
 import vistra.gui.Model;
 import vistra.gui.control.Control;
 import vistra.gui.view.component.AlgorithmPanel;
 import vistra.gui.view.component.GraphPanel;
 import vistra.gui.view.component.MenuBar;
 import vistra.gui.view.component.TraversalPanel;
-import vistra.util.TravisColor;
+import vistra.util.VistraColor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 
 /**
@@ -92,7 +92,7 @@ public class MinimalView extends JFrame implements IView {
 		/* control panel */
 		this.controlPanel = new JPanel();
 		this.controlPanel.setLayout(new BorderLayout());
-		this.controlPanel.setBackground((Color) TravisColor.ANTIQUE);
+		this.controlPanel.setBackground((Color) VistraColor.ANTIQUE);
 		this.controlPanel.add(this.parameterPanel, BorderLayout.NORTH);
 		this.controlPanel.add(this.playerPanel, BorderLayout.SOUTH);
 
