@@ -144,7 +144,7 @@ class AlgorithmManager implements IAlgorithmManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getWorkbenchDir() {
+	public String getWorkbench() {
 		return this.workbenchDir;
 	}
 

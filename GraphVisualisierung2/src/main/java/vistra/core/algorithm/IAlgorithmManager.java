@@ -20,7 +20,7 @@ public interface IAlgorithmManager {
 	 * 
 	 * @return the workbench directory
 	 */
-	public abstract String getWorkbenchDir();
+	public abstract String getWorkbench();
 
 	/**
 	 * Returns the file name extension filter.

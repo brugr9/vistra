@@ -31,7 +31,8 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * Application core, gives access to mainly important methods (facade pattern).
+ * A core, gives access to mainly important methods (facade pattern) and holds
+ * an algorithm which can be changed (strategy pattern).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -56,6 +57,8 @@ public class Core implements ICore {
 	/**
 	 * Main constructor.
 	 * 
+	 * @param p
+	 *            the properties
 	 */
 	public Core(Properties p) {
 		try {
@@ -126,8 +129,8 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public File getAlgorithmWorkbenchDir() {
-		return new File(this.algorithmManager.getWorkbenchDir());
+	public File getWorkbench() {
+		return new File(this.algorithmManager.getWorkbench());
 	}
 
 	/**
@@ -144,32 +147,11 @@ public class Core implements ICore {
 	@Override
 	public EdgeType[] importAlgorithm(File source) throws CoreException {
 		try {
-			FileUtils.copyFileToDirectory(source,
-					this.getAlgorithmWorkbenchDir());
+			FileUtils.copyFileToDirectory(source, this.getWorkbench());
 			return this.algorithmManager.add(source);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void selectAlgorithm(int index) throws CoreException {
-		try {
-			this.algorithm = this.algorithmManager.select(index);
-		} catch (Exception e) {
-			throw new CoreException(e);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getAlgorithmDescription() {
-		return this.algorithm.getDescription();
 	}
 
 	/**
@@ -182,6 +164,26 @@ public class Core implements ICore {
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IAlgorithm selectAlgorithm(int index) throws CoreException {
+		try {
+			return this.algorithmManager.select(index);
+		} catch (Exception e) {
+			throw new CoreException(e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setAlgorithm(IAlgorithm algorithm) {
+		this.algorithm = algorithm;
 	}
 
 	/**

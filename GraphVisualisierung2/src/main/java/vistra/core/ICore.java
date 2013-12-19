@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import vistra.common.IAlgorithm;
 import vistra.core.graph.zobsolete.IGravisGraph;
 import vistra.core.graph.zobsolete.IObservableGraph;
 import vistra.core.traversal.Traversal;
@@ -67,7 +68,7 @@ public interface ICore {
 	 * 
 	 * @return the algorithm workbench directory
 	 */
-	abstract File getAlgorithmWorkbenchDir();
+	abstract File getWorkbench();
 
 	/**
 	 * Returns the algorithm filename extension filter.
@@ -105,16 +106,18 @@ public interface ICore {
 	 * 
 	 * @param index
 	 *            the algorithm index
+	 * @return the algorithm
 	 * @throws CoreException
 	 */
-	abstract void selectAlgorithm(int index) throws CoreException;
+	abstract IAlgorithm selectAlgorithm(int index) throws CoreException;
 
 	/**
-	 * Returns the description of the selected algorithm.
+	 * Sets an algorithm.
 	 * 
-	 * @return the selected algorithm description
+	 * @param algorithm
+	 *            the algorithm to set
 	 */
-	abstract String getAlgorithmDescription();
+	abstract void setAlgorithm(IAlgorithm algorithm) throws CoreException;
 
 	/**
 	 * Deletes an imported algorithm file and returns the edge types the

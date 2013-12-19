@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * An implementation of an immutable bidirectional iterator.
+ * An immutable bidirectional iterator.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

@@ -482,13 +482,14 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			} else {
 				/* deny user interaction */
 				this.setState(new ParameterOff(this));
+				/* select the algorithm */
+				IAlgorithm algorithm = this.core.selectAlgorithm(index);
+				this.core.setAlgorithm(algorithm);
+				String description = algorithm.getDescription();
+				this.model.setAlgorithmDescription(description);
 				/* get the traversal */
-				this.core.selectAlgorithm(index);
 				IGravisGraph graph = this.model.getGraph();
 				Traversal traversal = this.core.executeAlgorithm(graph);
-				/* settings */
-				String description = this.core.getAlgorithmDescription();
-				this.model.setAlgorithmDescription(description);
 				this.model.setTraversal(traversal);
 				this.model.setProgressMaximum(traversal.size());
 			}
@@ -566,7 +567,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			fileChooser.addChoosableFileFilter(filter);
 			fileChooser.setFileFilter(filter);
 			// restrict access to workbench directory only
-			File root = this.core.getAlgorithmWorkbenchDir();
+			File root = this.core.getWorkbench();
 			FileSystemView fsv = new SingleRootFileSystemView(root);
 			fileChooser.setFileSystemView(fsv);
 			fileChooser.updateUI();

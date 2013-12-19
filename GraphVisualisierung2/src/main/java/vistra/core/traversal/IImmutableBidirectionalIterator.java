@@ -3,9 +3,10 @@ package vistra.core.traversal;
 import java.util.Iterator;
 
 /**
- * A immutable bidirectional iterator.
+ * An immutable bidirectional iterator interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * @param <E>
  * 
  */
 public interface IImmutableBidirectionalIterator<E> extends Iterable<E>,
