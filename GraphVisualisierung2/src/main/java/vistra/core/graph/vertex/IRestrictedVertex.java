@@ -1,7 +1,5 @@
 package vistra.core.graph.vertex;
 
-import java.awt.geom.Point2D;
-
 import vistra.core.graph.vertex.state.IVertexStateHandler;
 
 /**
@@ -27,10 +25,17 @@ interface IRestrictedVertex extends IVertexStateHandler {
 	abstract boolean isEnd();
 
 	/**
-	 * Returns the location.
+	 * Sets the distance.
 	 * 
-	 * @return the location
+	 * @param distance
 	 */
-	abstract Point2D getLocation();
+	abstract void setDistance(double distance);
+
+	/**
+	 * Returns the distance.
+	 * 
+	 * @return the distance
+	 */
+	abstract double getDistance();
 
 }

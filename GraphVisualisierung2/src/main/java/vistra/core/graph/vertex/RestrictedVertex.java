@@ -1,7 +1,5 @@
 package vistra.core.graph.vertex;
 
-import java.awt.geom.Point2D;
-
 import vistra.core.graph.vertex.state.VertexStateHandler;
 
 /**
@@ -41,12 +39,16 @@ class RestrictedVertex extends VertexStateHandler implements IRestrictedVertex {
 		return this.vertex.isEnd();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	public Point2D getLocation() {
-		return this.vertex.getLocation();
+	public void setDistance(double distance) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public double getDistance() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	/**

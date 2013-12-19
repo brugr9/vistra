@@ -1,7 +1,7 @@
 package vistra.core.graph.edge.state;
 
 import vistra.util.IState;
-import vistra.util.State;
+import vistra.util.AbstractState;
 
 /**
  * An abstract edge state.
@@ -9,7 +9,7 @@ import vistra.util.State;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractEdgeState extends State implements IState {
+abstract class AbstractEdgeState extends AbstractState implements IState {
 
 	/**
 	 * A field for a state handler.

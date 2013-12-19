@@ -1,7 +1,7 @@
 package vistra.gui.control.parameter;
 
 import vistra.util.IState;
-import vistra.util.State;
+import vistra.util.AbstractState;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -10,7 +10,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractParameterState extends State implements IState {
+abstract class AbstractParameterState extends AbstractState implements IState {
 
 	/**
 	 * A field for a state handler.

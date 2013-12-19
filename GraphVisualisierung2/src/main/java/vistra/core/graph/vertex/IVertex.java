@@ -34,4 +34,11 @@ interface IVertex extends IRestrictedVertex {
 	 */
 	abstract void setLocation(Point2D location);
 
+	/**
+	 * Returns the location.
+	 * 
+	 * @return the location
+	 */
+	abstract Point2D getLocation();
+
 }

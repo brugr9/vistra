@@ -6,7 +6,7 @@ package vistra.util;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public abstract class State implements IState {
+public abstract class AbstractState implements IState {
 
 	/**
 	 * {@inheritDoc}

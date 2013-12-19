@@ -23,6 +23,11 @@ class Vertex extends VertexStateHandler implements IVertex {
 	private boolean end;
 
 	/**
+	 * A field for the distance.
+	 */
+	private double distance;
+
+	/**
 	 * A field for the location.
 	 */
 	private Point2D location;
@@ -34,13 +39,9 @@ class Vertex extends VertexStateHandler implements IVertex {
 		super();
 		this.start = false;
 		this.end = false;
+		this.distance = 0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.core.graph.vertex.IVertex#setStart(boolean)
-	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -51,11 +52,6 @@ class Vertex extends VertexStateHandler implements IVertex {
 			this.end = !start;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.core.graph.vertex.IVertex#setEnd(boolean)
-	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -66,11 +62,14 @@ class Vertex extends VertexStateHandler implements IVertex {
 			this.start = !end;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.core.graph.vertex.IVertex#setLocation(java.awt.geom.Point2D)
+	/**
+	 * {@inheritDoc}
 	 */
+	@Override
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -79,11 +78,6 @@ class Vertex extends VertexStateHandler implements IVertex {
 		this.location = location;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.core.graph.vertex.IVertex#isStart()
-	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -92,11 +86,6 @@ class Vertex extends VertexStateHandler implements IVertex {
 		return start;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.core.graph.vertex.IVertex#isEnd()
-	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -105,17 +94,20 @@ class Vertex extends VertexStateHandler implements IVertex {
 		return end;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.core.graph.vertex.IVertex#getLocation()
+	/**
+	 * {@inheritDoc}
 	 */
+	@Override
+	public double getDistance() {
+		return this.distance;
+	};
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public Point2D getLocation() {
 		return this.location;
-	};
+	}
 
 }

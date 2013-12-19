@@ -1,7 +1,7 @@
 package vistra.core.graph.vertex.state;
 
 import vistra.util.IState;
-import vistra.util.State;
+import vistra.util.AbstractState;
 
 /**
  * An abstract vertex.
@@ -9,7 +9,7 @@ import vistra.util.State;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractVertexState extends State implements IState {
+abstract class AbstractVertexState extends AbstractState implements IState {
 
 	/**
 	 * A field for a state handler.

@@ -4,7 +4,7 @@
 package vistra.gui.control.animation;
 
 import vistra.util.IState;
-import vistra.util.State;
+import vistra.util.AbstractState;
 
 /**
  * An abstract animation state.
@@ -12,7 +12,7 @@ import vistra.util.State;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractAnimationState extends State implements IState {
+abstract class AbstractAnimationState extends AbstractState implements IState {
 
 	/**
 	 * A field for a state handler.
