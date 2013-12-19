@@ -1,4 +1,4 @@
 vistra
 ======
 
-Desktop-Applikation zur Visualisierung der Traversierung von Graphen
+Desktop-Applikation zur Traversierung von Graphen.
