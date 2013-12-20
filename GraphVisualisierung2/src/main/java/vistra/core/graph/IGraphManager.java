@@ -3,9 +3,6 @@ package vistra.core.graph;
 import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.zobsolete.graph.IGravisGraph;
-import vistra.core.zobsolete.graph.IObservableGraph;
-
 /**
  * A graph manager interface.
  * 
@@ -20,7 +17,7 @@ public interface IGraphManager {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract IObservableGraph getNewGraph() throws Exception;
+	public abstract IExtendedGraph getNewGraph() throws Exception;
 
 	/**
 	 * Opens a GraphML-file as graph.
@@ -30,7 +27,7 @@ public interface IGraphManager {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract IObservableGraph open(File file) throws Exception;
+	public abstract IExtendedGraph open(File file) throws Exception;
 
 	/**
 	 * Saves a graph as GraphML-file.
@@ -39,7 +36,7 @@ public interface IGraphManager {
 	 *            the graph to save
 	 * @throws Exception
 	 */
-	public void save(IGravisGraph graph) throws Exception;
+	public void save(IExtendedGraph graph) throws Exception;
 
 	/**
 	 * Saves a graph into a GraphML-file.
@@ -50,7 +47,7 @@ public interface IGraphManager {
 	 *            the file to write into
 	 * @throws Exception
 	 */
-	public void saveAs(IGravisGraph graph, File file) throws Exception;
+	public void saveAs(IExtendedGraph graph, File file) throws Exception;
 
 	/**
 	 * Returns the file name extension filter.

@@ -14,11 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vistra.core.zobsolete.graph.item.edge.IEdge;
-import vistra.core.zobsolete.graph.item.vertex.IVertex;
-import vistra.gui.util.GraphItemIdVerifier;
-import vistra.gui.util.VertexSizeVerifier;
-import vistra.util.transformer.ValueTransformer;
+import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.vertex.IVertex;
+import vistra.gui.view.component.popup.verifier.GraphItemIdVerifier;
+import vistra.gui.view.component.popup.verifier.VertexSizeVerifier;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -139,12 +138,9 @@ public class DialogVertexProperty extends JDialog {
 			final VisualizationViewer<IVertex, IEdge> vViewer) {
 
 		vertex.setId(this.txtVertexName.getText().trim());
-		vertex.setWidth(ValueTransformer.transformDouble(this.txtWidth
-				.getText()));
-		vertex.setHeight(ValueTransformer.transformDouble(this.txtHeight
-				.getText()));
 		vViewer.repaint();
 		this.dispose();
+
 	}
 
 	/**
@@ -155,17 +151,13 @@ public class DialogVertexProperty extends JDialog {
 			VisualizationViewer<IVertex, IEdge> vViewer) {
 
 		this.txtVertexName.setText(vertex.getId());
-		this.txtWidth.setText(String.valueOf(new Double(vertex.getWidth())
-				.intValue()));
-		this.txtHeight.setText(String.valueOf(new Double(vertex.getHeight())
-				.intValue()));
-
 		this.txtVertexName.setInputVerifier(new GraphItemIdVerifier(
 				this.txtVertexName.getText().trim(), vertex, vViewer));
 		this.txtWidth.setInputVerifier(new VertexSizeVerifier(this.txtWidth
 				.getText().trim()));
 		this.txtHeight.setInputVerifier(new VertexSizeVerifier(this.txtHeight
 				.getText().trim()));
+
 	}
 
 }

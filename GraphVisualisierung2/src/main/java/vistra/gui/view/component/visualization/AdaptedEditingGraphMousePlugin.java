@@ -6,9 +6,9 @@ import java.awt.geom.Point2D;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.core.zobsolete.graph.IGravisGraph;
-import vistra.core.zobsolete.graph.item.edge.IEdge;
-import vistra.core.zobsolete.graph.item.vertex.IVertex;
+import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -100,8 +100,8 @@ public class AdaptedEditingGraphMousePlugin extends
 
 				// set default edge type
 				this.edgeIsDirected = EdgeType.DIRECTED;
-				if (graph instanceof IGravisGraph) {
-					IGravisGraph gravisGraph = (IGravisGraph) graph;
+				if (graph instanceof IExtendedGraph) {
+					IExtendedGraph gravisGraph = (IExtendedGraph) graph;
 
 					if (gravisGraph.getEdgeType() == EdgeType.UNDIRECTED) {
 						this.edgeIsDirected = EdgeType.UNDIRECTED;

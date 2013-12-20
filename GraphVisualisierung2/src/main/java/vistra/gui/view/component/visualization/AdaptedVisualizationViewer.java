@@ -8,24 +8,24 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import vistra.core.zobsolete.graph.item.edge.EdgeFactory;
-import vistra.core.zobsolete.graph.item.edge.IEdge;
-import vistra.core.zobsolete.graph.item.vertex.IVertex;
-import vistra.core.zobsolete.graph.item.vertex.VertexFactory;
+import vistra.core.graph.item.edge.EdgeFactory;
+import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.vertex.VertexFactory;
 import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.component.popup.MenuFactory;
 import vistra.gui.view.component.popup.PopupMenuEdge;
 import vistra.gui.view.component.popup.PopupMenuVertex;
+import vistra.gui.view.component.vizualization.transformer.EdgeColorTransformer;
+import vistra.gui.view.component.vizualization.transformer.EdgeLabelTransformer;
+import vistra.gui.view.component.vizualization.transformer.EdgeStrokeTransformer;
+import vistra.gui.view.component.vizualization.transformer.ShapeTransformer;
+import vistra.gui.view.component.vizualization.transformer.VertexColorTransformer;
+import vistra.gui.view.component.vizualization.transformer.VertexLabelTransformer;
+import vistra.gui.view.component.vizualization.transformer.VertexStrokeTransformer;
+import vistra.gui.view.component.vizualization.transformer.VertexToolTipTransformer;
 import vistra.util.VistraColor;
-import vistra.util.transformer.EdgeColorTransformer;
-import vistra.util.transformer.EdgeLabelTransformer;
-import vistra.util.transformer.EdgeStrokeTransformer;
-import vistra.util.transformer.ShapeTransformer;
-import vistra.util.transformer.VertexColorTransformer;
-import vistra.util.transformer.VertexLabelTransformer;
-import vistra.util.transformer.VertexStrokeTransformer;
-import vistra.util.transformer.VertexToolTipTransformer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
@@ -72,8 +72,8 @@ public class AdaptedVisualizationViewer extends
 	 * @param dimension
 	 *            the dimension
 	 */
-	public AdaptedVisualizationViewer(JFrame top, Layout<IVertex, IEdge> layout,
-			Dimension dimension) {
+	public AdaptedVisualizationViewer(JFrame top,
+			Layout<IVertex, IEdge> layout, Dimension dimension) {
 		super(layout, dimension);
 		super.setBackground(VistraColor.WHITE);
 

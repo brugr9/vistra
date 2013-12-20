@@ -2,7 +2,7 @@ package vistra.gui.view.component.popup;
 
 import java.awt.geom.Point2D;
 
-import vistra.core.zobsolete.graph.item.IGraphItem;
+import vistra.core.graph.item.IGraphItem;
 
 /**
  * A graph item modifier interface.

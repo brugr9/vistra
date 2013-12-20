@@ -14,11 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vistra.core.zobsolete.graph.item.edge.IEdge;
-import vistra.core.zobsolete.graph.item.vertex.IVertex;
-import vistra.gui.util.EdgeWeightVerifier;
-import vistra.gui.util.GraphItemIdVerifier;
-import vistra.util.transformer.ValueTransformer;
+import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.vertex.IVertex;
+import vistra.gui.view.component.popup.verifier.EdgeWeightVerifier;
+import vistra.gui.view.component.popup.verifier.GraphItemIdVerifier;
+import vistra.gui.view.component.vizualization.transformer.ValueTransformer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -143,13 +143,13 @@ public class DialogEdgeProperty extends JDialog {
 	 * @param vViewer
 	 */
 	private void setTextFieldValues(IEdge edge,
-			VisualizationViewer<IVertex, IEdge> vViewer) {
+			VisualizationViewer<IVertex, IEdge> viewer) {
 
 		this.txtEdgeName.setText(edge.getId());
 		this.txtEdgeWeight.setText(String.valueOf(edge.getWeight()));
 
 		this.txtEdgeName.setInputVerifier(new GraphItemIdVerifier(
-				this.txtEdgeName.getText().trim(), edge, vViewer));
+				this.txtEdgeName.getText().trim(), edge, viewer));
 		this.txtEdgeWeight.setInputVerifier(new EdgeWeightVerifier(
 				this.txtEdgeWeight.getText().trim()));
 	}

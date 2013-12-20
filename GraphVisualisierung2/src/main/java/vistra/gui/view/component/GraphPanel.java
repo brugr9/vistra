@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import vistra.core.zobsolete.graph.item.edge.IEdge;
-import vistra.core.zobsolete.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.vertex.IVertex;
 import vistra.gui.IModel;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
@@ -93,7 +93,7 @@ public class GraphPanel extends JPanel implements Observer {
 				String title = b.getString("visualization.label") + ": ";
 				if (!m.isGraphSaved())
 					title += "*";
-				title += m.getGraph().getId();
+				title += m.getGraph().getName();
 				this.titledBorder.setTitle(title);
 			}
 		} catch (Exception e) {

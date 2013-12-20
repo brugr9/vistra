@@ -3,20 +3,23 @@ package vistra.core.graph;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.zobsolete.graph.GravisGraphMLWriter;
-import vistra.core.zobsolete.graph.IGravisGraph;
-import vistra.core.zobsolete.graph.IObservableGraph;
-import vistra.core.zobsolete.graph.item.edge.IEdge;
-import vistra.core.zobsolete.graph.item.vertex.IVertex;
-import vistra.util.transformer.EdgeTransformer;
-import vistra.util.transformer.GraphTransformer;
-import vistra.util.transformer.HyperEdgeTransformer;
-import vistra.util.transformer.VertexTransformer;
+import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.vertex.IVertex;
+import vistra.gui.view.component.vizualization.transformer.EdgeTransformer;
+import vistra.gui.view.component.vizualization.transformer.GraphTransformer;
+import vistra.gui.view.component.vizualization.transformer.HyperEdgeTransformer;
+import vistra.gui.view.component.vizualization.transformer.VertexTransformer;
+import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.GraphDecorator;
+import edu.uci.ics.jung.graph.Hypergraph;
 import edu.uci.ics.jung.io.GraphIOException;
+import edu.uci.ics.jung.io.GraphMLWriter;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 
 /**
@@ -27,10 +30,6 @@ import edu.uci.ics.jung.io.graphml.GraphMLReader2;
  */
 class GraphManager implements IGraphManager {
 
-	/**
-	 * A field for a default name.
-	 */
-	private String defaultName;
 	/**
 	 * A field for a filename extension filter.
 	 */
@@ -56,9 +55,9 @@ class GraphManager implements IGraphManager {
 	 */
 	private final HyperEdgeTransformer hyperEdgeTransformer;
 	/**
-	 * A field for a GraphML writer.
+	 * A field for a GraphMLWriter.
 	 */
-	private GravisGraphMLWriter gravisGraphMLWriter;
+	private GraphMLWriter graphMLWriter;
 
 	/**
 	 * Main constructor.
@@ -66,9 +65,9 @@ class GraphManager implements IGraphManager {
 	 * @param p
 	 *            the core properties
 	 */
+	@SuppressWarnings("rawtypes")
 	public GraphManager(Properties p) {
 		super();
-		this.defaultName = p.getProperty("graphname");
 		this.graph = null;
 		/* filename filter */
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -81,19 +80,17 @@ class GraphManager implements IGraphManager {
 		this.edgeTransformer = new EdgeTransformer();
 		this.hyperEdgeTransformer = new HyperEdgeTransformer();
 		/* graphML writer */
-		this.gravisGraphMLWriter = new GravisGraphMLWriter();
+		this.graphMLWriter = new GraphMLWriter();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IObservableGraph getNewGraph() throws Exception {
+	public IExtendedGraph getNewGraph() throws Exception {
 		try {
 			this.graph = null;
-			IObservableGraph newGraph = GraphFactory
-					.createObservableGraph();
-			newGraph.setId(this.defaultName);
+			IExtendedGraph newGraph = GraphFactory.create();
 			return newGraph;
 		} catch (Exception e) {
 			throw e;
@@ -104,7 +101,7 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IObservableGraph open(File file) throws Exception {
+	public IExtendedGraph open(File file) throws Exception {
 		try {
 			this.graph = file;
 			return this.read(file);
@@ -116,11 +113,11 @@ class GraphManager implements IGraphManager {
 	/**
 	 * {@inheritDoc}
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public void save(IGravisGraph graph) throws Exception {
+	public void save(IExtendedGraph graph) throws Exception {
 		try {
-			// TODO
-			// this.gravisGraphMLWriter.save(graph, w);
+			this.graphMLWriter.save(graph, new FileWriter(this.graph));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -130,10 +127,9 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void saveAs(IGravisGraph graph, File file) throws Exception {
+	public void saveAs(IExtendedGraph graph, File file) throws Exception {
 		try {
 			this.save(graph);
-			graph.setId(file.getName());
 		} catch (Exception e) {
 			throw e;
 		}
@@ -147,16 +143,16 @@ class GraphManager implements IGraphManager {
 	 *            the file to load
 	 * @return the loaded graph
 	 */
-	private IObservableGraph read(final File file) throws GraphException {
+	private IExtendedGraph read(final File file) throws GraphException {
 		try {
-			GraphMLReader2<IGravisGraph, IVertex, IEdge> graphReader = new GraphMLReader2<>(
+			GraphMLReader2<IExtendedGraph, IVertex, IEdge> graphReader = new GraphMLReader2<>(
 					new FileReader(file), this.graphTransformer,
 					this.vertexTransformer, this.edgeTransformer,
 					this.hyperEdgeTransformer);
 
-			IGravisGraph graph = graphReader.readGraph();
+			IExtendedGraph graph = graphReader.readGraph();
 			graphReader.close();
-			return GraphFactory.createObservableGraph(graph);
+			return graph;
 		} catch (GraphIOException e) {
 			throw new GraphException("I/O error in GraphML-file "
 					+ file.getName(), e);

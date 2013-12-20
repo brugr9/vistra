@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import vistra.core.zobsolete.graph.IObservableGraph;
-import vistra.core.zobsolete.traversal.Traversal;
+import vistra.core.graph.IExtendedGraph;
+import vistra.core.traversal.Traversal;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.animation.IAnimationStateHandler;
 import vistra.gui.control.parameter.IParameterStateHandler;
@@ -51,7 +51,7 @@ public final class Model extends Observable implements IModel {
 	/* Parameter */
 	private IParameterStateHandler parameterStateHandler;
 	// Graph
-	private IObservableGraph graph;
+	private IExtendedGraph graph;
 	private boolean editGraphEnabled;
 	private boolean graphSaved;
 	// Algorithm
@@ -91,7 +91,7 @@ public final class Model extends Observable implements IModel {
 	 * @param graph
 	 *            an observable gravis graph
 	 */
-	public Model(IObservableGraph graph) {
+	public Model(IExtendedGraph graph) {
 		super();
 
 		/* Menu */
@@ -488,7 +488,7 @@ public final class Model extends Observable implements IModel {
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getGraph()
 	 */
 	@Override
-	public IObservableGraph getGraph() {
+	public IExtendedGraph getGraph() {
 		return graph;
 	}
 
@@ -1035,7 +1035,7 @@ public final class Model extends Observable implements IModel {
 	 * .gravis.core.graph.IObservableGravisGraph)
 	 */
 	@Override
-	public void setGraph(IObservableGraph graph) {
+	public void setGraph(IExtendedGraph graph) {
 		this.graph = graph;
 		this.setChanged();
 	}

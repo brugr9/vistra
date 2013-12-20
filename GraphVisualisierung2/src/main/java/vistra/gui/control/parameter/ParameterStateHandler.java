@@ -25,11 +25,10 @@ import javax.swing.filechooser.FileSystemView;
 import vistra.common.IAlgorithm;
 import vistra.core.ICore;
 import vistra.core.graph.GraphFactory;
-import vistra.core.zobsolete.graph.IGravisGraph;
-import vistra.core.zobsolete.graph.IObservableGraph;
-import vistra.core.zobsolete.graph.item.edge.IEdge;
-import vistra.core.zobsolete.graph.item.vertex.IVertex;
-import vistra.core.zobsolete.traversal.Traversal;
+import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.traversal.Traversal;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.util.SingleRootFileSystemView;
@@ -337,11 +336,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingTheGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
-				IObservableGraph graph = GraphFactory.createObservableGraph();
+				IExtendedGraph graph = GraphFactory.create();
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
-				graph.setId(name);
-				graph.setDescription(" ");
+				graph.setName(name);
 				graph.setEdgeType(edgeType);
 				this.model.setGraph(graph);
 				this.setGraphSaved(false);
@@ -400,7 +398,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void saveGraph() throws Exception {
 		try {
-			IGravisGraph graph = this.model.getGraph();
+			IExtendedGraph graph = this.model.getGraph();
 			this.core.save(graph);
 			this.setGraphSaved(true);
 		} catch (Exception e) {
@@ -439,7 +437,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			int option = fileChooser.showSaveDialog(this.top);
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
-				IGravisGraph graph = this.model.getGraph();
+				IExtendedGraph graph = this.model.getGraph();
 				this.core.saveAs(graph, file);
 				this.setGraphSaved(true);
 			}
@@ -494,7 +492,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				String description = algorithm.getDescription();
 				this.model.setAlgorithmDescription(description);
 				/* get the traversal */
-				IGravisGraph graph = this.model.getGraph();
+				IExtendedGraph graph = this.model.getGraph();
 				Traversal traversal = this.core.traverse(graph);
 				this.model.setTraversal(traversal);
 				this.model.setProgressMaximum(traversal.size());
@@ -680,7 +678,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private boolean updateAlgorithms(EdgeType[] capabilities) throws Exception {
 		try {
 			boolean update = false;
-			IGravisGraph graph = this.model.getGraph();
+			IExtendedGraph graph = this.model.getGraph();
 			EdgeType edgeType = graph.getEdgeType();
 
 			for (EdgeType capability : capabilities) {

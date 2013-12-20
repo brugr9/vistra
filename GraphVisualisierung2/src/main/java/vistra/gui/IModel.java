@@ -3,8 +3,8 @@ package vistra.gui;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
-import vistra.core.zobsolete.graph.IObservableGraph;
-import vistra.core.zobsolete.traversal.Traversal;
+import vistra.core.graph.IExtendedGraph;
+import vistra.core.traversal.Traversal;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.animation.IAnimationStateHandler;
 import vistra.gui.control.parameter.IParameterStateHandler;
@@ -161,7 +161,7 @@ public interface IModel {
 	/**
 	 * @return the graph
 	 */
-	public abstract IObservableGraph getGraph();
+	public abstract IExtendedGraph getGraph();
 
 	/**
 	 * @return the editGraphEnabled
@@ -440,7 +440,7 @@ public interface IModel {
 	 * @param graph
 	 *            the graph to set
 	 */
-	public abstract void setGraph(IObservableGraph graph);
+	public abstract void setGraph(IExtendedGraph graph);
 
 	/**
 	 * @param editGraphEnabled

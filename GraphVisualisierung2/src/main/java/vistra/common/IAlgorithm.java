@@ -1,7 +1,7 @@
 package vistra.common;
 
 import vistra.core.algorithm.AlgorithmException;
-import vistra.core.zobsolete.graph.IRestrictedGraph;
+import vistra.core.graph.IExtendedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -41,7 +41,7 @@ public interface IAlgorithm {
 	 *            the graph to traverse
 	 * @throws AlgorithmException
 	 */
-	public abstract void traverse(IRestrictedGraph graph)
+	public abstract void traverse(IExtendedGraph graph)
 			throws AlgorithmException;
 
 }

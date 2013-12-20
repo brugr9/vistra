@@ -1,9 +1,5 @@
 package vistra.core;
 
-import static vistra.core.graph.GraphFactory.createGravisGraphEventListener;
-import static vistra.core.graph.GraphFactory.createObservableGraph;
-import static vistra.core.graph.GraphFactory.createRestrictedGraph;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +12,17 @@ import org.apache.commons.io.FileUtils;
 import vistra.common.IAlgorithm;
 import vistra.core.algorithm.AlgorithmManagerFactory;
 import vistra.core.algorithm.IAlgorithmManager;
+import vistra.core.graph.ExtendedGraph;
+import vistra.core.graph.GraphFactory;
 import vistra.core.graph.GraphManagerFactory;
+import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.IGraphManager;
-import vistra.core.zobsolete.graph.IGravisGraph;
-import vistra.core.zobsolete.graph.IObservableGraph;
-import vistra.core.zobsolete.graph.IRestrictedGraph;
-import vistra.core.zobsolete.graph.item.edge.IEdge;
-import vistra.core.zobsolete.graph.item.vertex.IVertex;
-import vistra.core.zobsolete.traversal.IImmutableBidirectionalIterator;
-import vistra.core.zobsolete.traversal.ImmutableBidirectionalIterator;
-import vistra.core.zobsolete.traversal.Traversal;
-import vistra.core.zobsolete.traversal.step.IStep;
+import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.vertex.IVertex;
+import vistra.util.IImmutableBidirectionalIterator;
+import vistra.util.ImmutableBidirectionalIterator;
+import vistra.core.traversal.IStep;
+import vistra.core.traversal.Traversal;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -81,7 +77,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IObservableGraph openGraph(File source) throws CoreException {
+	public IExtendedGraph openGraph(File source) throws CoreException {
 		try {
 			return this.graphManager.open(source);
 		} catch (Exception e) {
@@ -93,7 +89,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IObservableGraph getNewGraph() throws CoreException {
+	public IExtendedGraph getNewGraph() throws CoreException {
 		try {
 			return this.graphManager.getNewGraph();
 		} catch (Exception e) {
@@ -105,7 +101,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void save(IGravisGraph graph) throws CoreException {
+	public void save(IExtendedGraph graph) throws CoreException {
 		try {
 			this.graphManager.save(graph);
 		} catch (Exception e) {
@@ -117,7 +113,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void saveAs(IGravisGraph graph, File file) throws CoreException {
+	public void saveAs(IExtendedGraph graph, File file) throws CoreException {
 		try {
 			this.graphManager.saveAs(graph, file);
 		} catch (Exception e) {
@@ -207,29 +203,27 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Traversal traverse(IGravisGraph graph) throws CoreException {
+	public Traversal traverse(IExtendedGraph graph) throws CoreException {
 
 		try {
 			// the steps
-			List<IStep> steps = new ArrayList<IStep>();
+			List<IStep> stepList = new ArrayList<IStep>();
 			// the graph
-			GraphEventListener<IVertex, IEdge> graphEventListener = createGravisGraphEventListener(steps);
-			IObservableGraph observableGraph = createObservableGraph(graph);
-			observableGraph.addGraphEventListener(graphEventListener);
-			IRestrictedGraph restrictedGraph = createRestrictedGraph(observableGraph);
+			GraphEventListener<IVertex, IEdge> listener = GraphFactory
+					.createListener(stepList);
+			graph.addGraphEventListener(listener);
 			// the algorithm
-			this.algorithm.traverse(restrictedGraph);
+			this.algorithm.traverse(graph);
 			// undo all steps in reverse order
-			for (int index = steps.size() - 1; index > -1; index--)
-				steps.get(index).undo();
+			for (int index = stepList.size() - 1; index > -1; index--)
+				stepList.get(index).undo();
 			// the traversal
 			IImmutableBidirectionalIterator<IStep> stepIterator = new ImmutableBidirectionalIterator<IStep>(
-					steps);
+					stepList);
 			return new Traversal(stepIterator);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
 
 	}
-
 }

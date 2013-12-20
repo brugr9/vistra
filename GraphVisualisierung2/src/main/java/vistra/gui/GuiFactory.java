@@ -2,9 +2,9 @@ package vistra.gui;
 
 import vistra.core.ICore;
 import vistra.core.graph.GraphFactory;
-import vistra.core.zobsolete.graph.IObservableGraph;
-import vistra.core.zobsolete.graph.item.edge.IEdge;
-import vistra.core.zobsolete.graph.item.vertex.IVertex;
+import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.vertex.IVertex;
 import vistra.gui.control.Control;
 import vistra.gui.control.IControl;
 import vistra.gui.view.FullView;
@@ -56,7 +56,7 @@ public final class GuiFactory {
 	public static IView createGui(ICore core, ViewType type) throws Exception {
 		try {
 			// graph and layout
-			IObservableGraph graph = GraphFactory.createObservableGraph();
+			IExtendedGraph graph = GraphFactory.create();
 			Layout<IVertex, IEdge> layout = new StaticLayout<IVertex, IEdge>(
 					graph);
 			// model and control

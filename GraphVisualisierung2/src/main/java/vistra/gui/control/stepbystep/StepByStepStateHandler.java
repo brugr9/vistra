@@ -16,8 +16,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import vistra.core.zobsolete.traversal.Traversal;
-import vistra.core.zobsolete.traversal.step.IStepResult;
+import vistra.core.traversal.Traversal;
+import vistra.core.traversal.IStep;
 import vistra.gui.IModel;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
@@ -311,7 +311,7 @@ public final class StepByStepStateHandler extends Observable implements
 			int steplength = this.model.getSteplength();
 			int progress = this.model.getProgress();
 			int max = this.model.getProgressMaximum();
-			IStepResult stepResult = null;
+			IStep step = null;
 			String description = "";
 			StringBuilder stringBuilder = this.model.getStringBuilder();
 
@@ -320,12 +320,9 @@ public final class StepByStepStateHandler extends Observable implements
 				if (progress < max) {
 					/* modify the graph */
 					this.doBlink();
-					stepResult = traversal.next();
-					if (stepResult.hasComment()) {
-						description = stepResult.getComment();
-						stringBuilder.append(description
-								+ System.lineSeparator());
-					}
+					step = traversal.next();
+					description = step.execute();
+					stringBuilder.append(description + System.lineSeparator());
 					progress++;
 
 					/* update */
@@ -374,7 +371,7 @@ public final class StepByStepStateHandler extends Observable implements
 
 		try {
 
-			IStepResult stepResult = null;
+			IStep step = null;
 			String description = "";
 			StringBuilder stringBuilder = this.model.getStringBuilder();
 			boolean ok = traversal.hasNext();
@@ -382,11 +379,9 @@ public final class StepByStepStateHandler extends Observable implements
 			/* here we go ... */
 			while (ok) {
 				/* modify the graph */
-				stepResult = traversal.next();
-				if (stepResult.hasComment()) {
-					description = stepResult.getComment();
-					stringBuilder.append(description + System.lineSeparator());
-				}
+				step = traversal.next();
+				description = step.execute();
+				stringBuilder.append(description + System.lineSeparator());
 				ok = traversal.hasNext();
 			}
 

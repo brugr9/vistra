@@ -2,7 +2,7 @@ package vistra.core.algorithm.impl;
 
 import vistra.common.IAlgorithm;
 import vistra.core.algorithm.AbstractAlgorithm;
-import vistra.core.zobsolete.graph.IRestrictedGraph;
+import vistra.core.graph.IExtendedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -34,7 +34,7 @@ public class DLS extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(IRestrictedGraph graph) {
+	public void traverse(IExtendedGraph graph) {
 		// TODO
 	}
 
