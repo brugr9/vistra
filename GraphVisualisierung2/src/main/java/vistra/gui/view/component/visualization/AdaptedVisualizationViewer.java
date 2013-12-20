@@ -17,13 +17,13 @@ import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.component.popup.MenuFactory;
 import vistra.gui.view.component.popup.PopupMenuEdge;
 import vistra.gui.view.component.popup.PopupMenuVertex;
-import vistra.gui.view.component.vizualization.transformer.EdgeColorTransformer;
+import vistra.gui.view.component.vizualization.transformer.EdgeLineColorTransformer;
 import vistra.gui.view.component.vizualization.transformer.EdgeLabelTransformer;
-import vistra.gui.view.component.vizualization.transformer.EdgeStrokeTransformer;
+import vistra.gui.view.component.vizualization.transformer.EdgeLineWidthTransformer;
 import vistra.gui.view.component.vizualization.transformer.ShapeTransformer;
 import vistra.gui.view.component.vizualization.transformer.VertexColorTransformer;
 import vistra.gui.view.component.vizualization.transformer.VertexLabelTransformer;
-import vistra.gui.view.component.vizualization.transformer.VertexStrokeTransformer;
+import vistra.gui.view.component.vizualization.transformer.VertexLineWidthTransformer;
 import vistra.gui.view.component.vizualization.transformer.VertexToolTipTransformer;
 import vistra.util.VistraColor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -86,16 +86,16 @@ public class AdaptedVisualizationViewer extends
 		this.getRenderContext().setVertexLabelTransformer(
 				new VertexLabelTransformer());
 		this.getRenderContext().setVertexStrokeTransformer(
-				new VertexStrokeTransformer());
+				new VertexLineWidthTransformer());
 		this.setVertexToolTipTransformer(new VertexToolTipTransformer());
 
 		/* Edge layout */
 		this.getRenderContext().setEdgeShapeTransformer(
 				new EdgeShape.Line<IVertex, IEdge>());
 		this.getRenderContext().setEdgeDrawPaintTransformer(
-				new EdgeColorTransformer());
+				new EdgeLineColorTransformer());
 		this.getRenderContext().setArrowDrawPaintTransformer(
-				new EdgeColorTransformer());
+				new EdgeLineColorTransformer());
 		// Edge label: center
 		this.getRenderContext().setEdgeLabelClosenessTransformer(
 				new ConstantDirectionalEdgeValueTransformer<IVertex, IEdge>(
@@ -103,9 +103,9 @@ public class AdaptedVisualizationViewer extends
 		this.getRenderContext().setEdgeLabelTransformer(
 				new EdgeLabelTransformer());
 		this.getRenderContext().setEdgeStrokeTransformer(
-				new EdgeStrokeTransformer());
+				new EdgeLineWidthTransformer());
 		this.getRenderContext().setEdgeArrowStrokeTransformer(
-				new EdgeStrokeTransformer());
+				new EdgeLineWidthTransformer());
 
 		/* context menu */
 		this.vertexMenu = new PopupMenuVertex(top, this);

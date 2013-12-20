@@ -5,14 +5,15 @@ import org.apache.commons.collections15.Transformer;
 import vistra.core.graph.item.vertex.IVertex;
 
 /**
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class StartVertexTransformer implements Transformer<IVertex, String> {
+public class VertexFontColorTransformer implements
+		Transformer<IVertex, String> {
 
 	@Override
 	public String transform(IVertex vertex) {
-		return String.valueOf(vertex.isStart());
+		return ValueTransformer.transformColorToString(vertex.getFontColor());
 	}
 
 }

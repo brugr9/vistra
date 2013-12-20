@@ -1,5 +1,6 @@
 package vistra.core.graph.item.edge;
 
+import vistra.core.graph.GraphPropertyConstants;
 import vistra.core.graph.item.edge.state.EdgeStateHandler;
 
 /**
@@ -20,7 +21,7 @@ class Edge extends EdgeStateHandler implements IEdge {
 	 */
 	Edge() {
 		super();
-		this.weight = 1.0;
+		this.weight = GraphPropertyConstants.E_WEIGHT_DEFAULT;
 	}
 
 	/**

@@ -7,7 +7,7 @@ import vistra.core.graph.item.vertex.IVertex;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EndVertexTransformer implements Transformer<IVertex, String> {
+public class VertexEndTransformer implements Transformer<IVertex, String> {
 
 	@Override
 	public String transform(IVertex vertex) {

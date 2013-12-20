@@ -11,10 +11,21 @@ import org.apache.commons.collections15.Factory;
 public class VertexFactory implements Factory<IVertex> {
 
 	/**
-	 * {@inheritDoc}
+	 * Creates a vertex.
+	 * 
+	 * @return the vertex.
 	 */
 	@Override
 	public IVertex create() {
+		return new Vertex();
+	}
+
+	/**
+	 * Creates a vertex.
+	 * 
+	 * @return the vertex.
+	 */
+	public static IVertex createVertex() {
 		return new Vertex();
 	}
 }

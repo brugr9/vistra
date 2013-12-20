@@ -1,19 +1,31 @@
 package vistra.core.graph.item.edge;
 
+import org.apache.commons.collections15.Factory;
+
 /**
  * An edge factory.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeFactory {
+public class EdgeFactory implements Factory<IEdge> {
 
 	/**
 	 * Creates an edge.
 	 * 
 	 * @return the edge
 	 */
-	public static IEdge create() {
+	@Override
+	public IEdge create() {
+		return new Edge();
+	}
+	
+	/**
+	 * Creates an edge.
+	 * 
+	 * @return the edge
+	 */
+	public static IEdge createEdge() {
 		return new Edge();
 	}
 }

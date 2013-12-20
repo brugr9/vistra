@@ -3,7 +3,7 @@ package vistra.core.graph.item.vertex.state;
 import vistra.core.graph.item.AbstractGraphItem;
 
 /**
- * A vertex.
+ * A vertex state handler.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  */

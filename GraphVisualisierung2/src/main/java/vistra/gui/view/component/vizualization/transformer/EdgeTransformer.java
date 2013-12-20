@@ -15,10 +15,10 @@ public class EdgeTransformer implements Transformer<EdgeMetadata, IEdge> {
 
 	@Override
 	public IEdge transform(EdgeMetadata edgeMeta) {
-		IEdge edge = EdgeFactory.create();
+		IEdge edge = EdgeFactory.createEdge();
 
 		edge.setId(edgeMeta.getId());
-		edge.setCurrentColor(ValueTransformer.transformStringToColor(edgeMeta
+		edge.setLineColor(ValueTransformer.transformStringToColor(edgeMeta
 				.getProperty(GraphPropertyConstants.E_COLOR)));
 		edge.setWeight(ValueTransformer.transformDouble(edgeMeta
 				.getProperty(GraphPropertyConstants.E_WEIGHT)));

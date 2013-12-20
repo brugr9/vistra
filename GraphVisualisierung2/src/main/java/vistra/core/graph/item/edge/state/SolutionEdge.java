@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.core.graph.item.edge.state;
 
 import vistra.util.IState;

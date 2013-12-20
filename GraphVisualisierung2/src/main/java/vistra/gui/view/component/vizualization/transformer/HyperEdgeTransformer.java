@@ -1,13 +1,8 @@
 package vistra.gui.view.component.vizualization.transformer;
 
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
-
 import org.apache.commons.collections15.Transformer;
-
 import vistra.core.graph.item.edge.EdgeFactory;
 import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.GraphPropertyConstants;
 import edu.uci.ics.jung.io.graphml.HyperEdgeMetadata;
 
@@ -20,10 +15,10 @@ public class HyperEdgeTransformer implements
 
 	@Override
 	public IEdge transform(HyperEdgeMetadata hEdgeMeta) {
-		IEdge edge = EdgeFactory.create();
+		IEdge edge = EdgeFactory.createEdge();
 
 		edge.setId(hEdgeMeta.getId());
-		edge.setCurrentColor(ValueTransformer.transformStringToColor(hEdgeMeta
+		edge.setLineColor(ValueTransformer.transformStringToColor(hEdgeMeta
 				.getProperty(GraphPropertyConstants.E_COLOR)));
 		edge.setWeight(ValueTransformer.transformDouble(hEdgeMeta
 				.getProperty(GraphPropertyConstants.E_WEIGHT)));
