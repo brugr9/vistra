@@ -2,7 +2,9 @@ package vistra.gui.view.component.vizualization.transformer;
 
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+
 import org.apache.commons.collections15.Transformer;
+
 import vistra.core.graph.GraphPropertyConstants;
 import vistra.core.graph.item.vertex.IVertex;
 

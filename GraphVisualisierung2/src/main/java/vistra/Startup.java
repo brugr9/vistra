@@ -1,6 +1,7 @@
 package vistra;
 
 import javax.swing.JOptionPane;
+
 import vistra.gui.GuiFactory.ViewType;
 
 /**

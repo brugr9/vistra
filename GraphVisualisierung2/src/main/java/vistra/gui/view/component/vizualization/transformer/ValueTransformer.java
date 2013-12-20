@@ -5,8 +5,8 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.GraphPropertyConstants;
+import vistra.core.graph.item.IGraphItem;
 import vistra.util.VistraColor;
 
 /**

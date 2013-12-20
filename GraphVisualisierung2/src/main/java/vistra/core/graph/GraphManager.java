@@ -8,16 +8,12 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.gui.view.component.vizualization.transformer.EdgeTransformer;
 import vistra.gui.view.component.vizualization.transformer.GraphTransformer;
 import vistra.gui.view.component.vizualization.transformer.HyperEdgeTransformer;
 import vistra.gui.view.component.vizualization.transformer.VertexTransformer;
-import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.graph.GraphDecorator;
-import edu.uci.ics.jung.graph.Hypergraph;
 import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.GraphMLWriter;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;

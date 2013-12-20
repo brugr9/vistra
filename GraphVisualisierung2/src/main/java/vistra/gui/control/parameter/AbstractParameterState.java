@@ -1,7 +1,7 @@
 package vistra.gui.control.parameter;
 
-import vistra.util.IState;
 import vistra.util.AbstractState;
+import vistra.util.IState;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

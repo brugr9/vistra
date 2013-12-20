@@ -3,8 +3,8 @@
  */
 package vistra.gui.control.animation;
 
-import vistra.util.IState;
 import vistra.util.AbstractState;
+import vistra.util.IState;
 
 /**
  * An abstract animation state.

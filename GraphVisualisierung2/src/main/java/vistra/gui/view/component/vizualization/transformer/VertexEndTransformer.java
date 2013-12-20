@@ -1,6 +1,7 @@
 package vistra.gui.view.component.vizualization.transformer;
 
 import org.apache.commons.collections15.Transformer;
+
 import vistra.core.graph.item.vertex.IVertex;
 
 /**

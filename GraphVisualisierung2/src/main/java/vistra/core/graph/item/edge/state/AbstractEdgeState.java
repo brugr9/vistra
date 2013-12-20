@@ -1,7 +1,7 @@
 package vistra.core.graph.item.edge.state;
 
-import vistra.util.IState;
 import vistra.util.AbstractState;
+import vistra.util.IState;
 
 /**
  * An abstract edge state.

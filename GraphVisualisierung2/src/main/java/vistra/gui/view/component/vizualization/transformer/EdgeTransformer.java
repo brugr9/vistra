@@ -2,9 +2,9 @@ package vistra.gui.view.component.vizualization.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
+import vistra.core.graph.GraphPropertyConstants;
 import vistra.core.graph.item.edge.EdgeFactory;
 import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.GraphPropertyConstants;
 import edu.uci.ics.jung.io.graphml.EdgeMetadata;
 
 /**

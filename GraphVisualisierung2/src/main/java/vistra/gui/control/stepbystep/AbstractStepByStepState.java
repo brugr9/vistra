@@ -1,7 +1,7 @@
 package vistra.gui.control.stepbystep;
 
-import vistra.util.IState;
 import vistra.util.AbstractState;
+import vistra.util.IState;
 
 /**
  * An abstract step-by-step state.
