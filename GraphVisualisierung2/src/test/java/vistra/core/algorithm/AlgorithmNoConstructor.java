@@ -1,7 +1,7 @@
 package vistra.core.algorithm;
 
 import vistra.common.IAlgorithm;
-import vistra.core.zobsolete.graph.IRestrictedGraph;
+import vistra.core.graph.IExtendedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -32,7 +32,7 @@ public class AlgorithmNoConstructor implements IAlgorithm {
 	}
 
 	@Override
-	public void traverse(IRestrictedGraph graph) throws AlgorithmException {
+	public void traverse(IExtendedGraph graph) throws AlgorithmException {
 		// Auto-generated method stub
 
 	}

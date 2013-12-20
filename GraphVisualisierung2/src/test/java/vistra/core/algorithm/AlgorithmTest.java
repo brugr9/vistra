@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.core.algorithm;
 
 /**

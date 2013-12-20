@@ -1,6 +1,6 @@
 package vistra.core.algorithm;
 
-import vistra.core.zobsolete.graph.IRestrictedGraph;
+import vistra.core.graph.IExtendedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -21,7 +21,7 @@ public class AlgorithmNoInterface {
 		return null;
 	}
 
-	public void execute(IRestrictedGraph graph) throws Exception {
+	public void execute(IExtendedGraph graph) throws Exception {
 
 	}
 

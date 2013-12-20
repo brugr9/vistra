@@ -1,7 +1,7 @@
 package vistra.core.algorithm;
 
 import vistra.common.IAlgorithm;
-import vistra.core.zobsolete.graph.IRestrictedGraph;
+import vistra.core.graph.IExtendedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -22,25 +22,25 @@ public abstract class AlgorithmIsAbstract implements IAlgorithm {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void traverse(IRestrictedGraph graph) throws AlgorithmException {
-		// TODO Auto-generated method stub
+	public void traverse(IExtendedGraph graph) throws AlgorithmException {
+		// Auto-generated method stub
 
 	}
 
 	@Override
 	public EdgeType[] getEdgeTypes() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		return null;
 	}
 
