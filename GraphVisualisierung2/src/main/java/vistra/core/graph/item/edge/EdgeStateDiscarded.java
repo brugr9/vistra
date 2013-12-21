@@ -1,14 +1,14 @@
-package vistra.core.graph.item.edge.state;
+package vistra.core.graph.item.edge;
 
 import vistra.util.IState;
 
 /**
- * An edge state: visited ('a visited edge').
+ * An edge state: discarded ('a discarded edge').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class VisitedEdge extends AbstractEdgeState implements IState {
+class EdgeStateDiscarded extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class VisitedEdge extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	VisitedEdge(IEdgeStateHandler stateHandler) {
+	EdgeStateDiscarded(IEdge stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class VisitedEdge extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.visit();
+			super.stateHandler.setViewDiscarded();
 		} catch (Exception e) {
 			throw e;
 		}

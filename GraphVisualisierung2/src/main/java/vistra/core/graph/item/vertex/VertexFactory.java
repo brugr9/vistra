@@ -2,6 +2,9 @@ package vistra.core.graph.item.vertex;
 
 import org.apache.commons.collections15.Factory;
 
+import vistra.core.graph.item.edge.Edge;
+import vistra.core.graph.item.edge.IEdge;
+
 /**
  * A vertex factory.
  * 
@@ -17,7 +20,13 @@ public class VertexFactory implements Factory<IVertex> {
 	 */
 	@Override
 	public IVertex create() {
-		return new Vertex();
+		IVertex vertex = new Vertex();
+		try {
+			vertex.handleIdle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vertex;
 	}
 
 	/**
@@ -26,6 +35,12 @@ public class VertexFactory implements Factory<IVertex> {
 	 * @return the vertex.
 	 */
 	public static IVertex createVertex() {
-		return new Vertex();
+		IVertex vertex = new Vertex();
+		try {
+			vertex.handleIdle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vertex;
 	}
 }

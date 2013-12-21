@@ -17,15 +17,27 @@ public class EdgeFactory implements Factory<IEdge> {
 	 */
 	@Override
 	public IEdge create() {
-		return new Edge();
+		IEdge edge = new Edge();
+		try {
+			edge.handleIdle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return edge;
 	}
-	
+
 	/**
 	 * Creates an edge.
 	 * 
 	 * @return the edge
 	 */
 	public static IEdge createEdge() {
-		return new Edge();
+		IEdge edge = new Edge();
+		try {
+			edge.handleIdle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return edge;
 	}
 }

@@ -13,7 +13,7 @@ public class EdgeLabelTransformer implements Transformer<IEdge, String> {
 	@Override
 	public String transform(IEdge edge) {
 		return edge.getId()
-				+ (Double.isNaN(edge.getValue()) ? "" : " | "
-						+ ValueTransformer.round2Decimals(edge.getValue()));
+				+ (Double.isNaN(edge.getWeight()) ? "" : " | "
+						+ ValueTransformer.round2Decimals(edge.getWeight()));
 	}
 }

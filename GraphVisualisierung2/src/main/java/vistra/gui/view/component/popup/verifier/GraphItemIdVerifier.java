@@ -11,7 +11,7 @@ import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
- * An input verifier for the graph item identifier.
+ * A graph item identifier verifier.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -49,16 +49,16 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	@Override
 	public boolean verify(JComponent input) {
 
-		if (input instanceof JTextComponent
-				&& this.graph instanceof IExtendedGraph) {
-			// JTextComponent textField = (JTextComponent) input;
-			// IExtendedGraph graph = (IExtendedGraph) this.graph;
-			//
-			// return !textField.getText().trim().isEmpty()
-			// && (textField.getText().equals(this.graphItem.getId()) || !graph
-			// .containsItemId(textField.getText().trim()));
-			return false;
-		}
+		// TODO
+		// if (input instanceof JTextComponent
+		// JTextComponent textField = (JTextComponent) input;
+		// IExtendedGraph graph = (IExtendedGraph) this.graph;
+		//
+		// return !textField.getText().trim().isEmpty()
+		// && (textField.getText().equals(this.graphItem.getId()) || !graph
+		// .containsItemId(textField.getText().trim()));
+		// return false;
+		// }
 
 		return false;
 	}

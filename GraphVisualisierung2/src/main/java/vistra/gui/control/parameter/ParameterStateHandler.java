@@ -70,12 +70,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		this.core = core;
 		this.model = model;
 		this.top = null;
-		try {
-			this.setState(new ParameterIdle(this));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.state = new ParameterIdle(this);
 	}
 
 	/**

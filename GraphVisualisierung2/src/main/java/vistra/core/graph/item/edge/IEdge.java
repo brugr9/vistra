@@ -1,29 +1,39 @@
 package vistra.core.graph.item.edge;
 
-import vistra.core.graph.item.IGraphItem;
-import vistra.core.graph.item.edge.state.IEdgeStateHandler;
-
 /**
- * An edge interface.
+ * An interface for an edge (state handler).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IEdge extends IGraphItem, IEdgeStateHandler {
+public interface IEdge extends IEdgeModel {
 
 	/**
-	 * Sets the weight.
+	 * Handles idle.
 	 * 
-	 * @param weight
-	 *            the weight to set
+	 * @throws Exception
 	 */
-	abstract void setWeight(double weight);
+	abstract void handleIdle() throws Exception;
 
 	/**
-	 * Returns the weight.
+	 * Handles visit.
 	 * 
-	 * @return the weight
+	 * @throws Exception
 	 */
-	abstract double getWeight();
+	abstract void handleVisit() throws Exception;
+
+	/**
+	 * Handles discard.
+	 * 
+	 * @throws Exception
+	 */
+	abstract void handleDiscard() throws Exception;
+
+	/**
+	 * Handles solve.
+	 * 
+	 * @throws Exception
+	 */
+	abstract void handleSolve() throws Exception;
 
 }

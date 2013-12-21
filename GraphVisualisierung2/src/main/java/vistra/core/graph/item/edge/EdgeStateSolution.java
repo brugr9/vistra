@@ -1,14 +1,14 @@
-package vistra.core.graph.item.edge.state;
+package vistra.core.graph.item.edge;
 
 import vistra.util.IState;
 
 /**
- * An edge state: back ('a backedge').
+ * An edge state: solution ('an solution member edge').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class BackEdge extends AbstractEdgeState implements IState {
+class EdgeStateSolution extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class BackEdge extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	BackEdge(IEdgeStateHandler stateHandler) {
+	EdgeStateSolution(IEdge stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,9 +26,10 @@ class BackEdge extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.back();
+			super.stateHandler.setViewSolution();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
+
 }

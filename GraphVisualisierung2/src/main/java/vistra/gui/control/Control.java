@@ -73,6 +73,8 @@ public final class Control implements IControl {
 					+ b.getString("about.message").replaceAll("\n",
 							System.lineSeparator()) + System.lineSeparator());
 			this.model.setStringBuilder(sb);
+			/* set states */
+			this.model.getAnimationStateHandler().handleOff();
 			/* update the view */
 			this.model.notifyObservers();
 		} catch (Exception ex) {

@@ -11,7 +11,6 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
 /**
  * A graph factory.
  * 
- * @author Patrick Kofmel (kofmp1@bfh.ch)
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */

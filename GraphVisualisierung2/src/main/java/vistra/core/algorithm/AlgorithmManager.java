@@ -38,7 +38,7 @@ class AlgorithmManager implements IAlgorithmManager {
 	 */
 	private ArrayList<IAlgorithm> algorithmsAvailable;
 	/**
-	 * A field for an list of algorithm out of algorithms available.
+	 * A field for a list of supported algorithms.
 	 */
 	private ArrayList<IAlgorithm> algorithmsSupported;
 

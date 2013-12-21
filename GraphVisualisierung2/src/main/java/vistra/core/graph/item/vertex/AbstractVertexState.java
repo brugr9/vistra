@@ -1,4 +1,4 @@
-package vistra.core.graph.item.vertex.state;
+package vistra.core.graph.item.vertex;
 
 import vistra.util.AbstractState;
 import vistra.util.IState;
@@ -14,7 +14,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	/**
 	 * A field for a state handler.
 	 */
-	protected VertexStateHandler stateHandler;
+	protected Vertex stateHandler;
 
 	/**
 	 * Main constructor.
@@ -22,8 +22,8 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	AbstractVertexState(IVertexStateHandler stateHandler) {
-		this.stateHandler = (VertexStateHandler) stateHandler;
+	AbstractVertexState(IVertex stateHandler) {
+		this.stateHandler = (Vertex) stateHandler;
 	}
 
 	/**
@@ -33,7 +33,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 */
 	void handleInitialise() throws Exception {
 		try {
-			this.stateHandler.setState(new InitialVertex(this.stateHandler));
+			this.stateHandler.setState(new VertexStateIdle(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -46,7 +46,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 */
 	void handleActivate() throws Exception {
 		try {
-			this.stateHandler.setState(new ActiveVertex(this.stateHandler));
+			this.stateHandler.setState(new VertexStateActive(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -59,7 +59,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 */
 	void handleVisit() throws Exception {
 		try {
-			this.stateHandler.setState(new VisitedVertex(this.stateHandler));
+			this.stateHandler.setState(new VertexStateVisited(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -72,7 +72,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 */
 	void handleSolve() throws Exception {
 		try {
-			this.stateHandler.setState(new SolutionVertex(this.stateHandler));
+			this.stateHandler.setState(new VertexStateSolution(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}

@@ -1,4 +1,4 @@
-package vistra.core.graph.item.vertex.state;
+package vistra.core.graph.item.vertex;
 
 import vistra.util.IState;
 
@@ -8,7 +8,7 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class ActiveVertex extends AbstractVertexState implements IState {
+class VertexStateActive extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class ActiveVertex extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ActiveVertex(IVertexStateHandler stateHandler) {
+	VertexStateActive(IVertex stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class ActiveVertex extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-		super.stateHandler.activate();
+		super.stateHandler.setViewActivated();
 	} catch (Exception e) {
 		throw e;
 	}

@@ -25,32 +25,48 @@ public interface IGraphItem {
 	 */
 	abstract String getId();
 
-	// both
+	/**
+	 * Returns the line width.
+	 * 
+	 * @return the width
+	 */
 	abstract float getLineWidth();
 
+	/**
+	 * Sets the line width.
+	 * 
+	 * @param width
+	 *            the width to set
+	 */
 	abstract void setLineWidth(float width);
 
+	/**
+	 * Returns the line color.
+	 * 
+	 * @return the color
+	 */
 	abstract Color getLineColor();
 
+	/**
+	 * Sets the line color.
+	 * 
+	 * @param color
+	 *            the color to set
+	 */
 	abstract void setLineColor(Color color);
 
-	abstract double getFontSize();
-
-	abstract void getFontSize(double size);
-
-	// abstract FontStyle getFontStyle(); // bold, normal
-	// abstract void setFontStyle(FontStyle style); // bold, normal
+	/**
+	 * Returns the line color.
+	 * 
+	 * @return the color
+	 */
 	abstract Color getFontColor();
 
+	/**
+	 * Sets the line color.
+	 * 
+	 * @param color
+	 *            the color to set
+	 */
 	abstract void setFontColor(Color color);
-
-	abstract double getValue();
-
-	// vertex
-	abstract Color getBGColor();
-
-	abstract void setBGColor(Color color);
-
-	abstract void setValue(double value); // auch zeichen 8
-
 }

@@ -1,113 +1,149 @@
 package vistra.core.graph.item.vertex;
 
-import java.awt.geom.Point2D;
-
-import vistra.core.graph.item.vertex.state.VertexStateHandler;
+import vistra.util.GraphPropertyConstants;
+import vistra.util.GraphColor;
 
 /**
- * A vertex.
+ * A vertex (state handler).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
  */
-class Vertex extends VertexStateHandler implements IVertex {
+public class Vertex extends AbstractVertexModel implements IVertex {
 
 	/**
-	 * A field for the start.
+	 * A field for a vertex state.
 	 */
-	private boolean start;
-
-	/**
-	 * A field for the end.
-	 */
-	private boolean end;
-
-	/**
-	 * A field for the distance.
-	 */
-	private double distance;
-
-	/**
-	 * A field for the location.
-	 */
-	private Point2D location;
+	private AbstractVertexState state;
 
 	/**
 	 * Main constructor.
+	 * 
 	 */
-	Vertex() {
-		super();
-		this.start = false;
-		this.end = false;
-		this.distance = 0;
+	public Vertex() {
+		this.state = new VertexStateIdle(this);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setStart(boolean start) {
-		this.start = start;
-		if (start)
-			this.end = !start;
+	public void handleIdle() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleInitialise();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setEnd(boolean end) {
-		this.end = end;
-		if (end)
-			this.start = !end;
+	public void handleActivate() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleActivate();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setDistance(double distance) {
-		this.distance = distance;
+	public void handleVisit() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleVisit();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setLocation(Point2D location) {
-		this.location = location;
+	public void handleSolve() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleSolve();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Sets a state.
+	 * 
+	 * @param state
+	 *            the state to set
 	 */
-	@Override
-	public boolean isStart() {
-		return start;
+	void setState(AbstractVertexState state) throws Exception {
+		try {
+			this.state = state;
+			this.state.entry();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Doing:
 	 */
-	@Override
-	public boolean isEnd() {
-		return end;
+	void setViewIdle() throws Exception {
+		try {
+			this.setBgColor(GraphColor.LIGHT_ORANGE);
+			this.setFontColor(GraphColor.DARK_BLUE);
+			this.setLineColor(GraphColor.DARK_BLUE);
+			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_DEFAULT);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Doing:
 	 */
-	@Override
-	public double getDistance() {
-		return this.distance;
-	};
+	void setViewActivated() throws Exception {
+		try {
+			this.setBgColor(GraphColor.LIGHT_YELLOW);
+			this.setFontColor(GraphColor.RED);
+			this.setLineColor(GraphColor.RED);
+			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 
 	/**
-	 * {@inheritDoc}
+	 * Doing:
 	 */
-	@Override
-	public Point2D getLocation() {
-		return this.location;
+	void setViewVisited() throws Exception {
+		try {
+			this.setBgColor(GraphColor.LIGHT_ORANGE);
+			this.setFontColor(GraphColor.RED);
+			this.setLineColor(GraphColor.RED);
+			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Doing:
+	 */
+	void setViewSolved() throws Exception {
+		try {
+			this.setBgColor(GraphColor.WHITE);
+			this.setFontColor(GraphColor.LIGHT_GREEN);
+			this.setLineColor(GraphColor.LIGHT_GREEN);
+			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

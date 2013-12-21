@@ -14,9 +14,59 @@ public class AbstractGraphItem implements IGraphItem {
 	 * A field for an identifier.
 	 */
 	private String id;
+	/**
+	 * A field for a line width.
+	 */
+	private float lineWidth;
+	/**
+	 * A field for a line color.
+	 */
+	private Color lineColor;
+	/**
+	 * A field for a font color.
+	 */
+	private Color fontColor;
 
+	/**
+	 * Main constructor.
+	 */
 	public AbstractGraphItem() {
 		this.id = "";
+		this.lineWidth = 0;
+		this.lineColor = null;
+		this.fontColor = null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public float getLineWidth() {
+		return lineWidth;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getLineColor() {
+		return lineColor;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getFontColor() {
+		return fontColor;
 	}
 
 	/**
@@ -31,80 +81,24 @@ public class AbstractGraphItem implements IGraphItem {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getId() {
-		return this.id;
-	}
-
-	@Override
-	public float getLineWidth() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public void setLineWidth(float width) {
-		// TODO Auto-generated method stub
-
+		this.lineWidth = width;
 	}
 
-	@Override
-	public Color getLineColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setLineColor(Color color) {
-		// TODO Auto-generated method stub
-
+		this.lineColor = color;
 	}
 
-	@Override
-	public double getFontSize() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void getFontSize(double size) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Color getFontColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setFontColor(Color color) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public double getValue() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Color getBGColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setBGColor(Color color) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setValue(double value) {
-		// TODO Auto-generated method stub
-
+		this.fontColor = color;
 	}
 
 }

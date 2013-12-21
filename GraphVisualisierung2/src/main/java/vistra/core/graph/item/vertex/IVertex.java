@@ -1,74 +1,39 @@
 package vistra.core.graph.item.vertex;
 
-import java.awt.geom.Point2D;
-
-import vistra.core.graph.item.IGraphItem;
-import vistra.core.graph.item.vertex.state.IVertexStateHandler;
-
 /**
- * A vertex interface.
+ * An interface for an vertex (state handler).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IVertex extends IGraphItem, IVertexStateHandler {
+public interface IVertex extends IVertexModel {
 
 	/**
-	 * Returns the start.
+	 * Handles idle.
 	 * 
-	 * @return the start
+	 * @throws Exception
 	 */
-	abstract boolean isStart();
+	abstract void handleIdle() throws Exception;
 
 	/**
-	 * Returns the end.
+	 * Handles activate.
 	 * 
-	 * @return the end
+	 * @throws Exception
 	 */
-	abstract boolean isEnd();
+	abstract void handleActivate() throws Exception;
 
 	/**
-	 * Returns the location.
+	 * Handles visit.
 	 * 
-	 * @return the location
+	 * @throws Exception
 	 */
-	abstract Point2D getLocation();
+	abstract void handleVisit() throws Exception;
 
 	/**
-	 * Returns the distance.
+	 * Handles solve.
 	 * 
-	 * @return the distance
+	 * @throws Exception
 	 */
-	abstract double getDistance();
-
-	/**
-	 * Sets the start.
-	 * 
-	 * @param start
-	 *            the start to set
-	 */
-	abstract void setStart(boolean start);
-
-	/**
-	 * Sets the end.
-	 * 
-	 * @param end
-	 *            the end to set
-	 */
-	abstract void setEnd(boolean end);
-
-	/**
-	 * Sets the location.
-	 * 
-	 * @param location
-	 *            the location to set
-	 */
-	abstract void setLocation(Point2D location);
-
-	/**
-	 * Sets the distance.
-	 * 
-	 */
-	abstract void setDistance(double distance);
+	abstract void handleSolve() throws Exception;
 
 }

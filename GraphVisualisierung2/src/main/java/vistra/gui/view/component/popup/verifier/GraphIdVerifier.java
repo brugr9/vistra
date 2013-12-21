@@ -4,9 +4,9 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 /**
- * An input verifier for the graph identifier.
+ * An graph identifier verifier.
  * 
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class GraphIdVerifier extends AbstractVerifier {
@@ -20,11 +20,6 @@ public class GraphIdVerifier extends AbstractVerifier {
 		super(lastGood);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.InputVerifier#verify(javax.swing.JComponent)
-	 */
 	/**
 	 * {@inheritDoc}
 	 */

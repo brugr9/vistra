@@ -31,7 +31,7 @@ public final class GuiFactory {
 	 * Creates a gui (MVC).
 	 * 
 	 * @param core
-	 *            a gravis core
+	 *            a core
 	 * @return a view as in MVC
 	 * @throws Exception
 	 */
@@ -47,7 +47,7 @@ public final class GuiFactory {
 	 * Creates a gui (MVC).
 	 * 
 	 * @param core
-	 *            a gravis core
+	 *            a core
 	 * @param type
 	 *            the view type
 	 * @return a view as in MVC

@@ -71,12 +71,7 @@ public final class StepByStepStateHandler extends Observable implements
 				/ (timeDivider * numberOfSteps * NUMBER_OF_BLINKS) * A_SECOND;
 		this.timer = new Timer(blinkDelay, this.blinkListener);
 		// state
-		try {
-			this.setState(new StepByStepOff(this));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.state = new StepByStepOff(this);
 	}
 
 	/**

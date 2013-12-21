@@ -2,9 +2,9 @@ package vistra.gui.view.component.vizualization.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.GraphPropertyConstants;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
+import vistra.util.GraphPropertyConstants;
 import edu.uci.ics.jung.io.graphml.NodeMetadata;
 
 /**
@@ -21,9 +21,9 @@ public class VertexTransformer implements Transformer<NodeMetadata, IVertex> {
 
 		vertex.setId(vertexMeta.getId());
 		vertex.setLineColor(ValueTransformer.transformStringToColor(vertexMeta
-				.getProperty(GraphPropertyConstants.V_LINE_COLOR)));
-		vertex.setBGColor(ValueTransformer.transformStringToColor(vertexMeta
-				.getProperty(GraphPropertyConstants.V_BG_COLOR)));
+				.getProperty(GraphPropertyConstants.V_COLOR)));
+		vertex.setBgColor(ValueTransformer.transformStringToColor(vertexMeta
+				.getProperty(GraphPropertyConstants.V_COLOR)));
 		vertex.setLocation(ValueTransformer.transformLocation(
 				vertexMeta.getProperty(GraphPropertyConstants.V_LOC_X),
 				vertexMeta.getProperty(GraphPropertyConstants.V_LOC_Y)));

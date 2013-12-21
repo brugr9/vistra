@@ -1,14 +1,14 @@
-package vistra.core.graph.item.vertex.state;
+package vistra.core.graph.item.vertex;
 
 import vistra.util.IState;
 
 /**
- * A vertex state: solution ('a solution member vertex').
+ * A vertex state: initial ('the initial state of a vertex').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class SolutionVertex extends AbstractVertexState implements IState {
+class VertexStateIdle extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class SolutionVertex extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	SolutionVertex(IVertexStateHandler stateHandler) {
+	VertexStateIdle(IVertex stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class SolutionVertex extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.solve();
+			super.stateHandler.setViewIdle();
 		} catch (Exception e) {
 			throw e;
 		}

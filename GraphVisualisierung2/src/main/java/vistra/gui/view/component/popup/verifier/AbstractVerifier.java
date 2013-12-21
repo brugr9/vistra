@@ -5,9 +5,9 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 /**
- * An abstract input verifier adapted for GRAVIS.
+ * An abstract input verifier.
  * 
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 abstract class AbstractVerifier extends InputVerifier {

@@ -21,11 +21,10 @@ import vistra.gui.view.component.vizualization.transformer.EdgeLabelTransformer;
 import vistra.gui.view.component.vizualization.transformer.EdgeLineColorTransformer;
 import vistra.gui.view.component.vizualization.transformer.EdgeLineWidthTransformer;
 import vistra.gui.view.component.vizualization.transformer.ShapeTransformer;
-import vistra.gui.view.component.vizualization.transformer.VertexColorTransformer;
+import vistra.gui.view.component.vizualization.transformer.VertexBgColorTransformer;
 import vistra.gui.view.component.vizualization.transformer.VertexLabelTransformer;
 import vistra.gui.view.component.vizualization.transformer.VertexLineWidthTransformer;
-import vistra.gui.view.component.vizualization.transformer.VertexToolTipTransformer;
-import vistra.util.VistraColor;
+import vistra.util.GraphColor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
@@ -75,19 +74,18 @@ public class AdaptedVisualizationViewer extends
 	public AdaptedVisualizationViewer(JFrame top,
 			Layout<IVertex, IEdge> layout, Dimension dimension) {
 		super(layout, dimension);
-		super.setBackground(VistraColor.WHITE);
+		super.setBackground(GraphColor.WHITE);
 
 		/* Vertex layout */
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
 		this.getRenderContext().setVertexFillPaintTransformer(
-				new VertexColorTransformer());
+				new VertexBgColorTransformer());
 		this.getRenderContext().setVertexShapeTransformer(
 				new ShapeTransformer());
 		this.getRenderContext().setVertexLabelTransformer(
 				new VertexLabelTransformer());
 		this.getRenderContext().setVertexStrokeTransformer(
 				new VertexLineWidthTransformer());
-		this.setVertexToolTipTransformer(new VertexToolTipTransformer());
 
 		/* Edge layout */
 		this.getRenderContext().setEdgeShapeTransformer(

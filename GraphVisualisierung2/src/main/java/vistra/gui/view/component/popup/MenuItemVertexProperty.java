@@ -13,7 +13,9 @@ import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
- * @author Patrick Kofmel (kofmp1@bfh.ch)
+ * An vertex property menu item.
+ * 
+ * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 class MenuItemVertexProperty extends JMenuItem implements IItemModifier {

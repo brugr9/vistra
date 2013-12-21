@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.animation;
 
 import static vistra.gui.control.IControl.A_SECOND;
@@ -63,12 +60,7 @@ public final class AnimationStateHandler extends Observable implements
 		int animationDelay = this.model.getDelay() * A_SECOND;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
 		// state
-		try {
-			this.setState(new AnimationOff(this));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.state = new AnimationOff(this);
 	}
 
 	/**
@@ -343,6 +335,11 @@ public final class AnimationStateHandler extends Observable implements
 			this.model.getStepByStepStateHandler().handleOff();
 			this.model.setDelayEnabled(false);
 			this.model.setAnimationEnabled(false);
+			// pause label
+			String label = this.model.getResourceBundle().getString(
+					"pause.label");
+			this.model.setPauseLabel(label);
+			this.model.setPauseEvent(PAUSE);
 			this.model.notifyObservers(ANIMATION);
 		} catch (Exception ex) {
 			throw ex;

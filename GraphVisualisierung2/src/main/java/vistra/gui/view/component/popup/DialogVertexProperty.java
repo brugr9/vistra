@@ -17,7 +17,6 @@ import javax.swing.border.EmptyBorder;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.gui.view.component.popup.verifier.GraphItemIdVerifier;
-import vistra.gui.view.component.popup.verifier.VertexSizeVerifier;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -41,16 +40,6 @@ public class DialogVertexProperty extends JDialog {
 	private JTextField txtVertexName;
 
 	/**
-	 * A field for a width value text field.
-	 */
-	private JTextField txtWidth;
-
-	/**
-	 * A field for a height value text field.
-	 */
-	private JTextField txtHeight;
-
-	/**
 	 * Create the dialog.
 	 * 
 	 * @param vertex
@@ -68,20 +57,10 @@ public class DialogVertexProperty extends JDialog {
 		this.contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPanel.setLayout(new GridLayout(3, 2, 0, 0));
 
-		JLabel lblVertexName = new JLabel("Knoten-Name:              ");
+		JLabel lblVertexName = new JLabel("Name:              ");
 		this.contentPanel.add(lblVertexName);
 		this.txtVertexName = new JTextField();
 		this.contentPanel.add(txtVertexName);
-
-		JLabel lblWidth = new JLabel("Breite:");
-		this.contentPanel.add(lblWidth);
-		this.txtWidth = new JTextField();
-		this.contentPanel.add(txtWidth);
-
-		JLabel lblHeight = new JLabel("Höhe:");
-		this.contentPanel.add(lblHeight);
-		this.txtHeight = new JTextField();
-		this.contentPanel.add(txtHeight);
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -153,10 +132,6 @@ public class DialogVertexProperty extends JDialog {
 		this.txtVertexName.setText(vertex.getId());
 		this.txtVertexName.setInputVerifier(new GraphItemIdVerifier(
 				this.txtVertexName.getText().trim(), vertex, vViewer));
-		this.txtWidth.setInputVerifier(new VertexSizeVerifier(this.txtWidth
-				.getText().trim()));
-		this.txtHeight.setInputVerifier(new VertexSizeVerifier(this.txtHeight
-				.getText().trim()));
 
 	}
 

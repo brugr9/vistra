@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 import vistra.util.IImmutableBidirectionalIterator;
 
 /**
- * A traversal.
+ * A traversal as an immutable, bidirectional iterator over steps.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

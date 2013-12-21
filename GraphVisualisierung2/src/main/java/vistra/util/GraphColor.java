@@ -3,7 +3,7 @@ package vistra.util;
 import java.awt.Color;
 
 /**
- * The colours of vistra.
+ * Colours for the graph.
  * <p>
  * Some colours in a tool class though serving with <i>static elements only</i>.
  * <p>
@@ -13,7 +13,7 @@ import java.awt.Color;
  * @see Color
  * 
  */
-public abstract class VistraColor {
+public abstract class GraphColor {
 
 	/**
 	 * A field for the colour antique.
@@ -123,7 +123,7 @@ public abstract class VistraColor {
 	/**
 	 * A main (no-)constructor.
 	 */
-	private VistraColor() {
+	private GraphColor() {
 	}
 
 }

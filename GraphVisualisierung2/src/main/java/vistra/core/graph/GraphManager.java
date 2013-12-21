@@ -31,9 +31,9 @@ class GraphManager implements IGraphManager {
 	 */
 	private FileNameExtensionFilter fileNameExtensionFilter;
 	/**
-	 * A field for a graph file.
+	 * A field for a file.
 	 */
-	private File graph;
+	private File file;
 	/**
 	 * A field for a graph transformer.
 	 */
@@ -64,7 +64,7 @@ class GraphManager implements IGraphManager {
 	@SuppressWarnings("rawtypes")
 	public GraphManager(Properties p) {
 		super();
-		this.graph = null;
+		this.file = null;
 		/* filename filter */
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				p.getProperty("extension.graph.description"),
@@ -85,7 +85,7 @@ class GraphManager implements IGraphManager {
 	@Override
 	public IExtendedGraph getNewGraph() throws Exception {
 		try {
-			this.graph = null;
+			this.file = null;
 			IExtendedGraph newGraph = GraphFactory.create();
 			return newGraph;
 		} catch (Exception e) {
@@ -99,7 +99,7 @@ class GraphManager implements IGraphManager {
 	@Override
 	public IExtendedGraph open(File file) throws Exception {
 		try {
-			this.graph = file;
+			this.file = file;
 			return this.read(file);
 		} catch (Exception e) {
 			throw e;
@@ -113,7 +113,7 @@ class GraphManager implements IGraphManager {
 	@Override
 	public void save(IExtendedGraph graph) throws Exception {
 		try {
-			this.graphMLWriter.save(graph, new FileWriter(this.graph));
+			this.graphMLWriter.save(graph, new FileWriter(this.file));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -125,6 +125,7 @@ class GraphManager implements IGraphManager {
 	@Override
 	public void saveAs(IExtendedGraph graph, File file) throws Exception {
 		try {
+			this.file = file;
 			this.save(graph);
 		} catch (Exception e) {
 			throw e;

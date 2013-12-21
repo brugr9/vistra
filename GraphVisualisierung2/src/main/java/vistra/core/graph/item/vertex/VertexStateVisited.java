@@ -1,22 +1,22 @@
-package vistra.core.graph.item.edge.state;
+package vistra.core.graph.item.vertex;
 
 import vistra.util.IState;
 
 /**
- * An edge state: initial ('the initial state of an edge').
+ * A vertex state: visited ('a visited vertex').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class InitialEdge extends AbstractEdgeState implements IState {
+class VertexStateVisited extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            a state handler
+	 *            a stateHandler
 	 */
-	InitialEdge(IEdgeStateHandler stateHandler) {
+	VertexStateVisited(IVertex stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class InitialEdge extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.initialise();
+			super.stateHandler.setViewVisited();
 		} catch (Exception e) {
 			throw e;
 		}

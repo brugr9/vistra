@@ -1,8 +1,12 @@
 package vistra.core.algorithm.impl;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import vistra.common.IAlgorithm;
 import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.item.edge.IEdge;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

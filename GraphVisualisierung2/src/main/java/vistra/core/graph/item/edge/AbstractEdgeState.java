@@ -1,4 +1,4 @@
-package vistra.core.graph.item.edge.state;
+package vistra.core.graph.item.edge;
 
 import vistra.util.AbstractState;
 import vistra.util.IState;
@@ -14,7 +14,7 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	/**
 	 * A field for a state handler.
 	 */
-	protected EdgeStateHandler stateHandler;
+	protected Edge stateHandler;
 
 	/**
 	 * Main constructor.
@@ -22,27 +22,16 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	AbstractEdgeState(IEdgeStateHandler stateHandler) {
-		this.stateHandler = (EdgeStateHandler) stateHandler;
+	AbstractEdgeState(IEdge stateHandler) {
+		this.stateHandler = (Edge) stateHandler;
 	}
 
 	/**
-	 * Handles an initialisation.
+	 * Handles an initialise.
 	 */
 	void handleInitialise() throws Exception {
 		try {
-			this.stateHandler.setState(new InitialEdge(this.stateHandler));
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Handles a back.
-	 */
-	void handleBack() throws Exception {
-		try {
-			this.stateHandler.setState(new BackEdge(this.stateHandler));
+			this.stateHandler.setState(new EdgeStateIdle(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -53,7 +42,7 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	 */
 	void handleVisit() throws Exception {
 		try {
-			this.stateHandler.setState(new VisitedEdge(this.stateHandler));
+			this.stateHandler.setState(new EdgeStateVisited(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -64,7 +53,8 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	 */
 	void handleDiscard() throws Exception {
 		try {
-			this.stateHandler.setState(new DiscardedEdge(this.stateHandler));
+			this.stateHandler
+					.setState(new EdgeStateDiscarded(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -75,7 +65,8 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	 */
 	void handleSolve() throws Exception {
 		try {
-			this.stateHandler.setState(new SolutionEdge(this.stateHandler));
+			this.stateHandler
+					.setState(new EdgeStateSolution(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
