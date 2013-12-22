@@ -12,6 +12,7 @@ import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
+import edu.uci.ics.jung.graph.UndirectedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
@@ -117,13 +118,11 @@ public class AdaptedEditingGraphMousePlugin extends
 					this.transformEdgeShape(this.down, this.down);
 					vv.addPostRenderPaintable(this.edgePaintable);
 
-					// shift shortcut not supported in GRAVIS application
-
-					// if ((e.getModifiers() & MouseEvent.SHIFT_MASK) != 0
-					// && vv.getModel().getGraphLayout().getGraph()
-					// instanceof UndirectedGraph == false) {
-					// this.edgeIsDirected = EdgeType.DIRECTED;
-					// }
+					// TODO shift shortcut not supported in GRAVIS application?
+					if ((e.getModifiers() & MouseEvent.SHIFT_MASK) != 0
+							&& vv.getModel().getGraphLayout().getGraph() instanceof UndirectedGraph == false) {
+						this.edgeIsDirected = EdgeType.DIRECTED;
+					}
 
 					if (this.edgeIsDirected == EdgeType.DIRECTED) {
 						this.transformArrowShape(this.down, e.getPoint());
