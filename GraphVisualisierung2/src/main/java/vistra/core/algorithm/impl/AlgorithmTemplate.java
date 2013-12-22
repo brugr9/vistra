@@ -1,4 +1,4 @@
-package vistra.common;
+package vistra.core.algorithm.impl;
 
 import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.AlgorithmException;
