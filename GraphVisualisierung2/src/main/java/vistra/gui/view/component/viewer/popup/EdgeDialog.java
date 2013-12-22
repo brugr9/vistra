@@ -27,7 +27,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class DialogEdgeProperty extends JDialog {
+public class EdgeDialog extends JDialog {
 
 	private static final long serialVersionUID = -6646549637907283799L;
 
@@ -53,7 +53,7 @@ public class DialogEdgeProperty extends JDialog {
 	 * @param owner
 	 * @param edge
 	 */
-	public DialogEdgeProperty(IEdge edge, JFrame owner,
+	public EdgeDialog(IEdge edge, JFrame owner,
 			VisualizationViewer<IVertex, IEdge> viewer) {
 		super(owner, true);
 		this.contentPanel = new JPanel();
@@ -112,14 +112,14 @@ public class DialogEdgeProperty extends JDialog {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DialogEdgeProperty.this.updateTextFieldValues(edge, vViewer);
+				EdgeDialog.this.updateTextFieldValues(edge, vViewer);
 			}
 		});
 
 		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DialogEdgeProperty.this.dispose();
+				EdgeDialog.this.dispose();
 			}
 		});
 	}

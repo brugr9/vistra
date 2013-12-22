@@ -18,7 +18,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class MenuItemEdgeProperty extends JMenuItem implements IItemModifier {
+class EdgeProperty extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = -1894264493446725645L;
 
@@ -42,7 +42,7 @@ class MenuItemEdgeProperty extends JMenuItem implements IItemModifier {
 	 *            a visualization viewer
 	 * 
 	 */
-	protected MenuItemEdgeProperty(VisualizationViewer<IVertex, IEdge> viewer) {
+	protected EdgeProperty(VisualizationViewer<IVertex, IEdge> viewer) {
 		super("Edit edge ...");
 
 		this.viewer = viewer;
@@ -55,7 +55,7 @@ class MenuItemEdgeProperty extends JMenuItem implements IItemModifier {
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MenuItemEdgeProperty.this.showDialog(rootFrame);
+				EdgeProperty.this.showDialog(rootFrame);
 			}
 		});
 	}
@@ -65,7 +65,7 @@ class MenuItemEdgeProperty extends JMenuItem implements IItemModifier {
 	 */
 	protected void showDialog(JFrame owner) {
 		if (this.point != null && this.edge != null) {
-			DialogEdgeProperty dialog = new DialogEdgeProperty(this.edge,
+			EdgeDialog dialog = new EdgeDialog(this.edge,
 					owner, this.viewer);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());

@@ -15,7 +15,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class MenuItemDeleteVertex extends JMenuItem implements IItemModifier {
+class VertexDelete extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = -4699986300655692795L;
 	/**
@@ -31,7 +31,7 @@ class MenuItemDeleteVertex extends JMenuItem implements IItemModifier {
 	 * 
 	 * @param vViewer
 	 */
-	protected MenuItemDeleteVertex(VisualizationViewer<IVertex, IEdge> vViewer) {
+	protected VertexDelete(VisualizationViewer<IVertex, IEdge> vViewer) {
 		super("Delete vertex");
 
 		this.vViewer = vViewer;
@@ -39,7 +39,7 @@ class MenuItemDeleteVertex extends JMenuItem implements IItemModifier {
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MenuItemDeleteVertex.this.deleteVertex();
+				VertexDelete.this.deleteVertex();
 			}
 		});
 	}

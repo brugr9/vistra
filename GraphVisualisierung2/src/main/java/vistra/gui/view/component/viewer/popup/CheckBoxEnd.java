@@ -14,7 +14,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class CheckBoxEndVertex extends AbstarctCheckBox implements IItemModifier {
+class CheckBoxEnd extends AbstarctCheckBox implements IItemModifier {
 
 	private static final long serialVersionUID = 6641658478963193492L;
 
@@ -24,12 +24,12 @@ class CheckBoxEndVertex extends AbstarctCheckBox implements IItemModifier {
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	protected CheckBoxEndVertex(VisualizationViewer<IVertex, IEdge> viewer) {
+	protected CheckBoxEnd(VisualizationViewer<IVertex, IEdge> viewer) {
 		super(viewer, "End");
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CheckBoxEndVertex.this.setValue();
+				CheckBoxEnd.this.setValue();
 			}
 		});
 	}

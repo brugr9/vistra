@@ -25,7 +25,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class DialogVertexProperty extends JDialog {
+public class VertexDialog extends JDialog {
 
 	private static final long serialVersionUID = -6919635847499019908L;
 
@@ -46,7 +46,7 @@ public class DialogVertexProperty extends JDialog {
 	 * @param owner
 	 * @param vViewer
 	 */
-	public DialogVertexProperty(final IVertex vertex, final JFrame owner,
+	public VertexDialog(final IVertex vertex, final JFrame owner,
 			final VisualizationViewer<IVertex, IEdge> vViewer) {
 		super(owner, true);
 		this.setResizable(false);
@@ -96,7 +96,7 @@ public class DialogVertexProperty extends JDialog {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DialogVertexProperty.this
+				VertexDialog.this
 						.updateTextFieldValues(vertex, vViewer);
 			}
 		});
@@ -104,7 +104,7 @@ public class DialogVertexProperty extends JDialog {
 		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DialogVertexProperty.this.dispose();
+				VertexDialog.this.dispose();
 			}
 		});
 	}

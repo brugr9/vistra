@@ -20,7 +20,7 @@ public class VertexPopup extends JPopupMenu {
 	/**
 	 * A field for an vertex property menu item.
 	 */
-	private final MenuItemVertexProperty menuItemVertexProperty;
+	private final VertexProperty menuItemVertexProperty;
 
 	/**
 	 * Main constructor.
@@ -32,14 +32,14 @@ public class VertexPopup extends JPopupMenu {
 	 */
 	public VertexPopup(JFrame top, VisualizationViewer<IVertex, IEdge> viewer) {
 		super("vertexPopup");
-		this.menuItemVertexProperty = new MenuItemVertexProperty(viewer);
+		this.menuItemVertexProperty = new VertexProperty(viewer);
 		this.menuItemVertexProperty.setRootFrame(top);
-		this.add(new CheckBoxStartVertex(viewer));
-		this.add(new CheckBoxEndVertex(viewer));
+		this.add(new CheckBoxStart(viewer));
+		this.add(new CheckBoxEnd(viewer));
 		this.addSeparator();
 		this.add(this.menuItemVertexProperty);
 		this.addSeparator();
-		this.add(new MenuItemDeleteVertex(viewer));
+		this.add(new VertexDelete(viewer));
 	}
 
 }

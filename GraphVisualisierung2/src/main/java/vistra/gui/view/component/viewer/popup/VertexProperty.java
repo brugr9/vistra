@@ -18,7 +18,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class MenuItemVertexProperty extends JMenuItem implements IItemModifier {
+class VertexProperty extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = 3448304253580836407L;
 
@@ -37,7 +37,7 @@ class MenuItemVertexProperty extends JMenuItem implements IItemModifier {
 	/**
 	 * @param vViewer
 	 */
-	protected MenuItemVertexProperty(VisualizationViewer<IVertex, IEdge> vViewer) {
+	protected VertexProperty(VisualizationViewer<IVertex, IEdge> vViewer) {
 		super("Edit vertex ...");
 		this.vViewer = vViewer;
 		this.vertex = null;
@@ -50,7 +50,7 @@ class MenuItemVertexProperty extends JMenuItem implements IItemModifier {
 	 */
 	private void showDialog(JFrame owner) {
 		if (this.point != null && this.vertex != null) {
-			DialogVertexProperty dialog = new DialogVertexProperty(this.vertex,
+			VertexDialog dialog = new VertexDialog(this.vertex,
 					owner, this.vViewer);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());
@@ -85,7 +85,7 @@ class MenuItemVertexProperty extends JMenuItem implements IItemModifier {
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MenuItemVertexProperty.this.showDialog(rootFrame);
+				VertexProperty.this.showDialog(rootFrame);
 			}
 		});
 	}

@@ -20,7 +20,7 @@ public class EdgePopup extends JPopupMenu {
 	/**
 	 * A field for an edge property menu item.
 	 */
-	private final MenuItemEdgeProperty property;
+	private final EdgeProperty property;
 
 	/**
 	 * Main constructor.
@@ -32,10 +32,10 @@ public class EdgePopup extends JPopupMenu {
 	 */
 	public EdgePopup(JFrame top, VisualizationViewer<IVertex, IEdge> viewer) {
 		super("edgePopup");
-		this.property = new MenuItemEdgeProperty(viewer);
+		this.property = new EdgeProperty(viewer);
 		this.property.setRootFrame(top);
 		this.add(this.property);
 		this.addSeparator();
-		this.add(new MenuItemDeleteEdge(viewer));
+		this.add(new EdgeDelete(viewer));
 	}
 }
