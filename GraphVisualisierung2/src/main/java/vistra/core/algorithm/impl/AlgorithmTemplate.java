@@ -10,7 +10,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 /**
  * An algorithm template for algorithm developers.
  * <p>
- * As algorithm developer, you may do:
+ * As algorithm developer, you may
  * <ul>
  * <li>set your name in the authors-tag below
  * <li>rename the class

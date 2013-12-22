@@ -5,7 +5,6 @@ import org.apache.commons.collections15.Transformer;
 import vistra.core.graph.GraphMLMeta;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
-import vistra.util.ColorPalette;
 import vistra.util.Convert;
 import edu.uci.ics.jung.io.graphml.NodeMetadata;
 
@@ -22,10 +21,6 @@ public class VertexTransformer implements Transformer<NodeMetadata, IVertex> {
 		IVertex vertex = VertexFactory.createVertex();
 
 		vertex.setId(vertexMeta.getId());
-		vertex.setLineColor(ColorPalette.toColor(vertexMeta
-				.getProperty(GraphMLMeta.V_COLOR)));
-		vertex.setFillColor(ColorPalette.toColor(vertexMeta
-				.getProperty(GraphMLMeta.V_COLOR)));
 		vertex.setLocation(Convert.toPoint2D(
 				vertexMeta.getProperty(GraphMLMeta.V_LOC_X),
 				vertexMeta.getProperty(GraphMLMeta.V_LOC_Y)));
