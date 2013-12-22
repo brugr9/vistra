@@ -25,15 +25,15 @@ public class VertexPopup extends JPopupMenu {
 	/**
 	 * Main constructor.
 	 * 
+	 * @param top
+	 *            the top frame
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	public VertexPopup(JFrame rootFrame,
-			VisualizationViewer<IVertex, IEdge> viewer) {
-		super("Vertex");
-
+	public VertexPopup(JFrame top, VisualizationViewer<IVertex, IEdge> viewer) {
+		super("vertexPopup");
 		this.menuItemVertexProperty = new MenuItemVertexProperty(viewer);
-		this.menuItemVertexProperty.setRootFrame(rootFrame);
+		this.menuItemVertexProperty.setRootFrame(top);
 		this.add(new CheckBoxStartVertex(viewer));
 		this.add(new CheckBoxEndVertex(viewer));
 		this.addSeparator();

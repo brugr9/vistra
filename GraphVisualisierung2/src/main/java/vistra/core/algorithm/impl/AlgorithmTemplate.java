@@ -2,22 +2,31 @@ package vistra.core.algorithm.impl;
 
 import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.AlgorithmException;
+import vistra.core.algorithm.AlgorithmManager;
 import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.IExtendedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * @author TODO set developer name
+ * An algorithm template for algorithm developers.
+ * <p>
+ * As algorithm developer, you may do:
+ * <ul>
+ * <li>set your name in the authors-tag below
+ * <li>rename the class
+ * <li>remove the modifier 'abstract'
+ * <li>implement the constructor and the methods
+ * <li>add this class to the {@link AlgorithmManager} constructor.
+ * 
+ * @author the developer name
  * 
  */
 public abstract class AlgorithmTemplate extends AbstractAlgorithm implements
 		IAlgorithm {
 
-	// TODO rename the class
-	// TODO remove the modifier 'abstract'
-
 	/**
 	 * Main constructor.
+	 * 
 	 */
 	public AlgorithmTemplate() {
 		super();

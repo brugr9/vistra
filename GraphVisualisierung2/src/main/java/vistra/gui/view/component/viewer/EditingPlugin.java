@@ -23,7 +23,7 @@ import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class AdaptedEditingGraphMousePlugin extends
+public class EditingPlugin extends
 		EditingGraphMousePlugin<IVertex, IEdge> {
 
 	/**
@@ -34,7 +34,7 @@ public class AdaptedEditingGraphMousePlugin extends
 	 * @param edgeFactory
 	 *            the edge factory
 	 */
-	public AdaptedEditingGraphMousePlugin(Factory<IVertex> vertexFactory,
+	public EditingPlugin(Factory<IVertex> vertexFactory,
 			Factory<IEdge> edgeFactory) {
 		super(vertexFactory, edgeFactory);
 	}

@@ -17,27 +17,26 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;
 
 /**
- * An adapted JUNG mouse plugin that uses popup menus to create vertices,
- * undirected edges, and directed edges.
+ * An adapted JUNG mouse plugin that uses popup menus to create vertices and
+ * edges.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class AdaptedEditingPopupGraphMousePlugin extends
-		EditingPopupGraphMousePlugin<IVertex, IEdge> {
+public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 
 	/**
 	 * A field for an edge popup menu.
 	 */
-	private JPopupMenu edgePopup = null;
+	private JPopupMenu edgePopup;
 	/**
 	 * A field for a vertex popup menu.
 	 */
-	private JPopupMenu vertexPopup = null;
+	private JPopupMenu vertexPopup;
 	/**
 	 * A field for a create vertex popup menu.
 	 */
-	private JPopupMenu createVertexPopup = null;
+	private JPopupMenu createVertexPopup;
 
 	/**
 	 * Main constructor.
@@ -47,9 +46,12 @@ public class AdaptedEditingPopupGraphMousePlugin extends
 	 * @param edgeFactory
 	 *            an edge factory
 	 */
-	public AdaptedEditingPopupGraphMousePlugin(Factory<IVertex> vertexFactory,
+	public PopupPlugin(Factory<IVertex> vertexFactory,
 			Factory<IEdge> edgeFactory) {
 		super(vertexFactory, edgeFactory);
+		this.edgePopup = null;
+		this.vertexPopup = null;
+		this.createVertexPopup = null;
 	}
 
 	/**

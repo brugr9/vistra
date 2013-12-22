@@ -10,10 +10,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.transformer.EdgeTransformer;
 import vistra.core.graph.transformer.GraphTransformer;
-import vistra.core.graph.transformer.edge.EdgeTransformer;
-import vistra.core.graph.transformer.edge.HyperEdgeTransformer;
-import vistra.core.graph.transformer.vertex.VertexTransformer;
+import vistra.core.graph.transformer.HyperEdgeTransformer;
+import vistra.core.graph.transformer.VertexTransformer;
 import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.GraphMLWriter;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;

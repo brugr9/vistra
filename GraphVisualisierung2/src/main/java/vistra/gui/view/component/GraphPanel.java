@@ -37,7 +37,7 @@ public class GraphPanel extends JPanel implements Observer {
 	 */
 	private TitledBorder border;
 	/**
-	 * A field for a visualization viewer.
+	 * A field for a viewer.
 	 */
 	private Viewer viewer;
 	/**
@@ -60,11 +60,11 @@ public class GraphPanel extends JPanel implements Observer {
 	public GraphPanel(JFrame top, Model model, Layout<IVertex, IEdge> layout,
 			Dimension size) {
 		this.setSize(size);
-		this.border = BorderFactory.createTitledBorder("visualizationPanel");
+		this.border = BorderFactory.createTitledBorder("graphPanel");
 		this.setBorder(border);
 
 		/* viewer */
-		this.viewer = new Viewer(top, layout, new Dimension(size.width,
+		this.viewer = new Viewer(top, model, layout, new Dimension(size.width,
 				size.height - IView.BORDER));
 		model.addObserver(this.viewer);
 		/* zoom */

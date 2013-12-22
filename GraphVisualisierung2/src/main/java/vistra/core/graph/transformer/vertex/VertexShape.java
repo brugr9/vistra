@@ -12,7 +12,7 @@ import vistra.core.graph.item.vertex.IVertex;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexShapeTransformer implements Transformer<IVertex, Shape> {
+public class VertexShape implements Transformer<IVertex, Shape> {
 
 	@Override
 	public Shape transform(IVertex vertex) {

@@ -17,13 +17,12 @@ import edu.uci.ics.jung.visualization.picking.PickedState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class AdaptedPickingGraphMousePlugin extends
-		PickingGraphMousePlugin<IVertex, IEdge> {
+public class PickingPlugin extends PickingGraphMousePlugin<IVertex, IEdge> {
 
 	/**
 	 * Main constructor.
 	 */
-	public AdaptedPickingGraphMousePlugin() {
+	public PickingPlugin() {
 		super();
 	}
 

@@ -3,17 +3,17 @@ package vistra.core.graph.transformer.vertex;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.util.ColorPalette;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexFontColorTransformer implements Transformer<IVertex, String> {
+public class VertexLocationX implements Transformer<IVertex, String> {
 
 	@Override
 	public String transform(IVertex vertex) {
-		return ColorPalette.toString(vertex.getFontColor());
+		return String.valueOf(new Double(vertex.getLocation().getX())
+				.intValue());
 	}
 
 }

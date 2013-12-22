@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+	 http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+
+	<key id="weight" for="edge" attr.name="weight" attr.type="double">
+		<default>1.0</default>
+	</key>
+	<key id="start" for="node" attr.name="start" attr.type="boolean">
+		<default>false</default>
+	</key>
+	<key id="end" for="node" attr.name="end" attr.type="boolean">
+		<default>false</default>
+	</key>
+	<key id="coord.x" for="node" attr.name="coord.x" attr.type="integer">
+		<default>0</default>
+	</key>
+	<key id="coord.y" for="node" attr.name="coord.y" attr.type="integer">
+		<default>0</default>
+	</key>
+	
+	<graph id="Dijkstra Sample Graph 1" edgedefault="undirected">
+		<node id="A">
+			<data key="start">true</data>
+			<data key="coord.x">300</data>
+			<data key="coord.y">50</data>
+		</node>
+		<node id="B">
+			<data key="coord.x">100</data>
+			<data key="coord.y">250</data>
+		</node>
+		<node id="C">
+			<data key="coord.x">200</data>
+			<data key="coord.y">400</data>
+			<data key="end">true</data>
+		</node>
+		<node id="D">
+			<data key="coord.x">400</data>
+			<data key="coord.y">400</data>
+		</node>
+		<node id="E">
+			<data key="coord.x">500</data>
+			<data key="coord.y">250</data>
+		</node>
+
+		<edge id="eAB" source="A" target="B">
+			<data key="weight">10.0</data>
+		</edge>
+		<edge id="eBC" source="B" target="C">
+			<data key="weight">50.0</data>
+		</edge>
+		<edge id="eCE" source="C" target="E">
+			<data key="weight">10.0</data>
+		</edge>
+		<edge id="eAE" source="A" target="E">
+			<data key="weight">100.0</data>
+		</edge>
+		<edge id="eAD" source="A" target="D">
+			<data key="weight">30.0</data>
+		</edge>
+		<edge id="eDC" source="D" target="C">
+			<data key="weight">20.0</data>
+		</edge>
+		<edge id="eDE" source="D" target="E">
+			<data key="weight">60.0</data>
+		</edge>
+	</graph>  
+</graphml>

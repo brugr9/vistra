@@ -8,11 +8,11 @@ import vistra.core.graph.item.vertex.IVertex;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexStartTransformer implements Transformer<IVertex, String> {
+public class VertexID implements Transformer<IVertex, String> {
 
 	@Override
 	public String transform(IVertex vertex) {
-		return String.valueOf(vertex.isStart());
+		return vertex.getId();
 	}
 
 }

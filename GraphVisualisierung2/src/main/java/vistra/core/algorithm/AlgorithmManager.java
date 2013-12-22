@@ -16,16 +16,16 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class AlgorithmManager implements IAlgorithmManager {
+public final class AlgorithmManager implements IAlgorithmManager {
 
 	/**
 	 * A field for a list of algorithms available.
 	 */
-	private ArrayList<IAlgorithm> algorithmsAvailable;
+	private ArrayList<IAlgorithm> available;
 	/**
 	 * A field for a list of supported algorithms.
 	 */
-	private ArrayList<IAlgorithm> algorithmsSupported;
+	private ArrayList<IAlgorithm> supported;
 
 	/**
 	 * Main constructor.
@@ -35,22 +35,14 @@ class AlgorithmManager implements IAlgorithmManager {
 	 */
 	public AlgorithmManager(Properties p) {
 		super();
-		this.algorithmsSupported = new ArrayList<IAlgorithm>();
-		this.algorithmsAvailable = new ArrayList<IAlgorithm>();
-		this.addAlgorithmsAvailable();
-	}
-
-	/**
-	 * Adds available algorithms.
-	 */
-	private void addAlgorithmsAvailable() {
-		this.algorithmsAvailable.clear();
-		this.algorithmsAvailable.add(new Default());
-		this.algorithmsAvailable.add(new BFS());
-		this.algorithmsAvailable.add(new DFS());
-		this.algorithmsAvailable.add(new DLS());
-		this.algorithmsAvailable.add(new Dijkstra());
-		this.algorithmsAvailable.add(new Kruskal());
+		this.supported = new ArrayList<IAlgorithm>();
+		available = new ArrayList<IAlgorithm>();
+		available.add(new Default());
+		available.add(new BFS());
+		available.add(new DFS());
+		available.add(new DLS());
+		available.add(new Dijkstra());
+		available.add(new Kruskal());
 	}
 
 	/**
@@ -60,21 +52,21 @@ class AlgorithmManager implements IAlgorithmManager {
 	public String[] getNames(EdgeType edgeType) throws Exception {
 		try {
 			/* update algorithmsSupported */
-			this.algorithmsSupported.clear();
+			this.supported.clear();
 			EdgeType[] capabilities;
-			for (IAlgorithm a : this.algorithmsAvailable) {
+			for (IAlgorithm a : this.available) {
 				capabilities = a.getEdgeTypes();
 				for (int i = 0; i < capabilities.length; i++) {
 					if (capabilities[i] == edgeType) {
-						this.algorithmsSupported.add(a);
+						this.supported.add(a);
 						break;
 					}
 				}
 			}
 			/* get names from algorithmsSupported */
-			String[] names = new String[this.algorithmsSupported.size()];
+			String[] names = new String[this.supported.size()];
 			for (int i = 0; i < names.length; i++) {
-				names[i] = this.algorithmsSupported.get(i).getName();
+				names[i] = this.supported.get(i).getName();
 			}
 			return names;
 		} catch (Exception e) {
@@ -88,7 +80,7 @@ class AlgorithmManager implements IAlgorithmManager {
 	@Override
 	public IAlgorithm select(int index) throws Exception {
 		try {
-			return this.algorithmsSupported.get(index);
+			return this.supported.get(index);
 		} catch (Exception e) {
 			throw e;
 		}

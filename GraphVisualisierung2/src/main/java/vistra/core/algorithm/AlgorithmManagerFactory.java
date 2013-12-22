@@ -31,4 +31,5 @@ public final class AlgorithmManagerFactory {
 			throw e;
 		}
 	}
+
 }

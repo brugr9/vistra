@@ -1,9 +1,7 @@
 package vistra.gui.view.component.viewer;
 
-import java.awt.event.InputEvent;
 import java.awt.event.ItemEvent;
 
-import javax.swing.JComboBox;
 import javax.swing.JPopupMenu;
 
 import org.apache.commons.collections15.Factory;
@@ -17,10 +15,7 @@ import edu.uci.ics.jung.visualization.control.AnimatedPickingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.LabelEditingGraphMousePlugin;
-import edu.uci.ics.jung.visualization.control.RotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
-import edu.uci.ics.jung.visualization.control.ShearingGraphMousePlugin;
-import edu.uci.ics.jung.visualization.control.TranslatingGraphMousePlugin;
 
 /**
  * An adapted JUNG mouse plugin for editing a modal graph.
@@ -28,8 +23,7 @@ import edu.uci.ics.jung.visualization.control.TranslatingGraphMousePlugin;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class AdaptedEditingModalGraphMouse extends
-		EditingModalGraphMouse<IVertex, IEdge> {
+public class Mouse extends EditingModalGraphMouse<IVertex, IEdge> {
 
 	/**
 	 * Main constructor.
@@ -47,19 +41,17 @@ public class AdaptedEditingModalGraphMouse extends
 	 * @param createVertexPopup
 	 *            a createVertexPopup
 	 */
-	public AdaptedEditingModalGraphMouse(RenderContext<IVertex, IEdge> rc,
+	public Mouse(RenderContext<IVertex, IEdge> rc,
 			Factory<IVertex> vertexFactory, Factory<IEdge> edgeFactory,
 			JPopupMenu edgePopup, JPopupMenu vertexPopup,
 			MenuFactory createVertexPopup) {
 
 		super(rc, vertexFactory, edgeFactory);
 
-		if (this.popupEditingPlugin instanceof AdaptedEditingPopupGraphMousePlugin) {
-			((AdaptedEditingPopupGraphMousePlugin) this.popupEditingPlugin)
-					.setEdgePopup(edgePopup);
-			((AdaptedEditingPopupGraphMousePlugin) this.popupEditingPlugin)
-					.setVertexPopup(vertexPopup);
-			((AdaptedEditingPopupGraphMousePlugin) this.popupEditingPlugin)
+		if (this.popupEditingPlugin instanceof PopupPlugin) {
+			((PopupPlugin) this.popupEditingPlugin).setEdgePopup(edgePopup);
+			((PopupPlugin) this.popupEditingPlugin).setVertexPopup(vertexPopup);
+			((PopupPlugin) this.popupEditingPlugin)
 					.setVertexCreatePopup(createVertexPopup);
 		}
 	}
@@ -69,24 +61,21 @@ public class AdaptedEditingModalGraphMouse extends
 	 */
 	@Override
 	protected void loadPlugins() {
-		// PickingGraphMousePlugin
-		this.pickingPlugin = new AdaptedPickingGraphMousePlugin();
+		// Picking
+		this.pickingPlugin = new PickingPlugin();
 		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<IVertex, IEdge>();
-		this.translatingPlugin = new TranslatingGraphMousePlugin(
-				InputEvent.BUTTON1_MASK);
 		this.scalingPlugin = new ScalingGraphMousePlugin(
 				new CrossoverScalingControl(), 0, this.in, this.out);
-		this.rotatingPlugin = new RotatingGraphMousePlugin();
-		this.shearingPlugin = new ShearingGraphMousePlugin();
-		// EditingGraphMousePlugin
-		this.editingPlugin = new AdaptedEditingGraphMousePlugin(
-				this.vertexFactory, this.edgeFactory);
+		// Editing
+		this.editingPlugin = new EditingPlugin(this.vertexFactory,
+				this.edgeFactory);
 		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<IVertex, IEdge>();
 		this.annotatingPlugin = new AnnotatingGraphMousePlugin<IVertex, IEdge>(
 				rc);
-		// PopupGraphMousePlugin
-		this.popupEditingPlugin = new AdaptedEditingPopupGraphMousePlugin(
-				this.vertexFactory, this.edgeFactory);
+		// Popup
+		this.popupEditingPlugin = new PopupPlugin(this.vertexFactory,
+				this.edgeFactory);
+		/**/
 		this.add(scalingPlugin);
 		this.setMode(Mode.EDITING);
 	}
@@ -96,9 +85,6 @@ public class AdaptedEditingModalGraphMouse extends
 	 */
 	@Override
 	protected void setPickingMode() {
-		remove(this.translatingPlugin);
-		remove(this.rotatingPlugin);
-		remove(this.shearingPlugin);
 		remove(this.editingPlugin);
 		remove(this.annotatingPlugin);
 		add(this.pickingPlugin);
@@ -110,27 +96,9 @@ public class AdaptedEditingModalGraphMouse extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void setTransformingMode() {
-		remove(this.pickingPlugin);
-		remove(this.animatedPickingPlugin);
-		remove(this.editingPlugin);
-		remove(this.annotatingPlugin);
-		add(this.translatingPlugin);
-		add(this.rotatingPlugin);
-		add(this.shearingPlugin);
-		add(this.popupEditingPlugin);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	protected void setEditingMode() {
 		remove(this.pickingPlugin);
 		remove(this.animatedPickingPlugin);
-		remove(this.translatingPlugin);
-		remove(this.rotatingPlugin);
-		remove(this.shearingPlugin);
 		remove(this.labelEditingPlugin);
 		remove(this.annotatingPlugin);
 		add(this.editingPlugin);
@@ -144,9 +112,6 @@ public class AdaptedEditingModalGraphMouse extends
 	protected void setAnnotatingMode() {
 		remove(this.pickingPlugin);
 		remove(this.animatedPickingPlugin);
-		remove(this.translatingPlugin);
-		remove(this.rotatingPlugin);
-		remove(this.shearingPlugin);
 		remove(this.labelEditingPlugin);
 		remove(this.editingPlugin);
 		remove(this.popupEditingPlugin);
@@ -163,11 +128,9 @@ public class AdaptedEditingModalGraphMouse extends
 					ItemEvent.DESELECTED));
 			this.mode = mode;
 
-			if (mode == Mode.TRANSFORMING) {
-				this.setTransformingMode();
-			} else if (mode == Mode.PICKING) {
+			if (this.mode == Mode.PICKING) {
 				this.setPickingMode();
-			} else if (mode == Mode.EDITING) {
+			} else if (this.mode == Mode.EDITING) {
 				this.setEditingMode();
 			}
 
@@ -178,22 +141,6 @@ public class AdaptedEditingModalGraphMouse extends
 			this.fireItemStateChanged(new ItemEvent(this,
 					ItemEvent.ITEM_STATE_CHANGED, mode, ItemEvent.SELECTED));
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public JComboBox<Mode> getModeComboBox() {
-		if (this.modeBox == null) {
-			this.modeBox = new JComboBox<>(new Mode[] { Mode.PICKING,
-					Mode.EDITING, Mode.TRANSFORMING });
-			this.modeBox.addItemListener(this.getModeListener());
-		}
-		this.modeBox.setSelectedItem(this.mode);
-
-		return this.modeBox;
 	}
 
 }

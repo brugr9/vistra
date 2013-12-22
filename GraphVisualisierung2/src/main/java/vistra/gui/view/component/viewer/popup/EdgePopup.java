@@ -20,23 +20,22 @@ public class EdgePopup extends JPopupMenu {
 	/**
 	 * A field for an edge property menu item.
 	 */
-	private final MenuItemEdgeProperty menuItemEdgeProperty;
+	private final MenuItemEdgeProperty property;
 
 	/**
 	 * Main constructor.
 	 * 
+	 * @param top
+	 *            the top frame
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	public EdgePopup(JFrame rootFrame,
-			VisualizationViewer<IVertex, IEdge> viewer) {
-		super("Edge");
-
-		this.menuItemEdgeProperty = new MenuItemEdgeProperty(viewer);
-		this.menuItemEdgeProperty.setRootFrame(rootFrame);
-		this.add(this.menuItemEdgeProperty);
+	public EdgePopup(JFrame top, VisualizationViewer<IVertex, IEdge> viewer) {
+		super("edgePopup");
+		this.property = new MenuItemEdgeProperty(viewer);
+		this.property.setRootFrame(top);
+		this.add(this.property);
 		this.addSeparator();
 		this.add(new MenuItemDeleteEdge(viewer));
 	}
-
 }
