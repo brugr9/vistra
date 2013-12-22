@@ -20,8 +20,6 @@ public class HyperEdgeTransformer implements
 		IEdge edge = EdgeFactory.createEdge();
 
 		edge.setId(meta.getId());
-		// edge.setLineColor(ColorPalette.toColor(meta
-		// .getProperty(GraphMLMeta.E_COLOR)));
 		edge.setWeight(Convert.toDouble(meta.getProperty(GraphMLMeta.E_WEIGHT)));
 
 		return edge;

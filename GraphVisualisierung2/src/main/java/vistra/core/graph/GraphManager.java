@@ -53,7 +53,7 @@ class GraphManager implements IGraphManager {
 	/**
 	 * A field for a GraphMLWriter.
 	 */
-	private GraphMLWriter graphMLWriter;
+	private GraphMLWriter<IVertex, IEdge> graphMLWriter;
 
 	/**
 	 * Main constructor.
@@ -61,7 +61,6 @@ class GraphManager implements IGraphManager {
 	 * @param p
 	 *            the core properties
 	 */
-	@SuppressWarnings("rawtypes")
 	public GraphManager(Properties p) {
 		super();
 		this.file = null;
@@ -76,7 +75,7 @@ class GraphManager implements IGraphManager {
 		this.edgeTransformer = new EdgeTransformer();
 		this.hyperEdgeTransformer = new HyperEdgeTransformer();
 		/* graphML writer */
-		this.graphMLWriter = new GraphMLWriter();
+		this.graphMLWriter = new GraphMLWriter<IVertex, IEdge>();
 	}
 
 	/**
@@ -109,7 +108,6 @@ class GraphManager implements IGraphManager {
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void save(IExtendedGraph graph) throws Exception {
 		try {
@@ -154,8 +152,7 @@ class GraphManager implements IGraphManager {
 			throw new GraphException("I/O error in GraphML-file "
 					+ file.getName(), e);
 		} catch (FileNotFoundException e) {
-			throw new GraphException("GraphML-file not found: "
-					+ file.getName(), e);
+			throw new GraphException("File not found: " + file.getName(), e);
 		} catch (Exception e) {
 			throw new GraphException(
 					"Exception while loading data from GraphML-file "
