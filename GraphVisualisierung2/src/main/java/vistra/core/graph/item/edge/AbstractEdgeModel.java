@@ -1,6 +1,6 @@
 package vistra.core.graph.item.edge;
 
-import vistra.core.graph.GraphMLMeta;
+import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.AbstractGraphItem;
 
 /**
@@ -22,7 +22,7 @@ abstract class AbstractEdgeModel extends AbstractGraphItem implements
 	 */
 	AbstractEdgeModel() {
 		super();
-		this.weight = GraphMLMeta.E_WEIGHT_DEFAULT;
+		this.weight = GraphFactory.E_WEIGHT_DEFAULT;
 	}
 
 	/**

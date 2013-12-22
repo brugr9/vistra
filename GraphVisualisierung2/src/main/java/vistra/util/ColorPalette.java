@@ -1,6 +1,7 @@
 package vistra.util;
 
 import java.awt.Color;
+
 import vistra.core.graph.GraphMLMeta;
 
 /**

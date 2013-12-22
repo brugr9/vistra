@@ -17,6 +17,14 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  */
 public final class GraphFactory {
 
+	public final static double V_HEIGHT_DEFAULT = 40.0;
+	public final static double V_WIDTH_DEFAULT = 45.0;
+	public final static double E_WEIGHT_DEFAULT = 1.0;
+	public final static float STROKE_WIDTH_DEFAULT = 1.5f;
+	public final static float STROKE_WIDTH_BOLD = 3.0f;
+	public final static float V_TAGGED_STROKE = 3.0f;
+	public final static float E_TAGGED_STROKE = 5.0f;
+
 	/**
 	 * A main (no-)constructor.
 	 */

@@ -1,6 +1,6 @@
 package vistra.core.graph.item.edge;
 
-import vistra.core.graph.GraphMLMeta;
+import vistra.core.graph.GraphFactory;
 import vistra.util.ColorPalette;
 
 /**
@@ -140,7 +140,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 		try {
 			this.setFontColor(ColorPalette.darkblue);
 			this.setLineColor(ColorPalette.darkblue);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_DEFAULT);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -155,7 +155,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 		try {
 			this.setFontColor(ColorPalette.red);
 			this.setLineColor(ColorPalette.red);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -170,7 +170,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 		try {
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -185,7 +185,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 		try {
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -200,7 +200,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 		try {
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -215,12 +215,12 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 		try {
 			this.setFontColor(ColorPalette.GRAY);
 			this.setLineColor(ColorPalette.GRAY);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			// TODO
 			// this.setFontColor(VistraColor.DARK_BLUE);
 			// this.setLineColor(VistraColor.DARK_BLUE);
-			// this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
-			// this.setLineStyle(GraphPropertyConstants.STROKE_TAGGED)
+			// this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			// this.setLineStyle(GraphFactory.STROKE_TAGGED)
 		} catch (Exception e) {
 			throw e;
 		}
@@ -235,7 +235,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 		try {
 			this.setFontColor(ColorPalette.GREEN);
 			this.setLineColor(ColorPalette.GREEN);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}

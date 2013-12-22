@@ -1,6 +1,6 @@
 package vistra.core.graph.item.vertex;
 
-import vistra.core.graph.GraphMLMeta;
+import vistra.core.graph.GraphFactory;
 import vistra.util.ColorPalette;
 
 /**
@@ -100,7 +100,7 @@ public class Vertex extends AbstractVertexModel implements IVertex {
 			this.setFillColor(ColorPalette.orange);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setLineColor(ColorPalette.darkblue);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_DEFAULT);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -115,7 +115,7 @@ public class Vertex extends AbstractVertexModel implements IVertex {
 			this.setFillColor(ColorPalette.yellow);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setLineColor(ColorPalette.red);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -131,7 +131,7 @@ public class Vertex extends AbstractVertexModel implements IVertex {
 			this.setFillColor(ColorPalette.blue);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setLineColor(ColorPalette.red);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -145,7 +145,7 @@ public class Vertex extends AbstractVertexModel implements IVertex {
 			this.setFillColor(ColorPalette.white);
 			this.setFontColor(ColorPalette.green);
 			this.setLineColor(ColorPalette.green);
-			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}

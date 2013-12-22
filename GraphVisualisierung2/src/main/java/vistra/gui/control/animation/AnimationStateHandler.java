@@ -2,10 +2,10 @@ package vistra.gui.control.animation;
 
 import static vistra.gui.control.IControl.A_SECOND;
 import static vistra.gui.control.IControl.EventSource.ANIMATION;
+import static vistra.gui.control.IControl.EventSource.DELAY;
 import static vistra.gui.control.IControl.EventSource.PAUSE;
 import static vistra.gui.control.IControl.EventSource.PLAY;
 import static vistra.gui.control.IControl.EventSource.RESUME;
-import static vistra.gui.control.IControl.EventSource.DELAY;
 import static vistra.gui.control.IControl.EventSource.STOP;
 
 import java.awt.event.ActionEvent;

@@ -2,6 +2,7 @@ package vistra.core.algorithm;
 
 import java.util.ArrayList;
 import java.util.Properties;
+
 import vistra.core.algorithm.impl.BFS;
 import vistra.core.algorithm.impl.DFS;
 import vistra.core.algorithm.impl.DLS;
