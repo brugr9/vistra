@@ -1,6 +1,7 @@
 package vistra.gui.control;
 
 import java.awt.event.ActionEvent;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
@@ -29,9 +30,9 @@ final class ActionListenerQuit extends AbstractActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		int value = JOptionPane.showConfirmDialog(null, this.model
-				.getResourceBundle().getString("quit.message"), this.model
-				.getResourceBundle().getString("app.label"),
+		ResourceBundle b = this.model.getResourceBundle();
+		int value = JOptionPane.showConfirmDialog(null,
+				b.getString("quit.message"), b.getString("app.label"),
 				JOptionPane.YES_NO_OPTION);
 		if (value == JOptionPane.YES_OPTION) {
 			System.exit(0);

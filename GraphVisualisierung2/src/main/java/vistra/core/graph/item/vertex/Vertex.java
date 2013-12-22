@@ -1,7 +1,7 @@
 package vistra.core.graph.item.vertex;
 
-import vistra.util.GraphPropertyConstants;
-import vistra.util.GraphColor;
+import vistra.core.graph.GraphMLMeta;
+import vistra.util.ColorPalette;
 
 /**
  * A vertex (state handler).
@@ -20,30 +20,17 @@ public class Vertex extends AbstractVertexModel implements IVertex {
 	 * 
 	 */
 	public Vertex() {
-		this.state = new VertexStateIdle(this);
+		this.state = new VertexStateUnexplored(this);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleIdle() throws Exception {
+	public void handleUnexplored() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleInitialise();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void handleActivate() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleActivate();
+			this.state.handleUnexplored();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -66,10 +53,23 @@ public class Vertex extends AbstractVertexModel implements IVertex {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolve() throws Exception {
+	public void handleVisited() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleSolve();
+			this.state.handleVisited();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleSolution() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleSolution();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -91,56 +91,61 @@ public class Vertex extends AbstractVertexModel implements IVertex {
 	}
 
 	/**
-	 * Doing:
+	 * State view setter: Sets the look to unexplored.
+	 * <p>
+	 * (see doc/vistra/adt/10GraphTraversal_handout.pdf, page 11)
 	 */
-	void setViewIdle() throws Exception {
+	void setViewUnexplored() throws Exception {
 		try {
-			this.setBgColor(GraphColor.LIGHT_ORANGE);
-			this.setFontColor(GraphColor.DARK_BLUE);
-			this.setLineColor(GraphColor.DARK_BLUE);
-			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_DEFAULT);
+			this.setFillColor(ColorPalette.orange);
+			this.setFontColor(ColorPalette.darkblue);
+			this.setLineColor(ColorPalette.darkblue);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_DEFAULT);
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Doing:
+	 * State view setter: Sets the look as visit -- like 'visited' but with a
+	 * kind of 'spot' on the vertex.
 	 */
-	void setViewActivated() throws Exception {
+	void setViewVisit() throws Exception {
 		try {
-			this.setBgColor(GraphColor.LIGHT_YELLOW);
-			this.setFontColor(GraphColor.RED);
-			this.setLineColor(GraphColor.RED);
-			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
+			this.setFillColor(ColorPalette.yellow);
+			this.setFontColor(ColorPalette.darkblue);
+			this.setLineColor(ColorPalette.red);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Doing:
+	 * State view setter: Sets the look as visited.
+	 * <p>
+	 * (see doc/vistra/adt/10GraphTraversal_handout.pdf, page 11)
 	 */
 	void setViewVisited() throws Exception {
 		try {
-			this.setBgColor(GraphColor.LIGHT_ORANGE);
-			this.setFontColor(GraphColor.RED);
-			this.setLineColor(GraphColor.RED);
-			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
+			this.setFillColor(ColorPalette.blue);
+			this.setFontColor(ColorPalette.darkblue);
+			this.setLineColor(ColorPalette.red);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Doing:
+	 * State view setter: Sets the look as solution.
 	 */
 	void setViewSolved() throws Exception {
 		try {
-			this.setBgColor(GraphColor.WHITE);
-			this.setFontColor(GraphColor.LIGHT_GREEN);
-			this.setLineColor(GraphColor.LIGHT_GREEN);
-			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
+			this.setFillColor(ColorPalette.white);
+			this.setFontColor(ColorPalette.green);
+			this.setLineColor(ColorPalette.green);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}

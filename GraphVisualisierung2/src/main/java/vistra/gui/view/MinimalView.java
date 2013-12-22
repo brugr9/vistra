@@ -15,7 +15,7 @@ import vistra.gui.view.component.AlgorithmPanel;
 import vistra.gui.view.component.GraphPanel;
 import vistra.gui.view.component.MenuBar;
 import vistra.gui.view.component.TraversalPanel;
-import vistra.util.GraphColor;
+import vistra.util.ColorPalette;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 
 /**
@@ -92,7 +92,7 @@ public class MinimalView extends JFrame implements IView {
 		/* control panel */
 		this.controlPanel = new JPanel();
 		this.controlPanel.setLayout(new BorderLayout());
-		this.controlPanel.setBackground((Color) GraphColor.ANTIQUE);
+		this.controlPanel.setBackground((Color) ColorPalette.ANTIQUE);
 		this.controlPanel.add(this.parameterPanel, BorderLayout.NORTH);
 		this.controlPanel.add(this.playerPanel, BorderLayout.SOUTH);
 

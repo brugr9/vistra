@@ -1,9 +1,7 @@
 package vistra.gui.view.component.popup.verifier;
 
 import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
 
-import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;

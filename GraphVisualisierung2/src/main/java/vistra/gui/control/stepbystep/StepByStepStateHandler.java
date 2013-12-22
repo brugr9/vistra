@@ -220,6 +220,59 @@ public final class StepByStepStateHandler extends Observable implements
 	}
 
 	/**
+	 * State view setter: Sets the step-by-step view elements for state: idle.
+	 */
+	void setViewIdle() {
+		this.model.setSteplengthEnabled(true);
+		int progress = this.model.getProgress();
+		if (progress == 0)
+			this.setViewBeginning();
+		else if (progress == this.model.getProgressMaximum())
+			this.setViewEnd();
+		else
+			this.setViewIntermediate();
+	}
+
+	/**
+	 * State view setter: Sets the step-by-step view elements for state: at
+	 * beginning.
+	 */
+	void setViewBeginning() {
+		this.model.setStepByStepEnabled(true);
+		this.model.setBackwardEnabled(false);
+		this.model.setToBeginningEnabled(false);
+		this.model.notifyObservers(EventSource.STEP_BY_STEP);
+	}
+
+	/**
+	 * State view setter: Sets the step-by-step view elements for state:
+	 * intermediate.
+	 */
+	void setViewIntermediate() {
+		this.model.setStepByStepEnabled(true);
+		this.model.notifyObservers(EventSource.STEP_BY_STEP);
+	}
+
+	/**
+	 * State view setter: Sets the step-by-step view elements for state: at end.
+	 */
+	void setViewEnd() {
+		this.model.setStepByStepEnabled(true);
+		this.model.setForwardEnabled(false);
+		this.model.setToEndEnabled(false);
+		this.model.notifyObservers(EventSource.STEP_BY_STEP);
+	}
+
+	/**
+	 * State view setter: Sets the step-by-step view elements for state: off.
+	 */
+	void setViewOff() {
+		this.model.setSteplengthEnabled(false);
+		this.model.setStepByStepEnabled(false);
+		this.model.notifyObservers(EventSource.STEP_BY_STEP);
+	}
+
+	/**
 	 * Doing: Step-by-Step backward until reaching the beginning.
 	 * 
 	 * @throws Exception
@@ -390,59 +443,6 @@ public final class StepByStepStateHandler extends Observable implements
 			throw ex;
 		}
 
-	}
-
-	/**
-	 * State view setter: Sets the step-by-step view elements for state: idle.
-	 */
-	void setViewIdle() {
-		this.model.setSteplengthEnabled(true);
-		int progress = this.model.getProgress();
-		if (progress == 0)
-			this.setViewBeginning();
-		else if (progress == this.model.getProgressMaximum())
-			this.setViewEnd();
-		else
-			this.setViewIntermediate();
-	}
-
-	/**
-	 * State view setter: Sets the step-by-step view elements for state: at
-	 * beginning.
-	 */
-	void setViewBeginning() {
-		this.model.setStepByStepEnabled(true);
-		this.model.setBackwardEnabled(false);
-		this.model.setToBeginningEnabled(false);
-		this.model.notifyObservers(EventSource.STEP_BY_STEP);
-	}
-
-	/**
-	 * State view setter: Sets the step-by-step view elements for state:
-	 * intermediate.
-	 */
-	void setViewIntermediate() {
-		this.model.setStepByStepEnabled(true);
-		this.model.notifyObservers(EventSource.STEP_BY_STEP);
-	}
-
-	/**
-	 * State view setter: Sets the step-by-step view elements for state: at end.
-	 */
-	void setViewEnd() {
-		this.model.setStepByStepEnabled(true);
-		this.model.setForwardEnabled(false);
-		this.model.setToEndEnabled(false);
-		this.model.notifyObservers(EventSource.STEP_BY_STEP);
-	}
-
-	/**
-	 * State view setter: Sets the step-by-step view elements for state: off.
-	 */
-	void setViewOff() {
-		this.model.setSteplengthEnabled(false);
-		this.model.setStepByStepEnabled(false);
-		this.model.notifyObservers(EventSource.STEP_BY_STEP);
 	}
 
 	/**

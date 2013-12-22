@@ -9,31 +9,52 @@ package vistra.core.graph.item.edge;
 public interface IEdge extends IEdgeModel {
 
 	/**
-	 * Handles idle.
+	 * Handles unexplored.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleIdle() throws Exception;
+	abstract void handleUnexplored() throws Exception;
 
 	/**
-	 * Handles visit.
+	 * Handles discovery.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleVisit() throws Exception;
+	abstract void handleDiscovery() throws Exception;
 
 	/**
-	 * Handles discard.
+	 * Handles back.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleDiscard() throws Exception;
+	abstract void handleBack() throws Exception;
 
 	/**
-	 * Handles solve.
+	 * Handles forward.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleSolve() throws Exception;
+	abstract void handleForward() throws Exception;
+
+	/**
+	 * Handles cross.
+	 * 
+	 * @throws Exception
+	 */
+	abstract void handleCross() throws Exception;
+
+	/**
+	 * Handles discarded.
+	 * 
+	 * @throws Exception
+	 */
+	abstract void handleDiscarded() throws Exception;
+
+	/**
+	 * Handles solution.
+	 * 
+	 * @throws Exception
+	 */
+	abstract void handleSolution() throws Exception;
 
 }

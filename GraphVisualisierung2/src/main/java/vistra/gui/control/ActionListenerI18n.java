@@ -37,7 +37,6 @@ class ActionListenerI18n extends AbstractActionListener {
 		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle")
 				.replace(".", File.separator);
 		this.actionPerformed(null);
-
 	}
 
 	/**

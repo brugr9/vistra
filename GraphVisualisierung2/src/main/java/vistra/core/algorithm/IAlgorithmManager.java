@@ -4,7 +4,6 @@ import java.io.File;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.common.IAlgorithm;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

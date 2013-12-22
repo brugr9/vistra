@@ -11,7 +11,7 @@ import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
-import vistra.gui.view.component.visualization.AdaptedVisualizationViewer;
+import vistra.gui.view.component.visual.AdaptedVisualizationViewer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 

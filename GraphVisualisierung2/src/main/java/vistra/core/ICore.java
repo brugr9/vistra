@@ -4,7 +4,7 @@ import java.io.File;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.common.IAlgorithm;
+import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.traversal.Traversal;
 import edu.uci.ics.jung.graph.util.EdgeType;

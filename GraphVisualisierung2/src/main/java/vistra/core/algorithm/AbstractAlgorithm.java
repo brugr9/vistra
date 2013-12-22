@@ -1,7 +1,5 @@
 package vistra.core.algorithm;
 
-import vistra.common.IAlgorithm;
-import vistra.core.graph.IExtendedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -31,6 +29,64 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	}
 
 	/**
+	 * A constructor.
+	 * 
+	 * @param description
+	 *            a description
+	 */
+	protected AbstractAlgorithm(String description) {
+		this.description = description;
+		this.edgeTypes = null;
+	}
+
+	/**
+	 * A constructor.
+	 * 
+	 * @param edgeType
+	 *            an edge type
+	 */
+	protected AbstractAlgorithm(EdgeType edgeType) {
+		this.description = "";
+		this.edgeTypes = new EdgeType[] { edgeType };
+	}
+
+	/**
+	 * A constructor.
+	 * 
+	 * @param edgeTypes
+	 */
+	protected AbstractAlgorithm(EdgeType[] edgeTypes) {
+		this.description = "";
+		this.edgeTypes = edgeTypes;
+	}
+
+	/**
+	 * A constructor.
+	 * 
+	 * @param description
+	 *            a description
+	 * @param edgeType
+	 *            an edge type
+	 */
+	protected AbstractAlgorithm(String description, EdgeType edgeType) {
+		this.description = description;
+		this.edgeTypes = new EdgeType[] { edgeType };
+	}
+
+	/**
+	 * A constructor.
+	 * 
+	 * @param description
+	 *            a description
+	 * @param edgeTypes
+	 *            an edge type array
+	 */
+	protected AbstractAlgorithm(String description, EdgeType[] edgeTypes) {
+		this.description = description;
+		this.edgeTypes = edgeTypes;
+	}
+
+	/**
 	 * Sets the description.
 	 * 
 	 * @param description
@@ -41,9 +97,19 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	}
 
 	/**
+	 * Sets the edgeType.
+	 * 
+	 * @param edgeType
+	 *            the edgeTypes to set
+	 */
+	protected final void setEdgeType(EdgeType edgeType) {
+		this.edgeTypes = new EdgeType[] { edgeType };
+	}
+
+	/**
 	 * Sets the edgeTypes.
 	 * 
-	 * @param graphtypes
+	 * @param edgeTypes
 	 *            the edgeTypes to set
 	 */
 	protected final void setEdgeTypes(EdgeType[] edgeTypes) {
@@ -72,14 +138,6 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	@Override
 	public final EdgeType[] getEdgeTypes() {
 		return this.edgeTypes;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void traverse(IExtendedGraph graph) throws AlgorithmException {
-		// Does nothing on execute.
 	}
 
 }

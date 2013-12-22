@@ -9,8 +9,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FileUtils;
 
-import vistra.common.IAlgorithm;
 import vistra.core.algorithm.AlgorithmManagerFactory;
+import vistra.core.algorithm.IAlgorithm;
 import vistra.core.algorithm.IAlgorithmManager;
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.GraphManagerFactory;
@@ -20,8 +20,8 @@ import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.traversal.IStep;
 import vistra.core.traversal.Traversal;
-import vistra.util.IImmutableBidirectionalIterator;
-import vistra.util.ImmutableBidirectionalIterator;
+import vistra.util.IBidirectIterator;
+import vistra.util.ImmutableBidirectIterator;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -217,7 +217,7 @@ public class Core implements ICore {
 			for (int index = stepList.size() - 1; index > -1; index--)
 				stepList.get(index).undo();
 			// the traversal
-			IImmutableBidirectionalIterator<IStep> stepIterator = new ImmutableBidirectionalIterator<IStep>(
+			IBidirectIterator<IStep> stepIterator = new ImmutableBidirectIterator<IStep>(
 					stepList);
 			return new Traversal(stepIterator);
 		} catch (Exception e) {

@@ -8,7 +8,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
-import vistra.common.IAlgorithm;
 import vistra.core.algorithm.impl.BFS;
 import vistra.core.algorithm.impl.DFS;
 import vistra.core.algorithm.impl.DLS;

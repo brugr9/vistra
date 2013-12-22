@@ -9,7 +9,7 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractEdgeState extends AbstractState implements IState {
+class AbstractEdgeState extends AbstractState implements IState {
 
 	/**
 	 * A field for a state handler.
@@ -27,31 +27,66 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an initialise.
+	 * Handles unexplored.
 	 */
-	void handleInitialise() throws Exception {
+	void handleUnexplored() throws Exception {
 		try {
-			this.stateHandler.setState(new EdgeStateIdle(this.stateHandler));
+			this.stateHandler.setState(new EdgeStateUnexplored(
+					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Handles a visit.
+	 * Handles discovery.
 	 */
-	void handleVisit() throws Exception {
+	void handleDiscovery() throws Exception {
 		try {
-			this.stateHandler.setState(new EdgeStateVisited(this.stateHandler));
+			this.stateHandler
+					.setState(new EdgeStateDiscovery(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Handles a discard.
+	 * Handles back.
 	 */
-	void handleDiscard() throws Exception {
+	void handleBack() throws Exception {
+		try {
+			this.stateHandler.setState(new EdgeStateBack(this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Handles forward.
+	 */
+	void handleForward() throws Exception {
+		try {
+			this.stateHandler.setState(new EdgeStateForward(this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Handles cross.
+	 */
+	void handleCross() throws Exception {
+		try {
+			this.stateHandler.setState(new EdgeStateCross(this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Handles discarded.
+	 */
+	void handleDiscarded() throws Exception {
 		try {
 			this.stateHandler
 					.setState(new EdgeStateDiscarded(this.stateHandler));
@@ -61,9 +96,9 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles a solve.
+	 * Handles a solution.
 	 */
-	void handleSolve() throws Exception {
+	void handleSolution() throws Exception {
 		try {
 			this.stateHandler
 					.setState(new EdgeStateSolution(this.stateHandler));

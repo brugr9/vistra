@@ -9,18 +9,11 @@ package vistra.core.graph.item.vertex;
 public interface IVertex extends IVertexModel {
 
 	/**
-	 * Handles idle.
+	 * Handles unexplored.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleIdle() throws Exception;
-
-	/**
-	 * Handles activate.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleActivate() throws Exception;
+	abstract void handleUnexplored() throws Exception;
 
 	/**
 	 * Handles visit.
@@ -30,10 +23,17 @@ public interface IVertex extends IVertexModel {
 	abstract void handleVisit() throws Exception;
 
 	/**
+	 * Handles visited.
+	 * 
+	 * @throws Exception
+	 */
+	abstract void handleVisited() throws Exception;
+
+	/**
 	 * Handles solve.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleSolve() throws Exception;
+	abstract void handleSolution() throws Exception;
 
 }

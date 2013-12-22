@@ -35,11 +35,11 @@ interface IVertexModel extends IGraphItem {
 	abstract Point2D getLocation();
 
 	/**
-	 * Returns the background color.
+	 * Returns the fill color.
 	 * 
 	 * @return the color
 	 */
-	abstract Color getBgColor();
+	abstract Color getFillColor();
 
 	/**
 	 * Returns the value.
@@ -73,12 +73,12 @@ interface IVertexModel extends IGraphItem {
 	abstract void setLocation(Point2D point);
 
 	/**
-	 * Sets the background color.
+	 * Sets the fill color.
 	 * 
 	 * @param color
 	 *            the color to set
 	 */
-	abstract void setBgColor(Color color);
+	abstract void setFillColor(Color color);
 
 	/**
 	 * Sets the value.

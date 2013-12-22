@@ -3,7 +3,7 @@ package vistra.core.graph.item.vertex;
 import vistra.util.IState;
 
 /**
- * A vertex state: visited ('a visited vertex').
+ * A vertex state: visited.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

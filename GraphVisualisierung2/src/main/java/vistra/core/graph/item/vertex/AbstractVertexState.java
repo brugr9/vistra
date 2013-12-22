@@ -27,52 +27,55 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles initialise.
+	 * Handles unexplored.
 	 * 
 	 * @throws Exception
 	 */
-	void handleInitialise() throws Exception {
+	void handleUnexplored() throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateIdle(this.stateHandler));
+			this.stateHandler.setState(new VertexStateUnexplored(
+					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Handles activate.
-	 * 
-	 * @throws Exception
-	 */
-	void handleActivate() throws Exception {
-		try {
-			this.stateHandler.setState(new VertexStateActive(this.stateHandler));
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Handles visiting.
+	 * Handles visit.
 	 * 
 	 * @throws Exception
 	 */
 	void handleVisit() throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateVisited(this.stateHandler));
+			this.stateHandler.setState(new VertexStateVisit(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Handles solving.
+	 * Handles visited.
 	 * 
 	 * @throws Exception
 	 */
-	void handleSolve() throws Exception {
+	void handleVisited() throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateSolution(this.stateHandler));
+			this.stateHandler
+					.setState(new VertexStateVisited(this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Handles solution.
+	 * 
+	 * @throws Exception
+	 */
+	void handleSolution() throws Exception {
+		try {
+			this.stateHandler.setState(new VertexStateSolution(
+					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}

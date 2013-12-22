@@ -11,7 +11,8 @@ import vistra.core.graph.item.AbstractGraphItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractVertexModel extends AbstractGraphItem implements IVertexModel {
+abstract class AbstractVertexModel extends AbstractGraphItem implements
+		IVertexModel {
 
 	/**
 	 * A field for the start.
@@ -34,9 +35,9 @@ abstract class AbstractVertexModel extends AbstractGraphItem implements IVertexM
 	private Point2D location;
 
 	/**
-	 * A field for the background color.
+	 * A field for the fill color.
 	 */
-	private Color bgColor;
+	private Color fillColor;
 
 	/**
 	 * Main constructor.
@@ -46,7 +47,7 @@ abstract class AbstractVertexModel extends AbstractGraphItem implements IVertexM
 		this.start = false;
 		this.end = false;
 		this.value = 0;
-		this.bgColor = null;
+		this.fillColor = null;
 	}
 
 	/**
@@ -85,8 +86,8 @@ abstract class AbstractVertexModel extends AbstractGraphItem implements IVertexM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Color getBgColor() {
-		return bgColor;
+	public Color getFillColor() {
+		return fillColor;
 	}
 
 	/**
@@ -125,8 +126,8 @@ abstract class AbstractVertexModel extends AbstractGraphItem implements IVertexM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setBgColor(Color color) {
-		this.bgColor = color;
+	public void setFillColor(Color color) {
+		this.fillColor = color;
 	}
 
 }

@@ -22,8 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-import vistra.common.IAlgorithm;
 import vistra.core.ICore;
+import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.edge.IEdge;
@@ -31,7 +31,7 @@ import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.traversal.Traversal;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
-import vistra.gui.util.SingleRootFileSystemView;
+import vistra.util.SingleRootFileSystemView;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -305,6 +305,79 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
+	 * A state view setter: Sets the view for state: idle.
+	 */
+	void setViewIdle() {
+		this.enableMenu(true);
+		this.model.setAlgorithmsEnabled(false);
+		this.model.notifyObservers(EventSource.ALGORITHM);
+	}
+
+	/**
+	 * A state view setter: Sets the view for state: graph edited.
+	 */
+	void setViewGraphEdited() {
+		this.enableMenu(true);
+		if (this.model.isAlgorithmsEnabled()) {
+			this.model.setAlgorithmsEnabled(false);
+			this.model.notifyObservers(EventSource.ALGORITHM);
+		}
+	}
+
+	/**
+	 * A state view setter: Sets the view for state: graph saved.
+	 */
+	void setViewGraphSaved() {
+		this.enableMenu(true);
+		this.model.setAlgorithmsEnabled(true);
+		this.model.notifyObservers(EventSource.ALGORITHM);
+	}
+
+	/**
+	 * A state view setter: Sets the view for state: algorithm selected. Informs
+	 * the user by option pane about having successfully rendered the traversal.
+	 */
+	void setViewAlgorithmSelected() {
+		this.enableMenu(true);
+		this.model.setAlgorithmsEnabled(true);
+		this.model.notifyObservers(EventSource.ALGORITHM);
+		/* enable traversal player */
+		try {
+			this.model.getAnimationStateHandler().handleIdle();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/* render message */
+		ResourceBundle b = this.model.getResourceBundle();
+		JOptionPane.showMessageDialog(null, b.getString("render.message"),
+				b.getString("app.label"), 1, null);
+	}
+
+	/**
+	 * A state view setter: Sets the view for state: off.
+	 */
+	void setViewOff() {
+		this.enableMenu(false);
+		this.model.setAlgorithmsEnabled(false);
+		this.model.notifyObservers(EventSource.ALGORITHM);
+		this.setGraphEditable(false);
+	}
+
+	/**
+	 * A helper method for state view setter: Handles enabling/disabling the
+	 * menu elements. Does <b>not</b> tell the model to notify
+	 * <code>Observer</code>s.
+	 * 
+	 * @param enabled
+	 *            the enabled to set
+	 */
+	private void enableMenu(boolean enabled) {
+		this.model.setMenuEnabled(enabled);
+		this.model.setSaveGraphEnabled(!this.model.isGraphSaved());
+	}
+
+	/**
 	 * Doing: Enables the possibility to edit the graph.
 	 * 
 	 * @throws Exception
@@ -331,13 +404,13 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingTheGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
-				IExtendedGraph graph = GraphFactory.create();
+				IExtendedGraph graph = GraphFactory.create(edgeType);
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
 				graph.setName(name);
-				graph.setEdgeType(edgeType);
 				this.model.setGraph(graph);
 				this.setGraphSaved(false);
+				this.setGraphEditable(true);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -376,6 +449,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					File source = fileChooser.getSelectedFile();
 					this.model.setGraph(this.core.openGraph(source));
 					this.setGraphSaved(true);
+					this.setGraphEditable(true);
 				}
 			}
 			return option;
@@ -396,6 +470,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			IExtendedGraph graph = this.model.getGraph();
 			this.core.save(graph);
 			this.setGraphSaved(true);
+			this.setGraphEditable(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -435,6 +510,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				IExtendedGraph graph = this.model.getGraph();
 				this.core.saveAs(graph, file);
 				this.setGraphSaved(true);
+				this.setGraphEditable(true);
 			}
 			return option;
 
@@ -720,79 +796,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		} catch (Exception e) {
 			throw e;
 		}
-	}
-
-	/**
-	 * A state view setter: Sets the view for state: idle.
-	 */
-	void setViewIdle() {
-		this.enableMenu(true);
-		this.model.setAlgorithmsEnabled(false);
-		this.model.notifyObservers(EventSource.ALGORITHM);
-	}
-
-	/**
-	 * A state view setter: Sets the view for state: graph edited.
-	 */
-	void setViewGraphEdited() {
-		this.enableMenu(true);
-		if (this.model.isAlgorithmsEnabled()) {
-			this.model.setAlgorithmsEnabled(false);
-			this.model.notifyObservers(EventSource.ALGORITHM);
-		}
-	}
-
-	/**
-	 * A state view setter: Sets the view for state: graph saved.
-	 */
-	void setViewGraphSaved() {
-		this.enableMenu(true);
-		this.model.setAlgorithmsEnabled(true);
-		this.model.notifyObservers(EventSource.ALGORITHM);
-	}
-
-	/**
-	 * A state view setter: Sets the view for state: algorithm selected. Informs
-	 * the user by option pane about having successfully rendered the traversal.
-	 */
-	void setViewAlgorithmSelected() {
-		this.enableMenu(true);
-		this.model.setAlgorithmsEnabled(true);
-		this.model.notifyObservers(EventSource.ALGORITHM);
-		/* enable traversal player */
-		try {
-			this.model.getAnimationStateHandler().handleIdle();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		/* render message */
-		ResourceBundle b = this.model.getResourceBundle();
-		JOptionPane.showMessageDialog(null, b.getString("render.message"),
-				b.getString("app.label"), 1, null);
-	}
-
-	/**
-	 * A state view setter: Sets the view for state: off.
-	 */
-	void setViewOff() {
-		this.enableMenu(false);
-		this.model.setAlgorithmsEnabled(false);
-		this.model.notifyObservers(EventSource.ALGORITHM);
-		this.setGraphEditable(false);
-	}
-
-	/**
-	 * A helper method for state view setter: Handles enabling/disabling the
-	 * menu elements. Does <b>not</b> tell the model to notify
-	 * <code>Observer</code>s.
-	 * 
-	 * @param enabled
-	 *            the enabled to set
-	 */
-	private void enableMenu(boolean enabled) {
-		this.model.setMenuEnabled(enabled);
-		this.model.setSaveGraphEnabled(!this.model.isGraphSaved());
 	}
 
 	/**

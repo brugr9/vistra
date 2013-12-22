@@ -16,7 +16,7 @@ import javax.swing.border.TitledBorder;
 
 import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
-import vistra.util.GraphColor;
+import vistra.util.ColorPalette;
 
 
 /**
@@ -63,8 +63,8 @@ public final class ProtocolPanel extends JPanel implements Observer {
 		this.protocolTextArea.setRows(8);
 		this.protocolTextArea.setLineWrap(true);
 		this.protocolTextArea.setWrapStyleWord(true);
-		this.protocolTextArea.setBackground(GraphColor.LIGHT_GRAY);
-		this.protocolTextArea.setForeground(GraphColor.DARK_BLUE);
+		this.protocolTextArea.setBackground(ColorPalette.GRAY);
+		this.protocolTextArea.setForeground(ColorPalette.DARKBLUE);
 		// protocolScrollPane
 		this.protocolScrollPane = new JScrollPane(this.protocolTextArea);
 		this.protocolScrollPane

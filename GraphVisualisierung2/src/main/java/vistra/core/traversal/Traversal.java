@@ -3,7 +3,7 @@ package vistra.core.traversal;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import vistra.util.IImmutableBidirectionalIterator;
+import vistra.util.IBidirectIterator;
 
 /**
  * A traversal as an immutable, bidirectional iterator over steps.
@@ -11,12 +11,12 @@ import vistra.util.IImmutableBidirectionalIterator;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Traversal implements IImmutableBidirectionalIterator<IStep> {
+public class Traversal implements IBidirectIterator<IStep> {
 
 	/**
 	 * A field for an iterator over steps.
 	 */
-	private IImmutableBidirectionalIterator<IStep> stepIterator;
+	private IBidirectIterator<IStep> stepIterator;
 
 	/**
 	 * Main constructor.
@@ -25,7 +25,7 @@ public class Traversal implements IImmutableBidirectionalIterator<IStep> {
 	 *            an iterator over steps
 	 * 
 	 */
-	public Traversal(IImmutableBidirectionalIterator<IStep> stepIterator) {
+	public Traversal(IBidirectIterator<IStep> stepIterator) {
 		this.stepIterator = stepIterator;
 
 	}

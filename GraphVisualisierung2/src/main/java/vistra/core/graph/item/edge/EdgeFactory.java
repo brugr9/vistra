@@ -19,7 +19,7 @@ public class EdgeFactory implements Factory<IEdge> {
 	public IEdge create() {
 		IEdge edge = new Edge();
 		try {
-			edge.handleIdle();
+			edge.handleUnexplored();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class EdgeFactory implements Factory<IEdge> {
 	public static IEdge createEdge() {
 		IEdge edge = new Edge();
 		try {
-			edge.handleIdle();
+			edge.handleUnexplored();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

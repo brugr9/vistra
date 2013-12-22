@@ -10,10 +10,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.view.component.vizualization.transformer.EdgeTransformer;
-import vistra.gui.view.component.vizualization.transformer.GraphTransformer;
-import vistra.gui.view.component.vizualization.transformer.HyperEdgeTransformer;
-import vistra.gui.view.component.vizualization.transformer.VertexTransformer;
+import vistra.core.graph.transformer.GraphTransformer;
+import vistra.core.graph.transformer.edge.EdgeTransformer;
+import vistra.core.graph.transformer.edge.HyperEdgeTransformer;
+import vistra.core.graph.transformer.vertex.VertexTransformer;
 import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.GraphMLWriter;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
@@ -140,7 +140,7 @@ class GraphManager implements IGraphManager {
 	 *            the file to load
 	 * @return the loaded graph
 	 */
-	private IExtendedGraph read(final File file) throws GraphException {
+	private IExtendedGraph read(File file) throws GraphException {
 		try {
 			GraphMLReader2<IExtendedGraph, IVertex, IEdge> graphReader = new GraphMLReader2<>(
 					new FileReader(file), this.graphTransformer,

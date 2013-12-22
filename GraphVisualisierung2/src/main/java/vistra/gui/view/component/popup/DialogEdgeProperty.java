@@ -18,7 +18,7 @@ import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.gui.view.component.popup.verifier.EdgeWeightVerifier;
 import vistra.gui.view.component.popup.verifier.GraphItemIdVerifier;
-import vistra.gui.view.component.vizualization.transformer.ValueTransformer;
+import vistra.util.Convert;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -132,8 +132,8 @@ public class DialogEdgeProperty extends JDialog {
 			VisualizationViewer<IVertex, IEdge> vViewer) {
 
 		edge.setId(this.txtEdgeName.getText().trim());
-		edge.setWeight(ValueTransformer.round2Decimals(ValueTransformer
-				.transformDouble(this.txtEdgeWeight.getText())));
+		edge.setWeight(Convert.toRounded2Decimals(Convert
+				.toDouble(this.txtEdgeWeight.getText())));
 		vViewer.repaint();
 		this.dispose();
 	}

@@ -1,8 +1,8 @@
 package vistra.core.algorithm.impl;
 
-import vistra.common.IAlgorithm;
 import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.AlgorithmException;
+import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.IExtendedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 

@@ -1,7 +1,7 @@
 package vistra.core.graph.item.edge;
 
-import vistra.util.GraphPropertyConstants;
-import vistra.util.GraphColor;
+import vistra.core.graph.GraphMLMeta;
+import vistra.util.ColorPalette;
 
 /**
  * An edge (state handler).
@@ -21,17 +21,17 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 	 */
 	public Edge() {
 		super();
-		this.state = new EdgeStateIdle(this);
+		this.state = new EdgeStateUnexplored(this);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleIdle() throws Exception {
+	public void handleUnexplored() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleInitialise();
+			this.state.handleUnexplored();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -41,10 +41,10 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleVisit() throws Exception {
+	public void handleDiscovery() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleVisit();
+			this.state.handleDiscovery();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -54,10 +54,10 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleDiscard() throws Exception {
+	public void handleBack() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleDiscard();
+			this.state.handleBack();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -67,10 +67,49 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolve() throws Exception {
+	public void handleForward() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleSolve();
+			this.state.handleForward();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleCross() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleCross();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleDiscarded() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleDiscarded();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleSolution() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleSolution();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -97,11 +136,11 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 	 * 
 	 * @throws Exception
 	 */
-	void setViewIdle() throws Exception {
+	void setViewUnexplored() throws Exception {
 		try {
-			this.setFontColor(GraphColor.DARK_BLUE);
-			this.setLineColor(GraphColor.DARK_BLUE);
-			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_DEFAULT);
+			this.setFontColor(ColorPalette.darkblue);
+			this.setLineColor(ColorPalette.darkblue);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_DEFAULT);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -112,11 +151,56 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 	 * 
 	 * @throws Exception
 	 */
-	void setViewVisited() throws Exception {
+	void setViewDiscovery() throws Exception {
 		try {
-			this.setFontColor(GraphColor.RED);
-			this.setLineColor(GraphColor.RED);
-			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
+			this.setFontColor(ColorPalette.red);
+			this.setLineColor(ColorPalette.red);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Doing:
+	 * 
+	 * @throws Exception
+	 */
+	void setViewBack() throws Exception {
+		try {
+			this.setFontColor(ColorPalette.darkgreen);
+			this.setLineColor(ColorPalette.darkgreen);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Doing:
+	 * 
+	 * @throws Exception
+	 */
+	void setViewForward() throws Exception {
+		try {
+			this.setFontColor(ColorPalette.darkgreen);
+			this.setLineColor(ColorPalette.darkgreen);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Doing:
+	 * 
+	 * @throws Exception
+	 */
+	void setViewCross() throws Exception {
+		try {
+			this.setFontColor(ColorPalette.darkgreen);
+			this.setLineColor(ColorPalette.darkgreen);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -129,9 +213,9 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 	 */
 	void setViewDiscarded() throws Exception {
 		try {
-			this.setFontColor(GraphColor.LIGHT_GRAY);
-			this.setLineColor(GraphColor.LIGHT_GRAY);
-			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
+			this.setFontColor(ColorPalette.GRAY);
+			this.setLineColor(ColorPalette.GRAY);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
 			// TODO
 			// this.setFontColor(VistraColor.DARK_BLUE);
 			// this.setLineColor(VistraColor.DARK_BLUE);
@@ -149,9 +233,9 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 	 */
 	void setViewSolution() throws Exception {
 		try {
-			this.setFontColor(GraphColor.LIGHT_GREEN);
-			this.setLineColor(GraphColor.LIGHT_GREEN);
-			this.setLineWidth(GraphPropertyConstants.STROKE_WIDTH_BOLD);
+			this.setFontColor(ColorPalette.GREEN);
+			this.setLineColor(ColorPalette.GREEN);
+			this.setLineWidth(GraphMLMeta.STROKE_WIDTH_BOLD);
 		} catch (Exception e) {
 			throw e;
 		}

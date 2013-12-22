@@ -1,12 +1,14 @@
 package vistra.core.traversal;
 
+import vistra.util.ICommandHandler;
+
 /**
  * A step interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IStep {
+public interface IStep extends ICommandHandler {
 
 	/**
 	 * Executes the step and returns a step description.
@@ -19,8 +21,9 @@ public interface IStep {
 	/**
 	 * Undoes the step.
 	 * 
+	 * @return a description
 	 * @throws Exception
 	 */
-	abstract void undo() throws Exception;
+	abstract String undo() throws Exception;
 
 }

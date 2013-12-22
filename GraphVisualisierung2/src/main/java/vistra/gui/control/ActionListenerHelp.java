@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import vistra.gui.IModel;
 
 /**
- * A listener for getting a list of shortcuts.
+ * A listener for getting some help.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

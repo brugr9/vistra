@@ -1,50 +1,39 @@
 package vistra.common;
 
+import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.AlgorithmException;
+import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.IExtendedGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * @author TODO set developer name
  * 
- *         TODO rename the class
  */
-public class AlgorithmTemplate implements IAlgorithm {
+public abstract class AlgorithmTemplate extends AbstractAlgorithm implements
+		IAlgorithm {
+
+	// TODO rename the class
+	// TODO remove the modifier 'abstract'
 
 	/**
-	 * {@inheritDoc}
+	 * Main constructor.
 	 */
-	@Override
-	public String getName() {
-		return this.getClass().getName();
+	public AlgorithmTemplate() {
+		super();
+		// TODO set an algorithm description
+		this.setDescription("");
+		// TODO set the edge type by using one of the following statements:
+		this.setEdgeType(EdgeType.UNDIRECTED);
+		// this.setEdgeType(EdgeType.DIRECTED);
+		// this.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
+		// EdgeType.DIRECTED });
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getDescription() {
-		// TODO set Algorithm description
-		return "AlgorithmTemplate";
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void traverse(IExtendedGraph graph) throws AlgorithmException {
-		// TODO implement algorithm
+		// TODO implement the algorithm
 
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public EdgeType[] getEdgeTypes() {
-		// TODO EdgeType verwenden
-		// TODO set EdgeType
-		return null;
 	}
 
 }
