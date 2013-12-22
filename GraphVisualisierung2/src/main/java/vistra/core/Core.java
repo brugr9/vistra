@@ -7,8 +7,6 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.apache.commons.io.FileUtils;
-
 import vistra.core.algorithm.AlgorithmManagerFactory;
 import vistra.core.algorithm.IAlgorithm;
 import vistra.core.algorithm.IAlgorithmManager;
@@ -124,35 +122,6 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public File getWorkbench() {
-		return new File(this.algorithmManager.getWorkbench());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public FileNameExtensionFilter getAlgorithmFilter() {
-		return this.algorithmManager.getFilter();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public EdgeType[] importAlgorithm(File source) throws CoreException {
-		try {
-			FileUtils.copyFileToDirectory(source, this.getWorkbench());
-			return this.algorithmManager.add(source);
-		} catch (Exception e) {
-			throw new CoreException(e);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public String[] getAlgorithms(EdgeType edgeType) throws CoreException {
 		try {
 			return this.algorithmManager.getNames(edgeType);
@@ -179,23 +148,6 @@ public class Core implements ICore {
 	@Override
 	public void setAlgorithm(IAlgorithm algorithm) {
 		this.algorithm = algorithm;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public EdgeType[] deleteAlgorithm(File file) throws CoreException {
-
-		try {
-			if (file.delete())
-				return this.algorithmManager.remove(file.getName());
-			else
-				return null;
-		} catch (Exception e) {
-			throw new CoreException(e);
-		}
-
 	}
 
 	/**

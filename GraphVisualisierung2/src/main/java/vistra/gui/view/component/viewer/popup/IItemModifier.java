@@ -1,4 +1,4 @@
-package vistra.gui.view.component.popup;
+package vistra.gui.view.component.viewer.popup;
 
 import java.awt.geom.Point2D;
 

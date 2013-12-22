@@ -18,7 +18,6 @@ import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
 import vistra.util.ColorPalette;
 
-
 /**
  * A protocol panel.
  * 
@@ -32,51 +31,48 @@ public final class ProtocolPanel extends JPanel implements Observer {
 	/**
 	 * A field for a titled border.
 	 */
-	private TitledBorder protocolPanelBorder;
+	private TitledBorder border;
 	/**
-	 * A field for a messages screen.
+	 * A field for a text area.
 	 */
-	private JTextArea protocolTextArea;
+	private JTextArea textArea;
 	/**
 	 * A field for a scroll pane.
 	 */
-	private JScrollPane protocolScrollPane;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param width
-	 *            the panel width
-	 * @param height
-	 *            the panel height
+	 * @param size
+	 *            the size
 	 */
-	public ProtocolPanel(int width, int height) {
+	public ProtocolPanel(Dimension size) {
 		super();
-		// size
-		this.setMinimumSize(new Dimension(width, height));
+		this.setMinimumSize(size);
+		this.border = BorderFactory.createTitledBorder("protocolPanel");
+		this.setBorder(border);
 
-		// protocolTextArea
-		this.protocolTextArea = new JTextArea();
-		this.protocolTextArea.setEditable(false);
-		this.protocolTextArea.setMinimumSize(new Dimension(width, height));
-		this.protocolTextArea.setColumns(50);
-		this.protocolTextArea.setRows(8);
-		this.protocolTextArea.setLineWrap(true);
-		this.protocolTextArea.setWrapStyleWord(true);
-		this.protocolTextArea.setBackground(ColorPalette.GRAY);
-		this.protocolTextArea.setForeground(ColorPalette.DARKBLUE);
-		// protocolScrollPane
-		this.protocolScrollPane = new JScrollPane(this.protocolTextArea);
-		this.protocolScrollPane
+		/* text area */
+		this.textArea = new JTextArea();
+		this.textArea.setEditable(false);
+		this.textArea.setMinimumSize(size);
+		this.textArea.setColumns(50);
+		this.textArea.setRows(8);
+		this.textArea.setLineWrap(true);
+		this.textArea.setWrapStyleWord(true);
+		this.textArea.setBackground(ColorPalette.gray);
+		this.textArea.setForeground(ColorPalette.darkblue);
+		// scroll pane
+		this.scrollPane = new JScrollPane(this.textArea);
+		this.scrollPane
 				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		this.protocolScrollPane
+		this.scrollPane
 				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		// Layout
-		this.protocolPanelBorder = BorderFactory
-				.createTitledBorder("protocolPanel");
-		this.setBorder(protocolPanelBorder);
+
+		/* this */
 		this.setLayout(new GridLayout(1, 1));
-		this.add(this.protocolScrollPane);
+		this.add(this.scrollPane);
 	}
 
 	/**
@@ -92,12 +88,11 @@ public final class ProtocolPanel extends JPanel implements Observer {
 			try {
 
 				if (arg == EventSource.I18N) {
-					this.protocolPanelBorder.setTitle(b
-							.getString("protocol.label"));
+					this.border.setTitle(b.getString("protocol.label"));
 				}
-				this.protocolTextArea.setText(m.getStringBuilder().toString());
-				this.protocolTextArea.setCaretPosition(this.protocolTextArea
-						.getDocument().getLength());
+				this.textArea.setText(m.getStringBuilder().toString());
+				this.textArea.setCaretPosition(this.textArea.getDocument()
+						.getLength());
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

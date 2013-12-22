@@ -132,38 +132,6 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: import algorithm.
-	 * 
-	 * @throws Exception
-	 */
-	void handleImportAlgorithm() throws Exception {
-		try {
-			int option = this.stateHandler.importAlgorithm();
-			if (option == 0)
-				this.stateHandler
-						.setState(new ParameterIdle(this.stateHandler));
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Handles an interaction: delete algorithm.
-	 * 
-	 * @throws Exception
-	 */
-	void handleDeleteAlgorithm() throws Exception {
-		try {
-			int option = this.stateHandler.deleteAlgorithm();
-			if (option == 0)
-				this.stateHandler
-						.setState(new ParameterIdle(this.stateHandler));
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * Handles an interaction: select algorithm.
 	 * 
 	 * @throws Exception

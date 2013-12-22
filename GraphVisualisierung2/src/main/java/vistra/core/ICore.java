@@ -63,31 +63,6 @@ public interface ICore {
 	abstract void saveAs(IExtendedGraph graph, File file) throws CoreException;
 
 	/**
-	 * Returns the algorithm workbench directory.
-	 * 
-	 * @return the algorithm workbench directory
-	 */
-	abstract File getWorkbench();
-
-	/**
-	 * Returns the algorithm filename extension filter.
-	 * 
-	 * @return the algorithm filename extension filter
-	 */
-	abstract FileNameExtensionFilter getAlgorithmFilter();
-
-	/**
-	 * Imports an algorithm given as file and returns the edge types the
-	 * algorithm can handle.
-	 * 
-	 * @param source
-	 *            the algorithm file to import
-	 * @return the edge types
-	 * @throws CoreException
-	 */
-	abstract EdgeType[] importAlgorithm(File source) throws CoreException;
-
-	/**
 	 * Returns an array of available algorithms as names.
 	 * <p>
 	 * The list is filtered: it contains only the names of algorithms able to
@@ -117,17 +92,6 @@ public interface ICore {
 	 *            the algorithm to set
 	 */
 	abstract void setAlgorithm(IAlgorithm algorithm) throws CoreException;
-
-	/**
-	 * Deletes an imported algorithm file and returns the edge types the
-	 * algorithm was able to handle.
-	 * 
-	 * @param file
-	 *            the algorithm file to delete
-	 * @return the edge types if success (<code>null</code> else)
-	 * @throws CoreException
-	 */
-	abstract EdgeType[] deleteAlgorithm(File file) throws CoreException;
 
 	/**
 	 * Traverses a graph as given by executing the algorithm. Returns traversal

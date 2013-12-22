@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visual;
+package vistra.gui.view.component.viewer;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;

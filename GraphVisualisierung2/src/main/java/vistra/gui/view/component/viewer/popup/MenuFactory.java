@@ -1,4 +1,4 @@
-package vistra.gui.view.component.popup;
+package vistra.gui.view.component.viewer.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,7 @@ import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
-import vistra.gui.view.component.visual.AdaptedVisualizationViewer;
+import vistra.gui.view.component.viewer.Viewer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -43,7 +43,7 @@ public class MenuFactory extends JPopupMenu implements IItemModifier {
 	 * @param viewer
 	 *            an adapted visualization viewer
 	 */
-	public MenuFactory(AdaptedVisualizationViewer viewer) {
+	public MenuFactory(Viewer viewer) {
 		super("Neuer Knoten");
 
 		this.vertexFactory = new VertexFactory();

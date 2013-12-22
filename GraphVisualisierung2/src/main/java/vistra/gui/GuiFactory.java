@@ -70,6 +70,7 @@ public final class GuiFactory {
 				view = new MinimalView(layout, model, control);
 			else
 				view = new FullView(layout, model, control);
+			control.init();
 			return view;
 		} catch (Exception ex) {
 			throw ex;

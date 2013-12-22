@@ -22,7 +22,6 @@ import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
 import vistra.util.ColorPalette;
 
-
 /**
  * An algorithm panel.
  * 
@@ -36,66 +35,66 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 	/**
 	 * A field for a titled border.
 	 */
-	private TitledBorder titledBorder;
+	private TitledBorder border;
 	/**
-	 * A field for an algorithm combo box.
+	 * A field for a combo box.
 	 */
-	private JComboBox<String> algorithmCombo;
+	private JComboBox<String> combo;
 	/**
-	 * A field for an algorithm combo model.
+	 * A field for a combo box model.
 	 */
-	private ComboBoxModel<String> algorithmComboModel;
+	private ComboBoxModel<String> comboModel;
 	/**
-	 * A field for an algorithm description text area.
+	 * A field for a text area.
 	 */
-	private JTextArea algorithmDescriptionTextArea;
+	private JTextArea textArea;
 	/**
-	 * A field for an algorithm description scroll pane.
+	 * A field for a scroll pane.
 	 */
-	private JScrollPane algorithmDescriptionScrollPane;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param model
 	 *            the model as in MVC
+	 * @param size
+	 *            the panel size
 	 */
-	public AlgorithmPanel(IModel model, int width, int height) {
+	public AlgorithmPanel(IModel model, Dimension size) {
 		super();
-		this.setSize(new Dimension(width, height));
+		this.setSize(size);
+		this.border = BorderFactory.createTitledBorder("algorithmPanel");
+		this.setBorder(border);
+		this.setBackground((Color) ColorPalette.antique);
 
-		// combo
-		this.algorithmComboModel = new DefaultComboBoxModel<String>(
+		/* combo */
+		this.comboModel = new DefaultComboBoxModel<String>(
 				model.getAlgorithms());
-		this.algorithmCombo = new JComboBox<String>(this.algorithmComboModel);
-		this.algorithmCombo.addItemListener(model.getParameterStateHandler());
+		this.combo = new JComboBox<String>(this.comboModel);
+		this.combo.addItemListener(model.getParameterStateHandler());
 
-		// algorithmDescriptionTextArea
-		this.algorithmDescriptionTextArea = new JTextArea();
-		this.algorithmDescriptionTextArea.setEditable(false);
-		this.algorithmDescriptionTextArea.setMinimumSize(new Dimension(width,
-				height / 3));
-		this.algorithmDescriptionTextArea.setColumns(10);
-		this.algorithmDescriptionTextArea.setRows(10);
-		this.algorithmDescriptionTextArea.setLineWrap(true);
-		this.algorithmDescriptionTextArea.setWrapStyleWord(true);
-		this.algorithmDescriptionTextArea.setBackground(ColorPalette.GRAY);
-		this.algorithmDescriptionTextArea.setForeground(ColorPalette.DARKBLUE);
-		// algorithmDescriptionScrollPane
-		this.algorithmDescriptionScrollPane = new JScrollPane(
-				this.algorithmDescriptionTextArea);
-		this.algorithmDescriptionScrollPane
+		/* text area */
+		this.textArea = new JTextArea();
+		this.textArea.setEditable(false);
+		this.textArea.setMinimumSize(size);
+		this.textArea.setColumns(10);
+		this.textArea.setRows(10);
+		this.textArea.setLineWrap(true);
+		this.textArea.setWrapStyleWord(true);
+		this.textArea.setBackground(ColorPalette.gray);
+		this.textArea.setForeground(ColorPalette.darkblue);
+		// scroll pane
+		this.scrollPane = new JScrollPane(this.textArea);
+		this.scrollPane
 				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		this.algorithmDescriptionScrollPane
+		this.scrollPane
 				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-		// this
-		this.titledBorder = BorderFactory.createTitledBorder("algorithmPanel");
-		this.setBorder(titledBorder);
-		this.setBackground((Color) ColorPalette.ANTIQUE);
+		/* this */
 		this.setLayout(new BorderLayout());
-		this.add(this.algorithmCombo, BorderLayout.NORTH);
-		this.add(this.algorithmDescriptionTextArea, BorderLayout.SOUTH);
+		this.add(this.combo, BorderLayout.NORTH);
+		this.add(this.textArea, BorderLayout.SOUTH);
 
 	}
 
@@ -113,18 +112,16 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 			try {
 
 				if (arg == EventSource.I18N) {
-					this.titledBorder.setTitle(b.getString("algorithm.label"));
+					this.border.setTitle(b.getString("algorithm.label"));
 				} else if (arg == EventSource.GRAPH) {
-					this.algorithmCombo.setEnabled(m.isAlgorithmsEnabled());
+					this.combo.setEnabled(m.isAlgorithmsEnabled());
 				} else if (arg == EventSource.ALGORITHM) {
-					this.algorithmComboModel = new DefaultComboBoxModel<String>(
+					this.comboModel = new DefaultComboBoxModel<String>(
 							m.getAlgorithms());
-					this.algorithmCombo.setSelectedIndex(m
-							.getSelectedAlgorithmIndex());
-					this.algorithmCombo.setEnabled(m.isAlgorithmsEnabled());
-					this.algorithmDescriptionTextArea.setText(m
-							.getAlgorithmDescription());
-					this.algorithmDescriptionTextArea.setCaretPosition(1);
+					this.combo.setSelectedIndex(m.getSelectedAlgorithmIndex());
+					this.combo.setEnabled(m.isAlgorithmsEnabled());
+					this.textArea.setText(m.getAlgorithmDescription());
+					this.textArea.setCaretPosition(1);
 				}
 
 			} catch (Exception e) {

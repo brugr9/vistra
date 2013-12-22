@@ -1,6 +1,7 @@
 package vistra.gui.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
@@ -51,15 +52,14 @@ public class FullView extends MinimalView {
 		super(layout, model, control);
 
 		/* Component */
-		int width = FRAME_WIDTH - VISUALISATION_WIDTH;
+		int width = FRAME_WIDTH;
 		int height = FRAME_HEIGHT - VISUALISATION_HEIGHT
 				- this.menuBar.getHeight();
-		this.protocolPanel = new ProtocolPanel(width, height);
-		/* observe the model */
+		this.protocolPanel = new ProtocolPanel(new Dimension(width, height));
 		model.addObserver(protocolPanel);
 		/* this */
 		this.add(this.protocolPanel, BorderLayout.SOUTH);
-		control.init();
+		this.setVisible(true);
 	}
 
 }

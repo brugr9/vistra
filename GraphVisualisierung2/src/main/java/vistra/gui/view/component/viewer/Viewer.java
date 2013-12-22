@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visual;
+package vistra.gui.view.component.viewer;
 
 import java.awt.Dimension;
 import java.util.Observable;
@@ -21,11 +21,12 @@ import vistra.core.graph.transformer.vertex.VertexShapeTransformer;
 import vistra.core.graph.transformer.vertex.VertexStrokeTransformer;
 import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
-import vistra.gui.view.component.popup.MenuFactory;
-import vistra.gui.view.component.popup.PopupMenuEdge;
-import vistra.gui.view.component.popup.PopupMenuVertex;
+import vistra.gui.view.component.viewer.popup.MenuFactory;
+import vistra.gui.view.component.viewer.popup.EdgePopup;
+import vistra.gui.view.component.viewer.popup.VertexPopup;
 import vistra.util.ColorPalette;
 import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
@@ -39,23 +40,19 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class AdaptedVisualizationViewer extends
-		VisualizationViewer<IVertex, IEdge> implements Observer {
+public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
+		Observer {
 
 	private static final long serialVersionUID = 1145648259547595925L;
 
 	/**
 	 * A field for a vertex menu.
 	 */
-	private PopupMenuVertex vertexMenu;
+	private VertexPopup vertexMenu;
 	/**
 	 * A field for an edge menu.
 	 */
-	private PopupMenuEdge edgeMenu;
-	/**
-	 * A field for a vertex-menu factory.
-	 */
-	private MenuFactory vertexMenuFactory;
+	private EdgePopup edgeMenu;
 	/**
 	 * A field for an editing modal graph mouse.
 	 */
@@ -71,50 +68,36 @@ public class AdaptedVisualizationViewer extends
 	 * @param dimension
 	 *            the dimension
 	 */
-	public AdaptedVisualizationViewer(JFrame top,
-			Layout<IVertex, IEdge> layout, Dimension dimension) {
+	public Viewer(JFrame top, Layout<IVertex, IEdge> layout, Dimension dimension) {
 		super(layout, dimension);
 		super.setBackground(ColorPalette.WHITE);
 
-		/* Vertex layout */
+		/* Context */
+		RenderContext<IVertex, IEdge> c = this.getRenderContext();
+		/* Vertex */
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
-		this.getRenderContext().setVertexShapeTransformer(
-				new VertexShapeTransformer());
-		this.getRenderContext().setVertexStrokeTransformer(
-				new VertexStrokeTransformer());
-		this.getRenderContext().setVertexFillPaintTransformer(
-				new VertexFillPaintTransformer());
-		this.getRenderContext().setVertexLabelTransformer(
-				new VertexLabelTransformer());
+		c.setVertexShapeTransformer(new VertexShapeTransformer());
+		c.setVertexStrokeTransformer(new VertexStrokeTransformer());
+		c.setVertexFillPaintTransformer(new VertexFillPaintTransformer());
+		c.setVertexLabelTransformer(new VertexLabelTransformer());
+		/* Edge */
+		c.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertex, IEdge>(
+				0.5, 0.5));
+		c.setEdgeShapeTransformer(new EdgeShape.Line<IVertex, IEdge>());
+		c.setEdgeDrawPaintTransformer(new EdgeLineColorTransformer());
+		c.setArrowDrawPaintTransformer(new EdgeLineColorTransformer());
+		c.setEdgeLabelTransformer(new EdgeLabelTransformer());
+		c.setEdgeStrokeTransformer(new EdgeLineWidthTransformer());
+		c.setEdgeArrowStrokeTransformer(new EdgeLineWidthTransformer());
 
-
-		/* Edge layout */
-		this.getRenderContext().setEdgeShapeTransformer(
-				new EdgeShape.Line<IVertex, IEdge>());
-		this.getRenderContext().setEdgeDrawPaintTransformer(
-				new EdgeLineColorTransformer());
-		this.getRenderContext().setArrowDrawPaintTransformer(
-				new EdgeLineColorTransformer());
-		// Edge label: center
-		this.getRenderContext().setEdgeLabelClosenessTransformer(
-				new ConstantDirectionalEdgeValueTransformer<IVertex, IEdge>(
-						0.5, 0.5));
-		this.getRenderContext().setEdgeLabelTransformer(
-				new EdgeLabelTransformer());
-		this.getRenderContext().setEdgeStrokeTransformer(
-				new EdgeLineWidthTransformer());
-		this.getRenderContext().setEdgeArrowStrokeTransformer(
-				new EdgeLineWidthTransformer());
-
-		/* context menu */
-		this.vertexMenu = new PopupMenuVertex(top, this);
-		this.edgeMenu = new PopupMenuEdge(top, this);
+		/* popup menu */
+		this.vertexMenu = new VertexPopup(top, this);
+		this.edgeMenu = new EdgePopup(top, this);
 
 		/* mouse */
-		this.vertexMenuFactory = new MenuFactory(this);
-		this.mouse = new AdaptedEditingModalGraphMouse(this.getRenderContext(),
-				new VertexFactory(), new EdgeFactory(), this.edgeMenu,
-				this.vertexMenu, this.vertexMenuFactory);
+		this.mouse = new AdaptedEditingModalGraphMouse(c, new VertexFactory(),
+				new EdgeFactory(), this.edgeMenu, this.vertexMenu,
+				new MenuFactory(this));
 		this.setGraphMouse(this.mouse);
 		this.addKeyListener(this.mouse.getModeKeyListener());
 

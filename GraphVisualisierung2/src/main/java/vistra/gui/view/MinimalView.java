@@ -41,21 +41,21 @@ public class MinimalView extends JFrame implements IView {
 	 */
 	protected final MenuBar menuBar;
 	/**
-	 * A field for a visualization panel.
+	 * A field for a graph panel.
 	 */
-	private final GraphPanel visualizationPanel;
+	private final GraphPanel graphPanel;
 	/**
-	 * A field for a right panel.
+	 * A field for another panel.
 	 */
-	private final JPanel controlPanel;
+	private final JPanel anotherPanel;
 	/**
-	 * A field for the settings panel.
+	 * A field for an algorithm panel.
 	 */
-	private final AlgorithmPanel parameterPanel;
+	private final AlgorithmPanel algorithmPanel;
 	/**
 	 * A field for a traversal panel.
 	 */
-	private final TraversalPanel playerPanel;
+	private final TraversalPanel traversalPanel;
 
 	/**
 	 * Main constructor.
@@ -70,39 +70,40 @@ public class MinimalView extends JFrame implements IView {
 			IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocation(20, 20);
+		this.setTitle(model.getResourceBundle().getString("app.label"));
 		this.setMinimumSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		this.setResizable(false);
+		this.setLocation(20, 20);
 
 		/* Components */
 		this.menuBar = new MenuBar(model);
-		this.visualizationPanel = new GraphPanel(this, model, layout,
-				new Dimension(VISUALISATION_WIDTH, VISUALISATION_HEIGHT));
+		this.graphPanel = new GraphPanel(this, model, layout, new Dimension(
+				VISUALISATION_WIDTH, VISUALISATION_HEIGHT));
 		int width = FRAME_WIDTH - VISUALISATION_WIDTH;
 		// TODO height
-		this.parameterPanel = new AlgorithmPanel(model, width, 200);
-		this.playerPanel = new TraversalPanel(model, width, 400);
+		this.algorithmPanel = new AlgorithmPanel(model, new Dimension(width,
+				200));
+		this.traversalPanel = new TraversalPanel(model, new Dimension(width,
+				400));
 
 		// components observe the model
 		model.addObserver(this.menuBar);
-		model.addObserver(this.visualizationPanel);
-		model.addObserver(this.parameterPanel);
-		model.addObserver(this.playerPanel);
+		model.addObserver(this.graphPanel);
+		model.addObserver(this.algorithmPanel);
+		model.addObserver(this.traversalPanel);
 
-		/* control panel */
-		this.controlPanel = new JPanel();
-		this.controlPanel.setLayout(new BorderLayout());
-		this.controlPanel.setBackground((Color) ColorPalette.ANTIQUE);
-		this.controlPanel.add(this.parameterPanel, BorderLayout.NORTH);
-		this.controlPanel.add(this.playerPanel, BorderLayout.SOUTH);
+		/* another panel */
+		this.anotherPanel = new JPanel();
+		this.anotherPanel.setLayout(new BorderLayout());
+		this.anotherPanel.setBackground((Color) ColorPalette.antique);
+		this.anotherPanel.add(this.algorithmPanel, BorderLayout.NORTH);
+		this.anotherPanel.add(this.traversalPanel, BorderLayout.SOUTH);
 
 		/* this */
 		this.setJMenuBar(this.menuBar);
 		this.setLayout(new BorderLayout());
-		this.add(this.visualizationPanel, BorderLayout.WEST);
-		this.add(this.controlPanel, BorderLayout.EAST);
-		control.init();
-		this.setTitle(model.getResourceBundle().getString("app.label"));
+		this.add(this.graphPanel, BorderLayout.WEST);
+		this.add(this.anotherPanel, BorderLayout.EAST);
 		this.setVisible(true);
 	}
 

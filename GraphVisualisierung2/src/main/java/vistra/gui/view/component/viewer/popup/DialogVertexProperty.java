@@ -1,4 +1,4 @@
-package vistra.gui.view.component.popup;
+package vistra.gui.view.component.viewer.popup;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.view.component.popup.verifier.GraphItemIdVerifier;
+import vistra.gui.view.component.viewer.popup.verifier.GraphItemIdVerifier;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**

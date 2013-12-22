@@ -1,4 +1,4 @@
-package vistra.gui.view.component.visual;
+package vistra.gui.view.component.viewer;
 
 import java.awt.event.InputEvent;
 import java.awt.event.ItemEvent;
@@ -10,7 +10,7 @@ import org.apache.commons.collections15.Factory;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.view.component.popup.MenuFactory;
+import vistra.gui.view.component.viewer.popup.MenuFactory;
 import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.annotations.AnnotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.AnimatedPickingGraphMousePlugin;

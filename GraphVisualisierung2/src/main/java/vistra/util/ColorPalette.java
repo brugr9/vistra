@@ -1,7 +1,6 @@
 package vistra.util;
 
 import java.awt.Color;
-
 import vistra.core.graph.GraphMLMeta;
 
 /**
@@ -125,10 +124,10 @@ public abstract class ColorPalette {
 	}
 
 	/**
-	 * Converts a color name as found in {@link ColorPalette} to a lower case
-	 * string (e.g. used as metadata property in a GraphML element).
+	 * Converts a colour name as found in {@link ColorPalette} to a lower case
+	 * string (e.g. used as meta-data property in a GraphML element).
 	 * <p>
-	 * If the color as given is not defined in {@link ColorPalette}, the method
+	 * If the colour as given is not defined in {@link ColorPalette}, the method
 	 * returns the RGB value as string.
 	 * 
 	 * @param color
@@ -195,11 +194,12 @@ public abstract class ColorPalette {
 	}
 
 	/**
-	 * Tries to convert a {@link ColorPalette} color name (e.g. used as metadata
-	 * property in a GraphML element) into a {@link ColorPalette} color.
+	 * Tries to convert a {@link ColorPalette} colour name (e.g. used as
+	 * meta-data property in a GraphML element) into a {@link ColorPalette}
+	 * colour.
 	 * 
 	 * @param name
-	 *            a {@link ColorPalette} color name
+	 *            a {@link ColorPalette} colour name
 	 * @return the {@link ColorPalette} if successful (else: black)
 	 * @see GraphMLMeta
 	 */

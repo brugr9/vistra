@@ -1,4 +1,4 @@
-package vistra.gui.view.component.popup;
+package vistra.gui.view.component.viewer.popup;
 
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
@@ -13,7 +13,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class PopupMenuVertex extends JPopupMenu {
+public class VertexPopup extends JPopupMenu {
 
 	private static final long serialVersionUID = 3273304014704565148L;
 
@@ -28,7 +28,7 @@ public class PopupMenuVertex extends JPopupMenu {
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	public PopupMenuVertex(JFrame rootFrame,
+	public VertexPopup(JFrame rootFrame,
 			VisualizationViewer<IVertex, IEdge> viewer) {
 		super("Vertex");
 

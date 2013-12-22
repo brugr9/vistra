@@ -1,4 +1,4 @@
-package vistra.gui.view.component.popup.verifier;
+package vistra.gui.view.component.viewer.popup.verifier;
 
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;

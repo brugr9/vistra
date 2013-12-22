@@ -18,7 +18,7 @@ import vistra.gui.IModel;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.IView;
-import vistra.gui.view.component.visual.AdaptedVisualizationViewer;
+import vistra.gui.view.component.viewer.Viewer;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 
@@ -35,15 +35,15 @@ public class GraphPanel extends JPanel implements Observer {
 	/**
 	 * A field for a titled border.
 	 */
-	private TitledBorder titledBorder;
+	private TitledBorder border;
 	/**
-	 * A field for an adapted visualization viewer.
+	 * A field for a visualization viewer.
 	 */
-	private AdaptedVisualizationViewer visualizationViewer;
+	private Viewer viewer;
 	/**
 	 * A field for a graph zoom scroll pane.
 	 */
-	private GraphZoomScrollPane graphZoomScrollPane;
+	private GraphZoomScrollPane zoom;
 
 	/**
 	 * Main constructor.
@@ -53,29 +53,24 @@ public class GraphPanel extends JPanel implements Observer {
 	 * @param model
 	 *            a model as in MVC
 	 * @param layout
-	 *            the JUNG layout
-	 * @param dimension
-	 *            the dimension
+	 *            a JUNG layout
+	 * @param size
+	 *            the panel size
 	 */
 	public GraphPanel(JFrame top, Model model, Layout<IVertex, IEdge> layout,
-			Dimension dimension) {
-		this.setSize(dimension);
-		this.titledBorder = BorderFactory
-				.createTitledBorder("visualizationPanel");
-		this.setBorder(titledBorder);
+			Dimension size) {
+		this.setSize(size);
+		this.border = BorderFactory.createTitledBorder("visualizationPanel");
+		this.setBorder(border);
 
-		/* visualization viewer */
-		int width = dimension.width;
-		int height = dimension.height - IView.BORDER;
-		Dimension visualizerDimension = new Dimension(width, height);
-		this.visualizationViewer = new AdaptedVisualizationViewer(top, layout,
-				visualizerDimension);
-		model.addObserver(this.visualizationViewer);
-		this.graphZoomScrollPane = new GraphZoomScrollPane(
-				this.visualizationViewer);
-
+		/* viewer */
+		this.viewer = new Viewer(top, layout, new Dimension(size.width,
+				size.height - IView.BORDER));
+		model.addObserver(this.viewer);
+		/* zoom */
+		this.zoom = new GraphZoomScrollPane(this.viewer);
 		/* this */
-		this.add(this.graphZoomScrollPane, BorderLayout.CENTER);
+		this.add(this.zoom, BorderLayout.CENTER);
 
 	}
 
@@ -90,11 +85,11 @@ public class GraphPanel extends JPanel implements Observer {
 
 		try {
 			if (arg == EventSource.I18N || arg == EventSource.GRAPH) {
-				String title = b.getString("visualization.label") + ": ";
+				String title = b.getString("graph.label") + ": ";
 				if (!m.isGraphSaved())
 					title += "*";
 				title += m.getGraph().getName();
-				this.titledBorder.setTitle(title);
+				this.border.setTitle(title);
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),

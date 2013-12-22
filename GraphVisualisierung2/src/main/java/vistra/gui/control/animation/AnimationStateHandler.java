@@ -5,7 +5,7 @@ import static vistra.gui.control.IControl.EventSource.ANIMATION;
 import static vistra.gui.control.IControl.EventSource.PAUSE;
 import static vistra.gui.control.IControl.EventSource.PLAY;
 import static vistra.gui.control.IControl.EventSource.RESUME;
-import static vistra.gui.control.IControl.EventSource.SET_DELAY;
+import static vistra.gui.control.IControl.EventSource.DELAY;
 import static vistra.gui.control.IControl.EventSource.STOP;
 
 import java.awt.event.ActionEvent;
@@ -84,7 +84,7 @@ public final class AnimationStateHandler extends Observable implements
 			this.model.setDelay(value);
 			this.animationTimer.setDelay(value * A_SECOND);
 			/* update the view */
-			this.model.notifyObservers(SET_DELAY);
+			this.model.notifyObservers(DELAY);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), model
 					.getResourceBundle().getString("app.label"), 1, null);

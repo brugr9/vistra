@@ -1,4 +1,4 @@
-package vistra.gui.view.component.popup;
+package vistra.gui.view.component.viewer.popup;
 
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
@@ -13,7 +13,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class PopupMenuEdge extends JPopupMenu {
+public class EdgePopup extends JPopupMenu {
 
 	private static final long serialVersionUID = 2640685878709501654L;
 
@@ -28,7 +28,7 @@ public class PopupMenuEdge extends JPopupMenu {
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	public PopupMenuEdge(JFrame rootFrame,
+	public EdgePopup(JFrame rootFrame,
 			VisualizationViewer<IVertex, IEdge> viewer) {
 		super("Edge");
 

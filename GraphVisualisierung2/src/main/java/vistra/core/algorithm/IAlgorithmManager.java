@@ -1,9 +1,5 @@
 package vistra.core.algorithm;
 
-import java.io.File;
-
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -13,31 +9,6 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * 
  */
 public interface IAlgorithmManager {
-
-	/**
-	 * Returns the workbench directory.
-	 * 
-	 * @return the workbench directory
-	 */
-	public abstract String getWorkbench();
-
-	/**
-	 * Returns the file name extension filter.
-	 * 
-	 * @return the file name extension filter
-	 */
-	public abstract FileNameExtensionFilter getFilter();
-
-	/**
-	 * Adds an algorithm file as given and returns the edge types the algorithm
-	 * can handle.
-	 * 
-	 * @param file
-	 *            the algorithm file
-	 * @return the edge types
-	 * @throws Exception
-	 */
-	public abstract EdgeType[] add(File file) throws Exception;
 
 	/**
 	 * Returns a list of names with algorithms capable to operate on graphs with
@@ -59,17 +30,5 @@ public interface IAlgorithmManager {
 	 * @throws Exception
 	 */
 	public abstract IAlgorithm select(int index) throws Exception;
-
-	/**
-	 * Removes an imported algorithm file as given and returns the edge types
-	 * the removed algorithm can handle.
-	 * 
-	 * 
-	 * @param fileName
-	 *            the algorithm file name
-	 * @return the edge types
-	 * @throws Exception
-	 */
-	public abstract EdgeType[] remove(String fileName) throws Exception;
 
 }

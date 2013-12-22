@@ -66,18 +66,4 @@ public interface IParameterStateHandler extends IControlStateHandler,
 	 */
 	abstract void handleSelectAlgorithm() throws Exception;
 
-	/**
-	 * Handles an interaction: import algorithm.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleImportAlgorithm() throws Exception;
-
-	/**
-	 * Handles an interaction: delete algorithm.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleDeleteAlgorithm() throws Exception;
-
 }

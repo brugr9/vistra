@@ -1,11 +1,9 @@
 package vistra.gui.view.component;
 
-import static vistra.gui.control.IControl.EventSource.DELETE_ALGORITHM;
 import static vistra.gui.control.IControl.EventSource.DE_DE;
 import static vistra.gui.control.IControl.EventSource.EN_US;
 import static vistra.gui.control.IControl.EventSource.FR_FR;
 import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.IMPORT_ALGORITHM;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
 import static vistra.gui.control.IControl.EventSource.OPEN_GRAPH;
@@ -25,7 +23,6 @@ import javax.swing.KeyStroke;
 import vistra.gui.IModel;
 import vistra.gui.control.IControl.EventSource;
 
-
 /**
  * A menu bar.
  * 
@@ -39,75 +36,63 @@ public final class MenuBar extends JMenuBar implements Observer {
 	/**
 	 * A field for the menu 'file'.
 	 */
-	private final JMenu fileMenu;
+	private final JMenu file;
 	/**
 	 * A field for the menu 'i18n'.
 	 */
-	private final JMenu i18nMenu;
+	private final JMenu i18n;
 	/**
 	 * A field for the menu 'information'.
 	 */
-	private final JMenu infoMenu;
+	private final JMenu info;
 	/**
-	 * A field for the menu 'new'.
+	 * A field for the menu 'new graph'.
 	 */
-	private final JMenu newMenu;
+	private final JMenu newGraph;
 	/**
-	 * A field for the menu item 'new undirected Graph'.
+	 * A field for the menu item 'new undirected graph'.
 	 */
-	private final JMenuItem undirectedGraphMenuItem;
+	private final JMenuItem undirected;
 	/**
-	 * A field for the menu item 'new directed Graph'.
+	 * A field for the menu item 'new directed graph'.
 	 */
-	private final JMenuItem directedGraphMenuItem;
+	private final JMenuItem directed;
 	/**
 	 * A field for the menu item 'open graph'.
 	 */
-	private final JMenuItem openGraphMenuItem;
+	private final JMenuItem open;
 	/**
 	 * A field for the menu item 'save'.
 	 */
-	private final JMenuItem saveMenuItem;
+	private final JMenuItem save;
 	/**
-	 * A field for the menu item 'save graph as'.
+	 * A field for the menu item 'save as'.
 	 */
-	private final JMenuItem saveGraphAsMenuItem;
-	/**
-	 * A field for the menu 'algorithm'.
-	 */
-	private final JMenu algorithmMenu;
-	/**
-	 * A field for the menu item 'import Algorithm'.
-	 */
-	private final JMenuItem importAlgorithmMenuItem;
-	/**
-	 * A field for the menu item 'delete Algorithm'.
-	 */
-	private final JMenuItem deleteAlgorithmMenuItem;
+	private final JMenuItem saveAs;
 	/**
 	 * A field for the menu item 'quit'.
 	 */
-	private final JMenuItem quitMenuItem;
+	private final JMenuItem quit;
 	/**
 	 * A field for the menu item 'DE_DE'.
 	 */
-	private final JMenuItem deDEMenuItem;
+	private final JMenuItem deDE;
 	/**
 	 * A field for the menu item 'FR_FR'.
 	 */
-	private final JMenuItem frFRMenuItem;
+	private final JMenuItem frFR;
 	/**
 	 * A field for the menu item 'EN_US'.
 	 */
-	private final JMenuItem enUSMenuItem;
+	private final JMenuItem enUS;
 	/**
-	 * A field for the menu item 'shortcuts'.
+	 * A field for the menu item 'help'.
 	 */
-	private final JMenuItem shortcutsMenuItem;
+	private final JMenuItem help;
 	/**
 	 * A field for the menu item 'about'.
 	 */
-	private final JMenuItem aboutMenuItem;
+	private final JMenuItem about;
 
 	/**
 	 * Main constructor.
@@ -116,98 +101,77 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 *            the model as in MVC
 	 */
 	public MenuBar(IModel model) {
-		{// JMenu fileMenu
-			this.fileMenu = new JMenu("fileMenu");
-			// JMenuItem
-			this.undirectedGraphMenuItem = new JMenuItem(
-					"undirectedGraphMenuItem");
-			this.directedGraphMenuItem = new JMenuItem("directedGraphMenuItem");
-			this.openGraphMenuItem = new JMenuItem("openMenuItem");
-			this.saveMenuItem = new JMenuItem("saveMenuItem");
-			this.saveGraphAsMenuItem = new JMenuItem("saveAsMenuItem");
-			this.importAlgorithmMenuItem = new JMenuItem(
-					"importAlgorithmMenuItem");
-			this.deleteAlgorithmMenuItem = new JMenuItem(
-					"deleteAlgorithmMenuItem");
-			this.quitMenuItem = new JMenuItem("quitMenuItem");
+		{// file
+			this.file = new JMenu("fileMenu");
+			this.open = new JMenuItem("open");
+			this.save = new JMenuItem("save");
+			this.saveAs = new JMenuItem("save");
+			this.quit = new JMenuItem("quit");
 			// addActionListener
-			this.undirectedGraphMenuItem.addActionListener(model
-					.getParameterStateHandler());
-			this.directedGraphMenuItem.addActionListener(model
-					.getParameterStateHandler());
-			this.openGraphMenuItem.addActionListener(model
-					.getParameterStateHandler());
-			this.saveMenuItem.addActionListener(model
-					.getParameterStateHandler());
-			this.saveGraphAsMenuItem.addActionListener(model
-					.getParameterStateHandler());
-			this.importAlgorithmMenuItem.addActionListener(model
-					.getParameterStateHandler());
-			this.deleteAlgorithmMenuItem.addActionListener(model
-					.getParameterStateHandler());
-			this.quitMenuItem.addActionListener(model.getQuitListener());
-			// setActionCommand
-			this.undirectedGraphMenuItem.setActionCommand(NEW_GRAPH_UNDIRECTED
-					.toString());
-			this.directedGraphMenuItem.setActionCommand(NEW_GRAPH_DIRECTED
-					.toString());
-			this.openGraphMenuItem.setActionCommand(OPEN_GRAPH.toString());
-			this.saveMenuItem.setActionCommand(SAVE_GRAPH.toString());
-			this.saveGraphAsMenuItem.setActionCommand(SAVE_GRAPH_AS.toString());
-			this.importAlgorithmMenuItem.setActionCommand(IMPORT_ALGORITHM
-					.toString());
-			this.deleteAlgorithmMenuItem.setActionCommand(DELETE_ALGORITHM
-					.toString());
+			this.open.addActionListener(model.getParameterStateHandler());
+			this.save.addActionListener(model.getParameterStateHandler());
+			this.saveAs.addActionListener(model.getParameterStateHandler());
+			this.quit.addActionListener(model.getQuitListener());
+			this.open.setActionCommand(OPEN_GRAPH.toString());
+			this.save.setActionCommand(SAVE_GRAPH.toString());
+			this.saveAs.setActionCommand(SAVE_GRAPH_AS.toString());
+			{// graph
+				this.newGraph = new JMenu("newGraph");
+				this.undirected = new JMenuItem("undirected");
+				this.directed = new JMenuItem("directed");
+				// addActionListener
+				this.undirected.addActionListener(model
+						.getParameterStateHandler());
+				this.directed.addActionListener(model
+						.getParameterStateHandler());
+				// setActionCommand
+				this.undirected.setActionCommand(NEW_GRAPH_UNDIRECTED
+						.toString());
+				this.directed.setActionCommand(NEW_GRAPH_DIRECTED.toString());
+				// add
+				this.newGraph.add(this.undirected);
+				this.newGraph.add(this.directed);
+			}
 			// add
-			this.newMenu = new JMenu("newMenu");
-			this.newMenu.add(this.undirectedGraphMenuItem);
-			this.newMenu.add(this.directedGraphMenuItem);
-			this.algorithmMenu = new JMenu("algorithmMenu");
-			this.algorithmMenu.add(this.importAlgorithmMenuItem);
-			this.algorithmMenu.add(this.deleteAlgorithmMenuItem);
-			//
-			this.fileMenu.add(this.newMenu);
-			this.fileMenu.add(this.openGraphMenuItem);
-			this.fileMenu.add(this.saveMenuItem);
-			this.fileMenu.add(this.saveGraphAsMenuItem);
-			this.fileMenu.add(this.algorithmMenu);
-			this.fileMenu.add(this.quitMenuItem);
+			this.file.add(this.newGraph);
+			this.file.add(this.open);
+			this.file.add(this.save);
+			this.file.add(this.saveAs);
+			this.file.add(this.quit);
 		}
-		{// JMenu i18nMenu
-			this.i18nMenu = new JMenu("i18nMenu");
-			// JMenuItem
-			this.deDEMenuItem = new JMenuItem("deDEMenuItem");
-			this.frFRMenuItem = new JMenuItem("frFRMenuItem");
-			this.enUSMenuItem = new JMenuItem("enUSMenuItem");
+		{// i18n
+			this.i18n = new JMenu("i18n");
+			this.deDE = new JMenuItem("deDE");
+			this.frFR = new JMenuItem("frFR");
+			this.enUS = new JMenuItem("enUS");
 			// addActionListener
-			this.deDEMenuItem.addActionListener(model.getI18nListener());
-			this.frFRMenuItem.addActionListener(model.getI18nListener());
-			this.enUSMenuItem.addActionListener(model.getI18nListener());
+			this.deDE.addActionListener(model.getI18nListener());
+			this.frFR.addActionListener(model.getI18nListener());
+			this.enUS.addActionListener(model.getI18nListener());
 			// setActionCommand
-			this.deDEMenuItem.setActionCommand(DE_DE.toString());
-			this.frFRMenuItem.setActionCommand(FR_FR.toString());
-			this.enUSMenuItem.setActionCommand(EN_US.toString());
+			this.deDE.setActionCommand(DE_DE.toString());
+			this.frFR.setActionCommand(FR_FR.toString());
+			this.enUS.setActionCommand(EN_US.toString());
 			// add
-			this.i18nMenu.add(this.deDEMenuItem);
-			this.i18nMenu.add(this.frFRMenuItem);
-			this.i18nMenu.add(this.enUSMenuItem);
+			this.i18n.add(this.deDE);
+			this.i18n.add(this.frFR);
+			this.i18n.add(this.enUS);
 		}
-		{// JMenu infoMenu
-			this.infoMenu = new JMenu("infoMenu");
-			// JMenuItem
-			this.shortcutsMenuItem = new JMenuItem("helpMenuItem");
-			this.aboutMenuItem = new JMenuItem("aboutMenuItem");
+		{// info
+			this.info = new JMenu("infoMenu");
+			this.help = new JMenuItem("helpMenuItem");
+			this.about = new JMenuItem("aboutMenuItem");
 			// addActionListener
-			this.shortcutsMenuItem.addActionListener(model.getHelpListener());
-			this.aboutMenuItem.addActionListener(model.getAboutListener());
+			this.help.addActionListener(model.getHelpListener());
+			this.about.addActionListener(model.getAboutListener());
 			// add
-			this.infoMenu.add(this.shortcutsMenuItem);
-			this.infoMenu.add(this.aboutMenuItem);
+			this.info.add(this.help);
+			this.info.add(this.about);
 		}
 		// add
-		this.add(this.fileMenu);
-		this.add(this.i18nMenu);
-		this.add(this.infoMenu);
+		this.add(this.file);
+		this.add(this.i18n);
+		this.add(this.info);
 	}
 
 	/**
@@ -227,117 +191,97 @@ public final class MenuBar extends JMenuBar implements Observer {
 
 					{// JMenu fileMenu
 						// setText
-						this.fileMenu.setText(b.getString("file.label"));
-						this.newMenu.setText(b.getString("new.label"));
-						this.undirectedGraphMenuItem.setText(b
-								.getString("undirected.label"));
-						this.directedGraphMenuItem.setText(b
-								.getString("directed.label"));
-						this.openGraphMenuItem.setText(b
-								.getString("open.label"));
-						this.saveMenuItem.setText(b.getString("save.label"));
-						this.saveGraphAsMenuItem.setText(b
-								.getString("saveas.label"));
-						this.algorithmMenu.setText(b
-								.getString("algorithm.label"));
-						this.importAlgorithmMenuItem.setText(b
-								.getString("import.label"));
-						this.deleteAlgorithmMenuItem.setText(b
-								.getString("delete.label"));
-						this.quitMenuItem.setText(b.getString("quit.label"));
+						this.file.setText(b.getString("file.label"));
+						this.newGraph.setText(b.getString("new.label"));
+						this.undirected
+								.setText(b.getString("undirected.label"));
+						this.directed.setText(b.getString("directed.label"));
+						this.open.setText(b.getString("open.label"));
+						this.save.setText(b.getString("save.label"));
+						this.saveAs.setText(b.getString("saveas.label"));
+						this.quit.setText(b.getString("quit.label"));
 						// setMnemonic
-						this.fileMenu.setMnemonic(b.getString("file.mnemonic")
+						this.file.setMnemonic(b.getString("file.mnemonic")
 								.toCharArray()[0]);
-						this.newMenu.setMnemonic(b.getString("new.mnemonic")
+						this.newGraph.setMnemonic(b.getString("new.mnemonic")
 								.toCharArray()[0]);
-						this.openGraphMenuItem.setMnemonic(b.getString(
-								"open.mnemonic").toCharArray()[0]);
-						this.saveMenuItem.setMnemonic(b.getString(
-								"save.mnemonic").toCharArray()[0]);
-						this.saveGraphAsMenuItem.setMnemonic(b.getString(
-								"saveas.mnemonic").toCharArray()[0]);
-						this.quitMenuItem.setMnemonic(b.getString(
-								"quit.mnemonic").toCharArray()[0]);
+						this.open.setMnemonic(b.getString("open.mnemonic")
+								.toCharArray()[0]);
+						this.save.setMnemonic(b.getString("save.mnemonic")
+								.toCharArray()[0]);
+						this.saveAs.setMnemonic(b.getString("saveas.mnemonic")
+								.toCharArray()[0]);
+						this.quit.setMnemonic(b.getString("quit.mnemonic")
+								.toCharArray()[0]);
 						// setAccelerator
-						this.openGraphMenuItem.setAccelerator(KeyStroke
-								.getKeyStroke(b.getString("open.accelerator")));
-						this.saveMenuItem.setAccelerator(KeyStroke
-								.getKeyStroke(b.getString("save.accelerator")));
-						this.saveGraphAsMenuItem
-								.setAccelerator(KeyStroke.getKeyStroke(b
-										.getString("saveas.accelerator")));
-						this.quitMenuItem.setAccelerator(KeyStroke
-								.getKeyStroke(b.getString("quit.accelerator")));
+						this.open.setAccelerator(KeyStroke.getKeyStroke(b
+								.getString("open.accelerator")));
+						this.save.setAccelerator(KeyStroke.getKeyStroke(b
+								.getString("save.accelerator")));
+						this.saveAs.setAccelerator(KeyStroke.getKeyStroke(b
+								.getString("saveas.accelerator")));
+						this.quit.setAccelerator(KeyStroke.getKeyStroke(b
+								.getString("quit.accelerator")));
 					}
 					{// JMenu i18nMenu
 						// setText
-						this.i18nMenu.setText(b.getString("i18n.label"));
+						this.i18n.setText(b.getString("i18n.label"));
 						// setMnemonic
-						this.i18nMenu.setMnemonic(b.getString("i18n.mnemonic")
+						this.i18n.setMnemonic(b.getString("i18n.mnemonic")
 								.toCharArray()[0]);
 						// setText
-						this.deDEMenuItem.setText(b.getString("deDE.label"));
-						this.frFRMenuItem.setText(b.getString("frFR.label"));
-						this.enUSMenuItem.setText(b.getString("enUS.label"));
+						this.deDE.setText(b.getString("deDE.label"));
+						this.frFR.setText(b.getString("frFR.label"));
+						this.enUS.setText(b.getString("enUS.label"));
 						// setMnemonic
-						this.deDEMenuItem.setMnemonic(b.getString(
-								"deDE.mnemonic").toCharArray()[0]);
-						this.frFRMenuItem.setMnemonic(b.getString(
-								"frFR.mnemonic").toCharArray()[0]);
-						this.enUSMenuItem.setMnemonic(b.getString(
-								"enUS.mnemonic").toCharArray()[0]);
+						this.deDE.setMnemonic(b.getString("deDE.mnemonic")
+								.toCharArray()[0]);
+						this.frFR.setMnemonic(b.getString("frFR.mnemonic")
+								.toCharArray()[0]);
+						this.enUS.setMnemonic(b.getString("enUS.mnemonic")
+								.toCharArray()[0]);
 					}
 					{// JMenu infoMenu
 						// setText
-						this.infoMenu.setText(b.getString("info.label"));
-						this.shortcutsMenuItem.setText(b
-								.getString("help.label"));
-						this.aboutMenuItem.setText(b.getString("about.label"));
+						this.info.setText(b.getString("info.label"));
+						this.help.setText(b.getString("help.label"));
+						this.about.setText(b.getString("about.label"));
 						// setMnemonic
-						this.infoMenu.setMnemonic(b.getString("info.mnemonic")
+						this.info.setMnemonic(b.getString("info.mnemonic")
 								.toCharArray()[0]);
-						this.shortcutsMenuItem.setMnemonic(b.getString(
-								"help.mnemonic").toCharArray()[0]);
-						this.aboutMenuItem.setMnemonic(b.getString(
-								"about.mnemonic").toCharArray()[0]);
+						this.help.setMnemonic(b.getString("help.mnemonic")
+								.toCharArray()[0]);
+						this.about.setMnemonic(b.getString("about.mnemonic")
+								.toCharArray()[0]);
 						// setAccelerator
-						this.shortcutsMenuItem.setAccelerator(KeyStroke
-								.getKeyStroke(b.getString("help.accelerator")));
-						this.aboutMenuItem
-								.setAccelerator(KeyStroke.getKeyStroke(b
-										.getString("about.accelerator")));
+						this.help.setAccelerator(KeyStroke.getKeyStroke(b
+								.getString("help.accelerator")));
+						this.about.setAccelerator(KeyStroke.getKeyStroke(b
+								.getString("about.accelerator")));
 					}
 
 				} else if (arg == EventSource.GRAPH) {
-					this.saveGraphAsMenuItem.setEnabled(m.isSaveGraphEnabled());
+					this.saveAs.setEnabled(m.isSaveGraphEnabled());
 				} else {
 
 					// file
-					this.fileMenu.setEnabled(m.isFileEnabled());
-					this.newMenu.setEnabled(m.isNewMenuEnabled());
-					this.undirectedGraphMenuItem.setEnabled(m
-							.isUndirectedGraphEnabled());
-					this.directedGraphMenuItem.setEnabled(m
-							.isDirectedGraphEnabled());
-					this.openGraphMenuItem.setEnabled(m.isOpenGraphEnabled());
-					this.saveMenuItem.setEnabled(m.isSaveGraphEnabled());
-					this.saveGraphAsMenuItem.setEnabled(m
-							.isSaveGraphAsEnabled());
-					this.algorithmMenu.setEnabled(m.isAlgorithmMenuEnabled());
-					this.importAlgorithmMenuItem.setEnabled(m
-							.isImportAlgorithmEnabled());
-					this.deleteAlgorithmMenuItem.setEnabled(m
-							.isDeleteAlgorithmEnabled());
-					this.quitMenuItem.setEnabled(m.isQuitEnabled());
+					this.file.setEnabled(m.isFileEnabled());
+					this.newGraph.setEnabled(m.isNewMenuEnabled());
+					this.undirected.setEnabled(m.isUndirectedGraphEnabled());
+					this.directed.setEnabled(m.isDirectedGraphEnabled());
+					this.open.setEnabled(m.isOpenGraphEnabled());
+					this.save.setEnabled(m.isSaveGraphEnabled());
+					this.saveAs.setEnabled(m.isSaveGraphAsEnabled());
+					this.quit.setEnabled(m.isQuitEnabled());
 					// i18n
-					this.i18nMenu.setEnabled(m.isI18nEnabled());
-					this.deDEMenuItem.setEnabled(m.isDeDEEnabled());
-					this.frFRMenuItem.setEnabled(m.isFrFREnabled());
-					this.enUSMenuItem.setEnabled(m.isEnUSEnabled());
+					this.i18n.setEnabled(m.isI18nEnabled());
+					this.deDE.setEnabled(m.isDeDEEnabled());
+					this.frFR.setEnabled(m.isFrFREnabled());
+					this.enUS.setEnabled(m.isEnUSEnabled());
 					// info
-					this.infoMenu.setEnabled(m.isInfoEnabled());
-					this.shortcutsMenuItem.setEnabled(m.isHelpEnabled());
-					this.aboutMenuItem.setEnabled(m.isAboutEnabled());
+					this.info.setEnabled(m.isInfoEnabled());
+					this.help.setEnabled(m.isHelpEnabled());
+					this.about.setEnabled(m.isAboutEnabled());
 
 				}
 

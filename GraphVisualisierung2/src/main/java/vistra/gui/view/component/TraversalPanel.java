@@ -41,15 +41,30 @@ import vistra.util.ColorPalette;
 public final class TraversalPanel extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * A field for a minimum steplength.
+	 */
+	private static final int STEPLENGTH_MIN = 1;
+	/**
+	 * A field for a maximum steplength.
+	 */
+	private static final int STEPLENGTH_MAX = 10;
+	/**
+	 * A field for a minimum delay.
+	 */
+	private static final int DELAY_MIN = 1;
+	/**
+	 * A field for a maximum delay.
+	 */
+	private static final int DELAY_MAX = 10;
 	/**
 	 * A field for a titled border.
 	 */
-	private TitledBorder titledBorder;
+	private TitledBorder border;
 	/**
-	 * A field for a steps panel.
+	 * A field for a steplength panel.
 	 */
-	private JPanel stepsPanel;
+	private JPanel steplengthPanel;
 	/**
 	 * A field for a step-by-step panel.
 	 */
@@ -73,159 +88,150 @@ public final class TraversalPanel extends JPanel implements Observer {
 	/**
 	 * A field for a steplength spinner number model.
 	 */
-	private SpinnerNumberModel steplengthSpinnerNumberModel;
+	private SpinnerNumberModel steplengthModel;
 	/**
 	 * A field for an delay spinner number model.
 	 */
-	private SpinnerNumberModel delaySpinnerNumberModel;
+	private SpinnerNumberModel delayModel;
 	/**
 	 * A field for an steplength spinner.
 	 */
-	private JSpinner steplengthSpinner;
+	private JSpinner steplength;
 	/**
 	 * A field for an delay spinner.
 	 */
-	private JSpinner delaySpinner;
+	private JSpinner delay;
 	/**
 	 * A field for a progress bar.
 	 */
-	private JProgressBar progressBar;
+	private JProgressBar progress;
 	/**
 	 * A field for a play button.
 	 */
-	private JButton playButton;
+	private JButton play;
 	/**
 	 * A field for a pause button.
 	 */
-	private JToggleButton pauseButton;
+	private JToggleButton pause;
 	/**
 	 * A field for a stop button.
 	 */
-	private JButton stopButton;
+	private JButton stop;
 	/**
 	 * A field for a toBeginning button.
 	 */
-	private JButton toBeginningButton;
+	private JButton toBeginning;
 	/**
 	 * A field for a backward button.
 	 */
-	private JButton backwardButton;
+	private JButton backward;
 	/**
 	 * A field for a forward button.
 	 */
-	private JButton forwardButton;
+	private JButton forward;
 	/**
 	 * A field for an toEnd button.
 	 */
-	private JButton toEndButton;
+	private JButton toEnd;
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param model
 	 *            the model as in MVC
-	 * @param width
-	 *            the panel width
-	 * @param height
-	 *            the panel height
+	 * @param size
+	 *            the panel size
 	 */
-	public TraversalPanel(IModel model, int width, int height) {
+	public TraversalPanel(IModel model, Dimension size) {
 		super();
-		this.setSize(new Dimension(width, height));
-		this.titledBorder = BorderFactory.createTitledBorder("traversalPanel");
-		this.setBorder(titledBorder);
+		this.setSize(size);
+		this.border = BorderFactory.createTitledBorder("traversalPanel");
+		this.setBorder(border);
+		this.setBackground((Color) ColorPalette.antique);
 
+		/* spinner */
 		// step length
 		this.steplengthLabel = new JLabel("steplength");
-		this.steplengthSpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
-		this.steplengthSpinner = new JSpinner(this.steplengthSpinnerNumberModel);
-		((JSpinner.NumberEditor) this.steplengthSpinner.getEditor())
-				.getTextField().addFocusListener(
-						model.getStepByStepStateHandler());
+		this.steplengthModel = new SpinnerNumberModel(1, STEPLENGTH_MIN,
+				STEPLENGTH_MAX, 1);
+		this.steplength = new JSpinner(this.steplengthModel);
+		((JSpinner.NumberEditor) this.steplength.getEditor()).getTextField()
+				.addFocusListener(model.getStepByStepStateHandler());
 		// delay
 		this.delayLabel = new JLabel("delay");
-		this.delaySpinnerNumberModel = new SpinnerNumberModel(1, 1, 10, 1);
-		this.delaySpinner = new JSpinner(this.delaySpinnerNumberModel);
-		((JSpinner.NumberEditor) this.delaySpinner.getEditor()).getTextField()
+		this.delayModel = new SpinnerNumberModel(1, DELAY_MIN, DELAY_MAX, 1);
+		this.delay = new JSpinner(this.delayModel);
+		((JSpinner.NumberEditor) this.delay.getEditor()).getTextField()
 				.addFocusListener(model.getAnimationStateHandler());
 
-		// button
-		this.toBeginningButton = new JButton(new ImageIcon(this.getClass()
-				.getResource("toBeginning.png")));
-		this.backwardButton = new JButton(new ImageIcon(this.getClass()
-				.getResource("backward.png")));
-		this.forwardButton = new JButton(new ImageIcon(this.getClass()
-				.getResource("forward.png")));
-		this.toEndButton = new JButton(new ImageIcon(this.getClass()
-				.getResource("toEnd.png")));
-		this.playButton = new JButton(new ImageIcon(this.getClass()
-				.getResource("play.png")));
-		this.pauseButton = new JToggleButton(new ImageIcon(this.getClass()
-				.getResource("pause.png")));
-		this.stopButton = new JButton(new ImageIcon(this.getClass()
-				.getResource("stop.png")));
+		/* button */
+		Class<? extends TraversalPanel> c = this.getClass();
+		this.toBeginning = new JButton(new ImageIcon(
+				c.getResource("toBeginning.png")));
+		this.backward = new JButton(
+				new ImageIcon(c.getResource("backward.png")));
+		this.forward = new JButton(new ImageIcon(c.getResource("forward.png")));
+		this.toEnd = new JButton(new ImageIcon(c.getResource("toEnd.png")));
+		this.play = new JButton(new ImageIcon(c.getResource("play.png")));
+		this.pause = new JToggleButton(
+				new ImageIcon(c.getResource("pause.png")));
+		this.stop = new JButton(new ImageIcon(c.getResource("stop.png")));
 		// action command
-		this.toBeginningButton.setActionCommand(TO_BEGINNING.toString());
-		this.backwardButton.setActionCommand(BACKWARD.toString());
-		this.forwardButton.setActionCommand(FORWARD.toString());
-		this.toEndButton.setActionCommand(TO_END.toString());
-		this.playButton.setActionCommand(PLAY.toString());
-		this.pauseButton.setActionCommand(PAUSE.toString());
-		this.stopButton.setActionCommand(STOP.toString());
+		this.toBeginning.setActionCommand(TO_BEGINNING.toString());
+		this.backward.setActionCommand(BACKWARD.toString());
+		this.forward.setActionCommand(FORWARD.toString());
+		this.toEnd.setActionCommand(TO_END.toString());
+		this.play.setActionCommand(PLAY.toString());
+		this.pause.setActionCommand(PAUSE.toString());
+		this.stop.setActionCommand(STOP.toString());
 		// action listener
-		this.toBeginningButton.addActionListener(model
-				.getStepByStepStateHandler());
-		this.backwardButton
-				.addActionListener(model.getStepByStepStateHandler());
-		this.forwardButton.addActionListener(model.getStepByStepStateHandler());
-		this.toEndButton.addActionListener(model.getStepByStepStateHandler());
-		this.playButton.addActionListener(model.getAnimationStateHandler());
-		this.pauseButton.addActionListener(model.getAnimationStateHandler());
-		this.stopButton.addActionListener(model.getAnimationStateHandler());
+		this.toBeginning.addActionListener(model.getStepByStepStateHandler());
+		this.backward.addActionListener(model.getStepByStepStateHandler());
+		this.forward.addActionListener(model.getStepByStepStateHandler());
+		this.toEnd.addActionListener(model.getStepByStepStateHandler());
+		this.play.addActionListener(model.getAnimationStateHandler());
+		this.pause.addActionListener(model.getAnimationStateHandler());
+		this.stop.addActionListener(model.getAnimationStateHandler());
 
 		// progress
-		this.progressBar = new JProgressBar();
-		this.progressBar.setBackground(ColorPalette.DARKGRAY);
-		this.progressBar.setForeground(ColorPalette.GREEN);
-		this.progressBar.setVisible(true);
+		this.progress = new JProgressBar();
+		this.progress.setBackground(ColorPalette.darkgrey);
+		this.progress.setForeground(ColorPalette.green);
+		this.progress.setVisible(true);
 
-		// Panel
-		//
-		this.stepsPanel = new JPanel();
+		/* panel */
+		this.steplengthPanel = new JPanel();
 		this.delayPanel = new JPanel();
 		this.stepByStepPanel = new JPanel();
 		this.animationPanel = new JPanel();
-		//
-		this.stepsPanel.setLayout(new GridLayout(1, 2));
+		// layout
+		this.steplengthPanel.setLayout(new GridLayout(1, 2));
 		this.delayPanel.setLayout(new GridLayout(1, 2));
 		this.stepByStepPanel.setLayout(new GridLayout(1, 4));
 		this.animationPanel.setLayout(new GridLayout(1, 3));
-		//
-		this.stepsPanel.setBackground((Color) ColorPalette.ANTIQUE);
-		this.delayPanel.setBackground((Color) ColorPalette.ANTIQUE);
-		this.stepByStepPanel.setBackground((Color) ColorPalette.ANTIQUE);
-		this.animationPanel.setBackground((Color) ColorPalette.ANTIQUE);
-		//
-		this.stepsPanel.add(this.steplengthLabel);
-		this.stepsPanel.add(this.steplengthSpinner);
-		//
+		// background
+		this.steplengthPanel.setBackground((Color) ColorPalette.antique);
+		this.delayPanel.setBackground((Color) ColorPalette.antique);
+		this.stepByStepPanel.setBackground((Color) ColorPalette.antique);
+		this.animationPanel.setBackground((Color) ColorPalette.antique);
+		// add
+		this.steplengthPanel.add(this.steplengthLabel);
+		this.steplengthPanel.add(this.steplength);
 		this.delayPanel.add(this.delayLabel);
-		this.delayPanel.add(this.delaySpinner);
-		//
-		this.stepByStepPanel.add(this.toBeginningButton);
-		this.stepByStepPanel.add(this.backwardButton);
-		this.stepByStepPanel.add(this.forwardButton);
-		this.stepByStepPanel.add(this.toEndButton);
-		//
-		this.animationPanel.add(this.playButton);
-		this.animationPanel.add(this.pauseButton);
-		this.animationPanel.add(this.stopButton);
-		// this
+		this.delayPanel.add(this.delay);
+		this.stepByStepPanel.add(this.toBeginning);
+		this.stepByStepPanel.add(this.backward);
+		this.stepByStepPanel.add(this.forward);
+		this.stepByStepPanel.add(this.toEnd);
+		this.animationPanel.add(this.play);
+		this.animationPanel.add(this.pause);
+		this.animationPanel.add(this.stop);
+
+		/* this */
 		this.setLayout(new GridLayout(5, 1));
-		this.setBackground((Color) ColorPalette.ANTIQUE);
-		this.add(this.stepsPanel);
+		this.add(this.steplengthPanel);
 		this.add(this.delayPanel);
-		this.add(this.progressBar);
+		this.add(this.progress);
 		this.add(this.stepByStepPanel);
 		this.add(this.animationPanel);
 
@@ -245,46 +251,42 @@ public final class TraversalPanel extends JPanel implements Observer {
 			try {
 
 				if (arg == I18N) {
-					this.titledBorder.setTitle(b.getString("player.label"));
+					this.border.setTitle(b.getString("player.label"));
 					//
 					this.steplengthLabel.setText(b.getString("setStep.label"));
 					this.delayLabel.setText(b.getString("setDelay.label"));
 					//
-					this.toBeginningButton.setToolTipText(b
-							.getString("home.label"));
-					this.backwardButton.setToolTipText(b
-							.getString("backward.label"));
-					this.forwardButton.setToolTipText(b
-							.getString("forward.label"));
-					this.toEndButton.setToolTipText(b.getString("end.label"));
+					this.toBeginning.setToolTipText(b.getString("home.label"));
+					this.backward.setToolTipText(b.getString("backward.label"));
+					this.forward.setToolTipText(b.getString("forward.label"));
+					this.toEnd.setToolTipText(b.getString("end.label"));
 					//
-					this.playButton.setToolTipText(b.getString("play.label"));
-					this.pauseButton.setToolTipText(b.getString("pause.label"));
-					this.stopButton.setToolTipText(b.getString("stop.label"));
+					this.play.setToolTipText(b.getString("play.label"));
+					this.pause.setToolTipText(b.getString("pause.label"));
+					this.stop.setToolTipText(b.getString("stop.label"));
 
-				} else if (arg == EventSource.SET_DELAY) {
-					this.delaySpinner.setValue(m.getDelay());
-				} else if (arg == EventSource.SET_STEPLENGTH) {
-					this.steplengthSpinner.setValue(m.getSteplength());
+				} else if (arg == EventSource.DELAY) {
+					this.delay.setValue(m.getDelay());
+				} else if (arg == EventSource.STEPLENGTH) {
+					this.steplength.setValue(m.getSteplength());
 				} else if (arg == EventSource.STEP_BY_STEP) {
-					this.steplengthSpinner.setEnabled(m.isSteplengthEnabled());
-					this.toBeginningButton.setEnabled(m.isToBeginningEnabled());
-					this.backwardButton.setEnabled(m.isBackwardEnabled());
-					this.forwardButton.setEnabled(m.isForwardEnabled());
-					this.toEndButton.setEnabled(m.isToEndEnabled());
+					this.steplength.setEnabled(m.isSteplengthEnabled());
+					this.toBeginning.setEnabled(m.isToBeginningEnabled());
+					this.backward.setEnabled(m.isBackwardEnabled());
+					this.forward.setEnabled(m.isForwardEnabled());
+					this.toEnd.setEnabled(m.isToEndEnabled());
 				} else if (arg == EventSource.ANIMATION) {
-					this.delaySpinner.setEnabled(m.isDelayEnabled());
-					this.playButton.setEnabled(m.isPlayEnabled());
-					this.pauseButton.setEnabled(m.isPauseEnabled());
-					this.stopButton.setEnabled(m.isStopEnabled());
-					this.pauseButton.setToolTipText(m.getPauseLabel());
-					this.pauseButton.setActionCommand(m.getPauseEvent()
-							.toString());
+					this.delay.setEnabled(m.isDelayEnabled());
+					this.play.setEnabled(m.isPlayEnabled());
+					this.pause.setEnabled(m.isPauseEnabled());
+					this.stop.setEnabled(m.isStopEnabled());
+					this.pause.setToolTipText(m.getPauseLabel());
+					this.pause.setActionCommand(m.getPauseEvent().toString());
 					if (m.getPauseEvent() == EventSource.PAUSE)
-						this.pauseButton.setSelected(false);
+						this.pause.setSelected(false);
 				}
-				this.progressBar.setValue(m.getProgress());
-				this.progressBar.setMaximum(m.getProgressMaximum());
+				this.progress.setValue(m.getProgress());
+				this.progress.setMaximum(m.getProgressMaximum());
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

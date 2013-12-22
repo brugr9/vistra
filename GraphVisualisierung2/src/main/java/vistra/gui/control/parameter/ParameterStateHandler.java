@@ -1,9 +1,7 @@
 package vistra.gui.control.parameter;
 
-import static vistra.gui.control.IControl.EventSource.DELETE_ALGORITHM;
 import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
 import static vistra.gui.control.IControl.EventSource.GRAPH;
-import static vistra.gui.control.IControl.EventSource.IMPORT_ALGORITHM;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
 import static vistra.gui.control.IControl.EventSource.OPEN_GRAPH;
@@ -20,7 +18,6 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
 
 import vistra.core.ICore;
 import vistra.core.algorithm.IAlgorithm;
@@ -31,7 +28,6 @@ import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.traversal.Traversal;
 import vistra.gui.Model;
 import vistra.gui.control.IControl.EventSource;
-import vistra.util.SingleRootFileSystemView;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -96,10 +92,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.handleSaveGraphAs();
 			} else if (c.equals(EDIT_GRAPH.toString())) {
 				this.handleEditGraph();
-			} else if (c.equals(IMPORT_ALGORITHM.toString())) {
-				this.handleImportAlgorithm();
-			} else if (c.equals(DELETE_ALGORITHM.toString())) {
-				this.handleDeleteAlgorithm();
 			}
 
 		} catch (Exception ex) {
@@ -232,32 +224,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			this.state.exit();
 			this.state.handleEditGraph();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void handleImportAlgorithm() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleImportAlgorithm();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void handleDeleteAlgorithm() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleDeleteAlgorithm();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -402,7 +368,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			int option = 0;
 			if (!this.model.isGraphSaved())
-				option = this.confirmSavingTheGraph();
+				option = this.confirmSavingGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
 				IExtendedGraph graph = GraphFactory.create(edgeType);
 				String name = this.model.getResourceBundle().getString(
@@ -434,7 +400,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			int option = 1;
 			if (!this.model.isGraphSaved())
-				option = this.confirmSavingTheGraph();
+				option = this.confirmSavingGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
 				/* file chooser setup */
 				JFileChooser fileChooser = newFileChooser();
@@ -579,96 +545,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * Doing: Imports an algorithm and updates the list of algorithms.
-	 * 
-	 * @return the return state of the file chooser on popdown:
-	 *         <ul>
-	 *         <li>JFileChooser.CANCEL_OPTION = 1
-	 *         <li>JFileChooser.APPROVE_OPTION = 0
-	 *         <li>JFileChooser.ERROR_OPTION = -1 if an error occurs or the
-	 *         dialog is dismissed
-	 *         </ul>
-	 * @throws Exception
-	 */
-	int importAlgorithm() throws Exception {
-		try {
-			ResourceBundle b = this.model.getResourceBundle();
-			/* file chooser setup */
-			JFileChooser fileChooser = newFileChooser();
-			// filter
-			FileNameExtensionFilter filter = this.core.getAlgorithmFilter();
-			fileChooser.addChoosableFileFilter(filter);
-			fileChooser.setFileFilter(filter);
-			// title
-			fileChooser.setDialogTitle(b.getString("importAlgorithm.label"));
-
-			/* dialog */
-			int option = fileChooser.showDialog(this.top,
-					b.getString("import.label"));
-			if (option == JFileChooser.APPROVE_OPTION) {
-				File source = fileChooser.getSelectedFile();
-				EdgeType[] edgeTypes = this.core.importAlgorithm(source);
-				boolean ok = this.updateAlgorithms(edgeTypes);
-				String message = b.getString("importAlgorthm.message");
-				JOptionPane.showMessageDialog(null, message,
-						b.getString("app.label"), 1, null);
-			}
-			return option;
-
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Doing: Deletes an algorithm and updates the list of algorithms.
-	 * 
-	 * @return the return state of the file chooser on popdown:
-	 *         <ul>
-	 *         <li>JFileChooser.CANCEL_OPTION = 1
-	 *         <li>JFileChooser.APPROVE_OPTION = 0
-	 *         <li>JFileChooser.ERROR_OPTION = -1 if an error occurs or the
-	 *         dialog is dismissed
-	 *         </ul>
-	 * @throws Exception
-	 */
-	int deleteAlgorithm() throws Exception {
-		try {
-			ResourceBundle b = this.model.getResourceBundle();
-			/* file chooser setup */
-			JFileChooser fileChooser = newFileChooser();
-			// filter
-			FileNameExtensionFilter filter = this.core.getAlgorithmFilter();
-			fileChooser.addChoosableFileFilter(filter);
-			fileChooser.setFileFilter(filter);
-			// restrict access to workbench directory only
-			File root = this.core.getWorkbench();
-			FileSystemView fsv = new SingleRootFileSystemView(root);
-			fileChooser.setFileSystemView(fsv);
-			fileChooser.updateUI();
-			fileChooser.setCurrentDirectory(root);
-			// title
-			fileChooser.setDialogTitle(b.getString("deleteAlgorithm.label"));
-
-			/* dialog */
-			int option = fileChooser.showDialog(this.top,
-					b.getString("delete.label"));
-			if (option == JFileChooser.APPROVE_OPTION) {
-				File file = fileChooser.getSelectedFile();
-				EdgeType[] edgeTypes = this.core.deleteAlgorithm(file);
-				boolean ok = this.updateAlgorithms(edgeTypes);
-				String message = b.getString("deleteAlgorthm.message");
-				JOptionPane.showMessageDialog(null, message, this.model
-						.getResourceBundle().getString("app.label"), 1, null);
-			}
-			return option;
-
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * A helper method: Brings up a dialog asking for saving the graph with the
 	 * options <i>Yes</i>, <i>No</i> and <i>Cancel</i>. If the option <i>Yes</i>
 	 * is chosen, saving the graph will be delegated depending on the actual
@@ -683,7 +559,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	private int confirmSavingTheGraph() throws Exception {
+	private int confirmSavingGraph() throws Exception {
 		try {
 			/* dialog */
 			ResourceBundle b = this.model.getResourceBundle();

@@ -3,7 +3,7 @@ package vistra.gui.control.stepbystep;
 import static vistra.gui.control.IControl.A_SECOND;
 import static vistra.gui.control.IControl.EventSource.BACKWARD;
 import static vistra.gui.control.IControl.EventSource.FORWARD;
-import static vistra.gui.control.IControl.EventSource.SET_STEPLENGTH;
+import static vistra.gui.control.IControl.EventSource.STEPLENGTH;
 import static vistra.gui.control.IControl.EventSource.TO_BEGINNING;
 import static vistra.gui.control.IControl.EventSource.TO_END;
 
@@ -94,7 +94,7 @@ public final class StepByStepStateHandler extends Observable implements
 			/* set the value */
 			this.model.setSteplength(value);
 			/* update the view */
-			this.model.notifyObservers(SET_STEPLENGTH);
+			this.model.notifyObservers(STEPLENGTH);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);
