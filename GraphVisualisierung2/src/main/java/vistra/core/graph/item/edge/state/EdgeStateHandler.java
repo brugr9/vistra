@@ -1,5 +1,7 @@
 package vistra.core.graph.item.edge.state;
 
+import java.util.ArrayList;
+
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.edge.Edge;
 import vistra.core.graph.item.edge.IEdgeLayout;
@@ -13,10 +15,13 @@ import vistra.util.ColorPalette;
 public class EdgeStateHandler implements IEdgeStateHandler {
 
 	/**
-	 * A field for an edge state.
+	 * A field for a state.
 	 */
 	private AbstractEdgeState state;
-
+	/**
+	 * A field for a states cellar.
+	 */
+	private ArrayList<AbstractEdgeState> cellar;
 	/**
 	 * A field for a layout.
 	 */
@@ -30,7 +35,13 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	public EdgeStateHandler(IEdgeLayout layout) {
 		this.layout = (Edge) layout;
-		this.state = new EdgeStateUnexplored(this);
+		this.cellar = new ArrayList<AbstractEdgeState>();
+		this.state = null;
+		try {
+			this.setState(new EdgeStateUnexplored(this));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -119,6 +130,21 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 		try {
 			this.state.exit();
 			this.state.handleSolution();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handlePrevious() throws Exception {
+		try {
+			this.state.exit();
+			int index = this.cellar.size() - 1;
+			this.setState(this.cellar.get(index));
+			this.cellar.remove(index);
 		} catch (Exception e) {
 			throw e;
 		}

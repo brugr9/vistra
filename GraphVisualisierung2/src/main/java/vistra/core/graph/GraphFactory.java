@@ -2,7 +2,7 @@ package vistra.core.graph;
 
 import java.util.List;
 
-import vistra.core.graph.item.IGraphItemLayout;
+import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.traversal.step.IStep;
@@ -18,13 +18,16 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  */
 public final class GraphFactory {
 
+	/* Layout */
 	public final static double V_HEIGHT_DEFAULT = 40.0;
 	public final static double V_WIDTH_DEFAULT = 45.0;
-	public final static double E_WEIGHT_DEFAULT = 1.0;
 	public final static float STROKE_WIDTH_DEFAULT = 1.5f;
 	public final static float STROKE_WIDTH_BOLD = 3.0f;
 	public final static float V_TAGGED_STROKE = 3.0f;
 	public final static float E_TAGGED_STROKE = 5.0f;
+	/* Value */
+	public final static double V_VALUE_DEFAULT = 0.0;
+	public final static double E_WEIGHT_DEFAULT = 1.0;
 
 	/**
 	 * A main (no-)constructor.
@@ -92,8 +95,8 @@ public final class GraphFactory {
 	 *            the list
 	 * @return the array
 	 */
-	public static IGraphItemLayout[] toArray(List<IGraphItemLayout> list) {
-		return list.toArray(new IGraphItemLayout[list.size()]);
+	public static IItemLayout[] toArray(List<IItemLayout> list) {
+		return list.toArray(new IItemLayout[list.size()]);
 	}
 
 }

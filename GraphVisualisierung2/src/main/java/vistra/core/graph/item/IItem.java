@@ -1,12 +1,12 @@
 package vistra.core.graph.item;
 
 /**
- * A graph item interface.
+ * An item interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IGraphItem extends IGraphItemLayout {
+public interface IItem extends IItemLayout {
 
 	/**
 	 * Returns an identifier.
@@ -37,6 +37,5 @@ public interface IGraphItem extends IGraphItemLayout {
 	 *            the value to set
 	 */
 	public void setValue(double value);
-
 
 }

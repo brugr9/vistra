@@ -1,5 +1,7 @@
 package vistra.core.graph.item.vertex.state;
 
+import java.util.ArrayList;
+
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.Vertex;
@@ -13,10 +15,13 @@ import vistra.util.ColorPalette;
 public class VertexStateHandler implements IVertexStateHandler {
 
 	/**
-	 * A field for a vertex state.
+	 * A field for a state.
 	 */
 	private AbstractVertexState state;
-
+	/**
+	 * A field for states cellar.
+	 */
+	private ArrayList<AbstractVertexState> cellar;
 	/**
 	 * A field for a layout.
 	 */
@@ -30,7 +35,13 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	public VertexStateHandler(IVertex layout) {
 		this.layout = (Vertex) layout;
-		this.state = new VertexStateUnexplored(this);
+		this.cellar = new ArrayList<AbstractVertexState>();
+		this.state = null;
+		try {
+			this.setState(new VertexStateUnexplored(this));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -80,6 +91,21 @@ public class VertexStateHandler implements IVertexStateHandler {
 		try {
 			this.state.exit();
 			this.state.handleSolution();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handlePrevious() throws Exception {
+		try {
+			this.state.exit();
+			int index = this.cellar.size() - 1;
+			this.setState(this.cellar.get(index));
+			this.cellar.remove(index);
 		} catch (Exception e) {
 			throw e;
 		}

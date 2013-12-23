@@ -235,7 +235,7 @@ public final class AnimationStateHandler extends Observable implements
 			this.model.setPauseLabel(label);
 			this.model.setPauseEvent(PAUSE);
 			/* other state handlers */
-			this.model.getParameterStateHandler().handleIdle();
+			// TODO this.model.getParameterStateHandler().handleIdle();
 			this.model.getStepByStepStateHandler().handleIdle();
 
 			this.model.notifyObservers(ANIMATION);

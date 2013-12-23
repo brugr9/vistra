@@ -3,7 +3,7 @@ package vistra.core.graph;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.item.IItem;
 import vistra.core.graph.item.edge.Edge;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
@@ -82,11 +82,11 @@ public class ExtendedGraph extends ObservableGraph<IVertex, IEdge> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean containsItemId(String id) {
-		ArrayList<IGraphItem> items = new ArrayList<IGraphItem>();
-		items.addAll((Collection<? extends IGraphItem>) ((Edge) this.getEdges()));
-		items.addAll((Collection<? extends IGraphItem>) ((Vertex) this
+		ArrayList<IItem> items = new ArrayList<IItem>();
+		items.addAll((Collection<? extends IItem>) ((Edge) this.getEdges()));
+		items.addAll((Collection<? extends IItem>) ((Vertex) this
 				.getVertices()));
-		for (IGraphItem item : items) {
+		for (IItem item : items) {
 			if (item.getId() == id) {
 				return true;
 			}

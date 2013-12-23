@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.util.Observable;
 
 /**
- * An abstract graph item.
+ * An abstract item.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class AbstractGraphItem extends Observable implements IGraphItem {
+public class AbstractItem extends Observable implements IItem {
 
 	/**
 	 * A field for an identifier.
@@ -35,7 +35,7 @@ public class AbstractGraphItem extends Observable implements IGraphItem {
 	/**
 	 * Main constructor.
 	 */
-	public AbstractGraphItem(double value) {
+	public AbstractItem(double value) {
 		this.id = "";
 		this.value = value;
 	}

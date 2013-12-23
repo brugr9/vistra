@@ -1,6 +1,6 @@
 package vistra.core.graph.item.edge;
 
-import vistra.core.graph.item.AbstractGraphItem;
+import vistra.core.graph.item.AbstractItem;
 
 /**
  * An abstract edge layout.
@@ -8,7 +8,7 @@ import vistra.core.graph.item.AbstractGraphItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractEdgeLayout extends AbstractGraphItem implements
+abstract class AbstractEdgeLayout extends AbstractItem implements
 		IEdgeLayout {
 
 	/**

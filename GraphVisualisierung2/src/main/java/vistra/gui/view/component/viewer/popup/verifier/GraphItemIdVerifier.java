@@ -4,8 +4,8 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.graph.item.IGraphItem;
-import vistra.core.graph.item.IGraphItemLayout;
+import vistra.core.graph.item.IItem;
+import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
@@ -22,7 +22,7 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	/**
 	 * A field for a graph item.
 	 */
-	private final IGraphItemLayout graphItem;
+	private final IItemLayout graphItem;
 	/**
 	 * A field for a graph.
 	 */
@@ -37,7 +37,7 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	 * @param vViewer
 	 *            a visualization viewer
 	 */
-	public GraphItemIdVerifier(String lastGood, IGraphItemLayout graphItem,
+	public GraphItemIdVerifier(String lastGood, IItemLayout graphItem,
 			VisualizationViewer<IVertex, IEdge> vViewer) {
 		super(lastGood);
 		this.graphItem = graphItem;
@@ -56,7 +56,7 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 
 			return !textField.getText().trim().isEmpty()
 					&& (textField.getText().equals(
-							((IGraphItem) this.graphItem).getId()) || !graph
+							((IItem) this.graphItem).getId()) || !graph
 							.containsItemId(textField.getText().trim()));
 		}
 

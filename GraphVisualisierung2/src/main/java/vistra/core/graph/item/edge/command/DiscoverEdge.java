@@ -1,8 +1,8 @@
 package vistra.core.graph.item.edge.command;
 
+import vistra.core.graph.item.AbstractItemCommand;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.edge.state.EdgeStateHandler;
-import vistra.core.graph.item.edge.state.IEdgeStateHandler;
 import vistra.util.ICommand;
 
 /**
@@ -11,12 +11,7 @@ import vistra.util.ICommand;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class DiscoverEdge implements ICommand {
-
-	/**
-	 * A field for a state handler.
-	 */
-	private IEdgeStateHandler stateHandler;
+public class DiscoverEdge extends AbstractItemCommand implements ICommand {
 
 	/**
 	 * Main constructor.
@@ -25,17 +20,15 @@ public class DiscoverEdge implements ICommand {
 	 *            an edge
 	 */
 	public DiscoverEdge(IEdge edge) {
-		this.stateHandler = (EdgeStateHandler) edge;
+		super((EdgeStateHandler) edge);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute() throws Exception {
-		this.stateHandler.handleDiscovery();
-	}
-
-	@Override
-	public void undo() throws Exception {
-		this.stateHandler.handleUnexplored();
+		((EdgeStateHandler) super.stateHandler).handleDiscovery();
 	}
 
 }

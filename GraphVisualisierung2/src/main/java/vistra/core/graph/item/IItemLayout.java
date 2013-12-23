@@ -3,12 +3,12 @@ package vistra.core.graph.item;
 import java.awt.Color;
 
 /**
- * A graph item layout inteface.
+ * An item layout interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IGraphItemLayout {
+public interface IItemLayout {
 
 	/**
 	 * Returns the line width.

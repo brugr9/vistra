@@ -2,7 +2,7 @@ package vistra.core.graph.item.vertex;
 
 import java.awt.Color;
 
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.item.IItem;
 
 /**
  * A vertex layout interface.
@@ -10,7 +10,7 @@ import vistra.core.graph.item.IGraphItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IVertexLayout extends IGraphItem {
+public interface IVertexLayout extends IItem {
 
 	/**
 	 * Returns the fill color.

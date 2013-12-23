@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import vistra.core.graph.item.IGraphItemLayout;
+import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
@@ -75,7 +75,7 @@ public class MenuFactory extends JPopupMenu implements IItemModifier {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setGraphItemAndView(IGraphItemLayout item) {
+	public void setGraphItemAndView(IItemLayout item) {
 		// does nothing
 	}
 

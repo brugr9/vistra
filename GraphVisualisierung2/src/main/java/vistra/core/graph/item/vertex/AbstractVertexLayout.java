@@ -2,7 +2,7 @@ package vistra.core.graph.item.vertex;
 
 import java.awt.Color;
 
-import vistra.core.graph.item.AbstractGraphItem;
+import vistra.core.graph.item.AbstractItem;
 
 /**
  * An abstract vertex layout.
@@ -10,7 +10,7 @@ import vistra.core.graph.item.AbstractGraphItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractVertexLayout extends AbstractGraphItem implements
+abstract class AbstractVertexLayout extends AbstractItem implements
 		IVertexLayout {
 
 	/**

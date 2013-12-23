@@ -2,6 +2,8 @@ package vistra.core.graph.item.vertex;
 
 import java.awt.geom.Point2D;
 
+import vistra.core.graph.GraphFactory;
+
 /**
  * A vertex.
  * 
@@ -29,7 +31,7 @@ public class Vertex extends AbstractVertexLayout implements IVertex {
 	 * Main constructor.
 	 */
 	Vertex() {
-		super(0);
+		super(GraphFactory.V_VALUE_DEFAULT);
 		this.start = false;
 		this.end = false;
 	}
