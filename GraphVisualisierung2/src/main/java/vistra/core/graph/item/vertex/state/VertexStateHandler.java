@@ -10,7 +10,11 @@ import vistra.util.ColorPalette;
 /**
  * A vertex state handler.
  * 
+ * As being an item state handler, this handler has a cellar able to collect the
+ * state history.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * 
  */
 public class VertexStateHandler implements IVertexStateHandler {
 
@@ -97,21 +101,6 @@ public class VertexStateHandler implements IVertexStateHandler {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void handlePrevious() throws Exception {
-		try {
-			this.state.exit();
-			int index = this.cellar.size() - 1;
-			this.setState(this.cellar.get(index));
-			this.cellar.remove(index);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * Sets a state.
 	 * 
 	 * @param state
@@ -120,6 +109,23 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	void setState(AbstractVertexState state) throws Exception {
 		try {
+			this.cellar.add(state);
+			this.state = state;
+			this.state.entry();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleSetPreviousState() throws Exception {
+		try {
+			this.state.exit();
+			int index = this.cellar.size() - 1;
+			AbstractVertexState state = this.cellar.remove(index);
 			this.state = state;
 			this.state.entry();
 		} catch (Exception e) {

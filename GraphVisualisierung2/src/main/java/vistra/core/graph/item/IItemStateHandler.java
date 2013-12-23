@@ -1,7 +1,8 @@
 package vistra.core.graph.item;
 
 /**
- * An interface for an item state handler.
+ * An interface for an item state handler. An item state handler has a cellar
+ * collecting the state history.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -9,10 +10,10 @@ package vistra.core.graph.item;
 public interface IItemStateHandler {
 
 	/**
-	 * Handles previous.
+	 * Handles setting the previous state as getting it from a cellar.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handlePrevious() throws Exception;
+	abstract void handleSetPreviousState() throws Exception;
 
 }

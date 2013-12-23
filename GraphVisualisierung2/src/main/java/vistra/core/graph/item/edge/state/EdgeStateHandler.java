@@ -10,7 +10,11 @@ import vistra.util.ColorPalette;
 /**
  * An edge state handler.
  * 
+ * As being an item state handler, this handler has a cellar able to collect the
+ * state history.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * 
  */
 public class EdgeStateHandler implements IEdgeStateHandler {
 
@@ -136,21 +140,6 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void handlePrevious() throws Exception {
-		try {
-			this.state.exit();
-			int index = this.cellar.size() - 1;
-			this.setState(this.cellar.get(index));
-			this.cellar.remove(index);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * Sets a state.
 	 * 
 	 * @param state
@@ -159,6 +148,23 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	void setState(AbstractEdgeState state) throws Exception {
 		try {
+			this.cellar.add(state);
+			this.state = state;
+			this.state.entry();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleSetPreviousState() throws Exception {
+		try {
+			this.state.exit();
+			int index = this.cellar.size() - 1;
+			AbstractEdgeState state = this.cellar.remove(index);
 			this.state = state;
 			this.state.entry();
 		} catch (Exception e) {
