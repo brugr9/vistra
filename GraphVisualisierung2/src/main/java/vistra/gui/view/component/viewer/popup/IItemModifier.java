@@ -2,7 +2,7 @@ package vistra.gui.view.component.viewer.popup;
 
 import java.awt.geom.Point2D;
 
-import vistra.core.graph.item.IGraphItemModel;
+import vistra.core.graph.item.IGraphItemLayout;
 
 /**
  * A graph item modifier interface.
@@ -18,7 +18,7 @@ public interface IItemModifier {
 	 * @param item
 	 *            the item to set
 	 */
-	public abstract void setGraphItemAndView(IGraphItemModel item);
+	public abstract void setGraphItemAndView(IGraphItemLayout item);
 
 	/**
 	 * Sets the graph item location.

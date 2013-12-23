@@ -1,5 +1,7 @@
-package vistra.core.graph.item.edge;
+package vistra.core.graph.item.edge.state;
 
+import vistra.core.graph.item.vertex.state.IVertexStateHandler;
+import vistra.core.graph.item.vertex.state.VertexStateHandler;
 import vistra.util.AbstractState;
 import vistra.util.IState;
 
@@ -9,21 +11,21 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class AbstractEdgeState extends AbstractState implements IState {
+abstract class AbstractEdgeState extends AbstractState implements IState {
 
 	/**
 	 * A field for a state handler.
 	 */
-	protected Edge stateHandler;
+	protected EdgeStateHandler stateHandler;
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            a stateHandler
+	 *            a state handler
 	 */
-	AbstractEdgeState(IEdge stateHandler) {
-		this.stateHandler = (Edge) stateHandler;
+	AbstractEdgeState(IEdgeStateHandler stateHandler) {
+		this.stateHandler = (EdgeStateHandler) stateHandler;
 	}
 
 	/**

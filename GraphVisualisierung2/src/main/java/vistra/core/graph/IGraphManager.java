@@ -4,6 +4,8 @@ import java.io.File;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import edu.uci.ics.jung.graph.util.EdgeType;
+
 /**
  * A graph manager interface.
  * 
@@ -15,10 +17,13 @@ public interface IGraphManager {
 	/**
 	 * Creates and returns an empty graph.
 	 * 
+	 * @param edgeType
+	 *            the edge type
 	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract IExtendedGraph getNewGraph() throws Exception;
+	public abstract IExtendedGraph getNewGraph(EdgeType edgeType)
+			throws Exception;
 
 	/**
 	 * Opens a GraphML-file as graph.

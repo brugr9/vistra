@@ -1,22 +1,22 @@
-package vistra.core.graph.item.vertex;
+package vistra.core.graph.item.edge.state;
 
 import vistra.util.IState;
 
 /**
- * A vertex state: focussed.
+ * An edge state: discarded ('a discarded edge').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class VertexStateFocussed extends AbstractVertexState implements IState {
+class EdgeStateDiscarded extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            a stateHandler
+	 *            a state handler
 	 */
-	VertexStateFocussed(IVertexStateHandler stateHandler) {
+	EdgeStateDiscarded(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class VertexStateFocussed extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewFocussed();
+			super.stateHandler.setViewDiscarded();
 		} catch (Exception e) {
 			throw e;
 		}

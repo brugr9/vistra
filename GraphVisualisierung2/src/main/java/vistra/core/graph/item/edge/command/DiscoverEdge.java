@@ -1,18 +1,22 @@
 package vistra.core.graph.item.edge.command;
 
 import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.edge.state.EdgeStateHandler;
+import vistra.core.graph.item.edge.state.IEdgeStateHandler;
 import vistra.util.ICommand;
 
 /**
+ * An edge command: discover.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class DiscoverEdge implements ICommand {
 
 	/**
-	 * A field for an edge.
+	 * A field for a state handler.
 	 */
-	private IEdge edge;
+	private IEdgeStateHandler stateHandler;
 
 	/**
 	 * Main constructor.
@@ -21,17 +25,17 @@ public class DiscoverEdge implements ICommand {
 	 *            an edge
 	 */
 	public DiscoverEdge(IEdge edge) {
-		this.edge = edge;
+		this.stateHandler = (EdgeStateHandler) edge;
 	}
 
 	@Override
 	public void execute() throws Exception {
-		this.edge.handleDiscovery();
+		this.stateHandler.handleDiscovery();
 	}
 
 	@Override
 	public void undo() throws Exception {
-		this.edge.handleUnexplored();
+		this.stateHandler.handleUnexplored();
 	}
 
 }

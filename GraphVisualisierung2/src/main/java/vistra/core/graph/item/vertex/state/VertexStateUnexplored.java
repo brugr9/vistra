@@ -1,14 +1,14 @@
-package vistra.core.graph.item.edge;
+package vistra.core.graph.item.vertex.state;
 
 import vistra.util.IState;
 
 /**
- * An edge state: initial ('the initial state of an edge').
+ * A vertex state: unexplored.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class EdgeStateUnexplored extends AbstractEdgeState implements IState {
+class VertexStateUnexplored extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class EdgeStateUnexplored extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	EdgeStateUnexplored(IEdge stateHandler) {
+	VertexStateUnexplored(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

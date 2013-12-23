@@ -2,6 +2,8 @@ package vistra.core.graph.item.vertex;
 
 import org.apache.commons.collections15.Factory;
 
+import vistra.core.graph.item.vertex.state.VertexStateHandler;
+
 /**
  * A vertex factory.
  * 
@@ -17,13 +19,7 @@ public class VertexFactory implements Factory<IVertex> {
 	 */
 	@Override
 	public IVertex create() {
-		IVertex vertex = new Vertex();
-		try {
-			((VertexStateHandler) vertex).handleUnexplored();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return vertex;
+		return createVertex();
 	}
 
 	/**

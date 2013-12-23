@@ -9,7 +9,7 @@ import java.util.Observable;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class AbstractGraphItemModel extends Observable implements IGraphItemModel {
+public class AbstractGraphItem extends Observable implements IGraphItem {
 
 	/**
 	 * A field for an identifier.
@@ -27,15 +27,17 @@ public class AbstractGraphItemModel extends Observable implements IGraphItemMode
 	 * A field for a font color.
 	 */
 	private Color fontColor;
+	/**
+	 * A field for value.
+	 */
+	private double value;
 
 	/**
 	 * Main constructor.
 	 */
-	public AbstractGraphItemModel() {
+	public AbstractGraphItem(double value) {
 		this.id = "";
-		this.lineWidth = 0;
-		this.lineColor = null;
-		this.fontColor = null;
+		this.value = value;
 	}
 
 	/**
@@ -44,6 +46,32 @@ public class AbstractGraphItemModel extends Observable implements IGraphItemMode
 	@Override
 	public String getId() {
 		return id;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setId(String id) {
+		this.id = id;
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public double getValue() {
+		return value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setValue(double value) {
+		this.value = value;
+		this.setChanged();
 	}
 
 	/**
@@ -74,15 +102,6 @@ public class AbstractGraphItemModel extends Observable implements IGraphItemMode
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setId(String id) {
-		this.id = id;
-		this.setChanged();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void setLineWidth(float width) {
 		this.lineWidth = width;
 		this.setChanged();
@@ -105,5 +124,4 @@ public class AbstractGraphItemModel extends Observable implements IGraphItemMode
 		this.fontColor = color;
 		this.setChanged();
 	}
-
 }

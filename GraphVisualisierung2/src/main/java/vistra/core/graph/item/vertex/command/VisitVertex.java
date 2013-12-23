@@ -1,8 +1,8 @@
 package vistra.core.graph.item.vertex.command;
 
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.graph.item.vertex.IVertexStateHandler;
-import vistra.core.graph.item.vertex.VertexStateHandler;
+import vistra.core.graph.item.vertex.state.IVertexStateHandler;
+import vistra.core.graph.item.vertex.state.VertexStateHandler;
 import vistra.util.ICommand;
 
 /**

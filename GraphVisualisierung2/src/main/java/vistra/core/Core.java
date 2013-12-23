@@ -86,9 +86,9 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph getNewGraph() throws CoreException {
+	public IExtendedGraph getNewGraph(EdgeType edgeType) throws CoreException {
 		try {
-			return this.graphManager.getNewGraph();
+			return this.graphManager.getNewGraph(edgeType);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}

@@ -1,14 +1,14 @@
-package vistra.core.graph.item.edge;
+package vistra.core.graph.item.edge.state;
 
 import vistra.util.IState;
 
 /**
- * An edge state: forward.
+ * An edge state: cross.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class EdgeStateForward extends AbstractEdgeState implements IState {
+class EdgeStateCross extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class EdgeStateForward extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	EdgeStateForward(IEdge stateHandler) {
+	EdgeStateCross(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,10 +26,9 @@ class EdgeStateForward extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewForward();
+			super.stateHandler.setViewCross();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
-
 }

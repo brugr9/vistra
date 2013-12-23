@@ -14,6 +14,7 @@ import vistra.core.graph.transformer.EdgeTransformer;
 import vistra.core.graph.transformer.GraphTransformer;
 import vistra.core.graph.transformer.HyperEdgeTransformer;
 import vistra.core.graph.transformer.VertexTransformer;
+import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.GraphMLWriter;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
@@ -82,11 +83,11 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph getNewGraph() throws Exception {
+	public IExtendedGraph getNewGraph(EdgeType edgeType) throws Exception {
 		try {
 			this.file = null;
-			IExtendedGraph newGraph = GraphFactory.create();
-			return newGraph;
+			IExtendedGraph graph = GraphFactory.create(edgeType);
+			return graph;
 		} catch (Exception e) {
 			throw e;
 		}

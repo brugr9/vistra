@@ -17,7 +17,7 @@ public class GraphTransformer implements
 
 	@Override
 	public IExtendedGraph transform(GraphMetadata graphMeta) {
-		IExtendedGraph newGraph = GraphFactory.create();
+		IExtendedGraph newGraph = GraphFactory.create(EdgeType.UNDIRECTED);
 		newGraph.setName(graphMeta.getId());
 		EdgeType edgeType = graphMeta.getEdgeDefault() == EdgeDefault.UNDIRECTED ? EdgeType.UNDIRECTED
 				: EdgeType.DIRECTED;

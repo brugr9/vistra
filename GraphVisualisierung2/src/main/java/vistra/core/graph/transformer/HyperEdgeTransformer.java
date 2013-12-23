@@ -20,7 +20,7 @@ public class HyperEdgeTransformer implements
 		IEdge edge = EdgeFactory.createEdge();
 
 		edge.setId(meta.getId());
-		edge.setWeight(Convert.toDouble(meta.getProperty(GraphMLMeta.E_WEIGHT)));
+		edge.setValue(Convert.toDouble(meta.getProperty(GraphMLMeta.E_WEIGHT)));
 
 		return edge;
 	}

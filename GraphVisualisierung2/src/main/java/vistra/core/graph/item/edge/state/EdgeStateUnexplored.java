@@ -1,14 +1,14 @@
-package vistra.core.graph.item.edge;
+package vistra.core.graph.item.edge.state;
 
 import vistra.util.IState;
 
 /**
- * An edge state: back.
+ * An edge state: unexplored.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class EdgeStateBack extends AbstractEdgeState implements IState {
+class EdgeStateUnexplored extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class EdgeStateBack extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	EdgeStateBack(IEdge stateHandler) {
+	EdgeStateUnexplored(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class EdgeStateBack extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewBack();
+			super.stateHandler.setViewUnexplored();
 		} catch (Exception e) {
 			throw e;
 		}

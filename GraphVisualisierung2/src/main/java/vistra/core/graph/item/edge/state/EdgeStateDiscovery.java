@@ -1,22 +1,22 @@
-package vistra.core.graph.item.vertex;
+package vistra.core.graph.item.edge.state;
 
 import vistra.util.IState;
 
 /**
- * A vertex state: solution ('a solution member vertex').
+ * An edge state: visited ('a visited edge').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class VertexStateSolution extends AbstractVertexState implements IState {
+class EdgeStateDiscovery extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            a stateHandler
+	 *            a state handler
 	 */
-	VertexStateSolution(IVertexStateHandler stateHandler) {
+	EdgeStateDiscovery(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class VertexStateSolution extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewSolved();
+			super.stateHandler.setViewDiscovery();
 		} catch (Exception e) {
 			throw e;
 		}

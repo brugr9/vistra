@@ -27,10 +27,12 @@ public interface ICore {
 	/**
 	 * Returns an empty graph of edge type as given.
 	 * 
+	 * @param edgeType
+	 *            the edge type
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	abstract IExtendedGraph getNewGraph() throws CoreException;
+	abstract IExtendedGraph getNewGraph(EdgeType edgeType) throws CoreException;
 
 	/**
 	 * Opens a graph given as file.

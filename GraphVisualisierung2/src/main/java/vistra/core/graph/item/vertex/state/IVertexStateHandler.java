@@ -1,4 +1,4 @@
-package vistra.core.graph.item.vertex;
+package vistra.core.graph.item.vertex.state;
 
 /**
  * An interface for a vertex state handler.

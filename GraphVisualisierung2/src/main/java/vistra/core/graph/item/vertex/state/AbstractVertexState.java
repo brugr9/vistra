@@ -1,4 +1,4 @@
-package vistra.core.graph.item.vertex;
+package vistra.core.graph.item.vertex.state;
 
 import vistra.util.AbstractState;
 import vistra.util.IState;
@@ -20,7 +20,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            a stateHandler
+	 *            a state handler
 	 */
 	AbstractVertexState(IVertexStateHandler stateHandler) {
 		this.stateHandler = (VertexStateHandler) stateHandler;

@@ -12,6 +12,7 @@ import vistra.gui.view.IView;
 import vistra.gui.view.MinimalView;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.StaticLayout;
+import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * A factory creating MVC based graphic user interfaces.
@@ -56,7 +57,7 @@ public final class GuiFactory {
 	public static IView createGui(ICore core, ViewType type) throws Exception {
 		try {
 			// graph and layout
-			IExtendedGraph graph = GraphFactory.create();
+			IExtendedGraph graph = GraphFactory.create(EdgeType.UNDIRECTED);
 			Layout<IVertex, IEdge> layout = new StaticLayout<IVertex, IEdge>(
 					graph);
 			// model and control

@@ -2,7 +2,7 @@ package vistra.core.graph;
 
 import java.util.List;
 
-import vistra.core.graph.item.IGraphItemModel;
+import vistra.core.graph.item.IGraphItemLayout;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.traversal.step.IStep;
@@ -37,7 +37,7 @@ public final class GraphFactory {
 	 * 
 	 * @return the graph
 	 */
-	public static IExtendedGraph create() {
+	public IExtendedGraph create() {
 		return create(EdgeType.UNDIRECTED);
 	}
 
@@ -53,21 +53,6 @@ public final class GraphFactory {
 		IExtendedGraph graph = new ExtendedGraph(
 				new SparseGraph<IVertex, IEdge>());
 		graph.setEdgeType(edgeType);
-		return graph;
-	}
-
-	/**
-	 * Creates an <code>ExtendedGraph</code> based on a JUNG
-	 * <code>SparseGraph</code>.
-	 * 
-	 * @param listener
-	 *            a listener to add
-	 * @return the graph
-	 */
-	public static IExtendedGraph create(
-			GraphEventListener<IVertex, IEdge> listener) {
-		ExtendedGraph graph = (ExtendedGraph) create();
-		graph.addGraphEventListener(listener);
 		return graph;
 	}
 
@@ -107,8 +92,8 @@ public final class GraphFactory {
 	 *            the list
 	 * @return the array
 	 */
-	public static IGraphItemModel[] toArray(List<IGraphItemModel> list) {
-		return list.toArray(new IGraphItemModel[list.size()]);
+	public static IGraphItemLayout[] toArray(List<IGraphItemLayout> list) {
+		return list.toArray(new IGraphItemLayout[list.size()]);
 	}
 
 }
