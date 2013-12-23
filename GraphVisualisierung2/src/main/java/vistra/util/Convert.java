@@ -2,9 +2,6 @@ package vistra.util;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
-import java.util.List;
-
-import vistra.core.graph.item.IGraphItemModel;
 
 /**
  * A utility class, therefore serving with static method only.
@@ -86,14 +83,4 @@ public final class Convert {
 		return Math.rint(value * 100.0) / 100.0;
 	}
 
-	/**
-	 * Converts a list of into an array
-	 * 
-	 * @param list
-	 *            the list
-	 * @return the array
-	 */
-	public static IGraphItemModel[] toArray(List<IGraphItemModel> list) {
-		return list.toArray(new IGraphItemModel[list.size()]);
-	}
 }

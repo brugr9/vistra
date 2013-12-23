@@ -2,6 +2,7 @@ package vistra.core.graph;
 
 import java.util.List;
 
+import vistra.core.graph.item.IGraphItemModel;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.traversal.step.IStep;
@@ -97,6 +98,17 @@ public final class GraphFactory {
 	public static GraphEventListener<IVertex, IEdge> createListener(
 			List<IStep> stepList) {
 		return new ExtendedGraphEventListener(stepList);
+	}
+
+	/**
+	 * Converts a list of into an array
+	 * 
+	 * @param list
+	 *            the list
+	 * @return the array
+	 */
+	public static IGraphItemModel[] toArray(List<IGraphItemModel> list) {
+		return list.toArray(new IGraphItemModel[list.size()]);
 	}
 
 }

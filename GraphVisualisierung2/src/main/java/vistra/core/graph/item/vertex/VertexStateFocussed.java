@@ -3,7 +3,7 @@ package vistra.core.graph.item.vertex;
 import vistra.util.IState;
 
 /**
- * A vertex state: visit.
+ * A vertex state: focussed.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

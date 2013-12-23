@@ -1,7 +1,7 @@
 package vistra.util;
 
 /**
- * A macro command interface.
+ * A command handler interface (macro command).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

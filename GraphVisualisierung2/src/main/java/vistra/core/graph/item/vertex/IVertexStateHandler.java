@@ -1,7 +1,7 @@
 package vistra.core.graph.item.vertex;
 
 /**
- * An interface for an vertex (state handler).
+ * An interface for a vertex state handler.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

@@ -4,7 +4,7 @@ import vistra.util.AbstractState;
 import vistra.util.IState;
 
 /**
- * An abstract vertex.
+ * An abstract vertex state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

@@ -4,7 +4,7 @@ import vistra.core.graph.GraphFactory;
 import vistra.util.ColorPalette;
 
 /**
- * A vertex (state handler).
+ * A vertex state handler.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  */
