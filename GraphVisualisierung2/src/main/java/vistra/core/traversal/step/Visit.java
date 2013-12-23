@@ -4,8 +4,6 @@ import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.edge.command.DiscoverEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.command.VisitVertex;
-import vistra.core.traversal.step.handler.IStepHandler;
-import vistra.core.traversal.step.handler.VisitStepHandler;
 import vistra.util.ICommand;
 
 /**
@@ -14,12 +12,7 @@ import vistra.util.ICommand;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Visit implements IStep {
-
-	/**
-	 * A field for a step handler.
-	 */
-	private IStepHandler stepHandler;
+public class Visit extends AbstractStep implements IStep {
 
 	/**
 	 * Main constructor.
@@ -30,10 +23,9 @@ public class Visit implements IStep {
 	 *            the vertex to visit
 	 */
 	public Visit(IEdge edge, IVertex vertex) {
-		this.stepHandler = new VisitStepHandler();
-		String description = this.getClass().getSimpleName() + " "
+		super();
+		this.description = this.getClass().getSimpleName() + " "
 				+ vertex.getId();
-		this.stepHandler.setDescription(description);
 		try {
 			// new
 			ICommand discoverEdge = new DiscoverEdge(edge);
@@ -47,30 +39,6 @@ public class Visit implements IStep {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void execute() throws Exception {
-		this.stepHandler.execute();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void undo() throws Exception {
-		this.stepHandler.undo();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getDescription() {
-		return this.stepHandler.getDescription();
 	}
 
 }

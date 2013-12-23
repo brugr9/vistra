@@ -1,21 +1,16 @@
-package vistra.core.traversal.step.handler;
+package vistra.core.traversal.step;
 
 import java.util.ArrayList;
 import java.util.List;
 import vistra.util.ICommand;
 
 /**
- * An abstract step command.
+ * A step handler.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractStepHandler implements IStepHandler {
-
-	/**
-	 * A field for a description.
-	 */
-	private String description;
+class StepHandler implements IStepHandler {
 
 	/**
 	 * A field for a list of commands.
@@ -25,8 +20,7 @@ abstract class AbstractStepHandler implements IStepHandler {
 	/**
 	 * Main constructor.
 	 */
-	AbstractStepHandler() {
-		this.description = "";
+	StepHandler() {
 		this.commands = new ArrayList<ICommand>();
 	}
 
@@ -58,19 +52,4 @@ abstract class AbstractStepHandler implements IStepHandler {
 		this.commands.add(command);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getDescription() {
-		return this.description;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDescription(String description) {
-		this.description = description;
-	}
 }
