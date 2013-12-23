@@ -5,7 +5,7 @@ import java.awt.Dimension;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.Model;
+import vistra.gui.GuiModel;
 import vistra.gui.control.IControl;
 import vistra.gui.view.component.AlgorithmPanel;
 import vistra.gui.view.component.GraphPanel;
@@ -47,7 +47,7 @@ public class FullView extends MinimalView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public FullView(Layout<IVertex, IEdge> layout, Model model, IControl control)
+	public FullView(Layout<IVertex, IEdge> layout, GuiModel model, IControl control)
 			throws Exception {
 		super(layout, model, control);
 

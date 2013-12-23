@@ -16,7 +16,7 @@ class VertexStateVisited extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	VertexStateVisited(IVertex stateHandler) {
+	VertexStateVisited(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

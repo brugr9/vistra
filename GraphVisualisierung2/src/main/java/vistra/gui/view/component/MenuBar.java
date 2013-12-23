@@ -20,7 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import vistra.gui.IModel;
+import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
 
 /**
@@ -100,7 +100,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 * @param model
 	 *            the model as in MVC
 	 */
-	public MenuBar(IModel model) {
+	public MenuBar(IGuiModel model) {
 		{// file
 			this.file = new JMenu("fileMenu");
 			this.open = new JMenuItem("open");
@@ -180,9 +180,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		if (o instanceof IModel) {
+		if (o instanceof IGuiModel) {
 
-			IModel m = (IModel) o;
+			IGuiModel m = (IGuiModel) o;
 			ResourceBundle b = m.getResourceBundle();
 
 			try {

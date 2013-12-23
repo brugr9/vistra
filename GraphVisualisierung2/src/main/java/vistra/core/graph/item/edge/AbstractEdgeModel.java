@@ -1,7 +1,7 @@
 package vistra.core.graph.item.edge;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.item.AbstractGraphItem;
+import vistra.core.graph.item.AbstractGraphItemModel;
 
 /**
  * An edge.
@@ -9,7 +9,7 @@ import vistra.core.graph.item.AbstractGraphItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractEdgeModel extends AbstractGraphItem implements
+abstract class AbstractEdgeModel extends AbstractGraphItemModel implements
 		IEdgeModel {
 
 	/**
@@ -39,6 +39,7 @@ abstract class AbstractEdgeModel extends AbstractGraphItem implements
 	@Override
 	public void setWeight(double weight) {
 		this.weight = weight;
+		this.setChanged();
 	}
 
 }

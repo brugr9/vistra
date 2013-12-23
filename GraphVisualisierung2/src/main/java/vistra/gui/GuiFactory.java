@@ -60,7 +60,7 @@ public final class GuiFactory {
 			Layout<IVertex, IEdge> layout = new StaticLayout<IVertex, IEdge>(
 					graph);
 			// model and control
-			Model model = new Model(graph);
+			GuiModel model = new GuiModel(graph);
 			IControl control = new Control(core, model);
 			// view
 			IView view;

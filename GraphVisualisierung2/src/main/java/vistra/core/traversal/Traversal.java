@@ -3,6 +3,7 @@ package vistra.core.traversal;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import vistra.core.traversal.step.IStep;
 import vistra.util.IBidirectIterator;
 
 /**

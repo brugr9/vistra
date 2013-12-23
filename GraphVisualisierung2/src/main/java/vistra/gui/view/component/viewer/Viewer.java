@@ -19,7 +19,7 @@ import vistra.core.graph.transformer.vertex.VertexFillPaint;
 import vistra.core.graph.transformer.vertex.VertexLabel;
 import vistra.core.graph.transformer.vertex.VertexShape;
 import vistra.core.graph.transformer.vertex.VertexStroke;
-import vistra.gui.IModel;
+import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.component.viewer.popup.EdgePopup;
 import vistra.gui.view.component.viewer.popup.MenuFactory;
@@ -70,7 +70,7 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 	 * @param dimension
 	 *            the dimension
 	 */
-	public Viewer(JFrame top, IModel model, Layout<IVertex, IEdge> layout,
+	public Viewer(JFrame top, IGuiModel model, Layout<IVertex, IEdge> layout,
 			Dimension dimension) {
 		super(layout, dimension);
 		super.setBackground(ColorPalette.WHITE);
@@ -111,7 +111,7 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 	@Override
 	public void update(Observable o, Object arg) {
 
-		IModel m = (IModel) o;
+		IGuiModel m = (IGuiModel) o;
 		ResourceBundle b = m.getResourceBundle();
 
 		try {

@@ -1,6 +1,6 @@
 package vistra.core.graph.item.edge;
 
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.item.IGraphItemModel;
 
 /**
  * An edge interface.
@@ -8,7 +8,7 @@ import vistra.core.graph.item.IGraphItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-interface IEdgeModel extends IGraphItem {
+interface IEdgeModel extends IGraphItemModel {
 
 	/**
 	 * Sets the weight.

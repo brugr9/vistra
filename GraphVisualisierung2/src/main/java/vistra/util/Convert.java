@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.item.IGraphItemModel;
 
 /**
  * A utility class, therefore serving with static method only.
@@ -93,7 +93,7 @@ public final class Convert {
 	 *            the list
 	 * @return the array
 	 */
-	public static IGraphItem[] toArray(List<IGraphItem> list) {
-		return list.toArray(new IGraphItem[list.size()]);
+	public static IGraphItemModel[] toArray(List<IGraphItemModel> list) {
+		return list.toArray(new IGraphItemModel[list.size()]);
 	}
 }

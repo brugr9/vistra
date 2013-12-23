@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
-import vistra.gui.IModel;
+import vistra.gui.IGuiModel;
 
 /**
  * A listener for quitting the program.
@@ -21,7 +21,7 @@ final class ActionListenerQuit extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerQuit(IModel model) {
+	ActionListenerQuit(IGuiModel model) {
 		super(model);
 	}
 

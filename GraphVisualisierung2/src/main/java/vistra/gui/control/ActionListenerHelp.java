@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
 
-import vistra.gui.IModel;
+import vistra.gui.IGuiModel;
 
 /**
  * A listener for getting some help.
@@ -50,7 +50,7 @@ final class ActionListenerHelp extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerHelp(IModel model) {
+	ActionListenerHelp(IGuiModel model) {
 		super(model);
 	}
 

@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
-import vistra.gui.IModel;
+import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
 import vistra.util.ColorPalette;
 
@@ -61,7 +61,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 	 * @param size
 	 *            the panel size
 	 */
-	public AlgorithmPanel(IModel model, Dimension size) {
+	public AlgorithmPanel(IGuiModel model, Dimension size) {
 		super();
 		this.setSize(size);
 		this.border = BorderFactory.createTitledBorder("algorithmPanel");
@@ -104,9 +104,9 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		if (o instanceof IModel) {
+		if (o instanceof IGuiModel) {
 
-			IModel m = (IModel) o;
+			IGuiModel m = (IGuiModel) o;
 			ResourceBundle b = m.getResourceBundle();
 
 			try {

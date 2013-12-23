@@ -141,6 +141,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 			this.setFontColor(ColorPalette.darkblue);
 			this.setLineColor(ColorPalette.darkblue);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -156,6 +157,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 			this.setFontColor(ColorPalette.red);
 			this.setLineColor(ColorPalette.red);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -171,6 +173,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -186,6 +189,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -201,6 +205,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -221,6 +226,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 			// this.setLineColor(VistraColor.DARK_BLUE);
 			// this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			// this.setLineStyle(GraphFactory.STROKE_TAGGED)
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -236,6 +242,7 @@ public class Edge extends AbstractEdgeModel implements IEdge {
 			this.setFontColor(ColorPalette.GREEN);
 			this.setLineColor(ColorPalette.GREEN);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}

@@ -13,8 +13,9 @@ public class EdgeLabel implements Transformer<IEdge, String> {
 
 	@Override
 	public String transform(IEdge edge) {
-		return edge.getId()
-				+ (Double.isNaN(edge.getWeight()) ? "" : " | "
-						+ Convert.toRounded2Decimals(edge.getWeight()));
+		String value = "";
+		if (edge.getWeight() != 0.0)
+			value = ": " + Convert.toRounded2Decimals(edge.getWeight());
+		return edge.getId() + value;
 	}
 }

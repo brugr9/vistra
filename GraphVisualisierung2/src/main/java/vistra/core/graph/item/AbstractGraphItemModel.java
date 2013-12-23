@@ -1,6 +1,7 @@
 package vistra.core.graph.item;
 
 import java.awt.Color;
+import java.util.Observable;
 
 /**
  * An abstract graph item.
@@ -8,7 +9,7 @@ import java.awt.Color;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class AbstractGraphItem implements IGraphItem {
+public class AbstractGraphItemModel extends Observable implements IGraphItemModel {
 
 	/**
 	 * A field for an identifier.
@@ -30,7 +31,7 @@ public class AbstractGraphItem implements IGraphItem {
 	/**
 	 * Main constructor.
 	 */
-	public AbstractGraphItem() {
+	public AbstractGraphItemModel() {
 		this.id = "";
 		this.lineWidth = 0;
 		this.lineColor = null;
@@ -75,6 +76,7 @@ public class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setId(String id) {
 		this.id = id;
+		this.setChanged();
 	}
 
 	/**
@@ -83,6 +85,7 @@ public class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setLineWidth(float width) {
 		this.lineWidth = width;
+		this.setChanged();
 	}
 
 	/**
@@ -91,6 +94,7 @@ public class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setLineColor(Color color) {
 		this.lineColor = color;
+		this.setChanged();
 	}
 
 	/**
@@ -99,6 +103,7 @@ public class AbstractGraphItem implements IGraphItem {
 	@Override
 	public void setFontColor(Color color) {
 		this.fontColor = color;
+		this.setChanged();
 	}
 
 }

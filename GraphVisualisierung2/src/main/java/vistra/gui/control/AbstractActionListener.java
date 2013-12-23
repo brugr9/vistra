@@ -2,7 +2,7 @@ package vistra.gui.control;
 
 import java.awt.event.ActionListener;
 
-import vistra.gui.IModel;
+import vistra.gui.IGuiModel;
 
 /**
  * An abstract action listener.
@@ -15,7 +15,7 @@ abstract class AbstractActionListener implements ActionListener {
 	/**
 	 * A field for a model.
 	 */
-	protected final IModel model;
+	protected final IGuiModel model;
 
 	/**
 	 * Main constructor.
@@ -23,7 +23,7 @@ abstract class AbstractActionListener implements ActionListener {
 	 * @param model
 	 *            the model
 	 */
-	AbstractActionListener(IModel model) {
+	AbstractActionListener(IGuiModel model) {
 		super();
 		this.model = model;
 	}

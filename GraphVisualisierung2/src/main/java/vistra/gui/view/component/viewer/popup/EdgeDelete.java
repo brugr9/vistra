@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JMenuItem;
 
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.item.IGraphItemModel;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -56,7 +56,7 @@ class EdgeDelete extends JMenuItem implements IItemModifier {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setGraphItemAndView(IGraphItem item) {
+	public void setGraphItemAndView(IGraphItemModel item) {
 		if (item instanceof IEdge) {
 			this.edge = (IEdge) item;
 			this.setText("Kante " + this.edge.getId() + " löschen");

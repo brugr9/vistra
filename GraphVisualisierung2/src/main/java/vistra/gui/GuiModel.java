@@ -17,7 +17,7 @@ import vistra.gui.control.stepbystep.IStepByStepStateHandler;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class Model extends Observable implements IModel {
+public final class GuiModel extends Observable implements IGuiModel {
 
 	/* Menu */
 	// Action listener
@@ -91,7 +91,7 @@ public final class Model extends Observable implements IModel {
 	 * @param graph
 	 *            an observable gravis graph
 	 */
-	public Model(IExtendedGraph graph) {
+	public GuiModel(IExtendedGraph graph) {
 		super();
 
 		/* Menu */

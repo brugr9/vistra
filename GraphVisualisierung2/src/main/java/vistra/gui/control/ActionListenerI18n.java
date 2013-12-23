@@ -10,8 +10,8 @@ import java.util.ResourceBundle;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
-import vistra.gui.IModel;
-import vistra.gui.Model;
+import vistra.gui.IGuiModel;
+import vistra.gui.GuiModel;
 
 /**
  * An i18n listener.
@@ -32,7 +32,7 @@ class ActionListenerI18n extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerI18n(IModel model) {
+	ActionListenerI18n(IGuiModel model) {
 		super(model);
 		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle")
 				.replace(".", File.separator);
@@ -67,7 +67,7 @@ class ActionListenerI18n extends AbstractActionListener {
 			this.model.setResourceBundle(b);
 
 			/* update the view */
-			((Model) this.model).notifyObservers(I18N);
+			((GuiModel) this.model).notifyObservers(I18N);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);

@@ -17,8 +17,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import vistra.gui.IModel;
-import vistra.gui.Model;
+import vistra.gui.IGuiModel;
+import vistra.gui.GuiModel;
 import vistra.gui.control.stepbystep.StepByStepStateHandler;
 
 /**
@@ -36,7 +36,7 @@ public final class AnimationStateHandler extends Observable implements
 	/**
 	 * A field for a model.
 	 */
-	private Model model;
+	private GuiModel model;
 	/**
 	 * A field for an animation timer.
 	 */
@@ -52,7 +52,7 @@ public final class AnimationStateHandler extends Observable implements
 	 * @param model
 	 *            a model
 	 */
-	public AnimationStateHandler(Model model) {
+	public AnimationStateHandler(GuiModel model) {
 		super();
 		this.model = model;
 
@@ -360,7 +360,7 @@ public final class AnimationStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				IModel model = AnimationStateHandler.this.model;
+				IGuiModel model = AnimationStateHandler.this.model;
 				if (model.getProgress() < model.getProgressMaximum())
 					((StepByStepStateHandler) model.getStepByStepStateHandler())
 							.goForward();

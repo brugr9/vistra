@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.item.IGraphItemModel;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
@@ -25,10 +25,6 @@ public class MenuFactory extends JPopupMenu implements IItemModifier {
 
 	private static final long serialVersionUID = 6897658442329318591L;
 	/**
-	 * A field for a vertex factory.
-	 */
-	private final VertexFactory vertexFactory;
-	/**
 	 * A field for a visualization viewer.
 	 */
 	private final VisualizationViewer<IVertex, IEdge> viewer;
@@ -45,8 +41,6 @@ public class MenuFactory extends JPopupMenu implements IItemModifier {
 	 */
 	public MenuFactory(Viewer viewer) {
 		super("Neuer Knoten");
-
-		this.vertexFactory = new VertexFactory();
 		this.viewer = viewer;
 
 		JMenuItem newVertexMenuItem = new JMenuItem("Neuer Knoten");
@@ -64,14 +58,15 @@ public class MenuFactory extends JPopupMenu implements IItemModifier {
 	 */
 	private void createVertex() {
 		if (this.point2D != null) {
-			IVertex newVertex = this.vertexFactory.create();
+			VertexFactory vertexFactory = new VertexFactory();
+			IVertex vertex = vertexFactory.create();
 			Layout<IVertex, IEdge> layout = this.viewer.getGraphLayout();
 			Point2D newPoint = this.viewer.getRenderContext()
 					.getMultiLayerTransformer().inverseTransform(this.point2D);
 
-			newVertex.setLocation(newPoint);
-			layout.getGraph().addVertex(newVertex);
-			layout.setLocation(newVertex, newPoint);
+			vertex.setLocation(newPoint);
+			layout.getGraph().addVertex(vertex);
+			layout.setLocation(vertex, newPoint);
 			this.viewer.repaint();
 		}
 	}
@@ -80,7 +75,7 @@ public class MenuFactory extends JPopupMenu implements IItemModifier {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setGraphItemAndView(IGraphItem item) {
+	public void setGraphItemAndView(IGraphItemModel item) {
 		// does nothing
 	}
 

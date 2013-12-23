@@ -4,7 +4,7 @@ import java.util.List;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.traversal.IStep;
+import vistra.core.traversal.step.IStep;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 

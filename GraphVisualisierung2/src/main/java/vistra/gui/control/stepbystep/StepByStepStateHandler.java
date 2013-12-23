@@ -16,10 +16,10 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import vistra.core.traversal.IStep;
 import vistra.core.traversal.Traversal;
-import vistra.gui.IModel;
-import vistra.gui.Model;
+import vistra.core.traversal.step.IStep;
+import vistra.gui.IGuiModel;
+import vistra.gui.GuiModel;
 import vistra.gui.control.IControl.EventSource;
 
 /**
@@ -38,7 +38,7 @@ public final class StepByStepStateHandler extends Observable implements
 	/**
 	 * A field for a model.
 	 */
-	private Model model;
+	private GuiModel model;
 
 	/**
 	 * A field for a timer.
@@ -61,9 +61,9 @@ public final class StepByStepStateHandler extends Observable implements
 	 * @param model
 	 *            the model
 	 */
-	public StepByStepStateHandler(IModel model) {
+	public StepByStepStateHandler(IGuiModel model) {
 		super();
-		this.model = (Model) model;
+		this.model = (GuiModel) model;
 		this.blinkListener = new BlinkListener(NUMBER_OF_BLINKS);
 		int timeDivider = 2; // divides the delay into two parts: blink and show
 		int numberOfSteps = 2; // number of steps per blink: backward, forward
@@ -369,7 +369,8 @@ public final class StepByStepStateHandler extends Observable implements
 					/* modify the graph */
 					this.doBlink();
 					step = traversal.next();
-					description = step.execute();
+					description = step.getDescription();
+					step.execute();
 					stringBuilder.append(description + System.lineSeparator());
 					progress++;
 
@@ -428,7 +429,8 @@ public final class StepByStepStateHandler extends Observable implements
 			while (ok) {
 				/* modify the graph */
 				step = traversal.next();
-				description = step.execute();
+				description = step.getDescription();
+				step.execute();
 				stringBuilder.append(description + System.lineSeparator());
 				ok = traversal.hasNext();
 			}
@@ -454,17 +456,9 @@ public final class StepByStepStateHandler extends Observable implements
 	private final class BlinkListener implements ActionListener {
 
 		/**
-		 * A field for a counter.
-		 */
-		private int counter;
-		/**
 		 * A field for a number of blinks.
 		 */
 		private final int numberOfBlinks;
-		/**
-		 * A field for an is off value.
-		 */
-		private boolean isOff;
 
 		/**
 		 * Main constructor.
@@ -473,9 +467,7 @@ public final class StepByStepStateHandler extends Observable implements
 		 *            the number of blinks
 		 */
 		BlinkListener(int numberOfBlinks) {
-			this.counter = 0;
 			this.numberOfBlinks = numberOfBlinks;
-			this.isOff = true;
 		}
 
 		/**
@@ -484,21 +476,28 @@ public final class StepByStepStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			Model model = StepByStepStateHandler.this.model;
+			GuiModel model = StepByStepStateHandler.this.model;
 			Timer timer = StepByStepStateHandler.this.timer;
 
-			if (this.counter < numberOfBlinks) {
-				if (this.isOff)
-					model.getTraversal().next();
-				else
-					model.getTraversal().previous();
-				model.notifyObservers();
-				this.isOff = !this.isOff;
-				this.counter++;
-			} else {
-				this.counter = 0;
-				timer.stop();
-				timer.notify();
+			try {
+				boolean off = true;
+				int counter = 0;
+				if (counter < numberOfBlinks) {
+					if (off)
+						model.getTraversal().next().execute();
+					else
+						model.getTraversal().previous().undo();
+					model.notifyObservers();
+					off = !off;
+					counter++;
+				} else {
+					timer.stop();
+					timer.notify();
+				}
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, ex.toString(), model
+						.getResourceBundle().getString("app.label"), 1, null);
+				ex.printStackTrace();
 			}
 
 		}

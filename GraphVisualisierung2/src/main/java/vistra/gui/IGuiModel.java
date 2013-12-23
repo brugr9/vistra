@@ -16,7 +16,7 @@ import vistra.gui.control.stepbystep.IStepByStepStateHandler;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IModel {
+public interface IGuiModel {
 
 	/**
 	 * Sets the menuEnabled.

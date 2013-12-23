@@ -3,7 +3,7 @@ package vistra.gui.control;
 import java.util.ResourceBundle;
 
 import vistra.core.ICore;
-import vistra.gui.Model;
+import vistra.gui.GuiModel;
 import vistra.gui.control.animation.AnimationStateHandler;
 import vistra.gui.control.parameter.ParameterStateHandler;
 import vistra.gui.control.stepbystep.StepByStepStateHandler;
@@ -19,7 +19,7 @@ public final class Control implements IControl {
 	/**
 	 * A field for a model as in MVC.
 	 */
-	private final Model model;
+	private final GuiModel model;
 
 	/**
 	 * Main constructor.
@@ -30,7 +30,7 @@ public final class Control implements IControl {
 	 *            the model
 	 * @throws Exception
 	 */
-	public Control(ICore core, Model model) throws Exception {
+	public Control(ICore core, GuiModel model) throws Exception {
 		super();
 		try {
 			this.model = model;

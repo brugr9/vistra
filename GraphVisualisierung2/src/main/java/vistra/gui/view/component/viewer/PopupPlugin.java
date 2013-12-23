@@ -8,7 +8,7 @@ import javax.swing.JPopupMenu;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.item.IGraphItemModel;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.gui.view.component.viewer.popup.IItemModifier;
@@ -107,7 +107,7 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 	 * @param popUp
 	 *            a popup
 	 */
-	private void updateItemMenu(IGraphItem item, Point2D point, JPopupMenu popUp) {
+	private void updateItemMenu(IGraphItemModel item, Point2D point, JPopupMenu popUp) {
 		for (Component comp : popUp.getComponents()) {
 			if (comp instanceof IItemModifier) {
 				((IItemModifier) comp).setGraphItemAndView(item);

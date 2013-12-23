@@ -8,7 +8,7 @@ import java.awt.Color;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IGraphItem {
+public interface IGraphItemModel {
 
 	/**
 	 * Sets an identifier.

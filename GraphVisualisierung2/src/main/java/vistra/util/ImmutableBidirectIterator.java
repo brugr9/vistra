@@ -7,13 +7,12 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * An immutable bidirectional iterator.
+ * A bidirectional iterator.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class ImmutableBidirectIterator<E> implements
-		IBidirectIterator<E> {
+public class ImmutableBidirectIterator<E> implements IBidirectIterator<E> {
 
 	/**
 	 * A field for a list iterator.

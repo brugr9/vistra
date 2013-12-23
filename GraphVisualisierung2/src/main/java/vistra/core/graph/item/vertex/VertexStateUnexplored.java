@@ -16,7 +16,7 @@ class VertexStateUnexplored extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	VertexStateUnexplored(IVertex stateHandler) {
+	VertexStateUnexplored(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

@@ -1,0 +1,183 @@
+../../../src/main/java/vistra
+├── ApplicationFactory.java
+├── core
+│   ├── algorithm
+│   │   ├── AbstractAlgorithm.java
+│   │   ├── AlgorithmException.java
+│   │   ├── AlgorithmManagerFactory.java
+│   │   ├── AlgorithmManager.java
+│   │   ├── IAlgorithm.java
+│   │   ├── IAlgorithmManager.java
+│   │   └── impl
+│   │       ├── AlgorithmTemplate.java
+│   │       ├── BFS.java
+│   │       ├── Default.java
+│   │       ├── DFS.java
+│   │       ├── Dijkstra.java
+│   │       ├── DLS.java
+│   │       └── Kruskal.java
+│   ├── CoreException.java
+│   ├── Core.java
+│   ├── graph
+│   │   ├── ExtendedGraphEventListener.java
+│   │   ├── ExtendedGraph.java
+│   │   ├── GraphException.java
+│   │   ├── GraphFactory.java
+│   │   ├── GraphManagerFactory.java
+│   │   ├── GraphManager.java
+│   │   ├── GraphMLMeta.java
+│   │   ├── IExtendedGraph.java
+│   │   ├── IGraphManager.java
+│   │   ├── item
+│   │   │   ├── AbstractGraphItemModel.java
+│   │   │   ├── command
+│   │   │   ├── edge
+│   │   │   │   ├── AbstractEdgeModel.java
+│   │   │   │   ├── AbstractEdgeState.java
+│   │   │   │   ├── command
+│   │   │   │   │   └── DiscoverEdge.java
+│   │   │   │   ├── EdgeFactory.java
+│   │   │   │   ├── Edge.java
+│   │   │   │   ├── EdgeStateBack.java
+│   │   │   │   ├── EdgeStateCross.java
+│   │   │   │   ├── EdgeStateDiscarded.java
+│   │   │   │   ├── EdgeStateDiscovery.java
+│   │   │   │   ├── EdgeStateForward.java
+│   │   │   │   ├── EdgeStateSolution.java
+│   │   │   │   ├── EdgeStateUnexplored.java
+│   │   │   │   ├── IEdge.java
+│   │   │   │   └── IEdgeModel.java
+│   │   │   ├── IGraphItemModel.java
+│   │   │   └── vertex
+│   │   │       ├── AbstractVertexState.java
+│   │   │       ├── command
+│   │   │       │   └── VisitVertex.java
+│   │   │       ├── IVertex.java
+│   │   │       ├── IVertexStateHandler.java
+│   │   │       ├── VertexFactory.java
+│   │   │       ├── Vertex.java
+│   │   │       ├── VertexStateFocussed.java
+│   │   │       ├── VertexStateHandler.java
+│   │   │       ├── VertexStateSolution.java
+│   │   │       ├── VertexStateUnexplored.java
+│   │   │       └── VertexStateVisited.java
+│   │   └── transformer
+│   │       ├── edge
+│   │       │   ├── EdgeFontColor.java
+│   │       │   ├── EdgeID.java
+│   │       │   ├── EdgeLabel.java
+│   │       │   ├── EdgeLineColor.java
+│   │       │   ├── EdgeLineWidth.java
+│   │       │   └── EdgeWeight.java
+│   │       ├── EdgeTransformer.java
+│   │       ├── GraphTransformer.java
+│   │       ├── HyperEdgeTransformer.java
+│   │       ├── vertex
+│   │       │   ├── VertexEnd.java
+│   │       │   ├── VertexFillPaint.java
+│   │       │   ├── VertexFontColor.java
+│   │       │   ├── VertexHeight.java
+│   │       │   ├── VertexID.java
+│   │       │   ├── VertexLabel.java
+│   │       │   ├── VertexLocationX.java
+│   │       │   ├── VertexLocationY.java
+│   │       │   ├── VertexShape.java
+│   │       │   ├── VertexStart.java
+│   │       │   ├── VertexStroke.java
+│   │       │   └── VertexWidth.java
+│   │       └── VertexTransformer.java
+│   ├── ICore.java
+│   └── traversal
+│       ├── step
+│       │   ├── AbstractStepCommand.java
+│       │   ├── IStepCommand.java
+│       │   ├── IStep.java
+│       │   └── Visit.java
+│       └── Traversal.java
+├── gui
+│   ├── control
+│   │   ├── AbstractActionListener.java
+│   │   ├── ActionListenerAbout.java
+│   │   ├── ActionListenerHelp.java
+│   │   ├── ActionListenerI18n.java
+│   │   ├── ActionListenerQuit.java
+│   │   ├── animation
+│   │   │   ├── AbstractAnimationState.java
+│   │   │   ├── AnimationIdle.java
+│   │   │   ├── AnimationOff.java
+│   │   │   ├── AnimationPaused.java
+│   │   │   ├── AnimationPlaying.java
+│   │   │   ├── AnimationStateHandler.java
+│   │   │   ├── AnimationStopped.java
+│   │   │   └── IAnimationStateHandler.java
+│   │   ├── Control.java
+│   │   ├── IControl.java
+│   │   ├── IControlStateHandler.java
+│   │   ├── parameter
+│   │   │   ├── AbstractParameterState.java
+│   │   │   ├── IParameterStateHandler.java
+│   │   │   ├── ParameterAlgorithmSelected.java
+│   │   │   ├── ParameterGraphEdited.java
+│   │   │   ├── ParameterGraphSaved.java
+│   │   │   ├── ParameterIdle.java
+│   │   │   ├── ParameterOff.java
+│   │   │   └── ParameterStateHandler.java
+│   │   └── stepbystep
+│   │       ├── AbstractStepByStepState.java
+│   │       ├── IStepByStepStateHandler.java
+│   │       ├── StepByStepAtBeginning.java
+│   │       ├── StepByStepAtEnd.java
+│   │       ├── StepByStepIdle.java
+│   │       ├── StepByStepIntermediate.java
+│   │       ├── StepByStepOff.java
+│   │       └── StepByStepStateHandler.java
+│   ├── GuiFactory.java
+│   ├── GuiModel.java
+│   ├── IGuiModel.java
+│   └── view
+│       ├── component
+│       │   ├── AlgorithmPanel.java
+│       │   ├── GraphPanel.java
+│       │   ├── MenuBar.java
+│       │   ├── ProtocolPanel.java
+│       │   ├── TraversalPanel.java
+│       │   └── viewer
+│       │       ├── EditingPlugin.java
+│       │       ├── Mouse.java
+│       │       ├── PickingPlugin.java
+│       │       ├── popup
+│       │       │   ├── AbstarctCheckBox.java
+│       │       │   ├── CheckBoxEnd.java
+│       │       │   ├── CheckBoxStart.java
+│       │       │   ├── EdgeDelete.java
+│       │       │   ├── EdgeDialog.java
+│       │       │   ├── EdgePopup.java
+│       │       │   ├── EdgeProperty.java
+│       │       │   ├── IItemModifier.java
+│       │       │   ├── MenuFactory.java
+│       │       │   ├── verifier
+│       │       │   │   ├── AbstractVerifier.java
+│       │       │   │   ├── EdgeWeightVerifier.java
+│       │       │   │   ├── GraphIdVerifier.java
+│       │       │   │   └── GraphItemIdVerifier.java
+│       │       │   ├── VertexDelete.java
+│       │       │   ├── VertexDialog.java
+│       │       │   ├── VertexPopup.java
+│       │       │   └── VertexProperty.java
+│       │       ├── PopupPlugin.java
+│       │       └── Viewer.java
+│       ├── FullView.java
+│       ├── IView.java
+│       └── MinimalView.java
+├── Startup.java
+└── util
+    ├── AbstractState.java
+    ├── ColorPalette.java
+    ├── Convert.java
+    ├── IBidirectIterator.java
+    ├── ICommandHandler.java
+    ├── ICommand.java
+    ├── ImmutableBidirectIterator.java
+    └── IState.java
+
+26 directories, 154 files

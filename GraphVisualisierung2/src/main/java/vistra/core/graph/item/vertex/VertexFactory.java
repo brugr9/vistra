@@ -19,7 +19,7 @@ public class VertexFactory implements Factory<IVertex> {
 	public IVertex create() {
 		IVertex vertex = new Vertex();
 		try {
-			vertex.handleUnexplored();
+			((VertexStateHandler) vertex).handleUnexplored();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class VertexFactory implements Factory<IVertex> {
 	public static IVertex createVertex() {
 		IVertex vertex = new Vertex();
 		try {
-			vertex.handleUnexplored();
+			((VertexStateHandler) vertex).handleUnexplored();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.Model;
+import vistra.gui.GuiModel;
 import vistra.gui.control.IControl;
 import vistra.gui.view.component.AlgorithmPanel;
 import vistra.gui.view.component.GraphPanel;
@@ -66,7 +66,7 @@ public class MinimalView extends JFrame implements IView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public MinimalView(Layout<IVertex, IEdge> layout, Model model,
+	public MinimalView(Layout<IVertex, IEdge> layout, GuiModel model,
 			IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

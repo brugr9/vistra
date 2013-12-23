@@ -14,7 +14,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	/**
 	 * A field for a state handler.
 	 */
-	protected Vertex stateHandler;
+	protected VertexStateHandler stateHandler;
 
 	/**
 	 * Main constructor.
@@ -22,8 +22,8 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	AbstractVertexState(IVertex stateHandler) {
-		this.stateHandler = (Vertex) stateHandler;
+	AbstractVertexState(IVertexStateHandler stateHandler) {
+		this.stateHandler = (VertexStateHandler) stateHandler;
 	}
 
 	/**
@@ -45,9 +45,10 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 * 
 	 * @throws Exception
 	 */
-	void handleVisit() throws Exception {
+	void handleFocussed() throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateVisit(this.stateHandler));
+			this.stateHandler.setState(new VertexStateFocussed(
+					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}

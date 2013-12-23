@@ -26,7 +26,7 @@ import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.traversal.Traversal;
-import vistra.gui.Model;
+import vistra.gui.GuiModel;
 import vistra.gui.control.IControl.EventSource;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -49,7 +49,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	/**
 	 * A field for a model.
 	 */
-	private Model model;
+	private GuiModel model;
 	/**
 	 * A field for a top component.
 	 */
@@ -61,7 +61,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @param model
 	 *            a model
 	 */
-	public ParameterStateHandler(ICore core, Model model) {
+	public ParameterStateHandler(ICore core, GuiModel model) {
 		super();
 		this.core = core;
 		this.model = model;

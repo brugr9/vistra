@@ -16,7 +16,7 @@ class VertexStateSolution extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	VertexStateSolution(IVertex stateHandler) {
+	VertexStateSolution(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

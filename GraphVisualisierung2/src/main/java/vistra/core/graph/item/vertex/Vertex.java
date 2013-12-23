@@ -1,154 +1,136 @@
 package vistra.core.graph.item.vertex;
 
-import vistra.core.graph.GraphFactory;
-import vistra.util.ColorPalette;
+import java.awt.Color;
+import java.awt.geom.Point2D;
+
+import vistra.core.graph.item.AbstractGraphItemModel;
 
 /**
- * A vertex (state handler).
+ * A vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * 
  */
-public class Vertex extends AbstractVertexModel implements IVertex {
+public class Vertex extends AbstractGraphItemModel implements IVertex {
 
 	/**
-	 * A field for a vertex state.
+	 * A field for the start.
 	 */
-	private AbstractVertexState state;
+	private boolean start;
+
+	/**
+	 * A field for the end.
+	 */
+	private boolean end;
+
+	/**
+	 * A field for the value.
+	 */
+	private double value;
+
+	/**
+	 * A field for the location.
+	 */
+	private Point2D location;
+
+	/**
+	 * A field for the fill color.
+	 */
+	private Color fillColor;
 
 	/**
 	 * Main constructor.
-	 * 
 	 */
-	public Vertex() {
-		this.state = new VertexStateUnexplored(this);
+	Vertex() {
+		super();
+		this.start = false;
+		this.end = false;
+		this.value = 0;
+		this.fillColor = null;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleUnexplored() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleUnexplored();
-		} catch (Exception e) {
-			throw e;
-		}
+	public boolean isStart() {
+		return start;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleVisit() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleVisit();
-		} catch (Exception e) {
-			throw e;
-		}
+	public boolean isEnd() {
+		return end;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleVisited() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleVisited();
-		} catch (Exception e) {
-			throw e;
-		}
+	public double getValue() {
+		return value;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolution() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleSolution();
-		} catch (Exception e) {
-			throw e;
-		}
+	public Point2D getLocation() {
+		return location;
 	}
 
 	/**
-	 * Sets a state.
-	 * 
-	 * @param state
-	 *            the state to set
+	 * {@inheritDoc}
 	 */
-	void setState(AbstractVertexState state) throws Exception {
-		try {
-			this.state = state;
-			this.state.entry();
-		} catch (Exception e) {
-			throw e;
-		}
+	@Override
+	public Color getFillColor() {
+		return fillColor;
 	}
 
 	/**
-	 * State view setter: Sets the look to unexplored.
-	 * <p>
-	 * (see doc/vistra/adt/10GraphTraversal_handout.pdf, page 11)
+	 * {@inheritDoc}
 	 */
-	void setViewUnexplored() throws Exception {
-		try {
-			this.setFillColor(ColorPalette.orange);
-			this.setFontColor(ColorPalette.darkblue);
-			this.setLineColor(ColorPalette.darkblue);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
-		} catch (Exception e) {
-			throw e;
-		}
+	@Override
+	public void setStart(boolean start) {
+		this.start = start;
 	}
 
 	/**
-	 * State view setter: Sets the look as visit -- like 'visited' but with a
-	 * kind of 'spot' on the vertex.
+	 * {@inheritDoc}
 	 */
-	void setViewVisit() throws Exception {
-		try {
-			this.setFillColor(ColorPalette.yellow);
-			this.setFontColor(ColorPalette.darkblue);
-			this.setLineColor(ColorPalette.red);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-		} catch (Exception e) {
-			throw e;
-		}
+	@Override
+	public void setEnd(boolean end) {
+		this.end = end;
+		this.setChanged();
 	}
 
 	/**
-	 * State view setter: Sets the look as visited.
-	 * <p>
-	 * (see doc/vistra/adt/10GraphTraversal_handout.pdf, page 11)
+	 * {@inheritDoc}
 	 */
-	void setViewVisited() throws Exception {
-		try {
-			this.setFillColor(ColorPalette.blue);
-			this.setFontColor(ColorPalette.darkblue);
-			this.setLineColor(ColorPalette.red);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-		} catch (Exception e) {
-			throw e;
-		}
+	@Override
+	public void setValue(double value) {
+		this.value = value;
+		this.setChanged();
 	}
 
 	/**
-	 * State view setter: Sets the look as solution.
+	 * {@inheritDoc}
 	 */
-	void setViewSolved() throws Exception {
-		try {
-			this.setFillColor(ColorPalette.white);
-			this.setFontColor(ColorPalette.green);
-			this.setLineColor(ColorPalette.green);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-		} catch (Exception e) {
-			throw e;
-		}
+	@Override
+	public void setLocation(Point2D point) {
+		this.location = point;
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setFillColor(Color color) {
+		this.fillColor = color;
+		this.setChanged();
 	}
 
 }

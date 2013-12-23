@@ -4,7 +4,7 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.item.IGraphItemModel;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.Graph;
@@ -21,7 +21,7 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	/**
 	 * A field for a graph item.
 	 */
-	private final IGraphItem graphItem;
+	private final IGraphItemModel graphItem;
 	/**
 	 * A field for a graph.
 	 */
@@ -36,7 +36,7 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	 * @param vViewer
 	 *            a visualization viewer
 	 */
-	public GraphItemIdVerifier(String lastGood, IGraphItem graphItem,
+	public GraphItemIdVerifier(String lastGood, IGraphItemModel graphItem,
 			VisualizationViewer<IVertex, IEdge> vViewer) {
 		super(lastGood);
 		this.graphItem = graphItem;
