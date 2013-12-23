@@ -1,9 +1,12 @@
 package vistra.core.graph.item.vertex.command;
 
+import vistra.core.graph.item.edge.state.EdgeStateHandler;
 import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.vertex.Vertex;
 import vistra.core.graph.item.vertex.state.IVertexStateHandler;
 import vistra.core.graph.item.vertex.state.VertexStateHandler;
 import vistra.util.ICommand;
+import vistra.util.IState;
 
 /**
  * A vertex command: visit vertex.
@@ -16,7 +19,7 @@ public class VisitVertex implements ICommand {
 	/**
 	 * A field for a state handler.
 	 */
-	private IVertexStateHandler stateHandler;
+	private VertexStateHandler stateHandler;
 
 	/**
 	 * Main constructor.
@@ -35,7 +38,10 @@ public class VisitVertex implements ICommand {
 
 	@Override
 	public void undo() throws Exception {
+		// TODO if (counter > 0)
 		this.stateHandler.handleVisited();
+		// else
+		// this.stateHandler.handleUnexplored();
 	}
 
 }
