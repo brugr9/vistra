@@ -1,7 +1,13 @@
 package vistra.core.graph;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import vistra.core.graph.item.IGraphItem;
+import vistra.core.graph.item.edge.Edge;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.vertex.Vertex;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.ObservableGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -68,6 +74,24 @@ public class ExtendedGraph extends ObservableGraph<IVertex, IEdge> implements
 	@Override
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean containsItemId(String id) {
+		ArrayList<IGraphItem> items = new ArrayList<IGraphItem>();
+		items.addAll((Collection<? extends IGraphItem>) ((Edge) this.getEdges()));
+		items.addAll((Collection<? extends IGraphItem>) ((Vertex) this
+				.getVertices()));
+		for (IGraphItem item : items) {
+			if (item.getId() == id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

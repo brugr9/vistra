@@ -4,6 +4,7 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.item.IGraphItem;
 import vistra.core.graph.item.IGraphItemLayout;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
@@ -53,11 +54,10 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 			JTextComponent textField = (JTextComponent) input;
 			IExtendedGraph graph = (IExtendedGraph) this.graph;
 
-			// TODO
-			// return !textField.getText().trim().isEmpty()
-			// && (textField.getText().equals(this.graphItem.getId()) || !graph
-			// .containsItemId(textField.getText().trim()));
-			return false;
+			return !textField.getText().trim().isEmpty()
+					&& (textField.getText().equals(
+							((IGraphItem) this.graphItem).getId()) || !graph
+							.containsItemId(textField.getText().trim()));
 		}
 
 		return false;

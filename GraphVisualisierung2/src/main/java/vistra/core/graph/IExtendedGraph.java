@@ -56,4 +56,11 @@ public interface IExtendedGraph extends Graph<IVertex, IEdge>, Serializable {
 	 */
 	public void removeGraphEventListener(GraphEventListener<IVertex, IEdge> l);
 
+	/**
+	 * Checks for an existing item identifier.
+	 * 
+	 * @return <code>true</code> if the identifier exists
+	 */
+	public boolean containsItemId(String id);
+
 }

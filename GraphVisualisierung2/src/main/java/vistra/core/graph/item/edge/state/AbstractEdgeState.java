@@ -1,7 +1,5 @@
 package vistra.core.graph.item.edge.state;
 
-import vistra.core.graph.item.vertex.state.IVertexStateHandler;
-import vistra.core.graph.item.vertex.state.VertexStateHandler;
 import vistra.util.AbstractState;
 import vistra.util.IState;
 
