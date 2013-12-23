@@ -375,6 +375,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 						"defaultname");
 				graph.setName(name);
 				this.model.setGraph(graph);
+				this.updateAlgorithms();
 				this.setGraphSaved(false);
 				this.setGraphEditable(true);
 			}
@@ -413,7 +414,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				option = fileChooser.showOpenDialog(top);
 				if (option == JFileChooser.APPROVE_OPTION) {
 					File source = fileChooser.getSelectedFile();
-					this.model.setGraph(this.core.openGraph(source));
+					IExtendedGraph graph = this.core.openGraph(source);
+					this.model.setGraph(graph);
+					this.updateAlgorithms();
 					this.setGraphSaved(true);
 					this.setGraphEditable(true);
 				}
@@ -613,33 +616,18 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * A helper method: Updates the algorithm list by comparing the edge type of
-	 * the current graph with the edge types as given. The edge types given as
-	 * parameter are the capabilities of an imported or deleted algorithm.
+	 * A helper method: Updates the algorithm list.
 	 * 
-	 * @param edgeTypes
-	 *            the edge types to compare
-	 * @return <code>true</code> if updated
 	 * @throws Exception
 	 */
-	private boolean updateAlgorithms(EdgeType[] capabilities) throws Exception {
+	private void updateAlgorithms() throws Exception {
 		try {
-			boolean update = false;
 			IExtendedGraph graph = this.model.getGraph();
 			EdgeType edgeType = graph.getEdgeType();
-
-			for (EdgeType capability : capabilities) {
-				if (capability == edgeType) {
-					update = true;
-					break;
-				}
-			}
-			if (update) {
-				this.model.setAlgorithms(this.core.getAlgorithms(edgeType));
-				this.model.setSelectedAlgorithmIndex(0);
-				this.selectAlgorithm();
-			}
-			return update;
+			String[] algorithms = this.core.getAlgorithms(edgeType);
+			this.model.setAlgorithms(algorithms);
+			this.model.setSelectedAlgorithmIndex(0);
+			this.selectAlgorithm();
 		} catch (Exception e) {
 			throw e;
 		}

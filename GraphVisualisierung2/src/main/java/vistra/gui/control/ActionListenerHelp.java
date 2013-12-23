@@ -1,6 +1,7 @@
 package vistra.gui.control;
 
 import java.awt.event.ActionEvent;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
@@ -57,12 +58,16 @@ final class ActionListenerHelp extends AbstractActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		ResourceBundle b = this.model.getResourceBundle();
 		try {
-			JOptionPane.showMessageDialog(null, this.shortCuts, this.model
-					.getResourceBundle().getString("help.label"), 1, null);
+			// TODO i18n
+			JOptionPane.showMessageDialog(null, this.shortCuts,
+					b.getString("help.label"), 1, null);
+			// JOptionPane.showMessageDialog(null, b.getString("help.message"),
+			// b.getString("help.label"), 1, null);
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.toString(), this.model
-					.getResourceBundle().getString("app.label"), 1, null);
+			JOptionPane.showMessageDialog(null, ex.toString(),
+					b.getString("app.label"), 1, null);
 			ex.printStackTrace();
 		}
 	}
