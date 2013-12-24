@@ -47,8 +47,8 @@ public class FullView extends MinimalView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public FullView(Layout<IVertex, IEdge> layout, GuiModel model, IControl control)
-			throws Exception {
+	public FullView(Layout<IVertex, IEdge> layout, GuiModel model,
+			IControl control) throws Exception {
 		super(layout, model, control);
 
 		/* Component */
@@ -56,7 +56,7 @@ public class FullView extends MinimalView {
 		int height = FRAME_HEIGHT - VISUALISATION_HEIGHT
 				- this.menuBar.getHeight();
 		this.protocolPanel = new ProtocolPanel(new Dimension(width, height));
-		model.addObserver(protocolPanel);
+		model.addObserver(this.protocolPanel);
 		/* this */
 		this.add(this.protocolPanel, BorderLayout.SOUTH);
 		this.setVisible(true);

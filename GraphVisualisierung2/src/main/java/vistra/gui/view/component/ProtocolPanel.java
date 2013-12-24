@@ -57,8 +57,8 @@ public final class ProtocolPanel extends JPanel implements Observer {
 		this.textArea = new JTextArea();
 		this.textArea.setEditable(false);
 		this.textArea.setMinimumSize(size);
-		this.textArea.setColumns(50);
-		this.textArea.setRows(8);
+		this.textArea.setColumns(20);
+		this.textArea.setRows(20);
 		this.textArea.setLineWrap(true);
 		this.textArea.setWrapStyleWord(true);
 		this.textArea.setBackground(ColorPalette.gray);

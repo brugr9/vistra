@@ -22,7 +22,7 @@ public class Startup {
 		// @Override
 		// public void run() {
 		try {
-			ApplicationFactory.createApplication(ViewType.FULL);
+			ApplicationFactory.createApplication(ViewType.MINIMAL);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(
 					null,

@@ -14,6 +14,7 @@ import vistra.gui.control.IControl;
 import vistra.gui.view.component.AlgorithmPanel;
 import vistra.gui.view.component.GraphPanel;
 import vistra.gui.view.component.MenuBar;
+import vistra.gui.view.component.ProtocolPanel;
 import vistra.gui.view.component.TraversalPanel;
 import vistra.util.ColorPalette;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -56,6 +57,10 @@ public class MinimalView extends JFrame implements IView {
 	 * A field for a traversal panel.
 	 */
 	private final TraversalPanel traversalPanel;
+	/**
+	 * A field for a protocol panel.
+	 */
+	private final ProtocolPanel protocolPanel;
 
 	/**
 	 * Main constructor.
@@ -85,19 +90,21 @@ public class MinimalView extends JFrame implements IView {
 				200));
 		this.traversalPanel = new TraversalPanel(model, new Dimension(width,
 				400));
-
+		this.protocolPanel = new ProtocolPanel(new Dimension(width, 400));
 		// components observe the model
 		model.addObserver(this.menuBar);
 		model.addObserver(this.graphPanel);
 		model.addObserver(this.algorithmPanel);
 		model.addObserver(this.traversalPanel);
+		model.addObserver(this.protocolPanel);
 
 		/* another panel */
 		this.anotherPanel = new JPanel();
 		this.anotherPanel.setLayout(new BorderLayout());
 		this.anotherPanel.setBackground((Color) ColorPalette.antique);
 		this.anotherPanel.add(this.algorithmPanel, BorderLayout.NORTH);
-		this.anotherPanel.add(this.traversalPanel, BorderLayout.SOUTH);
+		this.anotherPanel.add(this.traversalPanel, BorderLayout.CENTER);
+		this.anotherPanel.add(this.protocolPanel, BorderLayout.SOUTH);
 
 		/* this */
 		this.setJMenuBar(this.menuBar);

@@ -69,6 +69,7 @@ public class GraphPanel extends JPanel implements Observer {
 		model.addObserver(this.viewer);
 		/* zoom */
 		this.zoom = new GraphZoomScrollPane(this.viewer);
+		this.zoom.setSize(size);
 		/* this */
 		this.add(this.zoom, BorderLayout.CENTER);
 

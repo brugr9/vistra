@@ -94,7 +94,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 		/* this */
 		this.setLayout(new BorderLayout());
 		this.add(this.combo, BorderLayout.NORTH);
-		this.add(this.textArea, BorderLayout.SOUTH);
+		this.add(this.scrollPane, BorderLayout.SOUTH);
 
 	}
 
