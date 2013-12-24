@@ -2,17 +2,13 @@ package vistra.gui.view.component.viewer.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Point2D;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.graph.item.vertex.VertexFactory;
 import vistra.gui.view.component.viewer.Viewer;
-import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
@@ -62,12 +58,17 @@ public class SwitchModePopup extends JPopupMenu {
 				SwitchModePopup.this.editingMode();
 			}
 		});
+
 		this.picking.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SwitchModePopup.this.pickingMode();
 			}
 		});
+
+		this.editing.setEnabled(false);
+		this.picking.setEnabled(true);
+
 	}
 
 	/**
@@ -77,6 +78,8 @@ public class SwitchModePopup extends JPopupMenu {
 	private void editingMode() {
 		((EditingModalGraphMouse<IVertex, IEdge>) this.viewer.getGraphMouse())
 				.setMode(Mode.EDITING);
+		this.editing.setEnabled(false);
+		this.picking.setEnabled(true);
 	}
 
 	/**
@@ -86,6 +89,8 @@ public class SwitchModePopup extends JPopupMenu {
 	private void pickingMode() {
 		((EditingModalGraphMouse<IVertex, IEdge>) this.viewer.getGraphMouse())
 				.setMode(Mode.PICKING);
+		this.editing.setEnabled(true);
+		this.picking.setEnabled(false);
 	}
 
 }

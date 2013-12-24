@@ -20,6 +20,7 @@ import vistra.core.graph.transformer.edge.EdgeLineWidth;
 import vistra.core.graph.transformer.vertex.VertexFillPaint;
 import vistra.core.graph.transformer.vertex.VertexFont;
 import vistra.core.graph.transformer.vertex.VertexLabel;
+import vistra.core.graph.transformer.vertex.VertexLineColor;
 import vistra.core.graph.transformer.vertex.VertexShape;
 import vistra.core.graph.transformer.vertex.VertexStroke;
 import vistra.gui.IGuiModel;
@@ -84,6 +85,7 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
 		rc.setVertexShapeTransformer(new VertexShape());
 		rc.setVertexStrokeTransformer(new VertexStroke());
+		rc.setVertexDrawPaintTransformer(new VertexLineColor());
 		rc.setVertexFillPaintTransformer(new VertexFillPaint());
 		rc.setVertexLabelTransformer(new VertexLabel());
 		rc.setVertexFontTransformer(new VertexFont());
@@ -93,11 +95,11 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 				GraphFactory.E_LABEL_CLOSENESS, GraphFactory.E_LABEL_CLOSENESS));
 		rc.setEdgeShapeTransformer(new EdgeShape.Line<IVertex, IEdge>());
 		rc.setEdgeDrawPaintTransformer(new EdgeLineColor());
-		rc.setArrowDrawPaintTransformer(new EdgeLineColor());
 		rc.setEdgeLabelTransformer(new EdgeLabel());
 		rc.setEdgeFontTransformer(new EdgeFont());
 		rc.setEdgeStrokeTransformer(new EdgeLineWidth());
 		rc.setEdgeArrowStrokeTransformer(new EdgeLineWidth());
+		rc.setArrowDrawPaintTransformer(new EdgeLineColor());
 
 		/* popup menu */
 		this.vertexMenu = new VertexPopup(top, this);

@@ -3,6 +3,7 @@ package vistra.core.graph.item.vertex;
 import java.awt.Color;
 
 import vistra.core.graph.item.AbstractItem;
+import vistra.util.ColorPalette;
 
 /**
  * An abstract vertex layout.
@@ -26,7 +27,7 @@ abstract class AbstractVertexLayout extends AbstractItem implements
 	 */
 	AbstractVertexLayout(double value) {
 		super(value);
-		this.fillColor = null;
+		this.fillColor = ColorPalette.orange;
 	}
 
 	/**
