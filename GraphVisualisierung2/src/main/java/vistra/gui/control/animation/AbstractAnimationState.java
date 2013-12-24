@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.animation;
 
 import vistra.util.AbstractState;

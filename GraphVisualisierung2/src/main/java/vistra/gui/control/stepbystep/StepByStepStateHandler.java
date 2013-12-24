@@ -231,6 +231,7 @@ public final class StepByStepStateHandler extends Observable implements
 			this.setViewEnd();
 		else
 			this.setViewIntermediate();
+		this.model.notifyObservers(EventSource.STEP_BY_STEP);
 	}
 
 	/**

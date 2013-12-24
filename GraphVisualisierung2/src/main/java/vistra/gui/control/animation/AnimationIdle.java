@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vistra.gui.control.animation;
 
 import vistra.util.IState;
@@ -29,7 +26,7 @@ class AnimationIdle extends AbstractAnimationState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewStopped();
+			super.stateHandler.setViewIdle();
 		} catch (Exception ex) {
 			throw ex;
 		}

@@ -217,6 +217,30 @@ public final class AnimationStateHandler extends Observable implements
 	}
 
 	/**
+	 * State view setter: idle.
+	 * 
+	 * @throws Exception
+	 */
+	void setViewIdle() throws Exception {
+		try {
+			/* animation state machine */
+			this.model.setDelayEnabled(true);
+			this.model.setAnimationEnabled(false);
+			this.model.setPlayEnabled(true);
+			// pause
+			String label = this.model.getResourceBundle().getString(
+					"pause.label");
+			this.model.setPauseLabel(label);
+			this.model.setPauseEvent(PAUSE);
+			this.model.notifyObservers(ANIMATION);
+			/* other state handlers */
+			this.model.getStepByStepStateHandler().handleIdle();
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
 	 * State view setter: Sets the view elements for state: stopped. In
 	 * addition, this method sets the state machines parameter and step-by-step
 	 * in state idle.
@@ -234,11 +258,10 @@ public final class AnimationStateHandler extends Observable implements
 					"pause.label");
 			this.model.setPauseLabel(label);
 			this.model.setPauseEvent(PAUSE);
-			/* other state handlers */
-			// TODO this.model.getParameterStateHandler().handleIdle();
-			this.model.getStepByStepStateHandler().handleIdle();
-
 			this.model.notifyObservers(ANIMATION);
+			/* other state handlers */
+			this.model.getParameterStateHandler().handleIdle();
+			this.model.getStepByStepStateHandler().handleIdle();
 		} catch (Exception ex) {
 			throw ex;
 		}
