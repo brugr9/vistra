@@ -12,7 +12,7 @@ public class EdgeWeight implements Transformer<IEdge, String> {
 
 	@Override
 	public String transform(IEdge edge) {
-		return Double.toString(edge.getValue());
+		return Integer.toString(edge.getValue());
 	}
 
 }

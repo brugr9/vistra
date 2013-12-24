@@ -15,7 +15,6 @@ public class VertexFont implements Transformer<IVertex, Font> {
 
 	@Override
 	public Font transform(IVertex vertex) {
-
 		return new Font("", vertex.getFontStyle(),
 				GraphFactory.V_FONT_SIZE_DEFAULT);
 	}

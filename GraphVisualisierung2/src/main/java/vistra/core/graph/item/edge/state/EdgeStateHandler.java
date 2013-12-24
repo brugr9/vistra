@@ -24,7 +24,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	private AbstractEdgeState state;
 	/**
-	 * A field for a states cellar.
+	 * A field for a cellar.
 	 */
 	private ArrayList<AbstractEdgeState> cellar;
 	/**
@@ -118,19 +118,6 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleDiscarded() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleDiscarded();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void handleSolution() throws Exception {
 		try {
 			this.state.exit();
@@ -174,7 +161,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the look to unexplored.
+	 * State view setter: Sets the layout to unexplored edge.
 	 * 
 	 * @throws Exception
 	 */
@@ -184,6 +171,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 			this.layout.setFontColor(ColorPalette.darkblue);
 			this.layout.setLineColor(ColorPalette.darkblue);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
+			this.layout.setDash(GraphFactory.E_SOLID);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -191,7 +179,9 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the look as discovery.
+	 * State view setter: Sets the layout as discovery edge.
+	 * <p>
+	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
@@ -201,6 +191,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 			this.layout.setFontColor(ColorPalette.red);
 			this.layout.setLineColor(ColorPalette.red);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.layout.setDash(GraphFactory.E_SOLID);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -208,7 +199,9 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	}
 
 	/**
-	 * Doing:
+	 * State view setter: Sets the layout as back edge.
+	 * <p>
+	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
@@ -218,6 +211,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 			this.layout.setFontColor(ColorPalette.darkgreen);
 			this.layout.setLineColor(ColorPalette.darkgreen);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.layout.setDash(GraphFactory.E_DASH_BACK);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -225,7 +219,9 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	}
 
 	/**
-	 * Doing:
+	 * State view setter: Sets the layout as forward edge.
+	 * <p>
+	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
@@ -235,6 +231,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 			this.layout.setFontColor(ColorPalette.darkgreen);
 			this.layout.setLineColor(ColorPalette.darkgreen);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.layout.setDash(GraphFactory.E_DASH_FWD);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -242,7 +239,9 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	}
 
 	/**
-	 * Doing:
+	 * State view setter: Sets the layout as cross edge.
+	 * <p>
+	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
@@ -252,6 +251,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 			this.layout.setFontColor(ColorPalette.darkgreen);
 			this.layout.setLineColor(ColorPalette.darkgreen);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.layout.setDash(GraphFactory.E_DASH_CROSS);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -259,29 +259,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	}
 
 	/**
-	 * Doing:
-	 * 
-	 * @throws Exception
-	 */
-	void setViewDiscarded() throws Exception {
-		try {
-			this.layout.setFontSyle(Font.PLAIN);
-			this.layout.setFontColor(ColorPalette.GRAY);
-			this.layout.setLineColor(ColorPalette.GRAY);
-			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			// TODO
-			// this.layout.setFontColor(VistraColor.DARK_BLUE);
-			// this.layout.setLineColor(VistraColor.DARK_BLUE);
-			// this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			// this.layout.setLineStyle(GraphFactory.STROKE_TAGGED)
-			this.layout.notifyObservers();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Doing:
+	 * State view setter: Sets the layout as solution member edge.
 	 * 
 	 * @throws Exception
 	 */
@@ -291,6 +269,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 			this.layout.setFontColor(ColorPalette.GREEN);
 			this.layout.setLineColor(ColorPalette.GREEN);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.layout.setDash(GraphFactory.E_SOLID);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;

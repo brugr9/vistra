@@ -29,9 +29,9 @@ public class EdgeWeightVerifier extends AbstractVerifier {
 			JTextComponent textField = (JTextComponent) input;
 
 			try {
-				Double.parseDouble(textField.getText());
+				Integer.parseInt(textField.getText());
 			} catch (Exception e) {
-				return false;
+				throw new IllegalArgumentException("integer value");
 			}
 
 			return true;

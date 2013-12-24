@@ -14,7 +14,6 @@ public class VertexFontColor implements Transformer<IVertex, Paint> {
 
 	@Override
 	public Paint transform(IVertex vertex) {
-
 		return vertex.getFontColor();
 	}
 

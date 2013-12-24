@@ -16,10 +16,10 @@ import vistra.core.graph.item.vertex.VertexFactory;
 import vistra.core.graph.transformer.edge.EdgeFont;
 import vistra.core.graph.transformer.edge.EdgeLabel;
 import vistra.core.graph.transformer.edge.EdgeLineColor;
-import vistra.core.graph.transformer.edge.EdgeLineWidth;
-import vistra.core.graph.transformer.vertex.VertexFillPaint;
+import vistra.core.graph.transformer.edge.EdgeStroke;
+import vistra.core.graph.transformer.vertex.VertexFillColor;
 import vistra.core.graph.transformer.vertex.VertexFont;
-import vistra.core.graph.transformer.vertex.VertexLabel;
+import vistra.core.graph.transformer.vertex.VertexLabelValue;
 import vistra.core.graph.transformer.vertex.VertexLineColor;
 import vistra.core.graph.transformer.vertex.VertexShape;
 import vistra.core.graph.transformer.vertex.VertexStroke;
@@ -86,8 +86,8 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 		rc.setVertexShapeTransformer(new VertexShape());
 		rc.setVertexStrokeTransformer(new VertexStroke());
 		rc.setVertexDrawPaintTransformer(new VertexLineColor());
-		rc.setVertexFillPaintTransformer(new VertexFillPaint());
-		rc.setVertexLabelTransformer(new VertexLabel());
+		rc.setVertexFillPaintTransformer(new VertexFillColor());
+		rc.setVertexLabelTransformer(new VertexLabelValue());
 		rc.setVertexFontTransformer(new VertexFont());
 
 		/* Edge */
@@ -97,8 +97,8 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 		rc.setEdgeDrawPaintTransformer(new EdgeLineColor());
 		rc.setEdgeLabelTransformer(new EdgeLabel());
 		rc.setEdgeFontTransformer(new EdgeFont());
-		rc.setEdgeStrokeTransformer(new EdgeLineWidth());
-		rc.setEdgeArrowStrokeTransformer(new EdgeLineWidth());
+		rc.setEdgeStrokeTransformer(new EdgeStroke());
+		rc.setEdgeArrowStrokeTransformer(new EdgeStroke());
 		rc.setArrowDrawPaintTransformer(new EdgeLineColor());
 
 		/* popup menu */

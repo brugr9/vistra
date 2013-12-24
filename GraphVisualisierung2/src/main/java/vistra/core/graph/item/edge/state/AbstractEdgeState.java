@@ -84,18 +84,6 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles discarded.
-	 */
-	void handleDiscarded() throws Exception {
-		try {
-			this.stateHandler
-					.setState(new EdgeStateDiscarded(this.stateHandler));
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * Handles a solution.
 	 */
 	void handleSolution() throws Exception {

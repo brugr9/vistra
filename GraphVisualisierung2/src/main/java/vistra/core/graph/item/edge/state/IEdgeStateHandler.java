@@ -46,13 +46,6 @@ public interface IEdgeStateHandler extends IItemStateHandler {
 	abstract void handleCross() throws Exception;
 
 	/**
-	 * Handles discarded.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleDiscarded() throws Exception;
-
-	/**
 	 * Handles solution.
 	 * 
 	 * @throws Exception

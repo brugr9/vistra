@@ -19,16 +19,22 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public final class GraphFactory {
 
 	/* Layout */
-	public final static double V_HEIGHT_DEFAULT = 40.0;
-	public final static double V_WIDTH_DEFAULT = 45.0;
 	public final static float STROKE_WIDTH_DEFAULT = 1.5f;
 	public final static float STROKE_WIDTH_BOLD = 3.0f;
-	public final static float V_TAGGED_STROKE = 3.0f;
-	public final static float E_TAGGED_STROKE = 5.0f;
+	/* vertex */
+	public final static double V_HEIGHT_DEFAULT = 40.0;
+	public final static double V_WIDTH_DEFAULT = 45.0;
 	public final static int V_FONT_SIZE_DEFAULT = 18;
-	public final static int E_FONT_SIZE_DEFAULT = 12;
-
+	public final static float V_TAGGED_STROKE = 3.0f;
+	/* edge */
 	public final static double E_LABEL_CLOSENESS = 0.5;
+	public final static int E_FONT_SIZE_DEFAULT = 18;
+	public final static float E_DASH_PHASE = 1.0f;
+	public final static float[] E_SOLID = null;
+	public final static float[] E_DASH_BACK = new float[] { 12.0f, 10.0f };
+	public final static float[] E_DASH_FWD = new float[] { 1.0f, 8.0f };
+	public final static float[] E_DASH_CROSS = new float[] { 10.0f, 10.0f, 1.0f,
+			10.0f };
 
 	/**
 	 * A main (no-)constructor.

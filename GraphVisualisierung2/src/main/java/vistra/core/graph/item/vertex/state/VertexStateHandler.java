@@ -24,7 +24,7 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	private AbstractVertexState state;
 	/**
-	 * A field for states cellar.
+	 * A field for a cellar.
 	 */
 	private ArrayList<AbstractVertexState> cellar;
 	/**
@@ -135,7 +135,7 @@ public class VertexStateHandler implements IVertexStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the look to unexplored.
+	 * State view setter: Sets the layout to unexplored vertex.
 	 * <p>
 	 * (see doc/vistra/adt/10GraphTraversal_handout.pdf, page 11)
 	 * 
@@ -143,11 +143,11 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	void setViewUnexplored() throws Exception {
 		try {
+			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
+			this.layout.setLineColor(ColorPalette.darkblue);
 			this.layout.setFillColor(ColorPalette.orange);
 			this.layout.setFontColor(ColorPalette.darkblue);
 			this.layout.setFontSyle(Font.PLAIN);
-			this.layout.setLineColor(ColorPalette.darkblue);
-			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -155,18 +155,18 @@ public class VertexStateHandler implements IVertexStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the look as focussed -- like 'visited' but with a
-	 * kind a 'spot' on the vertex.
+	 * State view setter: Sets the layout as focussed vertex -- like 'visited'
+	 * but with a kind a 'spot' on the vertex.
 	 * 
 	 * @throws Exception
 	 */
 	void setViewFocussed() throws Exception {
 		try {
+			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.layout.setLineColor(ColorPalette.red);
 			this.layout.setFillColor(ColorPalette.yellow);
 			this.layout.setFontColor(ColorPalette.darkblue);
 			this.layout.setFontSyle(Font.BOLD);
-			this.layout.setLineColor(ColorPalette.red);
-			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -174,7 +174,7 @@ public class VertexStateHandler implements IVertexStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the look as visited.
+	 * State view setter: Sets the layout as visited vertex.
 	 * <p>
 	 * (see doc/vistra/adt/10GraphTraversal_handout.pdf, page 11)
 	 * 
@@ -182,11 +182,11 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	void setViewVisited() throws Exception {
 		try {
+			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.layout.setLineColor(ColorPalette.red);
 			this.layout.setFillColor(ColorPalette.blue);
 			this.layout.setFontColor(ColorPalette.darkblue);
 			this.layout.setFontSyle(Font.BOLD);
-			this.layout.setLineColor(ColorPalette.red);
-			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -194,17 +194,17 @@ public class VertexStateHandler implements IVertexStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the look as solution.
+	 * State view setter: Sets the layout as solution member vertex.
 	 * 
 	 * @throws Exception
 	 */
 	void setViewSolved() throws Exception {
 		try {
+			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.layout.setLineColor(ColorPalette.green);
 			this.layout.setFillColor(ColorPalette.white);
 			this.layout.setFontColor(ColorPalette.green);
 			this.layout.setFontSyle(Font.BOLD);
-			this.layout.setLineColor(ColorPalette.green);
-			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
