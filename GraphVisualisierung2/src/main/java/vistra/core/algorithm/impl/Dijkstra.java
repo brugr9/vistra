@@ -1,18 +1,13 @@
 package vistra.core.algorithm.impl;
 
-import java.util.ArrayList;
-
 import net.datastructures.AdaptablePriorityQueue;
 import net.datastructures.DefaultComparator;
 import net.datastructures.HeapAdaptablePriorityQueue;
 import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.AlgorithmException;
 import vistra.core.algorithm.IAlgorithm;
-import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.ITraversableGraph;
-import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertex;
-import edu.uci.ics.jung.graph.event.GraphEvent.Edge;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

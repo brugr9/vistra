@@ -1,8 +1,8 @@
 package vistra.core.graph;
 
-import edu.uci.ics.jung.graph.Graph;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
+import edu.uci.ics.jung.graph.Graph;
 
 /**
  * A traversable graph.
