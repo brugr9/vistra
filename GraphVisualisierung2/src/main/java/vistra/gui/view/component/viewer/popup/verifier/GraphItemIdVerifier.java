@@ -3,7 +3,7 @@ package vistra.gui.view.component.viewer.popup.verifier;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
-import vistra.core.graph.IGraphLayout;
+import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertexLayout;
@@ -51,7 +51,7 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 
 		if (input instanceof JTextComponent) {
 			JTextComponent textField = (JTextComponent) input;
-			IGraphLayout graph = (IGraphLayout) this.graph;
+			IExtendedGraph graph = (IExtendedGraph) this.graph;
 
 			return !textField.getText().trim().isEmpty()
 					&& (textField.getText().equals(

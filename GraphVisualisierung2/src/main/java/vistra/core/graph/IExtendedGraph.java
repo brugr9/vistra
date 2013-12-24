@@ -14,7 +14,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IGraphLayout extends Graph<IVertexLayout, IEdgeLayout>,
+public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 		Serializable {
 
 	/**

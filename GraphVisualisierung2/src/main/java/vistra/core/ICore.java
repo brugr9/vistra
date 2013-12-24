@@ -5,7 +5,7 @@ import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.core.algorithm.IAlgorithm;
-import vistra.core.graph.IGraphLayout;
+import vistra.core.graph.IExtendedGraph;
 import vistra.core.traversal.Traversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -32,7 +32,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	abstract IGraphLayout getNewGraph(EdgeType edgeType) throws CoreException;
+	abstract IExtendedGraph getNewGraph(EdgeType edgeType) throws CoreException;
 
 	/**
 	 * Opens a graph given as file.
@@ -42,7 +42,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	abstract IGraphLayout openGraph(File source) throws CoreException;
+	abstract IExtendedGraph openGraph(File source) throws CoreException;
 
 	/**
 	 * Saves a graph as GraphML-file with the name as given.
@@ -51,7 +51,7 @@ public interface ICore {
 	 *            the graph to save
 	 * @throws CoreException
 	 */
-	abstract void save(IGraphLayout graph) throws CoreException;
+	abstract void save(IExtendedGraph graph) throws CoreException;
 
 	/**
 	 * Saves a graph into a GraphML-file.
@@ -62,7 +62,7 @@ public interface ICore {
 	 *            the file to write into
 	 * @throws CoreException
 	 */
-	abstract void saveAs(IGraphLayout graph, File file) throws CoreException;
+	abstract void saveAs(IExtendedGraph graph, File file) throws CoreException;
 
 	/**
 	 * Returns an array of available algorithms as names.
@@ -105,6 +105,6 @@ public interface ICore {
 	 * @return the traversal
 	 * @throws CoreException
 	 */
-	public Traversal traverse(IGraphLayout graph) throws CoreException;
+	public Traversal traverse(IExtendedGraph graph) throws CoreException;
 
 }

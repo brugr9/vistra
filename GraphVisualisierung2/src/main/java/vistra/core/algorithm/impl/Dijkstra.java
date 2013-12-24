@@ -8,7 +8,8 @@ import net.datastructures.HeapAdaptablePriorityQueue;
 import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.AlgorithmException;
 import vistra.core.algorithm.IAlgorithm;
-import vistra.core.graph.IGraphLayout;
+import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.ITraversableGraph;
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.event.GraphEvent.Edge;
@@ -40,7 +41,7 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * A field for the graph to traverse.
 	 */
-	private IGraphLayout graph;
+	private ITraversableGraph graph;
 	/**
 	 * A field for an infinity value.
 	 */
@@ -77,13 +78,9 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(IGraphLayout graph) throws AlgorithmException {
+	public void traverse(ITraversableGraph graph) throws AlgorithmException {
 		// TODO
 		this.graph = graph;
-		ArrayList<IEdgeLayout> a = new ArrayList<IEdgeLayout>();
-		a.addAll(graph.getEdges());
-		Edge e = (Edge) a.get(0);
-
 		WEIGHT = new Object();
 		// IVertex s = graph.getStart();
 		DefaultComparator comparator = new DefaultComparator();

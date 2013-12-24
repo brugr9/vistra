@@ -3,7 +3,7 @@ package vistra.gui;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
-import vistra.core.graph.IGraphLayout;
+import vistra.core.graph.IExtendedGraph;
 import vistra.core.traversal.Traversal;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.animation.IAnimationStateHandler;
@@ -161,7 +161,7 @@ public interface IGuiModel {
 	/**
 	 * @return the graph
 	 */
-	public abstract IGraphLayout getGraph();
+	public abstract IExtendedGraph getGraph();
 
 	/**
 	 * @return the editGraphEnabled
@@ -440,7 +440,7 @@ public interface IGuiModel {
 	 * @param graph
 	 *            the graph to set
 	 */
-	public abstract void setGraph(IGraphLayout graph);
+	public abstract void setGraph(IExtendedGraph graph);
 
 	/**
 	 * @param editGraphEnabled

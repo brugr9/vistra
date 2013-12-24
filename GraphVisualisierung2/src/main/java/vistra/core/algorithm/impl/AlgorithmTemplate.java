@@ -4,7 +4,7 @@ import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.AlgorithmException;
 import vistra.core.algorithm.AlgorithmManager;
 import vistra.core.algorithm.IAlgorithm;
-import vistra.core.graph.IGraphLayout;
+import vistra.core.graph.ITraversableGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -40,7 +40,7 @@ public abstract class AlgorithmTemplate extends AbstractAlgorithm implements
 	}
 
 	@Override
-	public void traverse(IGraphLayout graph) throws AlgorithmException {
+	public void traverse(ITraversableGraph graph) throws AlgorithmException {
 		// TODO implement the algorithm
 
 	}
