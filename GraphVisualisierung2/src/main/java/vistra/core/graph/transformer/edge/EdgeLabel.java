@@ -15,7 +15,7 @@ public class EdgeLabel implements Transformer<IEdgeLayout, String> {
 		String id = "";
 		if (edge.getId() != "")
 			id = edge.getId() + ": ";
-		return id + edge.getValue();
+		return id + edge.getWeight();
 	}
 
 }

@@ -22,7 +22,7 @@ public class HyperEdgeTransformer implements
 		IEdgeLayout layout = EdgeFactory.createEdgeLayout();
 
 		layout.setId(meta.getId());
-		layout.setValue(Convert.toInt(meta.getProperty(GraphMeta.E_WEIGHT)));
+		layout.setWeight(Convert.toInt(meta.getProperty(GraphMeta.E_WEIGHT)));
 
 		return layout;
 	}

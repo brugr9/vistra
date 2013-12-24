@@ -2,7 +2,7 @@ package vistra.gui;
 
 import vistra.core.ICore;
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.IGraphLayout;
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.control.Control;
@@ -57,7 +57,7 @@ public final class GuiFactory {
 	public static IView createGui(ICore core, ViewType type) throws Exception {
 		try {
 			// graph and layout
-			IExtendedGraph graph = GraphFactory.create(EdgeType.UNDIRECTED);
+			IGraphLayout graph = GraphFactory.create(EdgeType.UNDIRECTED);
 			Layout<IVertexLayout, IEdgeLayout> layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
 					graph);
 			// model and control

@@ -82,10 +82,10 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph getNewGraph(EdgeType edgeType) throws Exception {
+	public IGraphLayout getNewGraph(EdgeType edgeType) throws Exception {
 		try {
 			this.file = null;
-			IExtendedGraph graph = GraphFactory.create(edgeType);
+			IGraphLayout graph = GraphFactory.create(edgeType);
 			return graph;
 		} catch (Exception e) {
 			throw e;
@@ -96,7 +96,7 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph open(File file) throws Exception {
+	public IGraphLayout open(File file) throws Exception {
 		try {
 			this.file = file;
 			return this.read(file);
@@ -109,7 +109,7 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void save(IExtendedGraph graph) throws Exception {
+	public void save(IGraphLayout graph) throws Exception {
 		try {
 			this.writer.save(graph, new FileWriter(this.file));
 		} catch (Exception e) {
@@ -121,7 +121,7 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void saveAs(IExtendedGraph graph, File file) throws Exception {
+	public void saveAs(IGraphLayout graph, File file) throws Exception {
 		try {
 			this.file = file;
 			this.save(graph);
@@ -138,14 +138,14 @@ class GraphManager implements IGraphManager {
 	 *            the file to load
 	 * @return the loaded graph
 	 */
-	private IExtendedGraph read(File file) throws GraphException {
+	private IGraphLayout read(File file) throws GraphException {
 		try {
-			GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout> graphReader = new GraphMLReader2<>(
+			GraphMLReader2<IGraphLayout, IVertexLayout, IEdgeLayout> graphReader = new GraphMLReader2<>(
 					new FileReader(file), this.graphTransformer,
 					this.vertexTransformer, this.edgeTransformer,
 					this.hyperEdgeTransformer);
 
-			IExtendedGraph graph = graphReader.readGraph();
+			IGraphLayout graph = graphReader.readGraph();
 			graphReader.close();
 			return graph;
 		} catch (GraphIOException e) {

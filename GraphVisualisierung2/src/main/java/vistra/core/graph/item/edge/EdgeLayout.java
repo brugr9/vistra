@@ -26,17 +26,20 @@ public class EdgeLayout extends AbstractItemLayout implements IEdgeLayout {
 		this.edge = (Edge) edge;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public int getValue() {
-		return this.edge.getValue();
+	public int getWeight() {
+		return this.edge.getWeight();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setValue(int value) {
-		this.edge.weight = value;
+	public void setWeight(int weight) {
+		this.edge.weight = weight;
 		this.setChanged();
 	}
 

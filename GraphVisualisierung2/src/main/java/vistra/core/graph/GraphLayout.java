@@ -16,8 +16,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class ExtendedGraph extends ObservableGraph<IVertexLayout, IEdgeLayout>
-		implements IExtendedGraph {
+public class GraphLayout extends ObservableGraph<IVertexLayout, IEdgeLayout>
+		implements IGraphLayout {
 
 	private static final long serialVersionUID = 7604897874620015084L;
 
@@ -37,7 +37,7 @@ public class ExtendedGraph extends ObservableGraph<IVertexLayout, IEdgeLayout>
 	 * @param delegate
 	 *            the graph to delegate
 	 */
-	public ExtendedGraph(Graph<IVertexLayout, IEdgeLayout> delegate) {
+	public GraphLayout(Graph<IVertexLayout, IEdgeLayout> delegate) {
 		super(delegate);
 		this.edgeType = EdgeType.UNDIRECTED;
 	}
@@ -77,17 +77,16 @@ public class ExtendedGraph extends ObservableGraph<IVertexLayout, IEdgeLayout>
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public boolean containsItemId(String id) {
+	public boolean unused(String id) {
 		ArrayList<IItemLayout> items = new ArrayList<IItemLayout>();
-		items.addAll((Collection<? extends IItemLayout>) this.getEdges());
 		items.addAll((Collection<? extends IItemLayout>) this.getVertices());
+		items.addAll((Collection<? extends IItemLayout>) this.getEdges());
 		for (IItemLayout item : items) {
 			if (item.getId() == id) {
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 }

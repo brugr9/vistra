@@ -1,7 +1,5 @@
 package vistra.gui.control;
 
-import java.util.ResourceBundle;
-
 import vistra.core.ICore;
 import vistra.gui.GuiModel;
 import vistra.gui.control.animation.AnimationStateHandler;
@@ -65,14 +63,6 @@ public final class Control implements IControl {
 		try {
 			/* i18n */
 			this.model.getI18nListener().actionPerformed(null);
-			/* welcome message */
-			ResourceBundle b = this.model.getResourceBundle();
-			StringBuilder sb = new StringBuilder();
-			sb.append(b.getString("app.label")
-					+ System.lineSeparator()
-					+ b.getString("about.message").replaceAll("\n",
-							System.lineSeparator()) + System.lineSeparator());
-			this.model.setStringBuilder(sb);
 			/* set state (cascading animation and step-by-step states) */
 			this.model.getParameterStateHandler().handleIdle();
 			/* update the view */

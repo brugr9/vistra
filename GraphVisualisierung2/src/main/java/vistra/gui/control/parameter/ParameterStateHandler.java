@@ -22,7 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import vistra.core.ICore;
 import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.IGraphLayout;
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.traversal.Traversal;
@@ -370,7 +370,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
-				IExtendedGraph graph = GraphFactory.create(edgeType);
+				IGraphLayout graph = GraphFactory.create(edgeType);
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
 				graph.setName(name);
@@ -414,7 +414,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				option = fileChooser.showOpenDialog(top);
 				if (option == JFileChooser.APPROVE_OPTION) {
 					File source = fileChooser.getSelectedFile();
-					IExtendedGraph graph = this.core.openGraph(source);
+					IGraphLayout graph = this.core.openGraph(source);
 					this.model.setGraph(graph);
 					this.updateAlgorithms();
 					this.setGraphSaved(true);
@@ -436,7 +436,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void saveGraph() throws Exception {
 		try {
-			IExtendedGraph graph = this.model.getGraph();
+			IGraphLayout graph = this.model.getGraph();
 			this.core.save(graph);
 			this.setGraphSaved(true);
 			this.setGraphEditable(true);
@@ -476,7 +476,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			int option = fileChooser.showSaveDialog(this.top);
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
-				IExtendedGraph graph = this.model.getGraph();
+				IGraphLayout graph = this.model.getGraph();
 				this.core.saveAs(graph, file);
 				this.setGraphSaved(true);
 				this.setGraphEditable(true);
@@ -532,7 +532,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				String description = algorithm.getDescription();
 				this.model.setAlgorithmDescription(description);
 				/* get the traversal */
-				IExtendedGraph graph = this.model.getGraph();
+				IGraphLayout graph = this.model.getGraph();
 				Traversal traversal = this.core.traverse(graph);
 				this.model.setTraversal(traversal);
 				this.model.setProgressMaximum(traversal.size());
@@ -622,7 +622,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	private void updateAlgorithms() throws Exception {
 		try {
-			IExtendedGraph graph = this.model.getGraph();
+			IGraphLayout graph = this.model.getGraph();
 			EdgeType edgeType = graph.getEdgeType();
 			String[] algorithms = this.core.getAlgorithms(edgeType);
 			this.model.setAlgorithms(algorithms);

@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.IGraphLayout;
 import vistra.core.traversal.Traversal;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.animation.IAnimationStateHandler;
@@ -51,7 +51,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/* Parameter */
 	private IParameterStateHandler parameterStateHandler;
 	// Graph
-	private IExtendedGraph graph;
+	private IGraphLayout graph;
 	private boolean editGraphEnabled;
 	private boolean graphSaved;
 	// Algorithm
@@ -91,7 +91,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * @param graph
 	 *            an observable gravis graph
 	 */
-	public GuiModel(IExtendedGraph graph) {
+	public GuiModel(IGraphLayout graph) {
 		super();
 
 		/* Menu */
@@ -488,7 +488,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getGraph()
 	 */
 	@Override
-	public IExtendedGraph getGraph() {
+	public IGraphLayout getGraph() {
 		return graph;
 	}
 
@@ -1035,7 +1035,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * .gravis.core.graph.IObservableGravisGraph)
 	 */
 	@Override
-	public void setGraph(IExtendedGraph graph) {
+	public void setGraph(IGraphLayout graph) {
 		this.graph = graph;
 		this.setChanged();
 	}

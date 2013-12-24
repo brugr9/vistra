@@ -65,7 +65,13 @@ class ActionListenerI18n extends AbstractActionListener {
 			ResourceBundle b = ResourceBundle.getBundle(this.i18nBaseName,
 					locale);
 			this.model.setResourceBundle(b);
-
+			/* welcome message */
+			StringBuilder sb = new StringBuilder();
+			sb.append(b.getString("app.label")
+					+ System.lineSeparator()
+					+ b.getString("about.message").replaceAll("\n",
+							System.lineSeparator()) + System.lineSeparator());
+			this.model.setStringBuilder(sb);
 			/* update the view */
 			((GuiModel) this.model).notifyObservers(I18N);
 		} catch (Exception ex) {

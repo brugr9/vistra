@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.IGraphLayout;
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
@@ -101,8 +101,8 @@ public class EditingPlugin extends
 
 				// set default edge type
 				this.edgeIsDirected = EdgeType.DIRECTED;
-				if (graph instanceof IExtendedGraph) {
-					IExtendedGraph gravisGraph = (IExtendedGraph) graph;
+				if (graph instanceof IGraphLayout) {
+					IGraphLayout gravisGraph = (IGraphLayout) graph;
 
 					if (gravisGraph.getEdgeType() == EdgeType.UNDIRECTED) {
 						this.edgeIsDirected = EdgeType.UNDIRECTED;

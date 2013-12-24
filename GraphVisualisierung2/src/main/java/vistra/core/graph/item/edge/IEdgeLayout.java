@@ -11,11 +11,11 @@ import vistra.core.graph.item.IItemLayout;
 public interface IEdgeLayout extends IEdge, IItemLayout {
 
 	/**
-	 * Sets a value.
+	 * Sets a weight.
 	 * 
-	 * @param value
-	 *            the value to set
+	 * @param weight
+	 *            the weight to set
 	 */
-	public void setValue(int value);
+	public void setWeight(int weight);
 
 }

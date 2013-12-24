@@ -1,13 +1,17 @@
 package vistra.core.algorithm.impl;
 
+import java.util.ArrayList;
+
 import net.datastructures.AdaptablePriorityQueue;
 import net.datastructures.DefaultComparator;
 import net.datastructures.HeapAdaptablePriorityQueue;
 import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.AlgorithmException;
 import vistra.core.algorithm.IAlgorithm;
-import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.IGraphLayout;
+import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertex;
+import edu.uci.ics.jung.graph.event.GraphEvent.Edge;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -36,7 +40,7 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * A field for the graph to traverse.
 	 */
-	private IExtendedGraph graph;
+	private IGraphLayout graph;
 	/**
 	 * A field for an infinity value.
 	 */
@@ -73,9 +77,13 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(IExtendedGraph graph) throws AlgorithmException {
+	public void traverse(IGraphLayout graph) throws AlgorithmException {
 		// TODO
 		this.graph = graph;
+		ArrayList<IEdgeLayout> a = new ArrayList<IEdgeLayout>();
+		a.addAll(graph.getEdges());
+		Edge e = (Edge) a.get(0);
+
 		WEIGHT = new Object();
 		// IVertex s = graph.getStart();
 		DefaultComparator comparator = new DefaultComparator();
@@ -90,45 +98,27 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	 *            source vertex.
 	 */
 	protected void dijkstraVisit(IVertex v) {
-		/* TODO
-		// store all the vertices in priority queue Q
-		for (IVertex u : graph.getVertices()) {
-			int u_dist;
-			if (u == v)
-				u_dist = 0;
-			else
-				u_dist = INFINITE;
-			Entry<Integer, IVertex> u_entry = Q.insert(u_dist, u); // autoboxing
-			u.put(ENTRY, u_entry);
-		}
-		// grow the cloud, one vertex at a time
-		while (!Q.isEmpty()) {
-			// remove from Q and insert into cloud a vertex with minimum
-			// distance
-			Entry<Integer, IVertex> u_entry = Q.min();
-			IVertex u = u_entry.getValue();
-			int u_dist = u_entry.getKey();
-			Q.remove(u_entry); // remove u from the priority queue
-			u.put(DIST, u_dist); // the distance of u is final
-			u.remove(ENTRY); // remove the entry decoration of u
-			if (u_dist == INFINITE)
-				continue; // unreachable vertices are not processed
-			// examine all the neighbors of u and update their distances
-			for (IEdge e : graph.getIncidentEdges(u)) {
-				IVertex z = graph.getOpposite(u, e);
-				Entry<Integer, IVertex> z_entry = (Entry<Integer, IVertex>) z
-						.get(ENTRY);
-				if (z_entry != null) { // check that z is in Q, i.e., not in the
-										// cloud
-					int e_weight = (Integer) e.get(WEIGHT);
-					int z_dist = z_entry.getKey();
-					if (u_dist + e_weight < z_dist) // relaxation of edge e =
-													// (u,z)
-						Q.replaceKey(z_entry, u_dist + e_weight);
-				}
-			}
-		}
-		*/
+		/*
+		 * TODO // store all the vertices in priority queue Q for (IVertex u :
+		 * graph.getVertices()) { int u_dist; if (u == v) u_dist = 0; else
+		 * u_dist = INFINITE; Entry<Integer, IVertex> u_entry = Q.insert(u_dist,
+		 * u); // autoboxing u.put(ENTRY, u_entry); } // grow the cloud, one
+		 * vertex at a time while (!Q.isEmpty()) { // remove from Q and insert
+		 * into cloud a vertex with minimum // distance Entry<Integer, IVertex>
+		 * u_entry = Q.min(); IVertex u = u_entry.getValue(); int u_dist =
+		 * u_entry.getKey(); Q.remove(u_entry); // remove u from the priority
+		 * queue u.put(DIST, u_dist); // the distance of u is final
+		 * u.remove(ENTRY); // remove the entry decoration of u if (u_dist ==
+		 * INFINITE) continue; // unreachable vertices are not processed //
+		 * examine all the neighbors of u and update their distances for (IEdge
+		 * e : graph.getIncidentEdges(u)) { IVertex z = graph.getOpposite(u, e);
+		 * Entry<Integer, IVertex> z_entry = (Entry<Integer, IVertex>) z
+		 * .get(ENTRY); if (z_entry != null) { // check that z is in Q, i.e.,
+		 * not in the // cloud int e_weight = (Integer) e.get(WEIGHT); int
+		 * z_dist = z_entry.getKey(); if (u_dist + e_weight < z_dist) //
+		 * relaxation of edge e = // (u,z) Q.replaceKey(z_entry, u_dist +
+		 * e_weight); } } }
+		 */
 	}
 
 }

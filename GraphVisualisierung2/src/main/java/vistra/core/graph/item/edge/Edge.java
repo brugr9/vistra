@@ -8,7 +8,7 @@ import vistra.core.graph.GraphMeta;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class Edge implements IEdge {
+public class Edge implements IEdge {
 
 	/**
 	 * A field for the weight.
@@ -26,7 +26,7 @@ class Edge implements IEdge {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getValue() {
+	public int getWeight() {
 		return weight;
 	}
 

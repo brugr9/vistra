@@ -9,7 +9,6 @@ import static vistra.gui.control.IControl.EventSource.STOP;
 import static vistra.gui.control.IControl.EventSource.TO_BEGINNING;
 import static vistra.gui.control.IControl.EventSource.TO_END;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Observable;
@@ -147,7 +146,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.setSize(size);
 		this.border = BorderFactory.createTitledBorder("traversalPanel");
 		this.setBorder(border);
-		this.setBackground((Color) ColorPalette.antique);
+		this.setBackground(ColorPalette.antique);
 
 		/* spinner */
 		// step length
@@ -210,10 +209,10 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.stepByStepPanel.setLayout(new GridLayout(1, 4));
 		this.animationPanel.setLayout(new GridLayout(1, 3));
 		// background
-		this.steplengthPanel.setBackground((Color) ColorPalette.antique);
-		this.delayPanel.setBackground((Color) ColorPalette.antique);
-		this.stepByStepPanel.setBackground((Color) ColorPalette.antique);
-		this.animationPanel.setBackground((Color) ColorPalette.antique);
+		this.steplengthPanel.setBackground(ColorPalette.antique);
+		this.delayPanel.setBackground(ColorPalette.antique);
+		this.stepByStepPanel.setBackground(ColorPalette.antique);
+		this.animationPanel.setBackground(ColorPalette.antique);
 		// add
 		this.steplengthPanel.add(this.steplengthLabel);
 		this.steplengthPanel.add(this.steplength);

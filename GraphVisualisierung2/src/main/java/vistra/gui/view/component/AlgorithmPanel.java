@@ -1,7 +1,6 @@
 package vistra.gui.view.component;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
@@ -66,7 +65,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 		this.setSize(size);
 		this.border = BorderFactory.createTitledBorder("algorithmPanel");
 		this.setBorder(border);
-		this.setBackground((Color) ColorPalette.antique);
+		this.setBackground(ColorPalette.antique);
 
 		/* combo */
 		this.comboModel = new DefaultComboBoxModel<String>(

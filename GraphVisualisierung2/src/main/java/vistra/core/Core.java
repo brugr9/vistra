@@ -12,7 +12,7 @@ import vistra.core.algorithm.IAlgorithm;
 import vistra.core.algorithm.IAlgorithmManager;
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.GraphManagerFactory;
-import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.IGraphLayout;
 import vistra.core.graph.IGraphManager;
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertexLayout;
@@ -74,7 +74,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph openGraph(File source) throws CoreException {
+	public IGraphLayout openGraph(File source) throws CoreException {
 		try {
 			return this.graphManager.open(source);
 		} catch (Exception e) {
@@ -86,7 +86,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph getNewGraph(EdgeType edgeType) throws CoreException {
+	public IGraphLayout getNewGraph(EdgeType edgeType) throws CoreException {
 		try {
 			return this.graphManager.getNewGraph(edgeType);
 		} catch (Exception e) {
@@ -98,7 +98,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void save(IExtendedGraph graph) throws CoreException {
+	public void save(IGraphLayout graph) throws CoreException {
 		try {
 			this.graphManager.save(graph);
 		} catch (Exception e) {
@@ -110,7 +110,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void saveAs(IExtendedGraph graph, File file) throws CoreException {
+	public void saveAs(IGraphLayout graph, File file) throws CoreException {
 		try {
 			this.graphManager.saveAs(graph, file);
 		} catch (Exception e) {
@@ -154,7 +154,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Traversal traverse(IExtendedGraph graph) throws CoreException {
+	public Traversal traverse(IGraphLayout graph) throws CoreException {
 
 		try {
 			// the steps

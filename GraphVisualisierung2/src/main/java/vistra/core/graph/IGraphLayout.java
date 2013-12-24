@@ -14,7 +14,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
+public interface IGraphLayout extends Graph<IVertexLayout, IEdgeLayout>,
 		Serializable {
 
 	/**
@@ -60,10 +60,11 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 			GraphEventListener<IVertexLayout, IEdgeLayout> l);
 
 	/**
-	 * Checks for an existing item identifier.
+	 * Checks an item identifier.
 	 * 
-	 * @return <code>true</code> if the identifier exists
+	 * @return <code>true</code> if the identifier is not yet used,
+	 *         <code>false</code> otherwise
 	 */
-	public boolean containsItemId(String id);
+	public boolean unused(String itemId);
 
 }

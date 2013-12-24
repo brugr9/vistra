@@ -9,10 +9,10 @@ package vistra.core.graph.item.edge;
 public interface IEdge {
 
 	/**
-	 * Returns a weight.
+	 * Returns the weight.
 	 * 
 	 * @return the weight
 	 */
-	public int getValue();
+	public int getWeight();
 
 }

@@ -2,7 +2,7 @@ package vistra.core.algorithm.impl;
 
 import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.IAlgorithm;
-import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.IGraphLayout;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -34,7 +34,7 @@ public class DFS extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(IExtendedGraph graph) {
+	public void traverse(IGraphLayout graph) {
 		// TODO
 	}
 }

@@ -21,7 +21,7 @@ public class EdgeTransformer implements Transformer<EdgeMetadata, IEdgeLayout> {
 		IEdgeLayout layout = EdgeFactory.createEdgeLayout();
 
 		layout.setId(edgeMeta.getId());
-		layout.setValue(Convert.toInt(edgeMeta.getProperty(GraphMeta.E_WEIGHT)));
+		layout.setWeight(Convert.toInt(edgeMeta.getProperty(GraphMeta.E_WEIGHT)));
 
 		return layout;
 	}

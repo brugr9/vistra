@@ -47,7 +47,7 @@ public final class GraphFactory {
 	 * 
 	 * @return the graph
 	 */
-	public IExtendedGraph create() {
+	public IGraphLayout create() {
 		return create(EdgeType.UNDIRECTED);
 	}
 
@@ -57,8 +57,8 @@ public final class GraphFactory {
 	 * 
 	 * @return the graph
 	 */
-	public static IExtendedGraph createGraph() {
-		IExtendedGraph graph = new ExtendedGraph(
+	public static IGraphLayout createGraph() {
+		IGraphLayout graph = new GraphLayout(
 				new SparseGraph<IVertexLayout, IEdgeLayout>());
 		return graph;
 	}
@@ -71,8 +71,8 @@ public final class GraphFactory {
 	 *            an edge type
 	 * @return the graph
 	 */
-	public static IExtendedGraph create(EdgeType edgeType) {
-		IExtendedGraph graph = new ExtendedGraph(
+	public static IGraphLayout create(EdgeType edgeType) {
+		IGraphLayout graph = new GraphLayout(
 				new SparseGraph<IVertexLayout, IEdgeLayout>());
 		graph.setEdgeType(edgeType);
 		return graph;
@@ -88,9 +88,9 @@ public final class GraphFactory {
 	 *            a listener to add
 	 * @return the graph
 	 */
-	public static IExtendedGraph create(EdgeType edgeType,
+	public static IGraphLayout create(EdgeType edgeType,
 			GraphEventListener<IVertexLayout, IEdgeLayout> listener) {
-		ExtendedGraph graph = (ExtendedGraph) create(edgeType);
+		GraphLayout graph = (GraphLayout) create(edgeType);
 		graph.addGraphEventListener(listener);
 		return graph;
 	}
