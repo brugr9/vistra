@@ -33,7 +33,7 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class MinimalView extends JFrame implements IView {
+public class DefaultView extends JFrame implements IView {
 
 	private static final long serialVersionUID = 1L;
 
@@ -71,7 +71,7 @@ public class MinimalView extends JFrame implements IView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public MinimalView(Layout<IVertex, IEdge> layout, GuiModel model,
+	public DefaultView(Layout<IVertex, IEdge> layout, GuiModel model,
 			IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

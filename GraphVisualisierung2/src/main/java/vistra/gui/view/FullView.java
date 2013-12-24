@@ -29,7 +29,7 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class FullView extends MinimalView {
+public class FullView extends DefaultView {
 
 	private static final long serialVersionUID = 1L;
 

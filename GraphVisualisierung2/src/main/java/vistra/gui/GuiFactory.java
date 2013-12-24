@@ -9,7 +9,7 @@ import vistra.gui.control.Control;
 import vistra.gui.control.IControl;
 import vistra.gui.view.FullView;
 import vistra.gui.view.IView;
-import vistra.gui.view.MinimalView;
+import vistra.gui.view.DefaultView;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -67,10 +67,10 @@ public final class GuiFactory {
 			IView view;
 			if (type == ViewType.FULL)
 				view = new FullView(layout, model, control);
-			else if (type == ViewType.MINIMAL)
-				view = new MinimalView(layout, model, control);
+			else if (type == ViewType.DEFAULT)
+				view = new DefaultView(layout, model, control);
 			else
-				view = new FullView(layout, model, control);
+				view = new DefaultView(layout, model, control);
 			control.init();
 			return view;
 		} catch (Exception ex) {
