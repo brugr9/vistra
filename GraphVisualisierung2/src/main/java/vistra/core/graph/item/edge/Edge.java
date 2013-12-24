@@ -1,6 +1,6 @@
 package vistra.core.graph.item.edge;
 
-import vistra.core.graph.GraphFactory;
+import vistra.core.graph.GraphMeta;
 
 /**
  * An edge.
@@ -14,7 +14,7 @@ public class Edge extends AbstractEdgeLayout implements IEdge {
 	 * Main constructor.
 	 */
 	Edge() {
-		super(GraphFactory.E_WEIGHT_DEFAULT);
+		super(GraphMeta.E_WEIGHT_DEFAULT);
 	}
 
 }

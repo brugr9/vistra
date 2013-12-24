@@ -16,7 +16,6 @@ import vistra.core.graph.transformer.HyperEdgeTransformer;
 import vistra.core.graph.transformer.VertexTransformer;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.GraphIOException;
-import edu.uci.ics.jung.io.GraphMLWriter;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 
 /**
@@ -52,9 +51,9 @@ class GraphManager implements IGraphManager {
 	 */
 	private final HyperEdgeTransformer hyperEdgeTransformer;
 	/**
-	 * A field for a GraphMLWriter.
+	 * A field for a graph writer.
 	 */
-	private GraphMLWriter<IVertex, IEdge> graphMLWriter;
+	private GraphWriter writer;
 
 	/**
 	 * Main constructor.
@@ -76,7 +75,7 @@ class GraphManager implements IGraphManager {
 		this.edgeTransformer = new EdgeTransformer();
 		this.hyperEdgeTransformer = new HyperEdgeTransformer();
 		/* graphML writer */
-		this.graphMLWriter = new GraphMLWriter<IVertex, IEdge>();
+		this.writer = new GraphWriter();
 	}
 
 	/**
@@ -112,7 +111,7 @@ class GraphManager implements IGraphManager {
 	@Override
 	public void save(IExtendedGraph graph) throws Exception {
 		try {
-			this.graphMLWriter.save(graph, new FileWriter(this.file));
+			this.writer.save(graph, new FileWriter(this.file));
 		} catch (Exception e) {
 			throw e;
 		}

@@ -25,9 +25,10 @@ public final class GraphFactory {
 	public final static float STROKE_WIDTH_BOLD = 3.0f;
 	public final static float V_TAGGED_STROKE = 3.0f;
 	public final static float E_TAGGED_STROKE = 5.0f;
-	/* Value */
-	public final static double V_VALUE_DEFAULT = 0.0;
-	public final static double E_WEIGHT_DEFAULT = 1.0;
+	public final static int V_FONT_SIZE_DEFAULT = 18;
+	public final static int E_FONT_SIZE_DEFAULT = 12;
+
+	public final static double E_LABEL_CLOSENESS = 0.5;
 
 	/**
 	 * A main (no-)constructor.
@@ -42,6 +43,18 @@ public final class GraphFactory {
 	 */
 	public IExtendedGraph create() {
 		return create(EdgeType.UNDIRECTED);
+	}
+
+	/**
+	 * Creates a default JUNG <code>SparseGraph</code> and extends it to a
+	 * <code>ExtendedGraph</code>.
+	 * 
+	 * @return the graph
+	 */
+	public static IExtendedGraph createGraph() {
+		IExtendedGraph graph = new ExtendedGraph(
+				new SparseGraph<IVertex, IEdge>());
+		return graph;
 	}
 
 	/**

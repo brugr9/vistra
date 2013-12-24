@@ -1,5 +1,6 @@
 package vistra.core.graph.item.edge.state;
 
+import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.GraphFactory;
@@ -179,6 +180,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	void setViewUnexplored() throws Exception {
 		try {
+			this.layout.setFontSyle(Font.PLAIN);
 			this.layout.setFontColor(ColorPalette.darkblue);
 			this.layout.setLineColor(ColorPalette.darkblue);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
@@ -195,6 +197,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	void setViewDiscovery() throws Exception {
 		try {
+			this.layout.setFontSyle(Font.BOLD);
 			this.layout.setFontColor(ColorPalette.red);
 			this.layout.setLineColor(ColorPalette.red);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
@@ -211,6 +214,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	void setViewBack() throws Exception {
 		try {
+			this.layout.setFontSyle(Font.PLAIN);
 			this.layout.setFontColor(ColorPalette.darkgreen);
 			this.layout.setLineColor(ColorPalette.darkgreen);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
@@ -227,6 +231,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	void setViewForward() throws Exception {
 		try {
+			this.layout.setFontSyle(Font.PLAIN);
 			this.layout.setFontColor(ColorPalette.darkgreen);
 			this.layout.setLineColor(ColorPalette.darkgreen);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
@@ -243,6 +248,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	void setViewCross() throws Exception {
 		try {
+			this.layout.setFontSyle(Font.PLAIN);
 			this.layout.setFontColor(ColorPalette.darkgreen);
 			this.layout.setLineColor(ColorPalette.darkgreen);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
@@ -259,6 +265,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	void setViewDiscarded() throws Exception {
 		try {
+			this.layout.setFontSyle(Font.PLAIN);
 			this.layout.setFontColor(ColorPalette.GRAY);
 			this.layout.setLineColor(ColorPalette.GRAY);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
@@ -280,6 +287,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 */
 	void setViewSolution() throws Exception {
 		try {
+			this.layout.setFontSyle(Font.BOLD);
 			this.layout.setFontColor(ColorPalette.GREEN);
 			this.layout.setLineColor(ColorPalette.GREEN);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);

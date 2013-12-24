@@ -8,11 +8,11 @@ import vistra.core.graph.item.edge.IEdge;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeWeight implements Transformer<IEdge, Number> {
+public class EdgeWeight implements Transformer<IEdge, String> {
 
 	@Override
-	public Number transform(IEdge edge) {
-		return edge.getValue();
+	public String transform(IEdge edge) {
+		return Double.toString(edge.getValue());
 	}
 
 }

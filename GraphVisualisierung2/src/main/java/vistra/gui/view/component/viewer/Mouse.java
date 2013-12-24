@@ -8,7 +8,7 @@ import org.apache.commons.collections15.Factory;
 
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.view.component.viewer.popup.MenuFactory;
+import vistra.gui.view.component.viewer.popup.SwitchModePopup;
 import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.annotations.AnnotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.AnimatedPickingGraphMousePlugin;
@@ -38,21 +38,20 @@ public class Mouse extends EditingModalGraphMouse<IVertex, IEdge> {
 	 *            an edge popup
 	 * @param vertexPopup
 	 *            a vertex popup
-	 * @param createVertexPopup
+	 * @param switchModePopup
 	 *            a createVertexPopup
 	 */
 	public Mouse(RenderContext<IVertex, IEdge> rc,
 			Factory<IVertex> vertexFactory, Factory<IEdge> edgeFactory,
 			JPopupMenu edgePopup, JPopupMenu vertexPopup,
-			MenuFactory createVertexPopup) {
-
+			SwitchModePopup switchModePopup) {
 		super(rc, vertexFactory, edgeFactory);
 
 		if (this.popupEditingPlugin instanceof PopupPlugin) {
 			((PopupPlugin) this.popupEditingPlugin).setEdgePopup(edgePopup);
 			((PopupPlugin) this.popupEditingPlugin).setVertexPopup(vertexPopup);
 			((PopupPlugin) this.popupEditingPlugin)
-					.setVertexCreatePopup(createVertexPopup);
+					.setSwitchModePopup(switchModePopup);
 		}
 	}
 
@@ -64,18 +63,17 @@ public class Mouse extends EditingModalGraphMouse<IVertex, IEdge> {
 		// Picking
 		this.pickingPlugin = new PickingPlugin();
 		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<IVertex, IEdge>();
-		this.scalingPlugin = new ScalingGraphMousePlugin(
-				new CrossoverScalingControl(), 0, this.in, this.out);
+
 		// Editing
-		this.editingPlugin = new EditingPlugin(this.vertexFactory,
-				this.edgeFactory);
+		this.editingPlugin = new EditingPlugin(this.vertexFactory,this.edgeFactory);
 		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<IVertex, IEdge>();
-		this.annotatingPlugin = new AnnotatingGraphMousePlugin<IVertex, IEdge>(
-				rc);
+		this.annotatingPlugin = new AnnotatingGraphMousePlugin<IVertex, IEdge>(rc);
 		// Popup
 		this.popupEditingPlugin = new PopupPlugin(this.vertexFactory,
 				this.edgeFactory);
 		/**/
+		this.scalingPlugin = new ScalingGraphMousePlugin(
+				new CrossoverScalingControl(), 0, this.in, this.out);
 		this.add(scalingPlugin);
 		this.setMode(Mode.EDITING);
 	}
@@ -87,6 +85,7 @@ public class Mouse extends EditingModalGraphMouse<IVertex, IEdge> {
 	protected void setPickingMode() {
 		remove(this.editingPlugin);
 		remove(this.annotatingPlugin);
+
 		add(this.pickingPlugin);
 		add(this.animatedPickingPlugin);
 		add(this.popupEditingPlugin);
@@ -99,8 +98,11 @@ public class Mouse extends EditingModalGraphMouse<IVertex, IEdge> {
 	protected void setEditingMode() {
 		remove(this.pickingPlugin);
 		remove(this.animatedPickingPlugin);
+
 		remove(this.labelEditingPlugin);
+
 		remove(this.annotatingPlugin);
+
 		add(this.editingPlugin);
 		add(this.popupEditingPlugin);
 	}
@@ -112,7 +114,9 @@ public class Mouse extends EditingModalGraphMouse<IVertex, IEdge> {
 	protected void setAnnotatingMode() {
 		remove(this.pickingPlugin);
 		remove(this.animatedPickingPlugin);
+
 		remove(this.labelEditingPlugin);
+
 		remove(this.editingPlugin);
 		remove(this.popupEditingPlugin);
 	}
@@ -132,10 +136,6 @@ public class Mouse extends EditingModalGraphMouse<IVertex, IEdge> {
 				this.setPickingMode();
 			} else if (this.mode == Mode.EDITING) {
 				this.setEditingMode();
-			}
-
-			if (this.modeBox != null) {
-				this.modeBox.setSelectedItem(mode);
 			}
 
 			this.fireItemStateChanged(new ItemEvent(this,

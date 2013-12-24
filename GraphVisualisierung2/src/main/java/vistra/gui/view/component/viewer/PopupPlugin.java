@@ -34,9 +34,9 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 	 */
 	private JPopupMenu vertexPopup;
 	/**
-	 * A field for a create vertex popup menu.
+	 * A field for a switch mode popup menu.
 	 */
-	private JPopupMenu createVertexPopup;
+	private JPopupMenu switchMode;
 
 	/**
 	 * Main constructor.
@@ -51,7 +51,7 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 		super(vertexFactory, edgeFactory);
 		this.edgePopup = null;
 		this.vertexPopup = null;
-		this.createVertexPopup = null;
+		this.switchMode = null;
 	}
 
 	/**
@@ -60,9 +60,11 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 	@Override
 	protected void handlePopup(MouseEvent e) {
 		if (e.getSource() instanceof VisualizationViewer<?, ?>) {
+
 			@SuppressWarnings("unchecked")
 			VisualizationViewer<IVertex, IEdge> vViewer = (VisualizationViewer<IVertex, IEdge>) e
 					.getSource();
+
 			Point2D point = e.getPoint();
 			GraphElementAccessor<IVertex, IEdge> pickSupport = vViewer
 					.getPickSupport();
@@ -85,13 +87,12 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 
 				}
 
-				if (edge == null && vertex == null
-						&& this.createVertexPopup != null) {
-					if (this.createVertexPopup instanceof IItemModifier) {
-						((IItemModifier) this.createVertexPopup)
+				if (edge == null && vertex == null && this.switchMode != null) {
+					if (this.switchMode instanceof IItemModifier) {
+						((IItemModifier) this.switchMode)
 								.setGraphItemLocation(point);
 					}
-					this.createVertexPopup.show(vViewer, e.getX(), e.getY());
+					this.switchMode.show(vViewer, e.getX(), e.getY());
 				}
 			}
 		}
@@ -107,7 +108,8 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 	 * @param popUp
 	 *            a popup
 	 */
-	private void updateItemMenu(IItemLayout item, Point2D point, JPopupMenu popUp) {
+	private void updateItemMenu(IItemLayout item, Point2D point,
+			JPopupMenu popUp) {
 		for (Component comp : popUp.getComponents()) {
 			if (comp instanceof IItemModifier) {
 				((IItemModifier) comp).setGraphItemAndView(item);
@@ -117,33 +119,33 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 	}
 
 	/**
-	 * Setter for the Edge popup.
+	 * Setter for the edge popup.
 	 * 
-	 * @param edgePopup
-	 *            an edge popup
+	 * @param popup
+	 *            a popup
 	 */
-	public void setEdgePopup(JPopupMenu edgePopup) {
-		this.edgePopup = edgePopup;
+	public void setEdgePopup(JPopupMenu popup) {
+		this.edgePopup = popup;
 	}
 
 	/**
 	 * Setter for the vertex popup.
 	 * 
-	 * @param vertexPopup
-	 *            a vertex popup
+	 * @param popup
+	 *            a popup
 	 */
-	public void setVertexPopup(JPopupMenu vertexPopup) {
-		this.vertexPopup = vertexPopup;
+	public void setVertexPopup(JPopupMenu popup) {
+		this.vertexPopup = popup;
 	}
 
 	/**
-	 * Setter for the create vertex popup.
+	 * Setter for the switch-mode popup.
 	 * 
-	 * @param createVertexPopup
-	 *            a createVertexPopup
+	 * @param popup
+	 *            a popup
 	 */
-	public void setVertexCreatePopup(JPopupMenu createVertexPopup) {
-		this.createVertexPopup = createVertexPopup;
+	public void setSwitchModePopup(JPopupMenu popup) {
+		this.switchMode = popup;
 	}
 
 }

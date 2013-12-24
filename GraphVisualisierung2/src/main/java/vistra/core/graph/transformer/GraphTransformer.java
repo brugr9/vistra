@@ -9,6 +9,8 @@ import edu.uci.ics.jung.io.graphml.GraphMetadata;
 import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;
 
 /**
+ * An graph transformer for reading a GraphML file.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
@@ -17,13 +19,13 @@ public class GraphTransformer implements
 
 	@Override
 	public IExtendedGraph transform(GraphMetadata graphMeta) {
-		IExtendedGraph newGraph = GraphFactory.create(EdgeType.UNDIRECTED);
-		newGraph.setName(graphMeta.getId());
+		IExtendedGraph graph = GraphFactory.createGraph();
+		graph.setName(graphMeta.getId());
 		EdgeType edgeType = graphMeta.getEdgeDefault() == EdgeDefault.UNDIRECTED ? EdgeType.UNDIRECTED
 				: EdgeType.DIRECTED;
-		newGraph.setEdgeType(edgeType);
+		graph.setEdgeType(edgeType);
 
-		return newGraph;
+		return graph;
 	}
 
 }

@@ -2,7 +2,7 @@ package vistra.util;
 
 import java.awt.Color;
 
-import vistra.core.graph.GraphMLMeta;
+import vistra.core.graph.GraphMeta;
 
 /**
  * A tool class built like {@link Color} defining some customised colours.
@@ -134,7 +134,7 @@ public abstract class ColorPalette {
 	 * @param color
 	 *            the colour
 	 * @return the string if successful
-	 * @see GraphMLMeta
+	 * @see GraphMeta
 	 */
 	public static String toString(Color color) {
 
@@ -202,7 +202,7 @@ public abstract class ColorPalette {
 	 * @param name
 	 *            a {@link ColorPalette} colour name
 	 * @return the {@link ColorPalette} if successful (else: black)
-	 * @see GraphMLMeta
+	 * @see GraphMeta
 	 */
 	public static Color toColor(String name) {
 

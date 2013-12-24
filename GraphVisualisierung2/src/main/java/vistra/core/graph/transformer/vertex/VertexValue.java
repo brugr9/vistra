@@ -1,7 +1,5 @@
 package vistra.core.graph.transformer.vertex;
 
-import java.awt.Paint;
-
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.item.vertex.IVertex;
@@ -10,12 +8,11 @@ import vistra.core.graph.item.vertex.IVertex;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexFontColor implements Transformer<IVertex, Paint> {
+public class VertexValue implements Transformer<IVertex, String> {
 
 	@Override
-	public Paint transform(IVertex vertex) {
-
-		return vertex.getFontColor();
+	public String transform(IVertex vertex) {
+		return Double.toString(vertex.getValue());
 	}
 
 }

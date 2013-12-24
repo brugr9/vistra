@@ -1,6 +1,7 @@
 package vistra.core.graph.item;
 
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  * An item layout interface.
@@ -41,17 +42,35 @@ public interface IItemLayout {
 	abstract void setLineColor(Color color);
 
 	/**
-	 * Returns the line color.
+	 * Returns the font color.
 	 * 
 	 * @return the color
 	 */
 	abstract Color getFontColor();
 
 	/**
-	 * Sets the line color.
+	 * Sets the font color.
 	 * 
 	 * @param color
 	 *            the color to set
 	 */
 	abstract void setFontColor(Color color);
+
+	/**
+	 * Returns the font style.
+	 * 
+	 * @return the style
+	 * @see Font
+	 */
+	abstract int getFontStyle();
+
+	/**
+	 * Sets the font style.
+	 * 
+	 * @param color
+	 *            the style to set
+	 * @see Font
+	 */
+	abstract void setFontSyle(int style);
+
 }

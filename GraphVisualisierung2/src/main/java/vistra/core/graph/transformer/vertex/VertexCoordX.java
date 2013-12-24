@@ -8,7 +8,7 @@ import vistra.core.graph.item.vertex.IVertex;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexLocationX implements Transformer<IVertex, String> {
+public class VertexCoordX implements Transformer<IVertex, String> {
 
 	@Override
 	public String transform(IVertex vertex) {

@@ -8,21 +8,24 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.edge.EdgeFactory;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
+import vistra.core.graph.transformer.edge.EdgeFont;
 import vistra.core.graph.transformer.edge.EdgeLabel;
 import vistra.core.graph.transformer.edge.EdgeLineColor;
 import vistra.core.graph.transformer.edge.EdgeLineWidth;
 import vistra.core.graph.transformer.vertex.VertexFillPaint;
+import vistra.core.graph.transformer.vertex.VertexFont;
 import vistra.core.graph.transformer.vertex.VertexLabel;
 import vistra.core.graph.transformer.vertex.VertexShape;
 import vistra.core.graph.transformer.vertex.VertexStroke;
 import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.component.viewer.popup.EdgePopup;
-import vistra.gui.view.component.viewer.popup.MenuFactory;
+import vistra.gui.view.component.viewer.popup.SwitchModePopup;
 import vistra.gui.view.component.viewer.popup.VertexPopup;
 import vistra.util.ColorPalette;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -83,13 +86,16 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 		rc.setVertexStrokeTransformer(new VertexStroke());
 		rc.setVertexFillPaintTransformer(new VertexFillPaint());
 		rc.setVertexLabelTransformer(new VertexLabel());
+		rc.setVertexFontTransformer(new VertexFont());
+
 		/* Edge */
 		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertex, IEdge>(
-				0.5, 0.5));
+				GraphFactory.E_LABEL_CLOSENESS, GraphFactory.E_LABEL_CLOSENESS));
 		rc.setEdgeShapeTransformer(new EdgeShape.Line<IVertex, IEdge>());
 		rc.setEdgeDrawPaintTransformer(new EdgeLineColor());
 		rc.setArrowDrawPaintTransformer(new EdgeLineColor());
 		rc.setEdgeLabelTransformer(new EdgeLabel());
+		rc.setEdgeFontTransformer(new EdgeFont());
 		rc.setEdgeStrokeTransformer(new EdgeLineWidth());
 		rc.setEdgeArrowStrokeTransformer(new EdgeLineWidth());
 
@@ -99,7 +105,7 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 
 		/* mouse */
 		this.mouse = new Mouse(rc, new VertexFactory(), new EdgeFactory(),
-				this.edgeMenu, this.vertexMenu, new MenuFactory(this));
+				this.edgeMenu, this.vertexMenu, new SwitchModePopup(this));
 		this.setGraphMouse(this.mouse);
 		this.addKeyListener(this.mouse.getModeKeyListener());
 

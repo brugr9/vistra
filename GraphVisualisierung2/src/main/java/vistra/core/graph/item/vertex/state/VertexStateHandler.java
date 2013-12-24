@@ -1,5 +1,6 @@
 package vistra.core.graph.item.vertex.state;
 
+import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.GraphFactory;
@@ -144,6 +145,7 @@ public class VertexStateHandler implements IVertexStateHandler {
 		try {
 			this.layout.setFillColor(ColorPalette.orange);
 			this.layout.setFontColor(ColorPalette.darkblue);
+			this.layout.setFontSyle(Font.PLAIN);
 			this.layout.setLineColor(ColorPalette.darkblue);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
 			this.layout.notifyObservers();
@@ -162,6 +164,7 @@ public class VertexStateHandler implements IVertexStateHandler {
 		try {
 			this.layout.setFillColor(ColorPalette.yellow);
 			this.layout.setFontColor(ColorPalette.darkblue);
+			this.layout.setFontSyle(Font.BOLD);
 			this.layout.setLineColor(ColorPalette.red);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			this.layout.notifyObservers();
@@ -181,6 +184,7 @@ public class VertexStateHandler implements IVertexStateHandler {
 		try {
 			this.layout.setFillColor(ColorPalette.blue);
 			this.layout.setFontColor(ColorPalette.darkblue);
+			this.layout.setFontSyle(Font.BOLD);
 			this.layout.setLineColor(ColorPalette.red);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			this.layout.notifyObservers();
@@ -198,6 +202,7 @@ public class VertexStateHandler implements IVertexStateHandler {
 		try {
 			this.layout.setFillColor(ColorPalette.white);
 			this.layout.setFontColor(ColorPalette.green);
+			this.layout.setFontSyle(Font.BOLD);
 			this.layout.setLineColor(ColorPalette.green);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			this.layout.notifyObservers();
