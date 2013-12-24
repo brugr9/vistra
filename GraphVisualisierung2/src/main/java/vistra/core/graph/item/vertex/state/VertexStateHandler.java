@@ -4,15 +4,15 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.graph.item.vertex.Vertex;
+import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.vertex.VertexLayout;
 import vistra.util.ColorPalette;
 
 /**
  * A vertex state handler.
  * 
- * As being an item state handler, this handler has a cellar able to collect the
- * state history.
+ * As being an item state handler, this handler has a cellar at it's disposal
+ * and is therefore able to hold the state history therefore.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -30,7 +30,7 @@ public class VertexStateHandler implements IVertexStateHandler {
 	/**
 	 * A field for a layout.
 	 */
-	private Vertex layout;
+	private VertexLayout layout;
 
 	/**
 	 * Main constructor.
@@ -38,8 +38,8 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 * @param layout
 	 *            a layout
 	 */
-	public VertexStateHandler(IVertex layout) {
-		this.layout = (Vertex) layout;
+	public VertexStateHandler(IVertexLayout layout) {
+		this.layout = (VertexLayout) layout;
 		this.cellar = new ArrayList<AbstractVertexState>();
 		this.state = null;
 		try {

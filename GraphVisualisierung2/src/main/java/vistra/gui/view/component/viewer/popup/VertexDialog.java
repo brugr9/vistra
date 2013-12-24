@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.view.component.viewer.popup.verifier.GraphItemIdVerifier;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -46,8 +46,8 @@ public class VertexDialog extends JDialog {
 	 * @param owner
 	 * @param vViewer
 	 */
-	public VertexDialog(final IVertex vertex, final JFrame owner,
-			final VisualizationViewer<IVertex, IEdge> vViewer) {
+	public VertexDialog(final IVertexLayout vertex, final JFrame owner,
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 		super(owner, true);
 		this.setResizable(false);
 		// TODO remove string literals
@@ -89,15 +89,14 @@ public class VertexDialog extends JDialog {
 	 * @param okButton
 	 * @param cancelButton
 	 */
-	private void setListeners(final IVertex vertex,
-			final VisualizationViewer<IVertex, IEdge> vViewer,
+	private void setListeners(final IVertexLayout vertex,
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
 			JButton okButton, JButton cancelButton) {
 
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VertexDialog.this
-						.updateTextFieldValues(vertex, vViewer);
+				VertexDialog.this.updateTextFieldValues(vertex, vViewer);
 			}
 		});
 
@@ -113,8 +112,8 @@ public class VertexDialog extends JDialog {
 	 * @param vertex
 	 * @param vViewer
 	 */
-	private void updateTextFieldValues(final IVertex vertex,
-			final VisualizationViewer<IVertex, IEdge> vViewer) {
+	private void updateTextFieldValues(final IVertexLayout vertex,
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 
 		vertex.setId(this.txtVertexName.getText().trim());
 		vViewer.repaint();
@@ -126,8 +125,8 @@ public class VertexDialog extends JDialog {
 	 * @param vertex
 	 * @param vViewer
 	 */
-	private void setTextFieldValues(IVertex vertex,
-			VisualizationViewer<IVertex, IEdge> vViewer) {
+	private void setTextFieldValues(IVertexLayout vertex,
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 
 		this.txtVertexName.setText(vertex.getId());
 		this.txtVertexName.setInputVerifier(new GraphItemIdVerifier(

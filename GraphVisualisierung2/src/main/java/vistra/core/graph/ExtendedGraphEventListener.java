@@ -2,8 +2,8 @@ package vistra.core.graph;
 
 import java.util.List;
 
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.traversal.step.IStep;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
@@ -15,7 +15,7 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
  * 
  */
 public class ExtendedGraphEventListener implements
-		GraphEventListener<IVertex, IEdge> {
+		GraphEventListener<IVertexLayout, IEdgeLayout> {
 
 	/**
 	 * A field for a list of steps.
@@ -33,7 +33,7 @@ public class ExtendedGraphEventListener implements
 	}
 
 	@Override
-	public void handleGraphEvent(GraphEvent<IVertex, IEdge> evt) {
+	public void handleGraphEvent(GraphEvent<IVertexLayout, IEdgeLayout> evt) {
 		// TODO Auto-generated method stub
 
 	}

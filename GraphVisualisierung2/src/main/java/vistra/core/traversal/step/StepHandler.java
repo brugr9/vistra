@@ -2,6 +2,7 @@ package vistra.core.traversal.step;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import vistra.util.ICommand;
 
 /**

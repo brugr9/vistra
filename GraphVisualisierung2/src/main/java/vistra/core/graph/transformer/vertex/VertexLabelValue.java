@@ -2,20 +2,19 @@ package vistra.core.graph.transformer.vertex;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.vertex.IVertex;
-import vistra.util.Convert;
+import vistra.core.graph.item.vertex.IVertexLayout;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexLabelValue implements Transformer<IVertex, String> {
+public class VertexLabelValue implements Transformer<IVertexLayout, String> {
 
 	@Override
-	public String transform(IVertex vertex) {
+	public String transform(IVertexLayout layout) {
 		String value = "";
-		if (vertex.getValue() != 0.0)
-			value = ": " + vertex.getValue();
-		return vertex.getId() + value;
+		if (layout.getValue() != 0.0)
+			value = ": " + layout.getValue();
+		return layout.getId() + value;
 	}
 }

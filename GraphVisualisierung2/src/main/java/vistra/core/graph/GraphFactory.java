@@ -3,8 +3,8 @@ package vistra.core.graph;
 import java.util.List;
 
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.traversal.step.IStep;
 import edu.uci.ics.jung.graph.SparseGraph;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
@@ -33,8 +33,8 @@ public final class GraphFactory {
 	public final static float[] E_SOLID = null;
 	public final static float[] E_DASH_BACK = new float[] { 12.0f, 10.0f };
 	public final static float[] E_DASH_FWD = new float[] { 1.0f, 8.0f };
-	public final static float[] E_DASH_CROSS = new float[] { 10.0f, 10.0f, 1.0f,
-			10.0f };
+	public final static float[] E_DASH_CROSS = new float[] { 10.0f, 10.0f,
+			1.0f, 10.0f };
 
 	/**
 	 * A main (no-)constructor.
@@ -59,7 +59,7 @@ public final class GraphFactory {
 	 */
 	public static IExtendedGraph createGraph() {
 		IExtendedGraph graph = new ExtendedGraph(
-				new SparseGraph<IVertex, IEdge>());
+				new SparseGraph<IVertexLayout, IEdgeLayout>());
 		return graph;
 	}
 
@@ -73,7 +73,7 @@ public final class GraphFactory {
 	 */
 	public static IExtendedGraph create(EdgeType edgeType) {
 		IExtendedGraph graph = new ExtendedGraph(
-				new SparseGraph<IVertex, IEdge>());
+				new SparseGraph<IVertexLayout, IEdgeLayout>());
 		graph.setEdgeType(edgeType);
 		return graph;
 	}
@@ -89,7 +89,7 @@ public final class GraphFactory {
 	 * @return the graph
 	 */
 	public static IExtendedGraph create(EdgeType edgeType,
-			GraphEventListener<IVertex, IEdge> listener) {
+			GraphEventListener<IVertexLayout, IEdgeLayout> listener) {
 		ExtendedGraph graph = (ExtendedGraph) create(edgeType);
 		graph.addGraphEventListener(listener);
 		return graph;
@@ -102,7 +102,7 @@ public final class GraphFactory {
 	 *            a list for steps
 	 * @return the listener
 	 */
-	public static GraphEventListener<IVertex, IEdge> createListener(
+	public static GraphEventListener<IVertexLayout, IEdgeLayout> createListener(
 			List<IStep> stepList) {
 		return new ExtendedGraphEventListener(stepList);
 	}

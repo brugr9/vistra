@@ -8,13 +8,26 @@ import vistra.core.graph.GraphMeta;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Edge extends AbstractEdgeLayout implements IEdge {
+class Edge implements IEdge {
+
+	/**
+	 * A field for the weight.
+	 */
+	int weight;
 
 	/**
 	 * Main constructor.
 	 */
 	Edge() {
-		super(GraphMeta.E_WEIGHT_DEFAULT);
+		this.weight = GraphMeta.E_WEIGHT_DEFAULT;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int getValue() {
+		return weight;
 	}
 
 }

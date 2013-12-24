@@ -1,6 +1,5 @@
 package vistra.core.graph.item.vertex;
 
-import java.awt.geom.Point2D;
 import vistra.core.graph.GraphMeta;
 
 /**
@@ -9,30 +8,31 @@ import vistra.core.graph.GraphMeta;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Vertex extends AbstractVertexLayout implements IVertex {
+class Vertex implements IVertex {
 
 	/**
-	 * A field for the start.
+	 * A field for a start.
 	 */
-	private boolean start;
+	boolean start;
 
 	/**
-	 * A field for the end.
+	 * A field for an end.
 	 */
-	private boolean end;
+	boolean end;
 
 	/**
-	 * A field for the location.
+	 * A field for a value.
 	 */
-	private Point2D location;
+	int value;
 
 	/**
 	 * Main constructor.
 	 */
 	Vertex() {
-		super(GraphMeta.V_VALUE_DEFAULT);
-		this.start = false;
-		this.end = false;
+		super();
+		this.start = GraphMeta.V_START_DEFAULT;
+		this.end = GraphMeta.V_END_DEFAULT;
+		this.value = GraphMeta.V_VALUE_DEFAULT;
 	}
 
 	/**
@@ -55,37 +55,8 @@ public class Vertex extends AbstractVertexLayout implements IVertex {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Point2D getLocation() {
-		return location;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setStart(boolean start) {
-		this.start = start;
-		// TODO this.handleFocussed();
-		this.setChanged();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setEnd(boolean end) {
-		this.end = end;
-		// TODO this.handleSolved();
-		this.setChanged();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setLocation(Point2D point) {
-		this.location = point;
-		this.setChanged();
+	public int getValue() {
+		return value;
 	}
 
 }

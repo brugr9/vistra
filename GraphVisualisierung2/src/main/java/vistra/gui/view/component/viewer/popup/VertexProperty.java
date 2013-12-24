@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -22,12 +22,12 @@ class VertexProperty extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = 3448304253580836407L;
 
-	private final VisualizationViewer<IVertex, IEdge> vViewer;
+	private final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer;
 
 	/**
 	 * A field for a vertex.
 	 */
-	private IVertex vertex;
+	private IVertexLayout vertex;
 
 	/**
 	 * A field for a point.
@@ -37,7 +37,8 @@ class VertexProperty extends JMenuItem implements IItemModifier {
 	/**
 	 * @param vViewer
 	 */
-	protected VertexProperty(VisualizationViewer<IVertex, IEdge> vViewer) {
+	protected VertexProperty(
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 		super("Edit vertex ...");
 		this.vViewer = vViewer;
 		this.vertex = null;
@@ -50,8 +51,8 @@ class VertexProperty extends JMenuItem implements IItemModifier {
 	 */
 	private void showDialog(JFrame owner) {
 		if (this.point != null && this.vertex != null) {
-			VertexDialog dialog = new VertexDialog(this.vertex,
-					owner, this.vViewer);
+			VertexDialog dialog = new VertexDialog(this.vertex, owner,
+					this.vViewer);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());
 			dialog.setVisible(true);
@@ -63,8 +64,8 @@ class VertexProperty extends JMenuItem implements IItemModifier {
 	 */
 	@Override
 	public void setGraphItemAndView(IItemLayout item) {
-		if (item instanceof IVertex) {
-			this.vertex = (IVertex) item;
+		if (item instanceof IVertexLayout) {
+			this.vertex = (IVertexLayout) item;
 		}
 	}
 

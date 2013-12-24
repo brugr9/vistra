@@ -5,17 +5,17 @@ import java.awt.Stroke;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.vertex.IVertexLayout;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexStroke implements Transformer<IVertex, Stroke> {
+public class VertexStroke implements Transformer<IVertexLayout, Stroke> {
 
 	@Override
-	public Stroke transform(IVertex vertex) {
-		return new BasicStroke(vertex.getLineWidth());
+	public Stroke transform(IVertexLayout layout) {
+		return new BasicStroke(layout.getLineWidth());
 	}
 
 }

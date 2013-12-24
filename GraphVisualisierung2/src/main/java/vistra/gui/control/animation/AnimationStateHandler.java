@@ -17,8 +17,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import vistra.gui.IGuiModel;
 import vistra.gui.GuiModel;
+import vistra.gui.IGuiModel;
 import vistra.gui.control.stepbystep.StepByStepStateHandler;
 
 /**

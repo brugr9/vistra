@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -24,7 +24,7 @@ class CheckBoxEnd extends AbstarctCheckBox implements IItemModifier {
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	protected CheckBoxEnd(VisualizationViewer<IVertex, IEdge> viewer) {
+	protected CheckBoxEnd(VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		super(viewer, "End");
 		this.addActionListener(new ActionListener() {
 			@Override
@@ -49,8 +49,8 @@ class CheckBoxEnd extends AbstarctCheckBox implements IItemModifier {
 	 */
 	@Override
 	public void setGraphItemAndView(IItemLayout item) {
-		if (item instanceof IVertex) {
-			this.vertex = (IVertex) item;
+		if (item instanceof IVertexLayout) {
+			this.vertex = (IVertexLayout) item;
 			this.setSelected(this.vertex.isEnd());
 		}
 	}

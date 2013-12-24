@@ -4,17 +4,17 @@ import java.awt.Paint;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.edge.IEdgeLayout;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeLineColor implements Transformer<IEdge, Paint> {
+public class EdgeLineColor implements Transformer<IEdgeLayout, Paint> {
 
 	@Override
-	public Paint transform(IEdge edge) {
-		return edge.getLineColor();
+	public Paint transform(IEdgeLayout layout) {
+		return layout.getLineColor();
 	}
 
 }

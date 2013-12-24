@@ -19,7 +19,7 @@ public abstract class AbstractItemCommand implements IItemCommand {
 	 * @param stateHandler
 	 *            an state handler
 	 */
-	public AbstractItemCommand(IItemStateHandler stateHandler) {
+	protected AbstractItemCommand(IItemStateHandler stateHandler) {
 		this.stateHandler = stateHandler;
 	}
 

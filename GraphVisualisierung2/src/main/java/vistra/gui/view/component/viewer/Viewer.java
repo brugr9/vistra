@@ -10,8 +10,8 @@ import javax.swing.JOptionPane;
 
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.edge.EdgeFactory;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.graph.item.vertex.VertexFactory;
 import vistra.core.graph.transformer.edge.EdgeFont;
 import vistra.core.graph.transformer.edge.EdgeLabel;
@@ -44,8 +44,8 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
-		Observer {
+public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
+		implements Observer {
 
 	private static final long serialVersionUID = 1145648259547595925L;
 
@@ -60,7 +60,7 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 	/**
 	 * A field for an editing modal-graph mouse.
 	 */
-	private EditingModalGraphMouse<IVertex, IEdge> mouse;
+	private EditingModalGraphMouse<IVertexLayout, IEdgeLayout> mouse;
 
 	/**
 	 * Main constructor.
@@ -74,13 +74,13 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 	 * @param dimension
 	 *            the dimension
 	 */
-	public Viewer(JFrame top, IGuiModel model, Layout<IVertex, IEdge> layout,
-			Dimension dimension) {
+	public Viewer(JFrame top, IGuiModel model,
+			Layout<IVertexLayout, IEdgeLayout> layout, Dimension dimension) {
 		super(layout, dimension);
 		super.setBackground(ColorPalette.WHITE);
 
 		/* Context */
-		RenderContext<IVertex, IEdge> rc = this.getRenderContext();
+		RenderContext<IVertexLayout, IEdgeLayout> rc = this.getRenderContext();
 		/* Vertex */
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
 		rc.setVertexShapeTransformer(new VertexShape());
@@ -91,9 +91,9 @@ public class Viewer extends VisualizationViewer<IVertex, IEdge> implements
 		rc.setVertexFontTransformer(new VertexFont());
 
 		/* Edge */
-		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertex, IEdge>(
+		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertexLayout, IEdgeLayout>(
 				GraphFactory.E_LABEL_CLOSENESS, GraphFactory.E_LABEL_CLOSENESS));
-		rc.setEdgeShapeTransformer(new EdgeShape.Line<IVertex, IEdge>());
+		rc.setEdgeShapeTransformer(new EdgeShape.Line<IVertexLayout, IEdgeLayout>());
 		rc.setEdgeDrawPaintTransformer(new EdgeLineColor());
 		rc.setEdgeLabelTransformer(new EdgeLabel());
 		rc.setEdgeFontTransformer(new EdgeFont());

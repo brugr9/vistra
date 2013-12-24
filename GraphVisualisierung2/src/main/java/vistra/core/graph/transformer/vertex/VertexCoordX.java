@@ -2,17 +2,17 @@ package vistra.core.graph.transformer.vertex;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.vertex.IVertexLayout;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexCoordX implements Transformer<IVertex, String> {
+public class VertexCoordX implements Transformer<IVertexLayout, String> {
 
 	@Override
-	public String transform(IVertex vertex) {
-		return String.valueOf(new Double(vertex.getLocation().getX())
+	public String transform(IVertexLayout layout) {
+		return String.valueOf(new Double(layout.getLocation().getX())
 				.intValue());
 	}
 

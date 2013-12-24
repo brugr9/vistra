@@ -3,8 +3,8 @@ package vistra.gui.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.GuiModel;
 import vistra.gui.control.IControl;
 import vistra.gui.view.component.AlgorithmPanel;
@@ -47,7 +47,7 @@ public class FullView extends DefaultView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public FullView(Layout<IVertex, IEdge> layout, GuiModel model,
+	public FullView(Layout<IVertexLayout, IEdgeLayout> layout, GuiModel model,
 			IControl control) throws Exception {
 		super(layout, model, control);
 

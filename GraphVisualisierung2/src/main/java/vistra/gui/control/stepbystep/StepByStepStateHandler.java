@@ -18,8 +18,8 @@ import javax.swing.Timer;
 
 import vistra.core.traversal.Traversal;
 import vistra.core.traversal.step.IStep;
-import vistra.gui.IGuiModel;
 import vistra.gui.GuiModel;
+import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
 
 /**

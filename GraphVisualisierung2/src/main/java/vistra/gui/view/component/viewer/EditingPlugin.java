@@ -7,8 +7,8 @@ import java.awt.geom.Point2D;
 import org.apache.commons.collections15.Factory;
 
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -24,7 +24,7 @@ import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
  * 
  */
 public class EditingPlugin extends
-		EditingGraphMousePlugin<IVertex, IEdge> {
+		EditingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
 
 	/**
 	 * Main constructor.
@@ -34,8 +34,8 @@ public class EditingPlugin extends
 	 * @param edgeFactory
 	 *            the edge factory
 	 */
-	public EditingPlugin(Factory<IVertex> vertexFactory,
-			Factory<IEdge> edgeFactory) {
+	public EditingPlugin(Factory<IVertexLayout> vertexFactory,
+			Factory<IEdgeLayout> edgeFactory) {
 		super(vertexFactory, edgeFactory);
 	}
 
@@ -90,14 +90,14 @@ public class EditingPlugin extends
 	@SuppressWarnings("unchecked")
 	public void mousePressed(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			final VisualizationViewer<IVertex, IEdge> vv = (VisualizationViewer<IVertex, IEdge>) e
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
 					.getSource();
 			final Point2D p = e.getPoint();
-			GraphElementAccessor<IVertex, IEdge> pickSupport = vv
+			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vv
 					.getPickSupport();
 			if (pickSupport != null) {
-				Graph<IVertex, IEdge> graph = vv.getModel().getGraphLayout()
-						.getGraph();
+				Graph<IVertexLayout, IEdgeLayout> graph = vv.getModel()
+						.getGraphLayout().getGraph();
 
 				// set default edge type
 				this.edgeIsDirected = EdgeType.DIRECTED;
@@ -109,8 +109,8 @@ public class EditingPlugin extends
 					}
 				}
 
-				final IVertex vertex = pickSupport.getVertex(vv.getModel()
-						.getGraphLayout(), p.getX(), p.getY());
+				final IVertexLayout vertex = pickSupport.getVertex(vv
+						.getModel().getGraphLayout(), p.getX(), p.getY());
 
 				if (vertex != null) { // get ready to make an edge
 					this.startVertex = vertex;
@@ -129,8 +129,8 @@ public class EditingPlugin extends
 						vv.addPostRenderPaintable(this.arrowPaintable);
 					}
 				} else { // make a new vertex
-					IVertex newVertex = this.vertexFactory.create();
-					Layout<IVertex, IEdge> layout = vv.getModel()
+					IVertexLayout newVertex = this.vertexFactory.create();
+					Layout<IVertexLayout, IEdgeLayout> layout = vv.getModel()
 							.getGraphLayout();
 					graph.addVertex(newVertex);
 
@@ -155,19 +155,20 @@ public class EditingPlugin extends
 	@SuppressWarnings("unchecked")
 	public void mouseReleased(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			final VisualizationViewer<IVertex, IEdge> vv = (VisualizationViewer<IVertex, IEdge>) e
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
 					.getSource();
 			final Point2D p = e.getPoint();
-			Layout<IVertex, IEdge> layout = vv.getModel().getGraphLayout();
-			GraphElementAccessor<IVertex, IEdge> pickSupport = vv
+			Layout<IVertexLayout, IEdgeLayout> layout = vv.getModel()
+					.getGraphLayout();
+			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vv
 					.getPickSupport();
 
 			if (pickSupport != null) {
-				final IVertex vertex = pickSupport.getVertex(layout, p.getX(),
-						p.getY());
+				final IVertexLayout vertex = pickSupport.getVertex(layout,
+						p.getX(), p.getY());
 				if (vertex != null && this.startVertex != null) {
-					Graph<IVertex, IEdge> graph = vv.getGraphLayout()
-							.getGraph();
+					Graph<IVertexLayout, IEdgeLayout> graph = vv
+							.getGraphLayout().getGraph();
 					graph.addEdge(this.edgeFactory.create(), this.startVertex,
 							vertex, this.edgeIsDirected);
 					vv.repaint();

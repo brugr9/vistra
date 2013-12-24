@@ -10,8 +10,8 @@ import java.util.ResourceBundle;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
-import vistra.gui.IGuiModel;
 import vistra.gui.GuiModel;
+import vistra.gui.IGuiModel;
 
 /**
  * An i18n listener.

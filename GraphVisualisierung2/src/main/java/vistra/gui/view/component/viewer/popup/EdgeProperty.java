@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -25,11 +25,11 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	/**
 	 * A field for a visualization viewer.
 	 */
-	private final VisualizationViewer<IVertex, IEdge> viewer;
+	private final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
 	/**
 	 * A field for an edge.
 	 */
-	private IEdge edge;
+	private IEdgeLayout edge;
 	/**
 	 * A field for a point.
 	 */
@@ -42,7 +42,8 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	 *            a visualization viewer
 	 * 
 	 */
-	protected EdgeProperty(VisualizationViewer<IVertex, IEdge> viewer) {
+	protected EdgeProperty(
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		super("Edit edge ...");
 
 		this.viewer = viewer;
@@ -65,8 +66,7 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	 */
 	protected void showDialog(JFrame owner) {
 		if (this.point != null && this.edge != null) {
-			EdgeDialog dialog = new EdgeDialog(this.edge,
-					owner, this.viewer);
+			EdgeDialog dialog = new EdgeDialog(this.edge, owner, this.viewer);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());
 			dialog.setVisible(true);
@@ -78,8 +78,8 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	 */
 	@Override
 	public void setGraphItemAndView(IItemLayout item) {
-		if (item instanceof IEdge) {
-			this.edge = (IEdge) item;
+		if (item instanceof IEdgeLayout) {
+			this.edge = (IEdgeLayout) item;
 		}
 	}
 

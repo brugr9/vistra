@@ -3,11 +3,9 @@ package vistra.core.graph;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import vistra.core.graph.item.IItem;
-import vistra.core.graph.item.edge.Edge;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.graph.item.vertex.Vertex;
+import vistra.core.graph.item.IItemLayout;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.ObservableGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -18,8 +16,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class ExtendedGraph extends ObservableGraph<IVertex, IEdge> implements
-		IExtendedGraph {
+public class ExtendedGraph extends ObservableGraph<IVertexLayout, IEdgeLayout>
+		implements IExtendedGraph {
 
 	private static final long serialVersionUID = 7604897874620015084L;
 
@@ -39,7 +37,7 @@ public class ExtendedGraph extends ObservableGraph<IVertex, IEdge> implements
 	 * @param delegate
 	 *            the graph to delegate
 	 */
-	public ExtendedGraph(Graph<IVertex, IEdge> delegate) {
+	public ExtendedGraph(Graph<IVertexLayout, IEdgeLayout> delegate) {
 		super(delegate);
 		this.edgeType = EdgeType.UNDIRECTED;
 	}
@@ -82,16 +80,14 @@ public class ExtendedGraph extends ObservableGraph<IVertex, IEdge> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean containsItemId(String id) {
-		ArrayList<IItem> items = new ArrayList<IItem>();
-		items.addAll((Collection<? extends IItem>) ((Edge) this.getEdges()));
-		items.addAll((Collection<? extends IItem>) ((Vertex) this
-				.getVertices()));
-		for (IItem item : items) {
+		ArrayList<IItemLayout> items = new ArrayList<IItemLayout>();
+		items.addAll((Collection<? extends IItemLayout>) this.getEdges());
+		items.addAll((Collection<? extends IItemLayout>) this.getVertices());
+		for (IItemLayout item : items) {
 			if (item.getId() == id) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

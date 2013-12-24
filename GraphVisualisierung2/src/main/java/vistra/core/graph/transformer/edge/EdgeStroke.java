@@ -6,16 +6,16 @@ import java.awt.Stroke;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.edge.IEdgeLayout;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeStroke implements Transformer<IEdge, Stroke> {
+public class EdgeStroke implements Transformer<IEdgeLayout, Stroke> {
 
 	@Override
-	public Stroke transform(IEdge edge) {
+	public Stroke transform(IEdgeLayout edge) {
 
 		if (edge.getDash() == null)
 			return new BasicStroke(edge.getLineWidth());

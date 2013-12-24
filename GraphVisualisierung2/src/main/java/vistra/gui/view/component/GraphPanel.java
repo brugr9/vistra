@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
-import vistra.gui.IGuiModel;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.GuiModel;
+import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.IView;
 import vistra.gui.view.component.viewer.Viewer;
@@ -57,8 +57,8 @@ public class GraphPanel extends JPanel implements Observer {
 	 * @param size
 	 *            the panel size
 	 */
-	public GraphPanel(JFrame top, GuiModel model, Layout<IVertex, IEdge> layout,
-			Dimension size) {
+	public GraphPanel(JFrame top, GuiModel model,
+			Layout<IVertexLayout, IEdgeLayout> layout, Dimension size) {
 		this.setSize(size);
 		this.border = BorderFactory.createTitledBorder("graphPanel");
 		this.setBorder(border);

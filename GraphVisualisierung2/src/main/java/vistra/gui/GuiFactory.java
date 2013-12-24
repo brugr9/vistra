@@ -3,13 +3,13 @@ package vistra.gui;
 import vistra.core.ICore;
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.control.Control;
 import vistra.gui.control.IControl;
+import vistra.gui.view.DefaultView;
 import vistra.gui.view.FullView;
 import vistra.gui.view.IView;
-import vistra.gui.view.DefaultView;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -58,7 +58,7 @@ public final class GuiFactory {
 		try {
 			// graph and layout
 			IExtendedGraph graph = GraphFactory.create(EdgeType.UNDIRECTED);
-			Layout<IVertex, IEdge> layout = new StaticLayout<IVertex, IEdge>(
+			Layout<IVertexLayout, IEdgeLayout> layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
 					graph);
 			// model and control
 			GuiModel model = new GuiModel(graph);

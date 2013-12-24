@@ -14,8 +14,8 @@ import vistra.core.graph.GraphFactory;
 import vistra.core.graph.GraphManagerFactory;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.IGraphManager;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.traversal.Traversal;
 import vistra.core.traversal.step.IStep;
 import vistra.util.IBidirectIterator;
@@ -160,7 +160,7 @@ public class Core implements ICore {
 			// the steps
 			List<IStep> stepList = new ArrayList<IStep>();
 			// the graph
-			GraphEventListener<IVertex, IEdge> listener = GraphFactory
+			GraphEventListener<IVertexLayout, IEdgeLayout> listener = GraphFactory
 					.createListener(stepList);
 			graph.addGraphEventListener(listener);
 			// the algorithm

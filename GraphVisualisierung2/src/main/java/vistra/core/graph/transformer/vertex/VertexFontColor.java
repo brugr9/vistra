@@ -4,17 +4,17 @@ import java.awt.Paint;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.vertex.IVertexLayout;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexFontColor implements Transformer<IVertex, Paint> {
+public class VertexFontColor implements Transformer<IVertexLayout, Paint> {
 
 	@Override
-	public Paint transform(IVertex vertex) {
-		return vertex.getFontColor();
+	public Paint transform(IVertexLayout layout) {
+		return layout.getFontColor();
 	}
 
 }

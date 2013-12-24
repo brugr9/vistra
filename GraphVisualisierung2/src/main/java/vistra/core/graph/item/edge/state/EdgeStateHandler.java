@@ -4,15 +4,15 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.item.edge.Edge;
+import vistra.core.graph.item.edge.EdgeLayout;
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.util.ColorPalette;
 
 /**
  * An edge state handler.
  * 
- * As being an item state handler, this handler has a cellar able to collect the
- * state history.
+ * As being an item state handler, this handler has a cellar at it's disposal
+ * and is therefore able to hold the state history.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -30,7 +30,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	/**
 	 * A field for a layout.
 	 */
-	private Edge layout;
+	private EdgeLayout layout;
 
 	/**
 	 * Main constructor.
@@ -39,7 +39,7 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 *            a layout
 	 */
 	public EdgeStateHandler(IEdgeLayout layout) {
-		this.layout = (Edge) layout;
+		this.layout = (EdgeLayout) layout;
 		this.cellar = new ArrayList<AbstractEdgeState>();
 		this.state = null;
 		try {

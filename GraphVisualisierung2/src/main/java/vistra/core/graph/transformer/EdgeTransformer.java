@@ -4,7 +4,7 @@ import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.GraphMeta;
 import vistra.core.graph.item.edge.EdgeFactory;
-import vistra.core.graph.item.edge.IEdge;
+import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.util.Convert;
 import edu.uci.ics.jung.io.graphml.EdgeMetadata;
 
@@ -14,16 +14,16 @@ import edu.uci.ics.jung.io.graphml.EdgeMetadata;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeTransformer implements Transformer<EdgeMetadata, IEdge> {
+public class EdgeTransformer implements Transformer<EdgeMetadata, IEdgeLayout> {
 
 	@Override
-	public IEdge transform(EdgeMetadata edgeMeta) {
-		IEdge edge = EdgeFactory.createEdge();
+	public IEdgeLayout transform(EdgeMetadata edgeMeta) {
+		IEdgeLayout layout = EdgeFactory.createEdgeLayout();
 
-		edge.setId(edgeMeta.getId());
-		edge.setValue(Convert.toInt(edgeMeta.getProperty(GraphMeta.E_WEIGHT)));
+		layout.setId(edgeMeta.getId());
+		layout.setValue(Convert.toInt(edgeMeta.getProperty(GraphMeta.E_WEIGHT)));
 
-		return edge;
+		return layout;
 	}
 
 }

@@ -6,6 +6,13 @@ package vistra.core.graph.item.edge;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IEdge extends IEdgeLayout {
+public interface IEdge {
+
+	/**
+	 * Returns a weight.
+	 * 
+	 * @return the weight
+	 */
+	public int getValue();
 
 }

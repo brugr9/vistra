@@ -1,8 +1,8 @@
 package vistra.core.graph.item;
 
 /**
- * An interface for an item state handler. An item state handler has a cellar
- * collecting the state history.
+ * An interface for an item state handler. An item state handler has a cellar at
+ * it's disposal and therefore is able to hold the state history.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

@@ -7,8 +7,8 @@ import java.awt.geom.Point2D;
 import javax.swing.JMenuItem;
 
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -19,18 +19,18 @@ class EdgeDelete extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = -8344732316212412105L;
 	/**
-	 * 
+	 * A field for an edge.
 	 */
-	private IEdge edge;
+	private IEdgeLayout edge;
 	/**
-	 * 
+	 * A field for a visualization viewer.
 	 */
-	private final VisualizationViewer<IVertex, IEdge> vViewer;
+	private final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer;
 
 	/**
 	 * @param vViewer
 	 */
-	protected EdgeDelete(VisualizationViewer<IVertex, IEdge> vViewer) {
+	protected EdgeDelete(VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 		super("Delete edge");
 
 		this.vViewer = vViewer;
@@ -57,8 +57,8 @@ class EdgeDelete extends JMenuItem implements IItemModifier {
 	 */
 	@Override
 	public void setGraphItemAndView(IItemLayout item) {
-		if (item instanceof IEdge) {
-			this.edge = (IEdge) item;
+		if (item instanceof IEdgeLayout) {
+			this.edge = (IEdgeLayout) item;
 			this.setText("Kante " + this.edge.getId() + " löschen");
 		}
 	}

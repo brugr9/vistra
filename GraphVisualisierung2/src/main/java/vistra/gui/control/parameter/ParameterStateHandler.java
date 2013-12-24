@@ -23,8 +23,8 @@ import vistra.core.ICore;
 import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.traversal.Traversal;
 import vistra.gui.GuiModel;
 import vistra.gui.control.IControl.EventSource;
@@ -128,7 +128,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleGraphEvent(GraphEvent<IVertex, IEdge> evt) {
+	public void handleGraphEvent(GraphEvent<IVertexLayout, IEdgeLayout> evt) {
 		try {
 			this.handleEditGraph();
 		} catch (Exception ex) {

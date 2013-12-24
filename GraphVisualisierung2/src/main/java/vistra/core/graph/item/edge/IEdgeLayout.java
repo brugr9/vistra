@@ -1,6 +1,6 @@
 package vistra.core.graph.item.edge;
 
-import vistra.core.graph.item.IItem;
+import vistra.core.graph.item.IItemLayout;
 
 /**
  * An edge layout interface.
@@ -8,21 +8,14 @@ import vistra.core.graph.item.IItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IEdgeLayout extends IItem {
+public interface IEdgeLayout extends IEdge, IItemLayout {
 
 	/**
-	 * Returns an array of float representing a dash pattern (null means solid).
+	 * Sets a value.
 	 * 
-	 * @return the dash pattern
+	 * @param value
+	 *            the value to set
 	 */
-	abstract float[] getDash();
-
-	/**
-	 * Sets an array of float representing a dash pattern (null means solid).
-	 * 
-	 * @param dash
-	 *            the dash pattern
-	 */
-	abstract void setDash(float[] dash);
+	public void setValue(int value);
 
 }

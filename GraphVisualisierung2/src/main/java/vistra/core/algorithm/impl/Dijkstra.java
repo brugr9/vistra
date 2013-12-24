@@ -2,14 +2,11 @@ package vistra.core.algorithm.impl;
 
 import net.datastructures.AdaptablePriorityQueue;
 import net.datastructures.DefaultComparator;
-import net.datastructures.Entry;
 import net.datastructures.HeapAdaptablePriorityQueue;
-import net.datastructures.Vertex;
 import vistra.core.algorithm.AbstractAlgorithm;
 import vistra.core.algorithm.AlgorithmException;
 import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import edu.uci.ics.jung.graph.util.EdgeType;
 

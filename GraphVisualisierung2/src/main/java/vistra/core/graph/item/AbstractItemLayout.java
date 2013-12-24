@@ -8,12 +8,13 @@ import vistra.core.graph.GraphFactory;
 import vistra.util.ColorPalette;
 
 /**
- * An abstract item.
+ * An abstract item layout.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class AbstractItem extends Observable implements IItem {
+public abstract class AbstractItemLayout extends Observable implements
+		IItemLayout {
 
 	/**
 	 * A field for an identifier.
@@ -24,32 +25,33 @@ public class AbstractItem extends Observable implements IItem {
 	 */
 	private float lineWidth;
 	/**
-	 * A field for a line color.
+	 * A field for a dash.
+	 */
+	private float[] dash;
+	/**
+	 * A field for a line colour.
 	 */
 	private Color lineColor;
-	/**
-	 * A field for a font color.
-	 */
-	private Color fontColor;
 	/**
 	 * A field for a font style.
 	 */
 	private int fontStyle;
 	/**
-	 * A field for value.
+	 * A field for a font colour.
 	 */
-	private int value;
+	private Color fontColor;
 
 	/**
 	 * Main constructor.
 	 */
-	public AbstractItem(int value) {
+	protected AbstractItemLayout() {
+		super();
 		this.id = "";
 		this.lineWidth = GraphFactory.STROKE_WIDTH_DEFAULT;
+		this.dash = GraphFactory.E_SOLID;
 		this.lineColor = ColorPalette.darkblue;
-		this.fontColor = ColorPalette.darkblue;
 		this.fontStyle = Font.PLAIN;
-		this.value = value;
+		this.fontColor = ColorPalette.darkblue;
 	}
 
 	/**
@@ -58,6 +60,46 @@ public class AbstractItem extends Observable implements IItem {
 	@Override
 	public String getId() {
 		return id;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public float getLineWidth() {
+		return lineWidth;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public float[] getDash() {
+		return dash;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getLineColor() {
+		return lineColor;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int getFontStyle() {
+		return fontStyle;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getFontColor() {
+		return fontColor;
 	}
 
 	/**
@@ -73,16 +115,8 @@ public class AbstractItem extends Observable implements IItem {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getValue() {
-		return value;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setValue(int value) {
-		this.value = value;
+	public void setLineWidth(float width) {
+		this.lineWidth = width;
 		this.setChanged();
 	}
 
@@ -90,40 +124,8 @@ public class AbstractItem extends Observable implements IItem {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public float getLineWidth() {
-		return lineWidth;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Color getLineColor() {
-		return lineColor;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Color getFontColor() {
-		return fontColor;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getFontStyle() {
-		return fontStyle;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setLineWidth(float width) {
-		this.lineWidth = width;
+	public void setDash(float[] dash) {
+		this.dash = dash;
 		this.setChanged();
 	}
 
@@ -140,8 +142,8 @@ public class AbstractItem extends Observable implements IItem {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setFontColor(Color color) {
-		this.fontColor = color;
+	public void setFontSyle(int style) {
+		this.fontStyle = style;
 		this.setChanged();
 	}
 
@@ -149,8 +151,9 @@ public class AbstractItem extends Observable implements IItem {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setFontSyle(int style) {
-		this.fontStyle = style;
+	public void setFontColor(Color color) {
+		this.fontColor = color;
 		this.setChanged();
 	}
+
 }

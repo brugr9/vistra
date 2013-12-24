@@ -12,11 +12,12 @@ import java.awt.Font;
 public interface IItemLayout {
 
 	/**
-	 * Returns the line width.
+	 * Sets an identifier.
 	 * 
-	 * @return the width
+	 * @param id
+	 *            the identifier to set
 	 */
-	abstract float getLineWidth();
+	abstract void setId(String id);
 
 	/**
 	 * Sets the line width.
@@ -27,34 +28,65 @@ public interface IItemLayout {
 	abstract void setLineWidth(float width);
 
 	/**
-	 * Returns the line color.
+	 * Sets an array of float representing a dash pattern (null means solid).
 	 * 
-	 * @return the color
+	 * @param dash
+	 *            the dash pattern
 	 */
-	abstract Color getLineColor();
+	abstract void setDash(float[] dash);
 
 	/**
-	 * Sets the line color.
+	 * Sets the line colour.
 	 * 
 	 * @param color
-	 *            the color to set
+	 *            the colour to set
 	 */
 	abstract void setLineColor(Color color);
 
 	/**
-	 * Returns the font color.
-	 * 
-	 * @return the color
-	 */
-	abstract Color getFontColor();
-
-	/**
-	 * Sets the font color.
+	 * Sets the font style.
 	 * 
 	 * @param color
-	 *            the color to set
+	 *            the style to set
+	 * @see Font
+	 */
+	abstract void setFontSyle(int style);
+
+	/**
+	 * Sets the font colour.
+	 * 
+	 * @param color
+	 *            the colour to set
 	 */
 	abstract void setFontColor(Color color);
+
+	/**
+	 * Returns an identifier.
+	 * 
+	 * @return the identifier
+	 */
+	abstract String getId();
+
+	/**
+	 * Returns the line width.
+	 * 
+	 * @return the width
+	 */
+	abstract float getLineWidth();
+
+	/**
+	 * Returns an array of float representing a dash pattern (null means solid).
+	 * 
+	 * @return the dash pattern
+	 */
+	abstract float[] getDash();
+
+	/**
+	 * Returns the line colour.
+	 * 
+	 * @return the colour
+	 */
+	abstract Color getLineColor();
 
 	/**
 	 * Returns the font style.
@@ -65,12 +97,10 @@ public interface IItemLayout {
 	abstract int getFontStyle();
 
 	/**
-	 * Sets the font style.
+	 * Returns the font colour.
 	 * 
-	 * @param color
-	 *            the style to set
-	 * @see Font
+	 * @return the colour
 	 */
-	abstract void setFontSyle(int style);
+	abstract Color getFontColor();
 
 }

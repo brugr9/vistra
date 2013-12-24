@@ -7,8 +7,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.GuiModel;
 import vistra.gui.control.IControl;
 import vistra.gui.view.component.AlgorithmPanel;
@@ -71,7 +71,7 @@ public class DefaultView extends JFrame implements IView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public DefaultView(Layout<IVertex, IEdge> layout, GuiModel model,
+	public DefaultView(Layout<IVertexLayout, IEdgeLayout> layout, GuiModel model,
 			IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

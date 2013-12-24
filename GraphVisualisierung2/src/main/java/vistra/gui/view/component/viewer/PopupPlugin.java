@@ -9,8 +9,8 @@ import javax.swing.JPopupMenu;
 import org.apache.commons.collections15.Factory;
 
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.vertex.IVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.view.component.viewer.popup.IItemModifier;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -23,7 +23,8 @@ import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
+public class PopupPlugin extends
+		EditingPopupGraphMousePlugin<IVertexLayout, IEdgeLayout> {
 
 	/**
 	 * A field for an edge popup menu.
@@ -46,8 +47,8 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 	 * @param edgeFactory
 	 *            an edge factory
 	 */
-	public PopupPlugin(Factory<IVertex> vertexFactory,
-			Factory<IEdge> edgeFactory) {
+	public PopupPlugin(Factory<IVertexLayout> vertexFactory,
+			Factory<IEdgeLayout> edgeFactory) {
 		super(vertexFactory, edgeFactory);
 		this.edgePopup = null;
 		this.vertexPopup = null;
@@ -62,15 +63,15 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 		if (e.getSource() instanceof VisualizationViewer<?, ?>) {
 
 			@SuppressWarnings("unchecked")
-			VisualizationViewer<IVertex, IEdge> vViewer = (VisualizationViewer<IVertex, IEdge>) e
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
 					.getSource();
 
 			Point2D point = e.getPoint();
-			GraphElementAccessor<IVertex, IEdge> pickSupport = vViewer
+			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vViewer
 					.getPickSupport();
 
 			if (pickSupport != null) {
-				IVertex vertex = pickSupport.getVertex(
+				IVertexLayout vertex = pickSupport.getVertex(
 						vViewer.getGraphLayout(), point.getX(), point.getY());
 
 				if (vertex != null && this.vertexPopup != null) {
@@ -78,8 +79,8 @@ public class PopupPlugin extends EditingPopupGraphMousePlugin<IVertex, IEdge> {
 					this.vertexPopup.show(vViewer, e.getX(), e.getY());
 				}
 
-				IEdge edge = pickSupport.getEdge(vViewer.getGraphLayout(),
-						point.getX(), point.getY());
+				IEdgeLayout edge = pickSupport.getEdge(
+						vViewer.getGraphLayout(), point.getX(), point.getY());
 
 				if (edge != null && this.edgePopup != null) {
 					this.updateItemMenu(edge, point, this.edgePopup);
