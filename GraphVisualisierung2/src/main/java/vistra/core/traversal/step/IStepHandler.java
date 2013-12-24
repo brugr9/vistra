@@ -9,6 +9,6 @@ import vistra.util.ICommandHandler;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IStepHandler extends ICommand, ICommandHandler {
+interface IStepHandler extends ICommand, ICommandHandler {
 
 }

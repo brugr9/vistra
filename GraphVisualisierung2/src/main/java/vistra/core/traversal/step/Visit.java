@@ -7,7 +7,7 @@ import vistra.core.graph.item.vertex.command.VisitVertex;
 import vistra.util.ICommand;
 
 /**
- * A step: visit.
+ * A step: visits a vertex over an edge as given.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -25,7 +25,7 @@ public class Visit extends AbstractStep implements IStep {
 	public Visit(IEdge edge, IVertex vertex) {
 		super();
 		this.description = this.getClass().getSimpleName() + " "
-				+ vertex.getId();
+				+ vertex.getClass().getSimpleName() + " " + vertex.getId();
 		try {
 			// new
 			ICommand discoverEdge = new DiscoverEdge(edge);

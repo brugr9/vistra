@@ -27,15 +27,6 @@ public abstract class AbstractItemCommand implements IItemCommand {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute() throws Exception {
-		// default empty implementation
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void undo() throws Exception {
 		this.stateHandler.handleSetPreviousState();
 	}
