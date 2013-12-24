@@ -28,7 +28,7 @@ public interface IItem extends IItemLayout {
 	 * 
 	 * @return the value
 	 */
-	public double getValue();
+	public int getValue();
 
 	/**
 	 * Sets a value.
@@ -36,6 +36,6 @@ public interface IItem extends IItemLayout {
 	 * @param value
 	 *            the value to set
 	 */
-	public void setValue(double value);
+	public void setValue(int value);
 
 }

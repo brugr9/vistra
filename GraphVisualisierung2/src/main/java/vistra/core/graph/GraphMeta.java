@@ -20,7 +20,7 @@ public interface GraphMeta {
 	// value
 	public final static String V_VALUE = "value";
 	public final static String E_WEIGHT = "weight";
-	public final static double V_VALUE_DEFAULT = 0.0;
-	public final static double E_WEIGHT_DEFAULT = 1.0;
+	public final static int V_VALUE_DEFAULT = 0;
+	public final static int E_WEIGHT_DEFAULT = 1;
 
 }

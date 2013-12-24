@@ -8,8 +8,7 @@ import vistra.core.graph.item.AbstractItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractEdgeLayout extends AbstractItem implements
-		IEdgeLayout {
+abstract class AbstractEdgeLayout extends AbstractItem implements IEdgeLayout {
 
 	/**
 	 * Main constructor.
@@ -17,7 +16,7 @@ abstract class AbstractEdgeLayout extends AbstractItem implements
 	 * @param value
 	 *            a value
 	 */
-	AbstractEdgeLayout(double value) {
+	AbstractEdgeLayout(int value) {
 		super(value);
 	}
 

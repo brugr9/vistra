@@ -38,12 +38,12 @@ public class AbstractItem extends Observable implements IItem {
 	/**
 	 * A field for value.
 	 */
-	private double value;
+	private int value;
 
 	/**
 	 * Main constructor.
 	 */
-	public AbstractItem(double value) {
+	public AbstractItem(int value) {
 		this.id = "";
 		this.lineWidth = GraphFactory.STROKE_WIDTH_DEFAULT;
 		this.lineColor = ColorPalette.darkblue;
@@ -73,7 +73,7 @@ public class AbstractItem extends Observable implements IItem {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public double getValue() {
+	public int getValue() {
 		return value;
 	}
 
@@ -81,7 +81,7 @@ public class AbstractItem extends Observable implements IItem {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setValue(double value) {
+	public void setValue(int value) {
 		this.value = value;
 		this.setChanged();
 	}

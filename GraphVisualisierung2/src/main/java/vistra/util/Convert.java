@@ -34,6 +34,21 @@ public final class Convert {
 	}
 
 	/**
+	 * Tries to convert a string to an int.
+	 * 
+	 * @param value
+	 *            the value to convert
+	 * @return the value as int if successful
+	 */
+	public static int toInt(String value) {
+		try {
+			return Integer.parseInt(value);
+		} catch (Exception e) {
+			throw new UnsupportedOperationException();
+		}
+	}
+
+	/**
 	 * Tries to convert a string to a boolean.
 	 * 
 	 * @param value

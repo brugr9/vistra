@@ -21,7 +21,7 @@ public class EdgeTransformer implements Transformer<EdgeMetadata, IEdge> {
 		IEdge edge = EdgeFactory.createEdge();
 
 		edge.setId(edgeMeta.getId());
-		edge.setValue(Convert.toDouble(edgeMeta.getProperty(GraphMeta.E_WEIGHT)));
+		edge.setValue(Convert.toInt(edgeMeta.getProperty(GraphMeta.E_WEIGHT)));
 
 		return edge;
 	}

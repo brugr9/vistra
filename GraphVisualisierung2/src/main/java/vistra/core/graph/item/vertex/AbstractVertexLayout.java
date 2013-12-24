@@ -25,7 +25,7 @@ abstract class AbstractVertexLayout extends AbstractItem implements
 	 * @param value
 	 *            a value
 	 */
-	AbstractVertexLayout(double value) {
+	AbstractVertexLayout(int value) {
 		super(value);
 		this.fillColor = ColorPalette.orange;
 	}
