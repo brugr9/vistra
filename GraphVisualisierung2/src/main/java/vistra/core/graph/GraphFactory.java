@@ -5,7 +5,6 @@ import java.util.List;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertexLayout;
-import vistra.core.traversal.step.IStep;
 import edu.uci.ics.jung.graph.SparseGraph;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -96,15 +95,13 @@ public final class GraphFactory {
 	}
 
 	/**
-	 * Creates a <code>GraphEventListener</code>.
 	 * 
-	 * @param stepList
-	 *            a list for steps
-	 * @return the listener
+	 * @param graph
+	 * @return
 	 */
-	public static GraphEventListener<IVertexLayout, IEdgeLayout> createListener(
-			List<IStep> stepList) {
-		return new ExtendedGraphEventListener(stepList);
+	public static TraversableGraph createTraversableGraph(IExtendedGraph graph) {
+		// TODO
+		return null;
 	}
 
 	/**

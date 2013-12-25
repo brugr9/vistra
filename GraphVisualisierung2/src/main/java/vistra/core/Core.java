@@ -14,6 +14,8 @@ import vistra.core.graph.GraphFactory;
 import vistra.core.graph.GraphManagerFactory;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.IGraphManager;
+import vistra.core.graph.TraversableGraph;
+import vistra.core.graph.TraversableGraphEventListener;
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.traversal.Traversal;
@@ -57,6 +59,7 @@ public class Core implements ICore {
 		try {
 			this.graphManager = GraphManagerFactory.create(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(p);
+			this.algorithm = this.algorithmManager.select(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,9 +137,9 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IAlgorithm selectAlgorithm(int index) throws CoreException {
+	public void selectAlgorithm(int index) throws CoreException {
 		try {
-			return this.algorithmManager.select(index);
+			this.algorithm = this.algorithmManager.select(index);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
@@ -146,8 +149,8 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setAlgorithm(IAlgorithm algorithm) {
-		this.algorithm = algorithm;
+	public String getAlgorithmDescription() {
+		return this.algorithm.getDescription();
 	}
 
 	/**
@@ -160,11 +163,14 @@ public class Core implements ICore {
 			// the steps
 			List<IStep> stepList = new ArrayList<IStep>();
 			// the graph
-			GraphEventListener<IVertexLayout, IEdgeLayout> listener = GraphFactory
-					.createListener(stepList);
+			@SuppressWarnings("unchecked")
+			GraphEventListener<IVertexLayout, IEdgeLayout> listener = (GraphEventListener<IVertexLayout, IEdgeLayout>) new TraversableGraphEventListener(
+					stepList);
 			graph.addGraphEventListener(listener);
+			TraversableGraph traversableGraph = GraphFactory
+					.createTraversableGraph(graph);
 			// the algorithm
-			// TODO this.algorithm.traverse(graph);
+			this.algorithm.traverse(traversableGraph);
 			// undo all steps in reverse order
 			for (int index = stepList.size() - 1; index > -1; index--)
 				stepList.get(index).undo();

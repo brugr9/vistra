@@ -25,9 +25,11 @@ public class Visit extends AbstractStep implements IStep {
 	 */
 	public Visit(IEdge edge, IVertex vertex) {
 		super();
+
 		this.description = this.getClass().getSimpleName() + " "
 				+ vertex.getClass().getSimpleName() + " "
 				+ ((VertexLayout) vertex).getId();
+
 		try {
 			// new
 			ICommand discoverEdge = new DiscoverEdge(edge);
@@ -41,6 +43,7 @@ public class Visit extends AbstractStep implements IStep {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 }

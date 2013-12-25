@@ -527,9 +527,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				/* deny user interaction */
 				this.setState(new ParameterOff(this));
 				/* select the algorithm */
-				IAlgorithm algorithm = this.core.selectAlgorithm(index);
-				this.core.setAlgorithm(algorithm);
-				String description = algorithm.getDescription();
+				this.core.selectAlgorithm(index);
+				String description = this.core.getAlgorithmDescription();
 				this.model.setAlgorithmDescription(description);
 				/* get the traversal */
 				IExtendedGraph graph = this.model.getGraph();

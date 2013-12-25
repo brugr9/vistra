@@ -4,7 +4,6 @@ import java.io.File;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.traversal.Traversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -82,18 +81,16 @@ public interface ICore {
 	 * 
 	 * @param index
 	 *            the algorithm index
-	 * @return the algorithm
 	 * @throws CoreException
 	 */
-	abstract IAlgorithm selectAlgorithm(int index) throws CoreException;
+	abstract void selectAlgorithm(int index) throws CoreException;
 
 	/**
-	 * Sets an algorithm.
+	 * Returns the algorithm description.
 	 * 
-	 * @param algorithm
-	 *            the algorithm to set
+	 * @return the description
 	 */
-	abstract void setAlgorithm(IAlgorithm algorithm) throws CoreException;
+	abstract String getAlgorithmDescription() throws CoreException;
 
 	/**
 	 * Traverses a graph as given by executing the algorithm. Returns traversal

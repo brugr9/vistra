@@ -48,16 +48,16 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	public abstract void setEdgeType(EdgeType edgeType);
 
 	/**
-	 * Adds {@code l} as a listener to this graph.
+	 * Adds {@code listener} as a listener to this graph.
 	 */
 	public void addGraphEventListener(
-			GraphEventListener<IVertexLayout, IEdgeLayout> l);
+			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
 
 	/**
-	 * Removes {@code l} as a listener to this graph.
+	 * Removes {@code listener} as a listener to this graph.
 	 */
 	public void removeGraphEventListener(
-			GraphEventListener<IVertexLayout, IEdgeLayout> l);
+			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
 
 	/**
 	 * Checks an item identifier.

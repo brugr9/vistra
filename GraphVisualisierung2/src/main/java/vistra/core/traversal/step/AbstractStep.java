@@ -6,7 +6,7 @@ package vistra.core.traversal.step;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class AbstractStep implements IStep {
+abstract class AbstractStep implements IStep {
 
 	/**
 	 * A field for a description.
@@ -48,5 +48,5 @@ class AbstractStep implements IStep {
 	public String getDescription() {
 		return this.description;
 	}
-
+	
 }
