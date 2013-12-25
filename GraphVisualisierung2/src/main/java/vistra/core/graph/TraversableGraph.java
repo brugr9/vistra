@@ -1,5 +1,6 @@
 package vistra.core.graph;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import vistra.core.graph.item.edge.IEdge;
@@ -620,7 +621,11 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 */
 	@Override
 	public IVertex getStart() {
-		// TODO Auto-generated method stub
+		ArrayList<IVertex> vertices = new ArrayList<IVertex>();
+		vertices.addAll(this.delegate.getVertices());
+		for (IVertex vertex : vertices)
+			if (vertex.isStart())
+				return vertex;
 		return null;
 	}
 
@@ -629,7 +634,11 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 */
 	@Override
 	public IVertex getEnd() {
-		// TODO Auto-generated method stub
+		ArrayList<IVertex> vertices = new ArrayList<IVertex>();
+		vertices.addAll(this.delegate.getVertices());
+		for (IVertex vertex : vertices)
+			if (vertex.isEnd())
+				return vertex;
 		return null;
 	}
 
@@ -672,7 +681,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	@Override
 	public void stepDiscardedEdge(IEdge edge) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

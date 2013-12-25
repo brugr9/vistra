@@ -6,12 +6,12 @@ import vistra.core.graph.item.edge.state.EdgeStateHandler;
 import vistra.util.ICommand;
 
 /**
- * An edge command: discover.
+ * An edge command: discovery.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class DiscoverEdge extends AbstractItemCommand implements ICommand {
+public class DiscoveryEdge extends AbstractItemCommand implements ICommand {
 
 	/**
 	 * Main constructor.
@@ -19,7 +19,7 @@ public class DiscoverEdge extends AbstractItemCommand implements ICommand {
 	 * @param edge
 	 *            an edge
 	 */
-	public DiscoverEdge(IEdge edge) {
+	public DiscoveryEdge(IEdge edge) {
 		super((EdgeStateHandler) edge);
 	}
 

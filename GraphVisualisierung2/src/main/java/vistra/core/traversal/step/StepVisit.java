@@ -1,10 +1,10 @@
 package vistra.core.traversal.step;
 
 import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.edge.command.DiscoverEdge;
+import vistra.core.graph.item.edge.command.DiscoveryEdge;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexLayout;
-import vistra.core.graph.item.vertex.command.VisitVertex;
+import vistra.core.graph.item.vertex.command.VisitedVertex;
 import vistra.util.ICommand;
 
 /**
@@ -13,7 +13,7 @@ import vistra.util.ICommand;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Visit extends AbstractStep implements IStep {
+public class StepVisit extends AbstractStep implements IStep {
 
 	/**
 	 * Main constructor.
@@ -23,7 +23,7 @@ public class Visit extends AbstractStep implements IStep {
 	 * @param vertex
 	 *            the vertex to visit
 	 */
-	public Visit(IEdge edge, IVertex vertex) {
+	public StepVisit(IEdge edge, IVertex vertex) {
 		super();
 
 		this.description = this.getClass().getSimpleName() + " "
@@ -32,8 +32,8 @@ public class Visit extends AbstractStep implements IStep {
 
 		try {
 			// new
-			ICommand discoverEdge = new DiscoverEdge(edge);
-			ICommand visitVertex = new VisitVertex(vertex);
+			ICommand discoverEdge = new DiscoveryEdge(edge);
+			ICommand visitVertex = new VisitedVertex(vertex);
 			// add
 			this.stepHandler.addCommand(discoverEdge);
 			this.stepHandler.addCommand(visitVertex);
