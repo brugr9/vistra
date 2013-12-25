@@ -10,7 +10,7 @@ import vistra.core.graph.item.vertex.state.VertexStateHandler;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexFactory implements Factory<IVertexLayout> {
+public class VertexFactory implements Factory<ILayoutVertex> {
 
 	/**
 	 * Creates a vertex.
@@ -18,7 +18,7 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	 * @return the vertex.
 	 */
 	@Override
-	public IVertexLayout create() {
+	public ILayoutVertex create() {
 		return createVertexLayout();
 	}
 
@@ -27,9 +27,9 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	 * 
 	 * @return the vertex layout
 	 */
-	public static IVertexLayout createVertexLayout() {
+	public static ILayoutVertex createVertexLayout() {
 		IVertex vertex = new Vertex();
-		IVertexLayout vertexLayout = new VertexLayout(vertex);
+		ILayoutVertex vertexLayout = new LayoutVertex(vertex);
 		try {
 			((VertexStateHandler) vertexLayout).handleUnexplored();
 		} catch (Exception e) {

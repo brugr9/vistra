@@ -3,8 +3,8 @@ package vistra.gui.view.component.viewer.popup;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.edge.ILayoutEdge;
+import vistra.core.graph.item.vertex.ILayoutVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -30,7 +30,7 @@ public class EdgePopup extends JPopupMenu {
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	public EdgePopup(JFrame top, VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
+	public EdgePopup(JFrame top, VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
 		super("edgePopup");
 		this.property = new EdgeProperty(viewer);
 		this.property.setRootFrame(top);

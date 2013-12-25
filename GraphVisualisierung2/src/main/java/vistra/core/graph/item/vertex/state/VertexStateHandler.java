@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.graph.item.vertex.VertexLayout;
+import vistra.core.graph.item.vertex.LayoutVertex;
 import vistra.util.ColorPalette;
 
 /**
@@ -17,7 +17,7 @@ import vistra.util.ColorPalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexStateHandler extends VertexLayout implements
+public class VertexStateHandler extends LayoutVertex implements
 		IVertexStateHandler {
 
 	/**
@@ -36,7 +36,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 *            a vertex
 	 */
 	public VertexStateHandler(IVertex vertex) {
-		super((VertexLayout) vertex);
+		super((LayoutVertex) vertex);
 		this.state = null;
 		this.cellar = new ArrayList<AbstractVertexState>();
 		try {
@@ -123,8 +123,7 @@ public class VertexStateHandler extends VertexLayout implements
 		try {
 			this.state.exit();
 			int index = this.cellar.size() - 1;
-			AbstractVertexState state = this.cellar.remove(index);
-			this.state = state;
+			this.state = this.cellar.remove(index);
 			this.state.entry();
 		} catch (Exception e) {
 			throw e;

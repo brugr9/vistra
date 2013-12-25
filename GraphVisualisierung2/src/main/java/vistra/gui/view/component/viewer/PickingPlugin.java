@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.edge.ILayoutEdge;
+import vistra.core.graph.item.vertex.ILayoutVertex;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.PickingGraphMousePlugin;
@@ -17,7 +17,7 @@ import edu.uci.ics.jung.visualization.picking.PickedState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class PickingPlugin extends PickingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
+public class PickingPlugin extends PickingGraphMousePlugin<ILayoutVertex, ILayoutEdge> {
 
 	/**
 	 * Main constructor.
@@ -33,7 +33,7 @@ public class PickingPlugin extends PickingGraphMousePlugin<IVertexLayout, IEdgeL
 	@SuppressWarnings("unchecked")
 	public void mouseDragged(MouseEvent e) {
 		if (this.locked == false) {
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+			VisualizationViewer<ILayoutVertex, ILayoutEdge> vv = (VisualizationViewer<ILayoutVertex, ILayoutEdge>) e
 					.getSource();
 			if (this.vertex != null) {
 				Point p = e.getPoint();
@@ -41,12 +41,12 @@ public class PickingPlugin extends PickingGraphMousePlugin<IVertexLayout, IEdgeL
 						.getMultiLayerTransformer().inverseTransform(p);
 				Point2D graphDown = vv.getRenderContext()
 						.getMultiLayerTransformer().inverseTransform(this.down);
-				Layout<IVertexLayout, IEdgeLayout> layout = vv.getGraphLayout();
+				Layout<ILayoutVertex, ILayoutEdge> layout = vv.getGraphLayout();
 				double dx = graphPoint.getX() - graphDown.getX();
 				double dy = graphPoint.getY() - graphDown.getY();
-				PickedState<IVertexLayout> ps = vv.getPickedVertexState();
+				PickedState<ILayoutVertex> ps = vv.getPickedVertexState();
 
-				for (IVertexLayout v : ps.getPicked()) {
+				for (ILayoutVertex v : ps.getPicked()) {
 					Point2D vp = layout.transform(v);
 					vp.setLocation(vp.getX() + dx, vp.getY() + dy);
 					layout.setLocation(v, vp);

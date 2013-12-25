@@ -15,9 +15,9 @@ import edu.uci.ics.jung.graph.util.Pair;
  * most of its method calls to a constructor-specified <code>Graph</code>
  * instance.
  * <ul>
- * <li>Vertices and edges can neither been added nor removed.
- * <li>The graph serves with step-methods (starting with 'step...') for
- * generating a traversal.
+ * <li>Modifiers: Vertices and edges can neither been added nor removed.
+ * <li>Traversable: The graph serves with step-methods (names start with
+ * 'step...') for generating a traversal.
  * </ul>
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
@@ -614,6 +614,17 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	@Override
 	public int getEdgeCount(EdgeType edge_type) {
 		return this.delegate.getEdgeCount(edge_type);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public EdgeType getEdgeType() {
+		ArrayList<IEdge> edges = new ArrayList<IEdge>();
+		edges.addAll(this.delegate.getEdges());
+		IEdge edge = edges.get(0);
+		return this.delegate.getEdgeType(edge);
 	}
 
 	/**

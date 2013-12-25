@@ -4,9 +4,9 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.ILayoutItem;
+import vistra.core.graph.item.edge.ILayoutEdge;
+import vistra.core.graph.item.vertex.ILayoutVertex;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -21,11 +21,11 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	/**
 	 * A field for a graph item.
 	 */
-	private final IItemLayout graphItem;
+	private final ILayoutItem graphItem;
 	/**
 	 * A field for a graph.
 	 */
-	private final Graph<IVertexLayout, IEdgeLayout> graph;
+	private final Graph<ILayoutVertex, ILayoutEdge> graph;
 
 	/**
 	 * Main constructor.
@@ -36,8 +36,8 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	 * @param vViewer
 	 *            a visualization viewer
 	 */
-	public GraphItemIdVerifier(String lastGood, IItemLayout graphItem,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
+	public GraphItemIdVerifier(String lastGood, ILayoutItem graphItem,
+			VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer) {
 		super(lastGood);
 		this.graphItem = graphItem;
 		this.graph = vViewer.getGraphLayout().getGraph();
@@ -55,7 +55,7 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 
 			return !textField.getText().trim().isEmpty()
 					&& (textField.getText().equals(
-							((IItemLayout) this.graphItem).getId()) || graph
+							((ILayoutItem) this.graphItem).getId()) || graph
 							.unused(textField.getText().trim()));
 		}
 

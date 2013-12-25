@@ -21,7 +21,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	public boolean addEdge(IEdge e, IVertex v1, IVertex v2);
+	abstract boolean addEdge(IEdge e, IVertex v1, IVertex v2);
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	public boolean addEdge(IEdge e, IVertex v1, IVertex v2, EdgeType edgeType);
+	abstract boolean addEdge(IEdge e, IVertex v1, IVertex v2, EdgeType edgeType);
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	public boolean addVertex(IVertex vertex);
+	abstract boolean addVertex(IVertex vertex);
 
 	/**
 	 * 
@@ -45,7 +45,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	public boolean addEdge(IEdge edge, Collection<? extends IVertex> vertices);
+	abstract boolean addEdge(IEdge edge, Collection<? extends IVertex> vertices);
 
 	/**
 	 * 
@@ -53,8 +53,8 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	public boolean addEdge(IEdge edge, Collection<? extends IVertex> vertices,
-			EdgeType edge_type);
+	abstract boolean addEdge(IEdge edge,
+			Collection<? extends IVertex> vertices, EdgeType edge_type);
 
 	/**
 	 * 
@@ -62,7 +62,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	public boolean removeVertex(IVertex vertex);
+	abstract boolean removeVertex(IVertex vertex);
 
 	/**
 	 * 
@@ -70,7 +70,14 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	public boolean removeEdge(IEdge edge);
+	abstract boolean removeEdge(IEdge edge);
+
+	/**
+	 * Returns the edge type.
+	 * 
+	 * @return the edge type
+	 */
+	abstract EdgeType getEdgeType();
 
 	/**
 	 * Returns a previously as start vertex signed item.

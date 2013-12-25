@@ -3,8 +3,8 @@ package vistra.gui;
 import vistra.core.ICore;
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.edge.ILayoutEdge;
+import vistra.core.graph.item.vertex.ILayoutVertex;
 import vistra.gui.control.Control;
 import vistra.gui.control.IControl;
 import vistra.gui.view.DefaultView;
@@ -58,7 +58,7 @@ public final class GuiFactory {
 		try {
 			// graph and layout
 			IExtendedGraph graph = GraphFactory.create(EdgeType.UNDIRECTED);
-			Layout<IVertexLayout, IEdgeLayout> layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
+			Layout<ILayoutVertex, ILayoutEdge> layout = new StaticLayout<ILayoutVertex, ILayoutEdge>(
 					graph);
 			// model and control
 			GuiModel model = new GuiModel(graph);

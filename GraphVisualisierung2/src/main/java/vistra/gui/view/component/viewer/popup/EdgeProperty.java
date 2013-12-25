@@ -7,9 +7,9 @@ import java.awt.geom.Point2D;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
-import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.ILayoutItem;
+import vistra.core.graph.item.edge.ILayoutEdge;
+import vistra.core.graph.item.vertex.ILayoutVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -25,11 +25,11 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	/**
 	 * A field for a visualization viewer.
 	 */
-	private final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
+	private final VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer;
 	/**
 	 * A field for an edge.
 	 */
-	private IEdgeLayout edge;
+	private ILayoutEdge edge;
 	/**
 	 * A field for a point.
 	 */
@@ -43,7 +43,7 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	 * 
 	 */
 	protected EdgeProperty(
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
+			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
 		super("Edit edge ...");
 
 		this.viewer = viewer;
@@ -77,9 +77,9 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setGraphItemAndView(IItemLayout item) {
-		if (item instanceof IEdgeLayout) {
-			this.edge = (IEdgeLayout) item;
+	public void setGraphItemAndView(ILayoutItem item) {
+		if (item instanceof ILayoutEdge) {
+			this.edge = (ILayoutEdge) item;
 		}
 	}
 

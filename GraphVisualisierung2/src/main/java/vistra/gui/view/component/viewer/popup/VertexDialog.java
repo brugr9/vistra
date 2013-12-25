@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.edge.ILayoutEdge;
+import vistra.core.graph.item.vertex.ILayoutVertex;
 import vistra.gui.view.component.viewer.popup.verifier.GraphItemIdVerifier;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -46,8 +46,8 @@ public class VertexDialog extends JDialog {
 	 * @param owner
 	 * @param vViewer
 	 */
-	public VertexDialog(final IVertexLayout vertex, final JFrame owner,
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
+	public VertexDialog(final ILayoutVertex vertex, final JFrame owner,
+			final VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer) {
 		super(owner, true);
 		this.setResizable(false);
 		// TODO remove string literals
@@ -89,8 +89,8 @@ public class VertexDialog extends JDialog {
 	 * @param okButton
 	 * @param cancelButton
 	 */
-	private void setListeners(final IVertexLayout vertex,
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
+	private void setListeners(final ILayoutVertex vertex,
+			final VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer,
 			JButton okButton, JButton cancelButton) {
 
 		okButton.addActionListener(new ActionListener() {
@@ -112,8 +112,8 @@ public class VertexDialog extends JDialog {
 	 * @param vertex
 	 * @param vViewer
 	 */
-	private void updateTextFieldValues(final IVertexLayout vertex,
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
+	private void updateTextFieldValues(final ILayoutVertex vertex,
+			final VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer) {
 
 		vertex.setId(this.txtVertexName.getText().trim());
 		vViewer.repaint();
@@ -125,8 +125,8 @@ public class VertexDialog extends JDialog {
 	 * @param vertex
 	 * @param vViewer
 	 */
-	private void setTextFieldValues(IVertexLayout vertex,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
+	private void setTextFieldValues(ILayoutVertex vertex,
+			VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer) {
 
 		this.txtVertexName.setText(vertex.getId());
 		this.txtVertexName.setInputVerifier(new GraphItemIdVerifier(

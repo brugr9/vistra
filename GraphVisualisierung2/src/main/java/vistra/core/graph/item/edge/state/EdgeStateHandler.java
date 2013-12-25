@@ -4,7 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.item.edge.EdgeLayout;
+import vistra.core.graph.item.edge.LayoutEdge;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.util.ColorPalette;
 
@@ -17,7 +17,7 @@ import vistra.util.ColorPalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
+public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 
 	/**
 	 * A field for a state.
@@ -35,7 +35,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 *            an edge
 	 */
 	public EdgeStateHandler(IEdge edge) {
-		super((EdgeLayout) edge);
+		super((LayoutEdge) edge);
 		this.state = null;
 		this.cellar = new ArrayList<AbstractEdgeState>();
 		try {
@@ -161,8 +161,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 		try {
 			this.state.exit();
 			int index = this.cellar.size() - 1;
-			AbstractEdgeState state = this.cellar.remove(index);
-			this.state = state;
+			this.state = this.cellar.remove(index);
 			this.state.entry();
 		} catch (Exception e) {
 			throw e;

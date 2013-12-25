@@ -7,8 +7,8 @@ import java.awt.geom.Point2D;
 import org.apache.commons.collections15.Factory;
 
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.edge.ILayoutEdge;
+import vistra.core.graph.item.vertex.ILayoutVertex;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -24,7 +24,7 @@ import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
  * 
  */
 public class EditingPlugin extends
-		EditingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
+		EditingGraphMousePlugin<ILayoutVertex, ILayoutEdge> {
 
 	/**
 	 * Main constructor.
@@ -34,8 +34,8 @@ public class EditingPlugin extends
 	 * @param edgeFactory
 	 *            the edge factory
 	 */
-	public EditingPlugin(Factory<IVertexLayout> vertexFactory,
-			Factory<IEdgeLayout> edgeFactory) {
+	public EditingPlugin(Factory<ILayoutVertex> vertexFactory,
+			Factory<ILayoutEdge> edgeFactory) {
 		super(vertexFactory, edgeFactory);
 	}
 
@@ -90,13 +90,13 @@ public class EditingPlugin extends
 	@SuppressWarnings("unchecked")
 	public void mousePressed(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+			final VisualizationViewer<ILayoutVertex, ILayoutEdge> vv = (VisualizationViewer<ILayoutVertex, ILayoutEdge>) e
 					.getSource();
 			final Point2D p = e.getPoint();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vv
+			GraphElementAccessor<ILayoutVertex, ILayoutEdge> pickSupport = vv
 					.getPickSupport();
 			if (pickSupport != null) {
-				Graph<IVertexLayout, IEdgeLayout> graph = vv.getModel()
+				Graph<ILayoutVertex, ILayoutEdge> graph = vv.getModel()
 						.getGraphLayout().getGraph();
 
 				// set default edge type
@@ -109,7 +109,7 @@ public class EditingPlugin extends
 					}
 				}
 
-				final IVertexLayout vertex = pickSupport.getVertex(vv
+				final ILayoutVertex vertex = pickSupport.getVertex(vv
 						.getModel().getGraphLayout(), p.getX(), p.getY());
 
 				if (vertex != null) { // get ready to make an edge
@@ -129,8 +129,8 @@ public class EditingPlugin extends
 						vv.addPostRenderPaintable(this.arrowPaintable);
 					}
 				} else { // make a new vertex
-					IVertexLayout newVertex = this.vertexFactory.create();
-					Layout<IVertexLayout, IEdgeLayout> layout = vv.getModel()
+					ILayoutVertex newVertex = this.vertexFactory.create();
+					Layout<ILayoutVertex, ILayoutEdge> layout = vv.getModel()
 							.getGraphLayout();
 					graph.addVertex(newVertex);
 
@@ -155,19 +155,19 @@ public class EditingPlugin extends
 	@SuppressWarnings("unchecked")
 	public void mouseReleased(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+			final VisualizationViewer<ILayoutVertex, ILayoutEdge> vv = (VisualizationViewer<ILayoutVertex, ILayoutEdge>) e
 					.getSource();
 			final Point2D p = e.getPoint();
-			Layout<IVertexLayout, IEdgeLayout> layout = vv.getModel()
+			Layout<ILayoutVertex, ILayoutEdge> layout = vv.getModel()
 					.getGraphLayout();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vv
+			GraphElementAccessor<ILayoutVertex, ILayoutEdge> pickSupport = vv
 					.getPickSupport();
 
 			if (pickSupport != null) {
-				final IVertexLayout vertex = pickSupport.getVertex(layout,
+				final ILayoutVertex vertex = pickSupport.getVertex(layout,
 						p.getX(), p.getY());
 				if (vertex != null && this.startVertex != null) {
-					Graph<IVertexLayout, IEdgeLayout> graph = vv
+					Graph<ILayoutVertex, ILayoutEdge> graph = vv
 							.getGraphLayout().getGraph();
 					graph.addEdge(this.edgeFactory.create(), this.startVertex,
 							vertex, this.edgeIsDirected);

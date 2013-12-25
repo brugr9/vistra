@@ -3,7 +3,7 @@ package vistra.core.graph.item.vertex;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import vistra.core.graph.item.IItemLayout;
+import vistra.core.graph.item.ILayoutItem;
 
 /**
  * A vertex layout interface.
@@ -11,7 +11,7 @@ import vistra.core.graph.item.IItemLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IVertexLayout extends IVertex, IItemLayout {
+public interface ILayoutVertex extends IVertex, ILayoutItem {
 
 	/**
 	 * Sets the location.

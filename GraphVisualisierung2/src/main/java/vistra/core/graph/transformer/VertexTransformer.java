@@ -3,7 +3,7 @@ package vistra.core.graph.transformer;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.GraphMeta;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.vertex.ILayoutVertex;
 import vistra.core.graph.item.vertex.VertexFactory;
 import vistra.util.Convert;
 import edu.uci.ics.jung.io.graphml.NodeMetadata;
@@ -15,11 +15,11 @@ import edu.uci.ics.jung.io.graphml.NodeMetadata;
  * 
  */
 public class VertexTransformer implements
-		Transformer<NodeMetadata, IVertexLayout> {
+		Transformer<NodeMetadata, ILayoutVertex> {
 
 	@Override
-	public IVertexLayout transform(NodeMetadata vertexMeta) {
-		IVertexLayout layout = VertexFactory.createVertexLayout();
+	public ILayoutVertex transform(NodeMetadata vertexMeta) {
+		ILayoutVertex layout = VertexFactory.createVertexLayout();
 
 		layout.setId(vertexMeta.getId());
 		layout.setLocation(Convert.toPoint2D(

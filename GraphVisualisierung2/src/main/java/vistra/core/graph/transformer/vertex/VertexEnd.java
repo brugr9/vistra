@@ -2,16 +2,16 @@ package vistra.core.graph.transformer.vertex;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.vertex.ILayoutVertex;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexEnd implements Transformer<IVertexLayout, String> {
+public class VertexEnd implements Transformer<ILayoutVertex, String> {
 
 	@Override
-	public String transform(IVertexLayout vertex) {
+	public String transform(ILayoutVertex vertex) {
 		return String.valueOf(vertex.isEnd());
 	}
 

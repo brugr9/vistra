@@ -1,6 +1,6 @@
 package vistra.core.graph.item.edge;
 
-import vistra.core.graph.item.AbstractItemLayout;
+import vistra.core.graph.item.AbstractLayoutItem;
 
 /**
  * An edge layout.
@@ -8,7 +8,7 @@ import vistra.core.graph.item.AbstractItemLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeLayout extends AbstractItemLayout implements IEdgeLayout {
+public class LayoutEdge extends AbstractLayoutItem implements ILayoutEdge {
 
 	/**
 	 * A field for a vertex to work with.
@@ -21,7 +21,7 @@ public class EdgeLayout extends AbstractItemLayout implements IEdgeLayout {
 	 * @param edge
 	 *            an edge
 	 */
-	protected EdgeLayout(IEdge edge) {
+	protected LayoutEdge(IEdge edge) {
 		super();
 		this.edge = (Edge) edge;
 	}
