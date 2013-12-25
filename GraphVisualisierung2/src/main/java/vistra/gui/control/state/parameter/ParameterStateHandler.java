@@ -1,4 +1,4 @@
-package vistra.gui.control.parameter;
+package vistra.gui.control.state.parameter;
 
 import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
 import static vistra.gui.control.IControl.EventSource.GRAPH;
@@ -66,7 +66,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		this.core = core;
 		this.model = model;
 		this.top = null;
-		this.state = new ParameterIdle(this);
+		this.state = new ParameterStateIdle(this);
 	}
 
 	/**
@@ -525,7 +525,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setProgressMaximum(0);
 			} else {
 				/* deny user interaction */
-				this.setState(new ParameterOff(this));
+				this.setState(new ParameterStateOff(this));
 				/* select the algorithm */
 				this.core.selectAlgorithm(index);
 				String description = this.core.getAlgorithmDescription();
@@ -540,7 +540,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			return index;
 
 		} catch (Exception e) {
-			this.setState(new ParameterIdle(this));
+			this.setState(new ParameterStateIdle(this));
 			throw e;
 		}
 
@@ -574,9 +574,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (option == JOptionPane.YES_OPTION) {
 				Class<? extends AbstractParameterState> state = this.state
 						.getClass();
-				if (state == ParameterGraphEdited.class)
+				if (state == ParameterStateGraphEdited.class)
 					this.saveGraph();
-				if (state == ParameterIdle.class)
+				if (state == ParameterStateIdle.class)
 					this.saveGraphAs();
 			}
 			return option;

@@ -6,9 +6,9 @@ import java.util.ResourceBundle;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.traversal.Traversal;
 import vistra.gui.control.IControl.EventSource;
-import vistra.gui.control.animation.IAnimationStateHandler;
-import vistra.gui.control.parameter.IParameterStateHandler;
-import vistra.gui.control.stepbystep.IStepByStepStateHandler;
+import vistra.gui.control.state.animation.IAnimationStateHandler;
+import vistra.gui.control.state.parameter.IParameterStateHandler;
+import vistra.gui.control.state.stepbystep.ISbsStateHandler;
 
 /**
  * A model interface.
@@ -211,7 +211,7 @@ public interface IGuiModel {
 	/**
 	 * @return the stepByStepStateHandler
 	 */
-	public abstract IStepByStepStateHandler getStepByStepStateHandler();
+	public abstract ISbsStateHandler getStepByStepStateHandler();
 
 	/**
 	 * @return the steplength
@@ -501,7 +501,7 @@ public interface IGuiModel {
 	 *            the stepByStepStateHandler to set
 	 */
 	public abstract void setStepByStepStateHandler(
-			IStepByStepStateHandler stepByStepStateHandler);
+			ISbsStateHandler stepByStepStateHandler);
 
 	/**
 	 * @param steplength

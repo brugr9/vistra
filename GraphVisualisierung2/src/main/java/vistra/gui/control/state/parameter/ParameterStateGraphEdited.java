@@ -1,14 +1,14 @@
-package vistra.gui.control.stepbystep;
+package vistra.gui.control.state.parameter;
 
 import vistra.util.IState;
 
 /**
- * A step-by-step state: intermediate.
+ * A parameter state: graph edited.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class StepByStepIntermediate extends AbstractStepByStepState implements IState {
+class ParameterStateGraphEdited extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class StepByStepIntermediate extends AbstractStepByStepState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	StepByStepIntermediate(IStepByStepStateHandler stateHandler) {
+	ParameterStateGraphEdited(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class StepByStepIntermediate extends AbstractStepByStepState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewIntermediate();
+			super.stateHandler.setViewGraphEdited();
 		} catch (Exception e) {
 			throw e;
 		}

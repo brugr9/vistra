@@ -1,4 +1,4 @@
-package vistra.gui.control.stepbystep;
+package vistra.gui.control.state.stepbystep;
 
 import vistra.util.AbstractState;
 import vistra.util.IState;
@@ -9,12 +9,12 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractStepByStepState extends AbstractState implements IState {
+abstract class AbstractSbsState extends AbstractState implements IState {
 
 	/**
 	 * A field for a state handler.
 	 */
-	protected StepByStepStateHandler stateHandler;
+	protected SbsStateHandler stateHandler;
 
 	/**
 	 * Main constructor.
@@ -22,8 +22,8 @@ abstract class AbstractStepByStepState extends AbstractState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	protected AbstractStepByStepState(IStepByStepStateHandler stateHandler) {
-		this.stateHandler = (StepByStepStateHandler) stateHandler;
+	protected AbstractSbsState(ISbsStateHandler stateHandler) {
+		this.stateHandler = (SbsStateHandler) stateHandler;
 	}
 
 	/**
@@ -33,7 +33,7 @@ abstract class AbstractStepByStepState extends AbstractState implements IState {
 	 */
 	void handleIdle() throws Exception {
 		try {
-			this.stateHandler.setState(new StepByStepIdle(this.stateHandler));
+			this.stateHandler.setState(new SbsStateIdle(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -47,7 +47,7 @@ abstract class AbstractStepByStepState extends AbstractState implements IState {
 	void handleToBeginning() throws Exception {
 		try {
 			this.stateHandler.goToBeginning();
-			this.stateHandler.setState(new StepByStepAtBeginning(
+			this.stateHandler.setState(new SbsStateAtBeginning(
 					this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
@@ -63,10 +63,10 @@ abstract class AbstractStepByStepState extends AbstractState implements IState {
 		try {
 			boolean hasPrevious = this.stateHandler.goBackward();
 			if (hasPrevious)
-				this.stateHandler.setState(new StepByStepIntermediate(
+				this.stateHandler.setState(new SbsStateIntermediate(
 						this.stateHandler));
 			else
-				this.stateHandler.setState(new StepByStepAtBeginning(
+				this.stateHandler.setState(new SbsStateAtBeginning(
 						this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
@@ -82,10 +82,10 @@ abstract class AbstractStepByStepState extends AbstractState implements IState {
 		try {
 			boolean hasNext = this.stateHandler.goForward();
 			if (hasNext)
-				this.stateHandler.setState(new StepByStepIntermediate(
+				this.stateHandler.setState(new SbsStateIntermediate(
 						this.stateHandler));
 			else
-				this.stateHandler.setState(new StepByStepAtEnd(
+				this.stateHandler.setState(new SbsStateAtEnd(
 						this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
@@ -100,7 +100,7 @@ abstract class AbstractStepByStepState extends AbstractState implements IState {
 	void handleToEnd() throws Exception {
 		try {
 			this.stateHandler.goToEnd();
-			this.stateHandler.setState(new StepByStepAtEnd(this.stateHandler));
+			this.stateHandler.setState(new SbsStateAtEnd(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -113,7 +113,7 @@ abstract class AbstractStepByStepState extends AbstractState implements IState {
 	 */
 	void handleOff() throws Exception {
 		try {
-			this.stateHandler.setState(new StepByStepOff(this.stateHandler));
+			this.stateHandler.setState(new SbsStateOff(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}

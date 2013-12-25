@@ -1,14 +1,14 @@
-package vistra.gui.control.stepbystep;
+package vistra.gui.control.state.parameter;
 
 import vistra.util.IState;
 
 /**
- * A step-by-step state: idle.
+ * A parameter state: graph saved.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class StepByStepIdle extends AbstractStepByStepState implements IState {
+class ParameterStateGraphSaved extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class StepByStepIdle extends AbstractStepByStepState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	StepByStepIdle(IStepByStepStateHandler stateHandler) {
+	ParameterStateGraphSaved(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class StepByStepIdle extends AbstractStepByStepState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewIdle();
+			super.stateHandler.setViewGraphSaved();
 		} catch (Exception e) {
 			throw e;
 		}

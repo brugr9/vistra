@@ -19,80 +19,108 @@
 │   ├── CoreException.java
 │   ├── Core.java
 │   ├── graph
-│   │   ├── ExtendedGraphEventListener.java
 │   │   ├── ExtendedGraph.java
 │   │   ├── GraphException.java
 │   │   ├── GraphFactory.java
 │   │   ├── GraphManagerFactory.java
 │   │   ├── GraphManager.java
-│   │   ├── GraphMLMeta.java
+│   │   ├── GraphMeta.java
+│   │   ├── GraphWriter.java
 │   │   ├── IExtendedGraph.java
 │   │   ├── IGraphManager.java
 │   │   ├── item
-│   │   │   ├── AbstractGraphItemModel.java
-│   │   │   ├── command
+│   │   │   ├── AbstractItemCommand.java
+│   │   │   ├── AbstractItemLayout.java
 │   │   │   ├── edge
-│   │   │   │   ├── AbstractEdgeModel.java
-│   │   │   │   ├── AbstractEdgeState.java
 │   │   │   │   ├── command
-│   │   │   │   │   └── DiscoverEdge.java
+│   │   │   │   │   ├── BackEdge.java
+│   │   │   │   │   ├── CrossEdge.java
+│   │   │   │   │   ├── DiscardedEdge.java
+│   │   │   │   │   ├── DiscoveryEdge.java
+│   │   │   │   │   ├── ForwardEdge.java
+│   │   │   │   │   ├── SolutionEdge.java
+│   │   │   │   │   └── UnexploredEdge.java
 │   │   │   │   ├── EdgeFactory.java
 │   │   │   │   ├── Edge.java
-│   │   │   │   ├── EdgeStateBack.java
-│   │   │   │   ├── EdgeStateCross.java
-│   │   │   │   ├── EdgeStateDiscarded.java
-│   │   │   │   ├── EdgeStateDiscovery.java
-│   │   │   │   ├── EdgeStateForward.java
-│   │   │   │   ├── EdgeStateSolution.java
-│   │   │   │   ├── EdgeStateUnexplored.java
+│   │   │   │   ├── EdgeLayout.java
 │   │   │   │   ├── IEdge.java
-│   │   │   │   └── IEdgeModel.java
-│   │   │   ├── IGraphItemModel.java
+│   │   │   │   ├── IEdgeLayout.java
+│   │   │   │   └── state
+│   │   │   │       ├── AbstractEdgeState.java
+│   │   │   │       ├── EdgeStateBack.java
+│   │   │   │       ├── EdgeStateCross.java
+│   │   │   │       ├── EdgeStateDiscarded.java
+│   │   │   │       ├── EdgeStateDiscovery.java
+│   │   │   │       ├── EdgeStateForward.java
+│   │   │   │       ├── EdgeStateHandler.java
+│   │   │   │       ├── EdgeStateSolution.java
+│   │   │   │       ├── EdgeStateUnexplored.java
+│   │   │   │       └── IEdgeStateHandler.java
+│   │   │   ├── IItemCommand.java
+│   │   │   ├── IItemLayout.java
+│   │   │   ├── IItemStateHandler.java
 │   │   │   └── vertex
-│   │   │       ├── AbstractVertexState.java
 │   │   │       ├── command
-│   │   │       │   └── VisitVertex.java
+│   │   │       │   ├── FocussedVertex.java
+│   │   │       │   ├── SolutionVertex.java
+│   │   │       │   ├── UnexploredVertex.java
+│   │   │       │   └── VisitedVertex.java
 │   │   │       ├── IVertex.java
-│   │   │       ├── IVertexStateHandler.java
+│   │   │       ├── IVertexLayout.java
+│   │   │       ├── state
+│   │   │       │   ├── AbstractVertexState.java
+│   │   │       │   ├── IVertexStateHandler.java
+│   │   │       │   ├── VertexStateFocussed.java
+│   │   │       │   ├── VertexStateHandler.java
+│   │   │       │   ├── VertexStateSolution.java
+│   │   │       │   ├── VertexStateUnexplored.java
+│   │   │       │   └── VertexStateVisited.java
 │   │   │       ├── VertexFactory.java
 │   │   │       ├── Vertex.java
-│   │   │       ├── VertexStateFocussed.java
-│   │   │       ├── VertexStateHandler.java
-│   │   │       ├── VertexStateSolution.java
-│   │   │       ├── VertexStateUnexplored.java
-│   │   │       └── VertexStateVisited.java
-│   │   └── transformer
-│   │       ├── edge
-│   │       │   ├── EdgeFontColor.java
-│   │       │   ├── EdgeID.java
-│   │       │   ├── EdgeLabel.java
-│   │       │   ├── EdgeLineColor.java
-│   │       │   ├── EdgeLineWidth.java
-│   │       │   └── EdgeWeight.java
-│   │       ├── EdgeTransformer.java
-│   │       ├── GraphTransformer.java
-│   │       ├── HyperEdgeTransformer.java
-│   │       ├── vertex
-│   │       │   ├── VertexEnd.java
-│   │       │   ├── VertexFillPaint.java
-│   │       │   ├── VertexFontColor.java
-│   │       │   ├── VertexHeight.java
-│   │       │   ├── VertexID.java
-│   │       │   ├── VertexLabel.java
-│   │       │   ├── VertexLocationX.java
-│   │       │   ├── VertexLocationY.java
-│   │       │   ├── VertexShape.java
-│   │       │   ├── VertexStart.java
-│   │       │   ├── VertexStroke.java
-│   │       │   └── VertexWidth.java
-│   │       └── VertexTransformer.java
+│   │   │       └── VertexLayout.java
+│   │   ├── ITraversableGraphEventListener.java
+│   │   ├── ITraversableGraph.java
+│   │   ├── transformer
+│   │   │   ├── edge
+│   │   │   │   ├── EdgeFontColor.java
+│   │   │   │   ├── EdgeFont.java
+│   │   │   │   ├── EdgeID.java
+│   │   │   │   ├── EdgeLabel.java
+│   │   │   │   ├── EdgeLineColor.java
+│   │   │   │   ├── EdgeStroke.java
+│   │   │   │   └── EdgeWeight.java
+│   │   │   ├── EdgeTransformer.java
+│   │   │   ├── GraphTransformer.java
+│   │   │   ├── HyperEdgeTransformer.java
+│   │   │   ├── vertex
+│   │   │   │   ├── VertexCoordX.java
+│   │   │   │   ├── VertexCoordY.java
+│   │   │   │   ├── VertexEnd.java
+│   │   │   │   ├── VertexFillColor.java
+│   │   │   │   ├── VertexFontColor.java
+│   │   │   │   ├── VertexFont.java
+│   │   │   │   ├── VertexHeight.java
+│   │   │   │   ├── VertexID.java
+│   │   │   │   ├── VertexLabelValue.java
+│   │   │   │   ├── VertexLineColor.java
+│   │   │   │   ├── VertexShape.java
+│   │   │   │   ├── VertexStart.java
+│   │   │   │   ├── VertexStroke.java
+│   │   │   │   ├── VertexValue.java
+│   │   │   │   └── VertexWidth.java
+│   │   │   └── VertexTransformer.java
+│   │   ├── TraversableGraphEvent.java
+│   │   ├── TraversableGraphEventListener.java
+│   │   └── TraversableGraph.java
 │   ├── ICore.java
 │   └── traversal
 │       ├── step
-│       │   ├── AbstractStepCommand.java
-│       │   ├── IStepCommand.java
+│       │   ├── AbstractStep.java
+│       │   ├── IStepHandler.java
 │       │   ├── IStep.java
-│       │   └── Visit.java
+│       │   ├── StepCrossEdge.java
+│       │   ├── StepHandler.java
+│       │   └── StepVisit.java
 │       └── Traversal.java
 ├── gui
 │   ├── control
@@ -154,7 +182,7 @@
 │       │       │   ├── EdgePopup.java
 │       │       │   ├── EdgeProperty.java
 │       │       │   ├── IItemModifier.java
-│       │       │   ├── MenuFactory.java
+│       │       │   ├── SwitchModePopup.java
 │       │       │   ├── verifier
 │       │       │   │   ├── AbstractVerifier.java
 │       │       │   │   ├── EdgeWeightVerifier.java
@@ -166,9 +194,9 @@
 │       │       │   └── VertexProperty.java
 │       │       ├── PopupPlugin.java
 │       │       └── Viewer.java
+│       ├── DefaultView.java
 │       ├── FullView.java
-│       ├── IView.java
-│       └── MinimalView.java
+│       └── IView.java
 ├── Startup.java
 └── util
     ├── AbstractState.java
@@ -180,4 +208,4 @@
     ├── ImmutableBidirectIterator.java
     └── IState.java
 
-26 directories, 154 files
+27 directories, 181 files

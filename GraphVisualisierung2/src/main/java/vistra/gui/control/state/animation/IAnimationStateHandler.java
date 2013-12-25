@@ -1,9 +1,9 @@
-package vistra.gui.control.animation;
+package vistra.gui.control.state.animation;
 
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
-import vistra.gui.control.IControlStateHandler;
+import vistra.gui.control.state.IControlStateHandler;
 
 /**
  * An interface for an animation state handler.

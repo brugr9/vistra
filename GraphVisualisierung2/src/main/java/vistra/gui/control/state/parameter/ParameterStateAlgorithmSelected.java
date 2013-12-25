@@ -1,4 +1,4 @@
-package vistra.gui.control.parameter;
+package vistra.gui.control.state.parameter;
 
 import vistra.util.IState;
 
@@ -8,7 +8,7 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class ParameterAlgorithmSelected extends AbstractParameterState implements
+class ParameterStateAlgorithmSelected extends AbstractParameterState implements
 		IState {
 
 	/**
@@ -17,7 +17,7 @@ class ParameterAlgorithmSelected extends AbstractParameterState implements
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterAlgorithmSelected(IParameterStateHandler stateHandler) {
+	ParameterStateAlgorithmSelected(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

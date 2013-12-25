@@ -1,4 +1,4 @@
-package vistra.gui.control;
+package vistra.gui.control.state;
 
 /**
  * An interface for a control state handler.

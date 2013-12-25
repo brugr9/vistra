@@ -7,9 +7,9 @@ import java.util.ResourceBundle;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.traversal.Traversal;
 import vistra.gui.control.IControl.EventSource;
-import vistra.gui.control.animation.IAnimationStateHandler;
-import vistra.gui.control.parameter.IParameterStateHandler;
-import vistra.gui.control.stepbystep.IStepByStepStateHandler;
+import vistra.gui.control.state.animation.IAnimationStateHandler;
+import vistra.gui.control.state.parameter.IParameterStateHandler;
+import vistra.gui.control.state.stepbystep.ISbsStateHandler;
 
 /**
  * A model as in MVC holding some fields and its getter and setter methods.
@@ -65,7 +65,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private int progress;
 	private int progressMaximum;
 	// Step-by-Step
-	private IStepByStepStateHandler stepByStepStateHandler;
+	private ISbsStateHandler stepByStepStateHandler;
 	private int steplength;
 	private boolean steplengthEnabled;
 	private boolean toBeginningEnabled;
@@ -588,7 +588,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getStepByStepStateHandler()
 	 */
 	@Override
-	public IStepByStepStateHandler getStepByStepStateHandler() {
+	public ISbsStateHandler getStepByStepStateHandler() {
 		return stepByStepStateHandler;
 	}
 
@@ -1155,7 +1155,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 */
 	@Override
 	public void setStepByStepStateHandler(
-			IStepByStepStateHandler stepByStepStateHandler) {
+			ISbsStateHandler stepByStepStateHandler) {
 		this.stepByStepStateHandler = stepByStepStateHandler;
 		this.setChanged();
 	}

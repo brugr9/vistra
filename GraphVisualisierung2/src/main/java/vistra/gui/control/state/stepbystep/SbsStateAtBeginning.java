@@ -1,14 +1,14 @@
-package vistra.gui.control.parameter;
+package vistra.gui.control.state.stepbystep;
 
 import vistra.util.IState;
 
 /**
- * A parameter state: graph edited.
+ * A step-by-step state: at the beginning.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class ParameterGraphEdited extends AbstractParameterState implements IState {
+class SbsStateAtBeginning extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class ParameterGraphEdited extends AbstractParameterState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterGraphEdited(IParameterStateHandler stateHandler) {
+	SbsStateAtBeginning(ISbsStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class ParameterGraphEdited extends AbstractParameterState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewGraphEdited();
+			super.stateHandler.setViewBeginning();
 		} catch (Exception e) {
 			throw e;
 		}

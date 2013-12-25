@@ -1,4 +1,4 @@
-package vistra.gui.control.animation;
+package vistra.gui.control.state.animation;
 
 import vistra.util.AbstractState;
 import vistra.util.IState;
@@ -33,7 +33,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handleIdle() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationIdle(this.stateHandler));
+			this.stateHandler.setState(new AnimationStateIdle(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -46,7 +46,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handlePlay() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationPlaying(this.stateHandler));
+			this.stateHandler.setState(new AnimationStatePlaying(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -59,7 +59,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handlePause() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationPaused(this.stateHandler));
+			this.stateHandler.setState(new AnimationStatePaused(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -72,7 +72,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handleStop() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStopped(this.stateHandler));
+			this.stateHandler.setState(new AnimationStateStopped(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -85,7 +85,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handleOff() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationOff(this.stateHandler));
+			this.stateHandler.setState(new AnimationStateOff(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}

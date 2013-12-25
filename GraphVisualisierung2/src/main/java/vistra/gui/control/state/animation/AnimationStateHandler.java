@@ -1,4 +1,4 @@
-package vistra.gui.control.animation;
+package vistra.gui.control.state.animation;
 
 import static vistra.gui.control.IControl.A_SECOND;
 import static vistra.gui.control.IControl.EventSource.ANIMATION;
@@ -19,7 +19,7 @@ import javax.swing.Timer;
 
 import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
-import vistra.gui.control.stepbystep.StepByStepStateHandler;
+import vistra.gui.control.state.stepbystep.SbsStateHandler;
 
 /**
  * An animation state handler.
@@ -60,7 +60,7 @@ public final class AnimationStateHandler extends Observable implements
 		int animationDelay = this.model.getDelay() * A_SECOND;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
 		// state
-		this.state = new AnimationOff(this);
+		this.state = new AnimationStateOff(this);
 	}
 
 	/**
@@ -329,7 +329,7 @@ public final class AnimationStateHandler extends Observable implements
 		try {
 			/* reset the traversal eventually */
 			if (this.model.getProgress() == this.model.getProgressMaximum())
-				((StepByStepStateHandler) this.model
+				((SbsStateHandler) this.model
 						.getStepByStepStateHandler()).goToBeginning();
 			/* simply start the timer */
 			this.animationTimer.start();
@@ -385,7 +385,7 @@ public final class AnimationStateHandler extends Observable implements
 			try {
 				IGuiModel model = AnimationStateHandler.this.model;
 				if (model.getProgress() < model.getProgressMaximum())
-					((StepByStepStateHandler) model.getStepByStepStateHandler())
+					((SbsStateHandler) model.getStepByStepStateHandler())
 							.goForward();
 				else
 					model.getAnimationStateHandler().handleStop();

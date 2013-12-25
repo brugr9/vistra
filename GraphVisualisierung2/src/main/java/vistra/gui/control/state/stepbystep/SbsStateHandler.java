@@ -1,4 +1,4 @@
-package vistra.gui.control.stepbystep;
+package vistra.gui.control.state.stepbystep;
 
 import static vistra.gui.control.IControl.A_SECOND;
 import static vistra.gui.control.IControl.EventSource.BACKWARD;
@@ -27,13 +27,13 @@ import vistra.gui.control.IControl.EventSource;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  */
-public final class StepByStepStateHandler extends Observable implements
-		IStepByStepStateHandler {
+public final class SbsStateHandler extends Observable implements
+		ISbsStateHandler {
 
 	/**
 	 * A field for a step-by-step state.
 	 */
-	private AbstractStepByStepState state;
+	private AbstractSbsState state;
 
 	/**
 	 * A field for a model.
@@ -61,7 +61,7 @@ public final class StepByStepStateHandler extends Observable implements
 	 * @param model
 	 *            the model
 	 */
-	public StepByStepStateHandler(IGuiModel model) {
+	public SbsStateHandler(IGuiModel model) {
 		super();
 		this.model = (GuiModel) model;
 		this.blinkListener = new BlinkListener(NUMBER_OF_BLINKS);
@@ -71,7 +71,7 @@ public final class StepByStepStateHandler extends Observable implements
 				/ (timeDivider * numberOfSteps * NUMBER_OF_BLINKS) * A_SECOND;
 		this.timer = new Timer(blinkDelay, this.blinkListener);
 		// state
-		this.state = new StepByStepOff(this);
+		this.state = new SbsStateOff(this);
 	}
 
 	/**
@@ -210,7 +210,7 @@ public final class StepByStepStateHandler extends Observable implements
 	 *            the state to set
 	 * @throws Exception
 	 */
-	void setState(AbstractStepByStepState state) throws Exception {
+	void setState(AbstractSbsState state) throws Exception {
 		try {
 			this.state = state;
 			this.state.entry();
@@ -477,8 +477,8 @@ public final class StepByStepStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			GuiModel model = StepByStepStateHandler.this.model;
-			Timer timer = StepByStepStateHandler.this.timer;
+			GuiModel model = SbsStateHandler.this.model;
+			Timer timer = SbsStateHandler.this.timer;
 
 			try {
 				boolean off = true;

@@ -1,22 +1,22 @@
-package vistra.gui.control.animation;
+package vistra.gui.control.state.animation;
 
 import vistra.util.IState;
 
 /**
- * An animation state: playing.
+ * An animation state: stopped.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class AnimationPlaying extends AbstractAnimationState implements IState {
+class AnimationStateStopped extends AbstractAnimationState implements IState {
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            s stateHandler
+	 *            a stateHandler
 	 */
-	AnimationPlaying(IAnimationStateHandler stateHandler) {
+	AnimationStateStopped(IAnimationStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class AnimationPlaying extends AbstractAnimationState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewPlaying();
+			super.stateHandler.setViewStopped();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -38,7 +38,7 @@ class AnimationPlaying extends AbstractAnimationState implements IState {
 	@Override
 	protected void startDo() throws Exception {
 		try {
-			super.stateHandler.startAnimation();
+			super.stateHandler.stopAnimation();
 		} catch (Exception ex) {
 			throw ex;
 		}

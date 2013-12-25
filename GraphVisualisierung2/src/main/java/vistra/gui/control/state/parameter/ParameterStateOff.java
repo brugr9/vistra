@@ -1,14 +1,14 @@
-package vistra.gui.control.stepbystep;
+package vistra.gui.control.state.parameter;
 
 import vistra.util.IState;
 
 /**
- * A step-by-step state: at the end.
+ * A parameter state: off.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class StepByStepAtEnd extends AbstractStepByStepState implements IState {
+class ParameterStateOff extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class StepByStepAtEnd extends AbstractStepByStepState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	StepByStepAtEnd(IStepByStepStateHandler stateHandler) {
+	ParameterStateOff(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class StepByStepAtEnd extends AbstractStepByStepState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewEnd();
+			super.stateHandler.setViewOff();
 		} catch (Exception e) {
 			throw e;
 		}

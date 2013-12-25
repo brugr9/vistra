@@ -1,4 +1,4 @@
-package vistra.gui.control.parameter;
+package vistra.gui.control.state.parameter;
 
 import vistra.util.IState;
 
@@ -8,7 +8,7 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class ParameterIdle extends AbstractParameterState implements IState {
+class ParameterStateIdle extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class ParameterIdle extends AbstractParameterState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterIdle(IParameterStateHandler stateHandler) {
+	ParameterStateIdle(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

@@ -1,11 +1,11 @@
-package vistra.gui.control.parameter;
+package vistra.gui.control.state.parameter;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 
 import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.core.graph.item.vertex.IVertexLayout;
-import vistra.gui.control.IControlStateHandler;
+import vistra.gui.control.state.IControlStateHandler;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 
 /**

@@ -1,14 +1,14 @@
-package vistra.gui.control.animation;
+package vistra.gui.control.state.animation;
 
 import vistra.util.IState;
 
 /**
- * An animation state: off.
+ * An animation state: idle.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class AnimationOff extends AbstractAnimationState implements IState {
+class AnimationStateIdle extends AbstractAnimationState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class AnimationOff extends AbstractAnimationState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	AnimationOff(IAnimationStateHandler stateHandler) {
+	AnimationStateIdle(IAnimationStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class AnimationOff extends AbstractAnimationState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewOff();
+			super.stateHandler.setViewIdle();
 		} catch (Exception ex) {
 			throw ex;
 		}

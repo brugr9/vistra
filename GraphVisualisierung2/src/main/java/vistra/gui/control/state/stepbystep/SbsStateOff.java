@@ -1,4 +1,4 @@
-package vistra.gui.control.stepbystep;
+package vistra.gui.control.state.stepbystep;
 
 import vistra.util.IState;
 
@@ -8,7 +8,7 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class StepByStepOff extends AbstractStepByStepState implements IState {
+class SbsStateOff extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class StepByStepOff extends AbstractStepByStepState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	StepByStepOff(IStepByStepStateHandler stateHandler) {
+	SbsStateOff(ISbsStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
