@@ -12,11 +12,10 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * <p>
  * As algorithm developer, you may
  * <ul>
- * <li>set your name in the authors-tag below
  * <li>rename the class
  * <li>remove the modifier 'abstract'
  * <li>implement the constructor and the methods
- * <li>add this class to the {@link AlgorithmManager} constructor.
+ * <li>use the {@link AlgorithmManager} to add an instance.
  * 
  * @author the developer name
  * 

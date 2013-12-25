@@ -71,7 +71,6 @@ public class Core implements ICore {
 			this.algorithmManager.add(new DLS());
 			this.algorithmManager.add(new Dijkstra());
 			this.algorithmManager.add(new Kruskal());
-			this.algorithm = this.algorithmManager.select(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
