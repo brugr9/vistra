@@ -6,7 +6,7 @@ import vistra.core.graph.item.edge.state.EdgeStateHandler;
 import vistra.util.ICommand;
 
 /**
- * An edge command: forward.
+ * An edge command: forward edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

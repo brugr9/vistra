@@ -1,4 +1,4 @@
-package vistra.gui.control.state.animation;
+package vistra.gui.control.animation;
 
 import vistra.util.IState;
 

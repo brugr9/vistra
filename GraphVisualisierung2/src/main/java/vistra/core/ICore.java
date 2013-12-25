@@ -53,7 +53,7 @@ public interface ICore {
 	abstract void save(IExtendedGraph graph) throws CoreException;
 
 	/**
-	 * Saves a graph into a GraphML-file.
+	 * Saves a graph as GraphML-file.
 	 * 
 	 * @param graph
 	 *            the graph to save
@@ -64,17 +64,22 @@ public interface ICore {
 	abstract void saveAs(IExtendedGraph graph, File file) throws CoreException;
 
 	/**
-	 * Returns an array of available algorithms as names.
-	 * <p>
-	 * The list is filtered: it contains only the names of algorithms able to
-	 * traverse the edge type as given.
+	 * Updates the list of selectable algorithms. Afterwards, the list holds all
+	 * and only the algorithms capable to traverse edges as given by type.
 	 * 
 	 * @param edgeType
 	 *            the edge type
-	 * @return the array of available algorithms
 	 * @throws CoreException
 	 */
-	abstract String[] getAlgorithms(EdgeType edgeType) throws CoreException;
+	abstract void updateSelectableList(EdgeType edgeType) throws CoreException;
+
+	/**
+	 * Returns an array of human readable names of selectable algorithms.
+	 * 
+	 * @return the algorithm names
+	 * @throws CoreException
+	 */
+	abstract String[] getSelectableNames() throws CoreException;
 
 	/**
 	 * Selects an algorithm.

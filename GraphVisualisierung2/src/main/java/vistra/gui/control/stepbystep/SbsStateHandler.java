@@ -1,4 +1,4 @@
-package vistra.gui.control.state.stepbystep;
+package vistra.gui.control.stepbystep;
 
 import static vistra.gui.control.IControl.A_SECOND;
 import static vistra.gui.control.IControl.EventSource.BACKWARD;

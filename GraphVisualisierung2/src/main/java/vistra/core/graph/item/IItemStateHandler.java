@@ -10,7 +10,7 @@ package vistra.core.graph.item;
 public interface IItemStateHandler {
 
 	/**
-	 * Handles setting the previous state as getting it from a cellar.
+	 * Handles setting the previous state as getting it from the state cellar.
 	 * 
 	 * @throws Exception
 	 */

@@ -1,4 +1,4 @@
-package vistra.gui.control.state.parameter;
+package vistra.gui.control.parameter;
 
 import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
 import static vistra.gui.control.IControl.EventSource.GRAPH;
@@ -332,8 +332,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 
 	/**
 	 * A helper method for state view setter: Handles enabling/disabling the
-	 * menu elements. Does <b>not</b> tell the model to notify
-	 * <code>Observer</code>s.
+	 * menu elements.
 	 * 
 	 * @param enabled
 	 *            the enabled to set
@@ -341,6 +340,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private void enableMenu(boolean enabled) {
 		this.model.setMenuEnabled(enabled);
 		this.model.setSaveGraphEnabled(!this.model.isGraphSaved());
+		this.model.notifyObservers(EventSource.GRAPH);
 	}
 
 	/**
@@ -355,6 +355,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.model.getAnimationStateHandler().handleIdle();
 		this.setGraphSaved(true);
 		this.setGraphEditable(true);
+		this.updateAlgorithms();
 	}
 
 	/**
@@ -623,8 +624,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			IExtendedGraph graph = this.model.getGraph();
 			EdgeType edgeType = graph.getEdgeType();
-			String[] algorithms = this.core.getAlgorithms(edgeType);
-			this.model.setAlgorithms(algorithms);
+			this.core.updateSelectableList(edgeType);
+			String[] selectableNames = this.core.getSelectableNames();
+			this.model.setAlgorithms(selectableNames);
 			this.model.setSelectedAlgorithmIndex(0);
 			this.selectAlgorithm();
 		} catch (Exception e) {

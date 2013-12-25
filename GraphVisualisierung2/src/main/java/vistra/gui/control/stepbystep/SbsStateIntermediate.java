@@ -1,14 +1,14 @@
-package vistra.gui.control.state.animation;
+package vistra.gui.control.stepbystep;
 
 import vistra.util.IState;
 
 /**
- * An animation state: idle.
+ * A step-by-step state: intermediate.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class AnimationStateIdle extends AbstractAnimationState implements IState {
+class SbsStateIntermediate extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class AnimationStateIdle extends AbstractAnimationState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	AnimationStateIdle(IAnimationStateHandler stateHandler) {
+	SbsStateIntermediate(ISbsStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,9 +26,9 @@ class AnimationStateIdle extends AbstractAnimationState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewIdle();
-		} catch (Exception ex) {
-			throw ex;
+			super.stateHandler.setViewIntermediate();
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 

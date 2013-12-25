@@ -1,9 +1,9 @@
-package vistra.gui.control.state.stepbystep;
+package vistra.gui.control.stepbystep;
 
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
-import vistra.gui.control.state.IControlStateHandler;
+import vistra.gui.control.IControlStateHandler;
 
 /**
  * An interface for a step-by-step state handler.

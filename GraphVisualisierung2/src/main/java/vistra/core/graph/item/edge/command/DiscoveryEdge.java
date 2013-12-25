@@ -6,7 +6,7 @@ import vistra.core.graph.item.edge.state.EdgeStateHandler;
 import vistra.util.ICommand;
 
 /**
- * An edge command: discovery.
+ * An edge command: discovery edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

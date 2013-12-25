@@ -1,14 +1,14 @@
-package vistra.gui.control.state.parameter;
+package vistra.gui.control.stepbystep;
 
 import vistra.util.IState;
 
 /**
- * A parameter state: off.
+ * A step-by-step state: off.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class ParameterStateOff extends AbstractParameterState implements IState {
+class SbsStateOff extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class ParameterStateOff extends AbstractParameterState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterStateOff(IParameterStateHandler stateHandler) {
+	SbsStateOff(ISbsStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -25,11 +25,7 @@ class ParameterStateOff extends AbstractParameterState implements IState {
 	 */
 	@Override
 	protected void doEntry() throws Exception {
-		try {
-			super.stateHandler.setViewOff();
-		} catch (Exception e) {
-			throw e;
-		}
+		super.stateHandler.setViewOff();
 	}
 
 }

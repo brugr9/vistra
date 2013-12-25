@@ -11,15 +11,41 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public interface IAlgorithmManager {
 
 	/**
-	 * Returns a list of names with algorithms capable to operate on graphs with
-	 * the edge type as given.
+	 * Adds an algorithm.
+	 * 
+	 * @param algorithm
+	 *            the algorithm to add
+	 * @throws Exception
+	 */
+	abstract boolean add(IAlgorithm algorithm) throws Exception;
+
+	/**
+	 * Removes an algorithm.
+	 * 
+	 * @param algorithm
+	 *            the algorithm to remove
+	 * @return the removed algorithm
+	 * @throws Exception
+	 */
+	abstract boolean remove(IAlgorithm algorithm) throws Exception;
+
+	/**
+	 * Updates the list of selectable algorithms. Afterwards, the list holds all
+	 * and only the algorithms capable to traverse edges as given by type.
 	 * 
 	 * @param edgeType
-	 *            the graph type
+	 *            the edge type
+	 * @throws Exception
+	 */
+	abstract void updateSelectableList(EdgeType edgeType) throws Exception;
+
+	/**
+	 * Returns an array of human readable names of selectable algorithms.
+	 * 
 	 * @return the algorithm names
 	 * @throws Exception
 	 */
-	public abstract String[] getNames(EdgeType edgeType) throws Exception;
+	abstract String[] getSelectableNames() throws Exception;
 
 	/**
 	 * Selects an algorithm by index, loads and returns the algorithm.
@@ -29,6 +55,6 @@ public interface IAlgorithmManager {
 	 * @return the algorithm
 	 * @throws Exception
 	 */
-	public abstract IAlgorithm select(int index) throws Exception;
+	abstract IAlgorithm select(int index) throws Exception;
 
 }

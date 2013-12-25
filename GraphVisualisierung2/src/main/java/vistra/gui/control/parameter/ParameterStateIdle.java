@@ -1,14 +1,14 @@
-package vistra.gui.control.state.stepbystep;
+package vistra.gui.control.parameter;
 
 import vistra.util.IState;
 
 /**
- * A step-by-step state: idle.
+ * A parameter state: idle.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class SbsStateIdle extends AbstractSbsState implements IState {
+class ParameterStateIdle extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class SbsStateIdle extends AbstractSbsState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	SbsStateIdle(ISbsStateHandler stateHandler) {
+	ParameterStateIdle(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -27,6 +27,18 @@ class SbsStateIdle extends AbstractSbsState implements IState {
 	protected void doEntry() throws Exception {
 		try {
 			super.stateHandler.setViewIdle();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void startDo() throws Exception {
+		try {
+			super.stateHandler.idle();
 		} catch (Exception e) {
 			throw e;
 		}

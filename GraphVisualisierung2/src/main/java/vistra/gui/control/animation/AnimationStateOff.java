@@ -1,14 +1,14 @@
-package vistra.gui.control.state.parameter;
+package vistra.gui.control.animation;
 
 import vistra.util.IState;
 
 /**
- * A parameter state: graph saved.
+ * An animation state: off.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class ParameterStateGraphSaved extends AbstractParameterState implements IState {
+class AnimationStateOff extends AbstractAnimationState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class ParameterStateGraphSaved extends AbstractParameterState implements IState 
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterStateGraphSaved(IParameterStateHandler stateHandler) {
+	AnimationStateOff(IAnimationStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,9 +26,9 @@ class ParameterStateGraphSaved extends AbstractParameterState implements IState 
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewGraphSaved();
-		} catch (Exception e) {
-			throw e;
+			super.stateHandler.setViewOff();
+		} catch (Exception ex) {
+			throw ex;
 		}
 	}
 

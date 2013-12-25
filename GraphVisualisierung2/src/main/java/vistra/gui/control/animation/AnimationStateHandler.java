@@ -1,4 +1,4 @@
-package vistra.gui.control.state.animation;
+package vistra.gui.control.animation;
 
 import static vistra.gui.control.IControl.A_SECOND;
 import static vistra.gui.control.IControl.EventSource.ANIMATION;
@@ -19,7 +19,7 @@ import javax.swing.Timer;
 
 import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
-import vistra.gui.control.state.stepbystep.SbsStateHandler;
+import vistra.gui.control.stepbystep.SbsStateHandler;
 
 /**
  * An animation state handler.

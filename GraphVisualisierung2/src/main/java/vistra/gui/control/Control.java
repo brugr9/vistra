@@ -2,9 +2,9 @@ package vistra.gui.control;
 
 import vistra.core.ICore;
 import vistra.gui.GuiModel;
-import vistra.gui.control.state.animation.AnimationStateHandler;
-import vistra.gui.control.state.parameter.ParameterStateHandler;
-import vistra.gui.control.state.stepbystep.SbsStateHandler;
+import vistra.gui.control.animation.AnimationStateHandler;
+import vistra.gui.control.parameter.ParameterStateHandler;
+import vistra.gui.control.stepbystep.SbsStateHandler;
 
 /**
  * A control as in MVC.
@@ -33,16 +33,15 @@ public final class Control implements IControl {
 		try {
 			this.model = model;
 			// Algorithms
-			this.model.setAlgorithms(core.getAlgorithms(this.model.getGraph()
-					.getEdgeType()));
+			core.updateSelectableList(this.model.getGraph().getEdgeType());
+			this.model.setAlgorithms(core.getSelectableNames());
 			// Action listener
 			this.model.setI18nListener(new ActionListenerI18n(model));
 			this.model.setHelpListener(new ActionListenerHelp(model));
 			this.model.setAboutListener(new ActionListenerAbout(model));
 			this.model.setQuitListener(new ActionListenerQuit(model));
 			// State handler
-			this.model.setStepByStepStateHandler(new SbsStateHandler(
-					model));
+			this.model.setStepByStepStateHandler(new SbsStateHandler(model));
 			this.model
 					.setAnimationStateHandler(new AnimationStateHandler(model));
 			this.model.setParameterStateHandler(new ParameterStateHandler(core,

@@ -52,11 +52,11 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 	/**
 	 * A field for a vertex menu.
 	 */
-	private VertexPopup vertexMenu;
+	private VertexPopup vertexPopup;
 	/**
 	 * A field for an edge menu.
 	 */
-	private EdgePopup edgeMenu;
+	private EdgePopup edgePopup;
 	/**
 	 * A field for an editing modal-graph mouse.
 	 */
@@ -102,12 +102,12 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 		rc.setArrowDrawPaintTransformer(new EdgeLineColor());
 
 		/* popup menu */
-		this.vertexMenu = new VertexPopup(top, this);
-		this.edgeMenu = new EdgePopup(top, this);
+		this.vertexPopup = new VertexPopup(top, this);
+		this.edgePopup = new EdgePopup(top, this);
 
 		/* mouse */
 		this.mouse = new Mouse(rc, new VertexFactory(), new EdgeFactory(),
-				this.edgeMenu, this.vertexMenu, new SwitchModePopup(this));
+				this.edgePopup, this.vertexPopup, new SwitchModePopup(this));
 		this.setGraphMouse(this.mouse);
 		this.addKeyListener(this.mouse.getModeKeyListener());
 
@@ -124,8 +124,8 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 
 		try {
 			if (arg == EventSource.I18N) {
-				this.vertexMenu.setLabel(b.getString("vertex.label"));
-				this.edgeMenu.setLabel(b.getString("edge.label"));
+				this.vertexPopup.setLabel(b.getString("vertex.label"));
+				this.edgePopup.setLabel(b.getString("edge.label"));
 			} else if (arg == EventSource.EDIT_GRAPH) {
 				if (m.isEditGraphEnabled())
 					this.mouse.setMode(Mode.EDITING);

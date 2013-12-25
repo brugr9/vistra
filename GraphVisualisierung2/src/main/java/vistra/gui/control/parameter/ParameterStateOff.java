@@ -1,14 +1,14 @@
-package vistra.gui.control.state.animation;
+package vistra.gui.control.parameter;
 
 import vistra.util.IState;
 
 /**
- * An animation state: off.
+ * A parameter state: off.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class AnimationStateOff extends AbstractAnimationState implements IState {
+class ParameterStateOff extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class AnimationStateOff extends AbstractAnimationState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	AnimationStateOff(IAnimationStateHandler stateHandler) {
+	ParameterStateOff(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -27,8 +27,8 @@ class AnimationStateOff extends AbstractAnimationState implements IState {
 	protected void doEntry() throws Exception {
 		try {
 			super.stateHandler.setViewOff();
-		} catch (Exception ex) {
-			throw ex;
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 

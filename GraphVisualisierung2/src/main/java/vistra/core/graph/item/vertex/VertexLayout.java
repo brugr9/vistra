@@ -35,7 +35,7 @@ public class VertexLayout extends AbstractItemLayout implements IVertexLayout {
 	 * @param vertex
 	 *            a vertex
 	 */
-	VertexLayout(IVertex vertex) {
+	protected VertexLayout(IVertex vertex) {
 		super();
 		this.vertex = (Vertex) vertex;
 		this.location = Convert.toPoint2D(

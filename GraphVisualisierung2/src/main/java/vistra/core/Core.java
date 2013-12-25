@@ -10,6 +10,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import vistra.core.algorithm.AlgorithmManagerFactory;
 import vistra.core.algorithm.IAlgorithm;
 import vistra.core.algorithm.IAlgorithmManager;
+import vistra.core.algorithm.impl.BFS;
+import vistra.core.algorithm.impl.DFS;
+import vistra.core.algorithm.impl.DLS;
+import vistra.core.algorithm.impl.Default;
+import vistra.core.algorithm.impl.Dijkstra;
+import vistra.core.algorithm.impl.Kruskal;
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.GraphManagerFactory;
 import vistra.core.graph.IExtendedGraph;
@@ -59,6 +65,12 @@ public class Core implements ICore {
 		try {
 			this.graphManager = GraphManagerFactory.create(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(p);
+			this.algorithmManager.add(new Default());
+			this.algorithmManager.add(new BFS());
+			this.algorithmManager.add(new DFS());
+			this.algorithmManager.add(new DLS());
+			this.algorithmManager.add(new Dijkstra());
+			this.algorithmManager.add(new Kruskal());
 			this.algorithm = this.algorithmManager.select(0);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -125,9 +137,21 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String[] getAlgorithms(EdgeType edgeType) throws CoreException {
+	public void updateSelectableList(EdgeType edgeType) throws CoreException {
 		try {
-			return this.algorithmManager.getNames(edgeType);
+			this.algorithmManager.updateSelectableList(edgeType);
+		} catch (Exception e) {
+			throw new CoreException(e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String[] getSelectableNames() throws CoreException {
+		try {
+			return this.algorithmManager.getSelectableNames();
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}

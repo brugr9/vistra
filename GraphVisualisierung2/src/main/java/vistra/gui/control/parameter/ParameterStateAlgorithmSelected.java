@@ -1,4 +1,4 @@
-package vistra.gui.control.state.parameter;
+package vistra.gui.control.parameter;
 
 import vistra.util.IState;
 

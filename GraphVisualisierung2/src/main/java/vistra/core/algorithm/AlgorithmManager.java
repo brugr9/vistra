@@ -2,13 +2,6 @@ package vistra.core.algorithm;
 
 import java.util.ArrayList;
 import java.util.Properties;
-
-import vistra.core.algorithm.impl.BFS;
-import vistra.core.algorithm.impl.DFS;
-import vistra.core.algorithm.impl.DLS;
-import vistra.core.algorithm.impl.Default;
-import vistra.core.algorithm.impl.Dijkstra;
-import vistra.core.algorithm.impl.Kruskal;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -38,21 +31,31 @@ public final class AlgorithmManager implements IAlgorithmManager {
 		super();
 		this.supported = new ArrayList<IAlgorithm>();
 		available = new ArrayList<IAlgorithm>();
-		available.add(new Default());
-		available.add(new BFS());
-		available.add(new DFS());
-		available.add(new DLS());
-		available.add(new Dijkstra());
-		available.add(new Kruskal());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String[] getNames(EdgeType edgeType) throws Exception {
+	public boolean add(IAlgorithm algorithm) throws Exception {
+		return this.available.add(algorithm);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean remove(IAlgorithm algorithm) throws Exception {
+		this.supported.remove(algorithm);
+		return this.available.remove(algorithm);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void updateSelectableList(EdgeType edgeType) throws Exception {
 		try {
-			/* update algorithmsSupported */
 			this.supported.clear();
 			EdgeType[] capabilities;
 			for (IAlgorithm a : this.available) {
@@ -64,7 +67,17 @@ public final class AlgorithmManager implements IAlgorithmManager {
 					}
 				}
 			}
-			/* get names from algorithmsSupported */
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String[] getSelectableNames() throws Exception {
+		try {
 			String[] names = new String[this.supported.size()];
 			for (int i = 0; i < names.length; i++) {
 				names[i] = this.supported.get(i).getName();

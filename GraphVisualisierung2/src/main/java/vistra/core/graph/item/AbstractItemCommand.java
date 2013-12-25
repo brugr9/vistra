@@ -1,7 +1,7 @@
 package vistra.core.graph.item;
 
 /**
- * An abstract item command.
+ * An abstract item-command.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

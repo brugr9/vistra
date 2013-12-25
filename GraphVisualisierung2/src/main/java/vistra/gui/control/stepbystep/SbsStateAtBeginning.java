@@ -1,14 +1,14 @@
-package vistra.gui.control.state.stepbystep;
+package vistra.gui.control.stepbystep;
 
 import vistra.util.IState;
 
 /**
- * A step-by-step state: intermediate.
+ * A step-by-step state: at the beginning.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class SbsStateIntermediate extends AbstractSbsState implements IState {
+class SbsStateAtBeginning extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class SbsStateIntermediate extends AbstractSbsState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	SbsStateIntermediate(ISbsStateHandler stateHandler) {
+	SbsStateAtBeginning(ISbsStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class SbsStateIntermediate extends AbstractSbsState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewIntermediate();
+			super.stateHandler.setViewBeginning();
 		} catch (Exception e) {
 			throw e;
 		}

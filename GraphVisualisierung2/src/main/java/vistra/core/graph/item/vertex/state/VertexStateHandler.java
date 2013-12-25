@@ -4,7 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexLayout;
 import vistra.util.ColorPalette;
 
@@ -17,7 +17,8 @@ import vistra.util.ColorPalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexStateHandler implements IVertexStateHandler {
+public class VertexStateHandler extends VertexLayout implements
+		IVertexStateHandler {
 
 	/**
 	 * A field for a state.
@@ -27,21 +28,17 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 * A field for a cellar.
 	 */
 	private ArrayList<AbstractVertexState> cellar;
-	/**
-	 * A field for a layout.
-	 */
-	private VertexLayout layout;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param layout
-	 *            a layout
+	 * @param vertex
+	 *            a vertex
 	 */
-	public VertexStateHandler(IVertexLayout layout) {
-		this.layout = (VertexLayout) layout;
-		this.cellar = new ArrayList<AbstractVertexState>();
+	public VertexStateHandler(IVertex vertex) {
+		super((VertexLayout) vertex);
 		this.state = null;
+		this.cellar = new ArrayList<AbstractVertexState>();
 		try {
 			this.setState(new VertexStateUnexplored(this));
 		} catch (Exception e) {
@@ -143,12 +140,12 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	void setViewUnexplored() throws Exception {
 		try {
-			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
-			this.layout.setLineColor(ColorPalette.darkblue);
-			this.layout.setFillColor(ColorPalette.orange);
-			this.layout.setFontColor(ColorPalette.darkblue);
-			this.layout.setFontSyle(Font.PLAIN);
-			this.layout.notifyObservers();
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
+			this.setLineColor(ColorPalette.darkblue);
+			this.setFillColor(ColorPalette.orange);
+			this.setFontColor(ColorPalette.darkblue);
+			this.setFontSyle(Font.PLAIN);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -162,12 +159,12 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	void setViewFocussed() throws Exception {
 		try {
-			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.layout.setLineColor(ColorPalette.red);
-			this.layout.setFillColor(ColorPalette.yellow);
-			this.layout.setFontColor(ColorPalette.darkblue);
-			this.layout.setFontSyle(Font.BOLD);
-			this.layout.notifyObservers();
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.setLineColor(ColorPalette.red);
+			this.setFillColor(ColorPalette.yellow);
+			this.setFontColor(ColorPalette.darkblue);
+			this.setFontSyle(Font.BOLD);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -182,12 +179,12 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	void setViewVisited() throws Exception {
 		try {
-			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.layout.setLineColor(ColorPalette.red);
-			this.layout.setFillColor(ColorPalette.blue);
-			this.layout.setFontColor(ColorPalette.darkblue);
-			this.layout.setFontSyle(Font.BOLD);
-			this.layout.notifyObservers();
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.setLineColor(ColorPalette.red);
+			this.setFillColor(ColorPalette.blue);
+			this.setFontColor(ColorPalette.darkblue);
+			this.setFontSyle(Font.BOLD);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -200,12 +197,12 @@ public class VertexStateHandler implements IVertexStateHandler {
 	 */
 	void setViewSolved() throws Exception {
 		try {
-			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.layout.setLineColor(ColorPalette.green);
-			this.layout.setFillColor(ColorPalette.white);
-			this.layout.setFontColor(ColorPalette.green);
-			this.layout.setFontSyle(Font.BOLD);
-			this.layout.notifyObservers();
+			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.setLineColor(ColorPalette.green);
+			this.setFillColor(ColorPalette.white);
+			this.setFontColor(ColorPalette.green);
+			this.setFontSyle(Font.BOLD);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
