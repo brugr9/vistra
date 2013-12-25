@@ -118,6 +118,19 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void handleDiscarded() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleDiscarded();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void handleSolution() throws Exception {
 		try {
 			this.state.exit();
@@ -252,6 +265,24 @@ public class EdgeStateHandler implements IEdgeStateHandler {
 			this.layout.setLineColor(ColorPalette.darkgreen);
 			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			this.layout.setDash(GraphFactory.E_DASH_CROSS);
+			this.layout.notifyObservers();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * State view setter: Sets the layout as discarded edge.
+	 * 
+	 * @throws Exception
+	 */
+	void setViewDiscarded() throws Exception {
+		try {
+			this.layout.setFontSyle(Font.PLAIN);
+			this.layout.setFontColor(ColorPalette.darkblue);
+			this.layout.setLineColor(ColorPalette.darkblue);
+			this.layout.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.layout.setDash(GraphFactory.E_DASH_BACK);
 			this.layout.notifyObservers();
 		} catch (Exception e) {
 			throw e;
