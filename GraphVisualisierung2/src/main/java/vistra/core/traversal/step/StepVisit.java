@@ -1,10 +1,10 @@
 package vistra.core.traversal.step;
 
 import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.edge.command.DiscoveryEdge;
+import vistra.core.graph.item.edge.command.EdgeCommandDiscovery;
 import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexLayout;
-import vistra.core.graph.item.vertex.command.VisitedVertex;
+import vistra.core.graph.item.vertex.command.VertexCommandVisited;
 import vistra.util.ICommand;
 
 /**
@@ -32,8 +32,8 @@ public class StepVisit extends AbstractStep implements IStep {
 
 		try {
 			// new
-			ICommand discoverEdge = new DiscoveryEdge(edge);
-			ICommand visitVertex = new VisitedVertex(vertex);
+			ICommand discoverEdge = new EdgeCommandDiscovery(edge);
+			ICommand visitVertex = new VertexCommandVisited(vertex);
 			// add
 			this.stepHandler.addCommand(discoverEdge);
 			this.stepHandler.addCommand(visitVertex);

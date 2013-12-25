@@ -2,7 +2,7 @@ package vistra.core.traversal.step;
 
 import vistra.core.graph.item.edge.EdgeLayout;
 import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.edge.command.CrossEdge;
+import vistra.core.graph.item.edge.command.EdgeCommandCross;
 import vistra.util.ICommand;
 
 /**
@@ -28,7 +28,7 @@ public class StepCrossEdge extends AbstractStep implements IStep {
 
 		try {
 			// new
-			ICommand crossEdge = new CrossEdge(edge);
+			ICommand crossEdge = new EdgeCommandCross(edge);
 			// add
 			this.stepHandler.addCommand(crossEdge);
 			// execute

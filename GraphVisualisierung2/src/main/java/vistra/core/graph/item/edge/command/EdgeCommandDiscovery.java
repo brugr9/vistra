@@ -6,12 +6,12 @@ import vistra.core.graph.item.edge.state.EdgeStateHandler;
 import vistra.util.ICommand;
 
 /**
- * An edge command: cross edge.
+ * An edge command: discovery edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class CrossEdge extends AbstractItemCommand implements ICommand {
+public class EdgeCommandDiscovery extends AbstractItemCommand implements ICommand {
 
 	/**
 	 * Main constructor.
@@ -19,7 +19,7 @@ public class CrossEdge extends AbstractItemCommand implements ICommand {
 	 * @param edge
 	 *            an edge
 	 */
-	public CrossEdge(IEdge edge) {
+	public EdgeCommandDiscovery(IEdge edge) {
 		super((EdgeStateHandler) edge);
 	}
 
@@ -28,7 +28,7 @@ public class CrossEdge extends AbstractItemCommand implements ICommand {
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleCross();
+		((EdgeStateHandler) super.stateHandler).handleDiscovery();
 	}
 
 }

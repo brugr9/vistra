@@ -11,7 +11,7 @@ import vistra.util.ICommand;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class SolutionVertex extends AbstractItemCommand implements ICommand {
+public class VertexCommandFocussed extends AbstractItemCommand implements ICommand {
 
 	/**
 	 * Main constructor.
@@ -19,7 +19,7 @@ public class SolutionVertex extends AbstractItemCommand implements ICommand {
 	 * @param vertex
 	 *            a vertex
 	 */
-	public SolutionVertex(IVertex vertex) {
+	public VertexCommandFocussed(IVertex vertex) {
 		super((VertexStateHandler) vertex);
 	}
 

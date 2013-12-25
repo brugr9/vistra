@@ -6,12 +6,12 @@ import vistra.core.graph.item.edge.state.EdgeStateHandler;
 import vistra.util.ICommand;
 
 /**
- * An edge command: unexplored edge.
+ * An edge command: discarded edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class UnexploredEdge extends AbstractItemCommand implements ICommand {
+public class EdgeCommandDiscarded extends AbstractItemCommand implements ICommand {
 
 	/**
 	 * Main constructor.
@@ -19,7 +19,7 @@ public class UnexploredEdge extends AbstractItemCommand implements ICommand {
 	 * @param edge
 	 *            an edge
 	 */
-	public UnexploredEdge(IEdge edge) {
+	public EdgeCommandDiscarded(IEdge edge) {
 		super((EdgeStateHandler) edge);
 	}
 
@@ -28,7 +28,7 @@ public class UnexploredEdge extends AbstractItemCommand implements ICommand {
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleUnexplored();
+		((EdgeStateHandler) super.stateHandler).handleDiscarded();
 	}
 
 }

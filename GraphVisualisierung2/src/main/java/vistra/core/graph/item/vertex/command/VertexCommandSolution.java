@@ -11,7 +11,7 @@ import vistra.util.ICommand;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class UnexploredVertex extends AbstractItemCommand implements ICommand {
+public class VertexCommandSolution extends AbstractItemCommand implements ICommand {
 
 	/**
 	 * Main constructor.
@@ -19,7 +19,7 @@ public class UnexploredVertex extends AbstractItemCommand implements ICommand {
 	 * @param vertex
 	 *            a vertex
 	 */
-	public UnexploredVertex(IVertex vertex) {
+	public VertexCommandSolution(IVertex vertex) {
 		super((VertexStateHandler) vertex);
 	}
 
