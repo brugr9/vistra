@@ -1,7 +1,7 @@
 package vistra.core.graph;
 
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.graph.transformer.edge.EdgeWeight;
 import vistra.core.graph.transformer.vertex.VertexCoordX;
 import vistra.core.graph.transformer.vertex.VertexCoordY;
@@ -17,7 +17,7 @@ import edu.uci.ics.jung.io.GraphMLWriter;
  * 
  */
 public final class GraphWriter extends
-		GraphMLWriter<ILayoutVertex, ILayoutEdge> {
+		GraphMLWriter<IVertexLayout, IEdgeLayout> {
 
 	GraphWriter() {
 

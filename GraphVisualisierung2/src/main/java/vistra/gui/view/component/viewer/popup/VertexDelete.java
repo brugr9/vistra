@@ -6,9 +6,9 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JMenuItem;
 
-import vistra.core.graph.item.ILayoutItem;
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.IItemLayout;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -21,18 +21,18 @@ class VertexDelete extends JMenuItem implements IItemModifier {
 	/**
 	 * 
 	 */
-	private ILayoutVertex vertex;
+	private IVertexLayout vertex;
 	/**
 	 * 
 	 */
-	private final VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer;
+	private final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer;
 
 	/**
 	 * 
 	 * @param vViewer
 	 */
 	protected VertexDelete(
-			VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer) {
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 		super("Delete vertex");
 
 		this.vViewer = vViewer;
@@ -60,9 +60,9 @@ class VertexDelete extends JMenuItem implements IItemModifier {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setGraphItemAndView(ILayoutItem item) {
-		if (item instanceof ILayoutVertex) {
-			this.vertex = (ILayoutVertex) item;
+	public void setGraphItemAndView(IItemLayout item) {
+		if (item instanceof IVertexLayout) {
+			this.vertex = (IVertexLayout) item;
 			this.setText("Knoten " + this.vertex.getId() + " löschen");
 		}
 	}

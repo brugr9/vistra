@@ -4,8 +4,8 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JCheckBoxMenuItem;
 
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
@@ -19,11 +19,11 @@ public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
 	/**
 	 * A field for a visualization viewer.
 	 */
-	protected final VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer;
+	protected final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
 	/**
 	 * 
 	 */
-	protected ILayoutVertex vertex;
+	protected IVertexLayout vertex;
 
 	/**
 	 * Main constructor.
@@ -31,7 +31,7 @@ public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	protected AbstarctCheckBox(VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer,
+	protected AbstarctCheckBox(VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
 			String label) {
 		super(label);
 		this.viewer = viewer;

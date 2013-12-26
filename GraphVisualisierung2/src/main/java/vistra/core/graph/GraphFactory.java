@@ -2,9 +2,9 @@ package vistra.core.graph;
 
 import java.util.List;
 
-import vistra.core.graph.item.ILayoutItem;
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.IItemLayout;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.graph.SparseGraph;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -58,7 +58,7 @@ public final class GraphFactory {
 	 */
 	public static IExtendedGraph createGraph() {
 		IExtendedGraph graph = new ExtendedGraph(
-				new SparseGraph<ILayoutVertex, ILayoutEdge>());
+				new SparseGraph<IVertexLayout, IEdgeLayout>());
 		return graph;
 	}
 
@@ -72,7 +72,7 @@ public final class GraphFactory {
 	 */
 	public static IExtendedGraph create(EdgeType edgeType) {
 		IExtendedGraph graph = new ExtendedGraph(
-				new SparseGraph<ILayoutVertex, ILayoutEdge>());
+				new SparseGraph<IVertexLayout, IEdgeLayout>());
 		graph.setEdgeType(edgeType);
 		return graph;
 	}
@@ -88,7 +88,7 @@ public final class GraphFactory {
 	 * @return the graph
 	 */
 	public static IExtendedGraph create(EdgeType edgeType,
-			GraphEventListener<ILayoutVertex, ILayoutEdge> listener) {
+			GraphEventListener<IVertexLayout, IEdgeLayout> listener) {
 		ExtendedGraph graph = (ExtendedGraph) create(edgeType);
 		graph.addGraphEventListener(listener);
 		return graph;
@@ -111,8 +111,8 @@ public final class GraphFactory {
 	 *            the list
 	 * @return the array
 	 */
-	public static ILayoutItem[] toArray(List<ILayoutItem> list) {
-		return list.toArray(new ILayoutItem[list.size()]);
+	public static IItemLayout[] toArray(List<IItemLayout> list) {
+		return list.toArray(new IItemLayout[list.size()]);
 	}
 
 }

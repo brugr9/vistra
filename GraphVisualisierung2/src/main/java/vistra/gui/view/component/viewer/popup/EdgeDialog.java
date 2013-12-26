@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.view.component.viewer.popup.verifier.EdgeWeightVerifier;
 import vistra.gui.view.component.viewer.popup.verifier.GraphItemIdVerifier;
 import vistra.util.Convert;
@@ -53,8 +53,8 @@ public class EdgeDialog extends JDialog {
 	 * @param owner
 	 * @param edge
 	 */
-	public EdgeDialog(ILayoutEdge edge, JFrame owner,
-			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
+	public EdgeDialog(IEdgeLayout edge, JFrame owner,
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		super(owner, true);
 		this.contentPanel = new JPanel();
 
@@ -105,8 +105,8 @@ public class EdgeDialog extends JDialog {
 	 * @param okButton
 	 * @param cancelButton
 	 */
-	private void setListeners(final ILayoutEdge edge,
-			final VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer,
+	private void setListeners(final IEdgeLayout edge,
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
 			final JButton okButton, final JButton cancelButton) {
 
 		okButton.addActionListener(new ActionListener() {
@@ -128,8 +128,8 @@ public class EdgeDialog extends JDialog {
 	 * @param edge
 	 * @param vViewer
 	 */
-	protected void updateTextFieldValues(ILayoutEdge edge,
-			VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer) {
+	protected void updateTextFieldValues(IEdgeLayout edge,
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 
 		edge.setId(this.txtEdgeName.getText().trim());
 		edge.setWeight(Convert.toInt(this.txtEdgeWeight.getText()));
@@ -141,8 +141,8 @@ public class EdgeDialog extends JDialog {
 	 * @param edge
 	 * @param vViewer
 	 */
-	private void setTextFieldValues(ILayoutEdge edge,
-			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
+	private void setTextFieldValues(IEdgeLayout edge,
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 
 		this.txtEdgeName.setText(edge.getId());
 		this.txtEdgeWeight.setText(String.valueOf(edge.getWeight()));

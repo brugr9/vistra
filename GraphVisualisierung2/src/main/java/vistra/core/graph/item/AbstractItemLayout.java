@@ -13,8 +13,8 @@ import vistra.util.ColorPalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public abstract class AbstractLayoutItem extends Observable implements
-		ILayoutItem {
+public abstract class AbstractItemLayout extends Observable implements
+		IItemLayout {
 
 	/**
 	 * A field for an identifier.
@@ -44,7 +44,7 @@ public abstract class AbstractLayoutItem extends Observable implements
 	/**
 	 * Main constructor.
 	 */
-	protected AbstractLayoutItem() {
+	protected AbstractItemLayout() {
 		super();
 		this.id = "";
 		this.lineWidth = GraphFactory.STROKE_WIDTH_DEFAULT;

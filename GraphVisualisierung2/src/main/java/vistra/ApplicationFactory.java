@@ -24,8 +24,8 @@ final class ApplicationFactory {
 	}
 
 	/**
-	 * Creates an application with core and a default gui (MVC) of frame size as
-	 * given by values.
+	 * Creates an application with core and a default graphic user interface
+	 * (MVC).
 	 * 
 	 * @return the view
 	 * @throws Exception
@@ -42,8 +42,8 @@ final class ApplicationFactory {
 	}
 
 	/**
-	 * Creates an application with core and a gui (MVC) of given type and of
-	 * frame size as given by values.
+	 * Creates an application with core and a graphic user interface (MVC) of
+	 * given type.
 	 * 
 	 * @param viewType
 	 * @return the view

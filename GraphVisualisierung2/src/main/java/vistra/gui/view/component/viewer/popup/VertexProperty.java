@@ -7,9 +7,9 @@ import java.awt.geom.Point2D;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
-import vistra.core.graph.item.ILayoutItem;
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.IItemLayout;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -22,12 +22,12 @@ class VertexProperty extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = 3448304253580836407L;
 
-	private final VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer;
+	private final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer;
 
 	/**
 	 * A field for a vertex.
 	 */
-	private ILayoutVertex vertex;
+	private IVertexLayout vertex;
 
 	/**
 	 * A field for a point.
@@ -38,7 +38,7 @@ class VertexProperty extends JMenuItem implements IItemModifier {
 	 * @param vViewer
 	 */
 	protected VertexProperty(
-			VisualizationViewer<ILayoutVertex, ILayoutEdge> vViewer) {
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 		super("Edit vertex ...");
 		this.vViewer = vViewer;
 		this.vertex = null;
@@ -63,9 +63,9 @@ class VertexProperty extends JMenuItem implements IItemModifier {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setGraphItemAndView(ILayoutItem item) {
-		if (item instanceof ILayoutVertex) {
-			this.vertex = (ILayoutVertex) item;
+	public void setGraphItemAndView(IItemLayout item) {
+		if (item instanceof IVertexLayout) {
+			this.vertex = (IVertexLayout) item;
 		}
 	}
 

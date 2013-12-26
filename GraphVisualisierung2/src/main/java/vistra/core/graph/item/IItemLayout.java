@@ -9,7 +9,7 @@ import java.awt.Font;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface ILayoutItem {
+public interface IItemLayout {
 
 	/**
 	 * Sets an identifier.

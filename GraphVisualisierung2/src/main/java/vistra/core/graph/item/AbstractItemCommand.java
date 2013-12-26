@@ -1,12 +1,14 @@
 package vistra.core.graph.item;
 
+import vistra.util.ICommand;
+
 /**
  * An abstract item-command.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public abstract class AbstractItemCommand implements IItemCommand {
+public abstract class AbstractItemCommand implements ICommand {
 
 	/**
 	 * A field for a state handler.

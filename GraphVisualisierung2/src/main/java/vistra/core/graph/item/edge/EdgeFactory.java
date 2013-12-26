@@ -10,7 +10,7 @@ import vistra.core.graph.item.edge.state.EdgeStateHandler;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeFactory implements Factory<ILayoutEdge> {
+public class EdgeFactory implements Factory<IEdgeLayout> {
 
 	/**
 	 * Creates an edge.
@@ -18,7 +18,7 @@ public class EdgeFactory implements Factory<ILayoutEdge> {
 	 * @return the edge
 	 */
 	@Override
-	public ILayoutEdge create() {
+	public IEdgeLayout create() {
 		return createEdgeLayout();
 	}
 
@@ -27,9 +27,9 @@ public class EdgeFactory implements Factory<ILayoutEdge> {
 	 * 
 	 * @return the edge layout
 	 */
-	public static ILayoutEdge createEdgeLayout() {
+	public static IEdgeLayout createEdgeLayout() {
 		IEdge edge = new Edge();
-		ILayoutEdge edgeLayout = new LayoutEdge(edge);
+		IEdgeLayout edgeLayout = new EdgeLayout(edge);
 		try {
 			((EdgeStateHandler) edgeLayout).handleUnexplored();
 		} catch (Exception e) {

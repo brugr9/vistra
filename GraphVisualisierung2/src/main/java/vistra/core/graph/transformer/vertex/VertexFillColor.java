@@ -4,15 +4,15 @@ import java.awt.Paint;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.vertex.IVertexLayout;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)
  */
-public class VertexFillColor implements Transformer<ILayoutVertex, Paint> {
+public class VertexFillColor implements Transformer<IVertexLayout, Paint> {
 
 	@Override
-	public Paint transform(ILayoutVertex layout) {
+	public Paint transform(IVertexLayout layout) {
 		return layout.getFillColor();
 	}
 

@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.view.component.viewer.Viewer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
@@ -26,7 +26,7 @@ public class SwitchModePopup extends JPopupMenu {
 	/**
 	 * A field for a visualization viewer.
 	 */
-	private final VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer;
+	private final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
 
 	/**
 	 * A field for a editing menu item.
@@ -76,7 +76,7 @@ public class SwitchModePopup extends JPopupMenu {
 	 */
 	@SuppressWarnings("unchecked")
 	private void editingMode() {
-		((EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>) this.viewer.getGraphMouse())
+		((EditingModalGraphMouse<IVertexLayout, IEdgeLayout>) this.viewer.getGraphMouse())
 				.setMode(Mode.EDITING);
 		this.editing.setEnabled(false);
 		this.picking.setEnabled(true);
@@ -87,7 +87,7 @@ public class SwitchModePopup extends JPopupMenu {
 	 */
 	@SuppressWarnings("unchecked")
 	private void pickingMode() {
-		((EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>) this.viewer.getGraphMouse())
+		((EditingModalGraphMouse<IVertexLayout, IEdgeLayout>) this.viewer.getGraphMouse())
 				.setMode(Mode.PICKING);
 		this.editing.setEnabled(true);
 		this.picking.setEnabled(false);

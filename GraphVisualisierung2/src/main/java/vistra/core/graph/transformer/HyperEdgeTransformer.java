@@ -4,7 +4,7 @@ import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.GraphMeta;
 import vistra.core.graph.item.edge.EdgeFactory;
-import vistra.core.graph.item.edge.ILayoutEdge;
+import vistra.core.graph.item.edge.IEdgeLayout;
 import vistra.util.Convert;
 import edu.uci.ics.jung.io.graphml.HyperEdgeMetadata;
 
@@ -15,11 +15,11 @@ import edu.uci.ics.jung.io.graphml.HyperEdgeMetadata;
  * 
  */
 public class HyperEdgeTransformer implements
-		Transformer<HyperEdgeMetadata, ILayoutEdge> {
+		Transformer<HyperEdgeMetadata, IEdgeLayout> {
 
 	@Override
-	public ILayoutEdge transform(HyperEdgeMetadata meta) {
-		ILayoutEdge layout = EdgeFactory.createEdgeLayout();
+	public IEdgeLayout transform(HyperEdgeMetadata meta) {
+		IEdgeLayout layout = EdgeFactory.createEdgeLayout();
 
 		layout.setId(meta.getId());
 		layout.setWeight(Convert.toInt(meta.getProperty(GraphMeta.E_WEIGHT)));

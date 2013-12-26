@@ -22,8 +22,8 @@ import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.IGraphManager;
 import vistra.core.graph.TraversableGraph;
 import vistra.core.graph.TraversableGraphEventListener;
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.traversal.Traversal;
 import vistra.core.traversal.step.IStep;
 import vistra.util.IBidirectIterator;
@@ -187,7 +187,7 @@ public class Core implements ICore {
 			List<IStep> stepList = new ArrayList<IStep>();
 			// the graph
 			@SuppressWarnings("unchecked")
-			GraphEventListener<ILayoutVertex, ILayoutEdge> listener = (GraphEventListener<ILayoutVertex, ILayoutEdge>) new TraversableGraphEventListener(
+			GraphEventListener<IVertexLayout, IEdgeLayout> listener = (GraphEventListener<IVertexLayout, IEdgeLayout>) new TraversableGraphEventListener(
 					stepList);
 			graph.addGraphEventListener(listener);
 			TraversableGraph traversableGraph = GraphFactory

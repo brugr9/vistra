@@ -6,8 +6,8 @@ import javax.swing.JPopupMenu;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.gui.view.component.viewer.popup.SwitchModePopup;
 import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.annotations.AnnotatingGraphMousePlugin;
@@ -23,7 +23,7 @@ import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge> {
+public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout> {
 
 	/**
 	 * Main constructor.
@@ -41,9 +41,9 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge> {
 	 * @param switchModePopup
 	 *            a createVertexPopup
 	 */
-	public Mouse(RenderContext<ILayoutVertex, ILayoutEdge> rc,
-			Factory<ILayoutVertex> vertexFactory,
-			Factory<ILayoutEdge> edgeFactory, JPopupMenu edgePopup,
+	public Mouse(RenderContext<IVertexLayout, IEdgeLayout> rc,
+			Factory<IVertexLayout> vertexFactory,
+			Factory<IEdgeLayout> edgeFactory, JPopupMenu edgePopup,
 			JPopupMenu vertexPopup, SwitchModePopup switchModePopup) {
 		super(rc, vertexFactory, edgeFactory);
 
@@ -62,13 +62,13 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge> {
 	protected void loadPlugins() {
 		// Picking
 		this.pickingPlugin = new PickingPlugin();
-		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
+		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<IVertexLayout, IEdgeLayout>();
 
 		// Editing
 		this.editingPlugin = new EditingPlugin(this.vertexFactory,
 				this.edgeFactory);
-		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
-		this.annotatingPlugin = new AnnotatingGraphMousePlugin<ILayoutVertex, ILayoutEdge>(
+		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<IVertexLayout, IEdgeLayout>();
+		this.annotatingPlugin = new AnnotatingGraphMousePlugin<IVertexLayout, IEdgeLayout>(
 				rc);
 		// Popup
 		this.popupEditingPlugin = new PopupPlugin(this.vertexFactory,

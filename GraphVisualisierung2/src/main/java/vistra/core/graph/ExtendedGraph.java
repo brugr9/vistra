@@ -3,9 +3,9 @@ package vistra.core.graph;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import vistra.core.graph.item.ILayoutItem;
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.IItemLayout;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.ObservableGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -16,7 +16,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class ExtendedGraph extends ObservableGraph<ILayoutVertex, ILayoutEdge>
+public class ExtendedGraph extends ObservableGraph<IVertexLayout, IEdgeLayout>
 		implements IExtendedGraph {
 
 	private static final long serialVersionUID = 7604897874620015084L;
@@ -37,7 +37,7 @@ public class ExtendedGraph extends ObservableGraph<ILayoutVertex, ILayoutEdge>
 	 * @param delegate
 	 *            the graph to delegate
 	 */
-	public ExtendedGraph(Graph<ILayoutVertex, ILayoutEdge> delegate) {
+	public ExtendedGraph(Graph<IVertexLayout, IEdgeLayout> delegate) {
 		super(delegate);
 		this.edgeType = EdgeType.UNDIRECTED;
 	}
@@ -79,10 +79,10 @@ public class ExtendedGraph extends ObservableGraph<ILayoutVertex, ILayoutEdge>
 	 */
 	@Override
 	public boolean unused(String id) {
-		ArrayList<ILayoutItem> items = new ArrayList<ILayoutItem>();
-		items.addAll((Collection<? extends ILayoutItem>) this.getVertices());
-		items.addAll((Collection<? extends ILayoutItem>) this.getEdges());
-		for (ILayoutItem item : items) {
+		ArrayList<IItemLayout> items = new ArrayList<IItemLayout>();
+		items.addAll((Collection<? extends IItemLayout>) this.getVertices());
+		items.addAll((Collection<? extends IItemLayout>) this.getEdges());
+		for (IItemLayout item : items) {
 			if (item.getId() == id) {
 				return false;
 			}

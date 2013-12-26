@@ -8,8 +8,8 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import vistra.core.graph.transformer.EdgeTransformer;
 import vistra.core.graph.transformer.GraphTransformer;
 import vistra.core.graph.transformer.HyperEdgeTransformer;
@@ -140,7 +140,7 @@ class GraphManager implements IGraphManager {
 	 */
 	private IExtendedGraph read(File file) throws GraphException {
 		try {
-			GraphMLReader2<IExtendedGraph, ILayoutVertex, ILayoutEdge> graphReader = new GraphMLReader2<>(
+			GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout> graphReader = new GraphMLReader2<>(
 					new FileReader(file), this.graphTransformer,
 					this.vertexTransformer, this.edgeTransformer,
 					this.hyperEdgeTransformer);

@@ -3,7 +3,7 @@ package vistra.core.traversal.step;
 import vistra.core.graph.item.edge.IEdge;
 import vistra.core.graph.item.edge.command.DiscoveryEdgeCommand;
 import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.graph.item.vertex.LayoutVertex;
+import vistra.core.graph.item.vertex.VertexLayout;
 import vistra.core.graph.item.vertex.command.VertexCommandVisited;
 import vistra.util.ICommand;
 
@@ -28,7 +28,7 @@ public class StepVisit extends AbstractStep implements IStep {
 
 		this.description = this.getClass().getSimpleName() + " "
 				+ vertex.getClass().getSimpleName() + " "
-				+ ((LayoutVertex) vertex).getId();
+				+ ((VertexLayout) vertex).getId();
 
 		try {
 			// new

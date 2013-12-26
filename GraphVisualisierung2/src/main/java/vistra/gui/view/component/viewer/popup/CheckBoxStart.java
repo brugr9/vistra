@@ -3,9 +3,9 @@ package vistra.gui.view.component.viewer.popup;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vistra.core.graph.item.ILayoutItem;
-import vistra.core.graph.item.edge.ILayoutEdge;
-import vistra.core.graph.item.vertex.ILayoutVertex;
+import vistra.core.graph.item.IItemLayout;
+import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.vertex.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -25,7 +25,7 @@ class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
 	 *            a visualization viewer
 	 */
 	protected CheckBoxStart(
-			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		super(viewer, "Start");
 		this.addActionListener(new ActionListener() {
 			@Override
@@ -49,9 +49,9 @@ class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setGraphItemAndView(ILayoutItem item) {
-		if (item instanceof ILayoutVertex) {
-			this.vertex = (ILayoutVertex) item;
+	public void setGraphItemAndView(IItemLayout item) {
+		if (item instanceof IVertexLayout) {
+			this.vertex = (IVertexLayout) item;
 			this.setSelected(this.vertex.isStart());
 		}
 	}

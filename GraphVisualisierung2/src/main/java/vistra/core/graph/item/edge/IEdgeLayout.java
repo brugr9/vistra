@@ -1,6 +1,6 @@
 package vistra.core.graph.item.edge;
 
-import vistra.core.graph.item.ILayoutItem;
+import vistra.core.graph.item.IItemLayout;
 
 /**
  * An edge layout interface.
@@ -8,7 +8,7 @@ import vistra.core.graph.item.ILayoutItem;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface ILayoutEdge extends IEdge, ILayoutItem {
+public interface IEdgeLayout extends IEdge, IItemLayout {
 
 	/**
 	 * Sets a weight.

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 
 import vistra.core.graph.GraphMeta;
-import vistra.core.graph.item.AbstractLayoutItem;
+import vistra.core.graph.item.AbstractItemLayout;
 import vistra.util.ColorPalette;
 import vistra.util.Convert;
 
@@ -14,7 +14,7 @@ import vistra.util.Convert;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class LayoutVertex extends AbstractLayoutItem implements ILayoutVertex {
+public class VertexLayout extends AbstractItemLayout implements IVertexLayout {
 
 	/**
 	 * A field for a vertex to work with.
@@ -35,7 +35,7 @@ public class LayoutVertex extends AbstractLayoutItem implements ILayoutVertex {
 	 * @param vertex
 	 *            a vertex
 	 */
-	protected LayoutVertex(IVertex vertex) {
+	protected VertexLayout(IVertex vertex) {
 		super();
 		this.vertex = (Vertex) vertex;
 		this.location = Convert.toPoint2D(
