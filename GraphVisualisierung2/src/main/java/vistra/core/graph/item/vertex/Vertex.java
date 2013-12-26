@@ -1,5 +1,7 @@
 package vistra.core.graph.item.vertex;
 
+import java.util.Observable;
+
 import vistra.core.graph.GraphMeta;
 
 /**
@@ -8,7 +10,7 @@ import vistra.core.graph.GraphMeta;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class Vertex implements IVertex {
+class Vertex extends Observable implements IVertex {
 
 	/**
 	 * A field for a start.

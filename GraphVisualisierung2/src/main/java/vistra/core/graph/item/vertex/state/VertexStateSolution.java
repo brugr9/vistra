@@ -26,7 +26,7 @@ class VertexStateSolution extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewSolved();
+			super.stateHandler.setViewSolution();
 		} catch (Exception e) {
 			throw e;
 		}

@@ -2,6 +2,7 @@ package vistra.core.graph.item.vertex;
 
 import org.apache.commons.collections15.Factory;
 
+import vistra.core.graph.item.vertex.state.IVertexStateHandler;
 import vistra.core.graph.item.vertex.state.VertexStateHandler;
 
 /**
@@ -28,13 +29,12 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	 * @return the vertex layout
 	 */
 	public static IVertexLayout createVertexLayout() {
-		IVertex vertex = new Vertex();
-		IVertexLayout vertexLayout = new VertexLayout(vertex);
+		IVertexStateHandler vertex = new VertexStateHandler();
 		try {
-			((VertexStateHandler) vertexLayout).handleUnexplored();
+			vertex.handleUnexplored();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return vertexLayout;
+		return (VertexLayout) vertex;
 	}
 }

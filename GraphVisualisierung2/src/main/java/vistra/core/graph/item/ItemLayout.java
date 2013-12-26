@@ -1,20 +1,15 @@
 package vistra.core.graph.item;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.util.Observable;
 
-import vistra.core.graph.GraphFactory;
-import vistra.util.ColorPalette;
-
 /**
- * An abstract item layout.
+ * An item layout.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public abstract class AbstractItemLayout extends Observable implements
-		IItemLayout {
+public class ItemLayout extends Observable implements IItemLayout {
 
 	/**
 	 * A field for an identifier.
@@ -44,14 +39,14 @@ public abstract class AbstractItemLayout extends Observable implements
 	/**
 	 * Main constructor.
 	 */
-	protected AbstractItemLayout() {
+	public ItemLayout() {
 		super();
 		this.id = "";
-		this.lineWidth = GraphFactory.STROKE_WIDTH_DEFAULT;
-		this.dash = GraphFactory.E_SOLID;
-		this.lineColor = ColorPalette.darkblue;
-		this.fontStyle = Font.PLAIN;
-		this.fontColor = ColorPalette.darkblue;
+		this.lineWidth = 0;
+		this.dash = null;
+		this.lineColor = null;
+		this.fontStyle = 0;
+		this.fontColor = null;
 	}
 
 	/**
@@ -142,7 +137,7 @@ public abstract class AbstractItemLayout extends Observable implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setFontSyle(int style) {
+	public void setFontStyle(int style) {
 		this.fontStyle = style;
 		this.setChanged();
 	}

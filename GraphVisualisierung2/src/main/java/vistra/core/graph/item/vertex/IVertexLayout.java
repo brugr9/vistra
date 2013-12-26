@@ -22,10 +22,10 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	abstract void setLocation(Point2D point);
 
 	/**
-	 * Sets the fill color.
+	 * Sets the fill colour.
 	 * 
 	 * @param color
-	 *            the color to set
+	 *            the colour to set
 	 */
 	abstract void setFillColor(Color color);
 
@@ -51,7 +51,7 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	 * @param value
 	 *            the value to set
 	 */
-	public void setValue(int value);
+	abstract void setValue(int value);
 
 	/**
 	 * Returns the location.
@@ -61,9 +61,9 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	abstract Point2D getLocation();
 
 	/**
-	 * Returns the fill color.
+	 * Returns the fill colour.
 	 * 
-	 * @return the color
+	 * @return the colour
 	 */
 	abstract Color getFillColor();
 

@@ -3,6 +3,7 @@ package vistra.core.graph.item.edge;
 import org.apache.commons.collections15.Factory;
 
 import vistra.core.graph.item.edge.state.EdgeStateHandler;
+import vistra.core.graph.item.edge.state.IEdgeStateHandler;
 
 /**
  * An edge factory.
@@ -28,13 +29,13 @@ public class EdgeFactory implements Factory<IEdgeLayout> {
 	 * @return the edge layout
 	 */
 	public static IEdgeLayout createEdgeLayout() {
-		IEdge edge = new Edge();
-		IEdgeLayout edgeLayout = new EdgeLayout(edge);
+
+		IEdgeStateHandler edge = new EdgeStateHandler();
 		try {
-			((EdgeStateHandler) edgeLayout).handleUnexplored();
+			edge.handleUnexplored();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return edgeLayout;
+		return (EdgeLayout) edge;
 	}
 }

@@ -4,7 +4,6 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.item.vertex.IVertex;
 import vistra.core.graph.item.vertex.VertexLayout;
 import vistra.util.ColorPalette;
 
@@ -12,7 +11,7 @@ import vistra.util.ColorPalette;
  * A vertex state handler.
  * 
  * As being an item state handler, this handler has a cellar at it's disposal
- * and is therefore able to hold the state history therefore.
+ * and is therefore able to hold the state history.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -31,12 +30,9 @@ public class VertexStateHandler extends VertexLayout implements
 
 	/**
 	 * Main constructor.
-	 * 
-	 * @param vertex
-	 *            a vertex
 	 */
-	public VertexStateHandler(IVertex vertex) {
-		super((VertexLayout) vertex);
+	public VertexStateHandler() {
+		super();
 		this.state = null;
 		this.cellar = new ArrayList<AbstractVertexState>();
 		try {
@@ -139,12 +135,18 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setViewUnexplored() throws Exception {
 		try {
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
-			this.setLineColor(ColorPalette.darkblue);
-			this.setFillColor(ColorPalette.orange);
-			this.setFontColor(ColorPalette.darkblue);
-			this.setFontSyle(Font.PLAIN);
-			this.notifyObservers();
+			if (this.isStart())
+				this.handleFocussed();
+			else if (this.isEnd())
+				this.handleSolution();
+			else {
+				this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
+				this.setLineColor(ColorPalette.darkblue);
+				this.setFillColor(ColorPalette.orange);
+				this.setFontColor(ColorPalette.darkblue);
+				this.setFontStyle(Font.PLAIN);
+				this.notifyObservers();
+			}
 		} catch (Exception e) {
 			throw e;
 		}
@@ -158,12 +160,16 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setViewFocussed() throws Exception {
 		try {
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setLineColor(ColorPalette.red);
-			this.setFillColor(ColorPalette.yellow);
-			this.setFontColor(ColorPalette.darkblue);
-			this.setFontSyle(Font.BOLD);
-			this.notifyObservers();
+			if (this.isEnd())
+				this.handleSolution();
+			else {
+				this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+				this.setLineColor(ColorPalette.red);
+				this.setFillColor(ColorPalette.yellow);
+				this.setFontColor(ColorPalette.darkblue);
+				this.setFontStyle(Font.BOLD);
+				this.notifyObservers();
+			}
 		} catch (Exception e) {
 			throw e;
 		}
@@ -178,12 +184,18 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setViewVisited() throws Exception {
 		try {
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setLineColor(ColorPalette.red);
-			this.setFillColor(ColorPalette.blue);
-			this.setFontColor(ColorPalette.darkblue);
-			this.setFontSyle(Font.BOLD);
-			this.notifyObservers();
+			if (this.isStart())
+				this.handleFocussed();
+			else if (this.isEnd())
+				this.handleSolution();
+			else {
+				this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+				this.setLineColor(ColorPalette.red);
+				this.setFillColor(ColorPalette.blue);
+				this.setFontColor(ColorPalette.darkblue);
+				this.setFontStyle(Font.BOLD);
+				this.notifyObservers();
+			}
 		} catch (Exception e) {
 			throw e;
 		}
@@ -194,13 +206,13 @@ public class VertexStateHandler extends VertexLayout implements
 	 * 
 	 * @throws Exception
 	 */
-	void setViewSolved() throws Exception {
+	void setViewSolution() throws Exception {
 		try {
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 			this.setLineColor(ColorPalette.green);
 			this.setFillColor(ColorPalette.white);
 			this.setFontColor(ColorPalette.green);
-			this.setFontSyle(Font.BOLD);
+			this.setFontStyle(Font.BOLD);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;

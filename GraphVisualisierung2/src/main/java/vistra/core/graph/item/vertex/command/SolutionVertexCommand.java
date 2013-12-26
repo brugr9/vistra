@@ -6,12 +6,12 @@ import vistra.core.graph.item.vertex.state.VertexStateHandler;
 import vistra.util.ICommand;
 
 /**
- * A vertex command: visit vertex.
+ * A vertex command: solution vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexCommandFocussed extends AbstractItemCommand implements ICommand {
+public class SolutionVertexCommand extends AbstractItemCommand implements ICommand {
 
 	/**
 	 * Main constructor.
@@ -19,7 +19,7 @@ public class VertexCommandFocussed extends AbstractItemCommand implements IComma
 	 * @param vertex
 	 *            a vertex
 	 */
-	public VertexCommandFocussed(IVertex vertex) {
+	public SolutionVertexCommand(IVertex vertex) {
 		super((VertexStateHandler) vertex);
 	}
 

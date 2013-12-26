@@ -16,6 +16,6 @@ public interface IEdgeLayout extends IEdge, IItemLayout {
 	 * @param weight
 	 *            the weight to set
 	 */
-	public void setWeight(int weight);
+	abstract void setWeight(int weight);
 
 }

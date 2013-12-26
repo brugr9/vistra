@@ -2,6 +2,7 @@ package vistra.core.algorithm;
 
 import java.util.ArrayList;
 import java.util.Properties;
+
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

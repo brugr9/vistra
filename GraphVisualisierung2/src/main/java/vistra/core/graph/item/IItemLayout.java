@@ -50,7 +50,7 @@ public interface IItemLayout {
 	 *            the style to set
 	 * @see Font
 	 */
-	abstract void setFontSyle(int style);
+	abstract void setFontStyle(int style);
 
 	/**
 	 * Sets the font colour.

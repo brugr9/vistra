@@ -4,22 +4,22 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 
 import vistra.core.graph.GraphMeta;
-import vistra.core.graph.item.AbstractItemLayout;
+import vistra.core.graph.item.ItemLayout;
 import vistra.util.ColorPalette;
 import vistra.util.Convert;
 
 /**
- * An abstract vertex layout.
+ * A vertex layout.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexLayout extends AbstractItemLayout implements IVertexLayout {
+public class VertexLayout extends Vertex implements IVertexLayout {
 
 	/**
-	 * A field for a vertex to work with.
+	 * A field for an item layout to work with.
 	 */
-	private Vertex vertex;
+	private ItemLayout layout;
 	/**
 	 * A field for the location.
 	 */
@@ -31,13 +31,10 @@ public class VertexLayout extends AbstractItemLayout implements IVertexLayout {
 
 	/**
 	 * Main constructor.
-	 * 
-	 * @param vertex
-	 *            a vertex
 	 */
-	protected VertexLayout(IVertex vertex) {
+	protected VertexLayout() {
 		super();
-		this.vertex = (Vertex) vertex;
+		this.layout = new ItemLayout();
 		this.location = Convert.toPoint2D(
 				Integer.toString(GraphMeta.V_LOC_X_DEFAULT),
 				Integer.toString(GraphMeta.V_LOC_Y_DEFAULT));
@@ -48,8 +45,26 @@ public class VertexLayout extends AbstractItemLayout implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void setStart(boolean start) {
+		this.start = start;
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnd(boolean end) {
+		this.end = end;
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void setValue(int value) {
-		this.vertex.value = value;
+		this.value = value;
 		this.setChanged();
 	}
 
@@ -75,31 +90,6 @@ public class VertexLayout extends AbstractItemLayout implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setStart(boolean start) {
-		this.vertex.start = start;
-		// TODO this.handleFocussed();
-		this.setChanged();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setEnd(boolean end) {
-		this.vertex.end = end;
-		// TODO this.handleSolved();
-		this.setChanged();
-	}
-
-	@Override
-	public int getValue() {
-		return this.vertex.getValue();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public Point2D getLocation() {
 		return location;
 	}
@@ -116,16 +106,96 @@ public class VertexLayout extends AbstractItemLayout implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isStart() {
-		return this.vertex.isStart();
+	public void setId(String id) {
+		this.layout.setId(id);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isEnd() {
-		return this.vertex.isEnd();
+	public void setLineWidth(float width) {
+		this.layout.setLineWidth(width);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setDash(float[] dash) {
+		this.layout.setDash(dash);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setLineColor(Color color) {
+		this.layout.setLineColor(color);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setFontStyle(int style) {
+		this.layout.setFontStyle(style);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setFontColor(Color color) {
+		this.layout.setFontColor(color);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getId() {
+		return this.layout.getId();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public float getLineWidth() {
+		return this.layout.getLineWidth();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public float[] getDash() {
+		return this.layout.getDash();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getLineColor() {
+		return this.layout.getLineColor();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int getFontStyle() {
+		return this.layout.getFontStyle();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getFontColor() {
+		return this.layout.getFontColor();
 	}
 
 }

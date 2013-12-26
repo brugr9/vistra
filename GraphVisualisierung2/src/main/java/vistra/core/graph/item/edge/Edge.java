@@ -1,5 +1,7 @@
 package vistra.core.graph.item.edge;
 
+import java.util.Observable;
+
 import vistra.core.graph.GraphMeta;
 
 /**
@@ -8,7 +10,7 @@ import vistra.core.graph.GraphMeta;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Edge implements IEdge {
+class Edge extends Observable implements IEdge {
 
 	/**
 	 * A field for the weight.
