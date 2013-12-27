@@ -8,27 +8,27 @@ import java.util.Properties;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.core.algorithm.AlgorithmManagerFactory;
+import vistra.core.algorithm.BFS;
+import vistra.core.algorithm.DFS;
+import vistra.core.algorithm.DLS;
+import vistra.core.algorithm.Default;
+import vistra.core.algorithm.Dijkstra;
 import vistra.core.algorithm.IAlgorithm;
 import vistra.core.algorithm.IAlgorithmManager;
-import vistra.core.algorithm.impl.BFS;
-import vistra.core.algorithm.impl.DFS;
-import vistra.core.algorithm.impl.DLS;
-import vistra.core.algorithm.impl.Default;
-import vistra.core.algorithm.impl.Dijkstra;
-import vistra.core.algorithm.impl.Kruskal;
+import vistra.core.algorithm.Kruskal;
 import vistra.core.graph.GraphFactory;
 import vistra.core.graph.GraphManagerFactory;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.IGraphManager;
-import vistra.core.graph.TraversableGraph;
-import vistra.core.graph.TraversableGraphEventListener;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.IRenderGraph;
+import vistra.core.graph.event.IRenderGraphEventListener;
+import vistra.core.graph.event.RenderGraphEventListener;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.Traversal;
 import vistra.core.traversal.step.IStep;
 import vistra.util.IBidirectIterator;
 import vistra.util.ImmutableBidirectIterator;
-import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -186,14 +186,12 @@ public class Core implements ICore {
 			// the steps
 			List<IStep> stepList = new ArrayList<IStep>();
 			// the graph
-			@SuppressWarnings("unchecked")
-			GraphEventListener<IVertexLayout, IEdgeLayout> listener = (GraphEventListener<IVertexLayout, IEdgeLayout>) new TraversableGraphEventListener(
+			IRenderGraphEventListener<IVertexLayout, IEdgeLayout> listener = new RenderGraphEventListener(
 					stepList);
-			graph.addGraphEventListener(listener);
-			TraversableGraph traversableGraph = GraphFactory
-					.createTraversableGraph(graph);
+			graph.addRenderGraphEventListener(listener);
+			IRenderGraph renderGraph = GraphFactory.createRenderGraph(graph);
 			// the algorithm
-			this.algorithm.traverse(traversableGraph);
+			this.algorithm.traverse(renderGraph);
 			// undo all steps in reverse order
 			for (int index = stepList.size() - 1; index > -1; index--)
 				stepList.get(index).undo();

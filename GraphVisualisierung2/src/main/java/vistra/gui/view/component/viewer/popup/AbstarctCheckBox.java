@@ -4,8 +4,8 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JCheckBoxMenuItem;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements

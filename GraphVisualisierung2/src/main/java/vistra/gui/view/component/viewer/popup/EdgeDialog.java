@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.view.component.viewer.popup.verifier.EdgeWeightVerifier;
 import vistra.gui.view.component.viewer.popup.verifier.GraphItemIdVerifier;
 import vistra.util.Convert;

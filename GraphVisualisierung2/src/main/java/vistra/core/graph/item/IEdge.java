@@ -1,0 +1,18 @@
+package vistra.core.graph.item;
+
+/**
+ * An edge interface.
+ * 
+ * @author Roland Bruggmann (brugr9@bfh.ch)
+ * 
+ */
+public interface IEdge {
+
+	/**
+	 * Returns the weight.
+	 * 
+	 * @return the weight
+	 */
+	public int getWeight();
+
+}

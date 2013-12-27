@@ -9,7 +9,7 @@ import java.util.Observable;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class ItemLayout extends Observable implements IItemLayout {
+class ItemLayout extends Observable implements IItemLayout {
 
 	/**
 	 * A field for an identifier.
@@ -39,7 +39,7 @@ public class ItemLayout extends Observable implements IItemLayout {
 	/**
 	 * Main constructor.
 	 */
-	public ItemLayout() {
+	ItemLayout() {
 		super();
 		this.id = "";
 		this.lineWidth = 0;

@@ -1,11 +1,11 @@
 package vistra.core.traversal.step;
 
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.edge.command.DiscoveryEdgeCommand;
-import vistra.core.graph.item.vertex.IVertex;
-import vistra.core.graph.item.vertex.VertexLayout;
-import vistra.core.graph.item.vertex.command.VisitedVertexCommand;
-import vistra.util.ICommand;
+import vistra.core.graph.item.IEdge;
+import vistra.core.graph.item.IVertex;
+import vistra.core.graph.item.VertexLayout;
+import vistra.core.graph.item.state.command.DiscoveryEdgeCommand;
+import vistra.core.graph.item.state.command.IItemStateCommand;
+import vistra.core.graph.item.state.command.VisitedVertexCommand;
 
 /**
  * A step: visits a vertex over an edge as given.
@@ -25,15 +25,13 @@ public class StepVisit extends AbstractStep implements IStep {
 	 */
 	public StepVisit(IEdge edge, IVertex vertex) {
 		super();
-
-		this.description = this.getClass().getSimpleName() + " "
-				+ vertex.getClass().getSimpleName() + " "
+		this.description = "visit" + " "
+				+ vertex.getClass().getSimpleName().toLowerCase() + " "
 				+ ((VertexLayout) vertex).getId();
-
 		try {
 			// new
-			ICommand discoverEdge = new DiscoveryEdgeCommand(edge);
-			ICommand visitVertex = new VisitedVertexCommand(vertex);
+			IItemStateCommand discoverEdge = new DiscoveryEdgeCommand(edge);
+			IItemStateCommand visitVertex = new VisitedVertexCommand(vertex);
 			// add
 			this.stepHandler.addCommand(discoverEdge);
 			this.stepHandler.addCommand(visitVertex);

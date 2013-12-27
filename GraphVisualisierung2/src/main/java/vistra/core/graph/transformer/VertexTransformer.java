@@ -3,8 +3,8 @@ package vistra.core.graph.transformer;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.GraphMeta;
-import vistra.core.graph.item.vertex.IVertexLayout;
-import vistra.core.graph.item.vertex.VertexFactory;
+import vistra.core.graph.item.IVertexLayout;
+import vistra.core.graph.item.VertexFactory;
 import vistra.util.Convert;
 import edu.uci.ics.jung.io.graphml.NodeMetadata;
 

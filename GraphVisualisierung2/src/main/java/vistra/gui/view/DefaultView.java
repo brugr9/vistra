@@ -7,8 +7,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.GuiModel;
 import vistra.gui.control.IControl;
 import vistra.gui.view.component.AlgorithmPanel;

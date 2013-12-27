@@ -1,12 +1,12 @@
 package vistra.core.traversal.step;
 
-import vistra.core.graph.item.edge.EdgeLayout;
-import vistra.core.graph.item.edge.IEdge;
-import vistra.core.graph.item.edge.command.CrossEdgeCommand;
-import vistra.util.ICommand;
+import vistra.core.graph.item.EdgeLayout;
+import vistra.core.graph.item.IEdge;
+import vistra.core.graph.item.state.command.CrossEdgeCommand;
+import vistra.core.graph.item.state.command.IItemStateCommand;
 
 /**
- * A step: marks an edge as cross edge.
+ * A cross-edge step.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -28,7 +28,7 @@ public class StepCrossEdge extends AbstractStep implements IStep {
 
 		try {
 			// new
-			ICommand crossEdge = new CrossEdgeCommand(edge);
+			IItemStateCommand crossEdge = new CrossEdgeCommand(edge);
 			// add
 			this.stepHandler.addCommand(crossEdge);
 			// execute

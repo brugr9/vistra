@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;

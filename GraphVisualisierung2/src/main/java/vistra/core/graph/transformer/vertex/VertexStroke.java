@@ -5,7 +5,7 @@ import java.awt.Stroke;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IVertexLayout;
 
 /**
  * @author Roland Bruggmann (brugr9@bfh.ch)

@@ -1,6 +1,6 @@
 package vistra.core.algorithm;
 
-import vistra.core.graph.ITraversableGraph;
+import vistra.core.graph.IRenderGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -40,7 +40,7 @@ public interface IAlgorithm {
 	 *            the graph to traverse
 	 * @throws AlgorithmException
 	 */
-	public abstract void traverse(ITraversableGraph graph)
+	public abstract void traverse(IRenderGraph graph)
 			throws AlgorithmException;
 
 }

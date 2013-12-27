@@ -8,8 +8,8 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.core.graph.transformer.EdgeTransformer;
 import vistra.core.graph.transformer.GraphTransformer;
 import vistra.core.graph.transformer.HyperEdgeTransformer;

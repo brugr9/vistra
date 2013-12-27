@@ -2,8 +2,9 @@ package vistra.core.graph;
 
 import java.io.Serializable;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.event.IRenderGraphEventListener;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -22,7 +23,7 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	 * 
 	 * @return the name
 	 */
-	public abstract String getName();
+	abstract String getName();
 
 	/**
 	 * Sets the name.
@@ -30,14 +31,14 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	 * @param name
 	 *            the name to set
 	 */
-	public abstract void setName(String name);
+	abstract void setName(String name);
 
 	/**
 	 * Returns the edge type.
 	 * 
 	 * @return the edge type
 	 */
-	public abstract EdgeType getEdgeType();
+	abstract EdgeType getEdgeType();
 
 	/**
 	 * Sets the edge type.
@@ -45,19 +46,31 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	 * @param edgeType
 	 *            the edge type to set
 	 */
-	public abstract void setEdgeType(EdgeType edgeType);
+	abstract void setEdgeType(EdgeType edgeType);
 
 	/**
 	 * Adds {@code listener} as a listener to this graph.
 	 */
-	public void addGraphEventListener(
+	abstract void addGraphEventListener(
+			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
+
+	/**
+	 * Adds {@code listener} as a listener to this graph.
+	 */
+	abstract void addRenderGraphEventListener(
+			IRenderGraphEventListener<IVertexLayout, IEdgeLayout> listener);
+
+	/**
+	 * Removes {@code listener} as a listener to this graph.
+	 */
+	abstract void removeGraphEventListener(
 			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
 
 	/**
 	 * Removes {@code listener} as a listener to this graph.
 	 */
-	public void removeGraphEventListener(
-			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
+	abstract void removeRenderGraphEventListener(
+			IRenderGraphEventListener<IVertexLayout, IEdgeLayout> listener);
 
 	/**
 	 * Checks an item identifier.
@@ -65,6 +78,6 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	 * @return <code>true</code> if the identifier is not yet used,
 	 *         <code>false</code> otherwise
 	 */
-	public boolean unused(String itemId);
+	boolean unused(String itemId);
 
 }

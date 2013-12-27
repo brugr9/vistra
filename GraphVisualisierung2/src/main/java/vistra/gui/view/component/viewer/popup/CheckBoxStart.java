@@ -3,9 +3,9 @@ package vistra.gui.view.component.viewer.popup;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -41,6 +41,7 @@ class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
 	private void setValue() {
 		if (this.vertex != null) {
 			this.vertex.setStart(this.isSelected());
+
 			this.viewer.repaint();
 		}
 	}

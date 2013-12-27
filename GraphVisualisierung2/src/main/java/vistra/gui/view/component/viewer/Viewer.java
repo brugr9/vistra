@@ -9,10 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import vistra.core.graph.GraphFactory;
-import vistra.core.graph.item.edge.EdgeFactory;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
-import vistra.core.graph.item.vertex.VertexFactory;
+import vistra.core.graph.item.EdgeFactory;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
+import vistra.core.graph.item.VertexFactory;
 import vistra.core.graph.transformer.edge.EdgeFont;
 import vistra.core.graph.transformer.edge.EdgeLabel;
 import vistra.core.graph.transformer.edge.EdgeLineColor;

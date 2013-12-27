@@ -3,8 +3,8 @@ package vistra.gui.view.component.viewer.popup;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**

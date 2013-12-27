@@ -2,9 +2,9 @@ package vistra.core.graph;
 
 import java.util.List;
 
+import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IVertexLayout;
 import edu.uci.ics.jung.graph.SparseGraph;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -99,7 +99,7 @@ public final class GraphFactory {
 	 * @param graph
 	 * @return
 	 */
-	public static TraversableGraph createTraversableGraph(IExtendedGraph graph) {
+	public static IRenderGraph createRenderGraph(IExtendedGraph graph) {
 		// TODO
 		return null;
 	}

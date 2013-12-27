@@ -4,9 +4,9 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IVertexLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 

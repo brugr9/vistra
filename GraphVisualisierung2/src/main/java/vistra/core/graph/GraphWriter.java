@@ -1,7 +1,7 @@
 package vistra.core.graph;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.core.graph.transformer.edge.EdgeWeight;
 import vistra.core.graph.transformer.vertex.VertexCoordX;
 import vistra.core.graph.transformer.vertex.VertexCoordY;

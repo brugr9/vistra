@@ -8,9 +8,9 @@ import javax.swing.JPopupMenu;
 
 import org.apache.commons.collections15.Factory;
 
+import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.view.component.viewer.popup.IItemModifier;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.visualization.VisualizationViewer;

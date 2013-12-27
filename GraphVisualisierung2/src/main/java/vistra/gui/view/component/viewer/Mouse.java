@@ -6,8 +6,8 @@ import javax.swing.JPopupMenu;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.core.graph.item.edge.IEdgeLayout;
-import vistra.core.graph.item.vertex.IVertexLayout;
+import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.view.component.viewer.popup.SwitchModePopup;
 import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.annotations.AnnotatingGraphMousePlugin;

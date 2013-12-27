@@ -3,8 +3,8 @@ package vistra.core.graph.transformer;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.GraphMeta;
-import vistra.core.graph.item.edge.EdgeFactory;
-import vistra.core.graph.item.edge.IEdgeLayout;
+import vistra.core.graph.item.EdgeFactory;
+import vistra.core.graph.item.IEdgeLayout;
 import vistra.util.Convert;
 import edu.uci.ics.jung.io.graphml.EdgeMetadata;
 
