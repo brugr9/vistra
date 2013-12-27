@@ -97,9 +97,10 @@ public final class GraphFactory {
 	/**
 	 * 
 	 * @param graph
-	 * @return
+	 *            the graph
+	 * @return the traversable graph
 	 */
-	public static ITraversableGraph createRenderGraph(IExtendedGraph graph) {
+	public static ITraversableGraph createTraversableGraph(IExtendedGraph graph) {
 		// TODO
 		return null;
 	}

@@ -1,10 +1,9 @@
-package vistra.core.traversal.event;
+package vistra.core.traversal.step;
 
 import java.util.List;
 
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
-import vistra.core.traversal.step.IStep;
 
 /**
  * A step event listener.

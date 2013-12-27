@@ -1,4 +1,4 @@
-package vistra.core.traversal.event;
+package vistra.core.traversal.step;
 
 import edu.uci.ics.jung.graph.Graph;
 

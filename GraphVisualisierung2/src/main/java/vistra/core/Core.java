@@ -24,9 +24,9 @@ import vistra.core.graph.ITraversableGraph;
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
 import vistra.core.traversal.Traversal;
-import vistra.core.traversal.event.ITraversalEventListener;
-import vistra.core.traversal.event.TraversalEventListener;
 import vistra.core.traversal.step.IStep;
+import vistra.core.traversal.step.ITraversalEventListener;
+import vistra.core.traversal.step.TraversalEventListener;
 import vistra.util.IBidirectIterator;
 import vistra.util.ImmutableBidirectIterator;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -184,13 +184,13 @@ public class Core implements ICore {
 
 		try {
 			ITraversableGraph traversableGraph = GraphFactory
-					.createRenderGraph(graph);
+					.createTraversableGraph(graph);
 			List<IStep> stepList = new ArrayList<IStep>();
 			ITraversalEventListener<IVertex, IEdge> listener = new TraversalEventListener(
 					stepList);
-			traversableGraph.addStepListener(listener);
+			traversableGraph.addTraversalEventListener(listener);
 			this.algorithm.traverse(traversableGraph);
-			// undo all steps in reverse order
+			// TODO: unnötig? undo all steps in reverse order
 			for (int index = stepList.size() - 1; index > -1; index--)
 				stepList.get(index).undo();
 			// the traversal

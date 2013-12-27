@@ -8,8 +8,8 @@ import java.util.List;
 
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
-import vistra.core.traversal.event.ITraversalEventListener;
-import vistra.core.traversal.event.TraversalEvent;
+import vistra.core.traversal.step.ITraversalEventListener;
+import vistra.core.traversal.step.TraversalEvent;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.GraphDecorator;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -673,7 +673,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addStepListener(ITraversalEventListener<IVertex, IEdge> listener) {
+	public void addTraversalEventListener(ITraversalEventListener<IVertex, IEdge> listener) {
 		this.listenerList.add(listener);
 	}
 
@@ -681,7 +681,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void removeStepListener(
+	public void removeTraversalEventListener(
 			ITraversalEventListener<IVertex, IEdge> listener) {
 		this.listenerList.remove(listener);
 	}

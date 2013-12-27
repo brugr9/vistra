@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
-import vistra.core.traversal.event.ITraversalEventListener;
+import vistra.core.traversal.step.ITraversalEventListener;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -99,13 +99,13 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	/**
 	 * Adds {@code listener} as a listener to this graph.
 	 */
-	abstract void addStepListener(
+	abstract void addTraversalEventListener(
 			ITraversalEventListener<IVertex, IEdge> listener);
 
 	/**
 	 * Removes {@code listener} as a listener from this graph.
 	 */
-	abstract void removeStepListener(
+	abstract void removeTraversalEventListener(
 			ITraversalEventListener<IVertex, IEdge> listener);
 
 }
