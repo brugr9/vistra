@@ -2,12 +2,12 @@ package vistra.core.graph;
 
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
-import vistra.core.graph.transformer.edge.EdgeWeight;
-import vistra.core.graph.transformer.vertex.VertexCoordX;
-import vistra.core.graph.transformer.vertex.VertexCoordY;
-import vistra.core.graph.transformer.vertex.VertexEnd;
-import vistra.core.graph.transformer.vertex.VertexStart;
-import vistra.core.graph.transformer.vertex.VertexValue;
+import vistra.core.graph.transformer.EdgeWeight;
+import vistra.core.graph.transformer.VertexCoordX;
+import vistra.core.graph.transformer.VertexCoordY;
+import vistra.core.graph.transformer.VertexEnd;
+import vistra.core.graph.transformer.VertexStart;
+import vistra.core.graph.transformer.VertexValue;
 import edu.uci.ics.jung.io.GraphMLWriter;
 
 /**

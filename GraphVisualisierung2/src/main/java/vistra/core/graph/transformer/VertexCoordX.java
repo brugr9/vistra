@@ -1,4 +1,4 @@
-package vistra.core.graph.transformer.vertex;
+package vistra.core.graph.transformer;
 
 import org.apache.commons.collections15.Transformer;
 

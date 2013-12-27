@@ -1,4 +1,4 @@
-package vistra.core.graph.transformer.edge;
+package vistra.core.graph.transformer;
 
 import java.awt.Paint;
 

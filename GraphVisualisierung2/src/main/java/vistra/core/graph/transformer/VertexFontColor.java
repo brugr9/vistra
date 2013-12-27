@@ -1,4 +1,4 @@
-package vistra.core.graph.transformer.vertex;
+package vistra.core.graph.transformer;
 
 import java.awt.Paint;
 
@@ -10,11 +10,11 @@ import vistra.core.graph.item.IVertexLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexLineColor implements Transformer<IVertexLayout, Paint> {
+public class VertexFontColor implements Transformer<IVertexLayout, Paint> {
 
 	@Override
 	public Paint transform(IVertexLayout layout) {
-		return layout.getLineColor();
+		return layout.getFontColor();
 	}
 
 }

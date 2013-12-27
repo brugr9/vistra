@@ -3,7 +3,7 @@ package vistra.core.graph.item.state.command;
 import vistra.core.graph.item.state.IItemStateHandler;
 
 /**
- * An abstract command on an item-state.
+ * An abstract item-state command.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

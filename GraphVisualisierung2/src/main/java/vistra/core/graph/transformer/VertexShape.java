@@ -1,4 +1,4 @@
-package vistra.core.graph.transformer.vertex;
+package vistra.core.graph.transformer;
 
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;

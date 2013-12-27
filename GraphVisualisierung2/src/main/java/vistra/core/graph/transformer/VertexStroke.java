@@ -1,4 +1,4 @@
-package vistra.core.graph.transformer.vertex;
+package vistra.core.graph.transformer;
 
 import java.awt.BasicStroke;
 import java.awt.Stroke;
