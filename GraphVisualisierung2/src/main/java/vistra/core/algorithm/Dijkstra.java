@@ -3,7 +3,7 @@ package vistra.core.algorithm;
 import net.datastructures.AdaptablePriorityQueue;
 import net.datastructures.DefaultComparator;
 import net.datastructures.HeapAdaptablePriorityQueue;
-import vistra.core.graph.IRenderGraph;
+import vistra.core.graph.ITraversableGraph;
 import vistra.core.graph.item.IVertex;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -33,7 +33,7 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * A field for the graph to traverse.
 	 */
-	private IRenderGraph graph;
+	private ITraversableGraph graph;
 	/**
 	 * A field for an infinity value.
 	 */
@@ -70,7 +70,7 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(IRenderGraph graph) throws AlgorithmException {
+	public void traverse(ITraversableGraph graph) throws AlgorithmException {
 		// TODO
 		this.graph = graph;
 		WEIGHT = new Object();

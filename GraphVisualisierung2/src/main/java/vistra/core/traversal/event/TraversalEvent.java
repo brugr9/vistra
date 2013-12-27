@@ -1,4 +1,4 @@
-package vistra.core.graph.event;
+package vistra.core.traversal.event;
 
 import edu.uci.ics.jung.graph.Graph;
 
@@ -12,7 +12,7 @@ import edu.uci.ics.jung.graph.Graph;
  * @param <E>
  *            the edge type
  */
-public abstract class RenderGraphEvent<V, E> {
+public abstract class TraversalEvent<V, E> {
 
 	protected Graph<V, E> source;
 	protected Type type;
@@ -21,7 +21,7 @@ public abstract class RenderGraphEvent<V, E> {
 	 * Creates an instance with the specified {@code source} graph and
 	 * {@code Type} (vertex/edge addition/removal).
 	 */
-	public RenderGraphEvent(Graph<V, E> source, Type type) {
+	public TraversalEvent(Graph<V, E> source, Type type) {
 		this.source = source;
 		this.type = type;
 	}
@@ -39,7 +39,7 @@ public abstract class RenderGraphEvent<V, E> {
 	/**
 	 * An event type pertaining to graph vertices.
 	 */
-	public static class Vertex<V, E> extends RenderGraphEvent<V, E> {
+	public static class Vertex<V, E> extends TraversalEvent<V, E> {
 		protected V vertex;
 
 		/**
@@ -67,7 +67,7 @@ public abstract class RenderGraphEvent<V, E> {
 	/**
 	 * An event type pertaining to graph edges.
 	 */
-	public static class Edge<V, E> extends RenderGraphEvent<V, E> {
+	public static class Edge<V, E> extends TraversalEvent<V, E> {
 		protected E edge;
 
 		/**

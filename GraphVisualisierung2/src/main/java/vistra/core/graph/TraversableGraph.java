@@ -2,31 +2,37 @@ package vistra.core.graph;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
+import vistra.core.traversal.event.ITraversalEventListener;
+import vistra.core.traversal.event.TraversalEvent;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.GraphDecorator;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
 
 /**
- * A traversable graph: An implementation of <code>Graph</code> that delegates
- * most of its method calls to a constructor-specified <code>Graph</code>
- * instance.
- * <ul>
- * <li>Modifiers: Vertices and edges can neither been added nor removed.
- * <li>Traversable: The graph serves with step-methods (names start with
- * 'step...') for generating a traversal.
- * </ul>
+ * An implementation of <code>Graph</code> that delegates most of its method
+ * calls to a constructor-specified <code>Graph</code> instance. Modifiers are
+ * not supported anymore: vertices and edges can neither been added nor removed.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class RenderGraph extends GraphDecorator<IVertex, IEdge> implements
-		IRenderGraph {
+public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
+		ITraversableGraph {
 
 	private static final long serialVersionUID = -265489538887703410L;
+
+	/**
+	 * A field for a list of listeners.
+	 */
+	List<ITraversalEventListener<IVertex, IEdge>> listenerList = Collections
+			.synchronizedList(new LinkedList<ITraversalEventListener<IVertex, IEdge>>());
 
 	/**
 	 * Main constructor.
@@ -34,7 +40,7 @@ public class RenderGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * @param delegate
 	 *            the graph to delegate
 	 */
-	public RenderGraph(Graph<IVertex, IEdge> delegate) {
+	public TraversableGraph(Graph<IVertex, IEdge> delegate) {
 		super(delegate);
 	}
 
@@ -654,45 +660,29 @@ public class RenderGraph extends GraphDecorator<IVertex, IEdge> implements
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * 
+	 * @param evt
 	 */
-	@Override
-	public void stepVisit(IEdge edge, IVertex vertex) {
-		// TODO Auto-generated method stub
-
+	protected void fireStepEvent(TraversalEvent<IVertex, IEdge> evt) {
+		for (ITraversalEventListener<IVertex, IEdge> listener : listenerList) {
+			listener.handleStepEvent(evt);
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void stepBackEdge(IEdge edge) {
-		// TODO Auto-generated method stub
-
+	public void addStepListener(ITraversalEventListener<IVertex, IEdge> listener) {
+		this.listenerList.add(listener);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void stepForwardEdge(IEdge edge) {
-		// TODO Auto-generated method stub
-
+	public void removeStepListener(
+			ITraversalEventListener<IVertex, IEdge> listener) {
+		this.listenerList.remove(listener);
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepCrossEdge(IEdge edge) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void stepDiscardedEdge(IEdge edge) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

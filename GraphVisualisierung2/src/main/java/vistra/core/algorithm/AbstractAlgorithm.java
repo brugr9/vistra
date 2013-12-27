@@ -1,9 +1,10 @@
 package vistra.core.algorithm;
 
+import vistra.core.graph.ITraversableGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * An abstract algorithm, does nothing on execute.
+ * An observable algorithm, does nothing on execute.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -138,6 +139,12 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	@Override
 	public final EdgeType[] getEdgeTypes() {
 		return this.edgeTypes;
+	}
+
+	@Override
+	public void traverse(ITraversableGraph graph) throws AlgorithmException {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -20,12 +20,12 @@ import vistra.core.graph.GraphFactory;
 import vistra.core.graph.GraphManagerFactory;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.IGraphManager;
-import vistra.core.graph.IRenderGraph;
-import vistra.core.graph.event.IRenderGraphEventListener;
-import vistra.core.graph.event.RenderGraphEventListener;
-import vistra.core.graph.item.IEdgeLayout;
-import vistra.core.graph.item.IVertexLayout;
+import vistra.core.graph.ITraversableGraph;
+import vistra.core.graph.item.IEdge;
+import vistra.core.graph.item.IVertex;
 import vistra.core.traversal.Traversal;
+import vistra.core.traversal.event.ITraversalEventListener;
+import vistra.core.traversal.event.TraversalEventListener;
 import vistra.core.traversal.step.IStep;
 import vistra.util.IBidirectIterator;
 import vistra.util.ImmutableBidirectIterator;
@@ -183,15 +183,13 @@ public class Core implements ICore {
 	public Traversal traverse(IExtendedGraph graph) throws CoreException {
 
 		try {
-			// the steps
+			ITraversableGraph traversableGraph = GraphFactory
+					.createRenderGraph(graph);
 			List<IStep> stepList = new ArrayList<IStep>();
-			// the graph
-			IRenderGraphEventListener<IVertexLayout, IEdgeLayout> listener = new RenderGraphEventListener(
+			ITraversalEventListener<IVertex, IEdge> listener = new TraversalEventListener(
 					stepList);
-			graph.addRenderGraphEventListener(listener);
-			IRenderGraph renderGraph = GraphFactory.createRenderGraph(graph);
-			// the algorithm
-			this.algorithm.traverse(renderGraph);
+			traversableGraph.addStepListener(listener);
+			this.algorithm.traverse(traversableGraph);
 			// undo all steps in reverse order
 			for (int index = stepList.size() - 1; index > -1; index--)
 				stepList.get(index).undo();

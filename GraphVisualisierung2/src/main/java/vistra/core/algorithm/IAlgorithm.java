@@ -1,6 +1,6 @@
 package vistra.core.algorithm;
 
-import vistra.core.graph.IRenderGraph;
+import vistra.core.graph.ITraversableGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -16,7 +16,7 @@ public interface IAlgorithm {
 	 * 
 	 * @return the name
 	 */
-	public abstract String getName();
+	String getName();
 
 	/**
 	 * Returns a description of this algorithm, e.g. what this algorithm is made
@@ -24,14 +24,14 @@ public interface IAlgorithm {
 	 * 
 	 * @return the description
 	 */
-	public abstract String getDescription();
+	String getDescription();
 
 	/**
 	 * Returns the edge type(s) the algorithm is able to handle.
 	 * 
 	 * @return the edge type(s)
 	 */
-	public abstract EdgeType[] getEdgeTypes();
+	EdgeType[] getEdgeTypes();
 
 	/**
 	 * Traverses a graph as given.
@@ -40,7 +40,6 @@ public interface IAlgorithm {
 	 *            the graph to traverse
 	 * @throws AlgorithmException
 	 */
-	public abstract void traverse(IRenderGraph graph)
-			throws AlgorithmException;
+	void traverse(ITraversableGraph graph) throws AlgorithmException;
 
 }

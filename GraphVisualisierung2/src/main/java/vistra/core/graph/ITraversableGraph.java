@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
+import vistra.core.traversal.event.ITraversalEventListener;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -13,7 +14,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IRenderGraph extends Graph<IVertex, IEdge> {
+public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 
 	/**
 	 * 
@@ -96,45 +97,15 @@ public interface IRenderGraph extends Graph<IVertex, IEdge> {
 	abstract IVertex getEnd();
 
 	/**
-	 * A step method: visits a vertex over an edge as given.
-	 * 
-	 * @param edge
-	 *            the edge to discover
-	 * @param vertex
-	 *            the vertex to visit
+	 * Adds {@code listener} as a listener to this graph.
 	 */
-	abstract void stepVisit(IEdge edge, IVertex vertex);
+	abstract void addStepListener(
+			ITraversalEventListener<IVertex, IEdge> listener);
 
 	/**
-	 * A step method: sets an edge as back edge.
-	 * 
-	 * @param edge
-	 *            the edge to set as back edge
+	 * Removes {@code listener} as a listener from this graph.
 	 */
-	abstract void stepBackEdge(IEdge edge);
-
-	/**
-	 * A step method: sets an edge as forward edge.
-	 * 
-	 * @param edge
-	 *            the edge to set as forward edge
-	 */
-	abstract void stepForwardEdge(IEdge edge);
-
-	/**
-	 * A step method: sets an edge as cross edge.
-	 * 
-	 * @param edge
-	 *            the edge to set as cross edge
-	 */
-	abstract void stepCrossEdge(IEdge edge);
-
-	/**
-	 * A step method: sets an edge as dicarded edge.
-	 * 
-	 * @param edge
-	 *            the edge to set as discarded edge
-	 */
-	abstract void stepDiscardedEdge(IEdge edge);
+	abstract void removeStepListener(
+			ITraversalEventListener<IVertex, IEdge> listener);
 
 }

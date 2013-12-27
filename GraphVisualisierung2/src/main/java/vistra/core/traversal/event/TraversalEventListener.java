@@ -1,19 +1,19 @@
-package vistra.core.graph.event;
+package vistra.core.traversal.event;
 
 import java.util.List;
 
-import vistra.core.graph.item.IEdgeLayout;
-import vistra.core.graph.item.IVertexLayout;
+import vistra.core.graph.item.IEdge;
+import vistra.core.graph.item.IVertex;
 import vistra.core.traversal.step.IStep;
 
 /**
- * A render-graph event listener.
+ * A step event listener.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class RenderGraphEventListener implements
-		IRenderGraphEventListener<IVertexLayout, IEdgeLayout> {
+public class TraversalEventListener implements
+		ITraversalEventListener<IVertex, IEdge> {
 
 	/**
 	 * A field for a list of steps.
@@ -26,13 +26,12 @@ public class RenderGraphEventListener implements
 	 * @param stepList
 	 *            a list for steps
 	 */
-	public RenderGraphEventListener(List<IStep> stepList) {
+	public TraversalEventListener(List<IStep> stepList) {
 		this.stepList = stepList;
 	}
 
 	@Override
-	public void handleRenderGraphEvent(
-			RenderGraphEvent<IVertexLayout, IEdgeLayout> evt) {
+	public void handleStepEvent(TraversalEvent<IVertex, IEdge> evt) {
 
 		IStep step = null;
 

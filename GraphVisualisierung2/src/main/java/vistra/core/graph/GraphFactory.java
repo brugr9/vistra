@@ -99,7 +99,7 @@ public final class GraphFactory {
 	 * @param graph
 	 * @return
 	 */
-	public static IRenderGraph createRenderGraph(IExtendedGraph graph) {
+	public static ITraversableGraph createRenderGraph(IExtendedGraph graph) {
 		// TODO
 		return null;
 	}

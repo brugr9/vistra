@@ -1,6 +1,6 @@
 package vistra.core.algorithm;
 
-import vistra.core.graph.IRenderGraph;
+import vistra.core.graph.ITraversableGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -32,7 +32,7 @@ public class DLS extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(IRenderGraph graph) {
+	public void traverse(ITraversableGraph graph) {
 		// TODO
 	}
 

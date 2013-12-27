@@ -2,7 +2,6 @@ package vistra.core.graph;
 
 import java.io.Serializable;
 
-import vistra.core.graph.event.IRenderGraphEventListener;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import edu.uci.ics.jung.graph.Graph;
@@ -55,22 +54,10 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
 
 	/**
-	 * Adds {@code listener} as a listener to this graph.
-	 */
-	abstract void addRenderGraphEventListener(
-			IRenderGraphEventListener<IVertexLayout, IEdgeLayout> listener);
-
-	/**
 	 * Removes {@code listener} as a listener to this graph.
 	 */
 	abstract void removeGraphEventListener(
 			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
-
-	/**
-	 * Removes {@code listener} as a listener to this graph.
-	 */
-	abstract void removeRenderGraphEventListener(
-			IRenderGraphEventListener<IVertexLayout, IEdgeLayout> listener);
 
 	/**
 	 * Checks an item identifier.

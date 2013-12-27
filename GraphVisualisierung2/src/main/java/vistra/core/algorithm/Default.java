@@ -1,6 +1,6 @@
 package vistra.core.algorithm;
 
-import vistra.core.graph.IRenderGraph;
+import vistra.core.graph.ITraversableGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -33,7 +33,7 @@ public class Default extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(IRenderGraph graph) throws AlgorithmException {
+	public void traverse(ITraversableGraph graph) throws AlgorithmException {
 		// Does nothing on execute.
 	}
 
