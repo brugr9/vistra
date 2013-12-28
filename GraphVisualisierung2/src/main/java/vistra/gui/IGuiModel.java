@@ -6,9 +6,9 @@ import java.util.ResourceBundle;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.traversal.Traversal;
 import vistra.gui.control.IControl.EventSource;
-import vistra.gui.control.animation.IAnimationStateHandler;
-import vistra.gui.control.parameter.IParameterStateHandler;
-import vistra.gui.control.stepbystep.ISbsStateHandler;
+import vistra.gui.control.state.IAnimationStateHandler;
+import vistra.gui.control.state.IParameterStateHandler;
+import vistra.gui.control.state.ISbsStateHandler;
 
 /**
  * A model interface.

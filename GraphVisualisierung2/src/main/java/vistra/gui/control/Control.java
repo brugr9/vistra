@@ -2,9 +2,9 @@ package vistra.gui.control;
 
 import vistra.core.ICore;
 import vistra.gui.GuiModel;
-import vistra.gui.control.animation.AnimationStateHandler;
-import vistra.gui.control.parameter.ParameterStateHandler;
-import vistra.gui.control.stepbystep.SbsStateHandler;
+import vistra.gui.control.state.AnimationStateHandler;
+import vistra.gui.control.state.ParameterStateHandler;
+import vistra.gui.control.state.SbsStateHandler;
 
 /**
  * A control as in MVC.

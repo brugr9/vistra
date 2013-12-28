@@ -1,22 +1,24 @@
-package vistra.core.graph.item.state;
+package vistra.gui.control.state;
 
 import vistra.util.IState;
 
 /**
- * An edge state: unexplored.
+ * A step-by-step state: intermediate.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * @see EdgeStateHandler
+ * 
+ * @see SbsStateHandler
+ * 
  */
-class EdgeStateUnexplored extends AbstractEdgeState implements IState {
+class SbsStateIntermediate extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            a state handler
+	 *            a stateHandler
 	 */
-	EdgeStateUnexplored(IEdgeStateHandler stateHandler) {
+	SbsStateIntermediate(ISbsStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +28,7 @@ class EdgeStateUnexplored extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewUnexplored();
+			super.stateHandler.setViewIntermediate();
 		} catch (Exception e) {
 			throw e;
 		}

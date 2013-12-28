@@ -6,7 +6,7 @@ import vistra.util.IState;
  * An edge state: cross.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see EdgeStateHandler
  */
 class EdgeStateCross extends AbstractEdgeState implements IState {
 

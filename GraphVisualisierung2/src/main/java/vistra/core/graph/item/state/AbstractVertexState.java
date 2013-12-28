@@ -7,7 +7,7 @@ import vistra.util.IState;
  * An abstract vertex state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ *  @see VertexStateHandler
  */
 abstract class AbstractVertexState extends AbstractState implements IState {
 

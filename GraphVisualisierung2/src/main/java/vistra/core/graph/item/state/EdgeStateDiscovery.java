@@ -6,7 +6,7 @@ import vistra.util.IState;
  * An edge state: discovery ('a discovery edge').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see EdgeStateHandler
  */
 class EdgeStateDiscovery extends AbstractEdgeState implements IState {
 

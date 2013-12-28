@@ -6,7 +6,7 @@ import vistra.util.IState;
  * A vertex state: focussed.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ *  @see VertexStateHandler
  */
 class VertexStateFocussed extends AbstractVertexState implements IState {
 

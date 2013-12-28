@@ -7,7 +7,7 @@ import vistra.util.IState;
  * An abstract edge state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see EdgeStateHandler
  */
 abstract class AbstractEdgeState extends AbstractState implements IState {
 

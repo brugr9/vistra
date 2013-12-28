@@ -6,7 +6,7 @@ import vistra.util.IState;
  * An edge state: back.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see EdgeStateHandler
  */
 class EdgeStateBack extends AbstractEdgeState implements IState {
 

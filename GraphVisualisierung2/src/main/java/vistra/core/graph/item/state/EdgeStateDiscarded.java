@@ -6,7 +6,7 @@ import vistra.util.IState;
  * An edge state: discarded.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see EdgeStateHandler
  */
 class EdgeStateDiscarded extends AbstractEdgeState implements IState {
 

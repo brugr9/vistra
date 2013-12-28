@@ -9,11 +9,15 @@ import vistra.util.ColorPalette;
 
 /**
  * An edge state handler.
- * 
- * As being an item state handler, this handler has a cellar at it's disposal
- * and is therefore able to hold the state history.
+ * <p>
+ * As being an item state handler, this handler has a cellar at its disposal.
+ * Its therefore able to hold the state history of the edge and handles setting
+ * a previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * 
+ * @see IItemStateHandler
+ * @see VertexStateHandler
  * 
  */
 public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
@@ -148,8 +152,6 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			throw e;
 		}
 	}
-	
-	
 
 	/**
 	 * {@inheritDoc}

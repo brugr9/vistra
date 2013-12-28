@@ -1,22 +1,24 @@
-package vistra.core.graph.item.state;
+package vistra.gui.control.state;
 
 import vistra.util.IState;
 
 /**
- * An edge state: unexplored.
+ * A parameter state: off.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * @see EdgeStateHandler
+ * 
+ * @see ParameterStateHandler
+ * 
  */
-class EdgeStateUnexplored extends AbstractEdgeState implements IState {
+class ParameterStateOff extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            a state handler
+	 *            a stateHandler
 	 */
-	EdgeStateUnexplored(IEdgeStateHandler stateHandler) {
+	ParameterStateOff(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +28,7 @@ class EdgeStateUnexplored extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewUnexplored();
+			super.stateHandler.setViewOff();
 		} catch (Exception e) {
 			throw e;
 		}

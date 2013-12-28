@@ -6,7 +6,7 @@ import vistra.util.IState;
  * An edge state: forward.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see EdgeStateHandler
  */
 class EdgeStateForward extends AbstractEdgeState implements IState {
 

@@ -1,10 +1,12 @@
 package vistra.core.graph.item.state;
 
-
 /**
  * An interface for an edge state handler.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * 
+ * @see IItemStateHandler
+ * @see IVertexStateHandler
  * 
  */
 public interface IEdgeStateHandler extends IItemStateHandler {

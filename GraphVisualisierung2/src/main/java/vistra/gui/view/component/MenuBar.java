@@ -107,11 +107,12 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.save = new JMenuItem("save");
 			this.saveAs = new JMenuItem("save");
 			this.quit = new JMenuItem("quit");
-			// addActionListener
+			// listener
 			this.open.addActionListener(model.getParameterStateHandler());
 			this.save.addActionListener(model.getParameterStateHandler());
 			this.saveAs.addActionListener(model.getParameterStateHandler());
 			this.quit.addActionListener(model.getQuitListener());
+			// command
 			this.open.setActionCommand(OPEN_GRAPH.toString());
 			this.save.setActionCommand(SAVE_GRAPH.toString());
 			this.saveAs.setActionCommand(SAVE_GRAPH_AS.toString());
@@ -119,12 +120,12 @@ public final class MenuBar extends JMenuBar implements Observer {
 				this.newGraph = new JMenu("newGraph");
 				this.undirected = new JMenuItem("undirected");
 				this.directed = new JMenuItem("directed");
-				// addActionListener
+				// listener
 				this.undirected.addActionListener(model
 						.getParameterStateHandler());
 				this.directed.addActionListener(model
 						.getParameterStateHandler());
-				// setActionCommand
+				// command
 				this.undirected.setActionCommand(NEW_GRAPH_UNDIRECTED
 						.toString());
 				this.directed.setActionCommand(NEW_GRAPH_DIRECTED.toString());
@@ -144,11 +145,11 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.deDE = new JMenuItem("deDE");
 			this.frFR = new JMenuItem("frFR");
 			this.enUS = new JMenuItem("enUS");
-			// addActionListener
+			// listener
 			this.deDE.addActionListener(model.getI18nListener());
 			this.frFR.addActionListener(model.getI18nListener());
 			this.enUS.addActionListener(model.getI18nListener());
-			// setActionCommand
+			// command
 			this.deDE.setActionCommand(DE_DE.toString());
 			this.frFR.setActionCommand(FR_FR.toString());
 			this.enUS.setActionCommand(EN_US.toString());
@@ -161,7 +162,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.info = new JMenu("infoMenu");
 			this.help = new JMenuItem("helpMenuItem");
 			this.about = new JMenuItem("aboutMenuItem");
-			// addActionListener
+			// listener
 			this.help.addActionListener(model.getHelpListener());
 			this.about.addActionListener(model.getAboutListener());
 			// add

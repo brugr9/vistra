@@ -6,7 +6,7 @@ import vistra.util.IState;
  * A vertex state: unexplored.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ *  @see VertexStateHandler
  */
 class VertexStateUnexplored extends AbstractVertexState implements IState {
 

@@ -1,14 +1,16 @@
-package vistra.core.graph.item.state;
+package vistra.gui.control.state;
 
 import vistra.util.IState;
 
 /**
- * A vertex state: visited.
+ * A parameter state: graph saved.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * @see VertexStateHandler
+ * 
+ * @see ParameterStateHandler
+ * 
  */
-class VertexStateVisited extends AbstractVertexState implements IState {
+class ParameterStateGraphSaved extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +18,7 @@ class VertexStateVisited extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	VertexStateVisited(IVertexStateHandler stateHandler) {
+	ParameterStateGraphSaved(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +28,7 @@ class VertexStateVisited extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewVisited();
+			super.stateHandler.setViewGraphSaved();
 		} catch (Exception e) {
 			throw e;
 		}

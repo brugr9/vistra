@@ -6,7 +6,7 @@ import vistra.util.IState;
  * An edge state: solution ('an solution member edge').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see EdgeStateHandler
  */
 class EdgeStateSolution extends AbstractEdgeState implements IState {
 
