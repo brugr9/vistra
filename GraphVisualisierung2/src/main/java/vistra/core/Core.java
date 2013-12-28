@@ -100,9 +100,9 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph getNewGraph(EdgeType edgeType) throws CoreException {
+	public IExtendedGraph newGraph(EdgeType edgeType) throws CoreException {
 		try {
-			return this.graphManager.getNewGraph(edgeType);
+			return this.graphManager.newGraph(edgeType);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
@@ -112,9 +112,9 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void save(IExtendedGraph graph) throws CoreException {
+	public void saveGraph() throws CoreException {
 		try {
-			this.graphManager.save(graph);
+			this.graphManager.save();
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
@@ -124,9 +124,9 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void saveAs(IExtendedGraph graph, File file) throws CoreException {
+	public void saveGraphAs(File file) throws CoreException {
 		try {
-			this.graphManager.saveAs(graph, file);
+			this.graphManager.saveAs(file);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}

@@ -3,7 +3,7 @@ package vistra.core.graph.item.state;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import vistra.core.graph.GraphFactory;
+import vistra.core.graph.item.ItemLayoutConstants;
 import vistra.core.graph.item.EdgeLayout;
 import vistra.util.ColorPalette;
 
@@ -178,8 +178,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontStyle(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setLineColor(ColorPalette.darkblue);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
-			this.setDash(GraphFactory.E_SOLID);
+			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_DEFAULT);
+			this.setDash(ItemLayoutConstants.E_SOLID);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -198,8 +198,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontStyle(Font.BOLD);
 			this.setFontColor(ColorPalette.red);
 			this.setLineColor(ColorPalette.red);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_SOLID);
+			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
+			this.setDash(ItemLayoutConstants.E_SOLID);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -218,8 +218,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontStyle(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_DASHED);
+			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
+			this.setDash(ItemLayoutConstants.E_DASHED);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -238,8 +238,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontStyle(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_DASH_SHORT);
+			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
+			this.setDash(ItemLayoutConstants.E_DASH_SHORT);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -258,8 +258,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontStyle(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_DASH_POINT);
+			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
+			this.setDash(ItemLayoutConstants.E_DASH_POINT);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -276,8 +276,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontStyle(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setLineColor(ColorPalette.darkblue);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_DASHED);
+			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
+			this.setDash(ItemLayoutConstants.E_DASHED);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -294,8 +294,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontStyle(Font.BOLD);
 			this.setFontColor(ColorPalette.GREEN);
 			this.setLineColor(ColorPalette.GREEN);
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_SOLID);
+			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
+			this.setDash(ItemLayoutConstants.E_SOLID);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;

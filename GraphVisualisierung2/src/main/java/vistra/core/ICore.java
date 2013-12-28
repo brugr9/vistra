@@ -31,7 +31,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	abstract IExtendedGraph getNewGraph(EdgeType edgeType) throws CoreException;
+	abstract IExtendedGraph newGraph(EdgeType edgeType) throws CoreException;
 
 	/**
 	 * Opens a graph given as file.
@@ -44,24 +44,20 @@ public interface ICore {
 	abstract IExtendedGraph openGraph(File source) throws CoreException;
 
 	/**
-	 * Saves a graph as GraphML-file with the name as given.
+	 * Saves the graph as GraphML-file.
 	 * 
-	 * @param graph
-	 *            the graph to save
 	 * @throws CoreException
 	 */
-	abstract void save(IExtendedGraph graph) throws CoreException;
+	abstract void saveGraph() throws CoreException;
 
 	/**
-	 * Saves a graph as GraphML-file.
+	 * Saves the graph into a GraphML-file with name as given.
 	 * 
-	 * @param graph
-	 *            the graph to save
 	 * @param file
 	 *            the file to write into
 	 * @throws CoreException
 	 */
-	abstract void saveAs(IExtendedGraph graph, File file) throws CoreException;
+	abstract void saveGraphAs(File file) throws CoreException;
 
 	/**
 	 * Updates the list of selectable algorithms. Afterwards, the list holds all

@@ -30,6 +30,10 @@ import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 class GraphManager implements IGraphManager {
 
 	/**
+	 * A field for a graph.
+	 */
+	private IExtendedGraph graph;
+	/**
 	 * A field for a file.
 	 */
 	private File file;
@@ -67,6 +71,7 @@ class GraphManager implements IGraphManager {
 	public GraphManager(Properties p) {
 		super();
 		this.file = new File("");
+		this.graph = GraphFactory.create(EdgeType.UNDIRECTED);
 		/* filename filter */
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				p.getProperty("extension.graph.description"),
@@ -85,11 +90,11 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph getNewGraph(EdgeType edgeType) throws Exception {
+	public IExtendedGraph newGraph(EdgeType edgeType) throws Exception {
 		try {
 			this.file = new File("");
-			IExtendedGraph graph = GraphFactory.create(edgeType);
-			return graph;
+			this.graph = GraphFactory.create(edgeType);
+			return this.graph;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -102,55 +107,28 @@ class GraphManager implements IGraphManager {
 	public IExtendedGraph open(File file) throws Exception {
 		try {
 			this.file = file;
-			return this.read(file);
+			this.graph = GraphFactory.createGraph();
+			this.read(file);
+			return this.graph;
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void save(IExtendedGraph graph) throws Exception {
-		try {
-			this.writer.save(graph, new FileWriter(this.file));
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void saveAs(IExtendedGraph graph, File file) throws Exception {
-		try {
-			this.file = file;
-			this.save(graph);
-		} catch (Exception e) {
-			throw e;
-		}
-
-	}
-
-	/**
-	 * Creates an instance of graph and reads in a GraphML-file as given.
+	 * A helper method: Reads in a GraphML-file to the graph.
 	 * 
 	 * @param file
-	 *            the file to load
-	 * @return the loaded graph
+	 *            the file to read
 	 */
-	private IExtendedGraph read(File file) throws GraphException {
+	private void read(File file) throws GraphException {
 		try {
-			GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout> graphReader = new GraphMLReader2<>(
+			GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout> graphReader = new GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout>(
 					new FileReader(file), this.graphTransformer,
 					this.vertexTransformer, this.edgeTransformer,
 					this.hyperEdgeTransformer);
-
-			IExtendedGraph graph = graphReader.readGraph();
+			this.graph = graphReader.readGraph();
 			graphReader.close();
-			return graph;
 		} catch (GraphIOException e) {
 			throw new GraphException("I/O error in GraphML-file "
 					+ file.getName(), e);
@@ -161,6 +139,34 @@ class GraphManager implements IGraphManager {
 					"Exception while loading data from GraphML-file "
 							+ file.getName(), e);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void save() throws Exception {
+		try {
+			this.writer.save(this.graph, new FileWriter(this.file));
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void saveAs(File file) throws Exception {
+		try {
+			this.file = file;
+			this.save();
+			String name = file.getName();
+			this.graph.setName(name);
+		} catch (Exception e) {
+			throw e;
+		}
+
 	}
 
 	/**

@@ -1,7 +1,6 @@
 package vistra.gui;
 
 import vistra.core.ICore;
-import vistra.core.graph.GraphFactory;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
@@ -29,7 +28,7 @@ public final class GuiFactory {
 	}
 
 	/**
-	 * Creates a gui (MVC).
+	 * Creates a graphic user interface (MVC).
 	 * 
 	 * @param core
 	 *            a core
@@ -45,7 +44,7 @@ public final class GuiFactory {
 	}
 
 	/**
-	 * Creates a gui (MVC).
+	 * Creates a graphic user interface (MVC).
 	 * 
 	 * @param core
 	 *            a core
@@ -57,7 +56,7 @@ public final class GuiFactory {
 	public static IView createGui(ICore core, ViewType type) throws Exception {
 		try {
 			// graph and layout
-			IExtendedGraph graph = GraphFactory.create(EdgeType.UNDIRECTED);
+			IExtendedGraph graph = core.newGraph(EdgeType.UNDIRECTED);
 			Layout<IVertexLayout, IEdgeLayout> layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
 					graph);
 			// model and control

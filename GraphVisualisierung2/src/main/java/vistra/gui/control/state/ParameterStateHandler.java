@@ -21,7 +21,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.core.ICore;
 import vistra.core.algorithm.IAlgorithm;
-import vistra.core.graph.GraphFactory;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
@@ -371,7 +370,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.model.getAnimationStateHandler().handleOff();
 		else
 			this.model.getAnimationStateHandler().handleIdle();
-		this.setGraphSaved(true);
+		// TODO
+		this.setGraphSaved(false);
 		this.setGraphEditable(true);
 		this.updateAlgorithms();
 	}
@@ -389,7 +389,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
-				IExtendedGraph graph = GraphFactory.create(edgeType);
+				IExtendedGraph graph = this.core.newGraph(edgeType);
+				graph.addGraphEventListener(this);
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
 				graph.setName(name);
@@ -434,6 +435,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				if (option == JFileChooser.APPROVE_OPTION) {
 					File source = fileChooser.getSelectedFile();
 					IExtendedGraph graph = this.core.openGraph(source);
+					graph.addGraphEventListener(this);
 					this.model.setGraph(graph);
 					this.updateAlgorithms();
 					this.setGraphSaved(true);
@@ -455,8 +457,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void saveGraph() throws Exception {
 		try {
-			IExtendedGraph graph = this.model.getGraph();
-			this.core.save(graph);
+			this.core.saveGraph();
 			this.setGraphSaved(true);
 			this.setGraphEditable(true);
 		} catch (Exception e) {
@@ -495,8 +496,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			int option = fileChooser.showSaveDialog(this.top);
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
-				IExtendedGraph graph = this.model.getGraph();
-				this.core.saveAs(graph, file);
+				this.core.saveGraphAs(file);
 				this.setGraphSaved(true);
 				this.setGraphEditable(true);
 			}
@@ -626,7 +626,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	private void setGraphEditable(boolean editable) {
 		this.model.setEditGraphEnabled(editable);
-		this.model.notifyObservers(EDIT_GRAPH);
+		this.model.notifyObservers(GRAPH);
 	}
 
 	/**

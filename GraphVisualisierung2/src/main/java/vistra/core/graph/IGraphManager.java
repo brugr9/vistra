@@ -22,8 +22,7 @@ public interface IGraphManager {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	public abstract IExtendedGraph getNewGraph(EdgeType edgeType)
-			throws Exception;
+	public abstract IExtendedGraph newGraph(EdgeType edgeType) throws Exception;
 
 	/**
 	 * Opens a GraphML-file as graph.
@@ -36,24 +35,20 @@ public interface IGraphManager {
 	public abstract IExtendedGraph open(File file) throws Exception;
 
 	/**
-	 * Saves a graph as GraphML-file.
+	 * Saves the graph as GraphML-file.
 	 * 
-	 * @param graph
-	 *            the graph to save
 	 * @throws Exception
 	 */
-	public void save(IExtendedGraph graph) throws Exception;
+	public void save() throws Exception;
 
 	/**
-	 * Saves a graph into a GraphML-file.
+	 * Saves the graph into a GraphML-file as given.
 	 * 
-	 * @param graph
-	 *            the graph to save
 	 * @param file
 	 *            the file to write into
 	 * @throws Exception
 	 */
-	public void saveAs(IExtendedGraph graph, File file) throws Exception;
+	public void saveAs(File file) throws Exception;
 
 	/**
 	 * Returns the file name extension filter.

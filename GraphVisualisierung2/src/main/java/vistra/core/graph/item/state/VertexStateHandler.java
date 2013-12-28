@@ -3,16 +3,16 @@ package vistra.core.graph.item.state;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import vistra.core.graph.GraphFactory;
+import vistra.core.graph.item.ItemLayoutConstants;
 import vistra.core.graph.item.VertexLayout;
 import vistra.util.ColorPalette;
 
 /**
  * A vertex state handler.
  * <p>
- * As being an item state handler, this handler has a cellar at its disposal.
- * It is therefore able to hold the state history of the vertex and handles
- * setting a previous state.
+ * As being an item state handler, this handler has a cellar at its disposal. It
+ * is therefore able to hold the state history of the vertex and handles setting
+ * a previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -178,7 +178,6 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setValueUpdated(int value) throws Exception {
 		try {
-			// TODO value as string?
 			this.setValue(value);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -200,7 +199,7 @@ public class VertexStateHandler extends VertexLayout implements
 			else if (this.isEnd())
 				this.setViewSolution();
 			else {
-				this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
+				this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_DEFAULT);
 				this.setLineColor(ColorPalette.darkblue);
 				this.setFillColor(ColorPalette.orange);
 				this.setFontColor(ColorPalette.darkblue);
@@ -223,7 +222,7 @@ public class VertexStateHandler extends VertexLayout implements
 			if (this.isEnd())
 				this.setViewSolution();
 			else {
-				this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+				this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
 				this.setLineColor(ColorPalette.red);
 				this.setFillColor(ColorPalette.yellow);
 				this.setFontColor(ColorPalette.darkblue);
@@ -249,7 +248,7 @@ public class VertexStateHandler extends VertexLayout implements
 			else if (this.isEnd())
 				this.setViewSolution();
 			else {
-				this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+				this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
 				this.setLineColor(ColorPalette.red);
 				this.setFillColor(ColorPalette.blue);
 				this.setFontColor(ColorPalette.darkblue);
@@ -268,7 +267,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setViewSolution() throws Exception {
 		try {
-			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
+			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
 			this.setLineColor(ColorPalette.green);
 			this.setFillColor(ColorPalette.white);
 			this.setFontColor(ColorPalette.green);
@@ -284,6 +283,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * 
 	 * @return {@code true} if already visited
 	 */
+	@Override
 	public boolean isVisited() {
 		if (this.state instanceof VertexStateVisited
 				|| this.state instanceof VertexStateSolution)

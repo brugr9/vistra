@@ -54,9 +54,9 @@ public final class ExtendedGraphMLWriter extends
 		this.addVertexData(V_END, V_END_COMMENT,
 				Boolean.toString(V_END_DEFAULT), new VertexEnd());
 		this.addVertexData(V_VALUE, V_VALUE_COMMENT,
-				Double.toString(V_VALUE_DEFAULT), new VertexValue());
+				Integer.toString(V_VALUE_DEFAULT), new VertexValue());
 		this.addEdgeData(E_WEIGHT, E_WEIGHT_COMMENT,
-				Double.toString(E_WEIGHT_DEFAULT), new EdgeWeight());
+				Integer.toString(E_WEIGHT_DEFAULT), new EdgeWeight());
 	}
 
 }

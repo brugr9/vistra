@@ -33,6 +33,14 @@ public class GraphPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 177109739873034494L;
 
 	/**
+	 * A field for a title.
+	 */
+	private String title;
+	/**
+	 * A field for a name.
+	 */
+	private String name;
+	/**
 	 * A field for a titled border.
 	 */
 	private TitledBorder border;
@@ -62,6 +70,8 @@ public class GraphPanel extends JPanel implements Observer {
 		this.setSize(size);
 		this.border = BorderFactory.createTitledBorder("graphPanel");
 		this.setBorder(border);
+		this.title = "title";
+		this.name = "name";
 
 		/* viewer */
 		this.viewer = new Viewer(top, model, layout, new Dimension(size.width,
@@ -85,13 +95,14 @@ public class GraphPanel extends JPanel implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == EventSource.I18N || arg == EventSource.GRAPH) {
-				String title = b.getString("graph.label") + ": ";
+			if (arg == EventSource.I18N)
+				this.title = b.getString("graph.label") + ": ";
+			if (arg == EventSource.GRAPH) {
+				this.name = m.getGraph().getName();
 				if (!m.isGraphSaved())
-					title += "*";
-				title += m.getGraph().getName();
-				this.border.setTitle(title);
+					this.name += "*";
 			}
+			this.border.setTitle(title + name);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);
@@ -99,5 +110,4 @@ public class GraphPanel extends JPanel implements Observer {
 		}
 
 	}
-
 }

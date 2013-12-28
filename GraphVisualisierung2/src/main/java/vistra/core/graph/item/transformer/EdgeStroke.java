@@ -5,8 +5,8 @@ import java.awt.Stroke;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.ItemLayoutConstants;
 
 /**
  * An edge transformer: stroke.
@@ -27,6 +27,6 @@ public class EdgeStroke implements Transformer<IEdgeLayout, Stroke> {
 		else
 			return new BasicStroke(edge.getLineWidth(), BasicStroke.CAP_SQUARE,
 					BasicStroke.JOIN_MITER, 10.0f, edge.getDash(),
-					GraphFactory.E_DASH_PHASE);
+					ItemLayoutConstants.E_DASH_PHASE);
 	}
 }

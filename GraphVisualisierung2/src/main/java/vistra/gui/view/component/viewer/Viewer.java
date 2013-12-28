@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.EdgeFactory;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
@@ -65,6 +64,10 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 	 * A field for an editing modal-graph mouse.
 	 */
 	private final EditingModalGraphMouse<IVertexLayout, IEdgeLayout> mouse;
+	/**
+	 * A field for an edge label closeness.
+	 */
+	private final static double E_LABEL_CLOSENESS = 0.5;
 
 	/**
 	 * Main constructor.
@@ -95,7 +98,7 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 		rc.setVertexFontTransformer(new VertexFont());
 		/* edge */
 		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertexLayout, IEdgeLayout>(
-				GraphFactory.E_LABEL_CLOSENESS, GraphFactory.E_LABEL_CLOSENESS));
+				E_LABEL_CLOSENESS, E_LABEL_CLOSENESS));
 		rc.setEdgeShapeTransformer(new EdgeShape.Line<IVertexLayout, IEdgeLayout>());
 		rc.setEdgeStrokeTransformer(new EdgeStroke());
 		rc.setEdgeArrowStrokeTransformer(new EdgeStroke());
@@ -127,7 +130,7 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 			if (arg == EventSource.I18N) {
 				this.vertexPopup.setLabel(b.getString("vertex.label"));
 				this.edgePopup.setLabel(b.getString("edge.label"));
-			} else if (arg == EventSource.EDIT_GRAPH) {
+			} else if (arg == EventSource.GRAPH) {
 				if (m.isEditGraphEnabled())
 					this.mouse.setMode(Mode.EDITING);
 				else
