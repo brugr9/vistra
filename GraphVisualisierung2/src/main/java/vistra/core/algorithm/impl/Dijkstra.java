@@ -36,10 +36,7 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	 * A field for the graph to traverse.
 	 */
 	private ITraversableGraph graph;
-	/**
-	 * A field for an infinity value.
-	 */
-	protected static final Integer INFINITE = Integer.MAX_VALUE;
+
 	/**
 	 * A field for an edge weights decoration key.
 	 */
