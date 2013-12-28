@@ -1,4 +1,4 @@
-package vistra.core.graph.transformer;
+package vistra.core.graph.item.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
@@ -8,11 +8,11 @@ import vistra.core.graph.item.IVertexLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexCoordX implements Transformer<IVertexLayout, String> {
+public class VertexCoordY implements Transformer<IVertexLayout, String> {
 
 	@Override
 	public String transform(IVertexLayout layout) {
-		return String.valueOf(new Double(layout.getLocation().getX())
+		return String.valueOf(new Double(layout.getLocation().getY())
 				.intValue());
 	}
 

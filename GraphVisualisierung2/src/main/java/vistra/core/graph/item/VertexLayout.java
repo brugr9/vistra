@@ -3,8 +3,7 @@ package vistra.core.graph.item;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import vistra.core.graph.GraphMeta;
-import vistra.util.ColorPalette;
+import vistra.core.graph.ml.ExtendedGraphMLWriter;
 import vistra.util.Convert;
 
 /**
@@ -35,9 +34,9 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 		super();
 		this.layout = new ItemLayout();
 		this.location = Convert.toPoint2D(
-				Integer.toString(GraphMeta.V_LOC_X_DEFAULT),
-				Integer.toString(GraphMeta.V_LOC_Y_DEFAULT));
-		this.fillColor = ColorPalette.orange;
+				Integer.toString(ExtendedGraphMLWriter.V_LOC_X_DEFAULT),
+				Integer.toString(ExtendedGraphMLWriter.V_LOC_Y_DEFAULT));
+		this.fillColor = null;
 	}
 
 	/**

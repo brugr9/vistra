@@ -3,10 +3,10 @@ package vistra.gui.control.state;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 
-import edu.uci.ics.jung.graph.event.GraphEventListener;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.control.IControlStateHandler;
+import edu.uci.ics.jung.graph.event.GraphEventListener;
 
 /**
  * An interface for a parameter state handler. A parameter state machine handles

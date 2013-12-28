@@ -285,7 +285,7 @@ public final class SbsStateHandler extends Observable implements
 	 * 
 	 * @throws Exception
 	 */
-	public void goToBeginning() throws Exception {
+	void goToBeginning() throws Exception {
 
 		Traversal traversal = this.model.getTraversal();
 
@@ -358,7 +358,7 @@ public final class SbsStateHandler extends Observable implements
 	 * @return <code>true</code> if the traversal has a next step.
 	 * @throws Exception
 	 */
-	public boolean goForward() throws Exception {
+	boolean goForward() throws Exception {
 
 		Traversal traversal = this.model.getTraversal();
 

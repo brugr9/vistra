@@ -35,6 +35,6 @@ public class VertexFactory implements Factory<IVertexLayout> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return (VertexLayout) vertex;
+		return (IVertexLayout) vertex;
 	}
 }

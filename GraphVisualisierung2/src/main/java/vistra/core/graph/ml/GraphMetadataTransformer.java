@@ -1,4 +1,4 @@
-package vistra.core.graph.transformer;
+package vistra.core.graph.ml;
 
 import org.apache.commons.collections15.Transformer;
 
@@ -9,22 +9,21 @@ import edu.uci.ics.jung.io.graphml.GraphMetadata;
 import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;
 
 /**
- * An graph transformer for reading a GraphML file.
+ * An graph metadata transformer for reading an extended GraphML file.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GraphTransformer implements
+public class GraphMetadataTransformer implements
 		Transformer<GraphMetadata, IExtendedGraph> {
 
 	@Override
-	public IExtendedGraph transform(GraphMetadata graphMeta) {
+	public IExtendedGraph transform(GraphMetadata meta) {
 		IExtendedGraph graph = GraphFactory.createGraph();
-		graph.setName(graphMeta.getId());
-		EdgeType edgeType = graphMeta.getEdgeDefault() == EdgeDefault.UNDIRECTED ? EdgeType.UNDIRECTED
+		graph.setName(meta.getId());
+		EdgeType edgeType = meta.getEdgeDefault() == EdgeDefault.UNDIRECTED ? EdgeType.UNDIRECTED
 				: EdgeType.DIRECTED;
 		graph.setEdgeType(edgeType);
-
 		return graph;
 	}
 

@@ -2,8 +2,6 @@ package vistra.util;
 
 import java.awt.Color;
 
-import vistra.core.graph.GraphMeta;
-
 /**
  * A tool class built like {@link Color} defining some customised colours.
  * 
@@ -122,122 +120,6 @@ public abstract class ColorPalette {
 	 * A main (no-)constructor.
 	 */
 	private ColorPalette() {
-	}
-
-	/**
-	 * Converts a colour name as found in {@link ColorPalette} to a lower case
-	 * string (e.g. used as meta-data property in a GraphML element).
-	 * <p>
-	 * If the colour as given is not defined in {@link ColorPalette}, the method
-	 * returns the RGB value as string.
-	 * 
-	 * @param color
-	 *            the colour
-	 * @return the string if successful
-	 * @see GraphMeta
-	 */
-	public static String toString(Color color) {
-
-		if (color.equals(antique)) {
-			return "antique";
-		} else if (color.equals(ANTIQUE)) {
-			return "antique";
-		} else if (color.equals(red)) {
-			return "red";
-		} else if (color.equals(RED)) {
-			return "red";
-		} else if (color.equals(green)) {
-			return "green";
-		} else if (color.equals(GREEN)) {
-			return "green";
-		} else if (color.equals(darkgreen)) {
-			return "darkgreen";
-		} else if (color.equals(DARKGREEN)) {
-			return "darkgreen";
-		} else if (color.equals(orange)) {
-			return "orange";
-		} else if (color.equals(ORANGE)) {
-			return "orange";
-		} else if (color.equals(blue)) {
-			return "blue";
-		} else if (color.equals(BLUE)) {
-			return "blue";
-		} else if (color.equals(darkblue)) {
-			return "darkblue";
-		} else if (color.equals(DARKBLUE)) {
-			return "darkblue";
-		} else if (color.equals(citron)) {
-			return "citron";
-		} else if (color.equals(CITRON)) {
-			return "citron";
-		} else if (color.equals(yellow)) {
-			return "yellow";
-		} else if (color.equals(YELLOW)) {
-			return "yellow";
-		} else if (color.equals(gray)) {
-			return "gray";
-		} else if (color.equals(GRAY)) {
-			return "gray";
-		} else if (color.equals(darkgrey)) {
-			return "darkgray";
-		} else if (color.equals(DARKGRAY)) {
-			return "darkgray";
-		} else if (color.equals(white)) {
-			return "white";
-		} else if (color.equals(WHITE)) {
-			return "white";
-		} else if (color.equals(black)) {
-			return "black";
-		} else if (color.equals(BLACK)) {
-			return "black";
-		} else
-			return Integer.toString(color.getRGB());
-	}
-
-	/**
-	 * Tries to convert a {@link ColorPalette} colour name (e.g. used as
-	 * meta-data property in a GraphML element) into a {@link ColorPalette}
-	 * colour.
-	 * 
-	 * @param name
-	 *            a {@link ColorPalette} colour name
-	 * @return the {@link ColorPalette} if successful (else: black)
-	 * @see GraphMeta
-	 */
-	public static Color toColor(String name) {
-
-		switch (name) {
-
-		case "antique":
-			return antique;
-		case "red":
-			return red;
-		case "green":
-			return green;
-		case "darkgreen":
-			return darkgreen;
-		case "orange":
-			return orange;
-		case "blue":
-			return blue;
-		case "darkblue":
-			return darkblue;
-		case "citron":
-			return citron;
-		case "yellow":
-			return yellow;
-		case "gray":
-			return gray;
-		case "darkgray":
-			return darkgrey;
-		case "white":
-			return white;
-		case "black":
-			return black;
-		default:
-			return black;
-		}
-
 	}
 
 }

@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 /**
- * A utility class, therefore serving with static method only.
+ * A utility class serving with static methods only.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -18,29 +18,13 @@ public final class Convert {
 	}
 
 	/**
-	 * Tries to convert a string to a double.
+	 * Tries to convert a string to an integer.
 	 * 
 	 * @param value
 	 *            the value to convert
-	 * @return the value as double if successful, <code>Double.NaN</code>
-	 *         otherwise
+	 * @return the value as {@code Integer} if successful
 	 */
-	public static double toDouble(String value) {
-		try {
-			return Double.parseDouble(value);
-		} catch (Exception e) {
-			return Double.NaN;
-		}
-	}
-
-	/**
-	 * Tries to convert a string to an int.
-	 * 
-	 * @param value
-	 *            the value to convert
-	 * @return the value as int if successful
-	 */
-	public static int toInt(String value) {
+	public static Integer toInteger(String value) {
 		try {
 			return Integer.parseInt(value);
 		} catch (Exception e) {
@@ -49,53 +33,33 @@ public final class Convert {
 	}
 
 	/**
-	 * Tries to convert a string to a boolean.
-	 * 
-	 * @param value
-	 *            the value to convert
-	 * @return the value as boolean if successful, <code>false</code> otherwise
-	 */
-	public static boolean toBoolean(String value) {
-		try {
-			return Boolean.parseBoolean(value);
-		} catch (Exception e) {
-			throw new UnsupportedOperationException("value: " + value, e);
-		}
-	}
-
-	/**
 	 * Tries to convert two string coordinates to a point.
 	 * 
-	 * @param xValue
+	 * @param x
 	 *            the x coordinate
-	 * @param yValue
+	 * @param y
 	 *            the y coordinate
 	 * @return the point
 	 */
-	public static Point2D toPoint2D(String xValue, String yValue) {
-		int x, y;
+	public static Point2D toPoint2D(String x, String y) {
+		int xInt, yInt;
+		Point2D p;
 		try {
-			x = Integer.parseInt(xValue);
+			xInt = Integer.parseInt(x);
 		} catch (Exception e) {
-			throw new UnsupportedOperationException("xValue: " + xValue, e);
+			throw new UnsupportedOperationException("x: " + x, e);
 		}
 		try {
-			y = Integer.parseInt(yValue);
+			yInt = Integer.parseInt(y);
 		} catch (Exception e) {
-			throw new UnsupportedOperationException("yValue: " + yValue, e);
+			throw new UnsupportedOperationException("y: " + y, e);
 		}
-		return new Point(x, y);
-	}
-
-	/**
-	 * Rounds with two decimals.
-	 * 
-	 * @param value
-	 *            the value to round
-	 * @return the rounded value
-	 */
-	public static double toRounded2Decimals(double value) {
-		return Math.rint(value * 100.0) / 100.0;
+		try {
+			p = new Point(xInt, yInt);
+		} catch (Exception e) {
+			throw new UnsupportedOperationException("point", e);
+		}
+		return p;
 	}
 
 }

@@ -132,7 +132,7 @@ public class EdgeDialog extends JDialog {
 			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 
 		edge.setId(this.txtEdgeName.getText().trim());
-		edge.setWeight(Convert.toInt(this.txtEdgeWeight.getText()));
+		edge.setWeight(Convert.toInteger(this.txtEdgeWeight.getText()));
 		vViewer.repaint();
 		this.dispose();
 	}

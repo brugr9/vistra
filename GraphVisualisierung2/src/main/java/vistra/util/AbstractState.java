@@ -1,7 +1,7 @@
 package vistra.util;
 
 /**
- * An abstract state.
+ * An abstract state with default empty implementation on 'do'-methods.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

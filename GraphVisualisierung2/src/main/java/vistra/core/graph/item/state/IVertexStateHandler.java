@@ -55,4 +55,10 @@ public interface IVertexStateHandler extends IItemStateHandler {
 	 */
 	abstract void handleSolution() throws Exception;
 
+	/**
+	 * Returns the visited status.
+	 * 
+	 * @return {@code true} if visited
+	 */
+	abstract boolean isVisited();
 }

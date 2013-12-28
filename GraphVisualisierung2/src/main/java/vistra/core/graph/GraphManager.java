@@ -10,10 +10,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
-import vistra.core.graph.transformer.EdgeTransformer;
-import vistra.core.graph.transformer.GraphTransformer;
-import vistra.core.graph.transformer.HyperEdgeTransformer;
-import vistra.core.graph.transformer.VertexTransformer;
+import vistra.core.graph.ml.EdgeMetadataTransformer;
+import vistra.core.graph.ml.ExtendedGraphMLWriter;
+import vistra.core.graph.ml.GraphMetadataTransformer;
+import vistra.core.graph.ml.HyperEdgeMetadataTransformer;
+import vistra.core.graph.ml.VertexMetadataTransformer;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
@@ -27,33 +28,33 @@ import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 class GraphManager implements IGraphManager {
 
 	/**
-	 * A field for a filename extension filter.
-	 */
-	private FileNameExtensionFilter fileNameExtensionFilter;
-	/**
 	 * A field for a file.
 	 */
 	private File file;
 	/**
+	 * A field for a filename extension filter.
+	 */
+	private FileNameExtensionFilter fileNameExtensionFilter;
+	/**
 	 * A field for a graph transformer.
 	 */
-	private final GraphTransformer graphTransformer;
+	private final GraphMetadataTransformer graphTransformer;
 	/**
 	 * A field for a vertex transformer.
 	 */
-	private final VertexTransformer vertexTransformer;
+	private final VertexMetadataTransformer vertexTransformer;
 	/**
 	 * A field for a edge transformer.
 	 */
-	private final EdgeTransformer edgeTransformer;
+	private final EdgeMetadataTransformer edgeTransformer;
 	/**
 	 * A field for a hyper edge transformer.
 	 */
-	private final HyperEdgeTransformer hyperEdgeTransformer;
+	private final HyperEdgeMetadataTransformer hyperEdgeTransformer;
 	/**
 	 * A field for a graph writer.
 	 */
-	private GraphWriter writer;
+	private ExtendedGraphMLWriter writer;
 
 	/**
 	 * Main constructor.
@@ -70,12 +71,12 @@ class GraphManager implements IGraphManager {
 				p.getProperty("extension.graph"));
 		this.fileNameExtensionFilter = filter;
 		/* transformer */
-		this.graphTransformer = new GraphTransformer();
-		this.vertexTransformer = new VertexTransformer();
-		this.edgeTransformer = new EdgeTransformer();
-		this.hyperEdgeTransformer = new HyperEdgeTransformer();
+		this.graphTransformer = new GraphMetadataTransformer();
+		this.vertexTransformer = new VertexMetadataTransformer();
+		this.edgeTransformer = new EdgeMetadataTransformer();
+		this.hyperEdgeTransformer = new HyperEdgeMetadataTransformer();
 		/* graphML writer */
-		this.writer = new GraphWriter();
+		this.writer = new ExtendedGraphMLWriter();
 	}
 
 	/**

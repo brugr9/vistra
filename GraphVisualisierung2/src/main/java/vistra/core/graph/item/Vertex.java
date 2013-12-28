@@ -2,7 +2,7 @@ package vistra.core.graph.item;
 
 import java.util.Observable;
 
-import vistra.core.graph.GraphMeta;
+import vistra.core.graph.ml.ExtendedGraphMLWriter;
 
 /**
  * A vertex.
@@ -32,9 +32,9 @@ class Vertex extends Observable implements IVertex {
 	 */
 	Vertex() {
 		super();
-		this.start = GraphMeta.V_START_DEFAULT;
-		this.end = GraphMeta.V_END_DEFAULT;
-		this.value = GraphMeta.V_VALUE_DEFAULT;
+		this.start = ExtendedGraphMLWriter.V_START_DEFAULT;
+		this.end = ExtendedGraphMLWriter.V_END_DEFAULT;
+		this.value = ExtendedGraphMLWriter.V_VALUE_DEFAULT;
 	}
 
 	/**

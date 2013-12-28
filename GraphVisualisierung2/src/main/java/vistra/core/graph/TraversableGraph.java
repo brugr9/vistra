@@ -11,9 +11,7 @@ import vistra.core.graph.TraversableGraphEvent.Type;
 import vistra.core.graph.TraversableGraphEvent.VerticesEvent;
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
-import vistra.core.graph.item.IVertexLayout;
 import vistra.core.graph.item.state.IVertexStateHandler;
-import vistra.core.graph.item.state.VertexStateHandler;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.GraphDecorator;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -671,7 +669,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 */
 	@Override
 	public boolean isVisited(IVertex vertex) {
-		VertexStateHandler handler = (VertexStateHandler) vertex;
+		IVertexStateHandler handler = (IVertexStateHandler) vertex;
 		return handler.isVisited();
 	}
 
