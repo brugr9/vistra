@@ -63,6 +63,32 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void handleInitialised() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleInitialised();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleUpdated(int value) throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleUpdated(value);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void handleFocussed() throws Exception {
 		try {
 			this.state.exit();
@@ -130,15 +156,34 @@ public class VertexStateHandler extends VertexLayout implements
 		}
 	}
 
-	public boolean isVisited() {
-		if (this.state instanceof VertexStateVisited
-				|| this.state instanceof VertexStateSolution)
-			return true;
-		else if (this.state instanceof VertexStateFocussed)
-			return true;
-		else
-			return false;
+	/**
+	 * State value setter: Initialises a vertex value.
+	 * 
+	 * @throws Exception
+	 */
+	void setValueInitialised() throws Exception {
+		try {
+			this.setValueUpdated(Integer.MAX_VALUE);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 
+	/**
+	 * State value setter: Updates a vertex value.
+	 * 
+	 * @param value
+	 *            the value to set
+	 * @throws Exception
+	 */
+	void setValueUpdated(int value) throws Exception {
+		try {
+			// TODO value as string?
+			this.setValue(value);
+			this.notifyObservers();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -151,9 +196,9 @@ public class VertexStateHandler extends VertexLayout implements
 	void setViewUnexplored() throws Exception {
 		try {
 			if (this.isStart())
-				this.handleFocussed();
+				this.setViewFocussed();
 			else if (this.isEnd())
-				this.handleSolution();
+				this.setViewSolution();
 			else {
 				this.setLineWidth(GraphFactory.STROKE_WIDTH_DEFAULT);
 				this.setLineColor(ColorPalette.darkblue);
@@ -176,7 +221,7 @@ public class VertexStateHandler extends VertexLayout implements
 	void setViewFocussed() throws Exception {
 		try {
 			if (this.isEnd())
-				this.handleSolution();
+				this.setViewSolution();
 			else {
 				this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 				this.setLineColor(ColorPalette.red);
@@ -200,9 +245,9 @@ public class VertexStateHandler extends VertexLayout implements
 	void setViewVisited() throws Exception {
 		try {
 			if (this.isStart())
-				this.handleFocussed();
+				this.setViewFocussed();
 			else if (this.isEnd())
-				this.handleSolution();
+				this.setViewSolution();
 			else {
 				this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
 				this.setLineColor(ColorPalette.red);
@@ -232,6 +277,22 @@ public class VertexStateHandler extends VertexLayout implements
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+
+	/**
+	 * A helper method.
+	 * 
+	 * @return {@code true} if already visited
+	 */
+	public boolean isVisited() {
+		if (this.state instanceof VertexStateVisited
+				|| this.state instanceof VertexStateSolution)
+			return true;
+		else if (this.state instanceof VertexStateFocussed)
+			return true;
+		else
+			return false;
+
 	}
 
 }

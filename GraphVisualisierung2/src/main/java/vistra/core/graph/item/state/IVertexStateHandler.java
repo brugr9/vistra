@@ -19,6 +19,22 @@ public interface IVertexStateHandler extends IItemStateHandler {
 	abstract void handleUnexplored() throws Exception;
 
 	/**
+	 * Handles initialised.
+	 * 
+	 * @throws Exception
+	 */
+	abstract void handleInitialised() throws Exception;
+
+	/**
+	 * Handles updated.
+	 * 
+	 * @param value
+	 *            the value to set
+	 * @throws Exception
+	 */
+	abstract void handleUpdated(int value) throws Exception;
+
+	/**
 	 * Handles focussed.
 	 * 
 	 * @throws Exception

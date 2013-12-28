@@ -4,13 +4,13 @@ import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.state.EdgeStateHandler;
 
 /**
- * An edge-state command: unexplored edge.
+ * An item-state command: unexplored edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class UnexploredEdgeCommand extends AbstractItemStateCommand implements
-		IItemStateCommand {
+		IItemCommand {
 
 	/**
 	 * Main constructor.

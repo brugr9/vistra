@@ -1,6 +1,6 @@
 package vistra.core.graph.item.state.command;
 
-import vistra.core.graph.item.command.IItemCommand;
+import vistra.util.ICommand;
 
 /**
  * An item-state command interface.
@@ -8,6 +8,6 @@ import vistra.core.graph.item.command.IItemCommand;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IItemStateCommand extends IItemCommand {
+public interface IItemCommand extends ICommand {
 
 }

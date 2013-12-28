@@ -5,13 +5,13 @@ import vistra.core.graph.item.state.EdgeStateHandler;
 import vistra.core.graph.item.state.IItemStateHandler;
 
 /**
- * An edge-state command: back-edge.
+ * An item-state command: back-edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class BackEdgeCommand extends AbstractItemStateCommand implements
-		IItemStateCommand {
+		IItemCommand {
 
 	/**
 	 * Main constructor.

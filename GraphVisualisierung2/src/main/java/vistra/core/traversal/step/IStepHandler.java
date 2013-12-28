@@ -1,12 +1,15 @@
 package vistra.core.traversal.step;
 
-import vistra.core.graph.item.command.IItemCommand;
+import vistra.core.graph.item.state.command.IItemCommand;
 import vistra.util.ICommand;
 
 /**
- * A step handler interface.
+ * A step handler interface. A step handler is a command handler specialised on
+ * handling item-commands.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * @see IStep
+ * @see IItemCommand
  * 
  */
 interface IStepHandler extends ICommand {

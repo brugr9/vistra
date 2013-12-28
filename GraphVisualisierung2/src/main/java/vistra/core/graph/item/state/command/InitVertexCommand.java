@@ -4,12 +4,12 @@ import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.state.VertexStateHandler;
 
 /**
- * An item-state command: solution vertex.
+ * An item-state command: initialise vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class SolutionVertexCommand extends AbstractItemStateCommand implements
+public class InitVertexCommand extends AbstractItemStateCommand implements
 		IItemCommand {
 
 	/**
@@ -18,7 +18,7 @@ public class SolutionVertexCommand extends AbstractItemStateCommand implements
 	 * @param vertex
 	 *            a vertex
 	 */
-	public SolutionVertexCommand(IVertex vertex) {
+	public InitVertexCommand(IVertex vertex) {
 		super((VertexStateHandler) vertex);
 	}
 
@@ -27,7 +27,7 @@ public class SolutionVertexCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((VertexStateHandler) super.stateHandler).handleFocussed();
+		((VertexStateHandler) super.stateHandler).handleInitialised();
 	}
 
 }

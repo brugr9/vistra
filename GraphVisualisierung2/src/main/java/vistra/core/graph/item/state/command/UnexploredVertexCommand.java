@@ -4,13 +4,13 @@ import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.state.VertexStateHandler;
 
 /**
- * A vertex-state command: unexplored vertex.
+ * An item-state command: unexplored vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class UnexploredVertexCommand extends AbstractItemStateCommand implements
-		IItemStateCommand {
+		IItemCommand {
 
 	/**
 	 * Main constructor.

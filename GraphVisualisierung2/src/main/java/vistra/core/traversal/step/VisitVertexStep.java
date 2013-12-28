@@ -4,7 +4,7 @@ import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.VertexLayout;
 import vistra.core.graph.item.state.command.DiscoveryEdgeCommand;
-import vistra.core.graph.item.state.command.IItemStateCommand;
+import vistra.core.graph.item.state.command.IItemCommand;
 import vistra.core.graph.item.state.command.VisitedVertexCommand;
 
 /**
@@ -30,8 +30,8 @@ public class VisitVertexStep extends AbstractStep implements IStep {
 				+ ((VertexLayout) vertex).getId();
 		try {
 			// new
-			IItemStateCommand discoveryEdge = new DiscoveryEdgeCommand(edge);
-			IItemStateCommand visitedVertex = new VisitedVertexCommand(vertex);
+			IItemCommand discoveryEdge = new DiscoveryEdgeCommand(edge);
+			IItemCommand visitedVertex = new VisitedVertexCommand(vertex);
 			// add
 			this.stepHandler.addCommand(discoveryEdge);
 			this.stepHandler.addCommand(visitedVertex);

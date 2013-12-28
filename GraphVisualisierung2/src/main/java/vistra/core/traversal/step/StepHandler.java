@@ -3,7 +3,7 @@ package vistra.core.traversal.step;
 import java.util.ArrayList;
 import java.util.List;
 
-import vistra.core.graph.item.command.IItemCommand;
+import vistra.core.graph.item.state.command.IItemCommand;
 
 /**
  * A step handler.

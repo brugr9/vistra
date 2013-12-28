@@ -7,7 +7,7 @@ import vistra.util.IState;
  * An abstract vertex state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- *  @see VertexStateHandler
+ * @see VertexStateHandler
  */
 abstract class AbstractVertexState extends AbstractState implements IState {
 
@@ -35,6 +35,36 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 		try {
 			this.stateHandler.setState(new VertexStateUnexplored(
 					this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Handles initialised.
+	 * 
+	 * @throws Exception
+	 */
+	void handleInitialised() throws Exception {
+		try {
+			this.stateHandler.setState(new VertexStateInitialised(
+					this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Handles updated.
+	 * 
+	 * @param value
+	 *            the value to set
+	 * @throws Exception
+	 */
+	void handleUpdated(int value) throws Exception {
+		try {
+			this.stateHandler.setState(new VertexStateUpdated(
+					this.stateHandler, value));
 		} catch (Exception e) {
 			throw e;
 		}

@@ -4,13 +4,13 @@ import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.state.EdgeStateHandler;
 
 /**
- * An edge-state command: discarded edge.
+ * An item-state command: discarded edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class DiscardedEdgeCommand extends AbstractItemStateCommand implements
-		IItemStateCommand {
+		IItemCommand {
 
 	/**
 	 * Main constructor.

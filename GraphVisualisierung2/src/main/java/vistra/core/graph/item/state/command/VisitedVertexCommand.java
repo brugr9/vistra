@@ -4,13 +4,13 @@ import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.state.VertexStateHandler;
 
 /**
- * A vertex-state command: visited vertex.
+ * An item-state command: visited vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class VisitedVertexCommand extends AbstractItemStateCommand implements
-		IItemStateCommand {
+		IItemCommand {
 
 	/**
 	 * Main constructor.
