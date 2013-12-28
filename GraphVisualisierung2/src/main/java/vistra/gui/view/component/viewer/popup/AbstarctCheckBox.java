@@ -17,7 +17,7 @@ public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * A field for a visualization viewer.
+	 * A field for a viewer.
 	 */
 	protected final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
 	/**
@@ -29,7 +29,7 @@ public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
 	 * Main constructor.
 	 * 
 	 * @param viewer
-	 *            a visualization viewer
+	 *            a viewer
 	 */
 	protected AbstarctCheckBox(VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
 			String label) {

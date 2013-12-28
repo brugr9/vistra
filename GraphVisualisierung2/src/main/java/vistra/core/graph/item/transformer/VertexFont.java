@@ -20,7 +20,8 @@ public class VertexFont implements Transformer<IVertexLayout, Font> {
 	 */
 	@Override
 	public Font transform(IVertexLayout layout) {
-		return new Font("", layout.getFontStyle(),
+		Font f = new Font("", layout.getFontStyle(),
 				GraphFactory.V_FONT_SIZE_DEFAULT);
+		return f;
 	}
 }

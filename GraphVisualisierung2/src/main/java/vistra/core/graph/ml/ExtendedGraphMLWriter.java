@@ -11,7 +11,7 @@ import vistra.core.graph.item.transformer.VertexValue;
 import edu.uci.ics.jung.io.GraphMLWriter;
 
 /**
- * An extended GraphMLWriter for writing an extended GraphML file.
+ * An extended GraphMLWriter for writing an extended graph to a GraphML file.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

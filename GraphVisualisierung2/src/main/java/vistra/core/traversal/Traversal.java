@@ -3,6 +3,8 @@ package vistra.core.traversal;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import vistra.core.algorithm.IAlgorithm;
+import vistra.core.graph.TraversableGraph;
 import vistra.core.traversal.step.IStep;
 import vistra.util.IBidirectIterator;
 
@@ -10,6 +12,9 @@ import vistra.util.IBidirectIterator;
  * A traversal as an immutable, bidirectional iterator over steps.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * 
+ * @see IAlgorithm
+ * @see TraversableGraph
  * 
  */
 public class Traversal implements IBidirectIterator<IStep> {

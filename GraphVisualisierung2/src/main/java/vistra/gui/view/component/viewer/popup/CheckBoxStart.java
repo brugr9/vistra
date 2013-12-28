@@ -41,7 +41,6 @@ class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
 	private void setValue() {
 		if (this.vertex != null) {
 			this.vertex.setStart(this.isSelected());
-
 			this.viewer.repaint();
 		}
 	}

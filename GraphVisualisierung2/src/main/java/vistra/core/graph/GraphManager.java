@@ -64,7 +64,7 @@ class GraphManager implements IGraphManager {
 	 */
 	public GraphManager(Properties p) {
 		super();
-		this.file = null;
+		this.file = new File("");
 		/* filename filter */
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				p.getProperty("extension.graph.description"),
@@ -85,7 +85,7 @@ class GraphManager implements IGraphManager {
 	@Override
 	public IExtendedGraph getNewGraph(EdgeType edgeType) throws Exception {
 		try {
-			this.file = null;
+			this.file = new File("");
 			IExtendedGraph graph = GraphFactory.create(edgeType);
 			return graph;
 		} catch (Exception e) {

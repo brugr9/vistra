@@ -21,7 +21,7 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	/**
 	 * A field for a graph item.
 	 */
-	private final IItemLayout graphItem;
+	private final IItemLayout item;
 	/**
 	 * A field for a graph.
 	 */
@@ -31,16 +31,16 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	 * Main constructor.
 	 * 
 	 * @param lastGood
-	 * @param graphItem
+	 * @param item
 	 *            a graph item
-	 * @param vViewer
+	 * @param vv
 	 *            a visualization viewer
 	 */
-	public GraphItemIdVerifier(String lastGood, IItemLayout graphItem,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
+	public GraphItemIdVerifier(String lastGood, IItemLayout item,
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vv) {
 		super(lastGood);
-		this.graphItem = graphItem;
-		this.graph = vViewer.getGraphLayout().getGraph();
+		this.item = item;
+		this.graph = vv.getGraphLayout().getGraph();
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 
 			return !textField.getText().trim().isEmpty()
 					&& (textField.getText().equals(
-							((IItemLayout) this.graphItem).getId()) || graph
+							((IItemLayout) this.item).getId()) || graph
 							.unused(textField.getText().trim()));
 		}
 

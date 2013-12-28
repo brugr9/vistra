@@ -15,12 +15,12 @@ import vistra.core.graph.item.IVertexLayout;
 import vistra.core.graph.item.VertexFactory;
 import vistra.core.graph.item.transformer.EdgeFont;
 import vistra.core.graph.item.transformer.EdgeLabel;
-import vistra.core.graph.item.transformer.EdgeLineColor;
+import vistra.core.graph.item.transformer.EdgeStrokeColor;
 import vistra.core.graph.item.transformer.EdgeStroke;
 import vistra.core.graph.item.transformer.VertexFillColor;
 import vistra.core.graph.item.transformer.VertexFont;
 import vistra.core.graph.item.transformer.VertexLabel;
-import vistra.core.graph.item.transformer.VertexLineColor;
+import vistra.core.graph.item.transformer.VertexStrokeColor;
 import vistra.core.graph.item.transformer.VertexShape;
 import vistra.core.graph.item.transformer.VertexStroke;
 import vistra.gui.IGuiModel;
@@ -50,17 +50,21 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 	private static final long serialVersionUID = 1145648259547595925L;
 
 	/**
-	 * A field for a vertex menu.
+	 * A field for a vertex pop-up menu.
 	 */
-	private VertexPopup vertexPopup;
+	private final VertexPopup vertexPopup;
 	/**
-	 * A field for an edge menu.
+	 * A field for an edge pop-up menu.
 	 */
-	private EdgePopup edgePopup;
+	private final EdgePopup edgePopup;
+	/**
+	 * A field for a switch-mode pop-up menu.
+	 */
+	private final SwitchModePopup modePopup;
 	/**
 	 * A field for an editing modal-graph mouse.
 	 */
-	private EditingModalGraphMouse<IVertexLayout, IEdgeLayout> mouse;
+	private final EditingModalGraphMouse<IVertexLayout, IEdgeLayout> mouse;
 
 	/**
 	 * Main constructor.
@@ -77,40 +81,37 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 	public Viewer(JFrame top, IGuiModel model,
 			Layout<IVertexLayout, IEdgeLayout> layout, Dimension dimension) {
 		super(layout, dimension);
-		super.setBackground(ColorPalette.WHITE);
+		this.setBackground(ColorPalette.WHITE);
 
-		/* Context */
+		/* render context */
 		RenderContext<IVertexLayout, IEdgeLayout> rc = this.getRenderContext();
-		/* Vertex */
+		/* vertex */
 		this.getRenderer().getVertexLabelRenderer().setPosition(Position.CNTR);
 		rc.setVertexShapeTransformer(new VertexShape());
 		rc.setVertexStrokeTransformer(new VertexStroke());
-		rc.setVertexDrawPaintTransformer(new VertexLineColor());
+		rc.setVertexDrawPaintTransformer(new VertexStrokeColor());
 		rc.setVertexFillPaintTransformer(new VertexFillColor());
 		rc.setVertexLabelTransformer(new VertexLabel());
 		rc.setVertexFontTransformer(new VertexFont());
-
-		/* Edge */
+		/* edge */
 		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertexLayout, IEdgeLayout>(
 				GraphFactory.E_LABEL_CLOSENESS, GraphFactory.E_LABEL_CLOSENESS));
 		rc.setEdgeShapeTransformer(new EdgeShape.Line<IVertexLayout, IEdgeLayout>());
-		rc.setEdgeDrawPaintTransformer(new EdgeLineColor());
-		rc.setEdgeLabelTransformer(new EdgeLabel());
-		rc.setEdgeFontTransformer(new EdgeFont());
 		rc.setEdgeStrokeTransformer(new EdgeStroke());
 		rc.setEdgeArrowStrokeTransformer(new EdgeStroke());
-		rc.setArrowDrawPaintTransformer(new EdgeLineColor());
+		rc.setEdgeDrawPaintTransformer(new EdgeStrokeColor());
+		rc.setArrowDrawPaintTransformer(new EdgeStrokeColor());
+		rc.setEdgeLabelTransformer(new EdgeLabel());
+		rc.setEdgeFontTransformer(new EdgeFont());
 
-		/* popup menu */
+		/* mouse and pop-up menu */
 		this.vertexPopup = new VertexPopup(top, this);
 		this.edgePopup = new EdgePopup(top, this);
-
-		/* mouse */
+		this.modePopup = new SwitchModePopup(this);
 		this.mouse = new Mouse(rc, new VertexFactory(), new EdgeFactory(),
-				this.edgePopup, this.vertexPopup, new SwitchModePopup(this));
+				this.edgePopup, this.vertexPopup, this.modePopup);
 		this.setGraphMouse(this.mouse);
 		this.addKeyListener(this.mouse.getModeKeyListener());
-
 	}
 
 	/**

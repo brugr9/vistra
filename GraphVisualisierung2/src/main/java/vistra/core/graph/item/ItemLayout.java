@@ -77,7 +77,7 @@ class ItemLayout extends Observable implements IItemLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Color getLineColor() {
+	public Color getStrokeColor() {
 		return lineColor;
 	}
 

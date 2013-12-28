@@ -79,6 +79,7 @@ public class ExtendedGraph extends ObservableGraph<IVertexLayout, IEdgeLayout>
 	 */
 	@Override
 	public boolean unused(String id) {
+
 		ArrayList<IItemLayout> items = new ArrayList<IItemLayout>();
 		items.addAll((Collection<? extends IItemLayout>) this.getVertices());
 		items.addAll((Collection<? extends IItemLayout>) this.getEdges());
@@ -88,5 +89,7 @@ public class ExtendedGraph extends ObservableGraph<IVertexLayout, IEdgeLayout>
 			}
 		}
 		return true;
+
 	}
+
 }

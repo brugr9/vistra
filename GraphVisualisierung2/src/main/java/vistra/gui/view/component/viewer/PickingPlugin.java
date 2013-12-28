@@ -12,7 +12,7 @@ import edu.uci.ics.jung.visualization.control.PickingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.picking.PickedState;
 
 /**
- * An adapted JUNG mouse plugin for picking a graph.
+ * An adapted JUNG mouse plug-in for picking a graph.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

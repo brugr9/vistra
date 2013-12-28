@@ -14,7 +14,7 @@ import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
- * A menu factory.
+ * A switch-mode pop-up.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -44,28 +44,26 @@ public class SwitchModePopup extends JPopupMenu {
 	 *            an adapted visualization viewer
 	 */
 	public SwitchModePopup(Viewer viewer) {
-		super("Modus");
+		super("modus");
 		this.viewer = viewer;
 
 		// TODO i18n
-		this.editing = new JMenuItem("Editing");
-		this.picking = new JMenuItem("Picking");
-		this.add(editing);
-		this.add(picking);
+		this.editing = new JMenuItem("editing");
+		this.picking = new JMenuItem("picking");
 		this.editing.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SwitchModePopup.this.editingMode();
 			}
 		});
-
 		this.picking.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SwitchModePopup.this.pickingMode();
 			}
 		});
-
+		this.add(editing);
+		this.add(picking);
 		this.editing.setEnabled(false);
 		this.picking.setEnabled(true);
 
@@ -76,8 +74,8 @@ public class SwitchModePopup extends JPopupMenu {
 	 */
 	@SuppressWarnings("unchecked")
 	private void editingMode() {
-		((EditingModalGraphMouse<IVertexLayout, IEdgeLayout>) this.viewer.getGraphMouse())
-				.setMode(Mode.EDITING);
+		((EditingModalGraphMouse<IVertexLayout, IEdgeLayout>) this.viewer
+				.getGraphMouse()).setMode(Mode.EDITING);
 		this.editing.setEnabled(false);
 		this.picking.setEnabled(true);
 	}
@@ -87,8 +85,8 @@ public class SwitchModePopup extends JPopupMenu {
 	 */
 	@SuppressWarnings("unchecked")
 	private void pickingMode() {
-		((EditingModalGraphMouse<IVertexLayout, IEdgeLayout>) this.viewer.getGraphMouse())
-				.setMode(Mode.PICKING);
+		((EditingModalGraphMouse<IVertexLayout, IEdgeLayout>) this.viewer
+				.getGraphMouse()).setMode(Mode.PICKING);
 		this.editing.setEnabled(true);
 		this.picking.setEnabled(false);
 	}

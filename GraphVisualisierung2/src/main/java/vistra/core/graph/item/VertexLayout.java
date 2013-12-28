@@ -176,8 +176,8 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Color getLineColor() {
-		return this.layout.getLineColor();
+	public Color getStrokeColor() {
+		return this.layout.getStrokeColor();
 	}
 
 	/**

@@ -109,8 +109,8 @@ public class EdgeLayout extends Edge implements IEdgeLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Color getLineColor() {
-		return this.layout.getLineColor();
+	public Color getStrokeColor() {
+		return this.layout.getStrokeColor();
 	}
 
 	/**

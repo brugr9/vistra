@@ -82,11 +82,11 @@ public interface IItemLayout {
 	abstract float[] getDash();
 
 	/**
-	 * Returns the line colour.
+	 * Returns the stroke colour.
 	 * 
 	 * @return the colour
 	 */
-	abstract Color getLineColor();
+	abstract Color getStrokeColor();
 
 	/**
 	 * Returns the font style.

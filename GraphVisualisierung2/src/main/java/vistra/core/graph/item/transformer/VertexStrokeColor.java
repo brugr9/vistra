@@ -4,22 +4,22 @@ import java.awt.Paint;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.core.graph.item.IEdgeLayout;
+import vistra.core.graph.item.IVertexLayout;
 
 /**
- * An edge transformer: line color.
+ * A vertex transformer: stroke colour.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeLineColor implements Transformer<IEdgeLayout, Paint> {
+public class VertexStrokeColor implements Transformer<IVertexLayout, Paint> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Paint transform(IEdgeLayout layout) {
-		return layout.getLineColor();
+	public Paint transform(IVertexLayout layout) {
+		return layout.getStrokeColor();
 	}
 
 }

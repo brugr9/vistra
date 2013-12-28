@@ -6,12 +6,15 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.TraversableGraphEvent.EdgeVertexEvent;
 import vistra.core.graph.TraversableGraphEvent.Type;
 import vistra.core.graph.TraversableGraphEvent.VerticesEvent;
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.state.IVertexStateHandler;
+import vistra.core.traversal.Traversal;
+import vistra.core.traversal.step.IStep;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.GraphDecorator;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -22,9 +25,14 @@ import edu.uci.ics.jung.graph.util.Pair;
  * calls to a constructor-specified <code>Graph</code> instance. Modifiers are
  * not supported anymore: vertices and edges can neither been added nor removed.
  * <p>
- * In addition, this graph serves with some 'step'-methods.
+ * In addition, this graph serves with some 'step'-methods which an
+ * {@code IAlgorithm}-developer can use to generate steps of a traversal.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * 
+ * @see IAlgorithm
+ * @see IStep
+ * @see Traversal
  * 
  */
 public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
