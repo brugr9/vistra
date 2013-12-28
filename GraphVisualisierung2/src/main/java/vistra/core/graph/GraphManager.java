@@ -20,10 +20,12 @@ import edu.uci.ics.jung.io.GraphIOException;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 
 /**
- * A parameter manager specialized on parameters as files.
+ * A graph manager. Manages opening and saving (read/write) graphs.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
+ * @see ExtendedGraph
+ * @see ExtendedGraphMLWriter
  */
 class GraphManager implements IGraphManager {
 

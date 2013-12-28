@@ -7,6 +7,7 @@ import java.awt.geom.Point2D;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.PickingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.picking.PickedState;
@@ -17,7 +18,10 @@ import edu.uci.ics.jung.visualization.picking.PickedState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class PickingPlugin extends PickingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
+public class PickingPlugin extends
+		PickingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
+
+	private VisualizationViewer<IVertexLayout, IEdgeLayout> vv;
 
 	/**
 	 * Main constructor.
@@ -30,17 +34,15 @@ public class PickingPlugin extends PickingGraphMousePlugin<IVertexLayout, IEdgeL
 	 * {@inheritDoc}
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public void mouseDragged(MouseEvent e) {
 		if (this.locked == false) {
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
-					.getSource();
+			this.vv = (Viewer) e.getSource();
 			if (this.vertex != null) {
-				Point p = e.getPoint();
-				Point2D graphPoint = vv.getRenderContext()
-						.getMultiLayerTransformer().inverseTransform(p);
-				Point2D graphDown = vv.getRenderContext()
-						.getMultiLayerTransformer().inverseTransform(this.down);
+				Point point = e.getPoint();
+				MultiLayerTransformer mt = vv.getRenderContext()
+						.getMultiLayerTransformer();
+				Point2D graphPoint = mt.inverseTransform(point);
+				Point2D graphDown = mt.inverseTransform(this.down);
 				Layout<IVertexLayout, IEdgeLayout> layout = vv.getGraphLayout();
 				double dx = graphPoint.getX() - graphDown.getX();
 				double dy = graphPoint.getY() - graphDown.getY();
@@ -53,7 +55,7 @@ public class PickingPlugin extends PickingGraphMousePlugin<IVertexLayout, IEdgeL
 					// update the vertex location
 					v.setLocation(vp);
 				}
-				this.down = p;
+				this.down = point;
 
 			} else {
 				Point2D out = e.getPoint();

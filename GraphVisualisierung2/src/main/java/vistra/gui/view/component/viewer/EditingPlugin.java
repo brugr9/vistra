@@ -26,6 +26,10 @@ import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
 public class EditingPlugin extends
 		EditingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
 
+	private VisualizationViewer<IVertexLayout, IEdgeLayout> vv;
+
+	private Layout<IVertexLayout, IEdgeLayout> layout;
+
 	/**
 	 * Main constructor.
 	 * 
@@ -51,13 +55,12 @@ public class EditingPlugin extends
 		float y1 = (float) down.getY();
 		float x2 = (float) out.getX();
 		float y2 = (float) out.getY();
-
-		AffineTransform xform = AffineTransform.getTranslateInstance(x1, y1);
-
 		float dx = x2 - x1;
 		float dy = y2 - y1;
+		AffineTransform xform = AffineTransform.getTranslateInstance(x1, y1);
 		float thetaRadians = (float) Math.atan2(dy, dx);
 		xform.rotate(thetaRadians);
+
 		float dist = (float) Math.sqrt(dx * dx + dy * dy);
 		xform.scale(dist / this.rawEdge.getBounds().getWidth(), 1.0);
 		this.edgeShape = xform.createTransformedShape(this.rawEdge);
@@ -76,72 +79,67 @@ public class EditingPlugin extends
 		float y1 = (float) down.getY();
 		float x2 = (float) out.getX();
 		float y2 = (float) out.getY();
-
-		AffineTransform xform = AffineTransform.getTranslateInstance(x2, y2);
-
 		float dx = x2 - x1;
 		float dy = y2 - y1;
+		AffineTransform xform = AffineTransform.getTranslateInstance(x2, y2);
 		float thetaRadians = (float) Math.atan2(dy, dx);
 		xform.rotate(thetaRadians);
+
 		this.arrowShape = xform.createTransformedShape(this.rawArrowShape);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public void mousePressed(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
-					.getSource();
+			this.vv = (Viewer) e.getSource();
+			this.layout = vv.getModel().getGraphLayout();
 			final Point2D p = e.getPoint();
 			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vv
 					.getPickSupport();
+
 			if (pickSupport != null) {
-				Graph<IVertexLayout, IEdgeLayout> graph = vv.getModel()
-						.getGraphLayout().getGraph();
+				Graph<IVertexLayout, IEdgeLayout> graph = this.layout
+						.getGraph();
 
 				// set default edge type
 				this.edgeIsDirected = EdgeType.DIRECTED;
 				if (graph instanceof IExtendedGraph) {
-					IExtendedGraph gravisGraph = (IExtendedGraph) graph;
-
-					if (gravisGraph.getEdgeType() == EdgeType.UNDIRECTED) {
+					IExtendedGraph eg = (IExtendedGraph) graph;
+					if (eg.getEdgeType() == EdgeType.UNDIRECTED) {
 						this.edgeIsDirected = EdgeType.UNDIRECTED;
 					}
 				}
 
-				final IVertexLayout vertex = pickSupport.getVertex(vv
-						.getModel().getGraphLayout(), p.getX(), p.getY());
+				final IVertexLayout vertex = pickSupport.getVertex(this.layout,
+						p.getX(), p.getY());
 
 				if (vertex != null) { // get ready to make an edge
 					this.startVertex = vertex;
 					this.down = e.getPoint();
 					this.transformEdgeShape(this.down, this.down);
-					vv.addPostRenderPaintable(this.edgePaintable);
+					this.vv.addPostRenderPaintable(this.edgePaintable);
 
-					// TODO shift shortcut not supported in GRAVIS application?
 					if ((e.getModifiers() & MouseEvent.SHIFT_MASK) != 0
-							&& vv.getModel().getGraphLayout().getGraph() instanceof UndirectedGraph == false) {
+							&& this.layout.getGraph() instanceof UndirectedGraph == false) {
 						this.edgeIsDirected = EdgeType.DIRECTED;
 					}
 
 					if (this.edgeIsDirected == EdgeType.DIRECTED) {
 						this.transformArrowShape(this.down, e.getPoint());
-						vv.addPostRenderPaintable(this.arrowPaintable);
+						this.vv.addPostRenderPaintable(this.arrowPaintable);
 					}
 				} else { // make a new vertex
 					IVertexLayout newVertex = this.vertexFactory.create();
-					Layout<IVertexLayout, IEdgeLayout> layout = vv.getModel()
-							.getGraphLayout();
 					graph.addVertex(newVertex);
 
-					Point2D point = vv.getRenderContext()
+					Point2D point = this.vv.getRenderContext()
 							.getMultiLayerTransformer()
 							.inverseTransform(e.getPoint());
-					layout.setLocation(newVertex, point);
+					this.layout.setLocation(newVertex, point);
 					newVertex.setLocation(point);
 				}
 			}
-			vv.repaint();
+			this.vv.repaint();
 		}
 	}
 
@@ -152,13 +150,11 @@ public class EditingPlugin extends
 	 *            the mouse event
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public void mouseReleased(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
-					.getSource();
+			this.vv = (Viewer) e.getSource();
 			final Point2D p = e.getPoint();
-			Layout<IVertexLayout, IEdgeLayout> layout = vv.getModel()
+			Layout<IVertexLayout, IEdgeLayout> layout = this.vv.getModel()
 					.getGraphLayout();
 			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vv
 					.getPickSupport();
@@ -171,15 +167,15 @@ public class EditingPlugin extends
 							.getGraphLayout().getGraph();
 					graph.addEdge(this.edgeFactory.create(), this.startVertex,
 							vertex, this.edgeIsDirected);
-					vv.repaint();
+					this.vv.repaint();
 				}
 			}
 			this.startVertex = null;
 			this.down = null;
 			// set default edge type
 			this.edgeIsDirected = EdgeType.DIRECTED;
-			vv.removePostRenderPaintable(edgePaintable);
-			vv.removePostRenderPaintable(arrowPaintable);
+			this.vv.removePostRenderPaintable(edgePaintable);
+			this.vv.removePostRenderPaintable(arrowPaintable);
 		}
 	}
 
