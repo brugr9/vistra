@@ -97,6 +97,15 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	abstract IVertex getEnd();
 
 	/**
+	 * Returns the visited state of a vertex.
+	 * 
+	 * @param vertex
+	 *            the vertex to check
+	 * @return {@code true} if already visited
+	 */
+	abstract boolean isVisited(IVertex vertex);
+
+	/**
 	 * Adds {@code listener} as a listener to this graph.
 	 */
 	abstract void addTraversalEventListener(

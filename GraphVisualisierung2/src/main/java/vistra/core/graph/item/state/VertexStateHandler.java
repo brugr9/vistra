@@ -126,6 +126,17 @@ public class VertexStateHandler extends VertexLayout implements
 		}
 	}
 
+	public boolean isVisited() {
+		if (this.state instanceof VertexStateVisited
+				|| this.state instanceof VertexStateSolution)
+			return true;
+		else if (this.state instanceof VertexStateFocussed)
+			return true;
+		else
+			return false;
+
+	}
+
 	/**
 	 * State view setter: Sets the layout to unexplored vertex.
 	 * <p>
