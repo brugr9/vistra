@@ -2,6 +2,10 @@ package vistra.core.graph.item.state;
 
 /**
  * An interface for a vertex state handler.
+ * <p>
+ * As being an item state handler, this handler has a cellar at its disposal. It
+ * is therefore able to hold the state history of the item and handles setting a
+ * previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

@@ -30,9 +30,9 @@ public final class GraphFactory {
 	public final static int E_FONT_SIZE_DEFAULT = 18;
 	public final static float E_DASH_PHASE = 1.0f;
 	public final static float[] E_SOLID = null;
-	public final static float[] E_DASH_BACK = new float[] { 12.0f, 10.0f };
-	public final static float[] E_DASH_FWD = new float[] { 1.0f, 8.0f };
-	public final static float[] E_DASH_CROSS = new float[] { 10.0f, 10.0f,
+	public final static float[] E_DASHED = new float[] { 12.0f, 10.0f };
+	public final static float[] E_DASH_SHORT = new float[] { 1.0f, 8.0f };
+	public final static float[] E_DASH_POINT = new float[] { 10.0f, 10.0f,
 			1.0f, 10.0f };
 
 	/**

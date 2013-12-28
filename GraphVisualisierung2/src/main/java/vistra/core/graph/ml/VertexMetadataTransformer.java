@@ -16,6 +16,9 @@ import edu.uci.ics.jung.io.graphml.NodeMetadata;
 public class VertexMetadataTransformer implements
 		Transformer<NodeMetadata, IVertexLayout> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public IVertexLayout transform(NodeMetadata meta) {
 		IVertexLayout layout = VertexFactory.createVertexLayout();

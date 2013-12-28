@@ -8,11 +8,16 @@ import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.IVertexLayout;
 
 /**
+ * A vertex transformer: font style.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class VertexFont implements Transformer<IVertexLayout, Font> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Font transform(IVertexLayout layout) {
 		return new Font("", layout.getFontStyle(),

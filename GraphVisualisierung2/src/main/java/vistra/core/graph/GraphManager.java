@@ -36,23 +36,23 @@ class GraphManager implements IGraphManager {
 	 */
 	private FileNameExtensionFilter fileNameExtensionFilter;
 	/**
-	 * A field for a graph transformer.
+	 * A field for a graph metadata transformer.
 	 */
 	private final GraphMetadataTransformer graphTransformer;
 	/**
-	 * A field for a vertex transformer.
+	 * A field for a vertex metadata transformer.
 	 */
 	private final VertexMetadataTransformer vertexTransformer;
 	/**
-	 * A field for a edge transformer.
+	 * A field for a edge metadata transformer.
 	 */
 	private final EdgeMetadataTransformer edgeTransformer;
 	/**
-	 * A field for a hyper edge transformer.
+	 * A field for a hyper edge metadata transformer.
 	 */
 	private final HyperEdgeMetadataTransformer hyperEdgeTransformer;
 	/**
-	 * A field for a graph writer.
+	 * A field for an extended GraphML writer.
 	 */
 	private ExtendedGraphMLWriter writer;
 

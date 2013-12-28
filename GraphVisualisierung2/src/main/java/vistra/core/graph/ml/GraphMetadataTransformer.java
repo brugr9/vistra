@@ -17,6 +17,9 @@ import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;
 public class GraphMetadataTransformer implements
 		Transformer<GraphMetadata, IExtendedGraph> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public IExtendedGraph transform(GraphMetadata meta) {
 		IExtendedGraph graph = GraphFactory.createGraph();

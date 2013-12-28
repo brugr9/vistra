@@ -16,6 +16,9 @@ import edu.uci.ics.jung.io.graphml.HyperEdgeMetadata;
 public class HyperEdgeMetadataTransformer implements
 		Transformer<HyperEdgeMetadata, IEdgeLayout> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public IEdgeLayout transform(HyperEdgeMetadata meta) {
 		IEdgeLayout layout = EdgeFactory.createEdgeLayout();

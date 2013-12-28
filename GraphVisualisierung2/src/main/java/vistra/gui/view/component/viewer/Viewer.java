@@ -19,7 +19,7 @@ import vistra.core.graph.item.transformer.EdgeLineColor;
 import vistra.core.graph.item.transformer.EdgeStroke;
 import vistra.core.graph.item.transformer.VertexFillColor;
 import vistra.core.graph.item.transformer.VertexFont;
-import vistra.core.graph.item.transformer.VertexLabelValue;
+import vistra.core.graph.item.transformer.VertexLabel;
 import vistra.core.graph.item.transformer.VertexLineColor;
 import vistra.core.graph.item.transformer.VertexShape;
 import vistra.core.graph.item.transformer.VertexStroke;
@@ -87,7 +87,7 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 		rc.setVertexStrokeTransformer(new VertexStroke());
 		rc.setVertexDrawPaintTransformer(new VertexLineColor());
 		rc.setVertexFillPaintTransformer(new VertexFillColor());
-		rc.setVertexLabelTransformer(new VertexLabelValue());
+		rc.setVertexLabelTransformer(new VertexLabel());
 		rc.setVertexFontTransformer(new VertexFont());
 
 		/* Edge */

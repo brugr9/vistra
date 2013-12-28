@@ -16,6 +16,9 @@ import edu.uci.ics.jung.io.graphml.EdgeMetadata;
 public class EdgeMetadataTransformer implements
 		Transformer<EdgeMetadata, IEdgeLayout> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public IEdgeLayout transform(EdgeMetadata meta) {
 		IEdgeLayout layout = EdgeFactory.createEdgeLayout();

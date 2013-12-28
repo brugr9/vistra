@@ -10,9 +10,9 @@ import vistra.util.ColorPalette;
 /**
  * An edge state handler.
  * <p>
- * As being an item state handler, this handler has a cellar at its disposal.
- * Its therefore able to hold the state history of the edge and handles setting
- * a previous state.
+ * As being an item state handler, this handler has a cellar at its disposal. It
+ * is therefore able to hold the state history of the edge and handles setting a
+ * previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -219,7 +219,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_DASH_BACK);
+			this.setDash(GraphFactory.E_DASHED);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -239,7 +239,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_DASH_FWD);
+			this.setDash(GraphFactory.E_DASH_SHORT);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -259,7 +259,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setLineColor(ColorPalette.darkgreen);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_DASH_CROSS);
+			this.setDash(GraphFactory.E_DASH_POINT);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -277,7 +277,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.setFontColor(ColorPalette.darkblue);
 			this.setLineColor(ColorPalette.darkblue);
 			this.setLineWidth(GraphFactory.STROKE_WIDTH_BOLD);
-			this.setDash(GraphFactory.E_DASH_BACK);
+			this.setDash(GraphFactory.E_DASHED);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;

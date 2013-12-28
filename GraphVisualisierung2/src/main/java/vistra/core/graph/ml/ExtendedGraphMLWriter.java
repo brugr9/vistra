@@ -31,15 +31,15 @@ public final class ExtendedGraphMLWriter extends
 	public final static String V_END = "end";
 	public final static boolean V_START_DEFAULT = false;
 	public final static boolean V_END_DEFAULT = false;
-	public final static String V_START_COMMENT = "Vertex x coordinate";
-	public final static String V_END_COMMENT = "Vertex y coordinate";
+	public final static String V_START_COMMENT = "Vertex is start";
+	public final static String V_END_COMMENT = "Vertex is end";
 	// value, weight resp.
 	public final static String V_VALUE = "value";
 	public final static String E_WEIGHT = "weight";
 	public final static int V_VALUE_DEFAULT = 0;
 	public final static int E_WEIGHT_DEFAULT = 1;
-	public final static String V_VALUE_COMMENT = "Vertex x coordinate";
-	public final static String E_WEIGHT_COMMENT = "Vertex y coordinate";
+	public final static String V_VALUE_COMMENT = "Vertex value";
+	public final static String E_WEIGHT_COMMENT = "Edge weight";
 
 	/**
 	 * Main constructor.

@@ -8,11 +8,16 @@ import vistra.core.graph.GraphFactory;
 import vistra.core.graph.item.IEdgeLayout;
 
 /**
+ * An edge transformer: font style.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class EdgeFont implements Transformer<IEdgeLayout, Font> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Font transform(IEdgeLayout layout) {
 		return new Font("", layout.getFontStyle(),

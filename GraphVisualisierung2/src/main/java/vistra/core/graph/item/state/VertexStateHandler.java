@@ -11,7 +11,7 @@ import vistra.util.ColorPalette;
  * A vertex state handler.
  * <p>
  * As being an item state handler, this handler has a cellar at its disposal.
- * Its therefore able to hold the state history of the vertex and handles
+ * It is therefore able to hold the state history of the vertex and handles
  * setting a previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
