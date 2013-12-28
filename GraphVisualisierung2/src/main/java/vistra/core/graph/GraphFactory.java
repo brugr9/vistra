@@ -95,17 +95,6 @@ public final class GraphFactory {
 	}
 
 	/**
-	 * 
-	 * @param graph
-	 *            the graph
-	 * @return the traversable graph
-	 */
-	public static ITraversableGraph createTraversableGraph(IExtendedGraph graph) {
-		// TODO
-		return null;
-	}
-
-	/**
 	 * Converts a list of into an array
 	 * 
 	 * @param list

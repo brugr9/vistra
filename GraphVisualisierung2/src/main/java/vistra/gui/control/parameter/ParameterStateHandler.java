@@ -283,17 +283,26 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * A state view setter: Sets the view for state: graph edited.
 	 */
 	void setViewGraphEdited() {
+		this.setGraphSaved(false);
 		this.enableMenu(true);
 		if (this.model.isAlgorithmsEnabled()) {
 			this.model.setAlgorithmsEnabled(false);
 			this.model.notifyObservers(EventSource.ALGORITHM);
 		}
+		if (this.model.isStopEnabled())
+			try {
+				this.enableTraversalPlayer(false);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	/**
 	 * A state view setter: Sets the view for state: graph saved.
 	 */
 	void setViewGraphSaved() {
+		this.setGraphSaved(true);
 		this.enableMenu(true);
 		this.model.setAlgorithmsEnabled(true);
 		this.model.notifyObservers(EventSource.ALGORITHM);
@@ -593,15 +602,11 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 *            the saved status
 	 * @throws Exception
 	 */
-	private void setGraphSaved(boolean saved) throws Exception {
-		try {
-			this.model.setGraphSaved(saved);
-			this.model.setSaveGraphEnabled(!saved);
-			this.model.setAlgorithmsEnabled(saved);
-			this.model.notifyObservers(GRAPH);
-		} catch (Exception e) {
-			throw e;
-		}
+	private void setGraphSaved(boolean saved) {
+		this.model.setGraphSaved(saved);
+		this.model.setSaveGraphEnabled(!saved);
+		this.model.setAlgorithmsEnabled(saved);
+		this.model.notifyObservers(GRAPH);
 	}
 
 	/**

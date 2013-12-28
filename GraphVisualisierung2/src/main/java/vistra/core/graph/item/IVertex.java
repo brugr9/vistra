@@ -6,7 +6,7 @@ package vistra.core.graph.item;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IVertex {
+public interface IVertex extends IItem {
 
 	/**
 	 * Returns the start.

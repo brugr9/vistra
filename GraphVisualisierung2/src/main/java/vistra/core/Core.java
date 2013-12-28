@@ -16,17 +16,16 @@ import vistra.core.algorithm.Dijkstra;
 import vistra.core.algorithm.IAlgorithm;
 import vistra.core.algorithm.IAlgorithmManager;
 import vistra.core.algorithm.Kruskal;
-import vistra.core.graph.GraphFactory;
+import vistra.core.algorithm.Test;
 import vistra.core.graph.GraphManagerFactory;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.IGraphManager;
 import vistra.core.graph.ITraversableGraph;
-import vistra.core.graph.item.IEdge;
-import vistra.core.graph.item.IVertex;
+import vistra.core.graph.ITraversableGraphEventListener;
+import vistra.core.graph.TraversableGraph;
+import vistra.core.graph.TraversableGraphEventListener;
 import vistra.core.traversal.Traversal;
 import vistra.core.traversal.step.IStep;
-import vistra.core.traversal.step.ITraversalEventListener;
-import vistra.core.traversal.step.TraversalEventListener;
 import vistra.util.IBidirectIterator;
 import vistra.util.ImmutableBidirectIterator;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -66,6 +65,7 @@ public class Core implements ICore {
 			this.graphManager = GraphManagerFactory.create(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(p);
 			this.algorithmManager.add(new Default());
+			this.algorithmManager.add(new Test()); // TODO remove
 			this.algorithmManager.add(new BFS());
 			this.algorithmManager.add(new DFS());
 			this.algorithmManager.add(new DLS());
@@ -183,20 +183,18 @@ public class Core implements ICore {
 	public Traversal traverse(IExtendedGraph graph) throws CoreException {
 
 		try {
-			ITraversableGraph traversableGraph = GraphFactory
-					.createTraversableGraph(graph);
+			/* graph and listener */
 			List<IStep> stepList = new ArrayList<IStep>();
-			ITraversalEventListener<IVertex, IEdge> listener = new TraversalEventListener(
+			ITraversableGraphEventListener listener = new TraversableGraphEventListener(
 					stepList);
-			traversableGraph.addTraversalEventListener(listener);
-			this.algorithm.traverse(traversableGraph);
-			// TODO: unnötig? undo all steps in reverse order
-			for (int index = stepList.size() - 1; index > -1; index--)
-				stepList.get(index).undo();
-			// the traversal
+			ITraversableGraph tg = new TraversableGraph(graph);
+			tg.addTraversalEventListener(listener);
+			/* algorithm and traversal */
+			this.algorithm.traverse(tg);
 			IBidirectIterator<IStep> stepIterator = new ImmutableBidirectIterator<IStep>(
 					stepList);
-			return new Traversal(stepIterator);
+			Traversal traversal = new Traversal(stepIterator);
+			return traversal;
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}

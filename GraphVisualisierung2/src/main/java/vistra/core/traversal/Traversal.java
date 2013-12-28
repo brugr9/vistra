@@ -18,6 +18,10 @@ public class Traversal implements IBidirectIterator<IStep> {
 	 * A field for an iterator over steps.
 	 */
 	private IBidirectIterator<IStep> stepIterator;
+	/**
+	 * A field for a string builder.
+	 */
+	private StringBuilder statistics;
 
 	/**
 	 * Main constructor.
@@ -28,7 +32,7 @@ public class Traversal implements IBidirectIterator<IStep> {
 	 */
 	public Traversal(IBidirectIterator<IStep> stepIterator) {
 		this.stepIterator = stepIterator;
-
+		this.statistics = null;
 	}
 
 	/**
@@ -93,6 +97,25 @@ public class Traversal implements IBidirectIterator<IStep> {
 	@Override
 	public IStep previous() throws NoSuchElementException {
 		return this.stepIterator.previous();
+	}
+
+	/**
+	 * Sets the statistic information.
+	 * 
+	 * @param statistics
+	 *            the statistics
+	 */
+	public void setStatistics(StringBuilder statistics) {
+		this.statistics = statistics;
+	}
+
+	/**
+	 * Returns some statistic information.
+	 * 
+	 * @return the statistics
+	 */
+	public StringBuilder getStatistics() {
+		return this.statistics;
 	}
 
 }

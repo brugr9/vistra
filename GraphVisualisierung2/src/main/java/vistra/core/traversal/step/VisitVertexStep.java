@@ -13,7 +13,7 @@ import vistra.core.graph.item.state.command.VisitedVertexCommand;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class StepVisit extends AbstractStep implements IStep {
+public class VisitVertexStep extends AbstractStep implements IStep {
 
 	/**
 	 * Main constructor.
@@ -23,21 +23,21 @@ public class StepVisit extends AbstractStep implements IStep {
 	 * @param vertex
 	 *            the vertex to visit
 	 */
-	public StepVisit(IEdge edge, IVertex vertex) {
+	public VisitVertexStep(IEdge edge, IVertex vertex) {
 		super();
-		this.description = "visit" + " "
+		this.description = "Visit" + " "
 				+ vertex.getClass().getSimpleName().toLowerCase() + " "
 				+ ((VertexLayout) vertex).getId();
 		try {
 			// new
-			IItemStateCommand discoverEdge = new DiscoveryEdgeCommand(edge);
-			IItemStateCommand visitVertex = new VisitedVertexCommand(vertex);
+			IItemStateCommand discoveryEdge = new DiscoveryEdgeCommand(edge);
+			IItemStateCommand visitedVertex = new VisitedVertexCommand(vertex);
 			// add
-			this.stepHandler.addCommand(discoverEdge);
-			this.stepHandler.addCommand(visitVertex);
+			this.stepHandler.addCommand(discoveryEdge);
+			this.stepHandler.addCommand(visitedVertex);
 			// execute
-			discoverEdge.execute();
-			visitVertex.execute();
+			discoveryEdge.execute();
+			visitedVertex.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

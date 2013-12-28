@@ -148,6 +148,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			throw e;
 		}
 	}
+	
+	
 
 	/**
 	 * {@inheritDoc}
