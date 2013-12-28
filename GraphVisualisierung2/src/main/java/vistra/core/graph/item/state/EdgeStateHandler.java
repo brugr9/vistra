@@ -3,8 +3,8 @@ package vistra.core.graph.item.state;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import vistra.core.graph.item.ItemLayoutConstants;
 import vistra.core.graph.item.EdgeLayout;
+import vistra.core.graph.item.ItemLayoutConstants;
 import vistra.util.ColorPalette;
 
 /**
