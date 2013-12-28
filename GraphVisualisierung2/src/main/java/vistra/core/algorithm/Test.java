@@ -3,6 +3,7 @@ package vistra.core.algorithm;
 import java.util.ArrayList;
 
 import vistra.core.graph.ITraversableGraph;
+import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -38,8 +39,8 @@ public class Test extends AbstractAlgorithm implements IAlgorithm {
 				graph.getVertices());
 		graph.stepInitVertices(vertices);
 
-		// ArrayList<IEdge> edges = new ArrayList<IEdge>(graph.getEdges());
-		// graph.stepCrossEdge(edges.get(2));
-		// graph.stepBackEdge(edges.get(1));
+		ArrayList<IEdge> edges = new ArrayList<IEdge>(graph.getEdges());
+		graph.stepCrossEdge(edges.get(2));
+		graph.stepBackEdge(edges.get(1));
 	}
 }

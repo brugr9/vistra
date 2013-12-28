@@ -2,6 +2,7 @@ package vistra.core.graph.item.state.command;
 
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.state.EdgeStateHandler;
+import vistra.core.graph.item.state.IItemStateHandler;
 
 /**
  * An edge-state command: back-edge.
@@ -19,7 +20,7 @@ public class BackEdgeCommand extends AbstractItemStateCommand implements
 	 *            an edge
 	 */
 	public BackEdgeCommand(IEdge edge) {
-		super((EdgeStateHandler) edge);
+		super((IItemStateHandler) edge);
 	}
 
 	/**
