@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.core.ICore;
-import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
@@ -36,8 +35,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * <p>
  * As a part of the graphic user interface control, this state handler is an
  * action listener (file menu for the graph) and an item listener (algorithm
- * combo box), too. Furthermore, this handler listens on graph-events (e.g. the
- * graph got edited or saved).
+ * combo box), too. Furthermore, this handler listens on graph-events (edges,
+ * vertices).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -119,8 +118,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (e.getStateChange() == ItemEvent.SELECTED) {
 				/* get the value */
 				@SuppressWarnings("unchecked")
-				JComboBox<IAlgorithm> box = (JComboBox<IAlgorithm>) e
-						.getSource();
+				JComboBox<String> box = (JComboBox<String>) e.getSource();
 				this.model.setSelectedAlgorithmIndex(box.getSelectedIndex());
 				this.handleSelectAlgorithm();
 			}
@@ -384,7 +382,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @throws Exception
 	 */
 	void newGraph(EdgeType edgeType) throws Exception {
+
 		try {
+
 			int option = 0;
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingGraph();
@@ -399,6 +399,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.setGraphSaved(false);
 				this.setGraphEditable(true);
 			}
+
 		} catch (Exception e) {
 			throw e;
 		}
@@ -418,6 +419,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @throws Exception
 	 */
 	int openGraph() throws Exception {
+
 		try {
 			int option = 1;
 			if (!this.model.isGraphSaved())
@@ -437,17 +439,14 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					IExtendedGraph graph = this.core.openGraph(source);
 					graph.addGraphEventListener(this);
 					this.model.setGraph(graph);
+					this.model.notifyObservers(GRAPH);
 					this.updateAlgorithms();
-					this.setGraphSaved(true);
-					this.setGraphEditable(true);
 				}
 			}
 			return option;
-
 		} catch (Exception e) {
 			throw e;
 		}
-
 	}
 
 	/**
@@ -636,8 +635,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	private void updateAlgorithms() throws Exception {
 		try {
-			IExtendedGraph graph = this.model.getGraph();
-			EdgeType edgeType = graph.getEdgeType();
+			EdgeType edgeType = this.model.getGraph().getEdgeType();
 			this.core.updateSelectableList(edgeType);
 			String[] selectableNames = this.core.getSelectableNames();
 			this.model.setAlgorithms(selectableNames);

@@ -135,10 +135,8 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 					this.mouse.setMode(Mode.EDITING);
 				else
 					this.mouse.setMode(Mode.PICKING);
+				this.repaint();
 			}
-
-			this.repaint();
-
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);

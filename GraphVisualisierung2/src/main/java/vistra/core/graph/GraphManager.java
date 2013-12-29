@@ -128,6 +128,7 @@ class GraphManager implements IGraphManager {
 					this.vertexTransformer, this.edgeTransformer,
 					this.hyperEdgeTransformer);
 			this.graph = graphReader.readGraph();
+			this.graph.setName(file.getName());
 			graphReader.close();
 		} catch (GraphIOException e) {
 			throw new GraphException("I/O error in GraphML-file "
@@ -135,9 +136,8 @@ class GraphManager implements IGraphManager {
 		} catch (FileNotFoundException e) {
 			throw new GraphException("File not found: " + file.getName(), e);
 		} catch (Exception e) {
-			throw new GraphException(
-					"Exception while loading data from GraphML-file "
-							+ file.getName(), e);
+			throw new GraphException("Exception while reading "
+					+ file.getName(), e);
 		}
 	}
 
