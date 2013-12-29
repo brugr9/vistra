@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 
 import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.state.IAnimationStateHandler;
@@ -19,18 +20,15 @@ import vistra.gui.control.state.ISbsStateHandler;
  */
 public final class GuiModel extends Observable implements IGuiModel {
 
+	/* i18n */
+	private ResourceBundle resourceBundle;
+
 	/* Menu */
 	// Action listener
 	private ActionListener i18nListener;
 	private ActionListener helpListener;
 	private ActionListener aboutListener;
 	private ActionListener quitListener;
-	// i18n
-	private ResourceBundle resourceBundle;
-	private boolean i18nEnabled;
-	private boolean deDEEnabled;
-	private boolean frFREnabled;
-	private boolean enUSEnabled;
 	// File
 	private boolean fileEnabled;
 	private boolean newMenuEnabled;
@@ -39,10 +37,12 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private boolean openGraphEnabled;
 	private boolean saveGraphEnabled;
 	private boolean saveGraphAsEnabled;
-	private boolean algorithmMenuEnabled;
-	private boolean importAlgorithmEnabled;
-	private boolean deleteAlgorithmEnabled;
 	private boolean quitEnabled;
+	// i18n
+	private boolean i18nEnabled;
+	private boolean deDEEnabled;
+	private boolean frFREnabled;
+	private boolean enUSEnabled;
 	// Info
 	private boolean infoEnabled;
 	private boolean helpEnabled;
@@ -52,8 +52,11 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private IParameterStateHandler parameterStateHandler;
 	// Graph
 	private IExtendedGraph graph;
-	private boolean editGraphEnabled;
+	private boolean graphFile;
 	private boolean graphSaved;
+	private boolean editGraphEnabled;
+	private IVertexLayout start;
+	private IVertexLayout end;
 	// Algorithm
 	private String[] algorithms;
 	private boolean algorithmsEnabled;
@@ -82,7 +85,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private boolean stopEnabled;
 
 	// Protocol
-	private StringBuilder stringBuilder;
+	private StringBuilder protocol;
 
 	/**
 	 * Main constructor.
@@ -114,9 +117,6 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.saveGraphEnabled = false;
 		this.saveGraphAsEnabled = false;
 		this.editGraphEnabled = false;
-		this.algorithmMenuEnabled = false;
-		this.importAlgorithmEnabled = false;
-		this.deleteAlgorithmEnabled = false;
 		this.quitEnabled = false;
 		// Info
 		this.infoEnabled = false;
@@ -127,8 +127,12 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.parameterStateHandler = null;
 		// Graph
 		this.graph = graph;
-		this.editGraphEnabled = false;
+		this.graphFile = false;
 		this.graphSaved = false;
+		this.editGraphEnabled = false;
+		this.start = null;
+		this.end = null;
+
 		// Algorithm
 		this.algorithms = null;
 		this.algorithmsEnabled = false;
@@ -157,14 +161,14 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.stopEnabled = false;
 
 		/* Protocol */
-		this.stringBuilder = new StringBuilder();
+		this.protocol = new StringBuilder();
 
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setMenuEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setMenuEnabled(boolean)
 	 */
 	@Override
 	public void setMenuEnabled(boolean menuEnabled) {
@@ -180,9 +184,6 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setOpenGraphEnabled(menuEnabled);
 		this.setSaveGraphEnabled(menuEnabled);
 		this.setSaveGraphAsEnabled(menuEnabled);
-		this.setAlgorithmMenuEnabled(menuEnabled);
-		this.setImportAlgorithmEnabled(menuEnabled);
-		this.setDeleteAlgorithmEnabled(menuEnabled);
 		this.setQuitEnabled(menuEnabled);
 		// (...)
 		this.setDeDEEnabled(menuEnabled);
@@ -198,7 +199,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPlayerEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setPlayerEnabled(boolean)
 	 */
 	@Override
 	public void setPlayerEnabled(boolean menuEnabled) {
@@ -213,7 +214,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAnimationEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setAnimationEnabled(boolean)
 	 */
 	@Override
 	public void setAnimationEnabled(boolean menuEnabled) {
@@ -227,8 +228,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStepByStepEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setStepByStepEnabled(boolean)
 	 */
 	@Override
 	public void setStepByStepEnabled(boolean menuEnabled) {
@@ -243,7 +243,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getI18nListener()
+	 * @see vistra.gui.IGuiModel#getI18nListener()
 	 */
 	@Override
 	public ActionListener getI18nListener() {
@@ -253,7 +253,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getHelpListener()
+	 * @see vistra.gui.IGuiModel#getHelpListener()
 	 */
 	@Override
 	public ActionListener getHelpListener() {
@@ -263,7 +263,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAboutListener()
+	 * @see vistra.gui.IGuiModel#getAboutListener()
 	 */
 	@Override
 	public ActionListener getAboutListener() {
@@ -273,7 +273,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getQuitListener()
+	 * @see vistra.gui.IGuiModel#getQuitListener()
 	 */
 	@Override
 	public ActionListener getQuitListener() {
@@ -283,7 +283,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getResourceBundle()
+	 * @see vistra.gui.IGuiModel#getResourceBundle()
 	 */
 	@Override
 	public ResourceBundle getResourceBundle() {
@@ -293,7 +293,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isI18nEnabled()
+	 * @see vistra.gui.IGuiModel#isI18nEnabled()
 	 */
 	@Override
 	public boolean isI18nEnabled() {
@@ -303,7 +303,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDeDEEnabled()
+	 * @see vistra.gui.IGuiModel#isDeDEEnabled()
 	 */
 	@Override
 	public boolean isDeDEEnabled() {
@@ -313,7 +313,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isFrFREnabled()
+	 * @see vistra.gui.IGuiModel#isFrFREnabled()
 	 */
 	@Override
 	public boolean isFrFREnabled() {
@@ -323,7 +323,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isEnUSEnabled()
+	 * @see vistra.gui.IGuiModel#isEnUSEnabled()
 	 */
 	@Override
 	public boolean isEnUSEnabled() {
@@ -333,7 +333,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isFileEnabled()
+	 * @see vistra.gui.IGuiModel#isFileEnabled()
 	 */
 	@Override
 	public boolean isFileEnabled() {
@@ -343,7 +343,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isNewMenuEnabled()
+	 * @see vistra.gui.IGuiModel#isNewMenuEnabled()
 	 */
 	@Override
 	public boolean isNewMenuEnabled() {
@@ -353,7 +353,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isUndirectedGraphEnabled()
+	 * @see vistra.gui.IGuiModel#isUndirectedGraphEnabled()
 	 */
 	@Override
 	public boolean isUndirectedGraphEnabled() {
@@ -363,7 +363,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDirectedGraphEnabled()
+	 * @see vistra.gui.IGuiModel#isDirectedGraphEnabled()
 	 */
 	@Override
 	public boolean isDirectedGraphEnabled() {
@@ -373,7 +373,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isOpenGraphEnabled()
+	 * @see vistra.gui.IGuiModel#isOpenGraphEnabled()
 	 */
 	@Override
 	public boolean isOpenGraphEnabled() {
@@ -383,7 +383,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSaveGraphEnabled()
+	 * @see vistra.gui.IGuiModel#isSaveGraphEnabled()
 	 */
 	@Override
 	public boolean isSaveGraphEnabled() {
@@ -393,7 +393,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSaveGraphAsEnabled()
+	 * @see vistra.gui.IGuiModel#isSaveGraphAsEnabled()
 	 */
 	@Override
 	public boolean isSaveGraphAsEnabled() {
@@ -403,37 +403,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isAlgorithmMenuEnabled()
-	 */
-	@Override
-	public boolean isAlgorithmMenuEnabled() {
-		return algorithmMenuEnabled;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isImportAlgorithmEnabled()
-	 */
-	@Override
-	public boolean isImportAlgorithmEnabled() {
-		return importAlgorithmEnabled;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDeleteAlgorithmEnabled()
-	 */
-	@Override
-	public boolean isDeleteAlgorithmEnabled() {
-		return deleteAlgorithmEnabled;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isQuitEnabled()
+	 * @see vistra.gui.IGuiModel#isQuitEnabled()
 	 */
 	@Override
 	public boolean isQuitEnabled() {
@@ -443,7 +413,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isInfoEnabled()
+	 * @see vistra.gui.IGuiModel#isInfoEnabled()
 	 */
 	@Override
 	public boolean isInfoEnabled() {
@@ -453,7 +423,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isHelpEnabled()
+	 * @see vistra.gui.IGuiModel#isHelpEnabled()
 	 */
 	@Override
 	public boolean isHelpEnabled() {
@@ -463,7 +433,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isAboutEnabled()
+	 * @see vistra.gui.IGuiModel#isAboutEnabled()
 	 */
 	@Override
 	public boolean isAboutEnabled() {
@@ -473,7 +443,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getParameterStateHandler()
+	 * @see vistra.gui.IGuiModel#getParameterStateHandler()
 	 */
 	@Override
 	public IParameterStateHandler getParameterStateHandler() {
@@ -483,7 +453,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getGraph()
+	 * @see vistra.gui.IGuiModel#getGraph()
 	 */
 	@Override
 	public IExtendedGraph getGraph() {
@@ -493,17 +463,17 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isEditGraphEnabled()
+	 * @see vistra.gui.IGuiModel#isGraphFile()
 	 */
 	@Override
-	public boolean isEditGraphEnabled() {
-		return editGraphEnabled;
+	public boolean isGraphFile() {
+		return graphFile;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isGraphSaved()
+	 * @see vistra.gui.IGuiModel#isGraphSaved()
 	 */
 	@Override
 	public boolean isGraphSaved() {
@@ -513,7 +483,37 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAlgorithms()
+	 * @see vistra.gui.IGuiModel#isEditGraphEnabled()
+	 */
+	@Override
+	public boolean isEditGraphEnabled() {
+		return editGraphEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getStart()
+	 */
+	@Override
+	public IVertexLayout getStart() {
+		return start;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getEnd()
+	 */
+	@Override
+	public IVertexLayout getEnd() {
+		return end;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getAlgorithms()
 	 */
 	@Override
 	public String[] getAlgorithms() {
@@ -523,7 +523,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isAlgorithmsEnabled()
+	 * @see vistra.gui.IGuiModel#isAlgorithmsEnabled()
 	 */
 	@Override
 	public boolean isAlgorithmsEnabled() {
@@ -533,7 +533,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getSelectedAlgorithmIndex()
+	 * @see vistra.gui.IGuiModel#getSelectedAlgorithmIndex()
 	 */
 	@Override
 	public int getSelectedAlgorithmIndex() {
@@ -543,7 +543,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAlgorithmDescription()
+	 * @see vistra.gui.IGuiModel#getAlgorithmDescription()
 	 */
 	@Override
 	public String getAlgorithmDescription() {
@@ -553,7 +553,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getTraversal()
+	 * @see vistra.gui.IGuiModel#getTraversal()
 	 */
 	@Override
 	public ITraversal getTraversal() {
@@ -563,7 +563,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getProgress()
+	 * @see vistra.gui.IGuiModel#getProgress()
 	 */
 	@Override
 	public int getProgress() {
@@ -573,7 +573,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getStepByStepStateHandler()
+	 * @see vistra.gui.IGuiModel#getStepByStepStateHandler()
 	 */
 	@Override
 	public ISbsStateHandler getStepByStepStateHandler() {
@@ -583,7 +583,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getSteplength()
+	 * @see vistra.gui.IGuiModel#getSteplength()
 	 */
 	@Override
 	public int getSteplength() {
@@ -593,7 +593,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isSteplengthEnabled()
+	 * @see vistra.gui.IGuiModel#isSteplengthEnabled()
 	 */
 	@Override
 	public boolean isSteplengthEnabled() {
@@ -603,7 +603,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isToBeginningEnabled()
+	 * @see vistra.gui.IGuiModel#isToBeginningEnabled()
 	 */
 	@Override
 	public boolean isToBeginningEnabled() {
@@ -613,7 +613,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isBackwardEnabled()
+	 * @see vistra.gui.IGuiModel#isBackwardEnabled()
 	 */
 	@Override
 	public boolean isBackwardEnabled() {
@@ -623,7 +623,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isForwardEnabled()
+	 * @see vistra.gui.IGuiModel#isForwardEnabled()
 	 */
 	@Override
 	public boolean isForwardEnabled() {
@@ -633,7 +633,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isToEndEnabled()
+	 * @see vistra.gui.IGuiModel#isToEndEnabled()
 	 */
 	@Override
 	public boolean isToEndEnabled() {
@@ -643,7 +643,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getAnimationStateHandler()
+	 * @see vistra.gui.IGuiModel#getAnimationStateHandler()
 	 */
 	@Override
 	public IAnimationStateHandler getAnimationStateHandler() {
@@ -653,7 +653,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getDelay()
+	 * @see vistra.gui.IGuiModel#getDelay()
 	 */
 	@Override
 	public int getDelay() {
@@ -663,7 +663,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isDelayEnabled()
+	 * @see vistra.gui.IGuiModel#isDelayEnabled()
 	 */
 	@Override
 	public boolean isDelayEnabled() {
@@ -673,7 +673,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isPlayEnabled()
+	 * @see vistra.gui.IGuiModel#isPlayEnabled()
 	 */
 	@Override
 	public boolean isPlayEnabled() {
@@ -683,7 +683,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getPauseLabel()
+	 * @see vistra.gui.IGuiModel#getPauseLabel()
 	 */
 	@Override
 	public String getPauseLabel() {
@@ -693,7 +693,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getPauseEvent()
+	 * @see vistra.gui.IGuiModel#getPauseEvent()
 	 */
 	@Override
 	public EventSource getPauseEvent() {
@@ -703,7 +703,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isPauseEnabled()
+	 * @see vistra.gui.IGuiModel#isPauseEnabled()
 	 */
 	@Override
 	public boolean isPauseEnabled() {
@@ -713,7 +713,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#isStopEnabled()
+	 * @see vistra.gui.IGuiModel#isStopEnabled()
 	 */
 	@Override
 	public boolean isStopEnabled() {
@@ -723,19 +723,17 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getStringBuilder()
+	 * @see vistra.gui.IGuiModel#getProtocol()
 	 */
 	@Override
-	public StringBuilder getStringBuilder() {
-		return stringBuilder;
+	public StringBuilder getProtocol() {
+		return protocol;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setI18nListener(java.awt.event
-	 * .ActionListener)
+	 * @see vistra.gui.IGuiModel#setI18nListener(java.awt.event.ActionListener)
 	 */
 	@Override
 	public void setI18nListener(ActionListener i18nListener) {
@@ -746,9 +744,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setHelpListener(java.awt.event
-	 * .ActionListener)
+	 * @see vistra.gui.IGuiModel#setHelpListener(java.awt.event.ActionListener)
 	 */
 	@Override
 	public void setHelpListener(ActionListener helpListener) {
@@ -759,9 +755,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAboutListener(java.awt.event
-	 * .ActionListener)
+	 * @see vistra.gui.IGuiModel#setAboutListener(java.awt.event.ActionListener)
 	 */
 	@Override
 	public void setAboutListener(ActionListener aboutListener) {
@@ -772,9 +766,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setQuitListener(java.awt.event
-	 * .ActionListener)
+	 * @see vistra.gui.IGuiModel#setQuitListener(java.awt.event.ActionListener)
 	 */
 	@Override
 	public void setQuitListener(ActionListener quitListener) {
@@ -785,8 +777,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setResourceBundle(java.util.
-	 * ResourceBundle)
+	 * @see vistra.gui.IGuiModel#setResourceBundle(java.util.ResourceBundle)
 	 */
 	@Override
 	public void setResourceBundle(ResourceBundle resourceBundle) {
@@ -797,7 +788,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setI18nEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setI18nEnabled(boolean)
 	 */
 	@Override
 	public void setI18nEnabled(boolean i18nEnabled) {
@@ -808,7 +799,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDeDEEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setDeDEEnabled(boolean)
 	 */
 	@Override
 	public void setDeDEEnabled(boolean deDEEnabled) {
@@ -819,7 +810,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setFrFREnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setFrFREnabled(boolean)
 	 */
 	@Override
 	public void setFrFREnabled(boolean frFREnabled) {
@@ -830,7 +821,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setEnUSEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setEnUSEnabled(boolean)
 	 */
 	@Override
 	public void setEnUSEnabled(boolean enUSEnabled) {
@@ -841,7 +832,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setFileEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setFileEnabled(boolean)
 	 */
 	@Override
 	public void setFileEnabled(boolean fileEnabled) {
@@ -852,7 +843,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setNewMenuEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setNewMenuEnabled(boolean)
 	 */
 	@Override
 	public void setNewMenuEnabled(boolean newMenuEnabled) {
@@ -863,9 +854,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setUndirectedGraphEnabled(boolean
-	 * )
+	 * @see vistra.gui.IGuiModel#setUndirectedGraphEnabled(boolean)
 	 */
 	@Override
 	public void setUndirectedGraphEnabled(boolean undirectedGraphEnabled) {
@@ -876,8 +865,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDirectedGraphEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setDirectedGraphEnabled(boolean)
 	 */
 	@Override
 	public void setDirectedGraphEnabled(boolean directedGraphEnabled) {
@@ -888,7 +876,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setOpenGraphEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setOpenGraphEnabled(boolean)
 	 */
 	@Override
 	public void setOpenGraphEnabled(boolean openGraphEnabled) {
@@ -899,7 +887,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSaveGraphEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setSaveGraphEnabled(boolean)
 	 */
 	@Override
 	public void setSaveGraphEnabled(boolean saveGraphEnabled) {
@@ -910,8 +898,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSaveGraphAsEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setSaveGraphAsEnabled(boolean)
 	 */
 	@Override
 	public void setSaveGraphAsEnabled(boolean saveGraphAsEnabled) {
@@ -922,45 +909,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithmMenuEnabled(boolean)
-	 */
-	@Override
-	public void setAlgorithmMenuEnabled(boolean algorithmMenuEnabled) {
-		this.algorithmMenuEnabled = algorithmMenuEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setImportAlgorithmEnabled(boolean
-	 * )
-	 */
-	@Override
-	public void setImportAlgorithmEnabled(boolean importAlgorithmEnabled) {
-		this.importAlgorithmEnabled = importAlgorithmEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDeleteAlgorithmEnabled(boolean
-	 * )
-	 */
-	@Override
-	public void setDeleteAlgorithmEnabled(boolean deleteAlgorithmEnabled) {
-		this.deleteAlgorithmEnabled = deleteAlgorithmEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setQuitEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setQuitEnabled(boolean)
 	 */
 	@Override
 	public void setQuitEnabled(boolean quitEnabled) {
@@ -971,7 +920,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setInfoEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setInfoEnabled(boolean)
 	 */
 	@Override
 	public void setInfoEnabled(boolean infoEnabled) {
@@ -982,7 +931,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setHelpEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setHelpEnabled(boolean)
 	 */
 	@Override
 	public void setHelpEnabled(boolean helpEnabled) {
@@ -993,7 +942,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAboutEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setAboutEnabled(boolean)
 	 */
 	@Override
 	public void setAboutEnabled(boolean aboutEnabled) {
@@ -1005,8 +954,8 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setParameterStateHandler(ch.bfh
-	 * .bti7301.hs2013.gravis.gui.control.parameter.IParameterStateHandler)
+	 * vistra.gui.IGuiModel#setParameterStateHandler(vistra.gui.control.state
+	 * .IParameterStateHandler)
 	 */
 	@Override
 	public void setParameterStateHandler(
@@ -1018,9 +967,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraph(ch.bfh.bti7301.hs2013
-	 * .gravis.core.graph.IObservableGravisGraph)
+	 * @see vistra.gui.IGuiModel#setGraph(vistra.core.graph.IExtendedGraph)
 	 */
 	@Override
 	public void setGraph(IExtendedGraph graph) {
@@ -1031,18 +978,18 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setEditGraphEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setGraphFile(boolean)
 	 */
 	@Override
-	public void setEditGraphEnabled(boolean editGraphEnabled) {
-		this.editGraphEnabled = editGraphEnabled;
+	public void setGraphFile(boolean graphFile) {
+		this.graphFile = graphFile;
 		this.setChanged();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setGraphSaved(boolean)
+	 * @see vistra.gui.IGuiModel#setGraphSaved(boolean)
 	 */
 	@Override
 	public void setGraphSaved(boolean graphSaved) {
@@ -1053,8 +1000,40 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithms(java.lang.String[])
+	 * @see vistra.gui.IGuiModel#setEditGraphEnabled(boolean)
+	 */
+	@Override
+	public void setEditGraphEnabled(boolean editGraphEnabled) {
+		this.editGraphEnabled = editGraphEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setStart(vistra.core.graph.item.IVertexLayout)
+	 */
+	@Override
+	public void setStart(IVertexLayout start) {
+		this.start = start;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setEnd(vistra.core.graph.item.IVertexLayout)
+	 */
+	@Override
+	public void setEnd(IVertexLayout end) {
+		this.end = end;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setAlgorithms(java.lang.String[])
 	 */
 	@Override
 	public void setAlgorithms(String[] algorithms) {
@@ -1065,8 +1044,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithmsEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setAlgorithmsEnabled(boolean)
 	 */
 	@Override
 	public void setAlgorithmsEnabled(boolean algorithmsEnabled) {
@@ -1077,8 +1055,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSelectedAlgorithmIndex(int)
+	 * @see vistra.gui.IGuiModel#setSelectedAlgorithmIndex(int)
 	 */
 	@Override
 	public void setSelectedAlgorithmIndex(int selectedAlgorithmIndex) {
@@ -1089,9 +1066,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAlgorithmDescription(java.
-	 * lang.String)
+	 * @see vistra.gui.IGuiModel#setAlgorithmDescription(java.lang.String)
 	 */
 	@Override
 	public void setAlgorithmDescription(String algorithmDescription) {
@@ -1102,9 +1077,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setTraversal(ch.bfh.bti7301.hs2013
-	 * .gravis.core.traversal.Traversal)
+	 * @see vistra.gui.IGuiModel#setTraversal(vistra.core.traversal.ITraversal)
 	 */
 	@Override
 	public void setTraversal(ITraversal traversal) {
@@ -1115,7 +1088,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setProgress(int)
+	 * @see vistra.gui.IGuiModel#setProgress(int)
 	 */
 	@Override
 	public void setProgress(int progress) {
@@ -1127,8 +1100,8 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStepByStepStateHandler(ch.
-	 * bfh.bti7301.hs2013.gravis.gui.control.stepbystep.IStepByStepStateHandler)
+	 * vistra.gui.IGuiModel#setStepByStepStateHandler(vistra.gui.control.state
+	 * .ISbsStateHandler)
 	 */
 	@Override
 	public void setStepByStepStateHandler(
@@ -1140,7 +1113,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSteplength(int)
+	 * @see vistra.gui.IGuiModel#setSteplength(int)
 	 */
 	@Override
 	public void setSteplength(int steplength) {
@@ -1151,8 +1124,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setSteplengthEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setSteplengthEnabled(boolean)
 	 */
 	@Override
 	public void setSteplengthEnabled(boolean steplengthEnabled) {
@@ -1163,8 +1135,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setToBeginningEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setToBeginningEnabled(boolean)
 	 */
 	@Override
 	public void setToBeginningEnabled(boolean toBeginningEnabled) {
@@ -1175,7 +1146,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setBackwardEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setBackwardEnabled(boolean)
 	 */
 	@Override
 	public void setBackwardEnabled(boolean backwardEnabled) {
@@ -1186,7 +1157,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setForwardEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setForwardEnabled(boolean)
 	 */
 	@Override
 	public void setForwardEnabled(boolean forwardEnabled) {
@@ -1197,7 +1168,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setToEndEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setToEndEnabled(boolean)
 	 */
 	@Override
 	public void setToEndEnabled(boolean toEndEnabled) {
@@ -1209,8 +1180,8 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setAnimationStateHandler(ch.bfh
-	 * .bti7301.hs2013.gravis.gui.control.animation.IAnimationStateHandler)
+	 * vistra.gui.IGuiModel#setAnimationStateHandler(vistra.gui.control.state
+	 * .IAnimationStateHandler)
 	 */
 	@Override
 	public void setAnimationStateHandler(
@@ -1222,7 +1193,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDelay(int)
+	 * @see vistra.gui.IGuiModel#setDelay(int)
 	 */
 	@Override
 	public void setDelay(int delay) {
@@ -1233,7 +1204,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setDelayEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setDelayEnabled(boolean)
 	 */
 	@Override
 	public void setDelayEnabled(boolean delayEnabled) {
@@ -1244,7 +1215,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPlayEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setPlayEnabled(boolean)
 	 */
 	@Override
 	public void setPlayEnabled(boolean playEnabled) {
@@ -1255,8 +1226,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseLabel(java.lang.String)
+	 * @see vistra.gui.IGuiModel#setPauseLabel(java.lang.String)
 	 */
 	@Override
 	public void setPauseLabel(String pauseLabel) {
@@ -1268,8 +1238,8 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseEvent(ch.bfh.bti7301.
-	 * hs2013.gravis.gui.control.IControl.EventSource)
+	 * vistra.gui.IGuiModel#setPauseEvent(vistra.gui.control.IControl.EventSource
+	 * )
 	 */
 	@Override
 	public void setPauseEvent(EventSource pauseEvent) {
@@ -1280,7 +1250,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setPauseEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setPauseEnabled(boolean)
 	 */
 	@Override
 	public void setPauseEnabled(boolean pauseEnabled) {
@@ -1291,7 +1261,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStopEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setStopEnabled(boolean)
 	 */
 	@Override
 	public void setStopEnabled(boolean stopEnabled) {
@@ -1302,12 +1272,11 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setStringBuilder(java.lang.
-	 * StringBuilder)
+	 * @see vistra.gui.IGuiModel#setProtocol(java.lang.StringBuilder)
 	 */
 	@Override
-	public void setStringBuilder(StringBuilder stringBuilder) {
-		this.stringBuilder = stringBuilder;
+	public void setProtocol(StringBuilder protocol) {
+		this.protocol = protocol;
 		this.setChanged();
 	}
 

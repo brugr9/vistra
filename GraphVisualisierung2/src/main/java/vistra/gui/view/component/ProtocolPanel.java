@@ -91,7 +91,7 @@ public final class ProtocolPanel extends JPanel implements Observer {
 				if (arg == EventSource.I18N) {
 					this.border.setTitle(b.getString("protocol.label"));
 				}
-				this.textArea.setText(m.getStringBuilder().toString());
+				this.textArea.setText(m.getProtocol().toString());
 				this.textArea.setCaretPosition(this.textArea.getDocument()
 						.getLength());
 

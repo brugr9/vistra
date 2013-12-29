@@ -25,6 +25,7 @@ import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
 import vistra.gui.GuiModel;
+import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -68,10 +69,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @param model
 	 *            a model
 	 */
-	public ParameterStateHandler(ICore core, GuiModel model) {
+	public ParameterStateHandler(ICore core, IGuiModel model) {
 		super();
 		this.core = core;
-		this.model = model;
+		this.model = (GuiModel) model;
 		this.top = null;
 		this.state = new ParameterStateIdle(this);
 	}
@@ -290,18 +291,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void setViewGraphEdited() {
 		this.setGraphSaved(false);
-		this.enableMenu(true);
-		if (this.model.isAlgorithmsEnabled()) {
-			this.model.setAlgorithmsEnabled(false);
-			this.model.notifyObservers(EventSource.ALGORITHM);
-		}
-		if (this.model.isStopEnabled())
-			try {
-				this.enableTraversalPlayer(false);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	}
 
 	/**
@@ -364,10 +353,11 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @throws Exception
 	 */
 	void idle() throws Exception {
-		if (this.model.getTraversal().size() == 0)
-			this.model.getAnimationStateHandler().handleOff();
-		else
+		if (this.model.isGraphFile() && this.model.isGraphSaved()
+				&& this.model.getTraversal().size() > 0)
 			this.model.getAnimationStateHandler().handleIdle();
+		else
+			this.model.getAnimationStateHandler().handleOff();
 	}
 
 	/**
@@ -391,7 +381,13 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				graph.setName(name);
 				graph.addGraphEventListener(this);
 				this.model.setGraph(graph);
+				this.model.setGraphFile(false);
+				this.model.setGraphSaved(true);
+				this.model.setStart(null);
+				this.model.setEnd(null);
 				this.updateAlgorithms();
+				this.model.setSelectedAlgorithmIndex(0);
+				this.selectAlgorithm();
 			}
 		} catch (Exception e) {
 			throw e;
@@ -434,7 +430,13 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					graph.setName(name);
 					graph.addGraphEventListener(this);
 					this.model.setGraph(graph);
+					this.model.setGraphFile(true);
+					this.model.setGraphSaved(true);
+					this.model.setStart(null);
+					this.model.setEnd(null);
 					this.updateAlgorithms();
+					this.model.setSelectedAlgorithmIndex(0);
+					this.selectAlgorithm();
 				}
 			}
 			return option;
@@ -451,6 +453,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void saveGraph() throws Exception {
 		try {
 			this.core.saveGraph();
+			this.model.setGraphSaved(true);
+			this.model.setAlgorithmsEnabled(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -488,6 +492,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
 				this.core.saveGraphAs(file);
+				this.model.setGraphFile(true);
+				this.model.setGraphSaved(true);
+				this.model.setAlgorithmsEnabled(true);
 			}
 			return option;
 
@@ -503,7 +510,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void editGraph() throws Exception {
 		try {
-			// TODO nothing to do?
+			this.model.setGraphSaved(false);
+			this.model.setSelectedAlgorithmIndex(0);
+			this.selectAlgorithm();
+			this.model.setAlgorithmsEnabled(false);
 		} catch (Exception e) {
 			throw e;
 		}

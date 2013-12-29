@@ -71,8 +71,8 @@ public class DefaultView extends JFrame implements IView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public DefaultView(Layout<IVertexLayout, IEdgeLayout> layout, GuiModel model,
-			IControl control) throws Exception {
+	public DefaultView(Layout<IVertexLayout, IEdgeLayout> layout,
+			GuiModel model, IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(model.getResourceBundle().getString("app.label"));

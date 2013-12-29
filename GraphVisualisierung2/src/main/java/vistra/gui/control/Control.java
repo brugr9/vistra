@@ -1,7 +1,7 @@
 package vistra.gui.control;
 
 import vistra.core.ICore;
-import vistra.gui.GuiModel;
+import vistra.gui.IGuiModel;
 import vistra.gui.control.state.AnimationStateHandler;
 import vistra.gui.control.state.ParameterStateHandler;
 import vistra.gui.control.state.SbsStateHandler;
@@ -23,20 +23,21 @@ public final class Control implements IControl {
 	 *            the model
 	 * @throws Exception
 	 */
-	public Control(ICore core, GuiModel model) throws Exception {
+	public Control(ICore core, IGuiModel model) throws Exception {
 		super();
 		try {
-			// Action listener
+			/* Action listener */
 			model.setI18nListener(new ActionListenerI18n(model));
 			model.setHelpListener(new ActionListenerHelp(model));
 			model.setAboutListener(new ActionListenerAbout(model));
 			model.setQuitListener(new ActionListenerQuit(model));
-			// State handler
+			/* State handler */
 			model.setStepByStepStateHandler(new SbsStateHandler(model));
 			model.setAnimationStateHandler(new AnimationStateHandler(model));
 			model.setParameterStateHandler(new ParameterStateHandler(core,
 					model));
 			/* Parameter */
+			model.setGraphSaved(true);
 			model.getParameterStateHandler().handleNewGraphUndirected();
 		} catch (Exception e) {
 			throw e;

@@ -71,7 +71,7 @@ class ActionListenerI18n extends AbstractActionListener {
 					+ System.lineSeparator()
 					+ b.getString("about.message").replaceAll("\n",
 							System.lineSeparator()) + System.lineSeparator());
-			this.model.setStringBuilder(sb);
+			this.model.setProtocol(sb);
 			/* update the view */
 			((GuiModel) this.model).notifyObservers(I18N);
 		} catch (Exception ex) {

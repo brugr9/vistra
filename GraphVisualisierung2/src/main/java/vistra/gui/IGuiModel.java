@@ -4,18 +4,13 @@ import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import vistra.core.graph.IExtendedGraph;
+import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.state.IAnimationStateHandler;
 import vistra.gui.control.state.IParameterStateHandler;
 import vistra.gui.control.state.ISbsStateHandler;
 
-/**
- * A model interface.
- * 
- * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
- */
 public interface IGuiModel {
 
 	/**
@@ -26,17 +21,17 @@ public interface IGuiModel {
 	/**
 	 * Sets the playerEnabled.
 	 */
-	public abstract void setPlayerEnabled(boolean playerEnabled);
+	public abstract void setPlayerEnabled(boolean menuEnabled);
 
 	/**
 	 * Sets the animationEnabled.
 	 */
-	public abstract void setAnimationEnabled(boolean animationEnabled);
+	public abstract void setAnimationEnabled(boolean menuEnabled);
 
 	/**
 	 * Sets the stepByStepEnabled.
 	 */
-	public abstract void setStepByStepEnabled(boolean stepByStepEnabled);
+	public abstract void setStepByStepEnabled(boolean menuEnabled);
 
 	/**
 	 * @return the i18nListener
@@ -119,21 +114,6 @@ public interface IGuiModel {
 	public abstract boolean isSaveGraphAsEnabled();
 
 	/**
-	 * @return the algorithmMenuEnabled
-	 */
-	public abstract boolean isAlgorithmMenuEnabled();
-
-	/**
-	 * @return the importAlgorithmEnabled
-	 */
-	public abstract boolean isImportAlgorithmEnabled();
-
-	/**
-	 * @return the deleteAlgorithmEnabled
-	 */
-	public abstract boolean isDeleteAlgorithmEnabled();
-
-	/**
 	 * @return the quitEnabled
 	 */
 	public abstract boolean isQuitEnabled();
@@ -164,14 +144,29 @@ public interface IGuiModel {
 	public abstract IExtendedGraph getGraph();
 
 	/**
-	 * @return the editGraphEnabled
+	 * @return the graphFile
 	 */
-	public abstract boolean isEditGraphEnabled();
+	public abstract boolean isGraphFile();
 
 	/**
 	 * @return the graphSaved
 	 */
 	public abstract boolean isGraphSaved();
+
+	/**
+	 * @return the editGraphEnabled
+	 */
+	public abstract boolean isEditGraphEnabled();
+
+	/**
+	 * @return the start
+	 */
+	public abstract IVertexLayout getStart();
+
+	/**
+	 * @return the end
+	 */
+	public abstract IVertexLayout getEnd();
 
 	/**
 	 * @return the algorithms
@@ -279,9 +274,9 @@ public interface IGuiModel {
 	public abstract boolean isStopEnabled();
 
 	/**
-	 * @return the stringBuilder
+	 * @return the protocol
 	 */
-	public abstract StringBuilder getStringBuilder();
+	public abstract StringBuilder getProtocol();
 
 	/**
 	 * @param i18nListener
@@ -381,26 +376,6 @@ public interface IGuiModel {
 	public abstract void setSaveGraphAsEnabled(boolean saveGraphAsEnabled);
 
 	/**
-	 * @param algorithmMenuEnabled
-	 *            the algorithmMenuEnabled to set
-	 */
-	public abstract void setAlgorithmMenuEnabled(boolean algorithmMenuEnabled);
-
-	/**
-	 * @param importAlgorithmEnabled
-	 *            the importAlgorithmEnabled to set
-	 */
-	public abstract void setImportAlgorithmEnabled(
-			boolean importAlgorithmEnabled);
-
-	/**
-	 * @param deleteAlgorithmEnabled
-	 *            the deleteAlgorithmEnabled to set
-	 */
-	public abstract void setDeleteAlgorithmEnabled(
-			boolean deleteAlgorithmEnabled);
-
-	/**
 	 * @param quitEnabled
 	 *            the quitEnabled to set
 	 */
@@ -438,16 +413,34 @@ public interface IGuiModel {
 	public abstract void setGraph(IExtendedGraph graph);
 
 	/**
-	 * @param editGraphEnabled
-	 *            the editGraphEnabled to set
+	 * @param graphFile
+	 *            the graphFile to set
 	 */
-	public abstract void setEditGraphEnabled(boolean editGraphEnabled);
+	public abstract void setGraphFile(boolean graphFile);
 
 	/**
 	 * @param graphSaved
 	 *            the graphSaved to set
 	 */
 	public abstract void setGraphSaved(boolean graphSaved);
+
+	/**
+	 * @param editGraphEnabled
+	 *            the editGraphEnabled to set
+	 */
+	public abstract void setEditGraphEnabled(boolean editGraphEnabled);
+
+	/**
+	 * @param start
+	 *            the start to set
+	 */
+	public abstract void setStart(IVertexLayout start);
+
+	/**
+	 * @param end
+	 *            the end to set
+	 */
+	public abstract void setEnd(IVertexLayout end);
 
 	/**
 	 * @param algorithms
@@ -578,9 +571,9 @@ public interface IGuiModel {
 	public abstract void setStopEnabled(boolean stopEnabled);
 
 	/**
-	 * @param stringBuilder
-	 *            the stringBuilder to set
+	 * @param protocol
+	 *            the protocol to set
 	 */
-	public abstract void setStringBuilder(StringBuilder stringBuilder);
+	public abstract void setProtocol(StringBuilder protocol);
 
 }

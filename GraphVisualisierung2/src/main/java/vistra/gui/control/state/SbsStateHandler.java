@@ -301,7 +301,7 @@ public final class SbsStateHandler extends Observable implements
 
 			/* update */
 			this.model.setProgress(0);
-			this.model.setStringBuilder(new StringBuilder().append(" "));
+			this.model.setProtocol(new StringBuilder().append(" "));
 			this.model.notifyObservers();
 
 		} catch (Exception ex) {
@@ -341,7 +341,7 @@ public final class SbsStateHandler extends Observable implements
 				}
 			}
 
-			this.model.setStringBuilder(new StringBuilder().append(" "));
+			this.model.setProtocol(new StringBuilder().append(" "));
 			this.model.notifyObservers();
 
 		} catch (Exception ex) {
@@ -369,7 +369,7 @@ public final class SbsStateHandler extends Observable implements
 			int max = this.model.getTraversal().size();
 			IStep step = null;
 			String description = "";
-			StringBuilder stringBuilder = this.model.getStringBuilder();
+			StringBuilder stringBuilder = this.model.getProtocol();
 
 			/* here we go ... */
 			for (int i = 0; i < steplength; i++) {
@@ -384,12 +384,12 @@ public final class SbsStateHandler extends Observable implements
 
 					/* update */
 					this.model.setProgress(progress);
-					this.model.setStringBuilder(stringBuilder);
+					this.model.setProtocol(stringBuilder);
 					this.model.notifyObservers();
 				} else {
 					stringBuilder.append(traversal.getStatistics()
 							+ System.lineSeparator());
-					this.model.setStringBuilder(stringBuilder);
+					this.model.setProtocol(stringBuilder);
 					this.model.notifyObservers();
 					break;
 				}
@@ -434,7 +434,7 @@ public final class SbsStateHandler extends Observable implements
 
 			IStep step = null;
 			String description = "";
-			StringBuilder stringBuilder = this.model.getStringBuilder();
+			StringBuilder stringBuilder = this.model.getProtocol();
 			boolean ok = traversal.hasNext();
 
 			/* here we go ... */
@@ -452,7 +452,7 @@ public final class SbsStateHandler extends Observable implements
 			this.model.setProgress(max);
 			stringBuilder.append(traversal.getStatistics()
 					+ System.lineSeparator());
-			this.model.setStringBuilder(stringBuilder);
+			this.model.setProtocol(stringBuilder);
 			this.model.notifyObservers();
 
 		} catch (Exception ex) {

@@ -65,7 +65,7 @@ public class Core implements ICore {
 			this.graphManager = GraphManagerFactory.create(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(p);
 			this.algorithmManager.add(new Default());
-			this.algorithmManager.add(new Test()); // TODO remove
+			this.algorithmManager.add(new Test()); // TODO remove test algorithm
 			this.algorithmManager.add(new BFS());
 			this.algorithmManager.add(new DFS());
 			this.algorithmManager.add(new DLS());

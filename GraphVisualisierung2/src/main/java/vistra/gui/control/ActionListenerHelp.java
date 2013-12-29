@@ -61,10 +61,10 @@ final class ActionListenerHelp extends AbstractActionListener {
 		ResourceBundle b = this.model.getResourceBundle();
 		try {
 			// TODO i18n
-			JOptionPane.showMessageDialog(null, this.shortCuts,
+			String message = this.shortCuts;
+			// String message = b.getString("help.message");
+			JOptionPane.showMessageDialog(null, message,
 					b.getString("help.label"), 1, null);
-			// JOptionPane.showMessageDialog(null, b.getString("help.message"),
-			// b.getString("help.label"), 1, null);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(),
 					b.getString("app.label"), 1, null);

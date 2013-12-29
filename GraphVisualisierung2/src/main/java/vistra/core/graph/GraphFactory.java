@@ -6,7 +6,6 @@ import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
 import edu.uci.ics.jung.graph.SparseGraph;
-import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -24,7 +23,7 @@ public final class GraphFactory {
 	}
 
 	/**
-	 * Creates a undirected <code>ExtendedGraph</code>.
+	 * Creates an undirected {@code IExtendedGraph}.
 	 * 
 	 * @return the graph
 	 */
@@ -33,8 +32,8 @@ public final class GraphFactory {
 	}
 
 	/**
-	 * Creates a default JUNG <code>SparseGraph</code> and extends it to a
-	 * <code>ExtendedGraph</code>.
+	 * Creates a default JUNG {@code SparseGraph} and extends it to an
+	 * {@code IExtendedGraph}.
 	 * 
 	 * @return the graph
 	 */
@@ -45,39 +44,21 @@ public final class GraphFactory {
 	}
 
 	/**
-	 * Creates a <code>ExtendedGraph</code> based on a JUNG
-	 * <code>SparseGraph</code>.
+	 * Creates an {@code IExtendedGraph} with edge type as given based on a JUNG
+	 * {@code SparseGraph}.
 	 * 
 	 * @param edgeType
-	 *            an edge type
+	 *            the edge type
 	 * @return the graph
 	 */
 	public static IExtendedGraph create(EdgeType edgeType) {
-		IExtendedGraph graph = new ExtendedGraph(
-				new SparseGraph<IVertexLayout, IEdgeLayout>());
+		IExtendedGraph graph = createGraph();
 		graph.setEdgeType(edgeType);
 		return graph;
 	}
 
 	/**
-	 * Creates an <code>ExtendedGraph</code> based on a JUNG
-	 * <code>SparseGraph</code>.
-	 * 
-	 * @param edgeType
-	 *            an edge type
-	 * @param listener
-	 *            a listener to add
-	 * @return the graph
-	 */
-	public static IExtendedGraph create(EdgeType edgeType,
-			GraphEventListener<IVertexLayout, IEdgeLayout> listener) {
-		ExtendedGraph graph = (ExtendedGraph) create(edgeType);
-		graph.addGraphEventListener(listener);
-		return graph;
-	}
-
-	/**
-	 * Converts a list of into an array
+	 * Converts a list of {@code IItemLayout} to an array.
 	 * 
 	 * @param list
 	 *            the list

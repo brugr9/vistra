@@ -58,9 +58,9 @@ public final class AnimationStateHandler extends Observable implements
 	 * @param model
 	 *            a model
 	 */
-	public AnimationStateHandler(GuiModel model) {
+	public AnimationStateHandler(IGuiModel model) {
 		super();
-		this.model = model;
+		this.model = (GuiModel) model;
 
 		this.animationListener = new AnimationListener();
 		int animationDelay = this.model.getDelay() * A_SECOND;
