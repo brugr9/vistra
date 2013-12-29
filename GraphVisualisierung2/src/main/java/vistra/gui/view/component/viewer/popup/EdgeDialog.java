@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.view.component.viewer.popup.verifier.EdgeWeightVerifier;
-import vistra.gui.view.component.viewer.popup.verifier.GraphItemIdVerifier;
+import vistra.gui.view.component.viewer.popup.verifier.ItemIdVerifier;
 import vistra.util.Convert;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -147,7 +147,7 @@ public class EdgeDialog extends JDialog {
 		this.txtEdgeName.setText(edge.getId());
 		this.txtEdgeWeight.setText(String.valueOf(edge.getWeight()));
 
-		this.txtEdgeName.setInputVerifier(new GraphItemIdVerifier(
+		this.txtEdgeName.setInputVerifier(new ItemIdVerifier(
 				this.txtEdgeName.getText().trim(), edge, viewer));
 		this.txtEdgeWeight.setInputVerifier(new EdgeWeightVerifier(
 				this.txtEdgeWeight.getText().trim()));

@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
-import vistra.gui.view.component.viewer.popup.verifier.GraphItemIdVerifier;
+import vistra.gui.view.component.viewer.popup.verifier.ItemIdVerifier;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -129,7 +129,7 @@ public class VertexDialog extends JDialog {
 			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 
 		this.txtVertexName.setText(vertex.getId());
-		this.txtVertexName.setInputVerifier(new GraphItemIdVerifier(
+		this.txtVertexName.setInputVerifier(new ItemIdVerifier(
 				this.txtVertexName.getText().trim(), vertex, vViewer));
 
 	}

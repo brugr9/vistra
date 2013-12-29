@@ -12,12 +12,16 @@ import javax.swing.text.JTextComponent;
  */
 abstract class AbstractVerifier extends InputVerifier {
 
+	/**
+	 * A field for the last good.
+	 */
 	private String lastGood;
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param lastGood
+	 *            the last good
 	 */
 	protected AbstractVerifier(String lastGood) {
 		super();

@@ -26,14 +26,12 @@ public class EdgeWeightVerifier extends AbstractVerifier {
 	@Override
 	public boolean verify(JComponent input) {
 		if (input instanceof JTextComponent) {
-			JTextComponent textField = (JTextComponent) input;
-
+			String text = ((JTextComponent) input).getText();
 			try {
-				Integer.parseInt(textField.getText());
-			} catch (Exception e) {
-				throw new IllegalArgumentException("integer value");
+				Integer.parseInt(text);
+			} catch (NumberFormatException e) {
+				throw e;
 			}
-
 			return true;
 		}
 

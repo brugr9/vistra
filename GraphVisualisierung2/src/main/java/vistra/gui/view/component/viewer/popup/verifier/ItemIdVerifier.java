@@ -7,7 +7,6 @@ import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
-import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -16,31 +15,32 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GraphItemIdVerifier extends AbstractVerifier {
+public class ItemIdVerifier extends AbstractVerifier {
 
 	/**
-	 * A field for a graph item.
+	 * A field for an item.
 	 */
 	private final IItemLayout item;
 	/**
 	 * A field for a graph.
 	 */
-	private final Graph<IVertexLayout, IEdgeLayout> graph;
+	private final IExtendedGraph graph;
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param lastGood
+	 *            the last good
 	 * @param item
 	 *            a graph item
 	 * @param vv
 	 *            a visualization viewer
 	 */
-	public GraphItemIdVerifier(String lastGood, IItemLayout item,
+	public ItemIdVerifier(String lastGood, IItemLayout item,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> vv) {
 		super(lastGood);
 		this.item = item;
-		this.graph = vv.getGraphLayout().getGraph();
+		this.graph = (IExtendedGraph) vv.getGraphLayout().getGraph();
 	}
 
 	/**
@@ -50,16 +50,13 @@ public class GraphItemIdVerifier extends AbstractVerifier {
 	public boolean verify(JComponent input) {
 
 		if (input instanceof JTextComponent) {
-			JTextComponent textField = (JTextComponent) input;
-			IExtendedGraph graph = (IExtendedGraph) this.graph;
-
-			return !textField.getText().trim().isEmpty()
-					&& (textField.getText().equals(
-							((IItemLayout) this.item).getId()) || graph
-							.unused(textField.getText().trim()));
+			String text = ((JTextComponent) input).getText().trim();
+			return !text.isEmpty()
+					&& (text.equals(this.item.getId()) || this.graph
+							.unused(text));
 		}
-
 		return false;
+
 	}
 
 }
