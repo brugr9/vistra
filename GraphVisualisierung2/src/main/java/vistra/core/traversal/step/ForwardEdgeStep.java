@@ -1,7 +1,7 @@
 package vistra.core.traversal.step;
 
-import vistra.core.graph.item.EdgeLayout;
 import vistra.core.graph.item.IEdge;
+import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.state.command.ForwardEdgeCommand;
 import vistra.core.graph.item.state.command.IItemCommand;
 
@@ -21,7 +21,7 @@ public class ForwardEdgeStep extends AbstractStep implements IStep {
 	 */
 	public ForwardEdgeStep(IEdge edge) {
 		super();
-		this.description = "Forward edge " + ((EdgeLayout) edge).getId();
+		this.description = "Forwardedge " + ((IEdgeLayout) edge).getId();
 		try {
 			IItemCommand command = new ForwardEdgeCommand(edge);
 			this.stepHandler.addCommand(command);

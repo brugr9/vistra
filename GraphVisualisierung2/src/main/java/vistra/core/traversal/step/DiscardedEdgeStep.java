@@ -1,7 +1,7 @@
 package vistra.core.traversal.step;
 
-import vistra.core.graph.item.EdgeLayout;
 import vistra.core.graph.item.IEdge;
+import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.state.command.DiscardedEdgeCommand;
 import vistra.core.graph.item.state.command.IItemCommand;
 
@@ -21,7 +21,7 @@ public class DiscardedEdgeStep extends AbstractStep implements IStep {
 	 */
 	public DiscardedEdgeStep(IEdge edge) {
 		super();
-		this.description = "Discarded edge " + ((EdgeLayout) edge).getId();
+		this.description = "Discarded edge " + ((IEdgeLayout) edge).getId();
 		try {
 			IItemCommand command = new DiscardedEdgeCommand(edge);
 			this.stepHandler.addCommand(command);

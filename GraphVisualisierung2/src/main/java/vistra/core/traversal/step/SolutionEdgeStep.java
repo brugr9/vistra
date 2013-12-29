@@ -21,7 +21,8 @@ public class SolutionEdgeStep extends AbstractStep implements IStep {
 	 */
 	public SolutionEdgeStep(IEdge edge) {
 		super();
-		this.description = "Solution edge " + ((EdgeLayout) edge).getId();
+		this.description = "Solution member: edge "
+				+ ((EdgeLayout) edge).getId();
 		try {
 			IItemCommand command = new SolutionEdgeCommand(edge);
 			this.stepHandler.addCommand(command);

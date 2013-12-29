@@ -1,6 +1,7 @@
 package vistra.core.traversal.step;
 
 import vistra.core.graph.item.IEdge;
+import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.state.command.BackEdgeCommand;
 import vistra.core.graph.item.state.command.IItemCommand;
 
@@ -20,8 +21,7 @@ public class BackEdgeStep extends AbstractStep implements IStep {
 	 */
 	public BackEdgeStep(IEdge edge) {
 		super();
-		this.description = "";
-		// TODO this.description = "Back edge " + ((IEdgeLayout) edge).getId();
+		this.description = "Backedge " + ((IEdgeLayout) edge).getId();
 		try {
 			IItemCommand command = new BackEdgeCommand(edge);
 			this.stepHandler.addCommand(command);
@@ -30,5 +30,4 @@ public class BackEdgeStep extends AbstractStep implements IStep {
 			e.printStackTrace();
 		}
 	}
-
 }

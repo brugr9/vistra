@@ -16,7 +16,7 @@ import vistra.core.graph.item.state.command.UpdateVertexCommand;
 public class UpdateVerticesStep extends AbstractStep implements IStep {
 
 	/**
-	 * Main constructor.
+	 * Main constructor. TODO map as parameter
 	 * 
 	 * @param vertices
 	 *            the vertices to update
@@ -25,11 +25,12 @@ public class UpdateVerticesStep extends AbstractStep implements IStep {
 	 */
 	public UpdateVerticesStep(List<IVertex> vertices, List<Integer> values) {
 		super();
-		this.description = "Update values: ";
+		this.description = "Update values of vertices: ";
 		try {
 			for (int i = 0; i < vertices.size(); i++) {
-				this.description += ((IVertexLayout) vertices.get(i)).getId()
-						+ ", ";
+				this.description += ((IVertexLayout) vertices.get(i)).getId();
+				if (i < vertices.size() - 1)
+					this.description += ", ";
 				IItemCommand updateVertex = new UpdateVertexCommand(
 						(IVertex) vertices.get(i), values.get(i));
 				this.stepHandler.addCommand(updateVertex);
