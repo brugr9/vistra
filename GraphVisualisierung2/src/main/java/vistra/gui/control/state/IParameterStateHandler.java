@@ -5,7 +5,6 @@ import java.awt.event.ItemListener;
 
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
-import vistra.gui.control.IControlStateHandler;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 
 /**

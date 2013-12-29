@@ -1,13 +1,13 @@
-package vistra.gui.control;
+package vistra.gui.control.state;
 
 /**
- * An interface for a control state handler. All control state machines can be
- * off or idle.
+ * An interface for a control state handler. All control state handler can
+ * handle off and idle.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IControlStateHandler {
+interface IControlStateHandler {
 
 	/**
 	 * Handles idle.

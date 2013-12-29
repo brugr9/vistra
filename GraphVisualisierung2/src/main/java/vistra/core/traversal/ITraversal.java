@@ -25,6 +25,6 @@ public interface ITraversal extends IBidirectIterator<IStep> {
 	 * 
 	 * @return the description
 	 */
-	abstract StringBuilder getStatistics();
+	abstract StringBuilder getDescription();
 
 }

@@ -3,7 +3,6 @@ package vistra.gui.control.state;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
-import vistra.gui.control.IControlStateHandler;
 
 /**
  * An interface for a step-by-step state handler.A step-by-step state machine

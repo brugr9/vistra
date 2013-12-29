@@ -387,7 +387,7 @@ public final class SbsStateHandler extends Observable implements
 					this.model.setProtocol(stringBuilder);
 					this.model.notifyObservers();
 				} else {
-					stringBuilder.append(traversal.getStatistics()
+					stringBuilder.append(traversal.getDescription()
 							+ System.lineSeparator());
 					this.model.setProtocol(stringBuilder);
 					this.model.notifyObservers();
@@ -450,7 +450,7 @@ public final class SbsStateHandler extends Observable implements
 			/* update */
 			int max = this.model.getTraversal().size();
 			this.model.setProgress(max);
-			stringBuilder.append(traversal.getStatistics()
+			stringBuilder.append(traversal.getDescription()
 					+ System.lineSeparator());
 			this.model.setProtocol(stringBuilder);
 			this.model.notifyObservers();

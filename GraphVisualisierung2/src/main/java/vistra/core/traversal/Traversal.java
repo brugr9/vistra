@@ -109,15 +109,15 @@ public class Traversal implements ITraversal {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setDescription(StringBuilder statistics) {
-		this.description = statistics;
+	public void setDescription(StringBuilder description) {
+		this.description = description;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StringBuilder getStatistics() {
+	public StringBuilder getDescription() {
 		return this.description;
 	}
 
