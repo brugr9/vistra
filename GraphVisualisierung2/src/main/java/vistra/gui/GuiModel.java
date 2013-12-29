@@ -5,7 +5,7 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.traversal.Traversal;
+import vistra.core.traversal.ITraversal;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.state.IAnimationStateHandler;
 import vistra.gui.control.state.IParameterStateHandler;
@@ -61,9 +61,8 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private String algorithmDescription;
 
 	/* Traversal */
-	private Traversal traversal;
+	private ITraversal traversal;
 	private int progress;
-	private int progressMaximum;
 	// Step-by-Step
 	private ISbsStateHandler stepByStepStateHandler;
 	private int steplength;
@@ -139,7 +138,6 @@ public final class GuiModel extends Observable implements IGuiModel {
 		/* Traversal */
 		this.traversal = null;
 		this.progress = 0;
-		this.progressMaximum = 0;
 		// Step-by-Step
 		this.stepByStepStateHandler = null;
 		this.steplength = 1;
@@ -558,7 +556,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getTraversal()
 	 */
 	@Override
-	public Traversal getTraversal() {
+	public ITraversal getTraversal() {
 		return traversal;
 	}
 
@@ -570,16 +568,6 @@ public final class GuiModel extends Observable implements IGuiModel {
 	@Override
 	public int getProgress() {
 		return progress;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#getProgressMaximum()
-	 */
-	@Override
-	public int getProgressMaximum() {
-		return progressMaximum;
 	}
 
 	/*
@@ -1119,7 +1107,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * .gravis.core.traversal.Traversal)
 	 */
 	@Override
-	public void setTraversal(Traversal traversal) {
+	public void setTraversal(ITraversal traversal) {
 		this.traversal = traversal;
 		this.setChanged();
 	}
@@ -1132,17 +1120,6 @@ public final class GuiModel extends Observable implements IGuiModel {
 	@Override
 	public void setProgress(int progress) {
 		this.progress = progress;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ch.bfh.bti7301.hs2013.gravis.gui.IModel#setProgressMaximum(int)
-	 */
-	@Override
-	public void setProgressMaximum(int progressMaximum) {
-		this.progressMaximum = progressMaximum;
 		this.setChanged();
 	}
 

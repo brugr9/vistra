@@ -17,27 +17,26 @@ import vistra.util.IBidirectIterator;
  * @see TraversableGraph
  * 
  */
-public class Traversal implements IBidirectIterator<IStep> {
+public class Traversal implements ITraversal {
 
 	/**
 	 * A field for an iterator over steps.
 	 */
-	private IBidirectIterator<IStep> stepIterator;
+	private IBidirectIterator<IStep> iterator;
 	/**
-	 * A field for a string builder.
+	 * A field for a description (e.g. statistics etc.).
 	 */
-	private StringBuilder statistics;
+	private StringBuilder description;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param stepIterator
+	 * @param iterator
 	 *            an iterator over steps
-	 * 
 	 */
-	public Traversal(IBidirectIterator<IStep> stepIterator) {
-		this.stepIterator = stepIterator;
-		this.statistics = null;
+	public Traversal(IBidirectIterator<IStep> iterator) {
+		this.iterator = iterator;
+		this.description = new StringBuilder();
 	}
 
 	/**
@@ -53,7 +52,7 @@ public class Traversal implements IBidirectIterator<IStep> {
 	 */
 	@Override
 	public boolean hasNext() {
-		return this.stepIterator.hasNext();
+		return this.iterator.hasNext();
 	}
 
 	/**
@@ -61,11 +60,13 @@ public class Traversal implements IBidirectIterator<IStep> {
 	 */
 	@Override
 	public IStep next() {
-		return this.stepIterator.next();
+		return this.iterator.next();
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * 
+	 * Unsupported operation.
+	 * 
 	 */
 	@Override
 	public void remove() {
@@ -77,7 +78,7 @@ public class Traversal implements IBidirectIterator<IStep> {
 	 */
 	@Override
 	public int size() {
-		return this.stepIterator.size();
+		return this.iterator.size();
 	}
 
 	/**
@@ -85,7 +86,7 @@ public class Traversal implements IBidirectIterator<IStep> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return this.stepIterator.isEmpty();
+		return this.iterator.isEmpty();
 	}
 
 	/**
@@ -93,7 +94,7 @@ public class Traversal implements IBidirectIterator<IStep> {
 	 */
 	@Override
 	public boolean hasPrevious() {
-		return this.stepIterator.hasPrevious();
+		return this.iterator.hasPrevious();
 	}
 
 	/**
@@ -101,26 +102,23 @@ public class Traversal implements IBidirectIterator<IStep> {
 	 */
 	@Override
 	public IStep previous() throws NoSuchElementException {
-		return this.stepIterator.previous();
+		return this.iterator.previous();
 	}
 
 	/**
-	 * Sets the statistic information.
-	 * 
-	 * @param statistics
-	 *            the statistics
+	 * {@inheritDoc}
 	 */
-	public void setStatistics(StringBuilder statistics) {
-		this.statistics = statistics;
+	@Override
+	public void setDescription(StringBuilder statistics) {
+		this.description = statistics;
 	}
 
 	/**
-	 * Returns some statistic information.
-	 * 
-	 * @return the statistics
+	 * {@inheritDoc}
 	 */
+	@Override
 	public StringBuilder getStatistics() {
-		return this.statistics;
+		return this.description;
 	}
 
 }

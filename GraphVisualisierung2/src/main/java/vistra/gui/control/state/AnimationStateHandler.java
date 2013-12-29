@@ -333,8 +333,8 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	void startAnimation() throws Exception {
 		try {
-			/* reset the traversal eventually */
-			if (this.model.getProgress() == this.model.getProgressMaximum())
+			/* go to the first step eventually */
+			if (this.model.getProgress() == this.model.getTraversal().size())
 				((SbsStateHandler) this.model.getStepByStepStateHandler())
 						.goToBeginning();
 			/* simply start the timer */
@@ -390,7 +390,7 @@ public final class AnimationStateHandler extends Observable implements
 		public void actionPerformed(ActionEvent e) {
 			try {
 				IGuiModel model = AnimationStateHandler.this.model;
-				if (model.getProgress() < model.getProgressMaximum())
+				if (model.getProgress() < model.getTraversal().size())
 					((SbsStateHandler) model.getStepByStepStateHandler())
 							.goForward();
 				else

@@ -23,6 +23,7 @@ import vistra.core.ICore;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
+import vistra.core.traversal.ITraversal;
 import vistra.core.traversal.Traversal;
 import vistra.gui.GuiModel;
 import vistra.gui.control.IControl.EventSource;
@@ -530,8 +531,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (index == 0) {
 				/* settings */
 				this.model.setAlgorithmDescription(" ");
-				this.model.setTraversal(null);
-				this.model.setProgressMaximum(0);
+				this.model.setTraversal(new Traversal(null));
 			} else {
 				/* deny user interaction */
 				this.setState(new ParameterStateOff(this));
@@ -541,9 +541,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setAlgorithmDescription(description);
 				/* get the traversal */
 				IExtendedGraph graph = this.model.getGraph();
-				Traversal traversal = this.core.traverse(graph);
+				ITraversal traversal = this.core.traverse(graph);
 				this.model.setTraversal(traversal);
-				this.model.setProgressMaximum(traversal.size());
 			}
 
 			return index;

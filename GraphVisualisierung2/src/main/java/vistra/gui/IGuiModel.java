@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import vistra.core.graph.IExtendedGraph;
-import vistra.core.traversal.Traversal;
+import vistra.core.traversal.ITraversal;
 import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.state.IAnimationStateHandler;
 import vistra.gui.control.state.IParameterStateHandler;
@@ -196,17 +196,12 @@ public interface IGuiModel {
 	/**
 	 * @return the traversal
 	 */
-	public abstract Traversal getTraversal();
+	public abstract ITraversal getTraversal();
 
 	/**
 	 * @return the progress
 	 */
 	public abstract int getProgress();
-
-	/**
-	 * @return the progressMaximum
-	 */
-	public abstract int getProgressMaximum();
 
 	/**
 	 * @return the stepByStepStateHandler
@@ -482,19 +477,13 @@ public interface IGuiModel {
 	 * @param traversal
 	 *            the traversal to set
 	 */
-	public abstract void setTraversal(Traversal traversal);
+	public abstract void setTraversal(ITraversal traversal);
 
 	/**
 	 * @param progress
 	 *            the progress to set
 	 */
 	public abstract void setProgress(int progress);
-
-	/**
-	 * @param progressMaximum
-	 *            the progressMaximum to set
-	 */
-	public abstract void setProgressMaximum(int progressMaximum);
 
 	/**
 	 * @param stepByStepStateHandler

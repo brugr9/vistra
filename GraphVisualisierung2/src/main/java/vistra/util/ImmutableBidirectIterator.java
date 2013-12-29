@@ -1,16 +1,16 @@
 package vistra.util;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * A bidirectional iterator.
+ * A bidirectional iterator over a list, immutable.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
+ * @see ListIterator
  */
 public class ImmutableBidirectIterator<E> implements IBidirectIterator<E> {
 
@@ -25,17 +25,10 @@ public class ImmutableBidirectIterator<E> implements IBidirectIterator<E> {
 	private int size;
 
 	/**
-	 * Constructor.
-	 */
-	public ImmutableBidirectIterator() {
-		this(new ArrayList<E>());
-	}
-
-	/**
-	 * Constructor.
+	 * A constructor taking a list to iterate over.
 	 * 
 	 * @param list
-	 *            a list
+	 *            the list
 	 */
 	public ImmutableBidirectIterator(List<E> list) {
 		this.iterator = list.listIterator();

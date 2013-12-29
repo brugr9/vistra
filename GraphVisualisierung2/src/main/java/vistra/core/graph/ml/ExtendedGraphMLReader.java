@@ -2,6 +2,7 @@ package vistra.core.graph.ml;
 
 import java.io.IOException;
 import java.io.Reader;
+
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;

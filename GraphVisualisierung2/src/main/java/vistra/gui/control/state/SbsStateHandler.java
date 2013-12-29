@@ -16,7 +16,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import vistra.core.traversal.Traversal;
+import vistra.core.traversal.ITraversal;
 import vistra.core.traversal.step.IStep;
 import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
@@ -234,7 +234,7 @@ public final class SbsStateHandler extends Observable implements
 		int progress = this.model.getProgress();
 		if (progress == 0)
 			this.setViewBeginning();
-		else if (progress == this.model.getProgressMaximum())
+		else if (progress == this.model.getTraversal().size())
 			this.setViewEnd();
 		else
 			this.setViewIntermediate();
@@ -287,7 +287,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	void goToBeginning() throws Exception {
 
-		Traversal traversal = this.model.getTraversal();
+		ITraversal traversal = this.model.getTraversal();
 
 		try {
 			boolean ok = traversal.hasPrevious();
@@ -318,7 +318,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	boolean goBackward() throws Exception {
 
-		Traversal traversal = this.model.getTraversal();
+		ITraversal traversal = this.model.getTraversal();
 
 		try {
 
@@ -360,13 +360,13 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	boolean goForward() throws Exception {
 
-		Traversal traversal = this.model.getTraversal();
+		ITraversal traversal = this.model.getTraversal();
 
 		try {
 
 			int steplength = this.model.getSteplength();
 			int progress = this.model.getProgress();
-			int max = this.model.getProgressMaximum();
+			int max = this.model.getTraversal().size();
 			IStep step = null;
 			String description = "";
 			StringBuilder stringBuilder = this.model.getStringBuilder();
@@ -428,7 +428,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	void goToEnd() throws Exception {
 
-		Traversal traversal = this.model.getTraversal();
+		ITraversal traversal = this.model.getTraversal();
 
 		try {
 
@@ -448,7 +448,7 @@ public final class SbsStateHandler extends Observable implements
 			}
 
 			/* update */
-			int max = this.model.getProgressMaximum();
+			int max = this.model.getTraversal().size();
 			this.model.setProgress(max);
 			stringBuilder.append(traversal.getStatistics()
 					+ System.lineSeparator());

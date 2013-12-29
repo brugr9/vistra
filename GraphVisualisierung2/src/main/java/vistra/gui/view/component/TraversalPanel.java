@@ -285,7 +285,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 						this.pause.setSelected(false);
 				}
 				this.progress.setValue(m.getProgress());
-				this.progress.setMaximum(m.getProgressMaximum());
+				this.progress.setMaximum(m.getTraversal().size());
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

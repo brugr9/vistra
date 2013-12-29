@@ -9,7 +9,7 @@ import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * A traversable graph. Delegates most of its methods to a graph as given.
+ * A traversable graph. Delegates most of its methods to a given graph.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
