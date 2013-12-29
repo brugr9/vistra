@@ -1,7 +1,6 @@
 package vistra.util;
 
 import java.awt.BasicStroke;
-import java.awt.Stroke;
 
 import vistra.core.graph.item.ItemLayoutConstant;
 
@@ -10,7 +9,6 @@ import vistra.core.graph.item.ItemLayoutConstant;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see BasicStroke
  */
 public enum StrokeStyle {
 
@@ -100,11 +98,11 @@ public enum StrokeStyle {
 	}
 
 	/**
-	 * Returns a stroke.
+	 * Returns the stroke.
 	 * 
 	 * @return the stroke
 	 */
-	public Stroke getStorke() {
+	public BasicStroke getStorke() {
 		if (this.pattern == null)
 			return new BasicStroke(width);
 		else

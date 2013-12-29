@@ -1,7 +1,9 @@
 package vistra.core.graph.item.transformer;
 
 import java.awt.Stroke;
+
 import org.apache.commons.collections15.Transformer;
+
 import vistra.core.graph.item.IEdgeLayout;
 
 /**
