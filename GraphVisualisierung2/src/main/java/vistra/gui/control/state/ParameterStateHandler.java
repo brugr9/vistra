@@ -368,10 +368,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.model.getAnimationStateHandler().handleOff();
 		else
 			this.model.getAnimationStateHandler().handleIdle();
-		// TODO
-		this.setGraphSaved(false);
-		this.setGraphEditable(true);
-		this.updateAlgorithms();
 	}
 
 	/**
@@ -390,14 +386,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				option = this.confirmSavingGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
 				IExtendedGraph graph = this.core.newGraph(edgeType);
-				graph.addGraphEventListener(this);
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
 				graph.setName(name);
+				graph.addGraphEventListener(this);
 				this.model.setGraph(graph);
 				this.updateAlgorithms();
-				this.setGraphSaved(false);
-				this.setGraphEditable(true);
 			}
 
 		} catch (Exception e) {
@@ -437,9 +431,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				if (option == JFileChooser.APPROVE_OPTION) {
 					File source = fileChooser.getSelectedFile();
 					IExtendedGraph graph = this.core.openGraph(source);
+					String name = source.getName();
+					graph.setName(name);
 					graph.addGraphEventListener(this);
 					this.model.setGraph(graph);
-					this.model.notifyObservers(GRAPH);
 					this.updateAlgorithms();
 				}
 			}
@@ -457,8 +452,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void saveGraph() throws Exception {
 		try {
 			this.core.saveGraph();
-			this.setGraphSaved(true);
-			this.setGraphEditable(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -496,8 +489,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
 				this.core.saveGraphAs(file);
-				this.setGraphSaved(true);
-				this.setGraphEditable(true);
 			}
 			return option;
 
@@ -513,7 +504,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void editGraph() throws Exception {
 		try {
-			this.setGraphSaved(false);
+			// TODO nothing to do?
 		} catch (Exception e) {
 			throw e;
 		}

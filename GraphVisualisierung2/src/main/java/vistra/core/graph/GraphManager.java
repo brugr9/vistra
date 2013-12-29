@@ -1,23 +1,15 @@
 package vistra.core.graph;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.core.graph.item.IEdgeLayout;
-import vistra.core.graph.item.IVertexLayout;
-import vistra.core.graph.ml.EdgeMetadataTransformer;
+import vistra.core.graph.ml.ExtendedGraphMLReader;
 import vistra.core.graph.ml.ExtendedGraphMLWriter;
-import vistra.core.graph.ml.GraphMetadataTransformer;
-import vistra.core.graph.ml.HyperEdgeMetadataTransformer;
-import vistra.core.graph.ml.VertexMetadataTransformer;
 import edu.uci.ics.jung.graph.util.EdgeType;
-import edu.uci.ics.jung.io.GraphIOException;
-import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 
 /**
  * A graph manager. Manages opening and saving (read/write) graphs.
@@ -42,21 +34,9 @@ class GraphManager implements IGraphManager {
 	 */
 	private FileNameExtensionFilter fileNameExtensionFilter;
 	/**
-	 * A field for a graph metadata transformer.
+	 * A field for an extended GraphML reader.
 	 */
-	private final GraphMetadataTransformer graphTransformer;
-	/**
-	 * A field for a vertex metadata transformer.
-	 */
-	private final VertexMetadataTransformer vertexTransformer;
-	/**
-	 * A field for a edge metadata transformer.
-	 */
-	private final EdgeMetadataTransformer edgeTransformer;
-	/**
-	 * A field for a hyper edge metadata transformer.
-	 */
-	private final HyperEdgeMetadataTransformer hyperEdgeTransformer;
+	private ExtendedGraphMLReader reader;
 	/**
 	 * A field for an extended GraphML writer.
 	 */
@@ -77,12 +57,8 @@ class GraphManager implements IGraphManager {
 				p.getProperty("extension.graph.description"),
 				p.getProperty("extension.graph"));
 		this.fileNameExtensionFilter = filter;
-		/* transformer */
-		this.graphTransformer = new GraphMetadataTransformer();
-		this.vertexTransformer = new VertexMetadataTransformer();
-		this.edgeTransformer = new EdgeMetadataTransformer();
-		this.hyperEdgeTransformer = new HyperEdgeMetadataTransformer();
-		/* graphML writer */
+		/* GraphML */
+		this.reader = new ExtendedGraphMLReader();
 		this.writer = new ExtendedGraphMLWriter();
 	}
 
@@ -107,37 +83,10 @@ class GraphManager implements IGraphManager {
 	public IExtendedGraph open(File file) throws Exception {
 		try {
 			this.file = file;
-			this.graph = GraphFactory.createGraph();
-			this.read(file);
+			this.graph = this.reader.read(new FileReader(this.file));
 			return this.graph;
 		} catch (Exception e) {
 			throw e;
-		}
-	}
-
-	/**
-	 * A helper method: Reads in a GraphML-file to the graph.
-	 * 
-	 * @param file
-	 *            the file to read
-	 */
-	private void read(File file) throws GraphException {
-		try {
-			GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout> graphReader = new GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout>(
-					new FileReader(file), this.graphTransformer,
-					this.vertexTransformer, this.edgeTransformer,
-					this.hyperEdgeTransformer);
-			this.graph = graphReader.readGraph();
-			this.graph.setName(file.getName());
-			graphReader.close();
-		} catch (GraphIOException e) {
-			throw new GraphException("I/O error in GraphML-file "
-					+ file.getName(), e);
-		} catch (FileNotFoundException e) {
-			throw new GraphException("File not found: " + file.getName(), e);
-		} catch (Exception e) {
-			throw new GraphException("Exception while reading "
-					+ file.getName(), e);
 		}
 	}
 
