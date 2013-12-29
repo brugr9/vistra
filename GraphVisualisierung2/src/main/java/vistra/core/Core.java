@@ -136,7 +136,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updateSelectableList(EdgeType edgeType) throws CoreException {
+	public void updateSelectableNames(EdgeType edgeType) throws CoreException {
 		try {
 			this.algorithmManager.updateSelectableList(edgeType);
 		} catch (Exception e) {

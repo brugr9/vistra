@@ -1,6 +1,5 @@
 package vistra.core.graph.item.transformer;
 
-import java.awt.BasicStroke;
 import java.awt.Stroke;
 
 import org.apache.commons.collections15.Transformer;
@@ -20,7 +19,7 @@ public class VertexStroke implements Transformer<IVertexLayout, Stroke> {
 	 */
 	@Override
 	public Stroke transform(IVertexLayout layout) {
-		return new BasicStroke(layout.getLineWidth());
+		return layout.getStroke();
 	}
 
 }

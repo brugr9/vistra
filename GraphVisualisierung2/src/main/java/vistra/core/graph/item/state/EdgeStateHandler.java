@@ -4,8 +4,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.item.EdgeLayout;
-import vistra.core.graph.item.ItemLayoutConstants;
 import vistra.util.ColorPalette;
+import vistra.util.StrokeStyle;
 
 /**
  * An edge state handler.
@@ -175,11 +175,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewUnexplored() throws Exception {
 		try {
-			this.setFontStyle(Font.PLAIN);
+			this.setFont(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkblue);
-			this.setLineColor(ColorPalette.darkblue);
-			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_DEFAULT);
-			this.setDash(ItemLayoutConstants.E_SOLID);
+			this.setStroke(StrokeStyle.UNEXPLORED.getStorke());
+			this.setStrokeColor(ColorPalette.darkblue);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -195,11 +194,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewDiscovery() throws Exception {
 		try {
-			this.setFontStyle(Font.BOLD);
+			this.setFont(Font.BOLD);
 			this.setFontColor(ColorPalette.red);
-			this.setLineColor(ColorPalette.red);
-			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
-			this.setDash(ItemLayoutConstants.E_SOLID);
+			this.setStroke(StrokeStyle.VISITED.getStorke());
+			this.setStrokeColor(ColorPalette.red);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -215,11 +213,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewBack() throws Exception {
 		try {
-			this.setFontStyle(Font.PLAIN);
+			this.setFont(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkgreen);
-			this.setLineColor(ColorPalette.darkgreen);
-			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
-			this.setDash(ItemLayoutConstants.E_DASHED);
+			this.setStroke(StrokeStyle.BACK.getStorke());
+			this.setStrokeColor(ColorPalette.darkgreen);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -235,11 +232,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewForward() throws Exception {
 		try {
-			this.setFontStyle(Font.PLAIN);
+			this.setFont(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkgreen);
-			this.setLineColor(ColorPalette.darkgreen);
-			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
-			this.setDash(ItemLayoutConstants.E_DASH_SHORT);
+			this.setStroke(StrokeStyle.FORWARD.getStorke());
+			this.setStrokeColor(ColorPalette.darkgreen);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -255,11 +251,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewCross() throws Exception {
 		try {
-			this.setFontStyle(Font.PLAIN);
+			this.setFont(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkgreen);
-			this.setLineColor(ColorPalette.darkgreen);
-			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
-			this.setDash(ItemLayoutConstants.E_DASH_POINT);
+			this.setStroke(StrokeStyle.CROSS.getStorke());
+			this.setStrokeColor(ColorPalette.darkgreen);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -273,11 +268,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewDiscarded() throws Exception {
 		try {
-			this.setFontStyle(Font.PLAIN);
+			this.setFont(Font.PLAIN);
 			this.setFontColor(ColorPalette.darkblue);
-			this.setLineColor(ColorPalette.darkblue);
-			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
-			this.setDash(ItemLayoutConstants.E_DASHED);
+			this.setStroke(StrokeStyle.DISCARDED.getStorke());
+			this.setStrokeColor(ColorPalette.darkblue);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -291,11 +285,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewSolution() throws Exception {
 		try {
-			this.setFontStyle(Font.BOLD);
+			this.setFont(Font.BOLD);
 			this.setFontColor(ColorPalette.GREEN);
-			this.setLineColor(ColorPalette.GREEN);
-			this.setLineWidth(ItemLayoutConstants.STROKE_WIDTH_BOLD);
-			this.setDash(ItemLayoutConstants.E_SOLID);
+			this.setStroke(StrokeStyle.VISITED.getStorke());
+			this.setStrokeColor(ColorPalette.GREEN);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;

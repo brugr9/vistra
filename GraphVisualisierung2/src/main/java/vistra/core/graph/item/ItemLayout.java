@@ -1,6 +1,7 @@
 package vistra.core.graph.item;
 
 import java.awt.Color;
+import java.awt.Stroke;
 import java.util.Observable;
 
 /**
@@ -16,21 +17,17 @@ class ItemLayout extends Observable implements IItemLayout {
 	 */
 	private String id;
 	/**
-	 * A field for a line width.
+	 * A field for a stroke.
 	 */
-	private float lineWidth;
-	/**
-	 * A field for a dash.
-	 */
-	private float[] dash;
+	private Stroke stroke;
 	/**
 	 * A field for a line colour.
 	 */
-	private Color lineColor;
+	private Color strokeColor;
 	/**
-	 * A field for a font style.
+	 * A field for a font.
 	 */
-	private int fontStyle;
+	private int font;
 	/**
 	 * A field for a font colour.
 	 */
@@ -42,10 +39,9 @@ class ItemLayout extends Observable implements IItemLayout {
 	ItemLayout() {
 		super();
 		this.id = "";
-		this.lineWidth = 0;
-		this.dash = null;
-		this.lineColor = null;
-		this.fontStyle = 0;
+		this.stroke = null;
+		this.strokeColor = null;
+		this.font = 0;
 		this.fontColor = null;
 	}
 
@@ -61,16 +57,8 @@ class ItemLayout extends Observable implements IItemLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public float getLineWidth() {
-		return lineWidth;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public float[] getDash() {
-		return dash;
+	public Stroke getStroke() {
+		return stroke;
 	}
 
 	/**
@@ -78,15 +66,15 @@ class ItemLayout extends Observable implements IItemLayout {
 	 */
 	@Override
 	public Color getStrokeColor() {
-		return lineColor;
+		return strokeColor;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getFontStyle() {
-		return fontStyle;
+	public int getFont() {
+		return font;
 	}
 
 	/**
@@ -110,8 +98,8 @@ class ItemLayout extends Observable implements IItemLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setLineWidth(float width) {
-		this.lineWidth = width;
+	public void setStroke(Stroke stroke) {
+		this.stroke = stroke;
 		this.setChanged();
 	}
 
@@ -119,8 +107,8 @@ class ItemLayout extends Observable implements IItemLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setDash(float[] dash) {
-		this.dash = dash;
+	public void setStrokeColor(Color color) {
+		this.strokeColor = color;
 		this.setChanged();
 	}
 
@@ -128,17 +116,8 @@ class ItemLayout extends Observable implements IItemLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setLineColor(Color color) {
-		this.lineColor = color;
-		this.setChanged();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setFontStyle(int style) {
-		this.fontStyle = style;
+	public void setFont(int style) {
+		this.font = style;
 		this.setChanged();
 	}
 

@@ -70,7 +70,8 @@ public final class GuiFactory {
 				view = new DefaultView(layout, model, control);
 			else
 				view = new DefaultView(layout, model, control);
-			control.init();
+			// i18n
+			model.getI18nListener().actionPerformed(null);
 			return view;
 		} catch (Exception ex) {
 			throw ex;

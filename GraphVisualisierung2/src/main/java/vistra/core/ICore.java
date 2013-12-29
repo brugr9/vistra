@@ -67,7 +67,7 @@ public interface ICore {
 	 *            the edge type
 	 * @throws CoreException
 	 */
-	abstract void updateSelectableList(EdgeType edgeType) throws CoreException;
+	abstract void updateSelectableNames(EdgeType edgeType) throws CoreException;
 
 	/**
 	 * Returns an array of human readable names of selectable algorithms.

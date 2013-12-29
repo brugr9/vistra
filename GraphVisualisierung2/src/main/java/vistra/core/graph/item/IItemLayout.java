@@ -2,6 +2,7 @@ package vistra.core.graph.item;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Stroke;
 
 /**
  * An item layout interface.
@@ -20,37 +21,29 @@ public interface IItemLayout {
 	abstract void setId(String id);
 
 	/**
-	 * Sets the line width.
+	 * Sets the stroke.
 	 * 
-	 * @param width
-	 *            the width to set
+	 * @param stroke
+	 *            the stroke
 	 */
-	abstract void setLineWidth(float width);
+	abstract void setStroke(Stroke stroke);
 
 	/**
-	 * Sets an array of float representing a dash pattern (null means solid).
-	 * 
-	 * @param dash
-	 *            the dash pattern
-	 */
-	abstract void setDash(float[] dash);
-
-	/**
-	 * Sets the line colour.
+	 * Sets the stroke colour.
 	 * 
 	 * @param color
 	 *            the colour to set
 	 */
-	abstract void setLineColor(Color color);
+	abstract void setStrokeColor(Color color);
 
 	/**
-	 * Sets the font style.
+	 * Sets the font.
 	 * 
-	 * @param color
-	 *            the style to set
+	 * @param font
+	 *            the font to set
 	 * @see Font
 	 */
-	abstract void setFontStyle(int style);
+	abstract void setFont(int font);
 
 	/**
 	 * Sets the font colour.
@@ -68,18 +61,11 @@ public interface IItemLayout {
 	abstract String getId();
 
 	/**
-	 * Returns the line width.
+	 * Sets the stroke.
 	 * 
-	 * @return the width
+	 * @return the stroke
 	 */
-	abstract float getLineWidth();
-
-	/**
-	 * Returns an array of float representing a dash pattern (null means solid).
-	 * 
-	 * @return the dash pattern
-	 */
-	abstract float[] getDash();
+	abstract Stroke getStroke();
 
 	/**
 	 * Returns the stroke colour.
@@ -89,12 +75,12 @@ public interface IItemLayout {
 	abstract Color getStrokeColor();
 
 	/**
-	 * Returns the font style.
+	 * Returns the font.
 	 * 
-	 * @return the style
+	 * @return the font
 	 * @see Font
 	 */
-	abstract int getFontStyle();
+	abstract int getFont();
 
 	/**
 	 * Returns the font colour.

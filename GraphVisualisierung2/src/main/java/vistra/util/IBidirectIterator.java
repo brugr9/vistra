@@ -10,11 +10,10 @@ import java.util.NoSuchElementException;
  * 
  * @param <E>
  */
-public interface IBidirectIterator<E> extends Iterable<E>,
-		Iterator<E> {
+public interface IBidirectIterator<E> extends Iterable<E>, Iterator<E> {
 
 	/**
-	 * Returns the size of the iteration.
+	 * Returns the size of the iterator.
 	 * 
 	 * @return the size
 	 */

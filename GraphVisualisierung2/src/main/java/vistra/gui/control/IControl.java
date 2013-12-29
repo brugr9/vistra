@@ -34,11 +34,4 @@ public interface IControl {
 		ANIMATION, PLAY, PAUSE, RESUME, STOP,
 	}
 
-	/**
-	 * Initialises the control.
-	 * 
-	 * @throws Exception
-	 */
-	public void init() throws Exception;
-
 }

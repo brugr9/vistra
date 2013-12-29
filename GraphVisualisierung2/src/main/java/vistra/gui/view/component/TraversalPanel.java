@@ -196,6 +196,8 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.progress = new JProgressBar();
 		this.progress.setBackground(ColorPalette.darkgrey);
 		this.progress.setForeground(ColorPalette.green);
+		this.progress.setValue(0);
+		this.progress.setMaximum(0);
 		this.progress.setVisible(true);
 
 		/* panel */
@@ -263,18 +265,22 @@ public final class TraversalPanel extends JPanel implements Observer {
 					this.play.setToolTipText(b.getString("play.label"));
 					this.pause.setToolTipText(b.getString("pause.label"));
 					this.stop.setToolTipText(b.getString("stop.label"));
-
+				} else if (arg == EventSource.ALGORITHM) {
+					this.progress.setMaximum(m.getTraversal().size());
+					this.progress.setValue(m.getProgress());
 				} else if (arg == EventSource.DELAY) {
 					this.delay.setValue(m.getDelay());
 				} else if (arg == EventSource.STEPLENGTH) {
 					this.steplength.setValue(m.getSteplength());
 				} else if (arg == EventSource.STEP_BY_STEP) {
+					this.progress.setValue(m.getProgress());
 					this.steplength.setEnabled(m.isSteplengthEnabled());
 					this.toBeginning.setEnabled(m.isToBeginningEnabled());
 					this.backward.setEnabled(m.isBackwardEnabled());
 					this.forward.setEnabled(m.isForwardEnabled());
 					this.toEnd.setEnabled(m.isToEndEnabled());
 				} else if (arg == EventSource.ANIMATION) {
+					this.progress.setValue(m.getProgress());
 					this.delay.setEnabled(m.isDelayEnabled());
 					this.play.setEnabled(m.isPlayEnabled());
 					this.pause.setEnabled(m.isPauseEnabled());
@@ -284,8 +290,6 @@ public final class TraversalPanel extends JPanel implements Observer {
 					if (m.getPauseEvent() == EventSource.PAUSE)
 						this.pause.setSelected(false);
 				}
-				this.progress.setValue(m.getProgress());
-				this.progress.setMaximum(m.getTraversal().size());
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

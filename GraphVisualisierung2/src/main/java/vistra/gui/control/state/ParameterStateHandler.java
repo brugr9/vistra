@@ -24,7 +24,6 @@ import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
-import vistra.core.traversal.Traversal;
 import vistra.gui.GuiModel;
 import vistra.gui.control.IControl.EventSource;
 import edu.uci.ics.jung.graph.event.GraphEvent;
@@ -360,12 +359,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * Doing: Enables the possibility to edit the graph.
+	 * Doing: Sets the {@code AnimationStateHandler} off or idle.
 	 * 
 	 * @throws Exception
 	 */
 	void idle() throws Exception {
-		if (this.model.getTraversal() == null)
+		if (this.model.getTraversal().size() == 0)
 			this.model.getAnimationStateHandler().handleOff();
 		else
 			this.model.getAnimationStateHandler().handleIdle();
@@ -394,7 +393,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setGraph(graph);
 				this.updateAlgorithms();
 			}
-
 		} catch (Exception e) {
 			throw e;
 		}
@@ -520,30 +518,19 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	int selectAlgorithm() throws Exception {
 
 		try {
-			/* get the selected algorithm as index */
+
+			/* deny user interaction */
+			this.setState(new ParameterStateOff(this));
+			/* Algorithm */
 			int index = this.model.getSelectedAlgorithmIndex();
-
-			/* State machine animation (and step-by-step): off */
-			this.enableTraversalPlayer(false);
-			/* reset the progress */
+			this.core.selectAlgorithm(index);
+			String description = this.core.getAlgorithmDescription();
+			this.model.setAlgorithmDescription(description);
+			/* Traversal */
+			IExtendedGraph graph = this.model.getGraph();
+			ITraversal traversal = this.core.traverse(graph);
+			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
-
-			if (index == 0) {
-				/* settings */
-				this.model.setAlgorithmDescription(" ");
-				this.model.setTraversal(new Traversal(null));
-			} else {
-				/* deny user interaction */
-				this.setState(new ParameterStateOff(this));
-				/* select the algorithm */
-				this.core.selectAlgorithm(index);
-				String description = this.core.getAlgorithmDescription();
-				this.model.setAlgorithmDescription(description);
-				/* get the traversal */
-				IExtendedGraph graph = this.model.getGraph();
-				ITraversal traversal = this.core.traverse(graph);
-				this.model.setTraversal(traversal);
-			}
 
 			return index;
 
@@ -626,7 +613,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private void updateAlgorithms() throws Exception {
 		try {
 			EdgeType edgeType = this.model.getGraph().getEdgeType();
-			this.core.updateSelectableList(edgeType);
+			this.core.updateSelectableNames(edgeType);
 			String[] selectableNames = this.core.getSelectableNames();
 			this.model.setAlgorithms(selectableNames);
 			this.model.setSelectedAlgorithmIndex(0);

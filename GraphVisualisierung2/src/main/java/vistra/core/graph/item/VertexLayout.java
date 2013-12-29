@@ -1,6 +1,7 @@
 package vistra.core.graph.item;
 
 import java.awt.Color;
+import java.awt.Stroke;
 import java.awt.geom.Point2D;
 
 /**
@@ -107,32 +108,24 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setLineWidth(float width) {
-		this.layout.setLineWidth(width);
+	public void setStroke(Stroke stroke) {
+		this.layout.setStroke(stroke);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setDash(float[] dash) {
-		this.layout.setDash(dash);
+	public void setStrokeColor(Color color) {
+		this.layout.setStrokeColor(color);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setLineColor(Color color) {
-		this.layout.setLineColor(color);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setFontStyle(int style) {
-		this.layout.setFontStyle(style);
+	public void setFont(int style) {
+		this.layout.setFont(style);
 	}
 
 	/**
@@ -155,16 +148,8 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public float getLineWidth() {
-		return this.layout.getLineWidth();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public float[] getDash() {
-		return this.layout.getDash();
+	public Stroke getStroke() {
+		return this.layout.getStroke();
 	}
 
 	/**
@@ -179,8 +164,8 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getFontStyle() {
-		return this.layout.getFontStyle();
+	public int getFont() {
+		return this.layout.getFont();
 	}
 
 	/**

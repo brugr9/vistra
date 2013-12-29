@@ -6,7 +6,7 @@ import java.awt.geom.Ellipse2D;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.item.IVertexLayout;
-import vistra.core.graph.item.ItemLayoutConstants;
+import vistra.core.graph.item.ItemLayoutConstant;
 
 /**
  * A vertex transformer: shape.
@@ -21,8 +21,8 @@ public class VertexShape implements Transformer<IVertexLayout, Shape> {
 	 */
 	@Override
 	public Shape transform(IVertexLayout vertex) {
-		double width = ItemLayoutConstants.V_WIDTH_DEFAULT;
-		double height = ItemLayoutConstants.V_HEIGHT_DEFAULT;
+		double width = ItemLayoutConstant.WIDTH_DEFAULT;
+		double height = ItemLayoutConstant.HEIGHT_DEFAULT;
 		return new Ellipse2D.Double(-width / 2.0, -width / 2.0, width, height);
 	}
 
