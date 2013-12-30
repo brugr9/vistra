@@ -54,8 +54,8 @@ class GraphManager implements IGraphManager {
 		this.graph = GraphFactory.create(EdgeType.UNDIRECTED);
 		/* filename filter */
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
-				p.getProperty("extension.graph.description"),
-				p.getProperty("extension.graph"));
+				p.getProperty("filenameextension.graph.description"),
+				p.getProperty("filenameextension.graph"));
 		this.fileNameExtensionFilter = filter;
 		/* GraphML */
 		this.reader = new ExtendedGraphMLReader();
