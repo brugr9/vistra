@@ -50,7 +50,7 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	 * @param value
 	 *            the value to set
 	 */
-	abstract void setValue(int value);
+	abstract void setValue(String value);
 
 	/**
 	 * Returns the location.

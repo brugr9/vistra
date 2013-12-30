@@ -25,7 +25,7 @@ class Vertex extends Observable implements IVertex {
 	/**
 	 * A field for a value.
 	 */
-	int value;
+	String value;
 
 	/**
 	 * Main constructor.
@@ -57,7 +57,7 @@ class Vertex extends Observable implements IVertex {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getValue() {
+	public String getValue() {
 		return value;
 	}
 

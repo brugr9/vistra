@@ -27,6 +27,6 @@ public interface IVertex extends IItem {
 	 * 
 	 * @return the value
 	 */
-	public int getValue();
+	public String getValue();
 
 }

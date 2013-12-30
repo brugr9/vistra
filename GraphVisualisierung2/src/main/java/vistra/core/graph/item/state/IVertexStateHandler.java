@@ -29,7 +29,7 @@ public interface IVertexStateHandler extends IItemStateHandler {
 	 *            the value to set
 	 * @throws Exception
 	 */
-	abstract void handleUpdated(int value) throws Exception;
+	abstract void handleUpdated(String value) throws Exception;
 
 	/**
 	 * Handles focussed.

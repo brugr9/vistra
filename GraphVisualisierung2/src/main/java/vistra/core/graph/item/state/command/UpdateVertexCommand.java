@@ -15,7 +15,7 @@ public class UpdateVertexCommand extends AbstractItemStateCommand implements
 	/**
 	 * A field for a value.
 	 */
-	int value;
+	String value;
 
 	/**
 	 * Main constructor.
@@ -25,7 +25,7 @@ public class UpdateVertexCommand extends AbstractItemStateCommand implements
 	 * @param value
 	 *            a value
 	 */
-	public UpdateVertexCommand(IVertex vertex, int value) {
+	public UpdateVertexCommand(IVertex vertex, String value) {
 		super((VertexStateHandler) vertex);
 		this.value = value;
 	}

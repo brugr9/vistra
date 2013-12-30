@@ -13,7 +13,7 @@ class VertexStateUpdated extends AbstractVertexState implements IState {
 	/**
 	 * A field for a value.
 	 */
-	int value;
+	String value;
 
 	/**
 	 * Main constructor.
@@ -23,7 +23,7 @@ class VertexStateUpdated extends AbstractVertexState implements IState {
 	 * @param value
 	 *            a value
 	 */
-	VertexStateUpdated(IVertexStateHandler stateHandler, int value) {
+	VertexStateUpdated(IVertexStateHandler stateHandler, String value) {
 		super(stateHandler);
 		this.value = value;
 	}

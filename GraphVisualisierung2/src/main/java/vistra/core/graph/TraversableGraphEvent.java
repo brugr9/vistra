@@ -62,7 +62,7 @@ public abstract class TraversableGraphEvent {
 		/**
 		 * A field for a list of values.
 		 */
-		private List<Integer> values;
+		private List<String> values;
 
 		/**
 		 * Main constructor.
@@ -77,7 +77,7 @@ public abstract class TraversableGraphEvent {
 		 *            the values
 		 */
 		public VerticesEvent(ITraversableGraph source, Type type,
-				List<IVertex> vertices, List<Integer> values) {
+				List<IVertex> vertices, List<String> values) {
 			super(source, type);
 			this.vertices = vertices;
 			this.values = values;
@@ -97,7 +97,7 @@ public abstract class TraversableGraphEvent {
 		 * 
 		 * @return the values
 		 */
-		public List<Integer> getValues() {
+		public List<String> getValues() {
 			return this.values;
 		}
 

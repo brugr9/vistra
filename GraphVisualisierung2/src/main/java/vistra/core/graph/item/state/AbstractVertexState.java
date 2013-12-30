@@ -61,7 +61,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 *            the value to set
 	 * @throws Exception
 	 */
-	void handleUpdated(int value) throws Exception {
+	void handleUpdated(String value) throws Exception {
 		try {
 			this.stateHandler.setState(new VertexStateUpdated(
 					this.stateHandler, value));

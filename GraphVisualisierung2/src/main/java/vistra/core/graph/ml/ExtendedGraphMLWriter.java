@@ -36,7 +36,7 @@ public final class ExtendedGraphMLWriter extends
 	// value, weight resp.
 	public final static String V_VALUE = "value";
 	public final static String E_WEIGHT = "weight";
-	public final static int V_VALUE_DEFAULT = 0;
+	public final static String V_VALUE_DEFAULT = "";
 	public final static int E_WEIGHT_DEFAULT = 1;
 	public final static String V_VALUE_COMMENT = "Vertex value";
 	public final static String E_WEIGHT_COMMENT = "Edge weight";
@@ -53,8 +53,8 @@ public final class ExtendedGraphMLWriter extends
 				Boolean.toString(V_START_DEFAULT), new VertexStart());
 		this.addVertexData(V_END, V_END_COMMENT,
 				Boolean.toString(V_END_DEFAULT), new VertexEnd());
-		this.addVertexData(V_VALUE, V_VALUE_COMMENT,
-				Integer.toString(V_VALUE_DEFAULT), new VertexValue());
+		this.addVertexData(V_VALUE, V_VALUE_COMMENT, V_VALUE_DEFAULT,
+				new VertexValue());
 		this.addEdgeData(E_WEIGHT, E_WEIGHT_COMMENT,
 				Integer.toString(E_WEIGHT_DEFAULT), new EdgeWeight());
 	}

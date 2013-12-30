@@ -23,7 +23,7 @@ public class UpdateVerticesStep extends AbstractStep implements IStep {
 	 * @param values
 	 *            the values to set
 	 */
-	public UpdateVerticesStep(List<IVertex> vertices, List<Integer> values) {
+	public UpdateVerticesStep(List<IVertex> vertices, List<String> values) {
 		super();
 		this.description = "Update values of vertices: ";
 		try {

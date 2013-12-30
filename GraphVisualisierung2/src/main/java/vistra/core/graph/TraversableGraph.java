@@ -723,7 +723,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void stepUpdateVertices(List<IVertex> vertices, List<Integer> values) {
+	public void stepUpdateVertices(List<IVertex> vertices, List<String> values) {
 		this.fireEvent(new VerticesEvent(this, Type.UPDATE, vertices, values));
 	}
 

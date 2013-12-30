@@ -17,7 +17,7 @@ public class VertexValue implements Transformer<IVertexLayout, String> {
 	 */
 	@Override
 	public String transform(IVertexLayout vertex) {
-		return Integer.toString(vertex.getValue());
+		return vertex.getValue();
 	}
 
 }

@@ -57,7 +57,7 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setValue(int value) {
+	public void setValue(String value) {
 		this.value = value;
 		this.setChanged();
 	}

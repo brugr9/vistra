@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import vistra.core.graph.item.VertexLayout;
 import vistra.util.ColorPalette;
+import vistra.util.Sigma;
 import vistra.util.StrokeStyle;
 
 /**
@@ -76,7 +77,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleUpdated(int value) throws Exception {
+	public void handleUpdated(String value) throws Exception {
 		try {
 			this.state.exit();
 			this.state.handleUpdated(value);
@@ -163,8 +164,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setValueInitialised() throws Exception {
 		try {
-			this.setValueUpdated(Integer.MAX_VALUE);
-			this.notifyObservers();
+			this.setValueUpdated(Sigma.INIT);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -177,7 +177,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 *            the value to set
 	 * @throws Exception
 	 */
-	void setValueUpdated(int value) throws Exception {
+	void setValueUpdated(String value) throws Exception {
 		try {
 			this.setValue(value);
 			this.notifyObservers();

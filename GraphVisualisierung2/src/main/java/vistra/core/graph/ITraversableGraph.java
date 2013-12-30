@@ -137,7 +137,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 *            the values
 	 */
 	abstract void stepUpdateVertices(List<IVertex> vertices,
-			List<Integer> values);
+			List<String> values);
 
 	/**
 	 * A step method: visits a vertex over an edge as given.
