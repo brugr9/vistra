@@ -13,25 +13,28 @@ import vistra.gui.control.state.ISbsStateHandler;
 
 public interface IGuiModel {
 
-	/**
-	 * Sets the menuEnabled.
-	 */
 	public abstract void setMenuEnabled(boolean menuEnabled);
 
-	/**
-	 * Sets the playerEnabled.
-	 */
 	public abstract void setPlayerEnabled(boolean menuEnabled);
 
-	/**
-	 * Sets the animationEnabled.
-	 */
 	public abstract void setAnimationEnabled(boolean menuEnabled);
 
-	/**
-	 * Sets the stepByStepEnabled.
-	 */
 	public abstract void setStepByStepEnabled(boolean menuEnabled);
+
+	/**
+	 * @return the resourceBundle
+	 */
+	public abstract ResourceBundle getResourceBundle();
+
+	/**
+	 * @return the help
+	 */
+	public abstract String getHelp();
+
+	/**
+	 * @return the about
+	 */
+	public abstract String getAbout();
 
 	/**
 	 * @return the i18nListener
@@ -52,31 +55,6 @@ public interface IGuiModel {
 	 * @return the quitListener
 	 */
 	public abstract ActionListener getQuitListener();
-
-	/**
-	 * @return the resourceBundle
-	 */
-	public abstract ResourceBundle getResourceBundle();
-
-	/**
-	 * @return the i18nEnabled
-	 */
-	public abstract boolean isI18nEnabled();
-
-	/**
-	 * @return the deDEEnabled
-	 */
-	public abstract boolean isDeDEEnabled();
-
-	/**
-	 * @return the frFREnabled
-	 */
-	public abstract boolean isFrFREnabled();
-
-	/**
-	 * @return the enUSEnabled
-	 */
-	public abstract boolean isEnUSEnabled();
 
 	/**
 	 * @return the fileEnabled
@@ -117,6 +95,26 @@ public interface IGuiModel {
 	 * @return the quitEnabled
 	 */
 	public abstract boolean isQuitEnabled();
+
+	/**
+	 * @return the i18nEnabled
+	 */
+	public abstract boolean isI18nEnabled();
+
+	/**
+	 * @return the deDEEnabled
+	 */
+	public abstract boolean isDeDEEnabled();
+
+	/**
+	 * @return the frFREnabled
+	 */
+	public abstract boolean isFrFREnabled();
+
+	/**
+	 * @return the enUSEnabled
+	 */
+	public abstract boolean isEnUSEnabled();
 
 	/**
 	 * @return the infoEnabled
@@ -279,6 +277,24 @@ public interface IGuiModel {
 	public abstract StringBuilder getProtocol();
 
 	/**
+	 * @param resourceBundle
+	 *            the resourceBundle to set
+	 */
+	public abstract void setResourceBundle(ResourceBundle resourceBundle);
+
+	/**
+	 * @param help
+	 *            the help to set
+	 */
+	public abstract void setHelp(String help);
+
+	/**
+	 * @param about
+	 *            the about to set
+	 */
+	public abstract void setAbout(String about);
+
+	/**
 	 * @param i18nListener
 	 *            the i18nListener to set
 	 */
@@ -301,36 +317,6 @@ public interface IGuiModel {
 	 *            the quitListener to set
 	 */
 	public abstract void setQuitListener(ActionListener quitListener);
-
-	/**
-	 * @param resourceBundle
-	 *            the resourceBundle to set
-	 */
-	public abstract void setResourceBundle(ResourceBundle resourceBundle);
-
-	/**
-	 * @param i18nEnabled
-	 *            the i18nEnabled to set
-	 */
-	public abstract void setI18nEnabled(boolean i18nEnabled);
-
-	/**
-	 * @param deDEEnabled
-	 *            the deDEEnabled to set
-	 */
-	public abstract void setDeDEEnabled(boolean deDEEnabled);
-
-	/**
-	 * @param frFREnabled
-	 *            the frFREnabled to set
-	 */
-	public abstract void setFrFREnabled(boolean frFREnabled);
-
-	/**
-	 * @param enUSEnabled
-	 *            the enUSEnabled to set
-	 */
-	public abstract void setEnUSEnabled(boolean enUSEnabled);
 
 	/**
 	 * @param fileEnabled
@@ -380,6 +366,30 @@ public interface IGuiModel {
 	 *            the quitEnabled to set
 	 */
 	public abstract void setQuitEnabled(boolean quitEnabled);
+
+	/**
+	 * @param i18nEnabled
+	 *            the i18nEnabled to set
+	 */
+	public abstract void setI18nEnabled(boolean i18nEnabled);
+
+	/**
+	 * @param deDEEnabled
+	 *            the deDEEnabled to set
+	 */
+	public abstract void setDeDEEnabled(boolean deDEEnabled);
+
+	/**
+	 * @param frFREnabled
+	 *            the frFREnabled to set
+	 */
+	public abstract void setFrFREnabled(boolean frFREnabled);
+
+	/**
+	 * @param enUSEnabled
+	 *            the enUSEnabled to set
+	 */
+	public abstract void setEnUSEnabled(boolean enUSEnabled);
 
 	/**
 	 * @param infoEnabled
