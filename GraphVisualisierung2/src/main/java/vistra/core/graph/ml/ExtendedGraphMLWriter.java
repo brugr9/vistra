@@ -19,6 +19,7 @@ import edu.uci.ics.jung.io.GraphMLWriter;
 public final class ExtendedGraphMLWriter extends
 		GraphMLWriter<IVertexLayout, IEdgeLayout> {
 
+	// TODO extract
 	// geometry: x, y
 	public final static String V_LOC_X = "coord.x";
 	public final static String V_LOC_Y = "coord.y";
@@ -45,18 +46,28 @@ public final class ExtendedGraphMLWriter extends
 	 * Main constructor.
 	 */
 	public ExtendedGraphMLWriter() {
-		this.addVertexData(V_LOC_X, V_LOC_X_COMMENT,
-				Integer.toString(V_LOC_X_DEFAULT), new VertexCoordX());
-		this.addVertexData(V_LOC_Y, V_LOC_Y_COMMENT,
-				Integer.toString(V_LOC_Y_DEFAULT), new VertexCoordY());
-		this.addVertexData(V_START, V_START_COMMENT,
-				Boolean.toString(V_START_DEFAULT), new VertexStart());
-		this.addVertexData(V_END, V_END_COMMENT,
-				Boolean.toString(V_END_DEFAULT), new VertexEnd());
-		this.addVertexData(V_VALUE, V_VALUE_COMMENT, V_VALUE_DEFAULT,
-				new VertexValue());
-		this.addEdgeData(E_WEIGHT, E_WEIGHT_COMMENT,
-				Integer.toString(E_WEIGHT_DEFAULT), new EdgeWeight());
+		this.addVertexData(ExtendedGraphMLWriter.V_LOC_X,
+				ExtendedGraphMLWriter.V_LOC_X_COMMENT,
+				Integer.toString(ExtendedGraphMLWriter.V_LOC_X_DEFAULT),
+				new VertexCoordX());
+		this.addVertexData(ExtendedGraphMLWriter.V_LOC_Y, V_LOC_Y_COMMENT,
+				Integer.toString(ExtendedGraphMLWriter.V_LOC_Y_DEFAULT),
+				new VertexCoordY());
+		this.addVertexData(ExtendedGraphMLWriter.V_START,
+				ExtendedGraphMLWriter.V_START_COMMENT,
+				Boolean.toString(ExtendedGraphMLWriter.V_START_DEFAULT),
+				new VertexStart());
+		this.addVertexData(ExtendedGraphMLWriter.V_END,
+				ExtendedGraphMLWriter.V_END_COMMENT,
+				Boolean.toString(ExtendedGraphMLWriter.V_END_DEFAULT),
+				new VertexEnd());
+		this.addVertexData(ExtendedGraphMLWriter.V_VALUE,
+				ExtendedGraphMLWriter.V_VALUE_COMMENT,
+				ExtendedGraphMLWriter.V_VALUE_DEFAULT, new VertexValue());
+		this.addEdgeData(ExtendedGraphMLWriter.E_WEIGHT,
+				ExtendedGraphMLWriter.E_WEIGHT_COMMENT,
+				Integer.toString(ExtendedGraphMLWriter.E_WEIGHT_DEFAULT),
+				new EdgeWeight());
 	}
 
 }

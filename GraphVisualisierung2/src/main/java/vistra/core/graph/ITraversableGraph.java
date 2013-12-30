@@ -10,7 +10,12 @@ import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * A traversable graph. Delegates most of its methods to a graph as given.
+ * A traversable graph interface. The graph delegates most of its method calls
+ * to a constructor-specified {@code Graph}. Modifiers are not supported
+ * anymore: vertices and edges can neither been added nor removed.
+ * <p>
+ * In addition, this graph serves with some 'step'-methods which an
+ * {@code IAlgorithm}-developer can use for generating steps of a traversal.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see Traversal
@@ -85,7 +90,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * Returns a previously as start vertex signed item.
 	 * 
 	 * @param vertex
-	 *            the start vertex if any, <code>null</code> otherwise
+	 *            the start vertex if any, {@code null} otherwise
 	 */
 	abstract IVertex getStart();
 
@@ -93,7 +98,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * Returns a previously as end vertex signed item.
 	 * 
 	 * @param vertex
-	 *            the end vertex if any, <code>null</code> otherwise
+	 *            the end vertex if any, {@code null} otherwise
 	 */
 	abstract IVertex getEnd();
 
@@ -136,8 +141,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param values
 	 *            the values
 	 */
-	abstract void stepUpdateVertices(List<IVertex> vertices,
-			List<String> values);
+	abstract void stepUpdateVertices(List<IVertex> vertices, List<String> values);
 
 	/**
 	 * A step method: visits a vertex over an edge as given.

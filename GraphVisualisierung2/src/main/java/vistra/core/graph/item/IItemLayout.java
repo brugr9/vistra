@@ -43,7 +43,7 @@ public interface IItemLayout {
 	 *            the font to set
 	 * @see Font
 	 */
-	abstract void setFont(int font);
+	abstract void setFont(Font font);
 
 	/**
 	 * Sets the font colour.
@@ -80,7 +80,7 @@ public interface IItemLayout {
 	 * @return the font
 	 * @see Font
 	 */
-	abstract int getFont();
+	abstract Font getFont();
 
 	/**
 	 * Returns the font colour.

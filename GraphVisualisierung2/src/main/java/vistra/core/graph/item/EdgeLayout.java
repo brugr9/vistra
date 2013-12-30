@@ -1,6 +1,7 @@
 package vistra.core.graph.item;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Stroke;
 
 /**
@@ -61,8 +62,8 @@ public class EdgeLayout extends Edge implements IEdgeLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setFont(int style) {
-		this.layout.setFont(style);
+	public void setFont(Font font) {
+		this.layout.setFont(font);
 	}
 
 	/**
@@ -101,7 +102,7 @@ public class EdgeLayout extends Edge implements IEdgeLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getFont() {
+	public Font getFont() {
 		return this.layout.getFont();
 	}
 

@@ -6,7 +6,7 @@ import java.awt.geom.Ellipse2D;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.item.IVertexLayout;
-import vistra.core.graph.item.ItemLayoutConstant;
+import vistra.util.ItemLayoutConstant;
 
 /**
  * A vertex transformer: shape.

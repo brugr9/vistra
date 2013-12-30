@@ -1,12 +1,12 @@
 package vistra.core.graph.item.state;
 
-import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.item.VertexLayout;
 import vistra.util.ColorPalette;
+import vistra.util.FontPalette;
 import vistra.util.Sigma;
-import vistra.util.StrokeStyle;
+import vistra.util.StrokePalette;
 
 /**
  * A vertex state handler.
@@ -200,9 +200,9 @@ public class VertexStateHandler extends VertexLayout implements
 			else if (this.isEnd())
 				this.setViewSolution();
 			else {
-				this.setFont(Font.PLAIN);
+				this.setFont(FontPalette.normal);
 				this.setFontColor(ColorPalette.darkblue);
-				this.setStroke(StrokeStyle.UNEXPLORED.getStorke());
+				this.setStroke(StrokePalette.unexplored);
 				this.setStrokeColor(ColorPalette.darkblue);
 				this.setFillColor(ColorPalette.orange);
 				this.notifyObservers();
@@ -223,9 +223,9 @@ public class VertexStateHandler extends VertexLayout implements
 			if (this.isEnd())
 				this.setViewSolution();
 			else {
-				this.setFont(Font.BOLD);
+				this.setFont(FontPalette.hyphen);
 				this.setFontColor(ColorPalette.darkblue);
-				this.setStroke(StrokeStyle.VISITED.getStorke());
+				this.setStroke(StrokePalette.visited);
 				this.setStrokeColor(ColorPalette.red);
 				this.setFillColor(ColorPalette.orange);
 				this.notifyObservers();
@@ -249,9 +249,9 @@ public class VertexStateHandler extends VertexLayout implements
 			else if (this.isEnd())
 				this.setViewSolution();
 			else {
-				this.setFont(Font.BOLD);
+				this.setFont(FontPalette.hyphen);
 				this.setFontColor(ColorPalette.darkblue);
-				this.setStroke(StrokeStyle.VISITED.getStorke());
+				this.setStroke(StrokePalette.visited);
 				this.setStrokeColor(ColorPalette.red);
 				this.setFillColor(ColorPalette.blue);
 				this.notifyObservers();
@@ -268,9 +268,9 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setViewSolution() throws Exception {
 		try {
-			this.setFont(Font.BOLD);
+			this.setFont(FontPalette.hyphen);
 			this.setFontColor(ColorPalette.green);
-			this.setStroke(StrokeStyle.VISITED.getStorke());
+			this.setStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.green);
 			this.setFillColor(ColorPalette.white);
 			this.notifyObservers();

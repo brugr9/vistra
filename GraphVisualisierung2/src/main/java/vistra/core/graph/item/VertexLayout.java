@@ -1,6 +1,7 @@
 package vistra.core.graph.item;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Stroke;
 import java.awt.geom.Point2D;
 
@@ -124,8 +125,8 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setFont(int style) {
-		this.layout.setFont(style);
+	public void setFont(Font font) {
+		this.layout.setFont(font);
 	}
 
 	/**
@@ -164,7 +165,7 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getFont() {
+	public Font getFont() {
 		return this.layout.getFont();
 	}
 

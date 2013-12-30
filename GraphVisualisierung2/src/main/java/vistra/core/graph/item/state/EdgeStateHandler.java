@@ -1,11 +1,11 @@
 package vistra.core.graph.item.state;
 
-import java.awt.Font;
 import java.util.ArrayList;
 
 import vistra.core.graph.item.EdgeLayout;
 import vistra.util.ColorPalette;
-import vistra.util.StrokeStyle;
+import vistra.util.FontPalette;
+import vistra.util.StrokePalette;
 
 /**
  * An edge state handler.
@@ -175,9 +175,9 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewUnexplored() throws Exception {
 		try {
-			this.setFont(Font.PLAIN);
+			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
-			this.setStroke(StrokeStyle.UNEXPLORED.getStorke());
+			this.setStroke(StrokePalette.unexplored);
 			this.setStrokeColor(ColorPalette.darkblue);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -194,9 +194,9 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewDiscovery() throws Exception {
 		try {
-			this.setFont(Font.BOLD);
+			this.setFont(FontPalette.hyphen);
 			this.setFontColor(ColorPalette.red);
-			this.setStroke(StrokeStyle.VISITED.getStorke());
+			this.setStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.red);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -213,9 +213,9 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewBack() throws Exception {
 		try {
-			this.setFont(Font.PLAIN);
+			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
-			this.setStroke(StrokeStyle.BACK.getStorke());
+			this.setStroke(StrokePalette.back);
 			this.setStrokeColor(ColorPalette.darkgreen);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -232,9 +232,9 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewForward() throws Exception {
 		try {
-			this.setFont(Font.PLAIN);
+			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
-			this.setStroke(StrokeStyle.FORWARD.getStorke());
+			this.setStroke(StrokePalette.forward);
 			this.setStrokeColor(ColorPalette.darkgreen);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -251,9 +251,9 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewCross() throws Exception {
 		try {
-			this.setFont(Font.PLAIN);
+			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
-			this.setStroke(StrokeStyle.CROSS.getStorke());
+			this.setStroke(StrokePalette.cross);
 			this.setStrokeColor(ColorPalette.darkgreen);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -268,9 +268,9 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewDiscarded() throws Exception {
 		try {
-			this.setFont(Font.PLAIN);
+			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
-			this.setStroke(StrokeStyle.DISCARDED.getStorke());
+			this.setStroke(StrokePalette.discarded);
 			this.setStrokeColor(ColorPalette.darkblue);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -285,10 +285,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewSolution() throws Exception {
 		try {
-			this.setFont(Font.BOLD);
-			this.setFontColor(ColorPalette.GREEN);
-			this.setStroke(StrokeStyle.VISITED.getStorke());
-			this.setStrokeColor(ColorPalette.GREEN);
+			this.setFont(FontPalette.hyphen);
+			this.setFontColor(ColorPalette.green);
+			this.setStroke(StrokePalette.visited);
+			this.setStrokeColor(ColorPalette.green);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;

@@ -1,6 +1,7 @@
 package vistra.core.graph.item;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Stroke;
 import java.util.Observable;
 
@@ -27,7 +28,7 @@ class ItemLayout extends Observable implements IItemLayout {
 	/**
 	 * A field for a font.
 	 */
-	private int font;
+	private Font font;
 	/**
 	 * A field for a font colour.
 	 */
@@ -41,7 +42,7 @@ class ItemLayout extends Observable implements IItemLayout {
 		this.id = "";
 		this.stroke = null;
 		this.strokeColor = null;
-		this.font = 0;
+		this.font = null;
 		this.fontColor = null;
 	}
 
@@ -73,7 +74,7 @@ class ItemLayout extends Observable implements IItemLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getFont() {
+	public Font getFont() {
 		return font;
 	}
 
@@ -116,8 +117,8 @@ class ItemLayout extends Observable implements IItemLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setFont(int style) {
-		this.font = style;
+	public void setFont(Font font) {
+		this.font = font;
 		this.setChanged();
 	}
 
