@@ -22,7 +22,7 @@ public class Traversal implements ITraversal {
 	/**
 	 * A field for an iterator over steps.
 	 */
-	private IBidirectIterator<IStep> iterator;
+	private IBidirectIterator<IStep> steps;
 	/**
 	 * A field for a description (e.g. statistics etc.).
 	 */
@@ -31,11 +31,11 @@ public class Traversal implements ITraversal {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param iterator
+	 * @param steps
 	 *            an iterator over steps
 	 */
-	public Traversal(IBidirectIterator<IStep> iterator) {
-		this.iterator = iterator;
+	public Traversal(IBidirectIterator<IStep> steps) {
+		this.steps = steps;
 		this.description = new StringBuilder();
 	}
 
@@ -52,7 +52,7 @@ public class Traversal implements ITraversal {
 	 */
 	@Override
 	public boolean hasNext() {
-		return this.iterator.hasNext();
+		return this.steps.hasNext();
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class Traversal implements ITraversal {
 	 */
 	@Override
 	public IStep next() {
-		return this.iterator.next();
+		return this.steps.next();
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class Traversal implements ITraversal {
 	 */
 	@Override
 	public int size() {
-		return this.iterator.size();
+		return this.steps.size();
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class Traversal implements ITraversal {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return this.iterator.isEmpty();
+		return this.steps.isEmpty();
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class Traversal implements ITraversal {
 	 */
 	@Override
 	public boolean hasPrevious() {
-		return this.iterator.hasPrevious();
+		return this.steps.hasPrevious();
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class Traversal implements ITraversal {
 	 */
 	@Override
 	public IStep previous() throws NoSuchElementException {
-		return this.iterator.previous();
+		return this.steps.previous();
 	}
 
 	/**

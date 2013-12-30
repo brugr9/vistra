@@ -5,14 +5,15 @@ import java.util.List;
 
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
+import vistra.core.traversal.Traversal;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * A traversable graph. Delegates most of its methods to a given graph.
+ * A traversable graph. Delegates most of its methods to a graph as given.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see Traversal
  */
 public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 
@@ -127,6 +128,8 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 
 	/**
 	 * A step method: updates the vertices with values as given.
+	 * <p>
+	 * TODO a map as parameter
 	 * 
 	 * @param vertices
 	 *            the vertices
@@ -147,13 +150,12 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	abstract void stepVisitVertex(IEdge edge, IVertex vertex);
 
 	/**
-	 * A step method: visits a vertex over an edge as given and sets both as
-	 * solution.
+	 * A step method: sets a vertex and an edge as solution member.
 	 * 
 	 * @param edge
-	 *            the edge
+	 *            the edge to set as solution member
 	 * @param vertex
-	 *            the vertex
+	 *            the vertex to set as solution member
 	 */
 	abstract void stepSolutionVertex(IEdge edge, IVertex vertex);
 
@@ -161,7 +163,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * A step method: sets an edge as back edge.
 	 * 
 	 * @param edge
-	 *            the edge to set as back edge
+	 *            the edge to set as back-edge
 	 */
 	abstract void stepBackEdge(IEdge edge);
 
@@ -169,31 +171,31 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * A step method: sets an edge as forward edge.
 	 * 
 	 * @param edge
-	 *            the edge to set as forward edge
+	 *            the edge to set as forward-edge
 	 */
 	abstract void stepForwardEdge(IEdge edge);
 
 	/**
-	 * A step method: sets an edge as cross edge.
+	 * A step method: sets an edge as cross-edge.
 	 * 
 	 * @param edge
-	 *            the edge to set as cross edge
+	 *            the edge to set as cross-edge
 	 */
 	abstract void stepCrossEdge(IEdge edge);
 
 	/**
-	 * A step method: sets an edge as dicarded edge.
+	 * A step method: sets an edge as discarded.
 	 * 
 	 * @param edge
-	 *            the edge to set as discarded edge
+	 *            the edge to set as discarded
 	 */
 	abstract void stepDiscardedEdge(IEdge edge);
 
 	/**
-	 * A step method: sets an edge as solution edge.
+	 * A step method: sets an edge as solution member.
 	 * 
 	 * @param edge
-	 *            the edge to set as solution edge
+	 *            the edge to set as solution member
 	 */
 	abstract void stepSolutionEdge(IEdge edge);
 

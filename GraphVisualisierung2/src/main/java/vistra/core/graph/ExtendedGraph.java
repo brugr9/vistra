@@ -78,7 +78,7 @@ public class ExtendedGraph extends ObservableGraph<IVertexLayout, IEdgeLayout>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean unused(String id) {
+	public boolean unusedId(String id) {
 
 		ArrayList<IItemLayout> items = new ArrayList<IItemLayout>();
 		items.addAll((Collection<? extends IItemLayout>) this.getVertices());

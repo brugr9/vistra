@@ -62,9 +62,11 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	/**
 	 * Checks an item identifier.
 	 * 
-	 * @return <code>true</code> if the identifier is not yet used,
-	 *         <code>false</code> otherwise
+	 * @param identifier
+	 *            the identifier to check
+	 * @return {@code true} if the identifier is not yet used, {@code false}
+	 *         otherwise
 	 */
-	boolean unused(String itemId);
+	abstract boolean unusedId(String identifier);
 
 }

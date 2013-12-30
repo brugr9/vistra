@@ -53,7 +53,7 @@ public class ItemIdVerifier extends AbstractVerifier {
 			String text = ((JTextComponent) input).getText().trim();
 			return !text.isEmpty()
 					&& (text.equals(this.item.getId()) || this.graph
-							.unused(text));
+							.unusedId(text));
 		}
 		return false;
 
