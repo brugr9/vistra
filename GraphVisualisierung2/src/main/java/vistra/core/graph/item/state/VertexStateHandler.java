@@ -115,10 +115,10 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolution() throws Exception {
+	public void handleSolutionMember() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleSolution();
+			this.state.handleSolutionMember();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -287,7 +287,7 @@ public class VertexStateHandler extends VertexLayout implements
 	@Override
 	public boolean isVisited() {
 		if (this.state instanceof VertexStateVisited
-				|| this.state instanceof VertexStateSolution)
+				|| this.state instanceof VertexStateSolutionMember)
 			return true;
 		else if (this.state instanceof VertexStateFocussed)
 			return true;

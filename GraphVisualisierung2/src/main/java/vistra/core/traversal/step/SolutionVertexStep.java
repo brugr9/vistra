@@ -3,7 +3,7 @@ package vistra.core.traversal.step;
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.VertexLayout;
-import vistra.core.graph.item.state.command.IItemCommand;
+import vistra.core.graph.item.state.command.IItemStateCommand;
 import vistra.core.graph.item.state.command.SolutionEdgeCommand;
 import vistra.core.graph.item.state.command.VisitedVertexCommand;
 
@@ -29,8 +29,8 @@ public class SolutionVertexStep extends AbstractStep implements IStep {
 				+ ((VertexLayout) vertex).getId();
 		try {
 			// new
-			IItemCommand solutionEdge = new SolutionEdgeCommand(edge);
-			IItemCommand solutionVertex = new VisitedVertexCommand(vertex);
+			IItemStateCommand solutionEdge = new SolutionEdgeCommand(edge);
+			IItemStateCommand solutionVertex = new VisitedVertexCommand(vertex);
 			// add
 			this.stepHandler.addCommand(solutionEdge);
 			this.stepHandler.addCommand(solutionVertex);

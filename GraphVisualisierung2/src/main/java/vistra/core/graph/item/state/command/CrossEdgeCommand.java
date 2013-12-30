@@ -10,7 +10,7 @@ import vistra.core.graph.item.state.EdgeStateHandler;
  * 
  */
 public class CrossEdgeCommand extends AbstractItemStateCommand implements
-		IItemCommand {
+		IItemStateCommand {
 
 	/**
 	 * Main constructor.
@@ -27,7 +27,7 @@ public class CrossEdgeCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleCross();
+		((EdgeStateHandler) super.stateHandler).handleCrossEdge();
 	}
 
 }

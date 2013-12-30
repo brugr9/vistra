@@ -1,6 +1,6 @@
 package vistra.core.traversal.step;
 
-import vistra.core.graph.item.state.command.IItemCommand;
+import vistra.core.graph.item.state.command.IItemStateCommand;
 import vistra.util.ICommand;
 
 /**
@@ -9,7 +9,7 @@ import vistra.util.ICommand;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see IStep
- * @see IItemCommand
+ * @see IItemStateCommand
  * 
  */
 interface IStepHandler extends ICommand {
@@ -21,6 +21,6 @@ interface IStepHandler extends ICommand {
 	 *            the item command to add
 	 * @throws Exception
 	 */
-	public void addCommand(IItemCommand command) throws Exception;
+	public void addCommand(IItemStateCommand command) throws Exception;
 
 }

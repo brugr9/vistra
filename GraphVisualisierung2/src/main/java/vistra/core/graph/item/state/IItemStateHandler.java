@@ -15,6 +15,20 @@ package vistra.core.graph.item.state;
 public interface IItemStateHandler {
 
 	/**
+	 * Handles unexplored.
+	 * 
+	 * @throws Exception
+	 */
+	abstract void handleUnexplored() throws Exception;
+	
+	/**
+	 * Handles solution member.
+	 * 
+	 * @throws Exception
+	 */
+	abstract void handleSolutionMember() throws Exception;
+	
+	/**
 	 * Handles setting the previous state as getting it from the state cellar.
 	 * 
 	 * @throws Exception

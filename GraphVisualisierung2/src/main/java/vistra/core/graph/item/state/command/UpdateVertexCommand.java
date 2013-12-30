@@ -10,7 +10,7 @@ import vistra.core.graph.item.state.VertexStateHandler;
  * 
  */
 public class UpdateVertexCommand extends AbstractItemStateCommand implements
-		IItemCommand {
+		IItemStateCommand {
 
 	/**
 	 * A field for a value.

@@ -62,10 +62,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleDiscovery() throws Exception {
+	public void handleDiscoveryEdge() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleDiscovery();
+			this.state.handleDiscoveryEdge();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -75,10 +75,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleBack() throws Exception {
+	public void handleBackEdge() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleBack();
+			this.state.handleBackEdge();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -88,10 +88,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleForward() throws Exception {
+	public void handleForwardEdge() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleForward();
+			this.state.handleForwardEdge();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -101,10 +101,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleCross() throws Exception {
+	public void handleCrossEdge() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleCross();
+			this.state.handleCrossEdge();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -114,10 +114,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleDiscarded() throws Exception {
+	public void handleDiscardedEdge() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleDiscarded();
+			this.state.handleDiscardedEdge();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -127,10 +127,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolution() throws Exception {
+	public void handleSolutionMember() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleSolution();
+			this.state.handleSolutionMember();
 		} catch (Exception e) {
 			throw e;
 		}

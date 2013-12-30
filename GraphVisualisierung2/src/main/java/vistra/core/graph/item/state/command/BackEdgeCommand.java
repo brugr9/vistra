@@ -11,7 +11,7 @@ import vistra.core.graph.item.state.IItemStateHandler;
  * 
  */
 public class BackEdgeCommand extends AbstractItemStateCommand implements
-		IItemCommand {
+		IItemStateCommand {
 
 	/**
 	 * Main constructor.
@@ -28,7 +28,7 @@ public class BackEdgeCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleBack();
+		((EdgeStateHandler) super.stateHandler).handleBackEdge();
 	}
 
 }

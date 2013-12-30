@@ -3,7 +3,7 @@ package vistra.core.traversal.step;
 import java.util.List;
 
 import vistra.core.graph.item.IVertex;
-import vistra.core.graph.item.state.command.IItemCommand;
+import vistra.core.graph.item.state.command.IItemStateCommand;
 import vistra.core.graph.item.state.command.InitVertexCommand;
 
 /**
@@ -25,7 +25,7 @@ public class InitVerticesStep extends AbstractStep implements IStep {
 		this.description = "Initialise vertices.";
 		try {
 			for (IVertex vertex : vertices) {
-				IItemCommand initVertex = new InitVertexCommand(vertex);
+				IItemStateCommand initVertex = new InitVertexCommand(vertex);
 				this.stepHandler.addCommand(initVertex);
 				initVertex.execute();
 			}

@@ -8,7 +8,7 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  *  @see VertexStateHandler
  */
-class VertexStateSolution extends AbstractVertexState implements IState {
+class VertexStateSolutionMember extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class VertexStateSolution extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	VertexStateSolution(IVertexStateHandler stateHandler) {
+	VertexStateSolutionMember(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

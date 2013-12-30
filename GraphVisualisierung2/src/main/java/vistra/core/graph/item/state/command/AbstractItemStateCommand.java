@@ -8,7 +8,7 @@ import vistra.core.graph.item.state.IItemStateHandler;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-abstract class AbstractItemStateCommand implements IItemCommand {
+abstract class AbstractItemStateCommand implements IItemStateCommand {
 
 	/**
 	 * A field for a state handler.

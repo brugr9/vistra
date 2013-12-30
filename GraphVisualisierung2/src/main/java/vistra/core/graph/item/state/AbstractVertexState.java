@@ -71,7 +71,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles visit.
+	 * Handles focussed.
 	 * 
 	 * @throws Exception
 	 */
@@ -99,13 +99,13 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles solution.
+	 * Handles solution member.
 	 * 
 	 * @throws Exception
 	 */
-	void handleSolution() throws Exception {
+	void handleSolutionMember() throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateSolution(
+			this.stateHandler.setState(new VertexStateSolutionMember(
 					this.stateHandler));
 		} catch (Exception e) {
 			throw e;

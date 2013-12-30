@@ -2,7 +2,7 @@ package vistra.core.traversal.step;
 
 import vistra.core.graph.item.EdgeLayout;
 import vistra.core.graph.item.IEdge;
-import vistra.core.graph.item.state.command.IItemCommand;
+import vistra.core.graph.item.state.command.IItemStateCommand;
 import vistra.core.graph.item.state.command.SolutionEdgeCommand;
 
 /**
@@ -24,7 +24,7 @@ public class SolutionEdgeStep extends AbstractStep implements IStep {
 		this.description = "Solution member: edge "
 				+ ((EdgeLayout) edge).getId();
 		try {
-			IItemCommand command = new SolutionEdgeCommand(edge);
+			IItemStateCommand command = new SolutionEdgeCommand(edge);
 			this.stepHandler.addCommand(command);
 			command.execute();
 		} catch (Exception e) {

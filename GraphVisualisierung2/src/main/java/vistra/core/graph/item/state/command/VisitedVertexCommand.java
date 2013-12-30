@@ -10,7 +10,7 @@ import vistra.core.graph.item.state.VertexStateHandler;
  * 
  */
 public class VisitedVertexCommand extends AbstractItemStateCommand implements
-		IItemCommand {
+		IItemStateCommand {
 
 	/**
 	 * Main constructor.

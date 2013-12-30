@@ -10,7 +10,7 @@ import vistra.core.graph.item.state.EdgeStateHandler;
  * 
  */
 public class UnexploredEdgeCommand extends AbstractItemStateCommand implements
-		IItemCommand {
+		IItemStateCommand {
 
 	/**
 	 * Main constructor.

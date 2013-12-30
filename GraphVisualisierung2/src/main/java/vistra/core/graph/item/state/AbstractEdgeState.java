@@ -39,9 +39,9 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles discovery.
+	 * Handles discovery-edge.
 	 */
-	void handleDiscovery() throws Exception {
+	void handleDiscoveryEdge() throws Exception {
 		try {
 			this.stateHandler
 					.setState(new EdgeStateDiscovery(this.stateHandler));
@@ -51,9 +51,9 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles back.
+	 * Handles back-edge.
 	 */
-	void handleBack() throws Exception {
+	void handleBackEdge() throws Exception {
 		try {
 			this.stateHandler.setState(new EdgeStateBack(this.stateHandler));
 		} catch (Exception e) {
@@ -62,9 +62,9 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles forward.
+	 * Handles forward-edge.
 	 */
-	void handleForward() throws Exception {
+	void handleForwardEdge() throws Exception {
 		try {
 			this.stateHandler.setState(new EdgeStateForward(this.stateHandler));
 		} catch (Exception e) {
@@ -73,9 +73,9 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles cross.
+	 * Handles cross-edge.
 	 */
-	void handleCross() throws Exception {
+	void handleCrossEdge() throws Exception {
 		try {
 			this.stateHandler.setState(new EdgeStateCross(this.stateHandler));
 		} catch (Exception e) {
@@ -84,9 +84,9 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles discarded.
+	 * Handles discarded edge.
 	 */
-	void handleDiscarded() throws Exception {
+	void handleDiscardedEdge() throws Exception {
 		try {
 			this.stateHandler
 					.setState(new EdgeStateDiscarded(this.stateHandler));
@@ -96,12 +96,12 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles solution.
+	 * Handles solution member.
 	 */
-	void handleSolution() throws Exception {
+	void handleSolutionMember() throws Exception {
 		try {
-			this.stateHandler
-					.setState(new EdgeStateSolution(this.stateHandler));
+			this.stateHandler.setState(new EdgeStateSolutionMember(
+					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}

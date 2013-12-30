@@ -16,13 +16,6 @@ package vistra.core.graph.item.state;
 public interface IVertexStateHandler extends IItemStateHandler {
 
 	/**
-	 * Handles unexplored.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleUnexplored() throws Exception;
-
-	/**
 	 * Handles initialised.
 	 * 
 	 * @throws Exception
@@ -53,16 +46,10 @@ public interface IVertexStateHandler extends IItemStateHandler {
 	abstract void handleVisited() throws Exception;
 
 	/**
-	 * Handles solution.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleSolution() throws Exception;
-
-	/**
 	 * Returns the visited status.
 	 * 
 	 * @return {@code true} if visited
 	 */
 	abstract boolean isVisited();
+
 }

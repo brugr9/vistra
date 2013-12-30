@@ -16,52 +16,38 @@ package vistra.core.graph.item.state;
 public interface IEdgeStateHandler extends IItemStateHandler {
 
 	/**
-	 * Handles unexplored.
+	 * Handles discovery edge.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleUnexplored() throws Exception;
+	abstract void handleDiscoveryEdge() throws Exception;
 
 	/**
-	 * Handles discovery.
+	 * Handles back-edge.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleDiscovery() throws Exception;
+	abstract void handleBackEdge() throws Exception;
 
 	/**
-	 * Handles back.
+	 * Handles forward-edge.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleBack() throws Exception;
+	abstract void handleForwardEdge() throws Exception;
 
 	/**
-	 * Handles forward.
+	 * Handles cross-edge.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleForward() throws Exception;
+	abstract void handleCrossEdge() throws Exception;
 
 	/**
-	 * Handles cross.
+	 * Handles discarded edge.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleCross() throws Exception;
-
-	/**
-	 * Handles discarded.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleDiscarded() throws Exception;
-
-	/**
-	 * Handles solution.
-	 * 
-	 * @throws Exception
-	 */
-	abstract void handleSolution() throws Exception;
+	abstract void handleDiscardedEdge() throws Exception;
 
 }

@@ -8,6 +8,6 @@ import vistra.util.ICommand;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IItemCommand extends ICommand {
+public interface IItemStateCommand extends ICommand {
 
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.IVertexLayout;
-import vistra.core.graph.item.state.command.IItemCommand;
+import vistra.core.graph.item.state.command.IItemStateCommand;
 import vistra.core.graph.item.state.command.UpdateVertexCommand;
 
 /**
@@ -31,7 +31,7 @@ public class UpdateVerticesStep extends AbstractStep implements IStep {
 				this.description += ((IVertexLayout) vertices.get(i)).getId();
 				if (i < vertices.size() - 1)
 					this.description += ", ";
-				IItemCommand updateVertex = new UpdateVertexCommand(
+				IItemStateCommand updateVertex = new UpdateVertexCommand(
 						(IVertex) vertices.get(i), values.get(i));
 				this.stepHandler.addCommand(updateVertex);
 				updateVertex.execute();

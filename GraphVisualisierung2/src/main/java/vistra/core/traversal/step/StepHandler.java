@@ -3,7 +3,7 @@ package vistra.core.traversal.step;
 import java.util.ArrayList;
 import java.util.List;
 
-import vistra.core.graph.item.state.command.IItemCommand;
+import vistra.core.graph.item.state.command.IItemStateCommand;
 
 /**
  * A step handler.
@@ -16,13 +16,13 @@ class StepHandler implements IStepHandler {
 	/**
 	 * A field for a list of item commands.
 	 */
-	private List<IItemCommand> commands;
+	private List<IItemStateCommand> commands;
 
 	/**
 	 * Main constructor.
 	 */
 	StepHandler() {
-		this.commands = new ArrayList<IItemCommand>();
+		this.commands = new ArrayList<IItemStateCommand>();
 	}
 
 	/**
@@ -30,7 +30,7 @@ class StepHandler implements IStepHandler {
 	 */
 	@Override
 	public void execute() throws Exception {
-		for (IItemCommand command : this.commands)
+		for (IItemStateCommand command : this.commands)
 			command.execute();
 	}
 
@@ -48,7 +48,7 @@ class StepHandler implements IStepHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addCommand(IItemCommand command) throws Exception {
+	public void addCommand(IItemStateCommand command) throws Exception {
 		this.commands.add(command);
 	}
 
