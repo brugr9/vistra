@@ -494,6 +494,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.core.saveGraphAs(file);
 				this.model.setGraphFile(true);
 				this.model.setGraphSaved(true);
+				this.model.notifyObservers(GRAPH);
 				this.model.setAlgorithmsEnabled(true);
 			}
 			return option;
