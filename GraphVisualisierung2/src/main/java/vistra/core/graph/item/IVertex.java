@@ -13,20 +13,20 @@ public interface IVertex extends IItem {
 	 * 
 	 * @return the start
 	 */
-	abstract boolean isStart();
+	boolean isStart();
 
 	/**
 	 * Returns the end.
 	 * 
 	 * @return the end
 	 */
-	abstract boolean isEnd();
+	boolean isEnd();
 
 	/**
 	 * Returns a value.
 	 * 
 	 * @return the value
 	 */
-	public String getValue();
+	String getValue();
 
 }

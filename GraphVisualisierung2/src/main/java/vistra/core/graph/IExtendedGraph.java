@@ -22,7 +22,7 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	 * 
 	 * @return the name
 	 */
-	abstract String getName();
+	String getName();
 
 	/**
 	 * Sets the name.
@@ -30,14 +30,14 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	 * @param name
 	 *            the name to set
 	 */
-	abstract void setName(String name);
+	void setName(String name);
 
 	/**
 	 * Returns the edge type.
 	 * 
 	 * @return the edge type
 	 */
-	abstract EdgeType getEdgeType();
+	EdgeType getEdgeType();
 
 	/**
 	 * Sets the edge type.
@@ -45,18 +45,18 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	 * @param edgeType
 	 *            the edge type to set
 	 */
-	abstract void setEdgeType(EdgeType edgeType);
+	void setEdgeType(EdgeType edgeType);
 
 	/**
 	 * Adds {@code listener} as a listener to this graph.
 	 */
-	abstract void addGraphEventListener(
+	void addGraphEventListener(
 			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
 
 	/**
 	 * Removes {@code listener} as a listener to this graph.
 	 */
-	abstract void removeGraphEventListener(
+	void removeGraphEventListener(
 			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
 
 	/**
@@ -67,6 +67,6 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	 * @return {@code true} if the identifier is not yet used, {@code false}
 	 *         otherwise
 	 */
-	abstract boolean unusedId(String identifier);
+	boolean unusedId(String identifier);
 
 }

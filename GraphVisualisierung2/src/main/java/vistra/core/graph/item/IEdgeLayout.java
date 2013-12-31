@@ -1,6 +1,5 @@
 package vistra.core.graph.item;
 
-
 /**
  * An edge layout interface.
  * 
@@ -15,6 +14,6 @@ public interface IEdgeLayout extends IEdge, IItemLayout {
 	 * @param weight
 	 *            the weight to set
 	 */
-	abstract void setWeight(int weight);
+	void setWeight(int weight);
 
 }

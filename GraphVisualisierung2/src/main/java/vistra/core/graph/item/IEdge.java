@@ -13,6 +13,6 @@ public interface IEdge extends IItem {
 	 * 
 	 * @return the weight
 	 */
-	public int getWeight();
+	int getWeight();
 
 }

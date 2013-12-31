@@ -3,7 +3,6 @@ package vistra.gui.control.state;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
-
 /**
  * An interface for an animation state handler. An animation state machine
  * handles the animated iteration over a traversal-object.
@@ -24,20 +23,20 @@ public interface IAnimationStateHandler extends IControlStateHandler,
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handlePlay() throws Exception;
+	void handlePlay() throws Exception;
 
 	/**
 	 * Handles an interaction: pause.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handlePause() throws Exception;
+	void handlePause() throws Exception;
 
 	/**
 	 * Handles an interaction: stop.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleStop() throws Exception;
+	void handleStop() throws Exception;
 
 }

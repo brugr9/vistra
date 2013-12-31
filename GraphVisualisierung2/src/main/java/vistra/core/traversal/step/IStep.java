@@ -17,6 +17,6 @@ public interface IStep extends ICommand {
 	 * 
 	 * @return the description
 	 */
-	abstract String getDescription();
+	 String getDescription();
 
 }

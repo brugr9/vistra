@@ -30,48 +30,48 @@ public interface IParameterStateHandler extends IControlStateHandler,
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleNewGraphUndirected() throws Exception;
+	void handleNewGraphUndirected() throws Exception;
 
 	/**
 	 * Handles an interaction: new directed graph.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleNewGraphDirected() throws Exception;
+	void handleNewGraphDirected() throws Exception;
 
 	/**
 	 * Handles an interaction: open graph.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleOpenGraph() throws Exception;
+	void handleOpenGraph() throws Exception;
 
 	/**
 	 * Handles an interaction: save graph.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleSaveGraph() throws Exception;
+	void handleSaveGraph() throws Exception;
 
 	/**
 	 * Handles an interaction: save graph as.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleSaveGraphAs() throws Exception;
+	void handleSaveGraphAs() throws Exception;
 
 	/**
 	 * Handles an interaction: edit graph.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleEditGraph() throws Exception;
+	void handleEditGraph() throws Exception;
 
 	/**
 	 * Handles an interaction: select algorithm.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleSelectAlgorithm() throws Exception;
+	void handleSelectAlgorithm() throws Exception;
 
 }

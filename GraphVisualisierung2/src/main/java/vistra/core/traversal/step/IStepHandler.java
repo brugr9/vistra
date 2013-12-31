@@ -21,6 +21,6 @@ interface IStepHandler extends ICommand {
 	 *            the item command to add
 	 * @throws Exception
 	 */
-	public void addCommand(IItemStateCommand command) throws Exception;
+	void addCommand(IItemStateCommand command) throws Exception;
 
 }

@@ -19,20 +19,20 @@ public interface IItemStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleUnexplored() throws Exception;
-	
+	void handleUnexplored() throws Exception;
+
 	/**
 	 * Handles solution member.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleSolutionMember() throws Exception;
-	
+	void handleSolutionMember() throws Exception;
+
 	/**
 	 * Handles setting the previous state as getting it from the state cellar.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleSetPreviousState() throws Exception;
+	void handleSetPreviousState() throws Exception;
 
 }

@@ -17,7 +17,7 @@ public interface IBidirectIterator<E> extends Iterable<E>, Iterator<E> {
 	 * 
 	 * @return the size
 	 */
-	abstract int size();
+	int size();
 
 	/**
 	 * Returns {@code true} if the iteration has no elements. (In other words,
@@ -26,7 +26,7 @@ public interface IBidirectIterator<E> extends Iterable<E>, Iterator<E> {
 	 * 
 	 * @return {@code true} if the iteration has no elements
 	 */
-	abstract boolean isEmpty();
+	boolean isEmpty();
 
 	/**
 	 * Returns {@code true} if the iteration has more elements. (In other words,
@@ -35,7 +35,7 @@ public interface IBidirectIterator<E> extends Iterable<E>, Iterator<E> {
 	 * 
 	 * @return {@code true} if the iteration has more elements
 	 */
-	abstract boolean hasPrevious();
+	boolean hasPrevious();
 
 	/**
 	 * Returns the previous element in the iteration.
@@ -43,6 +43,6 @@ public interface IBidirectIterator<E> extends Iterable<E>, Iterator<E> {
 	 * @return the previous element in the iteration
 	 * @throws NoSuchElementException
 	 */
-	abstract E previous() throws NoSuchElementException;
+	E previous() throws NoSuchElementException;
 
 }

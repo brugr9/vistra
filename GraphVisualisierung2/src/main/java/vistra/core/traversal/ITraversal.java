@@ -18,13 +18,13 @@ public interface ITraversal extends IBidirectIterator<IStep> {
 	 * @param description
 	 *            the description
 	 */
-	abstract void setDescription(StringBuilder description);
+	void setDescription(StringBuilder description);
 
 	/**
 	 * Returns the description.
 	 * 
 	 * @return the description
 	 */
-	abstract StringBuilder getDescription();
+	StringBuilder getDescription();
 
 }

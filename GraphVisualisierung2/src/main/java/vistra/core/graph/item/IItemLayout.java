@@ -18,7 +18,7 @@ public interface IItemLayout {
 	 * @param id
 	 *            the identifier to set
 	 */
-	abstract void setId(String id);
+	void setId(String id);
 
 	/**
 	 * Sets the stroke.
@@ -26,7 +26,7 @@ public interface IItemLayout {
 	 * @param stroke
 	 *            the stroke
 	 */
-	abstract void setStroke(Stroke stroke);
+	void setStroke(Stroke stroke);
 
 	/**
 	 * Sets the stroke colour.
@@ -34,7 +34,7 @@ public interface IItemLayout {
 	 * @param color
 	 *            the colour to set
 	 */
-	abstract void setStrokeColor(Color color);
+	void setStrokeColor(Color color);
 
 	/**
 	 * Sets the font.
@@ -43,7 +43,7 @@ public interface IItemLayout {
 	 *            the font to set
 	 * @see Font
 	 */
-	abstract void setFont(Font font);
+	void setFont(Font font);
 
 	/**
 	 * Sets the font colour.
@@ -51,28 +51,28 @@ public interface IItemLayout {
 	 * @param color
 	 *            the colour to set
 	 */
-	abstract void setFontColor(Color color);
+	void setFontColor(Color color);
 
 	/**
 	 * Returns an identifier.
 	 * 
 	 * @return the identifier
 	 */
-	abstract String getId();
+	String getId();
 
 	/**
 	 * Sets the stroke.
 	 * 
 	 * @return the stroke
 	 */
-	abstract Stroke getStroke();
+	Stroke getStroke();
 
 	/**
 	 * Returns the stroke colour.
 	 * 
 	 * @return the colour
 	 */
-	abstract Color getStrokeColor();
+	Color getStrokeColor();
 
 	/**
 	 * Returns the font.
@@ -80,13 +80,13 @@ public interface IItemLayout {
 	 * @return the font
 	 * @see Font
 	 */
-	abstract Font getFont();
+	Font getFont();
 
 	/**
 	 * Returns the font colour.
 	 * 
 	 * @return the colour
 	 */
-	abstract Color getFontColor();
+	Color getFontColor();
 
 }

@@ -21,7 +21,7 @@ public interface ICore {
 	 * 
 	 * @return the graph filename extension filter
 	 */
-	abstract FileNameExtensionFilter getGraphFilter();
+	FileNameExtensionFilter getGraphFilter();
 
 	/**
 	 * Returns an empty graph of edge type as given.
@@ -31,7 +31,7 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	abstract IExtendedGraph newGraph(EdgeType edgeType) throws CoreException;
+	IExtendedGraph newGraph(EdgeType edgeType) throws CoreException;
 
 	/**
 	 * Opens a graph given as file.
@@ -41,14 +41,14 @@ public interface ICore {
 	 * @return the graph
 	 * @throws CoreException
 	 */
-	abstract IExtendedGraph openGraph(File source) throws CoreException;
+	IExtendedGraph openGraph(File source) throws CoreException;
 
 	/**
 	 * Saves the graph as GraphML-file.
 	 * 
 	 * @throws CoreException
 	 */
-	abstract void saveGraph() throws CoreException;
+	void saveGraph() throws CoreException;
 
 	/**
 	 * Saves the graph into a GraphML-file with name as given.
@@ -57,7 +57,7 @@ public interface ICore {
 	 *            the file to write into
 	 * @throws CoreException
 	 */
-	abstract void saveGraphAs(File file) throws CoreException;
+	void saveGraphAs(File file) throws CoreException;
 
 	/**
 	 * Updates the list of selectable algorithms. Afterwards, the list holds all
@@ -67,7 +67,7 @@ public interface ICore {
 	 *            the edge type
 	 * @throws CoreException
 	 */
-	abstract void updateSelectableNames(EdgeType edgeType) throws CoreException;
+	void updateSelectableNames(EdgeType edgeType) throws CoreException;
 
 	/**
 	 * Returns an array of human readable names of selectable algorithms.
@@ -75,7 +75,7 @@ public interface ICore {
 	 * @return the algorithm names
 	 * @throws CoreException
 	 */
-	abstract String[] getSelectableNames() throws CoreException;
+	String[] getSelectableNames() throws CoreException;
 
 	/**
 	 * Selects an algorithm.
@@ -84,14 +84,14 @@ public interface ICore {
 	 *            the algorithm index
 	 * @throws CoreException
 	 */
-	abstract void selectAlgorithm(int index) throws CoreException;
+	void selectAlgorithm(int index) throws CoreException;
 
 	/**
 	 * Returns the algorithm description.
 	 * 
 	 * @return the description
 	 */
-	abstract String getAlgorithmDescription() throws CoreException;
+	String getAlgorithmDescription() throws CoreException;
 
 	/**
 	 * Traverses a graph as given by executing the algorithm. Returns traversal
@@ -103,6 +103,6 @@ public interface ICore {
 	 * @return the traversal
 	 * @throws CoreException
 	 */
-	public Traversal traverse(IExtendedGraph graph) throws CoreException;
+	Traversal traverse(IExtendedGraph graph) throws CoreException;
 
 }

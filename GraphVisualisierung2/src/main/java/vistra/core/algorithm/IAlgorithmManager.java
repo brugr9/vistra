@@ -17,7 +17,7 @@ public interface IAlgorithmManager {
 	 *            the algorithm to add
 	 * @throws Exception
 	 */
-	abstract boolean add(IAlgorithm algorithm) throws Exception;
+	boolean add(IAlgorithm algorithm) throws Exception;
 
 	/**
 	 * Removes an algorithm.
@@ -27,7 +27,7 @@ public interface IAlgorithmManager {
 	 * @return the removed algorithm
 	 * @throws Exception
 	 */
-	abstract boolean remove(IAlgorithm algorithm) throws Exception;
+	boolean remove(IAlgorithm algorithm) throws Exception;
 
 	/**
 	 * Updates the list of selectable algorithms. Afterwards, the list holds all
@@ -37,7 +37,7 @@ public interface IAlgorithmManager {
 	 *            the edge type
 	 * @throws Exception
 	 */
-	abstract void updateSelectableList(EdgeType edgeType) throws Exception;
+	void updateSelectableList(EdgeType edgeType) throws Exception;
 
 	/**
 	 * Returns an array of human readable names of selectable algorithms.
@@ -45,7 +45,7 @@ public interface IAlgorithmManager {
 	 * @return the algorithm names
 	 * @throws Exception
 	 */
-	abstract String[] getSelectableNames() throws Exception;
+	String[] getSelectableNames() throws Exception;
 
 	/**
 	 * Selects an algorithm by index, loads and returns the algorithm.
@@ -55,6 +55,6 @@ public interface IAlgorithmManager {
 	 * @return the algorithm
 	 * @throws Exception
 	 */
-	abstract IAlgorithm select(int index) throws Exception;
+	IAlgorithm select(int index) throws Exception;
 
 }

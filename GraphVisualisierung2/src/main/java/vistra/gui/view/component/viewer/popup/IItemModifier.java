@@ -18,7 +18,7 @@ public interface IItemModifier {
 	 * @param item
 	 *            the item to set
 	 */
-	public abstract void setGraphItemAndView(IItemLayout item);
+	void setGraphItemAndView(IItemLayout item);
 
 	/**
 	 * Sets the graph item location.
@@ -26,5 +26,5 @@ public interface IItemModifier {
 	 * @param location
 	 *            the location to set
 	 */
-	public abstract void setGraphItemLocation(Point2D location);
+	void setGraphItemLocation(Point2D location);
 }

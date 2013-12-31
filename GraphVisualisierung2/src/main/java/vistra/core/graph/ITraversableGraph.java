@@ -28,7 +28,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	abstract boolean addEdge(IEdge e, IVertex v1, IVertex v2);
+	boolean addEdge(IEdge e, IVertex v1, IVertex v2);
 
 	/**
 	 * 
@@ -36,7 +36,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	abstract boolean addEdge(IEdge e, IVertex v1, IVertex v2, EdgeType edgeType);
+	boolean addEdge(IEdge e, IVertex v1, IVertex v2, EdgeType edgeType);
 
 	/**
 	 * 
@@ -44,7 +44,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	abstract boolean addVertex(IVertex vertex);
+	boolean addVertex(IVertex vertex);
 
 	/**
 	 * 
@@ -52,7 +52,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	abstract boolean addEdge(IEdge edge, Collection<? extends IVertex> vertices);
+	boolean addEdge(IEdge edge, Collection<? extends IVertex> vertices);
 
 	/**
 	 * 
@@ -60,8 +60,8 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	abstract boolean addEdge(IEdge edge,
-			Collection<? extends IVertex> vertices, EdgeType edge_type);
+	boolean addEdge(IEdge edge, Collection<? extends IVertex> vertices,
+			EdgeType edge_type);
 
 	/**
 	 * 
@@ -69,7 +69,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	abstract boolean removeVertex(IVertex vertex);
+	boolean removeVertex(IVertex vertex);
 
 	/**
 	 * 
@@ -77,14 +77,14 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 */
 	@Override
-	abstract boolean removeEdge(IEdge edge);
+	boolean removeEdge(IEdge edge);
 
 	/**
 	 * Returns the edge type.
 	 * 
 	 * @return the edge type
 	 */
-	abstract EdgeType getEdgeType();
+	EdgeType getEdgeType();
 
 	/**
 	 * Returns a previously as start vertex signed item.
@@ -92,7 +92,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param vertex
 	 *            the start vertex if any, {@code null} otherwise
 	 */
-	abstract IVertex getStart();
+	IVertex getStart();
 
 	/**
 	 * Returns a previously as end vertex signed item.
@@ -100,7 +100,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param vertex
 	 *            the end vertex if any, {@code null} otherwise
 	 */
-	abstract IVertex getEnd();
+	IVertex getEnd();
 
 	/**
 	 * Returns the visited state of a vertex.
@@ -109,19 +109,17 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 *            the vertex to check
 	 * @return {@code true} if already visited
 	 */
-	abstract boolean isVisited(IVertex vertex);
+	boolean isVisited(IVertex vertex);
 
 	/**
 	 * Adds {@code listener} as a listener to this graph.
 	 */
-	abstract void addTraversalEventListener(
-			ITraversableGraphEventListener listener);
+	void addTraversalEventListener(ITraversableGraphEventListener listener);
 
 	/**
 	 * Removes {@code listener} as a listener from this graph.
 	 */
-	abstract void removeTraversalEventListener(
-			ITraversableGraphEventListener listener);
+	void removeTraversalEventListener(ITraversableGraphEventListener listener);
 
 	/**
 	 * A step method: initialises the vertices.
@@ -129,7 +127,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param vertices
 	 *            the vertices to initialise
 	 */
-	abstract void stepInitVertices(List<IVertex> vertices);
+	void stepInitVertices(List<IVertex> vertices);
 
 	/**
 	 * A step method: updates the vertices with values as given.
@@ -141,7 +139,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param values
 	 *            the values
 	 */
-	abstract void stepUpdateVertices(List<IVertex> vertices, List<String> values);
+	void stepUpdateVertices(List<IVertex> vertices, List<String> values);
 
 	/**
 	 * A step method: visits a vertex over an edge as given.
@@ -151,7 +149,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param vertex
 	 *            the vertex to visit
 	 */
-	abstract void stepVisitVertex(IEdge edge, IVertex vertex);
+	void stepVisitVertex(IEdge edge, IVertex vertex);
 
 	/**
 	 * A step method: sets a vertex and an edge as solution member.
@@ -161,7 +159,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param vertex
 	 *            the vertex to set as solution member
 	 */
-	abstract void stepSolutionVertex(IEdge edge, IVertex vertex);
+	void stepSolutionVertex(IEdge edge, IVertex vertex);
 
 	/**
 	 * A step method: sets an edge as back edge.
@@ -169,7 +167,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param edge
 	 *            the edge to set as back-edge
 	 */
-	abstract void stepBackEdge(IEdge edge);
+	void stepBackEdge(IEdge edge);
 
 	/**
 	 * A step method: sets an edge as forward edge.
@@ -177,7 +175,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param edge
 	 *            the edge to set as forward-edge
 	 */
-	abstract void stepForwardEdge(IEdge edge);
+	void stepForwardEdge(IEdge edge);
 
 	/**
 	 * A step method: sets an edge as cross-edge.
@@ -185,7 +183,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param edge
 	 *            the edge to set as cross-edge
 	 */
-	abstract void stepCrossEdge(IEdge edge);
+	void stepCrossEdge(IEdge edge);
 
 	/**
 	 * A step method: sets an edge as discarded.
@@ -193,7 +191,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param edge
 	 *            the edge to set as discarded
 	 */
-	abstract void stepDiscardedEdge(IEdge edge);
+	void stepDiscardedEdge(IEdge edge);
 
 	/**
 	 * A step method: sets an edge as solution member.
@@ -201,6 +199,6 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param edge
 	 *            the edge to set as solution member
 	 */
-	abstract void stepSolutionEdge(IEdge edge);
+	void stepSolutionEdge(IEdge edge);
 
 }

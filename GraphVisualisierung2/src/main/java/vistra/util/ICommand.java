@@ -13,13 +13,13 @@ public interface ICommand {
 	 * 
 	 * @throws Exception
 	 */
-	abstract void execute() throws Exception;
+	void execute() throws Exception;
 
 	/**
 	 * Undoes the command.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void undo() throws Exception;
+	void undo() throws Exception;
 
 }

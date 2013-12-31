@@ -15,6 +15,6 @@ public interface ICommandHandler {
 	 *            the command to add
 	 * @throws Exception
 	 */
-	public void addCommand(ICommand command) throws Exception;
+	void addCommand(ICommand command) throws Exception;
 
 }

@@ -3,7 +3,6 @@ package vistra.core.graph.item;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
-
 /**
  * A vertex layout interface.
  * 
@@ -18,7 +17,7 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	 * @param point
 	 *            the point to set
 	 */
-	abstract void setLocation(Point2D point);
+	void setLocation(Point2D point);
 
 	/**
 	 * Sets the fill colour.
@@ -26,7 +25,7 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	 * @param color
 	 *            the colour to set
 	 */
-	abstract void setFillColor(Color color);
+	void setFillColor(Color color);
 
 	/**
 	 * Sets the start.
@@ -34,7 +33,7 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	 * @param start
 	 *            the start to set
 	 */
-	abstract void setStart(boolean start);
+	void setStart(boolean start);
 
 	/**
 	 * Sets the end.
@@ -42,7 +41,7 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	 * @param end
 	 *            the end to set
 	 */
-	abstract void setEnd(boolean end);
+	void setEnd(boolean end);
 
 	/**
 	 * Sets a value.
@@ -50,20 +49,20 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	 * @param value
 	 *            the value to set
 	 */
-	abstract void setValue(String value);
+	void setValue(String value);
 
 	/**
 	 * Returns the location.
 	 * 
 	 * @return the location
 	 */
-	abstract Point2D getLocation();
+	Point2D getLocation();
 
 	/**
 	 * Returns the fill colour.
 	 * 
 	 * @return the colour
 	 */
-	abstract Color getFillColor();
+	Color getFillColor();
 
 }

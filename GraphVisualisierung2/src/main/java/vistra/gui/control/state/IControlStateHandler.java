@@ -14,13 +14,13 @@ interface IControlStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleIdle() throws Exception;
+	void handleIdle() throws Exception;
 
 	/**
 	 * Handles off.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleOff() throws Exception;
+	void handleOff() throws Exception;
 
 }

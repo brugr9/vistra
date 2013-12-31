@@ -20,7 +20,7 @@ public interface IVertexStateHandler extends IItemStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleInitialised() throws Exception;
+	 void handleInitialised() throws Exception;
 
 	/**
 	 * Handles updated.
@@ -29,27 +29,27 @@ public interface IVertexStateHandler extends IItemStateHandler {
 	 *            the value to set
 	 * @throws Exception
 	 */
-	abstract void handleUpdated(String value) throws Exception;
+	 void handleUpdated(String value) throws Exception;
 
 	/**
 	 * Handles focussed.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleFocussed() throws Exception;
+	 void handleFocussed() throws Exception;
 
 	/**
 	 * Handles visited.
 	 * 
 	 * @throws Exception
 	 */
-	abstract void handleVisited() throws Exception;
+	 void handleVisited() throws Exception;
 
 	/**
 	 * Returns the visited status.
 	 * 
 	 * @return {@code true} if visited
 	 */
-	abstract boolean isVisited();
+	 boolean isVisited();
 
 }
