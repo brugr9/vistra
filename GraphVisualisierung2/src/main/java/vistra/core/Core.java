@@ -64,13 +64,13 @@ public class Core implements ICore {
 		try {
 			this.graphManager = GraphManagerFactory.create(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(p);
-			this.algorithmManager.add(new Default());
-			this.algorithmManager.add(new Test()); // TODO remove test algorithm
-			this.algorithmManager.add(new BFS());
-			this.algorithmManager.add(new DFS());
-			this.algorithmManager.add(new DLS());
-			this.algorithmManager.add(new Dijkstra());
-			this.algorithmManager.add(new Kruskal());
+			this.algorithmManager.addAvailable(new Default());
+			this.algorithmManager.addAvailable(new Test()); // TODO remove test algorithm
+			this.algorithmManager.addAvailable(new BFS());
+			this.algorithmManager.addAvailable(new DFS());
+			this.algorithmManager.addAvailable(new DLS());
+			this.algorithmManager.addAvailable(new Dijkstra());
+			this.algorithmManager.addAvailable(new Kruskal());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -138,7 +138,7 @@ public class Core implements ICore {
 	@Override
 	public void updateSelectableNames(EdgeType edgeType) throws CoreException {
 		try {
-			this.algorithmManager.updateSelectableList(edgeType);
+			this.algorithmManager.updateSupported(edgeType);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
@@ -150,7 +150,7 @@ public class Core implements ICore {
 	@Override
 	public String[] getSelectableNames() throws CoreException {
 		try {
-			return this.algorithmManager.getSelectableNames();
+			return this.algorithmManager.getNames();
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}
@@ -162,7 +162,7 @@ public class Core implements ICore {
 	@Override
 	public void selectAlgorithm(int index) throws CoreException {
 		try {
-			this.algorithm = this.algorithmManager.select(index);
+			this.algorithm = this.algorithmManager.getSupported(index);
 		} catch (Exception e) {
 			throw new CoreException(e);
 		}

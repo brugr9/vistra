@@ -7,6 +7,12 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * An algorithm manager.
+ * <p>
+ * An algorithm manager holds two lists:
+ * <ul>
+ * <li>a list with all algorithms available
+ * <li>a list with algorithms supporting an edge type (as a selection out of the
+ * algorithms available)
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -38,7 +44,7 @@ public final class AlgorithmManager implements IAlgorithmManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean add(IAlgorithm algorithm) throws Exception {
+	public boolean addAvailable(IAlgorithm algorithm) throws Exception {
 		return this.available.add(algorithm);
 	}
 
@@ -46,7 +52,7 @@ public final class AlgorithmManager implements IAlgorithmManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean remove(IAlgorithm algorithm) throws Exception {
+	public boolean removeAvailable(IAlgorithm algorithm) throws Exception {
 		this.supported.remove(algorithm);
 		return this.available.remove(algorithm);
 	}
@@ -55,7 +61,7 @@ public final class AlgorithmManager implements IAlgorithmManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updateSelectableList(EdgeType edgeType) throws Exception {
+	public void updateSupported(EdgeType edgeType) throws Exception {
 		try {
 			this.supported.clear();
 			EdgeType[] capabilities;
@@ -77,7 +83,7 @@ public final class AlgorithmManager implements IAlgorithmManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String[] getSelectableNames() throws Exception {
+	public String[] getNames() throws Exception {
 		try {
 			String[] names = new String[this.supported.size()];
 			for (int i = 0; i < names.length; i++) {
@@ -93,7 +99,7 @@ public final class AlgorithmManager implements IAlgorithmManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IAlgorithm select(int index) throws Exception {
+	public IAlgorithm getSupported(int index) throws Exception {
 		try {
 			return this.supported.get(index);
 		} catch (Exception e) {
