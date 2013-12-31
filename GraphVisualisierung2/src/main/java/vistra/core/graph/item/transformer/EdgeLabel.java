@@ -1,7 +1,6 @@
 package vistra.core.graph.item.transformer;
 
 import org.apache.commons.collections15.Transformer;
-
 import vistra.core.graph.item.IEdgeLayout;
 
 /**
@@ -17,10 +16,14 @@ public class EdgeLabel implements Transformer<IEdgeLayout, String> {
 	 */
 	@Override
 	public String transform(IEdgeLayout edge) {
-		String id = "";
-		if (edge.getId().trim() != "")
-			id = edge.getId() + ": ";
-		return id + edge.getWeight();
+		String label = "";
+		String id = edge.getId().trim();
+		String value = Integer.toString(edge.getWeight());
+		if (id != "" && value != "")
+			label = id + ": " + value;
+		else
+			label = id + value;
+		return label;
 	}
 
 }

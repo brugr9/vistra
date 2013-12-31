@@ -196,9 +196,9 @@ public class VertexStateHandler extends VertexLayout implements
 	void setViewUnexplored() throws Exception {
 		try {
 			if (this.isStart())
-				this.setViewFocussed();
+				this.setViewVisited();
 			else if (this.isEnd())
-				this.setViewSolution();
+				this.setViewVisited();
 			else {
 				this.setFont(FontPalette.normal);
 				this.setFontColor(ColorPalette.darkblue);

@@ -104,7 +104,7 @@ public abstract class ColorPalette {
 	/**
 	 * The colour white in the sRGB space.
 	 */
-	public final static Color white = new Color(246, 246, 210);
+	public final static Color white = new Color(254, 255, 255);
 	/**
 	 * The colour white.
 	 */

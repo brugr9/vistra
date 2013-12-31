@@ -29,13 +29,12 @@ public class EdgeFactory implements Factory<IEdgeLayout> {
 	 * @return the edge layout
 	 */
 	public static IEdgeLayout createEdgeLayout() {
-
 		IEdgeStateHandler edge = new EdgeStateHandler();
 		try {
 			edge.handleUnexplored();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return (EdgeLayout) edge;
+		return (IEdgeLayout) edge;
 	}
 }

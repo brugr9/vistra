@@ -16,11 +16,14 @@ public class VertexLabel implements Transformer<IVertexLayout, String> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String transform(IVertexLayout layout) {
-		String id = layout.getId();
-		String value = layout.getValue();
+	public String transform(IVertexLayout vertex) {
+		String label = "";
+		String id = vertex.getId().trim();
+		String value = vertex.getValue();
 		if (id != "" && value != "")
-			id += ": ";
-		return id + value;
+			label = id + ": " + value;
+		else
+			label = id + value;
+		return label;
 	}
 }

@@ -18,23 +18,23 @@ public enum FontPalette {
 	/**
 	 * Font 'normal'.
 	 * <ul>
-	 * <li>Size: normal
 	 * <li>Style: normal
+	 * <li>Size: normal
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	NORMAL("normal", ItemLayoutConstant.FONT_SIZE_NORMAL,
-			ItemLayoutConstant.FONT_STYLE_NORMAL),
+	NORMAL("normal", ItemLayoutConstant.FONT_STYLE_NORMAL,
+			ItemLayoutConstant.FONT_SIZE_NORMAL),
 	/**
 	 * Font 'hyphen'.
 	 * <ul>
-	 * <li>Size: hyphen
 	 * <li>Style: hyphen
+	 * <li>Size: hyphen
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	HYPHEN("hyphen", ItemLayoutConstant.FONT_SIZE_HYPHEN,
-			ItemLayoutConstant.FONT_STYLE_HYPHEN),
+	HYPHEN("hyphen", ItemLayoutConstant.FONT_STYLE_HYPHEN,
+			ItemLayoutConstant.FONT_SIZE_HYPHEN),
 
 	;
 
