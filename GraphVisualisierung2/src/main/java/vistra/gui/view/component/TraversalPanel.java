@@ -192,7 +192,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.pause.addActionListener(model.getAnimationStateHandler());
 		this.stop.addActionListener(model.getAnimationStateHandler());
 
-		// progress
+		/* progress bar */
 		this.progress = new JProgressBar();
 		this.progress.setBackground(ColorPalette.darkgrey);
 		this.progress.setForeground(ColorPalette.green);

@@ -1,6 +1,7 @@
 package vistra.core.graph.item.transformer;
 
 import org.apache.commons.collections15.Transformer;
+
 import vistra.core.graph.item.IEdgeLayout;
 
 /**

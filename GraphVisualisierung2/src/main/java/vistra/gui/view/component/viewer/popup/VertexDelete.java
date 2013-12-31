@@ -9,6 +9,8 @@ import javax.swing.JMenuItem;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
+import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.EventSource;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -18,25 +20,36 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 class VertexDelete extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = -4699986300655692795L;
+
 	/**
-	 * 
-	 */
-	private IVertexLayout vertex;
-	/**
-	 * 
+	 * A field for a visualization viewer.
 	 */
 	private final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer;
+	/**
+	 * A field for a model.
+	 */
+	private IGuiModel model;
+	/**
+	 * A field for an edge.
+	 */
+	private IVertexLayout vertex;
 
 	/**
+	 * Main constructor.
 	 * 
 	 * @param vViewer
+	 *            a visualization viewer
+	 * @param model
+	 *            a gui model
 	 */
 	protected VertexDelete(
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
-		super("Delete vertex");
-
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
+			IGuiModel model) {
+		super(model.getResourceBundle().getString("delete.vertex.label"));
 		this.vViewer = vViewer;
-
+		this.model = model;
+		this.setActionCommand(EventSource.EDIT_GRAPH.toString());
+		this.addActionListener(model.getParameterStateHandler());
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -46,7 +59,7 @@ class VertexDelete extends JMenuItem implements IItemModifier {
 	}
 
 	/**
-	 * 
+	 * Deletes the vertex.
 	 */
 	private void deleteVertex() {
 		if (this.vertex != null) {
@@ -63,7 +76,8 @@ class VertexDelete extends JMenuItem implements IItemModifier {
 	public void setGraphItemAndView(IItemLayout item) {
 		if (item instanceof IVertexLayout) {
 			this.vertex = (IVertexLayout) item;
-			this.setText("Knoten " + this.vertex.getId() + " löschen");
+			this.setText(this.model.getResourceBundle().getString(
+					"delete.vertex.label"));
 		}
 	}
 

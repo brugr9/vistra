@@ -8,6 +8,7 @@ import javax.swing.JPopupMenu;
 
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
+import vistra.gui.IGuiModel;
 import vistra.gui.view.component.viewer.Viewer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
@@ -43,7 +44,7 @@ public class SwitchModePopup extends JPopupMenu {
 	 * @param viewer
 	 *            an adapted visualization viewer
 	 */
-	public SwitchModePopup(Viewer viewer) {
+	public SwitchModePopup(Viewer viewer, IGuiModel model) {
 		super("modus");
 		this.viewer = viewer;
 

@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
+import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.component.viewer.popup.verifier.EdgeWeightVerifier;
 import vistra.gui.view.component.viewer.popup.verifier.ItemIdVerifier;
 import vistra.util.Convert;
@@ -34,67 +37,78 @@ public class EdgeDialog extends JDialog {
 	/**
 	 * A field for a content panel.
 	 */
-	private final JPanel contentPanel;
-
+	private final JPanel content;
 	/**
-	 * A field for an edge name text field.
+	 * A field for a label: name.
 	 */
-	private JTextField txtEdgeName;
-
+	private JLabel nameLbl;
 	/**
-	 * A field for an edge weight text field.
+	 * A field for a text field: name.
 	 */
-	private JTextField txtEdgeWeight;
+	private JTextField name;
+	/**
+	 * A field for a label: weight.
+	 */
+	private JLabel weightLbl;
+	/**
+	 * A field for a text field: weight.
+	 */
+	private JTextField weight;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param viewer
-	 * @param owner
 	 * @param edge
+	 * @param owner
+	 * @param viewer
+	 * @param model
 	 */
 	public EdgeDialog(IEdgeLayout edge, JFrame owner,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
+			IGuiModel model) {
 		super(owner, true);
-		this.contentPanel = new JPanel();
+		this.setResizable(false);
 
-		// TODO remove string literals
-		this.setTitle("Kante " + edge.getId() + " bearbeiten...");
+		ResourceBundle b = model.getResourceBundle();
 
-		this.getContentPane().setLayout(new BorderLayout());
-		this.contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.getContentPane().add(this.contentPanel, BorderLayout.CENTER);
-		this.contentPanel.setLayout(new GridLayout(2, 2, 0, 0));
+		/* content */
+		// name
+		this.nameLbl = new JLabel(b.getString("name.label"));
+		this.name = new JTextField("name");
+		this.name.setColumns(10);
+		// weigth
+		this.weightLbl = new JLabel(b.getString("weight.label"));
+		this.weight = new JTextField("weight");
+		this.weight.setColumns(10);
+		// panel
+		this.content = new JPanel();
+		this.content.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.content.setLayout(new GridLayout(2, 2, 0, 0));
+		this.content.add(this.nameLbl);
+		this.content.add(this.name);
+		this.content.add(this.weightLbl);
+		this.content.add(this.weight);
 
-		JLabel lblEdgeName = new JLabel("Kanten-Name:              ");
-		this.contentPanel.add(lblEdgeName);
-
-		this.txtEdgeName = new JTextField();
-		this.contentPanel.add(this.txtEdgeName);
-		this.txtEdgeName.setColumns(10);
-
-		JLabel lblEdgeWeight = new JLabel("Gewicht:");
-		this.contentPanel.add(lblEdgeWeight);
-
-		this.txtEdgeWeight = new JTextField();
-		this.contentPanel.add(this.txtEdgeWeight);
-		this.txtEdgeWeight.setColumns(10);
+		/* button */
+		JButton okButton = new JButton("OK");
+		okButton.setActionCommand(EventSource.EDIT_GRAPH.toString());
+		okButton.addActionListener(model.getParameterStateHandler());
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.setActionCommand("Cancel");
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		this.getContentPane().add(buttonPane, BorderLayout.SOUTH);
-
-		JButton okButton = new JButton("OK");
-		okButton.setActionCommand("OK");
 		buttonPane.add(okButton);
-		this.getRootPane().setDefaultButton(okButton);
-
-		JButton cancelButton = new JButton("Cancel");
-		cancelButton.setActionCommand("Cancel");
 		buttonPane.add(cancelButton);
+		this.getRootPane().setDefaultButton(okButton);
 
 		this.setTextFieldValues(edge, viewer);
 		this.setListeners(edge, viewer, okButton, cancelButton);
+
+		this.setTitle(b.getString("edit.edge.label"));
+		this.setLayout(new BorderLayout());
+		this.add(this.content, BorderLayout.CENTER);
+		this.add(buttonPane, BorderLayout.SOUTH);
 
 		this.pack();
 	}
@@ -131,8 +145,8 @@ public class EdgeDialog extends JDialog {
 	protected void updateTextFieldValues(IEdgeLayout edge,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
 
-		edge.setId(this.txtEdgeName.getText().trim());
-		edge.setWeight(Convert.toInteger(this.txtEdgeWeight.getText()));
+		edge.setId(this.name.getText().trim());
+		edge.setWeight(Convert.toInteger(this.weight.getText()));
 		vViewer.repaint();
 		this.dispose();
 	}
@@ -144,13 +158,13 @@ public class EdgeDialog extends JDialog {
 	private void setTextFieldValues(IEdgeLayout edge,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 
-		this.txtEdgeName.setText(edge.getId());
-		this.txtEdgeWeight.setText(String.valueOf(edge.getWeight()));
+		this.name.setText(edge.getId());
+		this.weight.setText(String.valueOf(edge.getWeight()));
 
-		this.txtEdgeName.setInputVerifier(new ItemIdVerifier(
-				this.txtEdgeName.getText().trim(), edge, viewer));
-		this.txtEdgeWeight.setInputVerifier(new EdgeWeightVerifier(
-				this.txtEdgeWeight.getText().trim()));
+		this.name.setInputVerifier(new ItemIdVerifier(this.name.getText()
+				.trim(), edge, viewer));
+		this.weight.setInputVerifier(new EdgeWeightVerifier(this.weight
+				.getText().trim()));
 	}
 
 }

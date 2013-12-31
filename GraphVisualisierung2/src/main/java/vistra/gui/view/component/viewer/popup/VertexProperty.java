@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
+import vistra.gui.IGuiModel;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -22,27 +23,39 @@ class VertexProperty extends JMenuItem implements IItemModifier {
 
 	private static final long serialVersionUID = 3448304253580836407L;
 
+	/**
+	 * A field for a visualization viewer.
+	 */
 	private final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer;
-
+	/**
+	 * A field for a model.
+	 */
+	private IGuiModel model;
+	/**
+	 * A field for a point.
+	 */
+	private Point2D point;
 	/**
 	 * A field for a vertex.
 	 */
 	private IVertexLayout vertex;
 
 	/**
-	 * A field for a point.
-	 */
-	private Point2D point;
-
-	/**
+	 * Main constructor.
+	 * 
 	 * @param vViewer
+	 *            a visualization viewer
+	 * @param model
+	 *            the gui model
 	 */
 	protected VertexProperty(
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
-		super("Edit vertex ...");
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
+			IGuiModel model) {
+		super(model.getResourceBundle().getString("edit.vertex.label"));
 		this.vViewer = vViewer;
-		this.vertex = null;
+		this.model = model;
 		this.point = null;
+		this.vertex = null;
 	}
 
 	/**
@@ -52,7 +65,7 @@ class VertexProperty extends JMenuItem implements IItemModifier {
 	private void showDialog(JFrame owner) {
 		if (this.point != null && this.vertex != null) {
 			VertexDialog dialog = new VertexDialog(this.vertex, owner,
-					this.vViewer);
+					this.vViewer, this.model);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());
 			dialog.setVisible(true);

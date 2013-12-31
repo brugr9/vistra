@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
+import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.EventSource;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -23,16 +25,21 @@ class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
 	 * 
 	 * @param viewer
 	 *            a visualization viewer
+	 * @param model
+	 *            the gui model
 	 */
 	protected CheckBoxStart(
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
-		super(viewer, "Start");
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
+			IGuiModel model) {
+		super(viewer, model.getResourceBundle().getString("start.label"), model);
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CheckBoxStart.this.setValue();
 			}
 		});
+		this.setActionCommand(EventSource.START.toString());
+		this.addActionListener(model.getParameterStateHandler());
 	}
 
 	/**
@@ -40,6 +47,21 @@ class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
 	 */
 	private void setValue() {
 		if (this.vertex != null) {
+			/* Start */
+			if (this.isSelected()) {
+				IVertexLayout previousStart = this.model.getStart();
+				if (previousStart != this.vertex) {
+					if (previousStart != null)
+						previousStart.setStart(false);
+					this.model.setStart(this.vertex);
+				}
+			}
+			/* End */
+			if (this.isSelected() && this.vertex.isEnd()) {
+				this.vertex.setEnd(false);
+				this.model.setEnd(null);
+			}
+			/**/
 			this.vertex.setStart(this.isSelected());
 			this.viewer.repaint();
 		}

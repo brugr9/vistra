@@ -49,17 +49,21 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 	private static final long serialVersionUID = 1145648259547595925L;
 
 	/**
+	 * A field for a top frame.
+	 */
+	private final JFrame top;
+	/**
 	 * A field for a vertex pop-up menu.
 	 */
-	private final VertexPopup vertexPopup;
+	private VertexPopup vertexPopup;
 	/**
 	 * A field for an edge pop-up menu.
 	 */
-	private final EdgePopup edgePopup;
+	private EdgePopup edgePopup;
 	/**
 	 * A field for a switch-mode pop-up menu.
 	 */
-	private final SwitchModePopup modePopup;
+	private SwitchModePopup switchMode;
 	/**
 	 * A field for an editing modal-graph mouse.
 	 */
@@ -84,6 +88,7 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 	public Viewer(JFrame top, IGuiModel model,
 			Layout<IVertexLayout, IEdgeLayout> layout, Dimension dimension) {
 		super(layout, dimension);
+		this.top = top;
 		this.setBackground(ColorPalette.WHITE);
 
 		/* render context */
@@ -108,11 +113,11 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 		rc.setEdgeFontTransformer(new EdgeFont());
 
 		/* mouse and pop-up menu */
-		this.vertexPopup = new VertexPopup(top, this);
-		this.edgePopup = new EdgePopup(top, this);
-		this.modePopup = new SwitchModePopup(this);
+		this.vertexPopup = new VertexPopup(top, this, model);
+		this.edgePopup = new EdgePopup(top, this, model);
+		this.switchMode = new SwitchModePopup(this, model);
 		this.mouse = new Mouse(rc, new VertexFactory(), new EdgeFactory(),
-				this.edgePopup, this.vertexPopup, this.modePopup);
+				this.edgePopup, this.vertexPopup, this.switchMode);
 		this.setGraphMouse(this.mouse);
 		this.addKeyListener(this.mouse.getModeKeyListener());
 	}
@@ -127,16 +132,24 @@ public class Viewer extends VisualizationViewer<IVertexLayout, IEdgeLayout>
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == EventSource.I18N) {
-				this.vertexPopup.setLabel(b.getString("vertex.label"));
-				this.edgePopup.setLabel(b.getString("edge.label"));
-			} else if (arg == EventSource.GRAPH) {
+			if (arg == EventSource.GRAPH) {
+				this.switchMode.setEnabled(true);
 				if (m.isEditGraphEnabled())
 					this.mouse.setMode(Mode.EDITING);
 				else
 					this.mouse.setMode(Mode.PICKING);
-				this.repaint();
+			} else if (arg == EventSource.ALGORITHM) {
+				this.mouse.setMode(Mode.PICKING);
+			} else if (arg == EventSource.ANIMATION) {
+				this.vertexPopup.setEnabled(false);
+				this.edgePopup.setEnabled(false);
+				this.switchMode.setEnabled(false);
+				this.mouse.setMode(Mode.PICKING);
+			} else if (arg == EventSource.STOP) {
+				this.switchMode.setEnabled(true);
+				this.mouse.setMode(Mode.PICKING);
 			}
+			this.repaint();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);

@@ -21,17 +21,81 @@ public interface IControl {
 	 */
 	public enum EventSource {
 		// i18n
-		I18N, DE_DE, FR_FR, EN_US,
+		I18N("i18n"),
+		//
+		DE_DE("deDE"),
+		//
+		FR_FR("frFR"),
+		//
+		EN_US("enUS"),
 		// IO graph
-		GRAPH, NEW_GRAPH_UNDIRECTED, NEW_GRAPH_DIRECTED, OPEN_GRAPH, SAVE_GRAPH, SAVE_GRAPH_AS, EDIT_GRAPH,
-		// IO algorithm
-		ALGORITHM,
+		GRAPH("graph"),
+		//
+		NEW_GRAPH_UNDIRECTED("newGraphUndirected"),
+		//
+		NEW_GRAPH_DIRECTED("newGraphDirected"),
+		//
+		OPEN_GRAPH("openGraph"),
+		//
+		SAVE_GRAPH("saveGraph"),
+		//
+		SAVE_GRAPH_AS("saveGraphAs"),
+		//
+		EDIT_GRAPH("editGraph"),
+		//
+		START(""),
+		//
+		FINISH("editGraph"),
+		// algorithm
+		ALGORITHM("algorithm"),
 		// player settings
-		DELAY, STEPLENGTH,
+		DELAY("delay"),
+		//
+		STEPLENGTH("steplenth"),
 		// step-by-step
-		STEP_BY_STEP, TO_BEGINNING, BACKWARD, FORWARD, TO_END,
+		STEP_BY_STEP("stepByStep"),
+		//
+		TO_BEGINNING("toBeginning"),
+		//
+		BACKWARD("backward"),
+		//
+		FORWARD("forward"),
+		//
+		TO_END("toEnd"),
 		// animation
-		ANIMATION, PLAY, PAUSE, RESUME, STOP,
+		ANIMATION("animation"),
+		//
+		PLAY("play"),
+		//
+		PAUSE("pause"),
+		//
+		RESUME("resume"),
+		//
+		STOP("stop"),
+
+		;
+
+		/**
+		 * A field for a value.
+		 */
+		private String value;
+
+		/**
+		 * 
+		 * @param value
+		 */
+		EventSource(String value) {
+			this.value = value;
+		}
+
+		/**
+		 * 
+		 * @return
+		 */
+		public String getValue() {
+			return this.value;
+		}
+
 	}
 
 }

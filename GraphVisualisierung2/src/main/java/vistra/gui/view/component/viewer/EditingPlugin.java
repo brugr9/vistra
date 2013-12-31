@@ -26,8 +26,14 @@ import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
 public class EditingPlugin extends
 		EditingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
 
+	/**
+	 * A field for a JUNG visualization viewer.
+	 */
 	private VisualizationViewer<IVertexLayout, IEdgeLayout> vv;
 
+	/**
+	 * A field for a JUNG layout.
+	 */
 	private Layout<IVertexLayout, IEdgeLayout> layout;
 
 	/**
@@ -144,7 +150,7 @@ public class EditingPlugin extends
 	}
 
 	/**
-	 * Handles an mouse event: mouse released.
+	 * Handles a mouse event: mouse released.
 	 * 
 	 * @param e
 	 *            the mouse event
@@ -167,8 +173,8 @@ public class EditingPlugin extends
 							.getGraphLayout().getGraph();
 					graph.addEdge(this.edgeFactory.create(), this.startVertex,
 							vertex, this.edgeIsDirected);
-					this.vv.repaint();
 				}
+				this.vv.repaint();
 			}
 			this.startVertex = null;
 			this.down = null;

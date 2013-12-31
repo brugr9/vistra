@@ -6,14 +6,12 @@ import javax.swing.JCheckBoxMenuItem;
 
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
+import vistra.gui.IGuiModel;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
-public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
+abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
 		IItemModifier {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -21,7 +19,11 @@ public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
 	 */
 	protected final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
 	/**
-	 * 
+	 * A field for a model.
+	 */
+	protected IGuiModel model;
+	/**
+	 * A field for a vertex.
 	 */
 	protected IVertexLayout vertex;
 
@@ -31,10 +33,12 @@ public abstract class AbstarctCheckBox extends JCheckBoxMenuItem implements
 	 * @param viewer
 	 *            a viewer
 	 */
-	protected AbstarctCheckBox(VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
-			String label) {
+	protected AbstarctCheckBox(
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
+			String label, IGuiModel model) {
 		super(label);
 		this.viewer = viewer;
+		this.model = model;
 		this.vertex = null;
 	}
 

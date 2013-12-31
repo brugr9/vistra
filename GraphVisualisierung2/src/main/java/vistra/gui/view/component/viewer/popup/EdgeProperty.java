@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
+import vistra.gui.IGuiModel;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -25,28 +26,36 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	/**
 	 * A field for a visualization viewer.
 	 */
-	private final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
+	private final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer;
 	/**
-	 * A field for an edge.
+	 * A field for a model.
 	 */
-	private IEdgeLayout edge;
+	private IGuiModel model;
 	/**
 	 * A field for a point.
 	 */
 	private Point2D point;
+	/**
+	 * A field for an edge.
+	 */
+	private IEdgeLayout edge;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param viewer
+	 * @param vViewer
 	 *            a visualization viewer
-	 * 
+	 * @param model
+	 *            the gui model
 	 */
 	protected EdgeProperty(
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
-		super("Edit edge ...");
-
-		this.viewer = viewer;
+			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
+			IGuiModel model) {
+		super(model.getResourceBundle().getString("edit.edge.label"));
+		this.vViewer = vViewer;
+		this.model = model;
+		this.point = null;
+		this.edge = null;
 	}
 
 	/**
@@ -66,7 +75,8 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	 */
 	protected void showDialog(JFrame owner) {
 		if (this.point != null && this.edge != null) {
-			EdgeDialog dialog = new EdgeDialog(this.edge, owner, this.viewer);
+			EdgeDialog dialog = new EdgeDialog(this.edge, owner, this.vViewer,
+					this.model);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());
 			dialog.setVisible(true);

@@ -1,6 +1,9 @@
 package vistra.gui.control.state;
 
+import static vistra.gui.control.IControl.EventSource.ALGORITHM;
 import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
+import static vistra.gui.control.IControl.EventSource.START;
+import static vistra.gui.control.IControl.EventSource.FINISH;
 import static vistra.gui.control.IControl.EventSource.GRAPH;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
@@ -8,6 +11,7 @@ import static vistra.gui.control.IControl.EventSource.OPEN_GRAPH;
 import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH;
 import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH_AS;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.io.File;
@@ -61,7 +65,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	/**
 	 * A field for a top component.
 	 */
-	private JComponent top;
+	private Container top;
 
 	/**
 	 * Main constructor.
@@ -85,7 +89,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 
 			String c = e.getActionCommand();
-			this.top = (JComponent) ((JComponent) e.getSource())
+			this.top = (Container) ((JComponent) e.getSource())
 					.getTopLevelAncestor();
 
 			if (c.equals(NEW_GRAPH_UNDIRECTED.toString())) {
@@ -99,6 +103,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			} else if (c.equals(SAVE_GRAPH_AS.toString())) {
 				this.handleSaveGraphAs();
 			} else if (c.equals(EDIT_GRAPH.toString())) {
+				this.handleEditGraph();
+			} else if (c.equals(START.toString())) {
+				this.handleEditGraph();
+			} else if (c.equals(FINISH.toString())) {
 				this.handleEditGraph();
 			}
 
@@ -601,8 +609,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private void setGraphSaved(boolean saved) {
 		this.model.setGraphSaved(saved);
 		this.model.setSaveGraphEnabled(!saved);
-		this.model.setAlgorithmsEnabled(saved);
 		this.model.notifyObservers(GRAPH);
+		this.model.setAlgorithmsEnabled(saved);
+		this.model.notifyObservers(ALGORITHM);
 	}
 
 	/**
