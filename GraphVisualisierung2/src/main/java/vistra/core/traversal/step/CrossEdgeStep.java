@@ -21,7 +21,7 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 	 */
 	public CrossEdgeStep(IEdge edge) {
 		super();
-		this.description = "Crossedge " + ((IEdgeLayout) edge).getId();
+		this.description = "Cross-edge " + ((IEdgeLayout) edge).getId();
 		try {
 			IItemStateCommand command = new CrossEdgeCommand(edge);
 			this.stepHandler.addCommand(command);

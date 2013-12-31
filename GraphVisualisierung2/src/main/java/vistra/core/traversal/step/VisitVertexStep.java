@@ -25,7 +25,7 @@ public class VisitVertexStep extends AbstractStep implements IStep {
 	 */
 	public VisitVertexStep(IEdge edge, IVertex vertex) {
 		super();
-		this.description = "Visit " + ((IVertexLayout) vertex).getId();
+		this.description = "Visit vertex " + ((IVertexLayout) vertex).getId();
 		try {
 			// new
 			IItemStateCommand discoveryEdge = new DiscoveryEdgeCommand(edge);

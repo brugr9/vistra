@@ -21,7 +21,7 @@ public class BackEdgeStep extends AbstractStep implements IStep {
 	 */
 	public BackEdgeStep(IEdge edge) {
 		super();
-		this.description = "Backedge " + ((IEdgeLayout) edge).getId();
+		this.description = "Back-edge " + ((IEdgeLayout) edge).getId();
 		try {
 			IItemStateCommand command = new BackEdgeCommand(edge);
 			this.stepHandler.addCommand(command);

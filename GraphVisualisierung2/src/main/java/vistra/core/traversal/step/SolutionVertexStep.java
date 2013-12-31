@@ -25,7 +25,7 @@ public class SolutionVertexStep extends AbstractStep implements IStep {
 	 */
 	public SolutionVertexStep(IEdge edge, IVertex vertex) {
 		super();
-		this.description = "Solution member: "
+		this.description = "Solution member: vertex "
 				+ ((VertexLayout) vertex).getId();
 		try {
 			// new

@@ -21,7 +21,7 @@ public class ForwardEdgeStep extends AbstractStep implements IStep {
 	 */
 	public ForwardEdgeStep(IEdge edge) {
 		super();
-		this.description = "Forwardedge " + ((IEdgeLayout) edge).getId();
+		this.description = "Forward-edge " + ((IEdgeLayout) edge).getId();
 		try {
 			IItemStateCommand command = new ForwardEdgeCommand(edge);
 			this.stepHandler.addCommand(command);
