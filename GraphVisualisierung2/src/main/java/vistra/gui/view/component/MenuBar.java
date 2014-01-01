@@ -1,8 +1,7 @@
 package vistra.gui.view.component;
 
-import static vistra.gui.control.IControl.EventSource.DE_DE;
-import static vistra.gui.control.IControl.EventSource.EN_US;
-import static vistra.gui.control.IControl.EventSource.FR_FR;
+import vistra.util.I18nPalette;
+
 import static vistra.gui.control.IControl.EventSource.I18N;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
@@ -42,9 +41,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 */
 	private final JMenu i18n;
 	/**
-	 * A field for the menu 'information'.
+	 * A field for the menu 'help'.
 	 */
-	private final JMenu info;
+	private final JMenu help;
 	/**
 	 * A field for the menu 'new graph'.
 	 */
@@ -74,21 +73,29 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 */
 	private final JMenuItem quit;
 	/**
-	 * A field for the menu item 'DE_DE'.
+	 * A field for the menu item 'deCH'.
+	 */
+	private final JMenuItem deCH;
+	/**
+	 * A field for the menu item 'deDE'.
 	 */
 	private final JMenuItem deDE;
 	/**
-	 * A field for the menu item 'FR_FR'.
+	 * A field for the menu item 'frFR'.
 	 */
 	private final JMenuItem frFR;
 	/**
-	 * A field for the menu item 'EN_US'.
+	 * A field for the menu item 'enGB'.
+	 */
+	private final JMenuItem enGB;
+	/**
+	 * A field for the menu item 'enUS'.
 	 */
 	private final JMenuItem enUS;
 	/**
-	 * A field for the menu item 'help'.
+	 * A field for the menu item 'shortcuts'.
 	 */
-	private final JMenuItem help;
+	private final JMenuItem shortcuts;
 	/**
 	 * A field for the menu item 'about'.
 	 */
@@ -142,37 +149,45 @@ public final class MenuBar extends JMenuBar implements Observer {
 		}
 		{// i18n
 			this.i18n = new JMenu("i18n");
+			this.deCH = new JMenuItem("deCH");
 			this.deDE = new JMenuItem("deDE");
 			this.frFR = new JMenuItem("frFR");
+			this.enGB = new JMenuItem("enGB");
 			this.enUS = new JMenuItem("enUS");
 			// listener
+			this.deCH.addActionListener(model.getI18nListener());
 			this.deDE.addActionListener(model.getI18nListener());
 			this.frFR.addActionListener(model.getI18nListener());
+			this.enGB.addActionListener(model.getI18nListener());
 			this.enUS.addActionListener(model.getI18nListener());
 			// command
-			this.deDE.setActionCommand(DE_DE.toString());
-			this.frFR.setActionCommand(FR_FR.toString());
-			this.enUS.setActionCommand(EN_US.toString());
+			this.deCH.setActionCommand(I18nPalette.deCH);
+			this.deDE.setActionCommand(I18nPalette.deDE);
+			this.frFR.setActionCommand(I18nPalette.frFR);
+			this.enGB.setActionCommand(I18nPalette.enGB);
+			this.enUS.setActionCommand(I18nPalette.enUS);
 			// add
+			this.i18n.add(this.deCH);
 			this.i18n.add(this.deDE);
 			this.i18n.add(this.frFR);
+			this.i18n.add(this.enGB);
 			this.i18n.add(this.enUS);
 		}
 		{// info
-			this.info = new JMenu("infoMenu");
-			this.help = new JMenuItem("helpMenuItem");
+			this.help = new JMenu("helpMenu");
+			this.shortcuts = new JMenuItem("shortcutsMenuItem");
 			this.about = new JMenuItem("aboutMenuItem");
 			// listener
-			this.help.addActionListener(model.getHelpListener());
+			this.shortcuts.addActionListener(model.getShortcutsListener());
 			this.about.addActionListener(model.getAboutListener());
 			// add
-			this.info.add(this.help);
-			this.info.add(this.about);
+			this.help.add(this.shortcuts);
+			this.help.add(this.about);
 		}
 		// add
 		this.add(this.file);
 		this.add(this.i18n);
-		this.add(this.info);
+		this.add(this.help);
 	}
 
 	/**
@@ -231,57 +246,65 @@ public final class MenuBar extends JMenuBar implements Observer {
 						this.i18n.setMnemonic(b.getString("i18n.mnemonic")
 								.toCharArray()[0]);
 						// setText
+						this.deCH.setText(b.getString("deCH.label"));
 						this.deDE.setText(b.getString("deDE.label"));
 						this.frFR.setText(b.getString("frFR.label"));
+						this.enGB.setText(b.getString("enGB.label"));
 						this.enUS.setText(b.getString("enUS.label"));
 						// setMnemonic
+						this.deCH.setMnemonic(b.getString("deCH.mnemonic")
+								.toCharArray()[0]);
 						this.deDE.setMnemonic(b.getString("deDE.mnemonic")
 								.toCharArray()[0]);
 						this.frFR.setMnemonic(b.getString("frFR.mnemonic")
+								.toCharArray()[0]);
+						this.enGB.setMnemonic(b.getString("enGB.mnemonic")
 								.toCharArray()[0]);
 						this.enUS.setMnemonic(b.getString("enUS.mnemonic")
 								.toCharArray()[0]);
 					}
 					{// JMenu infoMenu
 						// setText
-						this.info.setText(b.getString("info.label"));
 						this.help.setText(b.getString("help.label"));
+						this.shortcuts.setText(b.getString("shortcuts.label"));
 						this.about.setText(b.getString("about.label"));
 						// setMnemonic
-						this.info.setMnemonic(b.getString("info.mnemonic")
-								.toCharArray()[0]);
 						this.help.setMnemonic(b.getString("help.mnemonic")
 								.toCharArray()[0]);
+						this.shortcuts.setMnemonic(b.getString(
+								"shortcuts.mnemonic").toCharArray()[0]);
 						this.about.setMnemonic(b.getString("about.mnemonic")
 								.toCharArray()[0]);
 						// setAccelerator
-						this.help.setAccelerator(KeyStroke.getKeyStroke(b
-								.getString("help.accelerator")));
+						this.shortcuts.setAccelerator(KeyStroke.getKeyStroke(b
+								.getString("shortcuts.accelerator")));
 						this.about.setAccelerator(KeyStroke.getKeyStroke(b
 								.getString("about.accelerator")));
 					}
 
 				} else if (arg == EventSource.GRAPH) {
-					this.saveAs.setEnabled(m.isSaveGraphEnabled());
+					this.saveAs.setEnabled(m.isSaveEnabled());
 				} else {
 
 					// file
 					this.file.setEnabled(m.isFileEnabled());
-					this.newGraph.setEnabled(m.isNewMenuEnabled());
-					this.undirected.setEnabled(m.isUndirectedGraphEnabled());
-					this.directed.setEnabled(m.isDirectedGraphEnabled());
-					this.open.setEnabled(m.isOpenGraphEnabled());
-					this.save.setEnabled(m.isSaveGraphEnabled());
-					this.saveAs.setEnabled(m.isSaveGraphAsEnabled());
+					this.newGraph.setEnabled(m.isNewEnabled());
+					this.undirected.setEnabled(m.isUndirectedEnabled());
+					this.directed.setEnabled(m.isDirectedEnabled());
+					this.open.setEnabled(m.isOpenEnabled());
+					this.save.setEnabled(m.isSaveEnabled());
+					this.saveAs.setEnabled(m.isSaveAsEnabled());
 					this.quit.setEnabled(m.isQuitEnabled());
 					// i18n
 					this.i18n.setEnabled(m.isI18nEnabled());
+					this.deCH.setEnabled(m.isDeCHEnabled());
 					this.deDE.setEnabled(m.isDeDEEnabled());
 					this.frFR.setEnabled(m.isFrFREnabled());
+					this.enGB.setEnabled(m.isEnGBEnabled());
 					this.enUS.setEnabled(m.isEnUSEnabled());
 					// info
-					this.info.setEnabled(m.isInfoEnabled());
 					this.help.setEnabled(m.isHelpEnabled());
+					this.shortcuts.setEnabled(m.isShortcutsEnabled());
 					this.about.setEnabled(m.isAboutEnabled());
 
 				}

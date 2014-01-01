@@ -1,4 +1,4 @@
-package vistra.gui.view.component.viewer;
+package vistra.gui.view.mouse;
 
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
@@ -18,7 +18,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
 
 /**
- * An adapted JUNG mouse plug-in for editing a graph.
+ * An adapted JUNG mouse plug-in for editing vertices and edges.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -69,6 +69,7 @@ public class EditingPlugin extends
 
 		float dist = (float) Math.sqrt(dx * dx + dy * dy);
 		xform.scale(dist / this.rawEdge.getBounds().getWidth(), 1.0);
+
 		this.edgeShape = xform.createTransformedShape(this.rawEdge);
 	}
 
@@ -94,13 +95,16 @@ public class EditingPlugin extends
 		this.arrowShape = xform.createTransformedShape(this.rawArrowShape);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			this.vv = (Viewer) e.getSource();
-			this.layout = vv.getModel().getGraphLayout();
+			
+			this.vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+					.getSource();
+			this.layout = this.vv.getModel().getGraphLayout();
 			final Point2D p = e.getPoint();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vv
+			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = this.vv
 					.getPickSupport();
 
 			if (pickSupport != null) {
@@ -119,7 +123,8 @@ public class EditingPlugin extends
 				final IVertexLayout vertex = pickSupport.getVertex(this.layout,
 						p.getX(), p.getY());
 
-				if (vertex != null) { // get ready to make an edge
+				if (vertex != null) {
+					/* edge */
 					this.startVertex = vertex;
 					this.down = e.getPoint();
 					this.transformEdgeShape(this.down, this.down);
@@ -134,7 +139,8 @@ public class EditingPlugin extends
 						this.transformArrowShape(this.down, e.getPoint());
 						this.vv.addPostRenderPaintable(this.arrowPaintable);
 					}
-				} else { // make a new vertex
+				} else {
+					/* vertex */
 					IVertexLayout newVertex = this.vertexFactory.create();
 					graph.addVertex(newVertex);
 
@@ -155,21 +161,23 @@ public class EditingPlugin extends
 	 * @param e
 	 *            the mouse event
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			this.vv = (Viewer) e.getSource();
+			
+			this.vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+					.getSource();
 			final Point2D p = e.getPoint();
-			Layout<IVertexLayout, IEdgeLayout> layout = this.vv.getModel()
-					.getGraphLayout();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vv
+			this.layout = this.vv.getModel().getGraphLayout();
+			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = this.vv
 					.getPickSupport();
 
 			if (pickSupport != null) {
 				final IVertexLayout vertex = pickSupport.getVertex(layout,
 						p.getX(), p.getY());
 				if (vertex != null && this.startVertex != null) {
-					Graph<IVertexLayout, IEdgeLayout> graph = vv
+					Graph<IVertexLayout, IEdgeLayout> graph = this.vv
 							.getGraphLayout().getGraph();
 					graph.addEdge(this.edgeFactory.create(), this.startVertex,
 							vertex, this.edgeIsDirected);
@@ -180,8 +188,8 @@ public class EditingPlugin extends
 			this.down = null;
 			// set default edge type
 			this.edgeIsDirected = EdgeType.DIRECTED;
-			this.vv.removePostRenderPaintable(edgePaintable);
-			this.vv.removePostRenderPaintable(arrowPaintable);
+			this.vv.removePostRenderPaintable(this.edgePaintable);
+			this.vv.removePostRenderPaintable(this.arrowPaintable);
 		}
 	}
 

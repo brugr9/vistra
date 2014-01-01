@@ -194,7 +194,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewDiscovery() throws Exception {
 		try {
-			this.setFont(FontPalette.hyphen);
+			this.setFont(FontPalette.emphasised);
 			this.setFontColor(ColorPalette.red);
 			this.setStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.red);
@@ -285,7 +285,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setViewSolution() throws Exception {
 		try {
-			this.setFont(FontPalette.hyphen);
+			this.setFont(FontPalette.emphasised);
 			this.setFontColor(ColorPalette.green);
 			this.setStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.green);

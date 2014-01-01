@@ -28,7 +28,8 @@ public final class Control implements IControl {
 		try {
 			/* Action listener */
 			model.setI18nListener(new ActionListenerI18n(model));
-			model.setHelpListener(new ActionListenerHelp(model));
+			model.setModeListener(new ActionListenerMode(model));
+			model.setShortcutsListener(new ActionListenerShortcuts(model));
 			model.setAboutListener(new ActionListenerAbout(model));
 			model.setQuitListener(new ActionListenerQuit(model));
 			/* State handler */

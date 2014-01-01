@@ -3,6 +3,8 @@ package vistra.gui;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
+
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
@@ -14,588 +16,727 @@ import vistra.gui.control.state.ISbsStateHandler;
 public interface IGuiModel {
 
 	/**
+	 * A grouped setter method for all menus.
+	 * 
 	 * @param menuEnabled
 	 *            the menuEnabled to set
 	 */
-	void setMenuEnabled(boolean menuEnabled);
+	public abstract void setMenuEnabled(boolean menuEnabled);
 
 	/**
+	 * A grouped setter method for the menu file.
+	 * 
 	 * @param menuEnabled
 	 *            the menuEnabled to set
 	 */
-	void setPlayerEnabled(boolean menuEnabled);
+	public abstract void setMenuFileEnabled(boolean menuEnabled);
 
 	/**
+	 * A grouped setter method for the mode.
+	 * 
 	 * @param menuEnabled
 	 *            the menuEnabled to set
 	 */
-	void setAnimationEnabled(boolean menuEnabled);
+	public abstract void setMenuModeEnabled(boolean menuEnabled);
 
 	/**
+	 * A grouped setter method for the menu edit.
+	 * 
 	 * @param menuEnabled
 	 *            the menuEnabled to set
 	 */
-	void setStepByStepEnabled(boolean menuEnabled);
+	public abstract void setMenuEditEnabled(boolean menuEnabled);
+
+	/**
+	 * A grouped setter method for the menu i18n.
+	 * 
+	 * @param menuEnabled
+	 *            the menuEnabled to set
+	 */
+	public abstract void setMenuI18nEnabled(boolean menuEnabled);
+
+	/**
+	 * A grouped setter method for the menu help.
+	 * 
+	 * @param menuEnabled
+	 *            the menuEnabled to set
+	 */
+	public abstract void setMenuHelpEnabled(boolean menuEnabled);
+
+	/**
+	 * A grouped setter method for the traversal control.
+	 * 
+	 * @param enabled
+	 *            the enabled to set
+	 */
+	public abstract void setTraversalEnabled(boolean enabled);
+
+	/**
+	 * A grouped setter method for the step-by-step control.
+	 * 
+	 * @param enabled
+	 *            the enabled to set
+	 */
+	public abstract void setStepByStepEnabled(boolean enabled);
+
+	/**
+	 * A grouped setter method for the animation control.
+	 * 
+	 * @param enabled
+	 *            the enabled to set
+	 */
+	public abstract void setAnimationEnabled(boolean enabled);
 
 	/**
 	 * @return the resourceBundle
 	 */
-	ResourceBundle getResourceBundle();
+	public abstract ResourceBundle getResourceBundle();
 
 	/**
-	 * @return the help
+	 * @return the shortcutsMessage
 	 */
-	String getHelp();
+	public abstract String getShortcutsMessage();
 
 	/**
-	 * @return the about
+	 * @return the aboutMessage
 	 */
-	String getAbout();
+	public abstract String getAboutMessage();
 
 	/**
 	 * @return the i18nListener
 	 */
-	ActionListener getI18nListener();
+	public abstract ActionListener getI18nListener();
 
 	/**
-	 * @return the helpListener
+	 * @return the modeListener
 	 */
-	ActionListener getHelpListener();
+	public abstract ActionListener getModeListener();
+
+	/**
+	 * @return the shortcutsListener
+	 */
+	public abstract ActionListener getShortcutsListener();
 
 	/**
 	 * @return the aboutListener
 	 */
-	ActionListener getAboutListener();
+	public abstract ActionListener getAboutListener();
 
 	/**
 	 * @return the quitListener
 	 */
-	ActionListener getQuitListener();
+	public abstract ActionListener getQuitListener();
 
 	/**
 	 * @return the fileEnabled
 	 */
-	boolean isFileEnabled();
+	public abstract boolean isFileEnabled();
 
 	/**
-	 * @return the newMenuEnabled
+	 * @return the newEnabled
 	 */
-	boolean isNewMenuEnabled();
+	public abstract boolean isNewEnabled();
 
 	/**
-	 * @return the undirectedGraphEnabled
+	 * @return the undirectedEnabled
 	 */
-	boolean isUndirectedGraphEnabled();
+	public abstract boolean isUndirectedEnabled();
 
 	/**
-	 * @return the directedGraphEnabled
+	 * @return the directedEnabled
 	 */
-	boolean isDirectedGraphEnabled();
+	public abstract boolean isDirectedEnabled();
 
 	/**
-	 * @return the openGraphEnabled
+	 * @return the openEnabled
 	 */
-	boolean isOpenGraphEnabled();
+	public abstract boolean isOpenEnabled();
 
 	/**
-	 * @return the saveGraphEnabled
+	 * @return the saveEnabled
 	 */
-	boolean isSaveGraphEnabled();
+	public abstract boolean isSaveEnabled();
 
 	/**
-	 * @return the saveGraphAsEnabled
+	 * @return the saveAsEnabled
 	 */
-	boolean isSaveGraphAsEnabled();
+	public abstract boolean isSaveAsEnabled();
 
 	/**
 	 * @return the quitEnabled
 	 */
-	boolean isQuitEnabled();
+	public abstract boolean isQuitEnabled();
+
+	/**
+	 * @return the switchModeEnabled
+	 */
+	public abstract boolean isSwitchModeEnabled();
+
+	/**
+	 * @return the editEnabled
+	 */
+	public abstract boolean isEditEnabled();
+
+	/**
+	 * @return the pickingEnabled
+	 */
+	public abstract boolean isPickingEnabled();
+
+	/**
+	 * @return the vertexEnabled
+	 */
+	public abstract boolean isVertexEnabled();
+
+	/**
+	 * @return the edgeEnabled
+	 */
+	public abstract boolean isEdgeEnabled();
 
 	/**
 	 * @return the i18nEnabled
 	 */
-	boolean isI18nEnabled();
+	public abstract boolean isI18nEnabled();
+
+	/**
+	 * @return the deCHEnabled
+	 */
+	public abstract boolean isDeCHEnabled();
 
 	/**
 	 * @return the deDEEnabled
 	 */
-	boolean isDeDEEnabled();
+	public abstract boolean isDeDEEnabled();
 
 	/**
 	 * @return the frFREnabled
 	 */
-	boolean isFrFREnabled();
+	public abstract boolean isFrFREnabled();
+
+	/**
+	 * @return the enGBEnabled
+	 */
+	public abstract boolean isEnGBEnabled();
 
 	/**
 	 * @return the enUSEnabled
 	 */
-	boolean isEnUSEnabled();
-
-	/**
-	 * @return the infoEnabled
-	 */
-	boolean isInfoEnabled();
+	public abstract boolean isEnUSEnabled();
 
 	/**
 	 * @return the helpEnabled
 	 */
-	boolean isHelpEnabled();
+	public abstract boolean isHelpEnabled();
+
+	/**
+	 * @return the shortcutsEnabled
+	 */
+	public abstract boolean isShortcutsEnabled();
 
 	/**
 	 * @return the aboutEnabled
 	 */
-	boolean isAboutEnabled();
+	public abstract boolean isAboutEnabled();
 
 	/**
 	 * @return the parameterStateHandler
 	 */
-	IParameterStateHandler getParameterStateHandler();
+	public abstract IParameterStateHandler getParameterStateHandler();
 
 	/**
 	 * @return the graph
 	 */
-	IExtendedGraph getGraph();
-
-	/**
-	 * @return the graphFile
-	 */
-	boolean isGraphFile();
-
-	/**
-	 * @return the graphSaved
-	 */
-	boolean isGraphSaved();
-
-	/**
-	 * @return the editGraphEnabled
-	 */
-	boolean isEditGraphEnabled();
+	public abstract IExtendedGraph getGraph();
 
 	/**
 	 * @return the start
 	 */
-	IVertexLayout getStart();
+	public abstract IVertexLayout getStart();
 
 	/**
 	 * @return the end
 	 */
-	IVertexLayout getEnd();
+	public abstract IVertexLayout getEnd();
+
+	/**
+	 * @return the graphFile
+	 */
+	public abstract boolean isGraphFile();
+
+	/**
+	 * @return the graphSaved
+	 */
+	public abstract boolean isGraphSaved();
 
 	/**
 	 * @return the algorithms
 	 */
-	String[] getAlgorithms();
+	public abstract String[] getAlgorithms();
 
 	/**
 	 * @return the algorithmsEnabled
 	 */
-	boolean isAlgorithmsEnabled();
+	public abstract boolean isAlgorithmsEnabled();
 
 	/**
 	 * @return the selectedAlgorithmIndex
 	 */
-	int getSelectedAlgorithmIndex();
+	public abstract int getSelectedAlgorithmIndex();
 
 	/**
 	 * @return the algorithmDescription
 	 */
-	String getAlgorithmDescription();
+	public abstract String getAlgorithmDescription();
 
 	/**
 	 * @return the traversal
 	 */
-	ITraversal getTraversal();
+	public abstract ITraversal getTraversal();
 
 	/**
 	 * @return the progress
 	 */
-	int getProgress();
+	public abstract int getProgress();
 
 	/**
 	 * @return the stepByStepStateHandler
 	 */
-	ISbsStateHandler getStepByStepStateHandler();
+	public abstract ISbsStateHandler getStepByStepStateHandler();
 
 	/**
 	 * @return the steplength
 	 */
-	int getSteplength();
+	public abstract int getSteplength();
 
 	/**
 	 * @return the steplengthEnabled
 	 */
-	boolean isSteplengthEnabled();
+	public abstract boolean isSteplengthEnabled();
 
 	/**
 	 * @return the toBeginningEnabled
 	 */
-	boolean isToBeginningEnabled();
+	public abstract boolean isToBeginningEnabled();
 
 	/**
 	 * @return the backwardEnabled
 	 */
-	boolean isBackwardEnabled();
+	public abstract boolean isBackwardEnabled();
 
 	/**
 	 * @return the forwardEnabled
 	 */
-	boolean isForwardEnabled();
+	public abstract boolean isForwardEnabled();
 
 	/**
 	 * @return the toEndEnabled
 	 */
-	boolean isToEndEnabled();
+	public abstract boolean isToEndEnabled();
 
 	/**
 	 * @return the animationStateHandler
 	 */
-	IAnimationStateHandler getAnimationStateHandler();
+	public abstract IAnimationStateHandler getAnimationStateHandler();
 
 	/**
 	 * @return the delay
 	 */
-	int getDelay();
+	public abstract int getDelay();
 
 	/**
 	 * @return the delayEnabled
 	 */
-	boolean isDelayEnabled();
+	public abstract boolean isDelayEnabled();
 
 	/**
 	 * @return the playEnabled
 	 */
-	boolean isPlayEnabled();
+	public abstract boolean isPlayEnabled();
 
 	/**
 	 * @return the pauseLabel
 	 */
-	String getPauseLabel();
+	public abstract String getPauseLabel();
 
 	/**
 	 * @return the pauseEvent
 	 */
-	EventSource getPauseEvent();
+	public abstract EventSource getPauseEvent();
 
 	/**
 	 * @return the pauseEnabled
 	 */
-	boolean isPauseEnabled();
+	public abstract boolean isPauseEnabled();
 
 	/**
 	 * @return the stopEnabled
 	 */
-	boolean isStopEnabled();
+	public abstract boolean isStopEnabled();
 
 	/**
 	 * @return the protocol
 	 */
-	StringBuilder getProtocol();
+	public abstract StringBuilder getProtocol();
 
 	/**
 	 * @param resourceBundle
 	 *            the resourceBundle to set
 	 */
-	void setResourceBundle(ResourceBundle resourceBundle);
+	public abstract void setResourceBundle(ResourceBundle resourceBundle);
 
 	/**
-	 * @param help
-	 *            the help to set
+	 * @param shortcutsMessage
+	 *            the shortcutsMessage to set
 	 */
-	void setHelp(String help);
+	public abstract void setShortcutsMessage(String shortcutsMessage);
 
 	/**
-	 * @param about
-	 *            the about to set
+	 * @param aboutMessage
+	 *            the aboutMessage to set
 	 */
-	void setAbout(String about);
+	public abstract void setAboutMessage(String aboutMessage);
 
 	/**
 	 * @param i18nListener
 	 *            the i18nListener to set
 	 */
-	void setI18nListener(ActionListener i18nListener);
+	public abstract void setI18nListener(ActionListener i18nListener);
 
 	/**
-	 * @param helpListener
-	 *            the helpListener to set
+	 * @param modeListener
+	 *            the modeListener to set
 	 */
-	void setHelpListener(ActionListener helpListener);
+	public abstract void setModeListener(ActionListener modeListener);
+
+	/**
+	 * @param shortcutsListener
+	 *            the shortcutsListener to set
+	 */
+	public abstract void setShortcutsListener(ActionListener shortcutsListener);
 
 	/**
 	 * @param aboutListener
 	 *            the aboutListener to set
 	 */
-	void setAboutListener(ActionListener aboutListener);
+	public abstract void setAboutListener(ActionListener aboutListener);
 
 	/**
 	 * @param quitListener
 	 *            the quitListener to set
 	 */
-	void setQuitListener(ActionListener quitListener);
+	public abstract void setQuitListener(ActionListener quitListener);
 
 	/**
 	 * @param fileEnabled
 	 *            the fileEnabled to set
 	 */
-	void setFileEnabled(boolean fileEnabled);
+	public abstract void setFileEnabled(boolean fileEnabled);
 
 	/**
-	 * @param newMenuEnabled
-	 *            the newMenuEnabled to set
+	 * @param newEnabled
+	 *            the newEnabled to set
 	 */
-	void setNewMenuEnabled(boolean newMenuEnabled);
+	public abstract void setNewEnabled(boolean newEnabled);
 
 	/**
-	 * @param undirectedGraphEnabled
-	 *            the undirectedGraphEnabled to set
+	 * @param undirectedEnabled
+	 *            the undirectedEnabled to set
 	 */
-	void setUndirectedGraphEnabled(boolean undirectedGraphEnabled);
+	public abstract void setUndirectedEnabled(boolean undirectedEnabled);
 
 	/**
-	 * @param directedGraphEnabled
-	 *            the directedGraphEnabled to set
+	 * @param directedEnabled
+	 *            the directedEnabled to set
 	 */
-	void setDirectedGraphEnabled(boolean directedGraphEnabled);
+	public abstract void setDirectedEnabled(boolean directedEnabled);
 
 	/**
-	 * @param openGraphEnabled
-	 *            the openGraphEnabled to set
+	 * @param openEnabled
+	 *            the openEnabled to set
 	 */
-	void setOpenGraphEnabled(boolean openGraphEnabled);
+	public abstract void setOpenEnabled(boolean openEnabled);
 
 	/**
-	 * @param saveGraphEnabled
-	 *            the saveGraphEnabled to set
+	 * @param saveEnabled
+	 *            the saveEnabled to set
 	 */
-	void setSaveGraphEnabled(boolean saveGraphEnabled);
+	public abstract void setSaveEnabled(boolean saveEnabled);
 
 	/**
-	 * @param saveGraphAsEnabled
-	 *            the saveGraphAsEnabled to set
+	 * @param saveAsEnabled
+	 *            the saveAsEnabled to set
 	 */
-	void setSaveGraphAsEnabled(boolean saveGraphAsEnabled);
+	public abstract void setSaveAsEnabled(boolean saveAsEnabled);
 
 	/**
 	 * @param quitEnabled
 	 *            the quitEnabled to set
 	 */
-	void setQuitEnabled(boolean quitEnabled);
+	public abstract void setQuitEnabled(boolean quitEnabled);
+
+	/**
+	 * @param switchModeEnabled
+	 *            the switchModeEnabled to set
+	 */
+	public abstract void setSwitchModeEnabled(boolean switchModeEnabled);
+
+	/**
+	 * @param editEnabled
+	 *            the editEnabled to set
+	 */
+	public abstract void setEditEnabled(boolean editEnabled);
+
+	/**
+	 * @param pickingEnabled
+	 *            the pickingEnabled to set
+	 */
+	public abstract void setPickingEnabled(boolean pickingEnabled);
+
+	/**
+	 * @param vertexEnabled
+	 *            the vertexEnabled to set
+	 */
+	public abstract void setVertexEnabled(boolean vertexEnabled);
+
+	/**
+	 * @param edgeEnabled
+	 *            the edgeEnabled to set
+	 */
+	public abstract void setEdgeEnabled(boolean edgeEnabled);
 
 	/**
 	 * @param i18nEnabled
 	 *            the i18nEnabled to set
 	 */
-	void setI18nEnabled(boolean i18nEnabled);
+	public abstract void setI18nEnabled(boolean i18nEnabled);
+
+	/**
+	 * @param deCHEnabled
+	 *            the deCHEnabled to set
+	 */
+	public abstract void setDeCHEnabled(boolean deCHEnabled);
 
 	/**
 	 * @param deDEEnabled
 	 *            the deDEEnabled to set
 	 */
-	void setDeDEEnabled(boolean deDEEnabled);
+	public abstract void setDeDEEnabled(boolean deDEEnabled);
 
 	/**
 	 * @param frFREnabled
 	 *            the frFREnabled to set
 	 */
-	void setFrFREnabled(boolean frFREnabled);
+	public abstract void setFrFREnabled(boolean frFREnabled);
+
+	/**
+	 * @param enGBEnabled
+	 *            the enGBEnabled to set
+	 */
+	public abstract void setEnGBEnabled(boolean enGBEnabled);
 
 	/**
 	 * @param enUSEnabled
 	 *            the enUSEnabled to set
 	 */
-	void setEnUSEnabled(boolean enUSEnabled);
-
-	/**
-	 * @param infoEnabled
-	 *            the infoEnabled to set
-	 */
-	void setInfoEnabled(boolean infoEnabled);
+	public abstract void setEnUSEnabled(boolean enUSEnabled);
 
 	/**
 	 * @param helpEnabled
 	 *            the helpEnabled to set
 	 */
-	void setHelpEnabled(boolean helpEnabled);
+	public abstract void setHelpEnabled(boolean helpEnabled);
+
+	/**
+	 * @param shortcutsEnabled
+	 *            the shortcutsEnabled to set
+	 */
+	public abstract void setShortcutsEnabled(boolean shortcutsEnabled);
 
 	/**
 	 * @param aboutEnabled
 	 *            the aboutEnabled to set
 	 */
-	void setAboutEnabled(boolean aboutEnabled);
+	public abstract void setAboutEnabled(boolean aboutEnabled);
 
 	/**
 	 * @param parameterStateHandler
 	 *            the parameterStateHandler to set
 	 */
-	void setParameterStateHandler(IParameterStateHandler parameterStateHandler);
+	public abstract void setParameterStateHandler(
+			IParameterStateHandler parameterStateHandler);
 
 	/**
 	 * @param graph
 	 *            the graph to set
 	 */
-	void setGraph(IExtendedGraph graph);
-
-	/**
-	 * @param graphFile
-	 *            the graphFile to set
-	 */
-	void setGraphFile(boolean graphFile);
-
-	/**
-	 * @param graphSaved
-	 *            the graphSaved to set
-	 */
-	void setGraphSaved(boolean graphSaved);
-
-	/**
-	 * @param editGraphEnabled
-	 *            the editGraphEnabled to set
-	 */
-	void setEditGraphEnabled(boolean editGraphEnabled);
+	public abstract void setGraph(IExtendedGraph graph);
 
 	/**
 	 * @param start
 	 *            the start to set
 	 */
-	void setStart(IVertexLayout start);
+	public abstract void setStart(IVertexLayout start);
 
 	/**
 	 * @param end
 	 *            the end to set
 	 */
-	void setEnd(IVertexLayout end);
+	public abstract void setEnd(IVertexLayout end);
+
+	/**
+	 * @param graphFile
+	 *            the graphFile to set
+	 */
+	public abstract void setGraphFile(boolean graphFile);
+
+	/**
+	 * @param graphSaved
+	 *            the graphSaved to set
+	 */
+	public abstract void setGraphSaved(boolean graphSaved);
 
 	/**
 	 * @param algorithms
 	 *            the algorithms to set
 	 */
-	void setAlgorithms(String[] algorithms);
+	public abstract void setAlgorithms(String[] algorithms);
 
 	/**
 	 * @param algorithmsEnabled
 	 *            the algorithmsEnabled to set
 	 */
-	void setAlgorithmsEnabled(boolean algorithmsEnabled);
+	public abstract void setAlgorithmsEnabled(boolean algorithmsEnabled);
 
 	/**
 	 * @param selectedAlgorithmIndex
 	 *            the selectedAlgorithmIndex to set
 	 */
-	void setSelectedAlgorithmIndex(int selectedAlgorithmIndex);
+	public abstract void setSelectedAlgorithmIndex(int selectedAlgorithmIndex);
 
 	/**
 	 * @param algorithmDescription
 	 *            the algorithmDescription to set
 	 */
-	void setAlgorithmDescription(String algorithmDescription);
+	public abstract void setAlgorithmDescription(String algorithmDescription);
 
 	/**
 	 * @param traversal
 	 *            the traversal to set
 	 */
-	void setTraversal(ITraversal traversal);
+	public abstract void setTraversal(ITraversal traversal);
 
 	/**
 	 * @param progress
 	 *            the progress to set
 	 */
-	void setProgress(int progress);
+	public abstract void setProgress(int progress);
 
 	/**
 	 * @param stepByStepStateHandler
 	 *            the stepByStepStateHandler to set
 	 */
-	void setStepByStepStateHandler(ISbsStateHandler stepByStepStateHandler);
+	public abstract void setStepByStepStateHandler(
+			ISbsStateHandler stepByStepStateHandler);
 
 	/**
 	 * @param steplength
 	 *            the steplength to set
 	 */
-	void setSteplength(int steplength);
+	public abstract void setSteplength(int steplength);
 
 	/**
 	 * @param steplengthEnabled
 	 *            the steplengthEnabled to set
 	 */
-	void setSteplengthEnabled(boolean steplengthEnabled);
+	public abstract void setSteplengthEnabled(boolean steplengthEnabled);
 
 	/**
 	 * @param toBeginningEnabled
 	 *            the toBeginningEnabled to set
 	 */
-	void setToBeginningEnabled(boolean toBeginningEnabled);
+	public abstract void setToBeginningEnabled(boolean toBeginningEnabled);
 
 	/**
 	 * @param backwardEnabled
 	 *            the backwardEnabled to set
 	 */
-	void setBackwardEnabled(boolean backwardEnabled);
+	public abstract void setBackwardEnabled(boolean backwardEnabled);
 
 	/**
 	 * @param forwardEnabled
 	 *            the forwardEnabled to set
 	 */
-	void setForwardEnabled(boolean forwardEnabled);
+	public abstract void setForwardEnabled(boolean forwardEnabled);
 
 	/**
 	 * @param toEndEnabled
 	 *            the toEndEnabled to set
 	 */
-	void setToEndEnabled(boolean toEndEnabled);
+	public abstract void setToEndEnabled(boolean toEndEnabled);
 
 	/**
 	 * @param animationStateHandler
 	 *            the animationStateHandler to set
 	 */
-	void setAnimationStateHandler(IAnimationStateHandler animationStateHandler);
+	public abstract void setAnimationStateHandler(
+			IAnimationStateHandler animationStateHandler);
 
 	/**
 	 * @param delay
 	 *            the delay to set
 	 */
-	void setDelay(int delay);
+	public abstract void setDelay(int delay);
 
 	/**
 	 * @param delayEnabled
 	 *            the delayEnabled to set
 	 */
-	void setDelayEnabled(boolean delayEnabled);
+	public abstract void setDelayEnabled(boolean delayEnabled);
 
 	/**
 	 * @param playEnabled
 	 *            the playEnabled to set
 	 */
-	void setPlayEnabled(boolean playEnabled);
+	public abstract void setPlayEnabled(boolean playEnabled);
 
 	/**
 	 * @param pauseLabel
 	 *            the pauseLabel to set
 	 */
-	void setPauseLabel(String pauseLabel);
+	public abstract void setPauseLabel(String pauseLabel);
 
 	/**
 	 * @param pauseEvent
 	 *            the pauseEvent to set
 	 */
-	void setPauseEvent(EventSource pauseEvent);
+	public abstract void setPauseEvent(EventSource pauseEvent);
 
 	/**
 	 * @param pauseEnabled
 	 *            the pauseEnabled to set
 	 */
-	void setPauseEnabled(boolean pauseEnabled);
+	public abstract void setPauseEnabled(boolean pauseEnabled);
 
 	/**
 	 * @param stopEnabled
 	 *            the stopEnabled to set
 	 */
-	void setStopEnabled(boolean stopEnabled);
+	public abstract void setStopEnabled(boolean stopEnabled);
 
 	/**
 	 * @param protocol
 	 *            the protocol to set
 	 */
-	void setProtocol(StringBuilder protocol);
+	public abstract void setProtocol(StringBuilder protocol);
+
+	/**
+	 * @return the mode
+	 */
+	public abstract Mode getMode();
+
+	/**
+	 * @param mode
+	 *            the mode to set
+	 */
+	public abstract void setMode(Mode mode);
 
 }

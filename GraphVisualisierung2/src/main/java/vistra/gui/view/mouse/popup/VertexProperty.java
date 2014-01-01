@@ -1,4 +1,4 @@
-package vistra.gui.view.component.viewer.popup;
+package vistra.gui.view.mouse.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,14 +14,14 @@ import vistra.gui.IGuiModel;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
- * An edge property menu item.
+ * An vertex property menu item.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class EdgeProperty extends JMenuItem implements IItemModifier {
+class VertexProperty extends JMenuItem implements IItemModifier {
 
-	private static final long serialVersionUID = -1894264493446725645L;
+	private static final long serialVersionUID = 3448304253580836407L;
 
 	/**
 	 * A field for a visualization viewer.
@@ -36,9 +36,9 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	 */
 	private Point2D point;
 	/**
-	 * A field for an edge.
+	 * A field for a vertex.
 	 */
-	private IEdgeLayout edge;
+	private IVertexLayout vertex;
 
 	/**
 	 * Main constructor.
@@ -48,35 +48,24 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	 * @param model
 	 *            the gui model
 	 */
-	protected EdgeProperty(
+	protected VertexProperty(
 			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
 			IGuiModel model) {
-		super(model.getResourceBundle().getString("edit.edge.label"));
+		super(model.getResourceBundle().getString("vertex.label"));
 		this.vViewer = vViewer;
 		this.model = model;
 		this.point = null;
-		this.edge = null;
+		this.vertex = null;
 	}
 
 	/**
-	 * @param rootFrame
+	 * 
+	 * @param owner
 	 */
-	protected void setRootFrame(final JFrame rootFrame) {
-		this.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EdgeProperty.this.showDialog(rootFrame);
-			}
-		});
-	}
-
-	/**
-	 * @param rootFrame
-	 */
-	protected void showDialog(JFrame owner) {
-		if (this.point != null && this.edge != null) {
-			EdgeDialog dialog = new EdgeDialog(this.edge, owner, this.vViewer,
-					this.model);
+	private void showDialog(JFrame owner) {
+		if (this.point != null && this.vertex != null) {
+			VertexDialog dialog = new VertexDialog(this.vertex, owner,
+					this.vViewer, this.model);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());
 			dialog.setVisible(true);
@@ -88,8 +77,8 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 	 */
 	@Override
 	public void setGraphItemAndView(IItemLayout item) {
-		if (item instanceof IEdgeLayout) {
-			this.edge = (IEdgeLayout) item;
+		if (item instanceof IVertexLayout) {
+			this.vertex = (IVertexLayout) item;
 		}
 	}
 
@@ -101,6 +90,18 @@ class EdgeProperty extends JMenuItem implements IItemModifier {
 		if (point != null) {
 			this.point = point;
 		}
+	}
+
+	/**
+	 * @param rootFrame
+	 */
+	protected void setRootFrame(final JFrame rootFrame) {
+		this.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VertexProperty.this.showDialog(rootFrame);
+			}
+		});
 	}
 
 }

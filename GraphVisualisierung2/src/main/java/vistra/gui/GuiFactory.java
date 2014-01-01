@@ -1,7 +1,6 @@
 package vistra.gui;
 
 import vistra.core.ICore;
-import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.control.Control;
@@ -11,7 +10,6 @@ import vistra.gui.view.FullView;
 import vistra.gui.view.IView;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.StaticLayout;
-import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * A factory creating MVC based graphic user interfaces.
@@ -55,15 +53,13 @@ public final class GuiFactory {
 	 */
 	public static IView createGui(ICore core, ViewType type) throws Exception {
 		try {
-			// graph and layout
-			IExtendedGraph graph = core.newGraph(EdgeType.UNDIRECTED);
-			Layout<IVertexLayout, IEdgeLayout> layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
-					graph);
 			// model and control
-			GuiModel model = new GuiModel(graph);
+			GuiModel model = new GuiModel();
 			IControl control = new Control(core, model);
 			// view
 			IView view;
+			Layout<IVertexLayout, IEdgeLayout> layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
+					model.getGraph());
 			if (type == ViewType.FULL)
 				view = new FullView(layout, model, control);
 			else if (type == ViewType.DEFAULT)
@@ -85,7 +81,7 @@ public final class GuiFactory {
 	 * 
 	 */
 	public enum ViewType {
-		DEFAULT, FULL, MINIMAL,
+		DEFAULT, FULL;
 	}
 
 }

@@ -39,14 +39,13 @@ class ActionListenerI18n extends AbstractActionListener {
 			+ "<ul>"
 			+ "<li><b>Left-click</b> an empty area: Create a vertex"
 			+ "<li><b>Left-click + drag</b> from a first vertex to another vertex: Create an edge"
-			+ "<li><b>Left-Double-click</b> on a vertex or edge: Edit the label"
 			+ "<li><b>Right-click</b> on a vertex: Edit-vertex popup"
 			+ "<li><b>Right-click</b> on an edge: Edit-edge popup"
 			+ "</ul>"
 			+ "<h3>Picking Mode:</h3>"
 			+ "<ul>"
-			+ "<li><b>Left-click + drag</b> elsewhere: Select vertices in a region"
 			+ "<li><b>Left-click</b> on a vertex: Select the vertex"
+			+ "<li><b>Left-click + drag</b> elsewhere: Select vertices in a region"
 			+ "<li><b>Left-click + drag</b> on a vertex: Move all selected vertices"
 			+ "<li><b>Left-click</b> elsewhere: Unselect all vertices"
 			+ "<li><b>CTRL + Left-click</b> on a vertex: Select the vertex as center and shift view"
@@ -76,17 +75,13 @@ class ActionListenerI18n extends AbstractActionListener {
 		try {
 
 			/* create locale */
-			String language, country;
+			Locale locale = null;
 			if (e == null) {
-				language = System.getProperty("user.language");
-				country = System.getProperty("user.country");
-			} else {
-				// first and second character out of e.g. <EN_US>
-				language = e.getActionCommand().substring(0, 2).toLowerCase();
-				// fourth and fifth character out of e.g. <EN_US>
-				country = e.getActionCommand().substring(3, 5);
-			}
-			Locale locale = new Locale(language, country);
+				String language = System.getProperty("user.language");
+				String country = System.getProperty("user.country");
+				locale = new Locale(language, country);
+			} else
+				locale = Locale.forLanguageTag(e.getActionCommand());
 
 			/* component */
 			JComponent.setDefaultLocale(locale);
@@ -99,7 +94,7 @@ class ActionListenerI18n extends AbstractActionListener {
 			// StringBuilder help = new StringBuilder();
 			// help.append(b.getString("help.message"));
 			// this.model.setHelp(help.toString());
-			this.model.setHelp(this.shortCuts);
+			this.model.setShortcutsMessage(this.shortCuts);
 			/* about message */
 			StringBuilder about = new StringBuilder();
 			about.append(b.getString("app.label"));
@@ -108,7 +103,7 @@ class ActionListenerI18n extends AbstractActionListener {
 			about.append(b.getString("about.message").replaceAll("\n",
 					System.lineSeparator()));
 			about.append(System.lineSeparator());
-			this.model.setAbout(about.toString());
+			this.model.setAboutMessage(about.toString());
 			/* protocol */
 			this.model.setProtocol(about);
 			/* update the view */

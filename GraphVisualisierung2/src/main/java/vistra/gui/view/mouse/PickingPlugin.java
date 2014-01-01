@@ -1,4 +1,4 @@
-package vistra.gui.view.component.viewer;
+package vistra.gui.view.mouse;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -21,6 +21,9 @@ import edu.uci.ics.jung.visualization.picking.PickedState;
 public class PickingPlugin extends
 		PickingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
 
+	/**
+	 * A field for a JUNG visualization viewer.
+	 */
 	private VisualizationViewer<IVertexLayout, IEdgeLayout> vv;
 
 	/**
@@ -33,10 +36,12 @@ public class PickingPlugin extends
 	/**
 	 * {@inheritDoc}
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (this.locked == false) {
-			this.vv = (Viewer) e.getSource();
+			this.vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+					.getSource();
 			if (this.vertex != null) {
 				Point point = e.getPoint();
 				MultiLayerTransformer mt = vv.getRenderContext()

@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
+
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
@@ -22,43 +24,52 @@ public final class GuiModel extends Observable implements IGuiModel {
 
 	/* i18n */
 	private ResourceBundle resourceBundle;
-	private String help;
-	private String about;
+	private String shortcutsMessage;
+	private String aboutMessage;
 
 	/* Menu */
 	// Action listener
 	private ActionListener i18nListener;
-	private ActionListener helpListener;
+	private ActionListener modeListener;
+	private ActionListener shortcutsListener;
 	private ActionListener aboutListener;
 	private ActionListener quitListener;
 	// File
 	private boolean fileEnabled;
-	private boolean newMenuEnabled;
-	private boolean undirectedGraphEnabled;
-	private boolean directedGraphEnabled;
-	private boolean openGraphEnabled;
-	private boolean saveGraphEnabled;
-	private boolean saveGraphAsEnabled;
+	private boolean newEnabled;
+	private boolean undirectedEnabled;
+	private boolean directedEnabled;
+	private boolean openEnabled;
+	private boolean saveEnabled;
+	private boolean saveAsEnabled;
 	private boolean quitEnabled;
+	// Edit
+	private boolean switchModeEnabled;
+	private boolean editEnabled;
+	private boolean pickingEnabled;
+	private boolean vertexEnabled;
+	private boolean edgeEnabled;
 	// I18n
 	private boolean i18nEnabled;
+	private boolean deCHEnabled;
 	private boolean deDEEnabled;
 	private boolean frFREnabled;
+	private boolean enGBEnabled;
 	private boolean enUSEnabled;
 	// Info
-	private boolean infoEnabled;
 	private boolean helpEnabled;
+	private boolean shortcutsEnabled;
 	private boolean aboutEnabled;
 
 	/* Parameter */
 	private IParameterStateHandler parameterStateHandler;
 	// Graph
 	private IExtendedGraph graph;
-	private boolean graphFile;
-	private boolean graphSaved;
-	private boolean editGraphEnabled;
 	private IVertexLayout start;
 	private IVertexLayout end;
+	private boolean graphFile;
+	private boolean graphSaved;
+	private Mode mode;
 	// Algorithm
 	private String[] algorithms;
 	private boolean algorithmsEnabled;
@@ -86,59 +97,63 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private boolean pauseEnabled;
 	private boolean stopEnabled;
 
-	// Protocol
+	/* Protocol */
 	private StringBuilder protocol;
 
 	/**
 	 * Main constructor.
-	 * 
-	 * @param graph
-	 *            an observable gravis graph
 	 */
-	public GuiModel(IExtendedGraph graph) {
+	public GuiModel() {
 		super();
 
 		/* i18n */
 		this.resourceBundle = null;
-		this.help = "";
-		this.about = "";
+		this.shortcutsMessage = "";
+		this.aboutMessage = "";
 
 		/* Menu */
 		// Action listener
 		this.i18nListener = null;
-		this.helpListener = null;
+		this.modeListener = null;
+		this.shortcutsListener = null;
 		this.aboutListener = null;
 		this.quitListener = null;
 		// File
 		this.fileEnabled = false;
-		this.newMenuEnabled = false;
-		this.undirectedGraphEnabled = false;
-		this.directedGraphEnabled = false;
-		this.openGraphEnabled = false;
-		this.saveGraphEnabled = false;
-		this.saveGraphAsEnabled = false;
-		this.editGraphEnabled = false;
+		this.newEnabled = false;
+		this.undirectedEnabled = false;
+		this.directedEnabled = false;
+		this.openEnabled = false;
+		this.saveEnabled = false;
+		this.saveAsEnabled = false;
 		this.quitEnabled = false;
+		// Edit
+		this.switchModeEnabled = false;
+		this.editEnabled = false;
+		this.pickingEnabled = false;
+		this.vertexEnabled = false;
+		this.edgeEnabled = false;
 		// i18n
 		this.i18nEnabled = false;
+		this.deCHEnabled = false;
 		this.deDEEnabled = false;
 		this.frFREnabled = false;
+		this.enGBEnabled = false;
 		this.enUSEnabled = false;
 		// Info
-		this.infoEnabled = false;
 		this.helpEnabled = false;
+		this.shortcutsEnabled = false;
 		this.aboutEnabled = false;
 
 		/* Parameter */
 		this.parameterStateHandler = null;
 		// Graph
-		this.graph = graph;
-		this.graphFile = false;
-		this.graphSaved = false;
-		this.editGraphEnabled = false;
+		this.graph = null;
 		this.start = null;
 		this.end = null;
-
+		this.graphFile = false;
+		this.graphSaved = false;
+		this.mode = null;
 		// Algorithm
 		this.algorithms = null;
 		this.algorithmsEnabled = false;
@@ -171,65 +186,113 @@ public final class GuiModel extends Observable implements IGuiModel {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setMenuEnabled(boolean)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setMenuEnabled(boolean menuEnabled) {
 		// Menu
+		this.setMenuFileEnabled(menuEnabled);
+		this.setMenuModeEnabled(menuEnabled);
+		this.setMenuI18nEnabled(menuEnabled);
+		this.setMenuHelpEnabled(menuEnabled);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMenuFileEnabled(boolean menuEnabled) {
+		// Menu
 		this.setFileEnabled(menuEnabled);
-		this.setI18nEnabled(menuEnabled);
-		this.setInfoEnabled(menuEnabled);
 		// MenuItem
-		// (...)
-		this.setNewMenuEnabled(menuEnabled);
-		this.setUndirectedGraphEnabled(menuEnabled);
-		this.setDirectedGraphEnabled(menuEnabled);
-		this.setOpenGraphEnabled(menuEnabled);
-		this.setSaveGraphEnabled(menuEnabled);
-		this.setSaveGraphAsEnabled(menuEnabled);
+		this.setNewEnabled(menuEnabled);
+		this.setUndirectedEnabled(menuEnabled);
+		this.setDirectedEnabled(menuEnabled);
+		this.setOpenEnabled(menuEnabled);
+		this.setSaveEnabled(menuEnabled);
+		this.setSaveAsEnabled(menuEnabled);
 		this.setQuitEnabled(menuEnabled);
-		// (...)
+
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMenuModeEnabled(boolean menuEnabled) {
+		// Menu
+		this.setSwitchModeEnabled(menuEnabled);
+		// MenuItem
+		this.setMenuEditEnabled(menuEnabled);
+		this.setPickingEnabled(menuEnabled);
+
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMenuEditEnabled(boolean menuEnabled) {
+		// Menu
+		this.setEditEnabled(menuEnabled);
+		// MenuItem
+		this.setVertexEnabled(menuEnabled);
+		this.setEdgeEnabled(menuEnabled);
+
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMenuI18nEnabled(boolean menuEnabled) {
+		// Menu
+		this.setI18nEnabled(menuEnabled);
+		// MenuItem
+		this.setDeCHEnabled(menuEnabled);
 		this.setDeDEEnabled(menuEnabled);
 		this.setFrFREnabled(menuEnabled);
+		this.setEnGBEnabled(menuEnabled);
 		this.setEnUSEnabled(menuEnabled);
-		// (...)
+
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMenuHelpEnabled(boolean menuEnabled) {
+		// Menu
 		this.setHelpEnabled(menuEnabled);
+		// MenuItem
+		this.setShortcutsEnabled(menuEnabled);
 		this.setAboutEnabled(menuEnabled);
 
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setPlayerEnabled(boolean)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setPlayerEnabled(boolean menuEnabled) {
-		this.setSteplengthEnabled(menuEnabled);
-		this.setDelayEnabled(menuEnabled);
-		this.setAnimationEnabled(menuEnabled);
+	public void setTraversalEnabled(boolean menuEnabled) {
 		this.setStepByStepEnabled(menuEnabled);
-
-		this.setChanged();
+		this.setAnimationEnabled(menuEnabled);
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setAnimationEnabled(boolean)
-	 */
-	@Override
-	public void setAnimationEnabled(boolean menuEnabled) {
-		this.setPlayEnabled(menuEnabled);
-		this.setPauseEnabled(menuEnabled);
-		this.setStopEnabled(menuEnabled);
-
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setStepByStepEnabled(boolean)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setStepByStepEnabled(boolean menuEnabled) {
+		// spinner
+		this.setSteplengthEnabled(menuEnabled);
+		// button
 		this.setToBeginningEnabled(menuEnabled);
 		this.setBackwardEnabled(menuEnabled);
 		this.setForwardEnabled(menuEnabled);
@@ -238,416 +301,782 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setAnimationEnabled(boolean menuEnabled) {
+		// spinner
+		this.setDelayEnabled(menuEnabled);
+		// button
+		this.setPlayEnabled(menuEnabled);
+		this.setPauseEnabled(menuEnabled);
+		this.setStopEnabled(menuEnabled);
+
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getResourceBundle()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#getHelp()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getShortcutsMessage()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public String getHelp() {
-		return help;
+	public String getShortcutsMessage() {
+		return shortcutsMessage;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#getAbout()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getAboutMessage()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public String getAbout() {
-		return about;
+	public String getAboutMessage() {
+		return aboutMessage;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getI18nListener()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ActionListener getI18nListener() {
 		return i18nListener;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#getHelpListener()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getModeListener()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public ActionListener getHelpListener() {
-		return helpListener;
+	public ActionListener getModeListener() {
+		return modeListener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getShortcutsListener()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionListener getShortcutsListener() {
+		return shortcutsListener;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getAboutListener()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ActionListener getAboutListener() {
 		return aboutListener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getQuitListener()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ActionListener getQuitListener() {
 		return quitListener;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isFileEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isFileEnabled() {
 		return fileEnabled;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isNewMenuEnabled()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isNewEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isNewMenuEnabled() {
-		return newMenuEnabled;
+	public boolean isNewEnabled() {
+		return newEnabled;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isUndirectedGraphEnabled()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isUndirectedEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isUndirectedGraphEnabled() {
-		return undirectedGraphEnabled;
+	public boolean isUndirectedEnabled() {
+		return undirectedEnabled;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isDirectedGraphEnabled()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isDirectedEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isDirectedGraphEnabled() {
-		return directedGraphEnabled;
+	public boolean isDirectedEnabled() {
+		return directedEnabled;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isOpenGraphEnabled()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isOpenEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isOpenGraphEnabled() {
-		return openGraphEnabled;
+	public boolean isOpenEnabled() {
+		return openEnabled;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isSaveGraphEnabled()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isSaveEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isSaveGraphEnabled() {
-		return saveGraphEnabled;
+	public boolean isSaveEnabled() {
+		return saveEnabled;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isSaveGraphAsEnabled()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isSaveAsEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isSaveGraphAsEnabled() {
-		return saveGraphAsEnabled;
+	public boolean isSaveAsEnabled() {
+		return saveAsEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isQuitEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isQuitEnabled() {
 		return quitEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isSwitchModeEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isSwitchModeEnabled() {
+		return switchModeEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isEditEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isEditEnabled() {
+		return editEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isPickingEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isPickingEnabled() {
+		return pickingEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isVertexEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isVertexEnabled() {
+		return vertexEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isEdgeEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isEdgeEnabled() {
+		return edgeEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isI18nEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isI18nEnabled() {
 		return i18nEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isDeCHEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isDeCHEnabled() {
+		return deCHEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isDeDEEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isDeDEEnabled() {
 		return deDEEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isFrFREnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isFrFREnabled() {
 		return frFREnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isEnGBEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isEnGBEnabled() {
+		return enGBEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isEnUSEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isEnUSEnabled() {
 		return enUSEnabled;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isInfoEnabled()
-	 */
-	@Override
-	public boolean isInfoEnabled() {
-		return infoEnabled;
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isHelpEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isHelpEnabled() {
 		return helpEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isShortcutsEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isShortcutsEnabled() {
+		return shortcutsEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isAboutEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isAboutEnabled() {
 		return aboutEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getParameterStateHandler()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public IParameterStateHandler getParameterStateHandler() {
 		return parameterStateHandler;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getGraph()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public IExtendedGraph getGraph() {
 		return graph;
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isGraphFile()
-	 */
-	@Override
-	public boolean isGraphFile() {
-		return graphFile;
-	}
-
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isGraphSaved()
-	 */
-	@Override
-	public boolean isGraphSaved() {
-		return graphSaved;
-	}
-
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#isEditGraphEnabled()
-	 */
-	@Override
-	public boolean isEditGraphEnabled() {
-		return editGraphEnabled;
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getStart()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public IVertexLayout getStart() {
 		return start;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getEnd()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public IVertexLayout getEnd() {
 		return end;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isGraphFile()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isGraphFile() {
+		return graphFile;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#isGraphSaved()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isGraphSaved() {
+		return graphSaved;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getAlgorithms()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String[] getAlgorithms() {
 		return algorithms;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isAlgorithmsEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isAlgorithmsEnabled() {
 		return algorithmsEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getSelectedAlgorithmIndex()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int getSelectedAlgorithmIndex() {
 		return selectedAlgorithmIndex;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getAlgorithmDescription()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String getAlgorithmDescription() {
 		return algorithmDescription;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getTraversal()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ITraversal getTraversal() {
 		return traversal;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getProgress()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int getProgress() {
 		return progress;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getStepByStepStateHandler()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ISbsStateHandler getStepByStepStateHandler() {
 		return stepByStepStateHandler;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getSteplength()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int getSteplength() {
 		return steplength;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isSteplengthEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isSteplengthEnabled() {
 		return steplengthEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isToBeginningEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isToBeginningEnabled() {
 		return toBeginningEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isBackwardEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isBackwardEnabled() {
 		return backwardEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isForwardEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isForwardEnabled() {
 		return forwardEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isToEndEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isToEndEnabled() {
 		return toEndEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getAnimationStateHandler()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public IAnimationStateHandler getAnimationStateHandler() {
 		return animationStateHandler;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getDelay()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int getDelay() {
 		return delay;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isDelayEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isDelayEnabled() {
 		return delayEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isPlayEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isPlayEnabled() {
 		return playEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getPauseLabel()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String getPauseLabel() {
 		return pauseLabel;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getPauseEvent()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public EventSource getPauseEvent() {
 		return pauseEvent;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isPauseEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isPauseEnabled() {
 		return pauseEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#isStopEnabled()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isStopEnabled() {
 		return stopEnabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#getProtocol()
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public StringBuilder getProtocol() {
 		return protocol;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setResourceBundle(java.util.ResourceBundle)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setResourceBundle(ResourceBundle resourceBundle) {
@@ -655,26 +1084,41 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setHelp(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setShortcutsMessage(java.lang.String)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setHelp(String help) {
-		this.help = help;
+	public void setShortcutsMessage(String shortcutsMessage) {
+		this.shortcutsMessage = shortcutsMessage;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setAbout(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setAboutMessage(java.lang.String)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setAbout(String about) {
-		this.about = about;
+	public void setAboutMessage(String aboutMessage) {
+		this.aboutMessage = aboutMessage;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setI18nListener(java.awt.event.ActionListener)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setI18nListener(ActionListener i18nListener) {
@@ -682,17 +1126,42 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setHelpListener(java.awt.event.ActionListener)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setModeListener(java.awt.event.ActionListener)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setHelpListener(ActionListener helpListener) {
-		this.helpListener = helpListener;
+	public void setModeListener(ActionListener modeListener) {
+		this.modeListener = modeListener;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * vistra.gui.IGuiModel#setShortcutsListener(java.awt.event.ActionListener)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setShortcutsListener(ActionListener shortcutsListener) {
+		this.shortcutsListener = shortcutsListener;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setAboutListener(java.awt.event.ActionListener)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setAboutListener(ActionListener aboutListener) {
@@ -700,8 +1169,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setQuitListener(java.awt.event.ActionListener)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setQuitListener(ActionListener quitListener) {
@@ -709,8 +1183,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setFileEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setFileEnabled(boolean fileEnabled) {
@@ -718,62 +1197,97 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setNewMenuEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setNewEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setNewMenuEnabled(boolean newMenuEnabled) {
-		this.newMenuEnabled = newMenuEnabled;
+	public void setNewEnabled(boolean newEnabled) {
+		this.newEnabled = newEnabled;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setUndirectedGraphEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setUndirectedEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setUndirectedGraphEnabled(boolean undirectedGraphEnabled) {
-		this.undirectedGraphEnabled = undirectedGraphEnabled;
+	public void setUndirectedEnabled(boolean undirectedEnabled) {
+		this.undirectedEnabled = undirectedEnabled;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setDirectedGraphEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setDirectedEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setDirectedGraphEnabled(boolean directedGraphEnabled) {
-		this.directedGraphEnabled = directedGraphEnabled;
+	public void setDirectedEnabled(boolean directedEnabled) {
+		this.directedEnabled = directedEnabled;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setOpenGraphEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setOpenEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setOpenGraphEnabled(boolean openGraphEnabled) {
-		this.openGraphEnabled = openGraphEnabled;
+	public void setOpenEnabled(boolean openEnabled) {
+		this.openEnabled = openEnabled;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setSaveGraphEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setSaveEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setSaveGraphEnabled(boolean saveGraphEnabled) {
-		this.saveGraphEnabled = saveGraphEnabled;
+	public void setSaveEnabled(boolean saveEnabled) {
+		this.saveEnabled = saveEnabled;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setSaveGraphAsEnabled(boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setSaveAsEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public void setSaveGraphAsEnabled(boolean saveGraphAsEnabled) {
-		this.saveGraphAsEnabled = saveGraphAsEnabled;
+	public void setSaveAsEnabled(boolean saveAsEnabled) {
+		this.saveAsEnabled = saveAsEnabled;
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setQuitEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setQuitEnabled(boolean quitEnabled) {
@@ -781,8 +1295,83 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setSwitchModeEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setSwitchModeEnabled(boolean switchModeEnabled) {
+		this.switchModeEnabled = switchModeEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setEditEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEditEnabled(boolean editEnabled) {
+		this.editEnabled = editEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setPickingEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setPickingEnabled(boolean pickingEnabled) {
+		this.pickingEnabled = pickingEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setVertexEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setVertexEnabled(boolean vertexEnabled) {
+		this.vertexEnabled = vertexEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setEdgeEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEdgeEnabled(boolean edgeEnabled) {
+		this.edgeEnabled = edgeEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setI18nEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setI18nEnabled(boolean i18nEnabled) {
@@ -790,8 +1379,27 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setDeCHEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setDeCHEnabled(boolean deCHEnabled) {
+		this.deCHEnabled = deCHEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setDeDEEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setDeDEEnabled(boolean deDEEnabled) {
@@ -799,8 +1407,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setFrFREnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setFrFREnabled(boolean frFREnabled) {
@@ -808,8 +1421,27 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setEnGBEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnGBEnabled(boolean enGBEnabled) {
+		this.enGBEnabled = enGBEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setEnUSEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setEnUSEnabled(boolean enUSEnabled) {
@@ -817,17 +1449,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setInfoEnabled(boolean)
-	 */
-	@Override
-	public void setInfoEnabled(boolean infoEnabled) {
-		this.infoEnabled = infoEnabled;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setHelpEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setHelpEnabled(boolean helpEnabled) {
@@ -835,8 +1463,27 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setShortcutsEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setShortcutsEnabled(boolean shortcutsEnabled) {
+		this.shortcutsEnabled = shortcutsEnabled;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setAboutEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setAboutEnabled(boolean aboutEnabled) {
@@ -844,8 +1491,15 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setParameterStateHandler(vistra.gui.control.state.IParameterStateHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * vistra.gui.IGuiModel#setParameterStateHandler(vistra.gui.control.state
+	 * .IParameterStateHandler)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setParameterStateHandler(
@@ -854,8 +1508,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setGraph(vistra.core.graph.IExtendedGraph)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setGraph(IExtendedGraph graph) {
@@ -863,35 +1522,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setGraphFile(boolean)
-	 */
-	@Override
-	public void setGraphFile(boolean graphFile) {
-		this.graphFile = graphFile;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setGraphSaved(boolean)
-	 */
-	@Override
-	public void setGraphSaved(boolean graphSaved) {
-		this.graphSaved = graphSaved;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setEditGraphEnabled(boolean)
-	 */
-	@Override
-	public void setEditGraphEnabled(boolean editGraphEnabled) {
-		this.editGraphEnabled = editGraphEnabled;
-		this.setChanged();
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setStart(vistra.core.graph.item.IVertexLayout)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setStart(IVertexLayout start) {
@@ -899,8 +1536,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setEnd(vistra.core.graph.item.IVertexLayout)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setEnd(IVertexLayout end) {
@@ -908,8 +1550,41 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setGraphFile(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setGraphFile(boolean graphFile) {
+		this.graphFile = graphFile;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setGraphSaved(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setGraphSaved(boolean graphSaved) {
+		this.graphSaved = graphSaved;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setAlgorithms(java.lang.String[])
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setAlgorithms(String[] algorithms) {
@@ -917,8 +1592,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setAlgorithmsEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setAlgorithmsEnabled(boolean algorithmsEnabled) {
@@ -926,8 +1606,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setSelectedAlgorithmIndex(int)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setSelectedAlgorithmIndex(int selectedAlgorithmIndex) {
@@ -935,8 +1620,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setAlgorithmDescription(java.lang.String)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setAlgorithmDescription(String algorithmDescription) {
@@ -944,8 +1634,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setTraversal(vistra.core.traversal.ITraversal)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setTraversal(ITraversal traversal) {
@@ -953,8 +1648,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setProgress(int)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setProgress(int progress) {
@@ -962,8 +1662,15 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setStepByStepStateHandler(vistra.gui.control.state.ISbsStateHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * vistra.gui.IGuiModel#setStepByStepStateHandler(vistra.gui.control.state
+	 * .ISbsStateHandler)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setStepByStepStateHandler(
@@ -972,8 +1679,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setSteplength(int)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setSteplength(int steplength) {
@@ -981,8 +1693,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setSteplengthEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setSteplengthEnabled(boolean steplengthEnabled) {
@@ -990,8 +1707,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setToBeginningEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setToBeginningEnabled(boolean toBeginningEnabled) {
@@ -999,8 +1721,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setBackwardEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setBackwardEnabled(boolean backwardEnabled) {
@@ -1008,8 +1735,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setForwardEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setForwardEnabled(boolean forwardEnabled) {
@@ -1017,8 +1749,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setToEndEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setToEndEnabled(boolean toEndEnabled) {
@@ -1026,8 +1763,15 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setAnimationStateHandler(vistra.gui.control.state.IAnimationStateHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * vistra.gui.IGuiModel#setAnimationStateHandler(vistra.gui.control.state
+	 * .IAnimationStateHandler)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setAnimationStateHandler(
@@ -1036,8 +1780,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setDelay(int)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setDelay(int delay) {
@@ -1045,8 +1794,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setDelayEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setDelayEnabled(boolean delayEnabled) {
@@ -1054,8 +1808,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setPlayEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setPlayEnabled(boolean playEnabled) {
@@ -1063,8 +1822,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setPauseLabel(java.lang.String)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setPauseLabel(String pauseLabel) {
@@ -1072,8 +1836,15 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
-	 * @see vistra.gui.IGuiModel#setPauseEvent(vistra.gui.control.IControl.EventSource)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * vistra.gui.IGuiModel#setPauseEvent(vistra.gui.control.IControl.EventSource
+	 * )
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setPauseEvent(EventSource pauseEvent) {
@@ -1081,8 +1852,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setPauseEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setPauseEnabled(boolean pauseEnabled) {
@@ -1090,8 +1866,13 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setStopEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setStopEnabled(boolean stopEnabled) {
@@ -1099,12 +1880,45 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see vistra.gui.IGuiModel#setProtocol(java.lang.StringBuilder)
+	 */
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setProtocol(StringBuilder protocol) {
 		this.protocol = protocol;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getMode()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Mode getMode() {
+		return mode;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setMode(edu.uci.ics.jung.visualization.control.
+	 * ModalGraphMouse)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMode(Mode mode) {
+		this.mode = mode;
 		this.setChanged();
 	}
 

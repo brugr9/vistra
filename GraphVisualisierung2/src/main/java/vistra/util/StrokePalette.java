@@ -141,7 +141,7 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	public final static BasicStroke forward = UNEXPLORED.getStorke();
+	public final static BasicStroke forward = FORWARD.getStorke();
 
 	/**
 	 * Stroke style 'cross'.
@@ -151,7 +151,7 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	public final static BasicStroke cross = UNEXPLORED.getStorke();
+	public final static BasicStroke cross = CROSS.getStorke();
 
 	/**
 	 * Stroke style 'visited'.
@@ -161,7 +161,7 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	public final static BasicStroke visited = UNEXPLORED.getStorke();
+	public final static BasicStroke visited = VISITED.getStorke();
 
 	/**
 	 * Stroke style 'discarded'.
@@ -171,6 +171,6 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	public final static BasicStroke discarded = UNEXPLORED.getStorke();
+	public final static BasicStroke discarded = DISCARDED.getStorke();
 
 }

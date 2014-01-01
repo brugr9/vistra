@@ -1,4 +1,4 @@
-package vistra.gui.view.component.viewer.popup;
+package vistra.gui.view.mouse.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +17,9 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class EdgeDelete extends JMenuItem implements IItemModifier {
+class VertexDelete extends JMenuItem implements IItemModifier {
 
-	private static final long serialVersionUID = -8344732316212412105L;
+	private static final long serialVersionUID = -4699986300655692795L;
 
 	/**
 	 * A field for a visualization viewer.
@@ -32,7 +32,7 @@ class EdgeDelete extends JMenuItem implements IItemModifier {
 	/**
 	 * A field for an edge.
 	 */
-	private IEdgeLayout edge;
+	private IVertexLayout vertex;
 
 	/**
 	 * Main constructor.
@@ -42,10 +42,10 @@ class EdgeDelete extends JMenuItem implements IItemModifier {
 	 * @param model
 	 *            a gui model
 	 */
-	protected EdgeDelete(
+	protected VertexDelete(
 			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
 			IGuiModel model) {
-		super(model.getResourceBundle().getString("delete.edge.label"));
+		super(model.getResourceBundle().getString("delete.label"));
 		this.vViewer = vViewer;
 		this.model = model;
 		this.setActionCommand(EventSource.EDIT_GRAPH.toString());
@@ -53,18 +53,20 @@ class EdgeDelete extends JMenuItem implements IItemModifier {
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EdgeDelete.this.deleteEdge();
+				VertexDelete.this.deleteVertex();
 			}
 		});
 	}
 
 	/**
-	 * Deletes the edge.
+	 * Deletes the vertex.
 	 */
-	private void deleteEdge() {
-		this.vViewer.getPickedEdgeState().pick(this.edge, false);
-		this.vViewer.getGraphLayout().getGraph().removeEdge(this.edge);
-		this.vViewer.repaint();
+	private void deleteVertex() {
+		if (this.vertex != null) {
+			this.vViewer.getPickedVertexState().pick(this.vertex, false);
+			this.vViewer.getGraphLayout().getGraph().removeVertex(this.vertex);
+			this.vViewer.repaint();
+		}
 	}
 
 	/**
@@ -72,10 +74,10 @@ class EdgeDelete extends JMenuItem implements IItemModifier {
 	 */
 	@Override
 	public void setGraphItemAndView(IItemLayout item) {
-		if (item instanceof IEdgeLayout) {
-			this.edge = (IEdgeLayout) item;
+		if (item instanceof IVertexLayout) {
+			this.vertex = (IVertexLayout) item;
 			this.setText(this.model.getResourceBundle().getString(
-					"delete.edge.label"));
+					"delete.label"));
 		}
 	}
 
@@ -86,4 +88,5 @@ class EdgeDelete extends JMenuItem implements IItemModifier {
 	public void setGraphItemLocation(Point2D point) {
 		// does nothing
 	}
+
 }

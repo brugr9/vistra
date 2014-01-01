@@ -252,7 +252,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 			try {
 
 				if (arg == I18N) {
-					this.border.setTitle(b.getString("player.label"));
+					this.border.setTitle(b.getString("traversal.label"));
 					//
 					this.steplengthLabel.setText(b.getString("setStep.label"));
 					this.delayLabel.setText(b.getString("setDelay.label"));

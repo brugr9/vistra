@@ -1,4 +1,4 @@
-package vistra.gui.view.component.viewer.popup;
+package vistra.gui.view.mouse.popup;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -21,7 +22,7 @@ import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
-import vistra.gui.view.component.viewer.popup.verifier.ItemIdVerifier;
+import vistra.gui.control.verifier.ItemIdVerifier;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -60,12 +61,11 @@ public class VertexDialog extends JDialog implements Observer {
 			IGuiModel model) {
 		super(owner, true);
 		this.setResizable(false);
-
-		ResourceBundle b = model.getResourceBundle();
+		this.setTitle("VertexDialog");
 
 		/* content */
 		// name
-		this.nameLbl = new JLabel(b.getString("name.label"));
+		this.nameLbl = new JLabel("nameLbl");
 		this.name = new JTextField("name");
 		this.name.setColumns(10);
 		// panel
@@ -91,7 +91,6 @@ public class VertexDialog extends JDialog implements Observer {
 		this.setTextFieldValues(vertex, viewer);
 		this.setListeners(vertex, viewer, okButton, cancelButton);
 
-		this.setTitle(b.getString("edit.vertex.label"));
 		this.setLayout(new BorderLayout());
 		this.add(this.content, BorderLayout.CENTER);
 		this.add(buttonPane, BorderLayout.SOUTH);
@@ -150,10 +149,25 @@ public class VertexDialog extends JDialog implements Observer {
 
 	}
 
+	/**
+	 * Updates the dialog.
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
 
+		IGuiModel m = (IGuiModel) o;
+		ResourceBundle b = m.getResourceBundle();
+
+		try {
+			if (arg == EventSource.I18N) {
+				this.setTitle(b.getString("vertex.label"));
+				this.nameLbl.setText(b.getString("name.label"));
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.toString(),
+					b.getString("app.label"), 1, null);
+			e.printStackTrace();
+		}
+
+	}
 }

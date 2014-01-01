@@ -1,4 +1,4 @@
-package vistra.gui.view.component.viewer.popup;
+package vistra.gui.view.mouse.popup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,12 +11,12 @@ import vistra.gui.control.IControl.EventSource;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
- * A check box for setting a start vertex.
+ * A check box for setting an end vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
+class CheckBoxEnd extends AbstarctCheckBox implements IItemModifier {
 
 	private static final long serialVersionUID = 6641658478963193492L;
 
@@ -28,17 +28,18 @@ class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
 	 * @param model
 	 *            the gui model
 	 */
-	protected CheckBoxStart(
+	protected CheckBoxEnd(
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
 			IGuiModel model) {
-		super(viewer, model.getResourceBundle().getString("start.label"), model);
+		super(viewer, model.getResourceBundle().getString("finish.label"),
+				model);
 		this.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CheckBoxStart.this.setValue();
+				CheckBoxEnd.this.setValue();
 			}
 		});
-		this.setActionCommand(EventSource.START.toString());
+		this.setActionCommand(EventSource.FINISH.toString());
 		this.addActionListener(model.getParameterStateHandler());
 	}
 
@@ -47,22 +48,22 @@ class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
 	 */
 	private void setValue() {
 		if (this.vertex != null) {
-			/* Start */
+			/* End */
 			if (this.isSelected()) {
-				IVertexLayout previousStart = this.model.getStart();
-				if (previousStart != this.vertex) {
-					if (previousStart != null)
-						previousStart.setStart(false);
-					this.model.setStart(this.vertex);
+				IVertexLayout previousEnd = this.model.getEnd();
+				if (previousEnd != this.vertex) {
+					if (previousEnd != null)
+						previousEnd.setEnd(false);
+					this.model.setEnd(this.vertex);
 				}
 			}
-			/* End */
-			if (this.isSelected() && this.vertex.isEnd()) {
-				this.vertex.setEnd(false);
-				this.model.setEnd(null);
+			/* Start */
+			if (this.isSelected() && this.vertex.isStart()) {
+				this.vertex.setStart(false);
+				this.model.setStart(null);
 			}
 			/**/
-			this.vertex.setStart(this.isSelected());
+			this.vertex.setEnd(this.isSelected());
 			this.viewer.repaint();
 		}
 	}
@@ -74,7 +75,7 @@ class CheckBoxStart extends AbstarctCheckBox implements IItemModifier {
 	public void setGraphItemAndView(IItemLayout item) {
 		if (item instanceof IVertexLayout) {
 			this.vertex = (IVertexLayout) item;
-			this.setSelected(this.vertex.isStart());
+			this.setSelected(this.vertex.isEnd());
 		}
 	}
 

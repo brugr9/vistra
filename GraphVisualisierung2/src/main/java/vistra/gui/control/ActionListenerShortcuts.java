@@ -13,7 +13,7 @@ import vistra.gui.IGuiModel;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-final class ActionListenerHelp extends AbstractActionListener {
+final class ActionListenerShortcuts extends AbstractActionListener {
 
 	/**
 	 * Main constructor.
@@ -21,7 +21,7 @@ final class ActionListenerHelp extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerHelp(IGuiModel model) {
+	ActionListenerShortcuts(IGuiModel model) {
 		super(model);
 	}
 
@@ -32,7 +32,8 @@ final class ActionListenerHelp extends AbstractActionListener {
 	public void actionPerformed(ActionEvent e) {
 		ResourceBundle b = this.model.getResourceBundle();
 		try {
-			JOptionPane.showMessageDialog(null, this.model.getHelp(),
+			JOptionPane.showMessageDialog(null,
+					this.model.getShortcutsMessage(),
 					b.getString("help.label"), 1, null);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(),

@@ -351,7 +351,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	private void enableMenu(boolean enabled) {
 		this.model.setMenuEnabled(enabled);
-		this.model.setSaveGraphEnabled(!this.model.isGraphSaved());
+		this.model.setSaveEnabled(!this.model.isGraphSaved());
 		this.model.notifyObservers(EventSource.GRAPH);
 	}
 
@@ -608,7 +608,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	private void setGraphSaved(boolean saved) {
 		this.model.setGraphSaved(saved);
-		this.model.setSaveGraphEnabled(!saved);
+		this.model.setSaveEnabled(!saved);
 		this.model.notifyObservers(GRAPH);
 		this.model.setAlgorithmsEnabled(saved);
 		this.model.notifyObservers(ALGORITHM);
@@ -621,7 +621,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 *            the editable to set
 	 */
 	private void setGraphEditable(boolean editable) {
-		this.model.setEditGraphEnabled(editable);
+		this.model.setEditEnabled(editable);
 		this.model.notifyObservers(GRAPH);
 	}
 

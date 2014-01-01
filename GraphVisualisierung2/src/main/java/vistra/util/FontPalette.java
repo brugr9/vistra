@@ -26,15 +26,15 @@ public enum FontPalette {
 	NORMAL("normal", ItemLayoutConstant.FONT_STYLE_NORMAL,
 			ItemLayoutConstant.FONT_SIZE_NORMAL),
 	/**
-	 * Font 'hyphen'.
+	 * Font 'emphasised'.
 	 * <ul>
-	 * <li>Style: hyphen
-	 * <li>Size: hyphen
+	 * <li>Style: emphasised
+	 * <li>Size: emphasised
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	HYPHEN("hyphen", ItemLayoutConstant.FONT_STYLE_HYPHEN,
-			ItemLayoutConstant.FONT_SIZE_HYPHEN),
+	EMPHASISED("emphasised", ItemLayoutConstant.FONT_STYLE_EMPHASISED,
+			ItemLayoutConstant.FONT_SIZE_EMPHASISED),
 
 	;
 
@@ -87,13 +87,13 @@ public enum FontPalette {
 	public final static Font normal = NORMAL.getFont();
 
 	/**
-	 * Font 'hyphen'.
+	 * Font 'emphasised'.
 	 * <ul>
-	 * <li>Size: hyphen
-	 * <li>Style: hyphen
+	 * <li>Size: emphasised
+	 * <li>Style: emphasised
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	public final static Font hyphen = HYPHEN.getFont();
+	public final static Font emphasised = EMPHASISED.getFont();
 
 }

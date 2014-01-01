@@ -22,12 +22,6 @@ public interface IControl {
 	public enum EventSource {
 		// i18n
 		I18N("i18n"),
-		//
-		DE_DE("deDE"),
-		//
-		FR_FR("frFR"),
-		//
-		EN_US("enUS"),
 		// IO graph
 		GRAPH("graph"),
 		//
@@ -42,8 +36,10 @@ public interface IControl {
 		SAVE_GRAPH_AS("saveGraphAs"),
 		//
 		EDIT_GRAPH("editGraph"),
+		// edit
+		MODE("mode"),
 		//
-		START(""),
+		START("start"),
 		//
 		FINISH("editGraph"),
 		// algorithm
@@ -81,16 +77,19 @@ public interface IControl {
 		private String value;
 
 		/**
+		 * Main constructor.
 		 * 
 		 * @param value
+		 *            a value
 		 */
 		EventSource(String value) {
 			this.value = value;
 		}
 
 		/**
+		 * Returns the value.
 		 * 
-		 * @return
+		 * @return the value
 		 */
 		public String getValue() {
 			return this.value;

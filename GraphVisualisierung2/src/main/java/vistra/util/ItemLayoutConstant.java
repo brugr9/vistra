@@ -16,12 +16,14 @@ public final class ItemLayoutConstant {
 	/* vertex size */
 	public final static double HEIGHT_DEFAULT = 40.0;
 	public final static double WIDTH_DEFAULT = 45.0;
+	/* edge label closeness */
+	public final static double E_LABEL_CLOSENESS = 0.5;
 
 	/* font */
 	public final static int FONT_SIZE_NORMAL = 18;
-	public final static int FONT_SIZE_HYPHEN = 20;
+	public final static int FONT_SIZE_EMPHASISED = 20;
 	public final static int FONT_STYLE_NORMAL = Font.PLAIN;
-	public final static int FONT_STYLE_HYPHEN = Font.BOLD;
+	public final static int FONT_STYLE_EMPHASISED = Font.BOLD;
 
 	/* stroke */
 	public final static float STROKE_DASH_PHASE = 1.0f;

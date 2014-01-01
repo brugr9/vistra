@@ -1,16 +1,19 @@
-package vistra.gui.view.component.viewer.popup;
+package vistra.gui.view.mouse.popup;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -19,8 +22,8 @@ import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
-import vistra.gui.view.component.viewer.popup.verifier.EdgeWeightVerifier;
-import vistra.gui.view.component.viewer.popup.verifier.ItemIdVerifier;
+import vistra.gui.control.verifier.EdgeWeightVerifier;
+import vistra.gui.control.verifier.ItemIdVerifier;
 import vistra.util.Convert;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -30,7 +33,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeDialog extends JDialog {
+public class EdgeDialog extends JDialog implements Observer {
 
 	private static final long serialVersionUID = -6646549637907283799L;
 
@@ -68,16 +71,15 @@ public class EdgeDialog extends JDialog {
 			IGuiModel model) {
 		super(owner, true);
 		this.setResizable(false);
-
-		ResourceBundle b = model.getResourceBundle();
+		this.setTitle("edgeDialog");
 
 		/* content */
 		// name
-		this.nameLbl = new JLabel(b.getString("name.label"));
+		this.nameLbl = new JLabel("nameLbl");
 		this.name = new JTextField("name");
 		this.name.setColumns(10);
 		// weigth
-		this.weightLbl = new JLabel(b.getString("weight.label"));
+		this.weightLbl = new JLabel("weightLbl");
 		this.weight = new JTextField("weight");
 		this.weight.setColumns(10);
 		// panel
@@ -105,7 +107,6 @@ public class EdgeDialog extends JDialog {
 		this.setTextFieldValues(edge, viewer);
 		this.setListeners(edge, viewer, okButton, cancelButton);
 
-		this.setTitle(b.getString("edit.edge.label"));
 		this.setLayout(new BorderLayout());
 		this.add(this.content, BorderLayout.CENTER);
 		this.add(buttonPane, BorderLayout.SOUTH);
@@ -165,6 +166,29 @@ public class EdgeDialog extends JDialog {
 				.trim(), edge, viewer));
 		this.weight.setInputVerifier(new EdgeWeightVerifier(this.weight
 				.getText().trim()));
+	}
+
+	/**
+	 * Updates the dialog.
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+
+		IGuiModel m = (IGuiModel) o;
+		ResourceBundle b = m.getResourceBundle();
+
+		try {
+			if (arg == EventSource.I18N) {
+				this.setTitle(b.getString("edge.label"));
+				this.nameLbl.setText(b.getString("name.label"));
+				this.weightLbl.setText(b.getString("weight.label"));
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.toString(),
+					b.getString("app.label"), 1, null);
+			e.printStackTrace();
+		}
+
 	}
 
 }

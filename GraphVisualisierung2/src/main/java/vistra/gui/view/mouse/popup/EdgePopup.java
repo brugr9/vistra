@@ -1,4 +1,4 @@
-package vistra.gui.view.component.viewer.popup;
+package vistra.gui.view.mouse.popup;
 
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
