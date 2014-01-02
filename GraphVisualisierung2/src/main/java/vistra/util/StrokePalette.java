@@ -22,8 +22,7 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	UNEXPLORED(ItemLayoutConstant.STROKE_WIDTH_DEFAULT,
-			ItemLayoutConstant.STROKE_PATTERN_SOLID),
+	UNEXPLORED(StrokeWidth.widthDefault, StrokePattern.solid),
 	/**
 	 * Stroke style 'back'.
 	 * <ul>
@@ -32,8 +31,7 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	BACK(ItemLayoutConstant.STROKE_WIDTH_DEFAULT,
-			ItemLayoutConstant.STROKE_DASHED),
+	BACK(StrokeWidth.widthDefault, StrokePattern.dashed),
 	/**
 	 * Stroke style 'forward'.
 	 * <ul>
@@ -42,8 +40,7 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	FORWARD(ItemLayoutConstant.STROKE_WIDTH_DEFAULT,
-			ItemLayoutConstant.STROKE_DASHED_SHORT),
+	FORWARD(StrokeWidth.widthDefault, StrokePattern.shortDashed),
 	/**
 	 * Stroke style 'cross'.
 	 * <ul>
@@ -52,8 +49,7 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	CROSS(ItemLayoutConstant.STROKE_WIDTH_DEFAULT,
-			ItemLayoutConstant.STROKE_DASH_POINT),
+	CROSS(StrokeWidth.widthDefault, StrokePattern.dashPoint),
 	/**
 	 * Stroke style 'visited'.
 	 * <ul>
@@ -62,8 +58,7 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	VISITED(ItemLayoutConstant.STROKE_WIDTH_BOLD,
-			ItemLayoutConstant.STROKE_PATTERN_SOLID),
+	VISITED(StrokeWidth.widthBold, StrokePattern.solid),
 	/**
 	 * Stroke style 'discarded'.
 	 * <ul>
@@ -72,8 +67,7 @@ public enum StrokePalette {
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	DISCARDED(ItemLayoutConstant.STROKE_WIDTH_BOLD,
-			ItemLayoutConstant.STROKE_DASHED),
+	DISCARDED(StrokeWidth.widthBold, StrokePattern.dashed),
 
 	;
 
@@ -173,4 +167,129 @@ public enum StrokePalette {
 	 */
 	public final static BasicStroke discarded = DISCARDED.getStorke();
 
+	/**
+	 * Some stroke widths.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum StrokeWidth {
+
+		/**
+		 * Stroke width default.
+		 */
+		STROKE_WIDTH_DEFAULT(1.5f),
+		/**
+		 * Stroke width bold.
+		 */
+		STROKE_WIDTH_BOLD(3.0f),
+
+		;
+
+		/**
+		 * A field for the width.
+		 */
+		private float width;
+
+		/**
+		 * Main constructor.
+		 * 
+		 * @param width
+		 *            the width
+		 */
+		StrokeWidth(float width) {
+			this.width = width;
+		}
+
+		/**
+		 * Returns the width.
+		 * 
+		 * @return the width
+		 */
+		public float getWidth() {
+			return this.width;
+		}
+
+		/**
+		 * Stroke width default.
+		 */
+		public final static float widthDefault = STROKE_WIDTH_DEFAULT
+				.getWidth();
+		/**
+		 * Stroke width bold.
+		 */
+		public final static float widthBold = STROKE_WIDTH_BOLD.getWidth();
+
+	}
+
+	/**
+	 * Some stroke pattern.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum StrokePattern {
+
+		/**
+		 * Stroke pattern solid.
+		 */
+		STROKE_PATTERN_SOLID(null),
+		/**
+		 * Stroke pattern dashed.
+		 */
+		STROKE_DASHED(new float[] { 12.0f, 10.0f }),
+		/**
+		 * Stroke pattern short dashed.
+		 */
+		STROKE_DASHED_SHORT(new float[] { 1.0f, 8.0f }),
+		/**
+		 * Stroke pattern dash point.
+		 */
+		STROKE_DASH_POINT(new float[] { 10.0f, 10.0f, 1.0f, 10.0f }),
+
+		;
+
+		/**
+		 * A field for the pattern.
+		 */
+		private float[] pattern;
+
+		/**
+		 * Main constructor.
+		 * 
+		 * @param pattern
+		 *            the pattern
+		 */
+		StrokePattern(float[] pattern) {
+			this.pattern = pattern;
+		}
+
+		/**
+		 * Return the pattern.
+		 * 
+		 * @return the pattern
+		 */
+		public float[] getPattern() {
+			return this.pattern;
+		}
+
+		/**
+		 * Stroke pattern solid.
+		 */
+		public final static float[] solid = STROKE_PATTERN_SOLID.getPattern();
+		/**
+		 * Stroke pattern dashed.
+		 */
+		public final static float[] dashed = STROKE_DASHED.getPattern();
+		/**
+		 * Stroke pattern short dashed.
+		 */
+		public final static float[] shortDashed = STROKE_DASHED_SHORT
+				.getPattern();
+		/**
+		 * Stroke pattern dash-point.
+		 */
+		public final static float[] dashPoint = STROKE_DASH_POINT.getPattern();
+
+	}
 }
