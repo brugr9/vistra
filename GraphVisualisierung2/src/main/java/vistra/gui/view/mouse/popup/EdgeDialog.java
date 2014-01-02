@@ -1,5 +1,7 @@
 package vistra.gui.view.mouse.popup;
 
+import static vistra.gui.control.IControl.EventSource.EDIT;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -18,7 +20,6 @@ import javax.swing.border.EmptyBorder;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.IGuiModel;
-import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.verifier.EdgeWeightVerifier;
 import vistra.gui.control.verifier.ItemIdVerifier;
 import vistra.util.Convert;
@@ -93,27 +94,27 @@ public class EdgeDialog extends JDialog {
 		this.content.add(this.name);
 		this.content.add(this.weightLbl);
 		this.content.add(this.weight);
+		this.setText(edge, viewer);
 
-		/* button */
+		/* button panel */
+		// button
 		JButton ok = new JButton("OK");
-		ok.setActionCommand(EventSource.EDIT.toString());
+		ok.setActionCommand(EDIT.toString());
 		ok.addActionListener(model.getParameterStateHandler());
 		JButton cancel = new JButton("Cancel");
 		cancel.setActionCommand("Cancel");
-
-		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		buttonPane.add(ok);
-		buttonPane.add(cancel);
+		this.setListeners(edge, viewer, ok, cancel);
+		// panel
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		buttonPanel.add(ok);
+		buttonPanel.add(cancel);
 		this.getRootPane().setDefaultButton(ok);
 
-		this.setText(edge, viewer);
-		this.setListeners(edge, viewer, ok, cancel);
-
+		/* this */
 		this.setLayout(new BorderLayout());
 		this.add(this.content, BorderLayout.CENTER);
-		this.add(buttonPane, BorderLayout.SOUTH);
-
+		this.add(buttonPanel, BorderLayout.SOUTH);
 		this.pack();
 	}
 

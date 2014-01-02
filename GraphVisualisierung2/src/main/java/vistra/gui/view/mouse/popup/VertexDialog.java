@@ -78,27 +78,27 @@ public class VertexDialog extends JDialog {
 		this.content.setLayout(new GridLayout(1, 2, 0, 0));
 		this.content.add(this.nameLbl);
 		this.content.add(this.name);
+		this.setText(vertex, viewer);
 
-		/* button */
+		/* button panel */
+		// button
 		JButton ok = new JButton("OK");
 		ok.setActionCommand(EDIT.toString());
 		ok.addActionListener(model.getParameterStateHandler());
 		JButton cancel = new JButton("Cancel");
 		cancel.setActionCommand("Cancel");
-
-		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		buttonPane.add(ok);
-		buttonPane.add(cancel);
+		this.setListeners(vertex, viewer, ok, cancel);
+		// panel
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		buttonPanel.add(ok);
+		buttonPanel.add(cancel);
 		this.getRootPane().setDefaultButton(ok);
 
-		this.setText(vertex, viewer);
-		this.setListeners(vertex, viewer, ok, cancel);
-
+		/* this */
 		this.setLayout(new BorderLayout());
 		this.add(this.content, BorderLayout.CENTER);
-		this.add(buttonPane, BorderLayout.SOUTH);
-
+		this.add(buttonPanel, BorderLayout.SOUTH);
 		this.pack();
 	}
 

@@ -6,7 +6,7 @@ package vistra.util;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Sigma {
+public interface Sigma {
 
 	/**
 	 * A sign for an initial state.
