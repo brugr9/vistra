@@ -90,7 +90,7 @@ public class PopupPlugin extends
 
 				if (edge == null && vertex == null && this.modePopup != null) {
 					if (this.modePopup instanceof IItemPopup) {
-						((IItemPopup) this.modePopup).setItemLocation(point);
+						((IItemPopup) this.modePopup).setPopupLocation(point);
 					}
 					this.modePopup.show(viewer, e.getX(), e.getY());
 				}
@@ -113,7 +113,7 @@ public class PopupPlugin extends
 		for (Component comp : popUp.getComponents()) {
 			if (comp instanceof IItemPopup) {
 				((IItemPopup) comp).setItem(item);
-				((IItemPopup) comp).setItemLocation(point);
+				((IItemPopup) comp).setPopupLocation(point);
 			}
 		}
 	}

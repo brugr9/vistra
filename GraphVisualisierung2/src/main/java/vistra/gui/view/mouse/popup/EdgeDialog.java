@@ -96,7 +96,7 @@ public class EdgeDialog extends JDialog {
 
 		/* button */
 		JButton ok = new JButton("OK");
-		ok.setActionCommand(EventSource.EDIT_GRAPH.toString());
+		ok.setActionCommand(EventSource.EDIT.toString());
 		ok.addActionListener(model.getParameterStateHandler());
 		JButton cancel = new JButton("Cancel");
 		cancel.setActionCommand("Cancel");
@@ -146,8 +146,8 @@ public class EdgeDialog extends JDialog {
 	 * @param edge
 	 * @param viewer
 	 */
-	protected void updateText(IEdgeLayout edge,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
+	private void updateText(final IEdgeLayout edge,
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		edge.setId(this.name.getText().trim());
 		edge.setWeight(Convert.toInteger(this.weight.getText()));
 		viewer.repaint();

@@ -1,14 +1,17 @@
 package vistra.gui.control.state;
 
-import static vistra.gui.control.IControl.EventSource.MODE;
 import static vistra.gui.control.IControl.EventSource.ALGORITHM;
-import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
+import static vistra.gui.control.IControl.EventSource.EDIT;
+import static vistra.gui.control.IControl.EventSource.START;
+import static vistra.gui.control.IControl.EventSource.END;
+
 import static vistra.gui.control.IControl.EventSource.GRAPH;
-import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
-import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
-import static vistra.gui.control.IControl.EventSource.OPEN_GRAPH;
-import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH;
-import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH_AS;
+import static vistra.gui.control.IControl.EventSource.MODE;
+import static vistra.gui.control.IControl.EventSource.NEW_DIRECTED;
+import static vistra.gui.control.IControl.EventSource.NEW_UNDIRECTED;
+import static vistra.gui.control.IControl.EventSource.OPEN;
+import static vistra.gui.control.IControl.EventSource.SAVE;
+import static vistra.gui.control.IControl.EventSource.SAVE_AS;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -39,9 +42,9 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
  * an algorithm as parameter for generating a traversal-object.
  * <p>
  * As a part of the graphic user interface control, this state handler is an
- * action listener (file menu for the graph) and an item listener (algorithm
- * combo box), too. Furthermore, this handler listens on graph-events (edges,
- * vertices).
+ * action listener (file menu and edit pop-up for the graph) and an item
+ * listener (algorithm combo box), too. Furthermore, this handler listens on
+ * graph-events (adding/deletion of edges and vertices).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -82,7 +85,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Related to menu item.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -92,17 +95,21 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.top = (Container) ((JComponent) e.getSource())
 					.getTopLevelAncestor();
 
-			if (c.equals(NEW_GRAPH_UNDIRECTED.toString())) {
+			if (c.equals(NEW_UNDIRECTED.toString())) {
 				this.handleNewGraphUndirected();
-			} else if (c.equals(NEW_GRAPH_DIRECTED.toString())) {
+			} else if (c.equals(NEW_DIRECTED.toString())) {
 				this.handleNewGraphDirected();
-			} else if (c.equals(OPEN_GRAPH.toString())) {
+			} else if (c.equals(OPEN.toString())) {
 				this.handleOpenGraph();
-			} else if (c.equals(SAVE_GRAPH.toString())) {
+			} else if (c.equals(SAVE.toString())) {
 				this.handleSaveGraph();
-			} else if (c.equals(SAVE_GRAPH_AS.toString())) {
+			} else if (c.equals(SAVE_AS.toString())) {
 				this.handleSaveGraphAs();
-			} else if (c.equals(EDIT_GRAPH.toString())) {
+			} else if (c.equals(EDIT.toString())) {
+				this.handleEditGraph();
+			} else if (c.equals(START.toString())) {
+				this.handleEditGraph();
+			} else if (c.equals(END.toString())) {
 				this.handleEditGraph();
 			}
 
@@ -114,7 +121,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Related to the algorithm combo-box.
 	 */
 	@Override
 	public void itemStateChanged(ItemEvent e) {
@@ -141,6 +148,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	@Override
 	public void handleGraphEvent(GraphEvent<IVertexLayout, IEdgeLayout> evt) {
 		try {
+
+			// item added
+			// item deleted
+
 			this.handleEditGraph();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
@@ -558,45 +569,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * A helper method: Brings up a dialog asking for saving the graph with the
-	 * options <i>Yes</i>, <i>No</i> and <i>Cancel</i>. If the option <i>Yes</i>
-	 * is chosen, saving the graph will be delegated depending on the actual
-	 * state set.
-	 * 
-	 * @return an integer indicating the option selected by the user:
-	 *         <ul>
-	 *         <li>JOptionPane.YES_NO_OPTION = 0
-	 *         <li>JOptionPane.YES_NO_CANCEL_OPTION = 1
-	 *         <li>JOptionPane.OK_CANCEL_OPTION = 2
-	 *         </ul>
-	 * 
-	 * @throws Exception
-	 */
-	private int confirmSavingGraph() throws Exception {
-		try {
-			/* dialog */
-			ResourceBundle b = this.model.getResourceBundle();
-			String message = b.getString("graph.label") + ": "
-					+ b.getString("save.label") + "?";
-			int option = JOptionPane.showConfirmDialog(top, message,
-					b.getString("app.label"), JOptionPane.YES_NO_CANCEL_OPTION,
-					JOptionPane.QUESTION_MESSAGE);
-			/* delegate */
-			if (option == JOptionPane.YES_OPTION) {
-				Class<? extends AbstractParameterState> state = this.state
-						.getClass();
-				if (state == ParameterStateGraphEdited.class)
-					this.saveGraph();
-				if (state == ParameterStateIdle.class)
-					this.saveGraphAs();
-			}
-			return option;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * A helper method: Sets the view elements related to saving a graph.
 	 * 
 	 * @param saved
@@ -668,6 +640,45 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					.getAcceptAllFileFilter());
 			// done
 			return fileChooser;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * A helper method: Brings up a dialog asking for saving the graph with the
+	 * options <i>Yes</i>, <i>No</i> and <i>Cancel</i>. If the option <i>Yes</i>
+	 * is chosen, saving the graph will be delegated depending on the actual
+	 * state set.
+	 * 
+	 * @return an integer indicating the option selected by the user:
+	 *         <ul>
+	 *         <li>JOptionPane.YES_NO_OPTION = 0
+	 *         <li>JOptionPane.YES_NO_CANCEL_OPTION = 1
+	 *         <li>JOptionPane.OK_CANCEL_OPTION = 2
+	 *         </ul>
+	 * 
+	 * @throws Exception
+	 */
+	private int confirmSavingGraph() throws Exception {
+		try {
+			/* dialog */
+			ResourceBundle b = this.model.getResourceBundle();
+			String message = b.getString("graph.label") + ": "
+					+ b.getString("save.label") + "?";
+			int option = JOptionPane.showConfirmDialog(top, message,
+					b.getString("app.label"), JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE);
+			/* delegate */
+			if (option == JOptionPane.YES_OPTION) {
+				Class<? extends AbstractParameterState> state = this.state
+						.getClass();
+				if (state == ParameterStateGraphEdited.class)
+					this.saveGraph();
+				if (state == ParameterStateIdle.class)
+					this.saveGraphAs();
+			}
+			return option;
 		} catch (Exception e) {
 			throw e;
 		}

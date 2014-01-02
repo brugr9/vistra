@@ -25,19 +25,27 @@ public interface IControl {
 		// IO graph
 		GRAPH("graph"),
 		//
-		NEW_GRAPH_UNDIRECTED("newGraphUndirected"),
+		NEW_UNDIRECTED("newUndirected"),
 		//
-		NEW_GRAPH_DIRECTED("newGraphDirected"),
+		NEW_DIRECTED("newDirected"),
 		//
-		OPEN_GRAPH("openGraph"),
+		OPEN("open"),
 		//
-		SAVE_GRAPH("saveGraph"),
+		SAVE("save"),
 		//
-		SAVE_GRAPH_AS("saveGraphAs"),
-		//
-		EDIT_GRAPH("editGraph"),
+		SAVE_AS("saveAs"),
+
 		// edit
 		MODE("mode"),
+		//
+		EDIT("edit"),
+		//
+		START("start"),
+		//
+		END("end"),
+		//
+		DELETE("delete"),
+
 		// algorithm
 		ALGORITHM("algorithm"),
 		// player settings

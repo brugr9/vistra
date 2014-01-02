@@ -3,6 +3,8 @@ package vistra.gui.view.mouse.popup;
 import java.awt.geom.Point2D;
 import java.util.Observer;
 
+import javax.swing.JFrame;
+
 import vistra.core.graph.item.IItemLayout;
 
 /**
@@ -27,5 +29,8 @@ public interface IItemPopup extends Observer {
 	 * @param location
 	 *            the location to set
 	 */
-	void setItemLocation(Point2D location);
+	void setPopupLocation(Point2D location);
+
+	void addPropertyItemListener(JFrame top);
+
 }

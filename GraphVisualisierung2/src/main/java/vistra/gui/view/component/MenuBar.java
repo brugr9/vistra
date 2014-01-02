@@ -3,11 +3,11 @@ package vistra.gui.view.component;
 import vistra.util.I18nPalette;
 
 import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
-import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
-import static vistra.gui.control.IControl.EventSource.OPEN_GRAPH;
-import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH;
-import static vistra.gui.control.IControl.EventSource.SAVE_GRAPH_AS;
+import static vistra.gui.control.IControl.EventSource.NEW_DIRECTED;
+import static vistra.gui.control.IControl.EventSource.NEW_UNDIRECTED;
+import static vistra.gui.control.IControl.EventSource.OPEN;
+import static vistra.gui.control.IControl.EventSource.SAVE;
+import static vistra.gui.control.IControl.EventSource.SAVE_AS;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -120,9 +120,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.saveAs.addActionListener(model.getParameterStateHandler());
 			this.quit.addActionListener(model.getQuitListener());
 			// command
-			this.open.setActionCommand(OPEN_GRAPH.toString());
-			this.save.setActionCommand(SAVE_GRAPH.toString());
-			this.saveAs.setActionCommand(SAVE_GRAPH_AS.toString());
+			this.open.setActionCommand(OPEN.toString());
+			this.save.setActionCommand(SAVE.toString());
+			this.saveAs.setActionCommand(SAVE_AS.toString());
 			{// graph
 				this.newGraph = new JMenu("newGraph");
 				this.undirected = new JMenuItem("undirected");
@@ -133,9 +133,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 				this.directed.addActionListener(model
 						.getParameterStateHandler());
 				// command
-				this.undirected.setActionCommand(NEW_GRAPH_UNDIRECTED
-						.toString());
-				this.directed.setActionCommand(NEW_GRAPH_DIRECTED.toString());
+				this.undirected.setActionCommand(NEW_UNDIRECTED.toString());
+				this.directed.setActionCommand(NEW_DIRECTED.toString());
 				// add
 				this.newGraph.add(this.undirected);
 				this.newGraph.add(this.directed);

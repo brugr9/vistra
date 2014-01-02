@@ -1,7 +1,7 @@
 package vistra.gui.view.mouse.popup;
 
+import static vistra.gui.control.IControl.EventSource.EDIT;
 import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -71,35 +71,23 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		super("edgePopup");
 		/**/
 		this.viewer = viewer;
-		this.model = (IGuiModel) model;
+		this.model = model;
 		this.point = null;
 		this.edge = null;
 
 		/**/
 		this.property = new JMenuItem("property");
-		this.setRootFrame(top);
+		this.property.setActionCommand(EDIT.toString());
+		this.property.addActionListener(model.getParameterStateHandler());
+		this.addPropertyItemListener(top);
 		//
 		this.delete = new JMenuItem("delete");
-		this.delete.setActionCommand(EDIT_GRAPH.toString());
-		this.delete.addActionListener(model.getParameterStateHandler());
 		this.delete.addActionListener(new DeleteActionListener());
 
 		/**/
 		this.add(this.property);
 		this.addSeparator();
 		this.add(this.delete);
-	}
-
-	/**
-	 * @param rootFrame
-	 */
-	protected void setRootFrame(final JFrame top) {
-		this.property.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EdgePopup.this.showDialog(top);
-			}
-		});
 	}
 
 	/**
@@ -141,10 +129,23 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setItemLocation(Point2D point) {
+	public void setPopupLocation(Point2D point) {
 		if (point != null) {
 			this.point = point;
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addPropertyItemListener(final JFrame top) {
+		this.property.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EdgePopup.this.showDialog(top);
+			}
+		});
 	}
 
 	/**

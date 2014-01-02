@@ -1,7 +1,9 @@
 package vistra.gui.view.mouse.popup;
 
 import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
+import static vistra.gui.control.IControl.EventSource.EDIT;
+import static vistra.gui.control.IControl.EventSource.START;
+import static vistra.gui.control.IControl.EventSource.END;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -85,21 +87,20 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 
 		/**/
 		this.start = new JCheckBoxMenuItem("start");
-		this.start.setActionCommand(EDIT_GRAPH.toString());
+		this.start.setActionCommand(START.toString());
 		this.start.addActionListener(model.getParameterStateHandler());
 		this.start.addActionListener(new StartActionListener());
 		//
 		this.end = new JCheckBoxMenuItem("end");
-		this.end.setActionCommand(EDIT_GRAPH.toString());
+		this.end.setActionCommand(END.toString());
 		this.end.addActionListener(model.getParameterStateHandler());
 		this.end.addActionListener(new EndActionListener());
 		//
 		this.property = new JMenuItem("property");
-		this.setRootFrame(top);
+		this.property.setActionCommand(EDIT.toString());
+		this.property.addActionListener(model.getParameterStateHandler());
 		//
 		this.delete = new JMenuItem("delete");
-		this.delete.setActionCommand(EDIT_GRAPH.toString());
-		this.delete.addActionListener(model.getParameterStateHandler());
 		this.delete.addActionListener(new DeleteActionListener());
 
 		/**/
@@ -152,18 +153,6 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	}
 
 	/**
-	 * @param rootFrame
-	 */
-	protected void setRootFrame(final JFrame top) {
-		this.property.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				VertexPopup.this.showDialog(top);
-			}
-		});
-	}
-
-	/**
 	 * Shows the dialog.
 	 * 
 	 * @param owner
@@ -204,10 +193,23 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setItemLocation(Point2D point) {
+	public void setPopupLocation(Point2D point) {
 		if (point != null) {
 			this.point = point;
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addPropertyItemListener(final JFrame top) {
+		this.property.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VertexPopup.this.showDialog(top);
+			}
+		});
 	}
 
 	/**

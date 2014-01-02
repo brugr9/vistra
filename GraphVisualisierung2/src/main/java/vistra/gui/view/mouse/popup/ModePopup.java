@@ -11,10 +11,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
+import vistra.gui.IGuiModel;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
-
-import vistra.gui.IGuiModel;
 
 /**
  * A mode pop-up.
