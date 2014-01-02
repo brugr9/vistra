@@ -21,6 +21,7 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	/**
 	 * A field for some signs.
 	 */
+	// TODO recursion
 	private static IBidirectIterator<String> SIGMA;
 
 	/**
