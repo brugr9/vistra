@@ -1,23 +1,23 @@
-package vistra.core.graph.item.transformer;
+package vistra.core.graph.ml.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
 import vistra.core.graph.item.IVertexLayout;
 
 /**
- * A vertex transformer: end value.
+ * A vertex transformer: y-coordinate.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexEnd implements Transformer<IVertexLayout, String> {
+public class VertexCoordY implements Transformer<IVertexLayout, String> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String transform(IVertexLayout vertex) {
-		return String.valueOf(vertex.isEnd());
+		return String.valueOf((int) vertex.getLocation().getY());
 	}
 
 }

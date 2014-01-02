@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import vistra.gui.IGuiModel;
 
 /**
- * A listener for getting some help.
+ * A help action listener.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

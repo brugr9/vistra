@@ -29,7 +29,7 @@ public class EditingPlugin extends
 	/**
 	 * A field for a JUNG visualization viewer.
 	 */
-	private VisualizationViewer<IVertexLayout, IEdgeLayout> vv;
+	private VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
 
 	/**
 	 * A field for a JUNG layout.
@@ -99,12 +99,12 @@ public class EditingPlugin extends
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			
-			this.vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+
+			this.viewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
 					.getSource();
-			this.layout = this.vv.getModel().getGraphLayout();
+			this.layout = this.viewer.getModel().getGraphLayout();
 			final Point2D p = e.getPoint();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = this.vv
+			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = this.viewer
 					.getPickSupport();
 
 			if (pickSupport != null) {
@@ -128,7 +128,7 @@ public class EditingPlugin extends
 					this.startVertex = vertex;
 					this.down = e.getPoint();
 					this.transformEdgeShape(this.down, this.down);
-					this.vv.addPostRenderPaintable(this.edgePaintable);
+					this.viewer.addPostRenderPaintable(this.edgePaintable);
 
 					if ((e.getModifiers() & MouseEvent.SHIFT_MASK) != 0
 							&& this.layout.getGraph() instanceof UndirectedGraph == false) {
@@ -137,21 +137,21 @@ public class EditingPlugin extends
 
 					if (this.edgeIsDirected == EdgeType.DIRECTED) {
 						this.transformArrowShape(this.down, e.getPoint());
-						this.vv.addPostRenderPaintable(this.arrowPaintable);
+						this.viewer.addPostRenderPaintable(this.arrowPaintable);
 					}
 				} else {
 					/* vertex */
 					IVertexLayout newVertex = this.vertexFactory.create();
 					graph.addVertex(newVertex);
 
-					Point2D point = this.vv.getRenderContext()
+					Point2D point = this.viewer.getRenderContext()
 							.getMultiLayerTransformer()
 							.inverseTransform(e.getPoint());
 					this.layout.setLocation(newVertex, point);
 					newVertex.setLocation(point);
 				}
 			}
-			this.vv.repaint();
+			this.viewer.repaint();
 		}
 	}
 
@@ -165,31 +165,31 @@ public class EditingPlugin extends
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if (this.checkModifiers(e)) {
-			
-			this.vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+
+			this.viewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
 					.getSource();
 			final Point2D p = e.getPoint();
-			this.layout = this.vv.getModel().getGraphLayout();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = this.vv
+			this.layout = this.viewer.getModel().getGraphLayout();
+			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = this.viewer
 					.getPickSupport();
 
 			if (pickSupport != null) {
 				final IVertexLayout vertex = pickSupport.getVertex(layout,
 						p.getX(), p.getY());
 				if (vertex != null && this.startVertex != null) {
-					Graph<IVertexLayout, IEdgeLayout> graph = this.vv
+					Graph<IVertexLayout, IEdgeLayout> graph = this.viewer
 							.getGraphLayout().getGraph();
 					graph.addEdge(this.edgeFactory.create(), this.startVertex,
 							vertex, this.edgeIsDirected);
 				}
-				this.vv.repaint();
+				this.viewer.repaint();
 			}
 			this.startVertex = null;
 			this.down = null;
 			// set default edge type
 			this.edgeIsDirected = EdgeType.DIRECTED;
-			this.vv.removePostRenderPaintable(this.edgePaintable);
-			this.vv.removePostRenderPaintable(this.arrowPaintable);
+			this.viewer.removePostRenderPaintable(this.edgePaintable);
+			this.viewer.removePostRenderPaintable(this.arrowPaintable);
 		}
 	}
 

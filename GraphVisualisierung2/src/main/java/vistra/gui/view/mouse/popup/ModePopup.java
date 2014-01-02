@@ -11,35 +11,36 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 import vistra.gui.IGuiModel;
 
 /**
- * A switch-mode pop-up.
+ * A mode pop-up.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
+ * @see ModalGraphMouse
  */
-public class SwitchModePopup extends JPopupMenu implements Observer {
+public class ModePopup extends JPopupMenu implements Observer {
 
 	private static final long serialVersionUID = 6897658442329318591L;
 
 	/**
-	 * A field for a editing menu item.
+	 * A field for an editing menu item.
 	 */
 	private JMenuItem editing;
 	/**
-	 * A field for a editing menu item.
+	 * A field for a picking menu item.
 	 */
 	private JMenuItem picking;
 
 	/**
 	 * Main constructor.
 	 */
-	public SwitchModePopup(IGuiModel model) {
-		super("modus");
-
+	public ModePopup(IGuiModel model) {
+		super();
 		this.picking = new JMenuItem("picking");
 		this.editing = new JMenuItem("editing");
 		this.picking.addActionListener(model.getModeListener());
@@ -51,7 +52,7 @@ public class SwitchModePopup extends JPopupMenu implements Observer {
 	}
 
 	/**
-	 * Updates the mouse.
+	 * Updates the pop-up.
 	 */
 	@Override
 	public void update(Observable o, Object arg) {

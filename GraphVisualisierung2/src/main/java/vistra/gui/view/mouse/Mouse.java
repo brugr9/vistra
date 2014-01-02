@@ -1,6 +1,7 @@
 package vistra.gui.view.mouse;
 
 import static vistra.gui.control.IControl.EventSource.MODE;
+import static vistra.gui.control.IControl.EventSource.I18N;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -13,12 +14,12 @@ import vistra.core.graph.item.EdgeFactory;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.core.graph.item.VertexFactory;
+import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
 import vistra.gui.view.mouse.popup.EdgePopup;
-import vistra.gui.view.mouse.popup.SwitchModePopup;
+import vistra.gui.view.mouse.popup.ModePopup;
 import vistra.gui.view.mouse.popup.VertexPopup;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
-import edu.uci.ics.jung.visualization.annotations.AnnotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.AnimatedPickingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
@@ -37,7 +38,7 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 	/**
 	 * A field for a switch-mode pop-up menu.
 	 */
-	private SwitchModePopup modePopup;
+	private ModePopup modePopup;
 	/**
 	 * A field for a vertex pop-up menu.
 	 */
@@ -60,14 +61,18 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 	public Mouse(JFrame top, IGuiModel model,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		super(viewer.getRenderContext(), new VertexFactory(), new EdgeFactory());
-		this.modePopup = new SwitchModePopup(model);
+
+		this.modePopup = new ModePopup(model);
 		this.vertexPopup = new VertexPopup(top, viewer, model);
 		this.edgePopup = new EdgePopup(top, viewer, model);
+		((GuiModel) model).addObserver(this.modePopup);
+		((GuiModel) model).addObserver(this.vertexPopup);
+		((GuiModel) model).addObserver(this.edgePopup);
 
 		this.loadPlugins();
 		if (this.popupEditingPlugin instanceof PopupPlugin) {
 			((PopupPlugin) this.popupEditingPlugin)
-					.setSwitchModePopup(this.modePopup);
+					.setModePopup(this.modePopup);
 			((PopupPlugin) this.popupEditingPlugin)
 					.setEdgePopup(this.edgePopup);
 			((PopupPlugin) this.popupEditingPlugin)
@@ -85,18 +90,15 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 		this.scalingPlugin = new ScalingGraphMousePlugin(
 				new CrossoverScalingControl(), 0, this.in, this.out);
 		this.add(this.scalingPlugin);
-
 		/* picking */
 		this.pickingPlugin = new PickingPlugin();
 		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<IVertexLayout, IEdgeLayout>();
-		/* Editing */
+		/* editing */
 		this.popupEditingPlugin = new PopupPlugin(this.vertexFactory,
 				this.edgeFactory);
 		this.editingPlugin = new EditingPlugin(this.vertexFactory,
 				this.edgeFactory);
 		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<IVertexLayout, IEdgeLayout>();
-		this.annotatingPlugin = new AnnotatingGraphMousePlugin<IVertexLayout, IEdgeLayout>(
-				rc);
 	}
 
 	/**
@@ -109,7 +111,6 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 		remove(this.popupEditingPlugin);
 		remove(this.editingPlugin);
 		remove(this.labelEditingPlugin);
-		remove(this.annotatingPlugin);
 	}
 
 	/**
@@ -121,21 +122,7 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 		remove(this.animatedPickingPlugin);
 		add(this.popupEditingPlugin);
 		add(this.editingPlugin);
-		remove(this.labelEditingPlugin);
-		remove(this.annotatingPlugin);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void setAnnotatingMode() {
-		remove(this.pickingPlugin);
-		remove(this.animatedPickingPlugin);
-		remove(this.popupEditingPlugin);
-		remove(this.editingPlugin);
 		add(this.labelEditingPlugin);
-		add(this.annotatingPlugin);
 	}
 
 	/**
@@ -148,7 +135,11 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == MODE) {
+			if (arg == I18N) {
+				this.modePopup.setLabel(b.getString("mode.label"));
+				this.vertexPopup.setLabel(b.getString("vertex.label"));
+				this.edgePopup.setLabel(b.getString("edge.label"));
+			} else if (arg == MODE) {
 				this.setMode(m.getMode());
 				this.modePopup.setEnabled(m.isSwitchModeEnabled());
 				this.vertexPopup.setEnabled(m.isVertexEnabled());

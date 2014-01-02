@@ -1,9 +1,8 @@
 package vistra.gui.control.state;
 
+import static vistra.gui.control.IControl.EventSource.MODE;
 import static vistra.gui.control.IControl.EventSource.ALGORITHM;
 import static vistra.gui.control.IControl.EventSource.EDIT_GRAPH;
-import static vistra.gui.control.IControl.EventSource.START;
-import static vistra.gui.control.IControl.EventSource.FINISH;
 import static vistra.gui.control.IControl.EventSource.GRAPH;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_DIRECTED;
 import static vistra.gui.control.IControl.EventSource.NEW_GRAPH_UNDIRECTED;
@@ -33,6 +32,7 @@ import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
  * An a parameter state handler. A parameter state machine handles a graph and
@@ -103,10 +103,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			} else if (c.equals(SAVE_GRAPH_AS.toString())) {
 				this.handleSaveGraphAs();
 			} else if (c.equals(EDIT_GRAPH.toString())) {
-				this.handleEditGraph();
-			} else if (c.equals(START.toString())) {
-				this.handleEditGraph();
-			} else if (c.equals(FINISH.toString())) {
 				this.handleEditGraph();
 			}
 
@@ -289,7 +285,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * A state view setter: Sets the view for state: idle.
 	 */
 	void setViewIdle() {
-		this.enableMenu(true);
+		// Graph
+		this.setGraphEditable(true);
+		// Algorithm
 		this.model.setAlgorithmsEnabled(false);
 		this.model.notifyObservers(EventSource.ALGORITHM);
 	}
@@ -298,15 +296,21 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * A state view setter: Sets the view for state: graph edited.
 	 */
 	void setViewGraphEdited() {
+		// Graph
 		this.setGraphSaved(false);
+		// Algorithm
+		this.model.setAlgorithmsEnabled(false);
+		this.model.notifyObservers(EventSource.ALGORITHM);
 	}
 
 	/**
 	 * A state view setter: Sets the view for state: graph saved.
 	 */
 	void setViewGraphSaved() {
+		// Graph
 		this.setGraphSaved(true);
 		this.enableMenu(true);
+		// Algorithm
 		this.model.setAlgorithmsEnabled(true);
 		this.model.notifyObservers(EventSource.ALGORITHM);
 	}
@@ -316,30 +320,23 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * the user by option pane about having successfully rendered the traversal.
 	 */
 	void setViewAlgorithmSelected() {
+		// Graph
 		this.enableMenu(true);
+		// Algorithm
 		this.model.setAlgorithmsEnabled(true);
 		this.model.notifyObservers(EventSource.ALGORITHM);
-		/* enable traversal player */
-		try {
-			this.model.getAnimationStateHandler().handleIdle();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		/* render message */
-		ResourceBundle b = this.model.getResourceBundle();
-		JOptionPane.showMessageDialog(null, b.getString("render.message"),
-				b.getString("app.label"), 1, null);
 	}
 
 	/**
 	 * A state view setter: Sets the view for state: off.
 	 */
 	void setViewOff() {
+		// Graph
 		this.enableMenu(false);
+		this.setGraphEditable(false);
+		// Algorithm
 		this.model.setAlgorithmsEnabled(false);
 		this.model.notifyObservers(EventSource.ALGORITHM);
-		this.setGraphEditable(false);
 	}
 
 	/**
@@ -621,6 +618,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 *            the editable to set
 	 */
 	private void setGraphEditable(boolean editable) {
+		if (editable) {
+			this.model.setMode(Mode.EDITING);
+			this.model.notifyObservers(MODE);
+		}
 		this.model.setEditEnabled(editable);
 		this.model.notifyObservers(GRAPH);
 	}
@@ -673,21 +674,24 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * Doing: Enables or disabled the traversal player.
+	 * Doing: Enables or disabled the traversal.
 	 * 
 	 * @param enabled
 	 *            the enabled to set
 	 * @throws Exception
 	 */
-	void enableTraversalPlayer(boolean enabled) throws Exception {
+	void enableTraversal(boolean enabled) throws Exception {
 		try {
-			if (enabled)
+			if (enabled) {
 				this.model.getAnimationStateHandler().handleIdle();
-			else
+				ResourceBundle b = this.model.getResourceBundle();
+				JOptionPane.showMessageDialog(null,
+						b.getString("render.message"),
+						b.getString("app.label"), 1, null);
+			} else
 				this.model.getAnimationStateHandler().handleOff();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
-
 }

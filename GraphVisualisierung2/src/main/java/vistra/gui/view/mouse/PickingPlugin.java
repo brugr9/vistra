@@ -24,7 +24,7 @@ public class PickingPlugin extends
 	/**
 	 * A field for a JUNG visualization viewer.
 	 */
-	private VisualizationViewer<IVertexLayout, IEdgeLayout> vv;
+	private VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
 
 	/**
 	 * Main constructor.
@@ -40,18 +40,18 @@ public class PickingPlugin extends
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (this.locked == false) {
-			this.vv = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+			this.viewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
 					.getSource();
 			if (this.vertex != null) {
 				Point point = e.getPoint();
-				MultiLayerTransformer mt = vv.getRenderContext()
+				MultiLayerTransformer mt = viewer.getRenderContext()
 						.getMultiLayerTransformer();
 				Point2D graphPoint = mt.inverseTransform(point);
 				Point2D graphDown = mt.inverseTransform(this.down);
-				Layout<IVertexLayout, IEdgeLayout> layout = vv.getGraphLayout();
+				Layout<IVertexLayout, IEdgeLayout> layout = viewer.getGraphLayout();
 				double dx = graphPoint.getX() - graphDown.getX();
 				double dy = graphPoint.getY() - graphDown.getY();
-				PickedState<IVertexLayout> ps = vv.getPickedVertexState();
+				PickedState<IVertexLayout> ps = viewer.getPickedVertexState();
 
 				for (IVertexLayout v : ps.getPicked()) {
 					Point2D vp = layout.transform(v);
@@ -71,7 +71,7 @@ public class PickingPlugin extends
 			}
 			if (this.vertex != null)
 				e.consume();
-			vv.repaint();
+			viewer.repaint();
 		}
 	}
 

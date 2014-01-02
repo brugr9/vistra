@@ -2,12 +2,12 @@ package vistra.core.graph.ml;
 
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
-import vistra.core.graph.item.transformer.EdgeWeight;
-import vistra.core.graph.item.transformer.VertexCoordX;
-import vistra.core.graph.item.transformer.VertexCoordY;
-import vistra.core.graph.item.transformer.VertexEnd;
-import vistra.core.graph.item.transformer.VertexStart;
-import vistra.core.graph.item.transformer.VertexValue;
+import vistra.core.graph.ml.transformer.EdgeWeight;
+import vistra.core.graph.ml.transformer.VertexCoordX;
+import vistra.core.graph.ml.transformer.VertexCoordY;
+import vistra.core.graph.ml.transformer.VertexEnd;
+import vistra.core.graph.ml.transformer.VertexStart;
+import vistra.core.graph.ml.transformer.VertexValue;
 import edu.uci.ics.jung.io.GraphMLWriter;
 
 /**
@@ -46,24 +46,30 @@ public final class ExtendedGraphMLWriter extends
 	 * Main constructor.
 	 */
 	public ExtendedGraphMLWriter() {
+		// vertex: x
 		this.addVertexData(ExtendedGraphMLWriter.V_LOC_X,
 				ExtendedGraphMLWriter.V_LOC_X_COMMENT,
 				Integer.toString(ExtendedGraphMLWriter.V_LOC_X_DEFAULT),
 				new VertexCoordX());
+		// vertex: y
 		this.addVertexData(ExtendedGraphMLWriter.V_LOC_Y, V_LOC_Y_COMMENT,
 				Integer.toString(ExtendedGraphMLWriter.V_LOC_Y_DEFAULT),
 				new VertexCoordY());
+		// vertex: start
 		this.addVertexData(ExtendedGraphMLWriter.V_START,
 				ExtendedGraphMLWriter.V_START_COMMENT,
 				Boolean.toString(ExtendedGraphMLWriter.V_START_DEFAULT),
 				new VertexStart());
+		// vertex: end
 		this.addVertexData(ExtendedGraphMLWriter.V_END,
 				ExtendedGraphMLWriter.V_END_COMMENT,
 				Boolean.toString(ExtendedGraphMLWriter.V_END_DEFAULT),
 				new VertexEnd());
+		// vertex: value
 		this.addVertexData(ExtendedGraphMLWriter.V_VALUE,
 				ExtendedGraphMLWriter.V_VALUE_COMMENT,
 				ExtendedGraphMLWriter.V_VALUE_DEFAULT, new VertexValue());
+		// edge: weight
 		this.addEdgeData(ExtendedGraphMLWriter.E_WEIGHT,
 				ExtendedGraphMLWriter.E_WEIGHT_COMMENT,
 				Integer.toString(ExtendedGraphMLWriter.E_WEIGHT_DEFAULT),

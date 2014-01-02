@@ -38,10 +38,6 @@ public interface IControl {
 		EDIT_GRAPH("editGraph"),
 		// edit
 		MODE("mode"),
-		//
-		START("start"),
-		//
-		FINISH("editGraph"),
 		// algorithm
 		ALGORITHM("algorithm"),
 		// player settings

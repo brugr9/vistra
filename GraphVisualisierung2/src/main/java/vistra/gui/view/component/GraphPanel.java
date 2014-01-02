@@ -151,8 +151,7 @@ public class GraphPanel extends JPanel implements Observer {
 			if (arg == EventSource.GRAPH) {
 				this.name = m.getGraph().getName();
 				if (!m.isGraphSaved())
-					this.name = "*" + this.name;
-				// TODO this.viewer.repaint();
+					this.name += "*";
 			}
 			this.border.setTitle(this.title + ": " + this.name);
 			this.viewer.repaint();

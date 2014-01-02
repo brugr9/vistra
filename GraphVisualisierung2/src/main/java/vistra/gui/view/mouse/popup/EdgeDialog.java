@@ -5,15 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -33,7 +30,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeDialog extends JDialog implements Observer {
+public class EdgeDialog extends JDialog {
 
 	private static final long serialVersionUID = -6646549637907283799L;
 
@@ -62,24 +59,30 @@ public class EdgeDialog extends JDialog implements Observer {
 	 * Main constructor.
 	 * 
 	 * @param edge
-	 * @param owner
+	 *            an edge
+	 * @param top
+	 *            a top frame
 	 * @param viewer
+	 *            a visualization viewer
 	 * @param model
+	 *            a gui model
 	 */
-	public EdgeDialog(IEdgeLayout edge, JFrame owner,
+	public EdgeDialog(IEdgeLayout edge, JFrame top,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
 			IGuiModel model) {
-		super(owner, true);
+		super(top, true);
 		this.setResizable(false);
-		this.setTitle("edgeDialog");
+
+		ResourceBundle b = model.getResourceBundle();
+		this.setTitle(b.getString("edge.label"));
 
 		/* content */
 		// name
-		this.nameLbl = new JLabel("nameLbl");
+		this.nameLbl = new JLabel(b.getString("name.label"));
 		this.name = new JTextField("name");
 		this.name.setColumns(10);
 		// weigth
-		this.weightLbl = new JLabel("weightLbl");
+		this.weightLbl = new JLabel(b.getString("weight.label"));
 		this.weight = new JTextField("weight");
 		this.weight.setColumns(10);
 		// panel
@@ -92,20 +95,20 @@ public class EdgeDialog extends JDialog implements Observer {
 		this.content.add(this.weight);
 
 		/* button */
-		JButton okButton = new JButton("OK");
-		okButton.setActionCommand(EventSource.EDIT_GRAPH.toString());
-		okButton.addActionListener(model.getParameterStateHandler());
-		JButton cancelButton = new JButton("Cancel");
-		cancelButton.setActionCommand("Cancel");
+		JButton ok = new JButton("OK");
+		ok.setActionCommand(EventSource.EDIT_GRAPH.toString());
+		ok.addActionListener(model.getParameterStateHandler());
+		JButton cancel = new JButton("Cancel");
+		cancel.setActionCommand("Cancel");
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		buttonPane.add(okButton);
-		buttonPane.add(cancelButton);
-		this.getRootPane().setDefaultButton(okButton);
+		buttonPane.add(ok);
+		buttonPane.add(cancel);
+		this.getRootPane().setDefaultButton(ok);
 
-		this.setTextFieldValues(edge, viewer);
-		this.setListeners(edge, viewer, okButton, cancelButton);
+		this.setText(edge, viewer);
+		this.setListeners(edge, viewer, ok, cancel);
 
 		this.setLayout(new BorderLayout());
 		this.add(this.content, BorderLayout.CENTER);
@@ -116,18 +119,18 @@ public class EdgeDialog extends JDialog implements Observer {
 
 	/**
 	 * @param edge
-	 * @param vViewer
+	 * @param viewer
 	 * @param okButton
 	 * @param cancelButton
 	 */
 	private void setListeners(final IEdgeLayout edge,
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
 			final JButton okButton, final JButton cancelButton) {
 
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EdgeDialog.this.updateTextFieldValues(edge, vViewer);
+				EdgeDialog.this.updateText(edge, viewer);
 			}
 		});
 
@@ -141,54 +144,28 @@ public class EdgeDialog extends JDialog implements Observer {
 
 	/**
 	 * @param edge
-	 * @param vViewer
+	 * @param viewer
 	 */
-	protected void updateTextFieldValues(IEdgeLayout edge,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
-
+	protected void updateText(IEdgeLayout edge,
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		edge.setId(this.name.getText().trim());
 		edge.setWeight(Convert.toInteger(this.weight.getText()));
-		vViewer.repaint();
+		viewer.repaint();
 		this.dispose();
 	}
 
 	/**
 	 * @param edge
-	 * @param vViewer
+	 * @param viewer
 	 */
-	private void setTextFieldValues(IEdgeLayout edge,
+	private void setText(IEdgeLayout edge,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
-
 		this.name.setText(edge.getId());
 		this.weight.setText(String.valueOf(edge.getWeight()));
-
 		this.name.setInputVerifier(new ItemIdVerifier(this.name.getText()
 				.trim(), edge, viewer));
 		this.weight.setInputVerifier(new EdgeWeightVerifier(this.weight
 				.getText().trim()));
-	}
-
-	/**
-	 * Updates the dialog.
-	 */
-	@Override
-	public void update(Observable o, Object arg) {
-
-		IGuiModel m = (IGuiModel) o;
-		ResourceBundle b = m.getResourceBundle();
-
-		try {
-			if (arg == EventSource.I18N) {
-				this.setTitle(b.getString("edge.label"));
-				this.nameLbl.setText(b.getString("name.label"));
-				this.weightLbl.setText(b.getString("weight.label"));
-			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.toString(),
-					b.getString("app.label"), 1, null);
-			e.printStackTrace();
-		}
-
 	}
 
 }

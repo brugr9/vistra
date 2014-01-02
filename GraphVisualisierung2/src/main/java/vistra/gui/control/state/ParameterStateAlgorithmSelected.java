@@ -41,7 +41,7 @@ class ParameterStateAlgorithmSelected extends AbstractParameterState implements
 	@Override
 	protected void startDo() throws Exception {
 		try {
-			super.stateHandler.enableTraversalPlayer(true);
+			super.stateHandler.enableTraversal(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -53,7 +53,7 @@ class ParameterStateAlgorithmSelected extends AbstractParameterState implements
 	@Override
 	protected void stopDo() throws Exception {
 		try {
-			super.stateHandler.enableTraversalPlayer(false);
+			super.stateHandler.enableTraversal(false);
 		} catch (Exception e) {
 			throw e;
 		}

@@ -11,7 +11,7 @@ import org.apache.commons.collections15.Factory;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
-import vistra.gui.view.mouse.popup.IItemModifier;
+import vistra.gui.view.mouse.popup.IItemPopup;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;
@@ -63,37 +63,36 @@ public class PopupPlugin extends
 		if (e.getSource() instanceof VisualizationViewer<?, ?>) {
 
 			@SuppressWarnings("unchecked")
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
 					.getSource();
 
 			Point2D point = e.getPoint();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = vViewer
+			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = viewer
 					.getPickSupport();
 
 			if (pickSupport != null) {
 				IVertexLayout vertex = pickSupport.getVertex(
-						vViewer.getGraphLayout(), point.getX(), point.getY());
+						viewer.getGraphLayout(), point.getX(), point.getY());
 
 				if (vertex != null && this.vertexPopup != null) {
 					this.updateItemMenu(vertex, point, this.vertexPopup);
-					this.vertexPopup.show(vViewer, e.getX(), e.getY());
+					this.vertexPopup.show(viewer, e.getX(), e.getY());
 				}
 
-				IEdgeLayout edge = pickSupport.getEdge(
-						vViewer.getGraphLayout(), point.getX(), point.getY());
+				IEdgeLayout edge = pickSupport.getEdge(viewer.getGraphLayout(),
+						point.getX(), point.getY());
 
 				if (edge != null && this.edgePopup != null) {
 					this.updateItemMenu(edge, point, this.edgePopup);
-					this.edgePopup.show(vViewer, e.getX(), e.getY());
+					this.edgePopup.show(viewer, e.getX(), e.getY());
 
 				}
 
 				if (edge == null && vertex == null && this.modePopup != null) {
-					if (this.modePopup instanceof IItemModifier) {
-						((IItemModifier) this.modePopup)
-								.setGraphItemLocation(point);
+					if (this.modePopup instanceof IItemPopup) {
+						((IItemPopup) this.modePopup).setItemLocation(point);
 					}
-					this.modePopup.show(vViewer, e.getX(), e.getY());
+					this.modePopup.show(viewer, e.getX(), e.getY());
 				}
 			}
 		}
@@ -112,11 +111,21 @@ public class PopupPlugin extends
 	private void updateItemMenu(IItemLayout item, Point2D point,
 			JPopupMenu popUp) {
 		for (Component comp : popUp.getComponents()) {
-			if (comp instanceof IItemModifier) {
-				((IItemModifier) comp).setGraphItemAndView(item);
-				((IItemModifier) comp).setGraphItemLocation(point);
+			if (comp instanceof IItemPopup) {
+				((IItemPopup) comp).setItem(item);
+				((IItemPopup) comp).setItemLocation(point);
 			}
 		}
+	}
+
+	/**
+	 * Setter for the mode pop-up.
+	 * 
+	 * @param popup
+	 *            a pop-up
+	 */
+	public void setModePopup(JPopupMenu popup) {
+		this.modePopup = popup;
 	}
 
 	/**
@@ -137,16 +146,6 @@ public class PopupPlugin extends
 	 */
 	public void setVertexPopup(JPopupMenu popup) {
 		this.vertexPopup = popup;
-	}
-
-	/**
-	 * Setter for the switch-mode pop-up.
-	 * 
-	 * @param popup
-	 *            a pop-up
-	 */
-	public void setSwitchModePopup(JPopupMenu popup) {
-		this.modePopup = popup;
 	}
 
 }

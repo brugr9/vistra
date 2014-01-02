@@ -2,6 +2,7 @@ package vistra.gui.control;
 
 import java.awt.event.ActionListener;
 
+import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
 
 /**
@@ -15,7 +16,7 @@ abstract class AbstractActionListener implements ActionListener {
 	/**
 	 * A field for a model.
 	 */
-	protected final IGuiModel model;
+	protected final GuiModel model;
 
 	/**
 	 * Main constructor.
@@ -25,7 +26,7 @@ abstract class AbstractActionListener implements ActionListener {
 	 */
 	AbstractActionListener(IGuiModel model) {
 		super();
-		this.model = model;
+		this.model = (GuiModel) model;
 	}
 
 }

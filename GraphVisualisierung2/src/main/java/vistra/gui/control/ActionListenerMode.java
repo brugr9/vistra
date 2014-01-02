@@ -7,11 +7,10 @@ import javax.swing.JOptionPane;
 
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
-import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
 
 /**
- * A mode listener.
+ * A mode action listener.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -37,7 +36,7 @@ class ActionListenerMode extends AbstractActionListener {
 		try {
 			String c = e.getActionCommand();
 			this.model.setMode(Mode.valueOf(c));
-			((GuiModel) this.model).notifyObservers(MODE);
+			this.model.notifyObservers(MODE);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);

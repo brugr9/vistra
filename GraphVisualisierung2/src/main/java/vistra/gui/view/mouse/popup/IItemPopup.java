@@ -1,30 +1,31 @@
 package vistra.gui.view.mouse.popup;
 
 import java.awt.geom.Point2D;
+import java.util.Observer;
 
 import vistra.core.graph.item.IItemLayout;
 
 /**
- * A graph item modifier interface.
+ * An item pop-up menu interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IItemModifier {
+public interface IItemPopup extends Observer {
 
 	/**
-	 * Sets the graph item and the view.
+	 * Sets the item.
 	 * 
 	 * @param item
 	 *            the item to set
 	 */
-	void setGraphItemAndView(IItemLayout item);
+	void setItem(IItemLayout item);
 
 	/**
-	 * Sets the graph item location.
+	 * Sets the location.
 	 * 
 	 * @param location
 	 *            the location to set
 	 */
-	void setGraphItemLocation(Point2D location);
+	void setItemLocation(Point2D location);
 }

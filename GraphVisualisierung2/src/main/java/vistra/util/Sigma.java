@@ -11,9 +11,9 @@ public class Sigma {
 	/**
 	 * A sign for an initial state.
 	 * 
-	 * TODO single sign
+	 * TODO single sign for infinity
 	 */
-	public final static String INIT = "init";
+	public final static String INFINITY = "infinity";
 
 	/**
 	 * An array of signs from A to Z in upper case.

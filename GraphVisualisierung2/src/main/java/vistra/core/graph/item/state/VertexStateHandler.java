@@ -164,7 +164,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setValueInitialised() throws Exception {
 		try {
-			this.setValueUpdated(Sigma.INIT);
+			this.setValueUpdated(Sigma.INFINITY);
 		} catch (Exception e) {
 			throw e;
 		}

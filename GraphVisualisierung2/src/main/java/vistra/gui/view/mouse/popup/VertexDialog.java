@@ -5,15 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -31,7 +28,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexDialog extends JDialog implements Observer {
+public class VertexDialog extends JDialog {
 
 	private static final long serialVersionUID = -6919635847499019908L;
 
@@ -52,20 +49,26 @@ public class VertexDialog extends JDialog implements Observer {
 	 * Main constructor.
 	 * 
 	 * @param vertex
-	 * @param owner
+	 *            a vertex
+	 * @param top
+	 *            a top frame
 	 * @param viewer
+	 *            a visualization viewer
 	 * @param model
+	 *            a gui model
 	 */
-	public VertexDialog(IVertexLayout vertex, JFrame owner,
+	public VertexDialog(IVertexLayout vertex, JFrame top,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
 			IGuiModel model) {
-		super(owner, true);
+		super(top, true);
 		this.setResizable(false);
-		this.setTitle("VertexDialog");
+
+		ResourceBundle b = model.getResourceBundle();
+		this.setTitle(b.getString("vertex.label"));
 
 		/* content */
 		// name
-		this.nameLbl = new JLabel("nameLbl");
+		this.nameLbl = new JLabel(b.getString("name.label"));
 		this.name = new JTextField("name");
 		this.name.setColumns(10);
 		// panel
@@ -76,20 +79,20 @@ public class VertexDialog extends JDialog implements Observer {
 		this.content.add(this.name);
 
 		/* button */
-		JButton okButton = new JButton("OK");
-		okButton.setActionCommand(EventSource.EDIT_GRAPH.toString());
-		okButton.addActionListener(model.getParameterStateHandler());
-		JButton cancelButton = new JButton("Cancel");
-		cancelButton.setActionCommand("Cancel");
+		JButton ok = new JButton("OK");
+		ok.setActionCommand(EventSource.EDIT_GRAPH.toString());
+		ok.addActionListener(model.getParameterStateHandler());
+		JButton cancel = new JButton("Cancel");
+		cancel.setActionCommand("Cancel");
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		buttonPane.add(okButton);
-		buttonPane.add(cancelButton);
-		this.getRootPane().setDefaultButton(okButton);
+		buttonPane.add(ok);
+		buttonPane.add(cancel);
+		this.getRootPane().setDefaultButton(ok);
 
-		this.setTextFieldValues(vertex, viewer);
-		this.setListeners(vertex, viewer, okButton, cancelButton);
+		this.setText(vertex, viewer);
+		this.setListeners(vertex, viewer, ok, cancel);
 
 		this.setLayout(new BorderLayout());
 		this.add(this.content, BorderLayout.CENTER);
@@ -100,18 +103,18 @@ public class VertexDialog extends JDialog implements Observer {
 
 	/**
 	 * @param vertex
-	 * @param vViewer
+	 * @param viewer
 	 * @param okButton
 	 * @param cancelButton
 	 */
 	private void setListeners(final IVertexLayout vertex,
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer,
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
 			JButton okButton, JButton cancelButton) {
 
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VertexDialog.this.updateTextFieldValues(vertex, vViewer);
+				VertexDialog.this.updateText(vertex, viewer);
 			}
 		});
 
@@ -125,49 +128,25 @@ public class VertexDialog extends JDialog implements Observer {
 
 	/**
 	 * @param vertex
-	 * @param vViewer
+	 * @param viewer
 	 */
-	private void updateTextFieldValues(final IVertexLayout vertex,
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
-
+	private void updateText(final IVertexLayout vertex,
+			final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		vertex.setId(this.name.getText().trim());
-		vViewer.repaint();
+		viewer.repaint();
 		this.dispose();
 
 	}
 
 	/**
 	 * @param vertex
-	 * @param vViewer
+	 * @param viewer
 	 */
-	private void setTextFieldValues(IVertexLayout vertex,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vViewer) {
-
+	private void setText(IVertexLayout vertex,
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		this.name.setText(vertex.getId());
 		this.name.setInputVerifier(new ItemIdVerifier(this.name.getText()
-				.trim(), vertex, vViewer));
-
+				.trim(), vertex, viewer));
 	}
 
-	/**
-	 * Updates the dialog.
-	 */
-	@Override
-	public void update(Observable o, Object arg) {
-
-		IGuiModel m = (IGuiModel) o;
-		ResourceBundle b = m.getResourceBundle();
-
-		try {
-			if (arg == EventSource.I18N) {
-				this.setTitle(b.getString("vertex.label"));
-				this.nameLbl.setText(b.getString("name.label"));
-			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.toString(),
-					b.getString("app.label"), 1, null);
-			e.printStackTrace();
-		}
-
-	}
 }
