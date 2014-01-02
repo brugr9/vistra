@@ -2,9 +2,7 @@ package vistra.gui.control.state;
 
 import static vistra.gui.control.IControl.EventSource.ALGORITHM;
 import static vistra.gui.control.IControl.EventSource.EDIT;
-import static vistra.gui.control.IControl.EventSource.START;
 import static vistra.gui.control.IControl.EventSource.END;
-
 import static vistra.gui.control.IControl.EventSource.GRAPH;
 import static vistra.gui.control.IControl.EventSource.MODE;
 import static vistra.gui.control.IControl.EventSource.NEW_DIRECTED;
@@ -12,6 +10,7 @@ import static vistra.gui.control.IControl.EventSource.NEW_UNDIRECTED;
 import static vistra.gui.control.IControl.EventSource.OPEN;
 import static vistra.gui.control.IControl.EventSource.SAVE;
 import static vistra.gui.control.IControl.EventSource.SAVE_AS;
+import static vistra.gui.control.IControl.EventSource.START;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;

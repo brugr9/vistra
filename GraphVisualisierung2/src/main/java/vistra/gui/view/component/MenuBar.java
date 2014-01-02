@@ -1,7 +1,5 @@
 package vistra.gui.view.component;
 
-import vistra.util.I18nPalette;
-
 import static vistra.gui.control.IControl.EventSource.I18N;
 import static vistra.gui.control.IControl.EventSource.NEW_DIRECTED;
 import static vistra.gui.control.IControl.EventSource.NEW_UNDIRECTED;
@@ -21,6 +19,7 @@ import javax.swing.KeyStroke;
 
 import vistra.gui.IGuiModel;
 import vistra.gui.control.IControl.EventSource;
+import vistra.util.I18nPalette;
 
 /**
  * A menu bar.

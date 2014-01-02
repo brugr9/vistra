@@ -3,11 +3,11 @@ package vistra.gui.control;
 import static vistra.gui.control.IControl.EventSource.MODE;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.JOptionPane;
 
-import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
-
 import vistra.gui.IGuiModel;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
  * A mode action listener.

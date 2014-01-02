@@ -1,9 +1,9 @@
 package vistra.gui.view.mouse.popup;
 
-import static vistra.gui.control.IControl.EventSource.I18N;
 import static vistra.gui.control.IControl.EventSource.EDIT;
-import static vistra.gui.control.IControl.EventSource.START;
 import static vistra.gui.control.IControl.EventSource.END;
+import static vistra.gui.control.IControl.EventSource.I18N;
+import static vistra.gui.control.IControl.EventSource.START;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

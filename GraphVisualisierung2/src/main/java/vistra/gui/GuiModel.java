@@ -4,8 +4,6 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
-
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
@@ -13,6 +11,7 @@ import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.state.IAnimationStateHandler;
 import vistra.gui.control.state.IParameterStateHandler;
 import vistra.gui.control.state.ISbsStateHandler;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
  * A model as in MVC holding some fields and its getter and setter methods.
