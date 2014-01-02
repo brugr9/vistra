@@ -18,7 +18,6 @@ import javax.swing.JPopupMenu;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
-import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -39,7 +38,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * A field for a model.
 	 */
-	private GuiModel model;
+	private IGuiModel model;
 	/**
 	 * A field for a point.
 	 */
@@ -80,9 +79,10 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 			IGuiModel model) {
 		super("vertexPopup");
 		this.viewer = viewer;
-		this.model = (GuiModel) model;
+		this.model = (IGuiModel) model;
 		this.point = null;
 		this.vertex = null;
+
 		/**/
 		this.start = new JCheckBoxMenuItem("start");
 		this.start.setActionCommand(EDIT_GRAPH.toString());
@@ -228,11 +228,11 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 				this.delete.setText(b.getString("delete.label"));
 			}
 			/**/
-			this.setEnabled(m.isEditEnabled());
-			this.start.setEnabled(m.isEditEnabled());
-			this.end.setEnabled(m.isEditEnabled());
-			this.property.setEnabled(m.isEditEnabled());
-			this.delete.setEnabled(m.isEditEnabled());
+			this.setEnabled(m.isVertexEnabled());
+			this.start.setEnabled(m.isVertexEnabled());
+			this.end.setEnabled(m.isVertexEnabled());
+			this.property.setEnabled(m.isVertexEnabled());
+			this.delete.setEnabled(m.isVertexEnabled());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);

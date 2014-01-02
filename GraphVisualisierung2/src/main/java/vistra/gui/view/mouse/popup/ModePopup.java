@@ -67,7 +67,7 @@ public class ModePopup extends JPopupMenu implements Observer {
 			}
 			if (arg == MODE) {
 				this.picking.setEnabled(m.isPickingEnabled());
-				this.editing.setEnabled(m.isEditEnabled());
+				this.editing.setEnabled(m.isEditingEnabled());
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),

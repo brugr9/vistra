@@ -3,8 +3,6 @@ package vistra.gui;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
-import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
-
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
@@ -12,7 +10,14 @@ import vistra.gui.control.IControl.EventSource;
 import vistra.gui.control.state.IAnimationStateHandler;
 import vistra.gui.control.state.IParameterStateHandler;
 import vistra.gui.control.state.ISbsStateHandler;
+import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
+/**
+ * A gui model interface.
+ * 
+ * @author Roland Bruggmann (brugr9@bfh.ch)
+ * 
+ */
 public interface IGuiModel {
 
 	/**
@@ -168,14 +173,14 @@ public interface IGuiModel {
 	public abstract boolean isQuitEnabled();
 
 	/**
-	 * @return the switchModeEnabled
+	 * @return the modeEnabled
 	 */
-	public abstract boolean isSwitchModeEnabled();
+	public abstract boolean isModeEnabled();
 
 	/**
-	 * @return the editEnabled
+	 * @return the editingEnabled
 	 */
-	public abstract boolean isEditEnabled();
+	public abstract boolean isEditingEnabled();
 
 	/**
 	 * @return the pickingEnabled
@@ -266,6 +271,11 @@ public interface IGuiModel {
 	 * @return the graphSaved
 	 */
 	public abstract boolean isGraphSaved();
+
+	/**
+	 * @return the mode
+	 */
+	public abstract Mode getMode();
 
 	/**
 	 * @return the algorithms
@@ -474,16 +484,16 @@ public interface IGuiModel {
 	public abstract void setQuitEnabled(boolean quitEnabled);
 
 	/**
-	 * @param switchModeEnabled
-	 *            the switchModeEnabled to set
+	 * @param modeEnabled
+	 *            the modeEnabled to set
 	 */
-	public abstract void setSwitchModeEnabled(boolean switchModeEnabled);
+	public abstract void setModeEnabled(boolean modeEnabled);
 
 	/**
-	 * @param editEnabled
-	 *            the editEnabled to set
+	 * @param editingEnabled
+	 *            the editingEnabled to set
 	 */
-	public abstract void setEditEnabled(boolean editEnabled);
+	public abstract void setEditingEnabled(boolean editingEnabled);
 
 	/**
 	 * @param pickingEnabled
@@ -593,6 +603,12 @@ public interface IGuiModel {
 	 *            the graphSaved to set
 	 */
 	public abstract void setGraphSaved(boolean graphSaved);
+
+	/**
+	 * @param mode
+	 *            the mode to set
+	 */
+	public abstract void setMode(Mode mode);
 
 	/**
 	 * @param algorithms
@@ -727,16 +743,5 @@ public interface IGuiModel {
 	 *            the protocol to set
 	 */
 	public abstract void setProtocol(StringBuilder protocol);
-
-	/**
-	 * @return the mode
-	 */
-	public abstract Mode getMode();
-
-	/**
-	 * @param mode
-	 *            the mode to set
-	 */
-	public abstract void setMode(Mode mode);
 
 }

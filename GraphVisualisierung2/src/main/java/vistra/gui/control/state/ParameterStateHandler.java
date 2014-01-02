@@ -622,7 +622,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.model.setMode(Mode.EDITING);
 			this.model.notifyObservers(MODE);
 		}
-		this.model.setEditEnabled(editable);
+		this.model.setEditingEnabled(editable);
 		this.model.notifyObservers(GRAPH);
 	}
 

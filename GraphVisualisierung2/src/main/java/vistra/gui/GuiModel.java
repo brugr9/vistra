@@ -44,8 +44,8 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private boolean saveAsEnabled;
 	private boolean quitEnabled;
 	// Edit
-	private boolean switchModeEnabled;
-	private boolean editEnabled;
+	private boolean modeEnabled;
+	private boolean editingEnabled;
 	private boolean pickingEnabled;
 	private boolean vertexEnabled;
 	private boolean edgeEnabled;
@@ -128,8 +128,8 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.saveAsEnabled = false;
 		this.quitEnabled = false;
 		// Edit
-		this.switchModeEnabled = false;
-		this.editEnabled = false;
+		this.modeEnabled = false;
+		this.editingEnabled = false;
 		this.pickingEnabled = false;
 		this.vertexEnabled = false;
 		this.edgeEnabled = false;
@@ -186,6 +186,14 @@ public final class GuiModel extends Observable implements IGuiModel {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setMenuEnabled(boolean)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -198,6 +206,11 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setMenuHelpEnabled(menuEnabled);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setMenuFileEnabled(boolean)
+	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -217,13 +230,18 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setMenuModeEnabled(boolean)
+	 */
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void setMenuModeEnabled(boolean menuEnabled) {
 		// Menu
-		this.setSwitchModeEnabled(menuEnabled);
+		this.setModeEnabled(menuEnabled);
 		// MenuItem
 		this.setMenuEditEnabled(menuEnabled);
 		this.setPickingEnabled(menuEnabled);
@@ -231,13 +249,18 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setMenuEditEnabled(boolean)
+	 */
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void setMenuEditEnabled(boolean menuEnabled) {
 		// Menu
-		this.setEditEnabled(menuEnabled);
+		this.setEditingEnabled(menuEnabled);
 		// MenuItem
 		this.setVertexEnabled(menuEnabled);
 		this.setEdgeEnabled(menuEnabled);
@@ -245,6 +268,11 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setMenuI18nEnabled(boolean)
+	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -262,6 +290,11 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setMenuHelpEnabled(boolean)
+	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -276,6 +309,11 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setTraversalEnabled(boolean)
+	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -285,6 +323,11 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setAnimationEnabled(menuEnabled);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setStepByStepEnabled(boolean)
+	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -301,6 +344,11 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.setChanged();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setAnimationEnabled(boolean)
+	 */
 	/**
 	 * {@inheritDoc}
 	 */
@@ -527,27 +575,27 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isSwitchModeEnabled()
+	 * @see vistra.gui.IGuiModel#isModeEnabled()
 	 */
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isSwitchModeEnabled() {
-		return switchModeEnabled;
+	public boolean isModeEnabled() {
+		return modeEnabled;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isEditEnabled()
+	 * @see vistra.gui.IGuiModel#isEditingEnabled()
 	 */
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isEditEnabled() {
-		return editEnabled;
+	public boolean isEditingEnabled() {
+		return editingEnabled;
 	}
 
 	/*
@@ -782,6 +830,19 @@ public final class GuiModel extends Observable implements IGuiModel {
 	@Override
 	public boolean isGraphSaved() {
 		return graphSaved;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getMode()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Mode getMode() {
+		return mode;
 	}
 
 	/*
@@ -1298,28 +1359,28 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setSwitchModeEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setModeEnabled(boolean)
 	 */
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setSwitchModeEnabled(boolean switchModeEnabled) {
-		this.switchModeEnabled = switchModeEnabled;
+	public void setModeEnabled(boolean modeEnabled) {
+		this.modeEnabled = modeEnabled;
 		this.setChanged();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setEditEnabled(boolean)
+	 * @see vistra.gui.IGuiModel#setEditingEnabled(boolean)
 	 */
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setEditEnabled(boolean editEnabled) {
-		this.editEnabled = editEnabled;
+	public void setEditingEnabled(boolean editingEnabled) {
+		this.editingEnabled = editingEnabled;
 		this.setChanged();
 	}
 
@@ -1575,6 +1636,21 @@ public final class GuiModel extends Observable implements IGuiModel {
 	@Override
 	public void setGraphSaved(boolean graphSaved) {
 		this.graphSaved = graphSaved;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setMode(edu.uci.ics.jung.visualization.control.
+	 * ModalGraphMouse.Mode)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMode(Mode mode) {
+		this.mode = mode;
 		this.setChanged();
 	}
 
@@ -1891,34 +1967,6 @@ public final class GuiModel extends Observable implements IGuiModel {
 	@Override
 	public void setProtocol(StringBuilder protocol) {
 		this.protocol = protocol;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#getMode()
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Mode getMode() {
-		return mode;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setMode(edu.uci.ics.jung.visualization.control.
-	 * ModalGraphMouse)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMode(Mode mode) {
-		this.mode = mode;
 		this.setChanged();
 	}
 

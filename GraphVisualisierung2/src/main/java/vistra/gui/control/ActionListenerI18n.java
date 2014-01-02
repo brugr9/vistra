@@ -28,28 +28,29 @@ class ActionListenerI18n extends AbstractActionListener {
 	/**
 	 * A field for a list of shortcuts.
 	 */
-	private final String shortCuts = "<html>"
-			+ "<h3>All Modes:</h3>"
+	private final String shortcuts = "<html>"
+			+ "<h4>All Modes:</h4>"
+			+ "<small>LC = left-click; RC = right-click</small>"
 			+ "<ul>"
-			+ "<li><b>Mousewheel</b>: Scale the view"
-			+ "<li><b>Right-click</b> an empty area: Switch mode"
+			+ "<li>Mousewheel: Scale the view"
+			+ "<li>RC an empty area: Switch-mode pop-up menu"
 			+ "</ul>"
-			+ "<h3>Edit Mode:</h3>"
+			+ "<h4>Editing Mode:</h4>"
 			+ "<ul>"
-			+ "<li><b>Left-click</b> an empty area: Create a vertex"
-			+ "<li><b>Left-click + drag</b> from a first vertex to another vertex: Create an edge"
-			+ "<li><b>Right-click</b> on a vertex: Edit-vertex popup"
-			+ "<li><b>Right-click</b> on an edge: Edit-edge popup"
+			+ "<li>LC an empty area: Create a vertex"
+			+ "<li>LC + drag from a first to another vertex: Create an edge"
+			+ "<li>RC on a vertex: Edit-vertex pop-up menu"
+			+ "<li>RC on an edge: Edit-edge pop-up menu"
 			+ "</ul>"
-			+ "<h3>Picking Mode:</h3>"
+			+ "<h4>Picking Mode:</h4>"
 			+ "<ul>"
-			+ "<li><b>Left-click</b> on a vertex: Select the vertex"
-			+ "<li><b>Left-click + drag</b> elsewhere: Select vertices in a region"
-			+ "<li><b>Left-click + drag</b> on a vertex: Move all selected vertices"
-			+ "<li><b>Left-click</b> elsewhere: Unselect all vertices"
-			+ "<li><b>CTRL + Left-click</b> on a vertex: Select the vertex as center and shift view"
-			+ "<li><b>Shift + Left-click</b> on a vertex: Add/remove vertex selection"
-			+ "<li><b>Shift + Left-click + drag</b>: Add selection of vertices in a new region"
+			+ "<li>LC on a vertex: Select the vertex"
+			+ "<li>LC + drag elsewhere: Select vertices in a region"
+			+ "<li>LC + drag on a vertex: Move all selected vertices"
+			+ "<li>LC elsewhere: Unselect all vertices"
+			+ "<li>CTRL + LC on a vertex: Select the vertex as center and shift view"
+			+ "<li>Shift + LC on a vertex: Add/remove vertex selection"
+			+ "<li>Shift + LC + drag: Add selection of vertices in a new region"
 			+ "</ul>" + "</html>";
 
 	/**
@@ -93,7 +94,7 @@ class ActionListenerI18n extends AbstractActionListener {
 			// StringBuilder help = new StringBuilder();
 			// help.append(b.getString("help.message"));
 			// this.model.setHelp(help.toString());
-			this.model.setShortcutsMessage(this.shortCuts);
+			this.model.setShortcutsMessage(this.shortcuts);
 			/* about message */
 			StringBuilder about = new StringBuilder();
 			about.append(b.getString("app.label"));
