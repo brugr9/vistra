@@ -30,7 +30,7 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: idle.
+	 * Handles idle.
 	 * 
 	 * @throws Exception
 	 */
@@ -45,37 +45,37 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: new undirected graph.
+	 * Handles new undirected graph.
 	 * 
 	 * @throws Exception
 	 */
 	void handleNewGraphUndirected() throws Exception {
 		try {
 			this.stateHandler.newGraph(EdgeType.UNDIRECTED);
-			this.stateHandler
-					.setState(new ParameterStateIdle(this.stateHandler));
+			this.stateHandler.setState(new ParameterStateGraphEdited(
+					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Handles an interaction: new directed graph.
+	 * Handles new directed graph.
 	 * 
 	 * @throws Exception
 	 */
 	void handleNewGraphDirected() throws Exception {
 		try {
 			this.stateHandler.newGraph(EdgeType.DIRECTED);
-			this.stateHandler
-					.setState(new ParameterStateIdle(this.stateHandler));
+			this.stateHandler.setState(new ParameterStateGraphEdited(
+					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Handles an interaction: open graph.
+	 * Handles open graph.
 	 * 
 	 * @throws Exception
 	 */
@@ -91,7 +91,7 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: save graph.
+	 * Handles save graph.
 	 * 
 	 * @throws Exception
 	 */
@@ -106,7 +106,7 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: save graph as.
+	 * Handles save graph as.
 	 * 
 	 * @throws Exception
 	 */
@@ -122,7 +122,7 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: edit graph.
+	 * Handles edit graph.
 	 * 
 	 * @throws Exception
 	 */
@@ -137,7 +137,7 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: select algorithm.
+	 * Handles select algorithm.
 	 * 
 	 * @throws Exception
 	 */
@@ -145,7 +145,7 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 		try {
 			int index = this.stateHandler.selectAlgorithm();
 			if (index == 0)
-				this.stateHandler.setState(new ParameterStateIdle(
+				this.stateHandler.setState(new ParameterStateGraphSaved(
 						this.stateHandler));
 			else
 				this.stateHandler.setState(new ParameterStateAlgorithmSelected(
@@ -156,7 +156,7 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: off.
+	 * Handles off.
 	 * 
 	 * @throws Exception
 	 */

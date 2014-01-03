@@ -72,15 +72,17 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	/**
 	 * Main constructor.
 	 * 
+	 * @param core
+	 *            a core
 	 * @param model
-	 *            a model
+	 *            a gui model
 	 */
 	public ParameterStateHandler(ICore core, IGuiModel model) {
 		super();
 		this.core = core;
 		this.model = (GuiModel) model;
-		this.top = null;
 		this.state = new ParameterStateIdle(this);
+		this.top = null;
 	}
 
 	/**

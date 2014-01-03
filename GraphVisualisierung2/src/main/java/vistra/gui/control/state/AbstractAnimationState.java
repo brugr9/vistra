@@ -29,65 +29,70 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: idle.
+	 * Handles idle.
 	 * 
 	 * @throws Exception
 	 */
 	void handleIdle() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStateIdle(this.stateHandler));
+			this.stateHandler
+					.setState(new AnimationStateIdle(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
 
 	/**
-	 * Handles an interaction: play.
+	 * Handles playing.
 	 * 
 	 * @throws Exception
 	 */
-	void handlePlay() throws Exception {
+	void handlePlaying() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStatePlaying(this.stateHandler));
+			this.stateHandler.setState(new AnimationStatePlaying(
+					this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
 
 	/**
-	 * Handles an interaction: pause.
+	 * Handles paused.
 	 * 
 	 * @throws Exception
 	 */
-	void handlePause() throws Exception {
+	void handlePaused() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStatePaused(this.stateHandler));
+			this.stateHandler.setState(new AnimationStatePaused(
+					this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
 
 	/**
-	 * Handles an interaction: stop.
+	 * Handles stopped.
 	 * 
 	 * @throws Exception
 	 */
-	void handleStop() throws Exception {
+	void handleStopped() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStateStopped(this.stateHandler));
+			this.stateHandler.setState(new AnimationStateStopped(
+					this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
 
 	/**
-	 * Handles an interaction: off.
+	 * Handles off.
 	 * 
 	 * @throws Exception
 	 */
 	void handleOff() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStateOff(this.stateHandler));
+			this.stateHandler
+					.setState(new AnimationStateOff(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}

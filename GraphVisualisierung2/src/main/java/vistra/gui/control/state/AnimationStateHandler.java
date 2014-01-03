@@ -60,13 +60,11 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	public AnimationStateHandler(IGuiModel model) {
 		super();
+		this.state = new AnimationStateOff(this);
 		this.model = (GuiModel) model;
-
 		this.animationListener = new AnimationListener();
 		int animationDelay = this.model.getDelay() * A_SECOND;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
-		// state
-		this.state = new AnimationStateOff(this);
 	}
 
 	/**
@@ -106,13 +104,13 @@ public final class AnimationStateHandler extends Observable implements
 		try {
 			String c = e.getActionCommand();
 			if (c.equals(PLAY.toString()))
-				this.handlePlay();
+				this.handlePlaying();
 			else if (c.equals(PAUSE.toString()))
-				this.handlePause();
+				this.handlePaused();
 			else if (c.equals(RESUME.toString()))
-				this.handlePlay();
+				this.handlePlaying();
 			else if (c.equals(STOP.toString()))
-				this.handleStop();
+				this.handleStopped();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -137,10 +135,10 @@ public final class AnimationStateHandler extends Observable implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handlePlay() throws Exception {
+	public void handlePlaying() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handlePlay();
+			this.state.handlePlaying();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -150,10 +148,10 @@ public final class AnimationStateHandler extends Observable implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handlePause() throws Exception {
+	public void handlePaused() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handlePause();
+			this.state.handlePaused();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -163,10 +161,10 @@ public final class AnimationStateHandler extends Observable implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleStop() throws Exception {
+	public void handleStopped() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleStop();
+			this.state.handleStopped();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -336,7 +334,7 @@ public final class AnimationStateHandler extends Observable implements
 			/* go to the first step eventually */
 			if (this.model.getProgress() == this.model.getTraversal().size())
 				((SbsStateHandler) this.model.getStepByStepStateHandler())
-						.goToBeginning();
+						.toBeginning();
 			/* simply start the timer */
 			this.animationTimer.start();
 			this.setChanged();
@@ -392,9 +390,9 @@ public final class AnimationStateHandler extends Observable implements
 				IGuiModel model = AnimationStateHandler.this.model;
 				if (model.getProgress() < model.getTraversal().size())
 					((SbsStateHandler) model.getStepByStepStateHandler())
-							.goForward();
+							.forward();
 				else
-					model.getAnimationStateHandler().handleStop();
+					model.getAnimationStateHandler().handleStopped();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

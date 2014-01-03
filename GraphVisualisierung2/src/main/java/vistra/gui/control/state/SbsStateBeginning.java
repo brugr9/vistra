@@ -10,7 +10,7 @@ import vistra.util.IState;
  * @see SbsStateHandler
  * 
  */
-class SbsStateAtBeginning extends AbstractSbsState implements IState {
+class SbsStateBeginning extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
@@ -18,7 +18,7 @@ class SbsStateAtBeginning extends AbstractSbsState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	SbsStateAtBeginning(ISbsStateHandler stateHandler) {
+	SbsStateBeginning(ISbsStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

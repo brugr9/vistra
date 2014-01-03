@@ -70,6 +70,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	public SbsStateHandler(IGuiModel model) {
 		super();
+		this.state = new SbsStateOff(this);
 		this.model = (GuiModel) model;
 		this.blinkListener = new BlinkListener(NUMBER_OF_BLINKS);
 		int timeDivider = 2; // divides the delay into two parts: blink and show
@@ -77,8 +78,6 @@ public final class SbsStateHandler extends Observable implements
 		int blinkDelay = this.model.getDelay()
 				/ (timeDivider * numberOfSteps * NUMBER_OF_BLINKS) * A_SECOND;
 		this.timer = new Timer(blinkDelay, this.blinkListener);
-		// state
-		this.state = new SbsStateOff(this);
 	}
 
 	/**
@@ -285,7 +284,7 @@ public final class SbsStateHandler extends Observable implements
 	 * 
 	 * @throws Exception
 	 */
-	void goToBeginning() throws Exception {
+	void toBeginning() throws Exception {
 
 		ITraversal traversal = this.model.getTraversal();
 
@@ -316,7 +315,7 @@ public final class SbsStateHandler extends Observable implements
 	 * @return <code>true</code> if the traversal has a previous step.
 	 * @throws Exception
 	 */
-	boolean goBackward() throws Exception {
+	boolean backward() throws Exception {
 
 		ITraversal traversal = this.model.getTraversal();
 
@@ -358,7 +357,7 @@ public final class SbsStateHandler extends Observable implements
 	 * @return <code>true</code> if the traversal has a next step.
 	 * @throws Exception
 	 */
-	boolean goForward() throws Exception {
+	boolean forward() throws Exception {
 
 		ITraversal traversal = this.model.getTraversal();
 
@@ -375,7 +374,7 @@ public final class SbsStateHandler extends Observable implements
 			for (int i = 0; i < steplength; i++) {
 				if (progress < max) {
 					/* modify the graph */
-					this.doBlink();
+					this.blink();
 					step = traversal.next();
 					description = step.getDescription();
 					step.execute();
@@ -408,7 +407,7 @@ public final class SbsStateHandler extends Observable implements
 	 * 
 	 * @throws InterruptedException
 	 */
-	private void doBlink() throws InterruptedException {
+	private void blink() throws InterruptedException {
 		// TODO
 		// if (this.model.isBlinkEnabled()) {
 		this.timer.start();
@@ -426,7 +425,7 @@ public final class SbsStateHandler extends Observable implements
 	 * 
 	 * @throws Exception
 	 */
-	void goToEnd() throws Exception {
+	void toEnd() throws Exception {
 
 		ITraversal traversal = this.model.getTraversal();
 

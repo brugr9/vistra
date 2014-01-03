@@ -23,20 +23,20 @@ public interface IAnimationStateHandler extends IControlStateHandler,
 	 * 
 	 * @throws Exception
 	 */
-	void handlePlay() throws Exception;
+	void handlePlaying() throws Exception;
 
 	/**
 	 * Handles an interaction: pause.
 	 * 
 	 * @throws Exception
 	 */
-	void handlePause() throws Exception;
+	void handlePaused() throws Exception;
 
 	/**
 	 * Handles an interaction: stop.
 	 * 
 	 * @throws Exception
 	 */
-	void handleStop() throws Exception;
+	void handleStopped() throws Exception;
 
 }

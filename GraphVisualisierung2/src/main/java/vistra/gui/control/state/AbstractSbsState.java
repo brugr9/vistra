@@ -29,7 +29,7 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: idle.
+	 * Handles idle.
 	 * 
 	 * @throws Exception
 	 */
@@ -42,33 +42,33 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: to beginning.
+	 * Handles beginning.
 	 * 
 	 * @throws Exception
 	 */
 	void handleToBeginning() throws Exception {
 		try {
-			this.stateHandler.goToBeginning();
-			this.stateHandler.setState(new SbsStateAtBeginning(
-					this.stateHandler));
+			this.stateHandler.toBeginning();
+			this.stateHandler
+					.setState(new SbsStateBeginning(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
 
 	/**
-	 * Handles an interaction: backward.
+	 * Handles backward.
 	 * 
 	 * @throws Exception
 	 */
 	void handleBackward() throws Exception {
 		try {
-			boolean hasPrevious = this.stateHandler.goBackward();
+			boolean hasPrevious = this.stateHandler.backward();
 			if (hasPrevious)
-				this.stateHandler.setState(new SbsStateIntermediate(
+				this.stateHandler.setState(new SbsStateBetween(
 						this.stateHandler));
 			else
-				this.stateHandler.setState(new SbsStateAtBeginning(
+				this.stateHandler.setState(new SbsStateBeginning(
 						this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
@@ -76,40 +76,39 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles an interaction: forward.
+	 * Handles forward.
 	 * 
 	 * @throws Exception
 	 */
 	void handleForward() throws Exception {
 		try {
-			boolean hasNext = this.stateHandler.goForward();
+			boolean hasNext = this.stateHandler.forward();
 			if (hasNext)
-				this.stateHandler.setState(new SbsStateIntermediate(
+				this.stateHandler.setState(new SbsStateBetween(
 						this.stateHandler));
 			else
-				this.stateHandler
-						.setState(new SbsStateAtEnd(this.stateHandler));
+				this.stateHandler.setState(new SbsStateEnd(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
 
 	/**
-	 * Handles an interaction: to end.
+	 * Handles end.
 	 * 
 	 * @throws Exception
 	 */
 	void handleToEnd() throws Exception {
 		try {
-			this.stateHandler.goToEnd();
-			this.stateHandler.setState(new SbsStateAtEnd(this.stateHandler));
+			this.stateHandler.toEnd();
+			this.stateHandler.setState(new SbsStateEnd(this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
 
 	/**
-	 * Handles an interaction: off.
+	 * Handles off.
 	 * 
 	 * @throws Exception
 	 */
