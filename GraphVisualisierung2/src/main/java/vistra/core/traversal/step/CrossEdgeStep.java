@@ -1,7 +1,9 @@
 package vistra.core.traversal.step;
 
+import java.util.List;
+
+import vistra.core.graph.item.EdgeLayout;
 import vistra.core.graph.item.IEdge;
-import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.state.command.CrossEdgeCommand;
 import vistra.core.graph.item.state.command.IItemStateCommand;
 
@@ -14,14 +16,14 @@ import vistra.core.graph.item.state.command.IItemStateCommand;
 public class CrossEdgeStep extends AbstractStep implements IStep {
 
 	/**
-	 * Main constructor.
+	 * Single item constructor.
 	 * 
 	 * @param edge
 	 *            the edge
 	 */
 	public CrossEdgeStep(IEdge edge) {
 		super();
-		this.description = "Cross-edge " + ((IEdgeLayout) edge).getId();
+		this.description = "Cross-edge: " + ((EdgeLayout) edge).getId();
 		try {
 			IItemStateCommand command = new CrossEdgeCommand(edge);
 			this.stepHandler.addItemStateCommand(command);
@@ -29,7 +31,27 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	/**
+	 * Multi items constructor.
+	 * 
+	 * @param edges
+	 *            the edges
+	 */
+	public CrossEdgeStep(List<IEdge> edges) {
+		super();
+		this.description = "Cross-edges: ";
+		try {
+			for (IEdge edge : edges) {
+				IItemStateCommand command = new CrossEdgeCommand(edge);
+				this.stepHandler.addItemStateCommand(command);
+				command.execute();
+				this.description += ((EdgeLayout) edge).getId() + ", ";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

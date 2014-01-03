@@ -26,7 +26,7 @@ class EdgeStateForward extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewForward();
+			super.stateHandler.setLayoutForward();
 		} catch (Exception e) {
 			throw e;
 		}

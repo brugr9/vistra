@@ -26,7 +26,7 @@ class EdgeStateUnexplored extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewUnexplored();
+			super.stateHandler.setLayoutUnexplored();
 		} catch (Exception e) {
 			throw e;
 		}

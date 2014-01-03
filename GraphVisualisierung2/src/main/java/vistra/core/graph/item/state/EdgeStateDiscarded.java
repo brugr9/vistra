@@ -26,7 +26,7 @@ class EdgeStateDiscarded extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewDiscarded();
+			super.stateHandler.setLayoutDiscarded();
 		} catch (Exception e) {
 			throw e;
 		}

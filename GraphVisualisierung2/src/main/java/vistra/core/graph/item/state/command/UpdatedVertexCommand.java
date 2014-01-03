@@ -4,22 +4,30 @@ import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.state.VertexStateHandler;
 
 /**
- * An item-state command: focussed vertex.
+ * An item-state command: updated vertex value.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class FocussedVertexCommand extends AbstractItemStateCommand implements
+public class UpdatedVertexCommand extends AbstractItemStateCommand implements
 		IItemStateCommand {
+
+	/**
+	 * A field for a value.
+	 */
+	String value;
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param vertex
 	 *            a vertex
+	 * @param value
+	 *            a value
 	 */
-	public FocussedVertexCommand(IVertex vertex) {
+	public UpdatedVertexCommand(IVertex vertex, String value) {
 		super((VertexStateHandler) vertex);
+		this.value = value;
 	}
 
 	/**
@@ -27,7 +35,7 @@ public class FocussedVertexCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((VertexStateHandler) super.stateHandler).handleFocussed();
+		((VertexStateHandler) super.stateHandler).handleUpdatedVertex(this.value);
 	}
 
 }

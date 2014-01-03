@@ -1,4 +1,4 @@
-package vistra.gui.view.mouse.popup;
+package vistra.gui.view.popup;
 
 import static vistra.gui.control.IControl.EventSource.EDIT;
 
@@ -20,20 +20,18 @@ import javax.swing.border.EmptyBorder;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.IGuiModel;
-import vistra.gui.control.verifier.EdgeWeightVerifier;
 import vistra.gui.control.verifier.ItemIdVerifier;
-import vistra.util.Convert;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
- * An edge property dialog.
+ * A vertex property dialog.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeDialog extends JDialog {
+public class VertexDialog extends JDialog {
 
-	private static final long serialVersionUID = -6646549637907283799L;
+	private static final long serialVersionUID = -6919635847499019908L;
 
 	/**
 	 * A field for a content panel.
@@ -47,20 +45,12 @@ public class EdgeDialog extends JDialog {
 	 * A field for a text field: name.
 	 */
 	private JTextField name;
-	/**
-	 * A field for a label: weight.
-	 */
-	private JLabel weightLbl;
-	/**
-	 * A field for a text field: weight.
-	 */
-	private JTextField weight;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param edge
-	 *            an edge
+	 * @param vertex
+	 *            a vertex
 	 * @param top
 	 *            a top frame
 	 * @param viewer
@@ -68,33 +58,27 @@ public class EdgeDialog extends JDialog {
 	 * @param model
 	 *            a gui model
 	 */
-	public EdgeDialog(IEdgeLayout edge, JFrame top,
+	public VertexDialog(IVertexLayout vertex, JFrame top,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
 			IGuiModel model) {
 		super(top, true);
 		this.setResizable(false);
 
 		ResourceBundle b = model.getResourceBundle();
-		this.setTitle(b.getString("edge.label"));
+		this.setTitle(b.getString("vertex.label"));
 
 		/* content */
 		// name
 		this.nameLbl = new JLabel(b.getString("name.label"));
 		this.name = new JTextField("name");
 		this.name.setColumns(10);
-		// weigth
-		this.weightLbl = new JLabel(b.getString("weight.label"));
-		this.weight = new JTextField("weight");
-		this.weight.setColumns(10);
 		// panel
 		this.content = new JPanel();
 		this.content.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.content.setLayout(new GridLayout(2, 2, 0, 0));
+		this.content.setLayout(new GridLayout(1, 2, 0, 0));
 		this.content.add(this.nameLbl);
 		this.content.add(this.name);
-		this.content.add(this.weightLbl);
-		this.content.add(this.weight);
-		this.setText(edge, viewer);
+		this.setText(vertex, viewer);
 
 		/* button panel */
 		// button
@@ -103,7 +87,7 @@ public class EdgeDialog extends JDialog {
 		ok.addActionListener(model.getParameterStateHandler());
 		JButton cancel = new JButton("Cancel");
 		cancel.setActionCommand("Cancel");
-		this.setListeners(edge, viewer, ok, cancel);
+		this.setListeners(vertex, viewer, ok, cancel);
 		// panel
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -119,54 +103,51 @@ public class EdgeDialog extends JDialog {
 	}
 
 	/**
-	 * @param edge
+	 * @param vertex
 	 * @param viewer
 	 * @param okButton
 	 * @param cancelButton
 	 */
-	private void setListeners(final IEdgeLayout edge,
+	private void setListeners(final IVertexLayout vertex,
 			final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
-			final JButton okButton, final JButton cancelButton) {
+			final JButton okButton, JButton cancelButton) {
 
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EdgeDialog.this.updateText(edge, viewer);
+				VertexDialog.this.updateText(vertex, viewer);
 			}
 		});
 
 		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EdgeDialog.this.dispose();
+				VertexDialog.this.dispose();
 			}
 		});
 	}
 
 	/**
-	 * @param edge
+	 * @param vertex
 	 * @param viewer
 	 */
-	private void updateText(final IEdgeLayout edge,
+	private void updateText(final IVertexLayout vertex,
 			final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
-		edge.setId(this.name.getText().trim());
-		edge.setWeight(Convert.toInteger(this.weight.getText()));
+		vertex.setId(this.name.getText().trim());
 		viewer.repaint();
 		this.dispose();
+
 	}
 
 	/**
-	 * @param edge
+	 * @param vertex
 	 * @param viewer
 	 */
-	private void setText(IEdgeLayout edge,
+	private void setText(IVertexLayout vertex,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
-		this.name.setText(edge.getId());
-		this.weight.setText(String.valueOf(edge.getWeight()));
+		this.name.setText(vertex.getId());
 		this.name.setInputVerifier(new ItemIdVerifier(this.name.getText()
-				.trim(), edge, viewer));
-		this.weight.setInputVerifier(new EdgeWeightVerifier(this.weight
-				.getText().trim()));
+				.trim(), vertex, viewer));
 	}
 
 }

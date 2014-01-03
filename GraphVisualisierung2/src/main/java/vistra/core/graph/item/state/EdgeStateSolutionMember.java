@@ -26,7 +26,7 @@ class EdgeStateSolutionMember extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewSolution();
+			super.stateHandler.setLayoutSolutionMember();
 		} catch (Exception e) {
 			throw e;
 		}

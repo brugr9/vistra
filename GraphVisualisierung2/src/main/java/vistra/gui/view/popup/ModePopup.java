@@ -1,4 +1,4 @@
-package vistra.gui.view.mouse.popup;
+package vistra.gui.view.popup;
 
 import static vistra.gui.control.IControl.EventSource.I18N;
 import static vistra.gui.control.IControl.EventSource.MODE;

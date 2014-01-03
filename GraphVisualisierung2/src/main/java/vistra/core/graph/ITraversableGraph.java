@@ -1,11 +1,11 @@
 package vistra.core.graph;
 
 import java.util.Collection;
-import java.util.List;
 
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
 import vistra.core.traversal.Traversal;
+import vistra.core.traversal.step.IStep;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -112,101 +112,11 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	boolean isVisited(IVertex vertex);
 
 	/**
-	 * Adds {@code listener} as a listener to this graph.
-	 */
-	void addTraversalEventListener(ITraversableGraphEventListener listener);
-
-	/**
-	 * Removes {@code listener} as a listener from this graph.
-	 */
-	void removeTraversalEventListener(ITraversableGraphEventListener listener);
-
-	/**
-	 * A step method: initialises the vertices.
+	 * A step method: does a step.
 	 * 
-	 * @param vertices
-	 *            the vertices to initialise
+	 * @param step
+	 *            the step to do
 	 */
-	void stepInitVertices(List<IVertex> vertices);
-
-	/**
-	 * A step method: updates the vertices with values as given.
-	 * <p>
-	 * TODO a map as parameter
-	 * 
-	 * @param vertices
-	 *            the vertices
-	 * @param values
-	 *            the values
-	 */
-	void stepUpdateVertices(List<IVertex> vertices, List<String> values);
-
-	/**
-	 * A step method: visits a vertex over an edge as given.
-	 * 
-	 * @param edge
-	 *            the edge to discover
-	 * @param vertex
-	 *            the vertex to visit
-	 */
-	void stepVisitVertex(IEdge edge, IVertex vertex);
-
-	/**
-	 * A step method: sets a vertex and an edge as solution member.
-	 * 
-	 * @param edge
-	 *            the edge to set as solution member
-	 * @param vertex
-	 *            the vertex to set as solution member
-	 */
-	void stepSolutionVertex(IEdge edge, IVertex vertex);
-
-	/**
-	 * A step method: sets an edge as discovery-edge.
-	 * 
-	 * @param edge
-	 *            the edge to set as discovery-edge
-	 */
-	void stepDiscoveryEdge(IEdge edge);
-
-	/**
-	 * A step method: sets an edge as back-edge.
-	 * 
-	 * @param edge
-	 *            the edge to set as back-edge
-	 */
-	void stepBackEdge(IEdge edge);
-
-	/**
-	 * A step method: sets an edge as forward-edge.
-	 * 
-	 * @param edge
-	 *            the edge to set as forward-edge
-	 */
-	void stepForwardEdge(IEdge edge);
-
-	/**
-	 * A step method: sets an edge as cross-edge.
-	 * 
-	 * @param edge
-	 *            the edge to set as cross-edge
-	 */
-	void stepCrossEdge(IEdge edge);
-
-	/**
-	 * A step method: sets an edge as discarded.
-	 * 
-	 * @param edge
-	 *            the edge to set as discarded
-	 */
-	void stepDiscardedEdge(IEdge edge);
-
-	/**
-	 * A step method: sets an edge as solution member.
-	 * 
-	 * @param edge
-	 *            the edge to set as solution member
-	 */
-	void stepSolutionEdge(IEdge edge);
+	void stepBy(IStep step);
 
 }

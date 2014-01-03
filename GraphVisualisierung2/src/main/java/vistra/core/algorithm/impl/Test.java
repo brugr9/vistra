@@ -7,6 +7,15 @@ import vistra.core.algorithm.IAlgorithm;
 import vistra.core.graph.ITraversableGraph;
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
+import vistra.core.traversal.step.BackEdgeStep;
+import vistra.core.traversal.step.CrossEdgeStep;
+import vistra.core.traversal.step.DiscardedEdgeStep;
+import vistra.core.traversal.step.ForwardEdgeStep;
+import vistra.core.traversal.step.InitialisedVertexStep;
+import vistra.core.traversal.step.SolutionMemberStep;
+import vistra.core.traversal.step.UpdatedVertexStep;
+import vistra.core.traversal.step.VisitStep;
+import vistra.util.Convert;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -39,10 +48,18 @@ public class Test extends AbstractAlgorithm implements IAlgorithm {
 	public void traverse(ITraversableGraph graph) throws AlgorithmException {
 		ArrayList<IVertex> vertices = new ArrayList<IVertex>(
 				graph.getVertices());
-		graph.stepInitVertices(vertices);
-
 		ArrayList<IEdge> edges = new ArrayList<IEdge>(graph.getEdges());
-		graph.stepCrossEdge(edges.get(2));
-		graph.stepBackEdge(edges.get(1));
+		// tests
+		graph.stepBy(new InitialisedVertexStep(vertices));
+		graph.stepBy(new VisitStep(edges.get(0), vertices.get(1)));
+		graph.stepBy(new BackEdgeStep(edges.get(0)));
+		graph.stepBy(new ForwardEdgeStep(edges.get(0)));
+		graph.stepBy(new CrossEdgeStep(edges.get(0)));
+		graph.stepBy(new DiscardedEdgeStep(edges.get(0)));
+		String value = Integer.toString(Convert.toInteger(vertices.get(1)
+				.getValue()) + edges.get(0).getWeight());
+		graph.stepBy(new UpdatedVertexStep(vertices.get(1), value));
+		graph.stepBy(new SolutionMemberStep(edges.get(0), vertices.get(1)));
+
 	}
 }

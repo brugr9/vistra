@@ -27,7 +27,7 @@ public class UnexploredVertexCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((VertexStateHandler) super.stateHandler).handleFocussed();
+		((VertexStateHandler) super.stateHandler).handleUnexplored();
 	}
 
 }

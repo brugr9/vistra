@@ -34,7 +34,7 @@ class VertexStateUpdated extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setValueUpdated(this.value);
+			super.stateHandler.setLayoutUpdated(this.value);
 		} catch (Exception e) {
 			throw e;
 		}

@@ -3,12 +3,12 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * A vertex state: focussed.
+ * A vertex state: focus on.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- *  @see VertexStateHandler
+ * @see VertexStateHandler
  */
-class VertexStateFocussed extends AbstractVertexState implements IState {
+class VertexStateFocusOn extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class VertexStateFocussed extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	VertexStateFocussed(IVertexStateHandler stateHandler) {
+	VertexStateFocusOn(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class VertexStateFocussed extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewFocussed();
+			super.stateHandler.setLayoutFocusOn();
 		} catch (Exception e) {
 			throw e;
 		}

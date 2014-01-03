@@ -12,8 +12,7 @@ import vistra.util.StrokePalette;
  * A vertex state handler.
  * <p>
  * As being an item state handler, this handler has a cellar at its disposal. It
- * is therefore able to hold the state history of the vertex and handles setting
- * a previous state.
+ * is therefore able to hold the state history and to set a previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -77,7 +76,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleUpdated(String value) throws Exception {
+	public void handleUpdatedVertex(String value) throws Exception {
 		try {
 			this.state.exit();
 			this.state.handleUpdated(value);
@@ -90,10 +89,10 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleFocussed() throws Exception {
+	public void handleFocusOnVertex() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleFocussed();
+			this.state.handleFocusOn();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -103,7 +102,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleVisited() throws Exception {
+	public void handleVisitedVertex() throws Exception {
 		try {
 			this.state.exit();
 			this.state.handleVisited();
@@ -126,7 +125,7 @@ public class VertexStateHandler extends VertexLayout implements
 	}
 
 	/**
-	 * Sets a state.
+	 * Sets a state and adds it to the cellar.
 	 * 
 	 * @param state
 	 *            the state to set
@@ -134,9 +133,11 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setState(AbstractVertexState state) throws Exception {
 		try {
-			this.cellar.add(state);
 			this.state = state;
 			this.state.entry();
+			// begin cellar
+			this.cellar.add(state);
+			// end cellar
 		} catch (Exception e) {
 			throw e;
 		}
@@ -146,11 +147,13 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSetPreviousState() throws Exception {
+	public void setPreviousState() throws Exception {
 		try {
 			this.state.exit();
+			// begin cellar
 			int index = this.cellar.size() - 1;
 			this.state = this.cellar.remove(index);
+			// end cellar
 			this.state.entry();
 		} catch (Exception e) {
 			throw e;
@@ -158,26 +161,26 @@ public class VertexStateHandler extends VertexLayout implements
 	}
 
 	/**
-	 * State value setter: Initialises a vertex value.
+	 * A layout modifier: Initialises a vertex value.
 	 * 
 	 * @throws Exception
 	 */
-	void setValueInitialised() throws Exception {
+	void setLayoutInitialised() throws Exception {
 		try {
-			this.setValueUpdated(Sigma.INFINITY);
+			this.setLayoutUpdated(Sigma.INFINITY);
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * State value setter: Updates a vertex value.
+	 * A layout modifier: Updates a vertex value.
 	 * 
 	 * @param value
 	 *            the value to set
 	 * @throws Exception
 	 */
-	void setValueUpdated(String value) throws Exception {
+	void setLayoutUpdated(String value) throws Exception {
 		try {
 			this.setValue(value);
 			this.notifyObservers();
@@ -187,18 +190,18 @@ public class VertexStateHandler extends VertexLayout implements
 	}
 
 	/**
-	 * State view setter: Sets the layout to unexplored vertex.
+	 * A layout modifier: Sets the layout to unexplored vertex.
 	 * <p>
 	 * (see doc/vistra/adt/10GraphTraversal_handout.pdf, page 11)
 	 * 
 	 * @throws Exception
 	 */
-	void setViewUnexplored() throws Exception {
+	void setLayoutUnexplored() throws Exception {
 		try {
 			if (this.isStart())
-				this.setViewVisited();
+				this.setLayoutVisited();
 			else if (this.isEnd())
-				this.setViewVisited();
+				this.setLayoutVisited();
 			else {
 				this.setFont(FontPalette.normal);
 				this.setFontColor(ColorPalette.darkblue);
@@ -213,21 +216,21 @@ public class VertexStateHandler extends VertexLayout implements
 	}
 
 	/**
-	 * State view setter: Sets the layout as focussed vertex -- like 'visited'
-	 * but with a kind a 'spot' on the vertex.
+	 * A layout modifier: Sets the layout as focus on vertex -- like 'visited'
+	 * but with a kind of a 'spot light' on the vertex.
 	 * 
 	 * @throws Exception
 	 */
-	void setViewFocussed() throws Exception {
+	void setLayoutFocusOn() throws Exception {
 		try {
 			if (this.isEnd())
-				this.setViewSolution();
+				this.setLayoutSolutionMember();
 			else {
 				this.setFont(FontPalette.emphasised);
 				this.setFontColor(ColorPalette.darkblue);
 				this.setStroke(StrokePalette.visited);
 				this.setStrokeColor(ColorPalette.red);
-				this.setFillColor(ColorPalette.orange);
+				this.setFillColor(ColorPalette.citron);
 				this.notifyObservers();
 			}
 		} catch (Exception e) {
@@ -236,18 +239,18 @@ public class VertexStateHandler extends VertexLayout implements
 	}
 
 	/**
-	 * State view setter: Sets the layout as visited vertex.
+	 * A layout modifier: Sets the layout as visited vertex.
 	 * <p>
 	 * (see doc/vistra/adt/10GraphTraversal_handout.pdf, page 11)
 	 * 
 	 * @throws Exception
 	 */
-	void setViewVisited() throws Exception {
+	void setLayoutVisited() throws Exception {
 		try {
 			if (this.isStart())
-				this.setViewFocussed();
+				this.setLayoutFocusOn();
 			else if (this.isEnd())
-				this.setViewSolution();
+				this.setLayoutSolutionMember();
 			else {
 				this.setFont(FontPalette.emphasised);
 				this.setFontColor(ColorPalette.darkblue);
@@ -262,11 +265,11 @@ public class VertexStateHandler extends VertexLayout implements
 	}
 
 	/**
-	 * State view setter: Sets the layout as solution member vertex.
+	 * A layout modifier: Sets the layout as solution member vertex.
 	 * 
 	 * @throws Exception
 	 */
-	void setViewSolution() throws Exception {
+	void setLayoutSolutionMember() throws Exception {
 		try {
 			this.setFont(FontPalette.emphasised);
 			this.setFontColor(ColorPalette.green);
@@ -286,14 +289,12 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	@Override
 	public boolean isVisited() {
-		if (this.state instanceof VertexStateVisited
-				|| this.state instanceof VertexStateSolutionMember)
-			return true;
-		else if (this.state instanceof VertexStateFocussed)
-			return true;
-		else
+		// TODO
+		if (this.state instanceof VertexStateUnexplored
+				|| this.state instanceof VertexStateInitialised)
 			return false;
-
+		else
+			return true;
 	}
 
 }

@@ -2,14 +2,9 @@ package vistra.core.graph;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import vistra.core.algorithm.IAlgorithm;
-import vistra.core.graph.TraversableGraphEvent.EdgeVertexEvent;
-import vistra.core.graph.TraversableGraphEvent.Type;
-import vistra.core.graph.TraversableGraphEvent.VerticesEvent;
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.state.IVertexStateHandler;
@@ -21,12 +16,12 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
 
 /**
- * An implementation of {@code Graph} that delegates most of its method calls to
- * a constructor-specified {@code Graph} instance. Modifiers are not supported
+ * An implementation of {@code Graph}: delegates most of its method calls to a
+ * constructor-specified {@code Graph} instance. Modifiers are not supported
  * anymore: vertices and edges can neither been added nor removed.
  * <p>
- * In addition, this graph serves with some 'step'-methods which an
- * {@code IAlgorithm}-developer can use for generating steps of a traversal.
+ * In addition, this graph serves with a 'step'-method which an
+ * {@code IAlgorithm}-developer can use for traversing a graph.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -41,20 +36,23 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	private static final long serialVersionUID = -265489538887703410L;
 
 	/**
-	 * A field for a list of listeners.
+	 * A field for a list of steps.
 	 */
-	List<ITraversableGraphEventListener> listenerList = Collections
-			.synchronizedList(new LinkedList<ITraversableGraphEventListener>());
+	List<IStep> steps;
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param delegate
 	 *            the graph to delegate
+	 * @param steps
+	 *            a list for the steps
 	 */
 	@SuppressWarnings("unchecked")
-	public TraversableGraph(Graph<? extends IVertex, ? extends IEdge> delegate) {
+	public TraversableGraph(Graph<? extends IVertex, ? extends IEdge> delegate,
+			List<IStep> steps) {
 		super((Graph<IVertex, IEdge>) delegate);
+		this.steps = steps;
 	}
 
 	/*
@@ -685,112 +683,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addTraversalEventListener(
-			ITraversableGraphEventListener listener) {
-		this.listenerList.add(listener);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void removeTraversalEventListener(
-			ITraversableGraphEventListener listener) {
-		this.listenerList.remove(listener);
-	}
-
-	/**
-	 * Fires an event.
-	 * 
-	 * @param evt
-	 *            the event
-	 */
-	private void fireEvent(TraversableGraphEvent evt) {
-		for (ITraversableGraphEventListener listener : listenerList) {
-			listener.handleTraversableGraphEvent(evt);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepInitVertices(List<IVertex> vertices) {
-		this.fireEvent(new VerticesEvent(this, Type.INIT, vertices, null));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepUpdateVertices(List<IVertex> vertices, List<String> values) {
-		this.fireEvent(new VerticesEvent(this, Type.UPDATE, vertices, values));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepVisitVertex(IEdge edge, IVertex vertex) {
-		this.fireEvent(new EdgeVertexEvent(this, Type.VISIT, edge, vertex));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepSolutionVertex(IEdge edge, IVertex vertex) {
-		this.fireEvent(new EdgeVertexEvent(this, Type.SOLUTION, edge, vertex));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepDiscoveryEdge(IEdge edge) {
-		this.fireEvent(new EdgeVertexEvent(this, Type.DISCOVERY_EDGE, edge,
-				null));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepBackEdge(IEdge edge) {
-		this.fireEvent(new EdgeVertexEvent(this, Type.BACK_EDGE, edge, null));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepForwardEdge(IEdge edge) {
-		this.fireEvent(new EdgeVertexEvent(this, Type.FORWARD_EDGE, edge, null));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepCrossEdge(IEdge edge) {
-		this.fireEvent(new EdgeVertexEvent(this, Type.CROSS_EDGE, edge, null));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepDiscardedEdge(IEdge edge) {
-		this.fireEvent(new EdgeVertexEvent(this, Type.DISCARDED_EDGE, edge,
-				null));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void stepSolutionEdge(IEdge edge) {
-		this.fireEvent(new EdgeVertexEvent(this, Type.SOLUTION_EDGE, edge, null));
+	public void stepBy(IStep step) {
+		this.steps.add(step);
 	}
 
 }

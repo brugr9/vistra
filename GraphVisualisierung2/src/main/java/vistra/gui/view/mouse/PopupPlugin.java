@@ -11,7 +11,7 @@ import org.apache.commons.collections15.Factory;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
-import vistra.gui.view.mouse.popup.IItemPopup;
+import vistra.gui.view.popup.IItemPopup;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;

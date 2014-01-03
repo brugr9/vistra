@@ -26,7 +26,7 @@ class VertexStateVisited extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewVisited();
+			super.stateHandler.setLayoutVisited();
 		} catch (Exception e) {
 			throw e;
 		}

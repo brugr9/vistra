@@ -4,7 +4,7 @@ package vistra.core.graph.item.state;
  * An interface for an item state handler.
  * <p>
  * This handler has a cellar at its disposal. It is therefore able to hold the
- * state history of the item and handles setting a previous state.
+ * state history and to set a previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -29,10 +29,11 @@ public interface IItemStateHandler {
 	void handleSolutionMember() throws Exception;
 
 	/**
-	 * Handles setting the previous state as getting it from the state cellar.
+	 * Sets the previous state: removes the last state from the cellar and sets
+	 * the removed state as actual state.
 	 * 
 	 * @throws Exception
 	 */
-	void handleSetPreviousState() throws Exception;
+	void setPreviousState() throws Exception;
 
 }

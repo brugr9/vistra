@@ -26,7 +26,7 @@ class EdgeStateDiscovery extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewDiscovery();
+			super.stateHandler.setLayoutDiscovery();
 		} catch (Exception e) {
 			throw e;
 		}

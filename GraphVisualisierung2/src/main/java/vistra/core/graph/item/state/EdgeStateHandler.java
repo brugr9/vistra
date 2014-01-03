@@ -11,8 +11,7 @@ import vistra.util.StrokePalette;
  * An edge state handler.
  * <p>
  * As being an item state handler, this handler has a cellar at its disposal. It
- * is therefore able to hold the state history of the edge and handles setting a
- * previous state.
+ * is therefore able to hold the state history and to set a previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -137,7 +136,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * Sets a state.
+	 * Sets a state and adds it to the cellar.
 	 * 
 	 * @param state
 	 *            the state to set
@@ -145,9 +144,11 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setState(AbstractEdgeState state) throws Exception {
 		try {
-			this.cellar.add(state);
 			this.state = state;
 			this.state.entry();
+			// begin cellar
+			this.cellar.add(state);
+			// end cellar
 		} catch (Exception e) {
 			throw e;
 		}
@@ -157,11 +158,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSetPreviousState() throws Exception {
+	public void setPreviousState() throws Exception {
 		try {
 			this.state.exit();
+			// begin cellar
 			int index = this.cellar.size() - 1;
 			this.state = this.cellar.remove(index);
+			// end cellar
 			this.state.entry();
 		} catch (Exception e) {
 			throw e;
@@ -169,11 +172,11 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout to unexplored-edge.
+	 * A layout modifier: Sets the layout to unexplored-edge.
 	 * 
 	 * @throws Exception
 	 */
-	void setViewUnexplored() throws Exception {
+	void setLayoutUnexplored() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
@@ -186,13 +189,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as discovery-edge.
+	 * A layout modifier: Sets the layout as discovery-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
-	void setViewDiscovery() throws Exception {
+	void setLayoutDiscovery() throws Exception {
 		try {
 			this.setFont(FontPalette.emphasised);
 			this.setFontColor(ColorPalette.red);
@@ -205,13 +208,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as back-edge.
+	 * A layout modifier: Sets the layout as back-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
-	void setViewBack() throws Exception {
+	void setLayoutBack() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
@@ -224,13 +227,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as forward-edge.
+	 * A layout modifier: Sets the layout as forward-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
-	void setViewForward() throws Exception {
+	void setLayoutForward() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
@@ -243,13 +246,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as cross-edge.
+	 * A layout modifier: Sets the layout as cross-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
-	void setViewCross() throws Exception {
+	void setLayoutCross() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
@@ -262,11 +265,11 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as discarded-edge.
+	 * A layout modifier: Sets the layout as discarded-edge.
 	 * 
 	 * @throws Exception
 	 */
-	void setViewDiscarded() throws Exception {
+	void setLayoutDiscarded() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
@@ -279,11 +282,11 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as solution-member-edge.
+	 * A layout modifier: Sets the layout as solution-member-edge.
 	 * 
 	 * @throws Exception
 	 */
-	void setViewSolution() throws Exception {
+	void setLayoutSolutionMember() throws Exception {
 		try {
 			this.setFont(FontPalette.emphasised);
 			this.setFontColor(ColorPalette.green);

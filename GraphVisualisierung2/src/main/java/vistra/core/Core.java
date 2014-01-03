@@ -21,9 +21,7 @@ import vistra.core.graph.GraphManagerFactory;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.IGraphManager;
 import vistra.core.graph.ITraversableGraph;
-import vistra.core.graph.ITraversableGraphEventListener;
 import vistra.core.graph.TraversableGraph;
-import vistra.core.graph.TraversableGraphEventListener;
 import vistra.core.traversal.ITraversal;
 import vistra.core.traversal.Traversal;
 import vistra.core.traversal.step.IStep;
@@ -185,14 +183,12 @@ public class Core implements ICore {
 	public ITraversal traverse(IExtendedGraph graph) throws CoreException {
 
 		try {
-			/* graph and listener */
-			ITraversableGraph traversable = new TraversableGraph(graph);
+			/* graph */
 			List<IStep> stepList = new ArrayList<IStep>();
-			ITraversableGraphEventListener listener = new TraversableGraphEventListener(
+			ITraversableGraph traversableGraph = new TraversableGraph(graph,
 					stepList);
-			traversable.addTraversalEventListener(listener);
-			/* algorithm and traversal */
-			this.algorithm.traverse(traversable);
+			/* algorithm */
+			this.algorithm.traverse(traversableGraph);
 			IBidirectIterator<IStep> stepIterator = new ImmutableBidirectIterator<IStep>(
 					stepList);
 			ITraversal traversal = new Traversal(stepIterator);

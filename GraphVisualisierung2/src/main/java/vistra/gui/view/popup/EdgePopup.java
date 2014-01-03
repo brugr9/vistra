@@ -1,9 +1,7 @@
-package vistra.gui.view.mouse.popup;
+package vistra.gui.view.popup;
 
 import static vistra.gui.control.IControl.EventSource.EDIT;
-import static vistra.gui.control.IControl.EventSource.END;
 import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.START;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +9,6 @@ import java.awt.geom.Point2D;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -24,12 +21,12 @@ import vistra.gui.IGuiModel;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
- * A vertex pop-up menu.
+ * An edge pop-up menu.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexPopup extends JPopupMenu implements IItemPopup {
+public class EdgePopup extends JPopupMenu implements IItemPopup {
 
 	private static final long serialVersionUID = 3273304014704565148L;
 
@@ -46,17 +43,9 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 */
 	private Point2D point;
 	/**
-	 * A field for a vertex.
+	 * A field for a edge.
 	 */
-	private IVertexLayout vertex;
-	/**
-	 * A field for a start check box.
-	 */
-	private JCheckBoxMenuItem start;
-	/**
-	 * A field for an end check box.
-	 */
-	private JCheckBoxMenuItem end;
+	private IEdgeLayout edge;
 	/**
 	 * A field for a property menu item.
 	 */
@@ -76,80 +65,29 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 * @param model
 	 *            the gui model
 	 */
-	public VertexPopup(JFrame top,
+	public EdgePopup(JFrame top,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
 			IGuiModel model) {
-		super("vertexPopup");
+		super("edgePopup");
+		/**/
 		this.viewer = viewer;
-		this.model = (IGuiModel) model;
+		this.model = model;
 		this.point = null;
-		this.vertex = null;
+		this.edge = null;
 
 		/**/
-		this.start = new JCheckBoxMenuItem("start");
-		this.start.setActionCommand(START.toString());
-		this.start.addActionListener(model.getParameterStateHandler());
-		this.start.addActionListener(new StartActionListener());
-		//
-		this.end = new JCheckBoxMenuItem("end");
-		this.end.setActionCommand(END.toString());
-		this.end.addActionListener(model.getParameterStateHandler());
-		this.end.addActionListener(new EndActionListener());
-		//
 		this.property = new JMenuItem("property");
 		this.property.setActionCommand(EDIT.toString());
 		this.property.addActionListener(model.getParameterStateHandler());
+		this.addPropertyItemListener(top);
 		//
 		this.delete = new JMenuItem("delete");
 		this.delete.addActionListener(new DeleteActionListener());
 
 		/**/
-		this.add(this.start);
-		this.add(this.end);
-		this.addSeparator();
 		this.add(this.property);
 		this.addSeparator();
 		this.add(this.delete);
-	}
-
-	/**
-	 * Sets the start value.
-	 */
-	private void setStart() {
-		if (this.vertex != null) {
-			if (this.start.isSelected()) {
-				IVertexLayout previousStart = this.model.getStart();
-				if (previousStart != null)
-					previousStart.setStart(false);
-				this.model.setStart(this.vertex);
-
-				if (this.vertex.isEnd()) {
-					this.vertex.setEnd(false);
-					this.model.setEnd(null);
-				}
-			}
-			this.vertex.setStart(this.start.isSelected());
-		}
-	}
-
-	/**
-	 * Sets the end value.
-	 */
-	private void setEnd() {
-		if (this.vertex != null) {
-			if (this.end.isSelected()) {
-				IVertexLayout previousEnd = this.model.getEnd();
-				if (previousEnd != null)
-					previousEnd.setEnd(false);
-				this.model.setEnd(this.vertex);
-
-				if (this.vertex.isStart()) {
-					this.vertex.setStart(false);
-					this.model.setStart(null);
-				}
-			}
-			this.vertex.setEnd(this.end.isSelected());
-		}
 	}
 
 	/**
@@ -158,9 +96,9 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 * @param owner
 	 */
 	private void showDialog(JFrame owner) {
-		if (this.point != null && this.vertex != null) {
-			VertexDialog dialog = new VertexDialog(this.vertex, owner,
-					this.viewer, this.model);
+		if (this.point != null && this.edge != null) {
+			EdgeDialog dialog = new EdgeDialog(this.edge, owner, this.viewer,
+					this.model);
 			dialog.setLocation((int) this.point.getX() + owner.getX(),
 					(int) this.point.getY() + owner.getY());
 			dialog.setVisible(true);
@@ -171,9 +109,9 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 * Deletes the item.
 	 */
 	private void delete() {
-		if (this.vertex != null) {
-			this.viewer.getPickedVertexState().pick(this.vertex, false);
-			this.viewer.getGraphLayout().getGraph().removeVertex(this.vertex);
+		if (this.edge != null) {
+			this.viewer.getPickedEdgeState().pick(this.edge, false);
+			this.viewer.getGraphLayout().getGraph().removeEdge(this.edge);
 		}
 	}
 
@@ -183,9 +121,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	@Override
 	public void setItem(IItemLayout item) {
 		if (item instanceof IVertexLayout) {
-			this.vertex = (IVertexLayout) item;
-			this.start.setSelected(this.vertex.isStart());
-			this.end.setSelected(this.vertex.isEnd());
+			this.edge = (IEdgeLayout) item;
 		}
 	}
 
@@ -207,7 +143,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		this.property.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VertexPopup.this.showDialog(top);
+				EdgePopup.this.showDialog(top);
 			}
 		});
 	}
@@ -223,18 +159,14 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 
 		try {
 			if (arg == I18N) {
-				this.setLabel(b.getString("vertex.label"));
-				this.start.setText(b.getString("start.label"));
-				this.end.setText(b.getString("finish.label"));
+				this.setLabel(b.getString("edge.label"));
 				this.property.setText(b.getString("edit.label"));
 				this.delete.setText(b.getString("delete.label"));
 			}
 			/**/
-			this.setEnabled(m.isVertexEnabled());
-			this.start.setEnabled(m.isVertexEnabled());
-			this.end.setEnabled(m.isVertexEnabled());
-			this.property.setEnabled(m.isVertexEnabled());
-			this.delete.setEnabled(m.isVertexEnabled());
+			this.setEnabled(m.isEdgeEnabled());
+			this.property.setEnabled(m.isEdgeEnabled());
+			this.delete.setEnabled(m.isEdgeEnabled());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);
@@ -248,37 +180,11 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private class StartActionListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			VertexPopup.this.setStart();
-		}
-	}
-
-	/**
-	 * 
-	 * @author Roland Bruggmann (brugr9@bfh.ch)
-	 * 
-	 */
-	private class EndActionListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			VertexPopup.this.setEnd();
-		}
-	}
-
-	/**
-	 * 
-	 * @author Roland Bruggmann (brugr9@bfh.ch)
-	 * 
-	 */
 	private class DeleteActionListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			VertexPopup.this.delete();
+			EdgePopup.this.delete();
 		}
 	}
 

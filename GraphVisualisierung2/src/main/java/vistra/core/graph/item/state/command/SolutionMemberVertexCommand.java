@@ -4,30 +4,22 @@ import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.state.VertexStateHandler;
 
 /**
- * An item-state command: update vertex value.
+ * An item-state command: solution-member vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class UpdateVertexCommand extends AbstractItemStateCommand implements
+public class SolutionMemberVertexCommand extends AbstractItemStateCommand implements
 		IItemStateCommand {
-
-	/**
-	 * A field for a value.
-	 */
-	String value;
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param vertex
 	 *            a vertex
-	 * @param value
-	 *            a value
 	 */
-	public UpdateVertexCommand(IVertex vertex, String value) {
+	public SolutionMemberVertexCommand(IVertex vertex) {
 		super((VertexStateHandler) vertex);
-		this.value = value;
 	}
 
 	/**
@@ -35,7 +27,7 @@ public class UpdateVertexCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((VertexStateHandler) super.stateHandler).handleUpdated(this.value);
+		((VertexStateHandler) super.stateHandler).handleSolutionMember();
 	}
 
 }
