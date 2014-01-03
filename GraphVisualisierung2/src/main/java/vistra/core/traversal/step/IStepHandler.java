@@ -5,7 +5,7 @@ import vistra.util.ICommand;
 
 /**
  * A step handler interface. A step handler is a command handler specialised on
- * handling item-commands.
+ * item-state-commands.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see IStep
