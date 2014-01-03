@@ -102,7 +102,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleVisitedVertex() throws Exception {
+	public void handleVisited() throws Exception {
 		try {
 			this.state.exit();
 			this.state.handleVisited();

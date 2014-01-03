@@ -61,19 +61,6 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleDiscoveryEdge() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleDiscoveryEdge();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void handleBackEdge() throws Exception {
 		try {
 			this.state.exit();
@@ -117,6 +104,19 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 		try {
 			this.state.exit();
 			this.state.handleDiscardedEdge();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handleVisited() throws Exception {
+		try {
+			this.state.exit();
+			this.state.handleDiscoveryEdge();
 		} catch (Exception e) {
 			throw e;
 		}

@@ -27,7 +27,7 @@ public class DiscoveryEdgeCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleDiscoveryEdge();
+		((EdgeStateHandler) super.stateHandler).handleVisited();
 	}
 
 }

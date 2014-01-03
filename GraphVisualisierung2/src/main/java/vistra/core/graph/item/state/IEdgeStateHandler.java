@@ -16,13 +16,6 @@ package vistra.core.graph.item.state;
 public interface IEdgeStateHandler extends IItemStateHandler {
 
 	/**
-	 * Handles discovery edge.
-	 * 
-	 * @throws Exception
-	 */
-	void handleDiscoveryEdge() throws Exception;
-
-	/**
 	 * Handles back-edge.
 	 * 
 	 * @throws Exception

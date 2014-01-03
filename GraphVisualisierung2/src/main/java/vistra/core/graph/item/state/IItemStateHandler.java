@@ -22,6 +22,13 @@ public interface IItemStateHandler {
 	void handleUnexplored() throws Exception;
 
 	/**
+	 * Handles visited.
+	 * 
+	 * @throws Exception
+	 */
+	void handleVisited() throws Exception;
+
+	/**
 	 * Handles solution member.
 	 * 
 	 * @throws Exception

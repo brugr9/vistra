@@ -35,13 +35,6 @@ public interface IVertexStateHandler extends IItemStateHandler {
 	void handleFocusOnVertex() throws Exception;
 
 	/**
-	 * Handles visited.
-	 * 
-	 * @throws Exception
-	 */
-	void handleVisitedVertex() throws Exception;
-
-	/**
 	 * Returns the visited status.
 	 * 
 	 * @return {@code true} if visited
