@@ -26,7 +26,7 @@ public class InitVerticesStep extends AbstractStep implements IStep {
 		try {
 			for (IVertex vertex : vertices) {
 				IItemStateCommand initVertex = new InitVertexCommand(vertex);
-				this.stepHandler.addCommand(initVertex);
+				this.stepHandler.addItemStateCommand(initVertex);
 				initVertex.execute();
 			}
 		} catch (Exception e) {

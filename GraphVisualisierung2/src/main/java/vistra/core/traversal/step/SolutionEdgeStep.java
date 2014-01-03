@@ -25,7 +25,7 @@ public class SolutionEdgeStep extends AbstractStep implements IStep {
 				+ ((EdgeLayout) edge).getId();
 		try {
 			IItemStateCommand command = new SolutionEdgeCommand(edge);
-			this.stepHandler.addCommand(command);
+			this.stepHandler.addItemStateCommand(command);
 			command.execute();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -162,7 +162,15 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	void stepSolutionVertex(IEdge edge, IVertex vertex);
 
 	/**
-	 * A step method: sets an edge as back edge.
+	 * A step method: sets an edge as discovery-edge.
+	 * 
+	 * @param edge
+	 *            the edge to set as discovery-edge
+	 */
+	void stepDiscoveryEdge(IEdge edge);
+
+	/**
+	 * A step method: sets an edge as back-edge.
 	 * 
 	 * @param edge
 	 *            the edge to set as back-edge
@@ -170,7 +178,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	void stepBackEdge(IEdge edge);
 
 	/**
-	 * A step method: sets an edge as forward edge.
+	 * A step method: sets an edge as forward-edge.
 	 * 
 	 * @param edge
 	 *            the edge to set as forward-edge

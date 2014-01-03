@@ -33,7 +33,7 @@ public class UpdateVerticesStep extends AbstractStep implements IStep {
 					this.description += ", ";
 				IItemStateCommand updateVertex = new UpdateVertexCommand(
 						(IVertex) vertices.get(i), values.get(i));
-				this.stepHandler.addCommand(updateVertex);
+				this.stepHandler.addItemStateCommand(updateVertex);
 				updateVertex.execute();
 			}
 		} catch (Exception e) {

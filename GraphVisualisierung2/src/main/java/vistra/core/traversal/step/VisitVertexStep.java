@@ -31,8 +31,8 @@ public class VisitVertexStep extends AbstractStep implements IStep {
 			IItemStateCommand discoveryEdge = new DiscoveryEdgeCommand(edge);
 			IItemStateCommand visitedVertex = new VisitedVertexCommand(vertex);
 			// add
-			this.stepHandler.addCommand(discoveryEdge);
-			this.stepHandler.addCommand(visitedVertex);
+			this.stepHandler.addItemStateCommand(discoveryEdge);
+			this.stepHandler.addItemStateCommand(visitedVertex);
 			// execute
 			discoveryEdge.execute();
 			visitedVertex.execute();

@@ -15,12 +15,12 @@ import vistra.util.ICommand;
 interface IStepHandler extends ICommand {
 
 	/**
-	 * Adds an item command.
+	 * Adds an item-state command.
 	 * 
 	 * @param command
-	 *            the item command to add
+	 *            the item-state command to add
 	 * @throws Exception
 	 */
-	void addCommand(IItemStateCommand command) throws Exception;
+	void addItemStateCommand(IItemStateCommand command) throws Exception;
 
 }

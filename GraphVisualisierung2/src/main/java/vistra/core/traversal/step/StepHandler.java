@@ -48,7 +48,7 @@ class StepHandler implements IStepHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addCommand(IItemStateCommand command) throws Exception {
+	public void addItemStateCommand(IItemStateCommand command) throws Exception {
 		this.commands.add(command);
 	}
 

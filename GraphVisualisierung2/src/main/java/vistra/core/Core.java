@@ -24,6 +24,7 @@ import vistra.core.graph.ITraversableGraph;
 import vistra.core.graph.ITraversableGraphEventListener;
 import vistra.core.graph.TraversableGraph;
 import vistra.core.graph.TraversableGraphEventListener;
+import vistra.core.traversal.ITraversal;
 import vistra.core.traversal.Traversal;
 import vistra.core.traversal.step.IStep;
 import vistra.util.IBidirectIterator;
@@ -65,7 +66,8 @@ public class Core implements ICore {
 			this.graphManager = GraphManagerFactory.create(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(p);
 			this.algorithmManager.addAvailable(new Default());
-			this.algorithmManager.addAvailable(new Test()); // TODO remove test algorithm
+			this.algorithmManager.addAvailable(new Test()); // TODO remove test
+															// algorithm
 			this.algorithmManager.addAvailable(new BFS());
 			this.algorithmManager.addAvailable(new DFS());
 			this.algorithmManager.addAvailable(new DLS());
@@ -180,20 +182,20 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Traversal traverse(IExtendedGraph graph) throws CoreException {
+	public ITraversal traverse(IExtendedGraph graph) throws CoreException {
 
 		try {
 			/* graph and listener */
+			ITraversableGraph traversable = new TraversableGraph(graph);
 			List<IStep> stepList = new ArrayList<IStep>();
 			ITraversableGraphEventListener listener = new TraversableGraphEventListener(
 					stepList);
-			ITraversableGraph tg = new TraversableGraph(graph);
-			tg.addTraversalEventListener(listener);
+			traversable.addTraversalEventListener(listener);
 			/* algorithm and traversal */
-			this.algorithm.traverse(tg);
+			this.algorithm.traverse(traversable);
 			IBidirectIterator<IStep> stepIterator = new ImmutableBidirectIterator<IStep>(
 					stepList);
-			Traversal traversal = new Traversal(stepIterator);
+			ITraversal traversal = new Traversal(stepIterator);
 			return traversal;
 		} catch (Exception e) {
 			throw new CoreException(e);

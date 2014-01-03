@@ -47,7 +47,7 @@ public abstract class TraversableGraphEvent {
 		/* edge-vertex */
 		VISIT, SOLUTION,
 		/* edge */
-		BACK_EDGE, FORWARD_EDGE, CROSS_EDGE, DISCARDED_EDGE, SOLUTION_EDGE,
+		DISCOVERY_EDGE, BACK_EDGE, FORWARD_EDGE, CROSS_EDGE, DISCARDED_EDGE, SOLUTION_EDGE,
 	}
 
 	/**

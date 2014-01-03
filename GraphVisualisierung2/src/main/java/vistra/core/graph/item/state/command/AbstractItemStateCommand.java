@@ -13,7 +13,7 @@ abstract class AbstractItemStateCommand implements IItemStateCommand {
 	/**
 	 * A field for a state handler.
 	 */
-	IItemStateHandler stateHandler;
+	protected IItemStateHandler stateHandler;
 
 	/**
 	 * Main constructor.

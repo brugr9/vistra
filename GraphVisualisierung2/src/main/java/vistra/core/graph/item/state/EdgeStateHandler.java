@@ -169,7 +169,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout to unexplored edge.
+	 * State view setter: Sets the layout to unexplored-edge.
 	 * 
 	 * @throws Exception
 	 */
@@ -186,7 +186,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as discovery edge.
+	 * State view setter: Sets the layout as discovery-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
@@ -205,7 +205,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as back edge.
+	 * State view setter: Sets the layout as back-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
@@ -224,7 +224,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as forward edge.
+	 * State view setter: Sets the layout as forward-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
@@ -243,7 +243,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as cross edge.
+	 * State view setter: Sets the layout as cross-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
@@ -262,7 +262,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as discarded edge.
+	 * State view setter: Sets the layout as discarded-edge.
 	 * 
 	 * @throws Exception
 	 */
@@ -279,7 +279,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * State view setter: Sets the layout as solution member edge.
+	 * State view setter: Sets the layout as solution-member-edge.
 	 * 
 	 * @throws Exception
 	 */

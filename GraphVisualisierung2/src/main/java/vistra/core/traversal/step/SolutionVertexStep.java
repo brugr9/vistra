@@ -32,8 +32,8 @@ public class SolutionVertexStep extends AbstractStep implements IStep {
 			IItemStateCommand solutionEdge = new SolutionEdgeCommand(edge);
 			IItemStateCommand solutionVertex = new VisitedVertexCommand(vertex);
 			// add
-			this.stepHandler.addCommand(solutionEdge);
-			this.stepHandler.addCommand(solutionVertex);
+			this.stepHandler.addItemStateCommand(solutionEdge);
+			this.stepHandler.addItemStateCommand(solutionVertex);
 			// execute
 			solutionEdge.execute();
 			solutionVertex.execute();

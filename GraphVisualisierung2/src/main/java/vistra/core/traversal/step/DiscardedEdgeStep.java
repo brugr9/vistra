@@ -24,7 +24,7 @@ public class DiscardedEdgeStep extends AbstractStep implements IStep {
 		this.description = "Discarded edge " + ((IEdgeLayout) edge).getId();
 		try {
 			IItemStateCommand command = new DiscardedEdgeCommand(edge);
-			this.stepHandler.addCommand(command);
+			this.stepHandler.addItemStateCommand(command);
 			command.execute();
 		} catch (Exception e) {
 			e.printStackTrace();

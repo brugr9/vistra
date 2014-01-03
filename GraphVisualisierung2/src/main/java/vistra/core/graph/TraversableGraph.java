@@ -747,6 +747,15 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void stepDiscoveryEdge(IEdge edge) {
+		this.fireEvent(new EdgeVertexEvent(this, Type.DISCOVERY_EDGE, edge,
+				null));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void stepBackEdge(IEdge edge) {
 		this.fireEvent(new EdgeVertexEvent(this, Type.BACK_EDGE, edge, null));
 	}
