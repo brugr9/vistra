@@ -3,14 +3,14 @@ package vistra.gui.control.state;
 import vistra.util.IState;
 
 /**
- * An animation state: idle.
+ * A step-by-step state: inter (... neither beginning nor end).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see AnimationStateHandler
+ * @see SbsStateHandler
  * 
  */
-class AnimationStateIdle extends AbstractAnimationState implements IState {
+class SbsStateInter extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
@@ -18,7 +18,7 @@ class AnimationStateIdle extends AbstractAnimationState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	AnimationStateIdle(IAnimationStateHandler stateHandler) {
+	SbsStateInter(ISbsStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -28,9 +28,9 @@ class AnimationStateIdle extends AbstractAnimationState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewIdle();
-		} catch (Exception ex) {
-			throw ex;
+			super.stateHandler.setViewInter();
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 

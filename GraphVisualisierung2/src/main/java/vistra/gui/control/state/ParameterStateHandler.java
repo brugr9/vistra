@@ -81,7 +81,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		super();
 		this.core = core;
 		this.model = (GuiModel) model;
-		this.state = new ParameterStateIdle(this);
+		this.state = new ParameterStateOff(this);
 		this.top = null;
 	}
 
@@ -294,17 +294,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * A state view setter: Sets the view for state: idle.
-	 */
-	void setViewIdle() {
-		// Graph
-		this.setGraphEditable(true);
-		// Algorithm
-		this.model.setAlgorithmsEnabled(false);
-		this.model.notifyObservers(EventSource.ALGORITHM);
-	}
-
-	/**
 	 * A state view setter: Sets the view for state: graph edited.
 	 */
 	void setViewGraphEdited() {
@@ -365,16 +354,20 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * Doing: Sets the {@code AnimationStateHandler} off or idle.
 	 * 
+	 * @return 0 if selected, 1 if saved, 2 if edited
 	 * @throws Exception
 	 */
-	void idle() throws Exception {
-		if (this.model.isGraphFile() && this.model.isGraphSaved()
-				&& this.model.getTraversal().size() > 0)
-			this.model.getAnimationStateHandler().handleIdle();
-		else
-			this.model.getAnimationStateHandler().handleOff();
+	int idle() throws Exception {
+		int selected = 0, saved = 1, edited = 2;
+		if (this.model.isGraphSaved()) {
+			if (this.model.getTraversal() != null)
+				return selected;
+			else
+				return saved;
+		} else {
+			return edited;
+		}
 	}
 
 	/**
@@ -503,7 +496,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			// title
 			fileChooser.setDialogTitle(this.model.getResourceBundle()
 					.getString("saveas.label"));
-
 			/* dialog */
 			int option = fileChooser.showSaveDialog(this.top);
 			if (option == JFileChooser.APPROVE_OPTION) {
@@ -515,7 +507,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setAlgorithmsEnabled(true);
 			}
 			return option;
-
 		} catch (Exception e) {
 			throw e;
 		}
@@ -563,7 +554,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			return index;
 
 		} catch (Exception e) {
-			this.setState(new ParameterStateIdle(this));
+			this.setState(new ParameterStateGraphSaved(this));
 			throw e;
 		}
 
@@ -672,11 +663,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					JOptionPane.QUESTION_MESSAGE);
 			/* delegate */
 			if (option == JOptionPane.YES_OPTION) {
-				Class<? extends AbstractParameterState> state = this.state
-						.getClass();
-				if (state == ParameterStateGraphEdited.class)
+				if (this.model.isGraphFile())
 					this.saveGraph();
-				if (state == ParameterStateIdle.class)
+				else
 					this.saveGraphAs();
 			}
 			return option;

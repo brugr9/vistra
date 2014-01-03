@@ -35,7 +35,19 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 */
 	void handleIdle() throws Exception {
 		try {
-			this.stateHandler.setState(new SbsStateIdle(this.stateHandler));
+			switch (this.stateHandler.idle()) {
+			case -1:
+				this.stateHandler.setState(new SbsStateBeginning(
+						this.stateHandler));
+				break;
+			case 1:
+				this.stateHandler.setState(new SbsStateEnd(this.stateHandler));
+				break;
+			default:
+				this.stateHandler
+						.setState(new SbsStateInter(this.stateHandler));
+				break;
+			}
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -65,8 +77,8 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 		try {
 			boolean hasPrevious = this.stateHandler.backward();
 			if (hasPrevious)
-				this.stateHandler.setState(new SbsStateBetween(
-						this.stateHandler));
+				this.stateHandler
+						.setState(new SbsStateInter(this.stateHandler));
 			else
 				this.stateHandler.setState(new SbsStateBeginning(
 						this.stateHandler));
@@ -84,8 +96,8 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 		try {
 			boolean hasNext = this.stateHandler.forward();
 			if (hasNext)
-				this.stateHandler.setState(new SbsStateBetween(
-						this.stateHandler));
+				this.stateHandler
+						.setState(new SbsStateInter(this.stateHandler));
 			else
 				this.stateHandler.setState(new SbsStateEnd(this.stateHandler));
 		} catch (Exception ex) {

@@ -226,21 +226,6 @@ public final class SbsStateHandler extends Observable implements
 	}
 
 	/**
-	 * State view setter: Sets the step-by-step view elements for state: idle.
-	 */
-	void setViewIdle() {
-		this.model.setSteplengthEnabled(true);
-		int progress = this.model.getProgress();
-		if (progress == 0)
-			this.setViewBeginning();
-		else if (progress == this.model.getTraversal().size())
-			this.setViewEnd();
-		else
-			this.setViewIntermediate();
-		this.model.notifyObservers(EventSource.STEP_BY_STEP);
-	}
-
-	/**
 	 * State view setter: Sets the step-by-step view elements for state: at
 	 * beginning.
 	 */
@@ -252,10 +237,9 @@ public final class SbsStateHandler extends Observable implements
 	}
 
 	/**
-	 * State view setter: Sets the step-by-step view elements for state:
-	 * intermediate.
+	 * State view setter: Sets the step-by-step view elements for state: inter.
 	 */
-	void setViewIntermediate() {
+	void setViewInter() {
 		this.model.setStepByStepEnabled(true);
 		this.model.notifyObservers(EventSource.STEP_BY_STEP);
 	}
@@ -277,6 +261,20 @@ public final class SbsStateHandler extends Observable implements
 		this.model.setSteplengthEnabled(false);
 		this.model.setStepByStepEnabled(false);
 		this.model.notifyObservers(EventSource.STEP_BY_STEP);
+	}
+
+	/**
+	 * 
+	 * @return -1 if at beginning, 1 if at end, 0 else
+	 */
+	int idle() {
+		int progress = this.model.getProgress();
+		int max = this.model.getTraversal().size();
+		if (progress == 0)
+			return -1;
+		else if (progress == max)
+			return 1;
+		return 0;
 	}
 
 	/**

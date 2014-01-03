@@ -199,52 +199,6 @@ public final class AnimationStateHandler extends Observable implements
 	}
 
 	/**
-	 * State view setter: Sets the animation view elements for state: off. In
-	 * addition, his method sets the state machine step-by-step in state off.
-	 * 
-	 * @throws Exception
-	 */
-	void setViewOff() throws Exception {
-		try {
-			this.model.getStepByStepStateHandler().handleOff();
-			this.model.setDelayEnabled(false);
-			this.model.setAnimationEnabled(false);
-			// pause label
-			String label = this.model.getResourceBundle().getString(
-					"pause.label");
-			this.model.setPauseLabel(label);
-			this.model.setPauseEvent(PAUSE);
-			this.model.notifyObservers(ANIMATION);
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
-
-	/**
-	 * State view setter: idle.
-	 * 
-	 * @throws Exception
-	 */
-	void setViewIdle() throws Exception {
-		try {
-			/* animation state machine */
-			this.model.setDelayEnabled(true);
-			this.model.setAnimationEnabled(false);
-			this.model.setPlayEnabled(true);
-			// pause
-			String label = this.model.getResourceBundle().getString(
-					"pause.label");
-			this.model.setPauseLabel(label);
-			this.model.setPauseEvent(PAUSE);
-			this.model.notifyObservers(ANIMATION);
-			/* other state handlers */
-			this.model.getStepByStepStateHandler().handleIdle();
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
-
-	/**
 	 * State view setter: Sets the view elements for state: stopped. In
 	 * addition, this method sets the state machines parameter and step-by-step
 	 * in state idle.
@@ -316,6 +270,28 @@ public final class AnimationStateHandler extends Observable implements
 			this.model.setPauseLabel(label);
 			this.model.setPauseEvent(RESUME);
 
+			this.model.notifyObservers(ANIMATION);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * State view setter: Sets the animation view elements for state: off. In
+	 * addition, his method sets the state machine step-by-step in state off.
+	 * 
+	 * @throws Exception
+	 */
+	void setViewOff() throws Exception {
+		try {
+			this.model.getStepByStepStateHandler().handleOff();
+			this.model.setDelayEnabled(false);
+			this.model.setAnimationEnabled(false);
+			// pause label
+			String label = this.model.getResourceBundle().getString(
+					"pause.label");
+			this.model.setPauseLabel(label);
+			this.model.setPauseEvent(PAUSE);
 			this.model.notifyObservers(ANIMATION);
 		} catch (Exception ex) {
 			throw ex;

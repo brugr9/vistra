@@ -35,8 +35,8 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handleIdle() throws Exception {
 		try {
-			this.stateHandler
-					.setState(new AnimationStateIdle(this.stateHandler));
+			this.stateHandler.setState(new AnimationStateStopped(
+					this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}

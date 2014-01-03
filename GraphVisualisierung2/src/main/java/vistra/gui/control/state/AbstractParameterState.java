@@ -36,9 +36,20 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	 */
 	void handleIdle() throws Exception {
 		try {
-			this.stateHandler.idle();
-			this.stateHandler
-					.setState(new ParameterStateIdle(this.stateHandler));
+			switch (this.stateHandler.idle()) {
+			case 0:
+				this.stateHandler.setState(new ParameterStateAlgorithmSelected(
+						this.stateHandler));
+				break;
+			case 1:
+				this.stateHandler.setState(new ParameterStateGraphSaved(
+						this.stateHandler));
+				break;
+			default:
+				this.stateHandler.setState(new ParameterStateGraphEdited(
+						this.stateHandler));
+				break;
+			}
 		} catch (Exception e) {
 			throw e;
 		}
