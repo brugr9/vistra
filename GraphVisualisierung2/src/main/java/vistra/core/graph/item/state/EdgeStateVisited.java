@@ -3,12 +3,12 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * An edge state: discovery ('a discovery edge').
+ * An edge state: visited (discovery edge).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see EdgeStateHandler
  */
-class EdgeStateDiscovery extends AbstractEdgeState implements IState {
+class EdgeStateVisited extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class EdgeStateDiscovery extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	EdgeStateDiscovery(IEdgeStateHandler stateHandler) {
+	EdgeStateVisited(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

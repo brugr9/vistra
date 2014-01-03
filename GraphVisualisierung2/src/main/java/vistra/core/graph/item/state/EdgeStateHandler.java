@@ -116,7 +116,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	public void handleVisited() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleDiscoveryEdge();
+			this.state.handleVisited();
 		} catch (Exception e) {
 			throw e;
 		}

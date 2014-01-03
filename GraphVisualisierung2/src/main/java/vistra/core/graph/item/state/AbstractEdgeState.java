@@ -39,18 +39,6 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles discovery-edge.
-	 */
-	void handleDiscoveryEdge() throws Exception {
-		try {
-			this.stateHandler
-					.setState(new EdgeStateDiscovery(this.stateHandler));
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * Handles back-edge.
 	 */
 	void handleBackEdge() throws Exception {
@@ -90,6 +78,17 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 		try {
 			this.stateHandler
 					.setState(new EdgeStateDiscarded(this.stateHandler));
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Handles visited.
+	 */
+	void handleVisited() throws Exception {
+		try {
+			this.stateHandler.setState(new EdgeStateVisited(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
