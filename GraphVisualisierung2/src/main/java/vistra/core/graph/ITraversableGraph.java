@@ -11,11 +11,13 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * A traversable graph interface. The graph delegates most of its method calls
- * to a constructor-specified {@code Graph}. Modifiers are not supported
- * anymore: vertices and edges can neither been added nor removed.
- * <p>
- * In addition, this graph serves with some 'step'-methods which an
- * {@code IAlgorithm}-developer can use for generating steps of a traversal.
+ * to a constructor-specified {@code Graph}.
+ * <ul>
+ * <li>Modifiers are not supported anymore: vertices and edges can neither been
+ * added nor removed.
+ * <li>In addition, this graph serves with a 'step'-method which an
+ * {@code IAlgorithm}-developer can use for traversing over the graph and
+ * generating a {@code Traversal}.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see Traversal
@@ -107,7 +109,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * 
 	 * @param vertex
 	 *            the vertex to check
-	 * @return {@code true} if already visited
+	 * @return {@code true} if visited
 	 */
 	boolean isVisited(IVertex vertex);
 

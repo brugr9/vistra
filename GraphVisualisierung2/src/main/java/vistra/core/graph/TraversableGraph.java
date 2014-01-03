@@ -16,12 +16,14 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.graph.util.Pair;
 
 /**
- * An implementation of {@code Graph}: delegates most of its method calls to a
- * constructor-specified {@code Graph} instance. Modifiers are not supported
- * anymore: vertices and edges can neither been added nor removed.
- * <p>
- * In addition, this graph serves with a 'step'-method which an
- * {@code IAlgorithm}-developer can use for traversing a graph.
+ * A traversable graph. The graph delegates most of its method calls to a
+ * constructor-specified {@code Graph}.
+ * <ul>
+ * <li>Modifiers are not supported anymore: vertices and edges can neither been
+ * added nor removed.
+ * <li>In addition, this graph serves with a 'step'-method which an
+ * {@code IAlgorithm}-developer can use for traversing over the graph and
+ * generating a {@code Traversal}.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
