@@ -27,7 +27,7 @@ public class CrossEdgeCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleCrossEdge();
+		((EdgeStateHandler) super.stateHandler).handleCross();
 	}
 
 }

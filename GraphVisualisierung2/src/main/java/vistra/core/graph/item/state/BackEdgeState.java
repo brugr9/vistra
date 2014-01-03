@@ -3,12 +3,12 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * An edge state: forward.
+ * An edge state: back.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see EdgeStateHandler
  */
-class EdgeStateForward extends AbstractEdgeState implements IState {
+class BackEdgeState extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class EdgeStateForward extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	EdgeStateForward(IEdgeStateHandler stateHandler) {
+	BackEdgeState(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class EdgeStateForward extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutForward();
+			super.stateHandler.setLayoutBack();
 		} catch (Exception e) {
 			throw e;
 		}

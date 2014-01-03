@@ -40,7 +40,7 @@ public class VertexStateHandler extends VertexLayout implements
 		this.state = null;
 		this.cellar = new ArrayList<AbstractVertexState>();
 		try {
-			this.setState(new VertexStateUnexplored(this));
+			this.setState(new UnexploredVertexState(this));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -76,7 +76,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleUpdatedVertex(String value) throws Exception {
+	public void handleUpdated(String value) throws Exception {
 		try {
 			this.state.exit();
 			this.state.handleUpdated(value);
@@ -89,7 +89,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleFocusOnVertex() throws Exception {
+	public void handleFocusOn() throws Exception {
 		try {
 			this.state.exit();
 			this.state.handleFocusOn();
@@ -115,10 +115,10 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolutionMember() throws Exception {
+	public void handleSolution() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleSolutionMember();
+			this.state.handleSolution();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -224,7 +224,7 @@ public class VertexStateHandler extends VertexLayout implements
 	void setLayoutFocusOn() throws Exception {
 		try {
 			if (this.isEnd())
-				this.setLayoutSolutionMember();
+				this.setLayoutSolution();
 			else {
 				this.setFont(FontPalette.emphasised);
 				this.setFontColor(ColorPalette.darkblue);
@@ -250,7 +250,7 @@ public class VertexStateHandler extends VertexLayout implements
 			if (this.isStart())
 				this.setLayoutFocusOn();
 			else if (this.isEnd())
-				this.setLayoutSolutionMember();
+				this.setLayoutSolution();
 			else {
 				this.setFont(FontPalette.emphasised);
 				this.setFontColor(ColorPalette.darkblue);
@@ -269,7 +269,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutSolutionMember() throws Exception {
+	void setLayoutSolution() throws Exception {
 		try {
 			this.setFont(FontPalette.emphasised);
 			this.setFontColor(ColorPalette.green);
@@ -290,8 +290,8 @@ public class VertexStateHandler extends VertexLayout implements
 	@Override
 	public boolean isVisited() {
 		// TODO
-		if (this.state instanceof VertexStateUnexplored
-				|| this.state instanceof VertexStateInitialised)
+		if (this.state instanceof UnexploredVertexState
+				|| this.state instanceof InitialisedVertexState)
 			return false;
 		else
 			return true;

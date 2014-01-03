@@ -20,27 +20,27 @@ public interface IEdgeStateHandler extends IItemStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void handleBackEdge() throws Exception;
+	void handleBack() throws Exception;
 
 	/**
 	 * Handles forward-edge.
 	 * 
 	 * @throws Exception
 	 */
-	void handleForwardEdge() throws Exception;
+	void handleForward() throws Exception;
 
 	/**
 	 * Handles cross-edge.
 	 * 
 	 * @throws Exception
 	 */
-	void handleCrossEdge() throws Exception;
+	void handleCross() throws Exception;
 
 	/**
 	 * Handles discarded edge.
 	 * 
 	 * @throws Exception
 	 */
-	void handleDiscardedEdge() throws Exception;
+	void handleDiscarded() throws Exception;
 
 }

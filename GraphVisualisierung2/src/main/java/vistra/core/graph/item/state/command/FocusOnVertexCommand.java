@@ -27,7 +27,7 @@ public class FocusOnVertexCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((VertexStateHandler) super.stateHandler).handleFocusOnVertex();
+		((VertexStateHandler) super.stateHandler).handleFocusOn();
 	}
 
 }

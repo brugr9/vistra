@@ -29,11 +29,11 @@ public interface IItemStateHandler {
 	void handleVisited() throws Exception;
 
 	/**
-	 * Handles solution member.
+	 * Handles solution.
 	 * 
 	 * @throws Exception
 	 */
-	void handleSolutionMember() throws Exception;
+	void handleSolution() throws Exception;
 
 	/**
 	 * Sets the previous state: removes the last state from the cellar and sets

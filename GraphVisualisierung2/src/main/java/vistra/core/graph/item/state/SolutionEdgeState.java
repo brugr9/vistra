@@ -3,12 +3,12 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * An edge state: discarded.
+ * An edge state: solution ('an solution member edge').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see EdgeStateHandler
  */
-class EdgeStateDiscarded extends AbstractEdgeState implements IState {
+class SolutionEdgeState extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class EdgeStateDiscarded extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	EdgeStateDiscarded(IEdgeStateHandler stateHandler) {
+	SolutionEdgeState(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class EdgeStateDiscarded extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutDiscarded();
+			super.stateHandler.setLayoutSolution();
 		} catch (Exception e) {
 			throw e;
 		}

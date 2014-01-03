@@ -3,20 +3,20 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * An edge state: back.
+ * A vertex state: focus on this vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * @see EdgeStateHandler
+ * @see VertexStateHandler
  */
-class EdgeStateBack extends AbstractEdgeState implements IState {
+class FocusOnVertexState extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            a state handler
+	 *            a stateHandler
 	 */
-	EdgeStateBack(IEdgeStateHandler stateHandler) {
+	FocusOnVertexState(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class EdgeStateBack extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutBack();
+			super.stateHandler.setLayoutFocusOn();
 		} catch (Exception e) {
 			throw e;
 		}

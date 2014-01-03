@@ -33,7 +33,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 */
 	void handleUnexplored() throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateUnexplored(
+			this.stateHandler.setState(new UnexploredVertexState(
 					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
@@ -47,7 +47,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 */
 	void handleInitialised() throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateInitialised(
+			this.stateHandler.setState(new InitialisedVertexState(
 					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
@@ -63,7 +63,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 */
 	void handleUpdated(String value) throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateUpdated(
+			this.stateHandler.setState(new UpdatedVertexState(
 					this.stateHandler, value));
 		} catch (Exception e) {
 			throw e;
@@ -77,7 +77,7 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	 */
 	void handleFocusOn() throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateFocusOn(
+			this.stateHandler.setState(new FocusOnVertexState(
 					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
@@ -92,20 +92,20 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	void handleVisited() throws Exception {
 		try {
 			this.stateHandler
-					.setState(new VertexStateVisited(this.stateHandler));
+					.setState(new VisitedVertexState(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Handles solution member.
+	 * Handles solution.
 	 * 
 	 * @throws Exception
 	 */
-	void handleSolutionMember() throws Exception {
+	void handleSolution() throws Exception {
 		try {
-			this.stateHandler.setState(new VertexStateSolutionMember(
+			this.stateHandler.setState(new SolutionVertexState(
 					this.stateHandler));
 		} catch (Exception e) {
 			throw e;

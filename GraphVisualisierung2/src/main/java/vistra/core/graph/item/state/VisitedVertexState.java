@@ -3,12 +3,12 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * A vertex state: initialised.
+ * A vertex state: visited.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see VertexStateHandler
  */
-class VertexStateInitialised extends AbstractVertexState implements IState {
+class VisitedVertexState extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class VertexStateInitialised extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	VertexStateInitialised(IVertexStateHandler stateHandler) {
+	VisitedVertexState(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class VertexStateInitialised extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutInitialised();
+			super.stateHandler.setLayoutVisited();
 		} catch (Exception e) {
 			throw e;
 		}

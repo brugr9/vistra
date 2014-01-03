@@ -3,12 +3,12 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * A vertex state: unexplored.
+ * An edge state: cross.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- *  @see VertexStateHandler
+ * @see EdgeStateHandler
  */
-class VertexStateUnexplored extends AbstractVertexState implements IState {
+class CrossEdgeState extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class VertexStateUnexplored extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	VertexStateUnexplored(IVertexStateHandler stateHandler) {
+	CrossEdgeState(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,10 +26,9 @@ class VertexStateUnexplored extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutUnexplored();
+			super.stateHandler.setLayoutCross();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
-
 }

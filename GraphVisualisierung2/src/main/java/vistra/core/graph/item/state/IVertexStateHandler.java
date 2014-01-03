@@ -25,14 +25,14 @@ public interface IVertexStateHandler extends IItemStateHandler {
 	 *            the value to set
 	 * @throws Exception
 	 */
-	void handleUpdatedVertex(String value) throws Exception;
+	void handleUpdated(String value) throws Exception;
 
 	/**
 	 * Handles focus on.
 	 * 
 	 * @throws Exception
 	 */
-	void handleFocusOnVertex() throws Exception;
+	void handleFocusOn() throws Exception;
 
 	/**
 	 * Returns the visited status.

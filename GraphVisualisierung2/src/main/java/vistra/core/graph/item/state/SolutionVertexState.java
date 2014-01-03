@@ -3,12 +3,12 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * A vertex state: focus on.
+ * A vertex state: solution ('a solution member vertex').
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * @see VertexStateHandler
+ *  @see VertexStateHandler
  */
-class VertexStateFocusOn extends AbstractVertexState implements IState {
+class SolutionVertexState extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class VertexStateFocusOn extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	VertexStateFocusOn(IVertexStateHandler stateHandler) {
+	SolutionVertexState(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class VertexStateFocusOn extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutFocusOn();
+			super.stateHandler.setLayoutSolution();
 		} catch (Exception e) {
 			throw e;
 		}

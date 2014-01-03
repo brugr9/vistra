@@ -31,7 +31,7 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	 */
 	void handleUnexplored() throws Exception {
 		try {
-			this.stateHandler.setState(new EdgeStateUnexplored(
+			this.stateHandler.setState(new UnexploredEdgeState(
 					this.stateHandler));
 		} catch (Exception e) {
 			throw e;
@@ -41,9 +41,9 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	/**
 	 * Handles back-edge.
 	 */
-	void handleBackEdge() throws Exception {
+	void handleBack() throws Exception {
 		try {
-			this.stateHandler.setState(new EdgeStateBack(this.stateHandler));
+			this.stateHandler.setState(new BackEdgeState(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -52,9 +52,9 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	/**
 	 * Handles forward-edge.
 	 */
-	void handleForwardEdge() throws Exception {
+	void handleForward() throws Exception {
 		try {
-			this.stateHandler.setState(new EdgeStateForward(this.stateHandler));
+			this.stateHandler.setState(new ForwardEdgeState(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -63,9 +63,9 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	/**
 	 * Handles cross-edge.
 	 */
-	void handleCrossEdge() throws Exception {
+	void handleCross() throws Exception {
 		try {
-			this.stateHandler.setState(new EdgeStateCross(this.stateHandler));
+			this.stateHandler.setState(new CrossEdgeState(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -74,10 +74,10 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	/**
 	 * Handles discarded edge.
 	 */
-	void handleDiscardedEdge() throws Exception {
+	void handleDiscarded() throws Exception {
 		try {
 			this.stateHandler
-					.setState(new EdgeStateDiscarded(this.stateHandler));
+					.setState(new DiscardedEdgeState(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
@@ -88,18 +88,18 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	 */
 	void handleVisited() throws Exception {
 		try {
-			this.stateHandler.setState(new EdgeStateVisited(this.stateHandler));
+			this.stateHandler.setState(new VisitedEdgeState(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Handles solution member.
+	 * Handles solution.
 	 */
-	void handleSolutionMember() throws Exception {
+	void handleSolution() throws Exception {
 		try {
-			this.stateHandler.setState(new EdgeStateSolutionMember(
+			this.stateHandler.setState(new SolutionEdgeState(
 					this.stateHandler));
 		} catch (Exception e) {
 			throw e;

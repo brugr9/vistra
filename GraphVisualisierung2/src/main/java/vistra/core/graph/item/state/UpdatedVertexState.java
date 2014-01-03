@@ -8,7 +8,7 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see VertexStateHandler
  */
-class VertexStateUpdated extends AbstractVertexState implements IState {
+class UpdatedVertexState extends AbstractVertexState implements IState {
 
 	/**
 	 * A field for a value.
@@ -23,7 +23,7 @@ class VertexStateUpdated extends AbstractVertexState implements IState {
 	 * @param value
 	 *            a value
 	 */
-	VertexStateUpdated(IVertexStateHandler stateHandler, String value) {
+	UpdatedVertexState(IVertexStateHandler stateHandler, String value) {
 		super(stateHandler);
 		this.value = value;
 	}

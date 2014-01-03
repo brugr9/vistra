@@ -3,12 +3,12 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * A vertex state: solution ('a solution member vertex').
+ * A vertex state: initialised.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- *  @see VertexStateHandler
+ * @see VertexStateHandler
  */
-class VertexStateSolutionMember extends AbstractVertexState implements IState {
+class InitialisedVertexState extends AbstractVertexState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class VertexStateSolutionMember extends AbstractVertexState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	VertexStateSolutionMember(IVertexStateHandler stateHandler) {
+	InitialisedVertexState(IVertexStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class VertexStateSolutionMember extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutSolutionMember();
+			super.stateHandler.setLayoutInitialised();
 		} catch (Exception e) {
 			throw e;
 		}

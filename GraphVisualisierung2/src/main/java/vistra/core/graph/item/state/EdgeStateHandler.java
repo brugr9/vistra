@@ -38,7 +38,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 		this.state = null;
 		this.cellar = new ArrayList<AbstractEdgeState>();
 		try {
-			this.setState(new EdgeStateUnexplored(this));
+			this.setState(new UnexploredEdgeState(this));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,10 +61,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleBackEdge() throws Exception {
+	public void handleBack() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleBackEdge();
+			this.state.handleBack();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -74,10 +74,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleForwardEdge() throws Exception {
+	public void handleForward() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleForwardEdge();
+			this.state.handleForward();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -87,10 +87,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleCrossEdge() throws Exception {
+	public void handleCross() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleCrossEdge();
+			this.state.handleCross();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -100,10 +100,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleDiscardedEdge() throws Exception {
+	public void handleDiscarded() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleDiscardedEdge();
+			this.state.handleDiscarded();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -126,10 +126,10 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolutionMember() throws Exception {
+	public void handleSolution() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleSolutionMember();
+			this.state.handleSolution();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -286,7 +286,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutSolutionMember() throws Exception {
+	void setLayoutSolution() throws Exception {
 		try {
 			this.setFont(FontPalette.emphasised);
 			this.setFontColor(ColorPalette.green);

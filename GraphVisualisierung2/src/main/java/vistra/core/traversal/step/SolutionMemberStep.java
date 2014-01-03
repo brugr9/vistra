@@ -11,7 +11,7 @@ import vistra.core.graph.item.state.command.SolutionMemberEdgeCommand;
 import vistra.core.graph.item.state.command.SolutionMemberVertexCommand;
 
 /**
- * A step: solution-member. TODO parameter: a map
+ * A step: solution-member edge and vertex. TODO parameter: a map
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  */

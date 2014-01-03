@@ -3,12 +3,12 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * An edge state: solution ('an solution member edge').
+ * An edge state: unexplored.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see EdgeStateHandler
  */
-class EdgeStateSolutionMember extends AbstractEdgeState implements IState {
+class UnexploredEdgeState extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class EdgeStateSolutionMember extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	EdgeStateSolutionMember(IEdgeStateHandler stateHandler) {
+	UnexploredEdgeState(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class EdgeStateSolutionMember extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutSolutionMember();
+			super.stateHandler.setLayoutUnexplored();
 		} catch (Exception e) {
 			throw e;
 		}

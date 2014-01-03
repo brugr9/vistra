@@ -3,20 +3,20 @@ package vistra.core.graph.item.state;
 import vistra.util.IState;
 
 /**
- * A vertex state: visited.
+ * An edge state: discarded.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * @see VertexStateHandler
+ * @see EdgeStateHandler
  */
-class VertexStateVisited extends AbstractVertexState implements IState {
+class DiscardedEdgeState extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
 	 * 
 	 * @param stateHandler
-	 *            a stateHandler
+	 *            a state handler
 	 */
-	VertexStateVisited(IVertexStateHandler stateHandler) {
+	DiscardedEdgeState(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -26,7 +26,7 @@ class VertexStateVisited extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutVisited();
+			super.stateHandler.setLayoutDiscarded();
 		} catch (Exception e) {
 			throw e;
 		}

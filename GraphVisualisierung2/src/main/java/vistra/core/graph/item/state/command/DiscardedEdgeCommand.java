@@ -27,7 +27,7 @@ public class DiscardedEdgeCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleDiscardedEdge();
+		((EdgeStateHandler) super.stateHandler).handleDiscarded();
 	}
 
 }

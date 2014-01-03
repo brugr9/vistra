@@ -4,12 +4,12 @@ import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.state.EdgeStateHandler;
 
 /**
- * An item-state command: discovery-edge.
+ * An item-state command: visited edge (discovery-edge).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class DiscoveryEdgeCommand extends AbstractItemStateCommand implements
+public class VisitedEdgeCommand extends AbstractItemStateCommand implements
 		IItemStateCommand {
 
 	/**
@@ -18,7 +18,7 @@ public class DiscoveryEdgeCommand extends AbstractItemStateCommand implements
 	 * @param edge
 	 *            an edge
 	 */
-	public DiscoveryEdgeCommand(IEdge edge) {
+	public VisitedEdgeCommand(IEdge edge) {
 		super((EdgeStateHandler) edge);
 	}
 

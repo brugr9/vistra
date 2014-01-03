@@ -8,7 +8,7 @@ import vistra.util.IState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see EdgeStateHandler
  */
-class EdgeStateVisited extends AbstractEdgeState implements IState {
+class VisitedEdgeState extends AbstractEdgeState implements IState {
 
 	/**
 	 * Main constructor.
@@ -16,7 +16,7 @@ class EdgeStateVisited extends AbstractEdgeState implements IState {
 	 * @param stateHandler
 	 *            a state handler
 	 */
-	EdgeStateVisited(IEdgeStateHandler stateHandler) {
+	VisitedEdgeState(IEdgeStateHandler stateHandler) {
 		super(stateHandler);
 	}
 

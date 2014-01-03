@@ -6,8 +6,8 @@ import vistra.core.graph.item.EdgeLayout;
 import vistra.core.graph.item.IEdge;
 import vistra.core.graph.item.IVertex;
 import vistra.core.graph.item.VertexLayout;
-import vistra.core.graph.item.state.command.DiscoveryEdgeCommand;
 import vistra.core.graph.item.state.command.IItemStateCommand;
+import vistra.core.graph.item.state.command.VisitedEdgeCommand;
 import vistra.core.graph.item.state.command.VisitedVertexCommand;
 
 /**
@@ -31,7 +31,7 @@ public class VisitStep extends AbstractStep implements IStep {
 		this.description = "Visited vertex " + ((VertexLayout) vertex).getId()
 				+ " due to edge " + ((EdgeLayout) edge).getId();
 		try {
-			IItemStateCommand edgeCommand = new DiscoveryEdgeCommand(edge);
+			IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
 			IItemStateCommand vertexCommand = new VisitedVertexCommand(vertex);
 			this.stepHandler.addItemStateCommand(edgeCommand);
 			this.stepHandler.addItemStateCommand(vertexCommand);
@@ -59,7 +59,7 @@ public class VisitStep extends AbstractStep implements IStep {
 			for (int index = 0; index < edges.size(); index++) {
 				edge = edges.get(index);
 				vertex = vertices.get(index);
-				IItemStateCommand edgeCommand = new DiscoveryEdgeCommand(edge);
+				IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
 				IItemStateCommand vertexCommand = new VisitedVertexCommand(
 						vertex);
 				this.stepHandler.addItemStateCommand(edgeCommand);
