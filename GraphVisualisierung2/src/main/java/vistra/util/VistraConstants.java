@@ -11,7 +11,7 @@ package vistra.util;
  *      TODO replace by enum
  * 
  */
-public final class ItemLayoutConstant {
+public final class VistraConstants {
 
 	/* vertex size */
 	public final static double HEIGHT_DEFAULT = 40.0;
@@ -22,7 +22,7 @@ public final class ItemLayoutConstant {
 	/**
 	 * A main (no-)constructor.
 	 */
-	private ItemLayoutConstant() {
+	private VistraConstants() {
 	}
 
 }

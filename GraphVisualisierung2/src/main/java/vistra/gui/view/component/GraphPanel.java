@@ -30,7 +30,7 @@ import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.IView;
 import vistra.gui.view.mouse.Mouse;
 import vistra.util.ColorPalette;
-import vistra.util.ItemLayoutConstant;
+import vistra.util.VistraConstants;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.RenderContext;
@@ -112,8 +112,8 @@ public class GraphPanel extends JPanel implements Observer {
 		rc.setVertexFontTransformer(new VertexFont());
 		// transformer: edge
 		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertexLayout, IEdgeLayout>(
-				ItemLayoutConstant.E_LABEL_CLOSENESS,
-				ItemLayoutConstant.E_LABEL_CLOSENESS));
+				VistraConstants.E_LABEL_CLOSENESS,
+				VistraConstants.E_LABEL_CLOSENESS));
 		rc.setEdgeShapeTransformer(new EdgeShape.Line<IVertexLayout, IEdgeLayout>());
 		rc.setEdgeStrokeTransformer(new EdgeStroke());
 		rc.setEdgeArrowStrokeTransformer(new EdgeStroke());

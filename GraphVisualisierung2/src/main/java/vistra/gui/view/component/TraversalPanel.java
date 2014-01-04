@@ -67,7 +67,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 	/**
 	 * A field for a step-by-step panel.
 	 */
-	private JPanel stepByStepPanel;
+	private JPanel sbsPanel;
 	/**
 	 * A field for a animation panel.
 	 */
@@ -203,27 +203,27 @@ public final class TraversalPanel extends JPanel implements Observer {
 		/* panel */
 		this.steplengthPanel = new JPanel();
 		this.delayPanel = new JPanel();
-		this.stepByStepPanel = new JPanel();
+		this.sbsPanel = new JPanel();
 		this.animationPanel = new JPanel();
 		// layout
 		this.steplengthPanel.setLayout(new GridLayout(1, 2));
 		this.delayPanel.setLayout(new GridLayout(1, 2));
-		this.stepByStepPanel.setLayout(new GridLayout(1, 4));
+		this.sbsPanel.setLayout(new GridLayout(1, 4));
 		this.animationPanel.setLayout(new GridLayout(1, 3));
 		// background
 		this.steplengthPanel.setBackground(ColorPalette.antique);
 		this.delayPanel.setBackground(ColorPalette.antique);
-		this.stepByStepPanel.setBackground(ColorPalette.antique);
+		this.sbsPanel.setBackground(ColorPalette.antique);
 		this.animationPanel.setBackground(ColorPalette.antique);
 		// add
 		this.steplengthPanel.add(this.steplengthLabel);
 		this.steplengthPanel.add(this.steplength);
 		this.delayPanel.add(this.delayLabel);
 		this.delayPanel.add(this.delay);
-		this.stepByStepPanel.add(this.toBeginning);
-		this.stepByStepPanel.add(this.backward);
-		this.stepByStepPanel.add(this.forward);
-		this.stepByStepPanel.add(this.toEnd);
+		this.sbsPanel.add(this.toBeginning);
+		this.sbsPanel.add(this.backward);
+		this.sbsPanel.add(this.forward);
+		this.sbsPanel.add(this.toEnd);
 		this.animationPanel.add(this.play);
 		this.animationPanel.add(this.pause);
 		this.animationPanel.add(this.stop);
@@ -233,7 +233,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.add(this.steplengthPanel);
 		this.add(this.delayPanel);
 		this.add(this.progress);
-		this.add(this.stepByStepPanel);
+		this.add(this.sbsPanel);
 		this.add(this.animationPanel);
 
 	}

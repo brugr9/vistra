@@ -46,11 +46,11 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 	/**
 	 * A field for a text area.
 	 */
-	private JTextArea textArea;
+	private JTextArea text;
 	/**
 	 * A field for a scroll pane.
 	 */
-	private JScrollPane scrollPane;
+	private JScrollPane scroll;
 
 	/**
 	 * Main constructor.
@@ -74,26 +74,26 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 		this.combo.addItemListener(model.getParameterStateHandler());
 
 		/* text area */
-		this.textArea = new JTextArea();
-		this.textArea.setEditable(false);
-		this.textArea.setMinimumSize(size);
-		this.textArea.setColumns(10);
-		this.textArea.setRows(10);
-		this.textArea.setLineWrap(true);
-		this.textArea.setWrapStyleWord(true);
-		this.textArea.setBackground(ColorPalette.gray);
-		this.textArea.setForeground(ColorPalette.darkblue);
+		this.text = new JTextArea();
+		this.text.setEditable(false);
+		this.text.setMinimumSize(size);
+		this.text.setColumns(10);
+		this.text.setRows(10);
+		this.text.setLineWrap(true);
+		this.text.setWrapStyleWord(true);
+		this.text.setBackground(ColorPalette.gray);
+		this.text.setForeground(ColorPalette.darkblue);
 		// scroll pane
-		this.scrollPane = new JScrollPane(this.textArea);
-		this.scrollPane
+		this.scroll = new JScrollPane(this.text);
+		this.scroll
 				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		this.scrollPane
+		this.scroll
 				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		/* this */
 		this.setLayout(new BorderLayout());
 		this.add(this.combo, BorderLayout.NORTH);
-		this.add(this.scrollPane, BorderLayout.SOUTH);
+		this.add(this.scroll, BorderLayout.SOUTH);
 
 	}
 
@@ -119,8 +119,8 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 							m.getAlgorithms());
 					this.combo.setSelectedIndex(m.getSelectedAlgorithmIndex());
 					this.combo.setEnabled(m.isAlgorithmsEnabled());
-					this.textArea.setText(m.getAlgorithmDescription());
-					this.textArea.setCaretPosition(1);
+					this.text.setText(m.getAlgorithmDescription());
+					this.text.setCaretPosition(1);
 				}
 
 			} catch (Exception e) {

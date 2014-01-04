@@ -113,7 +113,7 @@ public enum StrokePalette {
 	 * <li>Width: default
 	 * <li>Stroke: solid
 	 * 
-	 * @see ItemLayoutConstant
+	 * @see VistraConstants
 	 */
 	public final static BasicStroke unexplored = UNEXPLORED.getStorke();
 
@@ -123,7 +123,7 @@ public enum StrokePalette {
 	 * <li>Width: bold
 	 * <li>Stroke: dashed
 	 * 
-	 * @see ItemLayoutConstant
+	 * @see VistraConstants
 	 */
 	public final static BasicStroke back = BACK.getStorke();
 
@@ -133,7 +133,7 @@ public enum StrokePalette {
 	 * <li>Width: bold
 	 * <li>Stroke: short dashed
 	 * 
-	 * @see ItemLayoutConstant
+	 * @see VistraConstants
 	 */
 	public final static BasicStroke forward = FORWARD.getStorke();
 
@@ -143,7 +143,7 @@ public enum StrokePalette {
 	 * <li>Width: bold
 	 * <li>Stroke: dash-point
 	 * 
-	 * @see ItemLayoutConstant
+	 * @see VistraConstants
 	 */
 	public final static BasicStroke cross = CROSS.getStorke();
 
@@ -153,7 +153,7 @@ public enum StrokePalette {
 	 * <li>Width: bold
 	 * <li>Stroke: solid
 	 * 
-	 * @see ItemLayoutConstant
+	 * @see VistraConstants
 	 */
 	public final static BasicStroke visited = VISITED.getStorke();
 
@@ -163,7 +163,7 @@ public enum StrokePalette {
 	 * <li>Width: bold
 	 * <li>Stroke: dashed
 	 * 
-	 * @see ItemLayoutConstant
+	 * @see VistraConstants
 	 */
 	public final static BasicStroke discarded = DISCARDED.getStorke();
 
