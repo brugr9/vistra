@@ -26,30 +26,30 @@ public enum StrokePalette {
 	/**
 	 * Stroke style 'back'.
 	 * <ul>
-	 * <li>Width: default
+	 * <li>Width: bold
 	 * <li>Stroke: dashed
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	BACK(StrokeWidth.widthDefault, StrokePattern.dashed),
+	BACK(StrokeWidth.widthBold, StrokePattern.dashed),
 	/**
 	 * Stroke style 'forward'.
 	 * <ul>
-	 * <li>Width: default
+	 * <li>Width: bold
 	 * <li>Stroke: short dashed
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	FORWARD(StrokeWidth.widthDefault, StrokePattern.shortDashed),
+	FORWARD(StrokeWidth.widthBold, StrokePattern.shortDashed),
 	/**
 	 * Stroke style 'cross'.
 	 * <ul>
-	 * <li>Width: default
+	 * <li>Width: bold
 	 * <li>Stroke: dash-point
 	 * 
 	 * @see ItemLayoutConstant
 	 */
-	CROSS(StrokeWidth.widthDefault, StrokePattern.dashPoint),
+	CROSS(StrokeWidth.widthBold, StrokePattern.dashPoint),
 	/**
 	 * Stroke style 'visited'.
 	 * <ul>
@@ -104,7 +104,7 @@ public enum StrokePalette {
 		else
 			return new BasicStroke(width, BasicStroke.CAP_SQUARE,
 					BasicStroke.JOIN_MITER, 10.0f, pattern,
-					ItemLayoutConstant.STROKE_DASH_PHASE);
+					StrokePhase.strokeDashPhase);
 	}
 
 	/**
@@ -120,7 +120,7 @@ public enum StrokePalette {
 	/**
 	 * Stroke style 'back'.
 	 * <ul>
-	 * <li>Width: default
+	 * <li>Width: bold
 	 * <li>Stroke: dashed
 	 * 
 	 * @see ItemLayoutConstant
@@ -130,7 +130,7 @@ public enum StrokePalette {
 	/**
 	 * Stroke style 'forward'.
 	 * <ul>
-	 * <li>Width: default
+	 * <li>Width: bold
 	 * <li>Stroke: short dashed
 	 * 
 	 * @see ItemLayoutConstant
@@ -140,7 +140,7 @@ public enum StrokePalette {
 	/**
 	 * Stroke style 'cross'.
 	 * <ul>
-	 * <li>Width: default
+	 * <li>Width: bold
 	 * <li>Stroke: dash-point
 	 * 
 	 * @see ItemLayoutConstant
@@ -290,6 +290,53 @@ public enum StrokePalette {
 		 * Stroke pattern dash-point.
 		 */
 		public final static float[] dashPoint = STROKE_DASH_POINT.getPattern();
+
+	}
+
+	/**
+	 * Some stroke phase.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum StrokePhase {
+
+		/**
+		 * Stroke dash phase default.
+		 */
+		STROKE_DASH_PHASE(1.0f),
+
+		;
+
+		/**
+		 * A field for the phase.
+		 */
+		private float phase;
+
+		/**
+		 * Main constructor.
+		 * 
+		 * @param phase
+		 *            the phase
+		 */
+		StrokePhase(float phase) {
+			this.phase = phase;
+		}
+
+		/**
+		 * Returns the phase.
+		 * 
+		 * @return the phase
+		 */
+		public float getPhase() {
+			return this.phase;
+		}
+
+		/**
+		 * Stroke dash phase.
+		 */
+		public final static float strokeDashPhase = STROKE_DASH_PHASE
+				.getPhase();
 
 	}
 }

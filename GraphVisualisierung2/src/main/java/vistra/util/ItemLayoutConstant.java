@@ -1,7 +1,5 @@
 package vistra.util;
 
-import java.awt.Font;
-
 /**
  * Constants for the item layout.
  * 
@@ -9,6 +7,8 @@ import java.awt.Font;
  * 
  * @see FontPalette
  * @see StrokePalette
+ * 
+ *      TODO replace by enum
  * 
  */
 public final class ItemLayoutConstant {
@@ -18,22 +18,6 @@ public final class ItemLayoutConstant {
 	public final static double WIDTH_DEFAULT = 45.0;
 	/* edge label closeness */
 	public final static double E_LABEL_CLOSENESS = 0.5;
-
-	/* font */
-	public final static int FONT_SIZE_NORMAL = 18;
-	public final static int FONT_SIZE_EMPHASISED = 20;
-	public final static int FONT_STYLE_NORMAL = Font.PLAIN;
-	public final static int FONT_STYLE_EMPHASISED = Font.BOLD;
-
-	/* stroke */
-	public final static float STROKE_DASH_PHASE = 1.0f;
-	public final static float STROKE_WIDTH_DEFAULT = 1.5f;
-	public final static float STROKE_WIDTH_BOLD = 3.0f;
-	public final static float[] STROKE_PATTERN_SOLID = null;
-	public final static float[] STROKE_DASHED = new float[] { 12.0f, 10.0f };
-	public final static float[] STROKE_DASHED_SHORT = new float[] { 1.0f, 8.0f };
-	public final static float[] STROKE_DASH_POINT = new float[] { 10.0f, 10.0f,
-			1.0f, 10.0f };
 
 	/**
 	 * A main (no-)constructor.

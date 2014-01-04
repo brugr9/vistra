@@ -60,11 +60,15 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	public AnimationStateHandler(IGuiModel model) {
 		super();
-		this.state = new AnimationStateOff(this);
 		this.model = (GuiModel) model;
 		this.animationListener = new AnimationListener();
 		int animationDelay = this.model.getDelay() * A_SECOND;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
+		try {
+			this.setState(new AnimationStateOff(this));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -138,7 +142,7 @@ public final class AnimationStateHandler extends Observable implements
 	public void handlePlaying() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handlePlaying();
+			this.state.handlePlay();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -151,7 +155,7 @@ public final class AnimationStateHandler extends Observable implements
 	public void handlePaused() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handlePaused();
+			this.state.handlePause();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -164,7 +168,7 @@ public final class AnimationStateHandler extends Observable implements
 	public void handleStopped() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleStopped();
+			this.state.handleStop();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -199,54 +203,43 @@ public final class AnimationStateHandler extends Observable implements
 	}
 
 	/**
-	 * State view setter: Sets the view elements for state: stopped. In
-	 * addition, this method sets the state machines parameter and step-by-step
-	 * in state idle.
+	 * State view setter: Sets the animation view elements for state: stopped.
 	 * 
 	 * @throws Exception
 	 */
 	void setViewStopped() throws Exception {
 		try {
-			/* animation state machine */
-			this.model.setDelayEnabled(true);
-			this.model.setAnimationEnabled(false);
-			this.model.setPlayEnabled(true);
-			// pause
+			this.model.setAnimationEnabled(true);
+			this.model.setPauseEnabled(false);
+			this.model.setStopEnabled(false);
+			// pause label
 			String label = this.model.getResourceBundle().getString(
 					"pause.label");
 			this.model.setPauseLabel(label);
 			this.model.setPauseEvent(PAUSE);
+			//
 			this.model.notifyObservers(ANIMATION);
-			/* other state handlers */
-			this.model.getParameterStateHandler().handleIdle();
-			this.model.getStepByStepStateHandler().handleIdle();
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
 
 	/**
-	 * State view setter: Sets the view elements for state: playing. In
-	 * addition, this method sets the state machines parameter and step-by-step
-	 * in state off.
+	 * State view setter: Sets the animation view elements for state: playing.
 	 * 
 	 * @throws Exception
 	 */
 	void setViewPlaying() throws Exception {
-		/* other state handlers */
 		try {
-			this.model.getParameterStateHandler().handleOff();
-			this.model.getStepByStepStateHandler().handleOff();
-			/* animation state machine */
-			this.model.setDelayEnabled(false);
 			this.model.setAnimationEnabled(true);
+			this.model.setDelayEnabled(false);
 			this.model.setPlayEnabled(false);
-			// pause
+			// pause label
 			String label = this.model.getResourceBundle().getString(
 					"pause.label");
 			this.model.setPauseLabel(label);
 			this.model.setPauseEvent(PAUSE);
-
+			//
 			this.model.notifyObservers(ANIMATION);
 		} catch (Exception ex) {
 			throw ex;
@@ -260,16 +253,15 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	void setViewPaused() throws Exception {
 		try {
-			/* other state handlers */
-			// ... are already in state 'off' since coming from state 'playing'
-			/* animation state machine */
-			// ... is already setViewPlaying() since coming from state 'playing'
-			// pause
+			this.model.setAnimationEnabled(true);
+			this.model.setDelayEnabled(false);
+			this.model.setPlayEnabled(false);
+			// pause label
 			String label = this.model.getResourceBundle().getString(
 					"resume.label");
 			this.model.setPauseLabel(label);
 			this.model.setPauseEvent(RESUME);
-
+			//
 			this.model.notifyObservers(ANIMATION);
 		} catch (Exception ex) {
 			throw ex;
@@ -277,21 +269,13 @@ public final class AnimationStateHandler extends Observable implements
 	}
 
 	/**
-	 * State view setter: Sets the animation view elements for state: off. In
-	 * addition, his method sets the state machine step-by-step in state off.
+	 * State view setter: Sets the animation view elements for state: off.
 	 * 
 	 * @throws Exception
 	 */
 	void setViewOff() throws Exception {
 		try {
-			this.model.getStepByStepStateHandler().handleOff();
-			this.model.setDelayEnabled(false);
 			this.model.setAnimationEnabled(false);
-			// pause label
-			String label = this.model.getResourceBundle().getString(
-					"pause.label");
-			this.model.setPauseLabel(label);
-			this.model.setPauseEvent(PAUSE);
 			this.model.notifyObservers(ANIMATION);
 		} catch (Exception ex) {
 			throw ex;
@@ -307,9 +291,13 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	void startAnimation() throws Exception {
 		try {
+			// TODO cast etc. ...
+			((ParameterStateHandler) this.model.getParameterStateHandler())
+					.setViewOff();
+			this.model.getSbsStateHandler().handleOff();
 			/* go to the first step eventually */
 			if (this.model.getProgress() == this.model.getTraversal().size())
-				((SbsStateHandler) this.model.getStepByStepStateHandler())
+				((SbsStateHandler) this.model.getSbsStateHandler())
 						.toBeginning();
 			/* simply start the timer */
 			this.animationTimer.start();
@@ -335,6 +323,21 @@ public final class AnimationStateHandler extends Observable implements
 	}
 
 	/**
+	 * Doing: Resumes the animation by starting the related timer.
+	 * 
+	 * @throws Exception
+	 */
+	void resumeAnimation() throws Exception {
+		try {
+			/* simply start the timer */
+			this.animationTimer.start();
+			this.setChanged();
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
 	 * Doing: Stops the animation by stopping the related timer.
 	 * 
 	 * @throws Exception
@@ -344,6 +347,10 @@ public final class AnimationStateHandler extends Observable implements
 			/* simply stop the timer */
 			this.animationTimer.stop();
 			this.setChanged();
+			// TODO cast etc. ...
+			((ParameterStateHandler) this.model.getParameterStateHandler())
+					.setViewAlgorithmSelected();
+			this.model.getSbsStateHandler().handleIdle();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -363,12 +370,11 @@ public final class AnimationStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				IGuiModel model = AnimationStateHandler.this.model;
-				if (model.getProgress() < model.getTraversal().size())
-					((SbsStateHandler) model.getStepByStepStateHandler())
-							.forward();
+				IGuiModel m = AnimationStateHandler.this.model;
+				if (m.getProgress() < m.getTraversal().size())
+					((SbsStateHandler) m.getSbsStateHandler()).forward();
 				else
-					model.getAnimationStateHandler().handleStopped();
+					m.getAnimationStateHandler().handleStopped();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

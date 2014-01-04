@@ -33,7 +33,7 @@ public final class Control implements IControl {
 			model.setAboutListener(new ActionListenerAbout(model));
 			model.setQuitListener(new ActionListenerQuit(model));
 			/* State handler */
-			model.setStepByStepStateHandler(new SbsStateHandler(model));
+			model.setSbsStateHandler(new SbsStateHandler(model));
 			model.setAnimationStateHandler(new AnimationStateHandler(model));
 			model.setParameterStateHandler(new ParameterStateHandler(core,
 					model));

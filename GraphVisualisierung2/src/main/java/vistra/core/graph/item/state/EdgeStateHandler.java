@@ -197,7 +197,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setLayoutDiscovery() throws Exception {
 		try {
-			this.setFont(FontPalette.emphasised);
+			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.red);
 			this.setStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.red);

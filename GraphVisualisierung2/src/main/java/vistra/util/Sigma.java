@@ -5,6 +5,7 @@ package vistra.util;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
+ *         TODO replace by enum
  */
 public interface Sigma {
 
@@ -13,7 +14,7 @@ public interface Sigma {
 	 * 
 	 * TODO single sign for infinity
 	 */
-	public final static String INFINITY = "infinity";
+	public final static String INFINITY = "inf";
 
 	/**
 	 * An array of signs from A to Z in upper case.

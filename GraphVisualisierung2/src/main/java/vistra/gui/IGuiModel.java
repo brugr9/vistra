@@ -82,7 +82,7 @@ public interface IGuiModel {
 	 * @param enabled
 	 *            the enabled to set
 	 */
-	public abstract void setStepByStepEnabled(boolean enabled);
+	public abstract void setSbsEnabled(boolean enabled);
 
 	/**
 	 * A grouped setter method for the animation control.
@@ -310,7 +310,7 @@ public interface IGuiModel {
 	/**
 	 * @return the stepByStepStateHandler
 	 */
-	public abstract ISbsStateHandler getStepByStepStateHandler();
+	public abstract ISbsStateHandler getSbsStateHandler();
 
 	/**
 	 * @return the steplength
@@ -650,7 +650,7 @@ public interface IGuiModel {
 	 * @param stepByStepStateHandler
 	 *            the stepByStepStateHandler to set
 	 */
-	public abstract void setStepByStepStateHandler(
+	public abstract void setSbsStateHandler(
 			ISbsStateHandler stepByStepStateHandler);
 
 	/**

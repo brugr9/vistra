@@ -38,22 +38,11 @@ class AnimationStatePaused extends AbstractAnimationState implements IState {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void startDo() throws Exception {
+	void handlePause() throws Exception {
 		try {
-			super.stateHandler.pauseAnimation();
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	void handlePaused() throws Exception {
-		try {
-			super.stateHandler.setState(new AnimationStatePlaying(
-					super.stateHandler));
+			this.stateHandler.resumeAnimation();
+			this.stateHandler.setState(new AnimationStatePlaying(
+					this.stateHandler));
 		} catch (Exception ex) {
 			throw ex;
 		}

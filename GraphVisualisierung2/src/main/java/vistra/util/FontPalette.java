@@ -20,21 +20,15 @@ public enum FontPalette {
 	 * <ul>
 	 * <li>Style: normal
 	 * <li>Size: normal
-	 * 
-	 * @see ItemLayoutConstant
 	 */
-	NORMAL("normal", ItemLayoutConstant.FONT_STYLE_NORMAL,
-			ItemLayoutConstant.FONT_SIZE_NORMAL),
+	NORMAL("normal", FontStyle.normal, FontSize.normal),
 	/**
 	 * Font 'emphasised'.
 	 * <ul>
 	 * <li>Style: emphasised
 	 * <li>Size: emphasised
-	 * 
-	 * @see ItemLayoutConstant
 	 */
-	EMPHASISED("emphasised", ItemLayoutConstant.FONT_STYLE_EMPHASISED,
-			ItemLayoutConstant.FONT_SIZE_EMPHASISED),
+	EMPHASISED("emphasised", FontStyle.emphasised, FontSize.emphasised),
 
 	;
 
@@ -82,7 +76,6 @@ public enum FontPalette {
 	 * <li>Size: normal
 	 * <li>Style: normal
 	 * 
-	 * @see ItemLayoutConstant
 	 */
 	public final static Font normal = NORMAL.getFont();
 
@@ -92,8 +85,112 @@ public enum FontPalette {
 	 * <li>Size: emphasised
 	 * <li>Style: emphasised
 	 * 
-	 * @see ItemLayoutConstant
 	 */
 	public final static Font emphasised = EMPHASISED.getFont();
 
+	/**
+	 * Font sizes.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum FontSize {
+
+		/**
+		 * Font size: normal.
+		 */
+		FONT_SIZE_NORMAL(18),
+		/**
+		 * Font size: emphasised.
+		 */
+		FONT_SIZE_EMPHASISED(20),
+
+		;
+
+		/**
+		 * A field for the size.
+		 */
+		private int size;
+
+		/**
+		 * Main constructor.
+		 * 
+		 * @param size
+		 *            the size
+		 */
+		FontSize(int size) {
+			this.size = size;
+		}
+
+		/**
+		 * Returns the size.
+		 * 
+		 * @return the size
+		 */
+		public int getSize() {
+			return this.size;
+		}
+
+		/**
+		 * Font size: normal.
+		 */
+		public final static int normal = FONT_SIZE_NORMAL.getSize();
+		/**
+		 * Font size: emphasised.
+		 */
+		public final static int emphasised = FONT_SIZE_EMPHASISED.getSize();
+	}
+
+	/**
+	 * Font styles.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum FontStyle {
+		
+		/**
+		 * Font style: normal.
+		 */
+		FONT_STYLE_NORMAL(Font.PLAIN),
+		/**
+		 * Font style: emphasised.
+		 */
+		FONT_STYLE_EMPHASISED(Font.BOLD),
+
+		;
+
+		/**
+		 * A field for the style.
+		 */
+		private int style;
+
+		/**
+		 * Main constructor.
+		 * 
+		 * @param style
+		 *            the style
+		 */
+		FontStyle(int style) {
+			this.style = style;
+		}
+
+		/**
+		 * Returns the style.
+		 * 
+		 * @return the style
+		 */
+		public int getStyle() {
+			return this.style;
+		}
+
+		/**
+		 * Font style: normal.
+		 */
+		public final static int normal = FONT_STYLE_NORMAL.getStyle();
+		/**
+		 * Font style: emphasised.
+		 */
+		public final static int emphasised = FONT_STYLE_NORMAL.getStyle();
+	}
 }

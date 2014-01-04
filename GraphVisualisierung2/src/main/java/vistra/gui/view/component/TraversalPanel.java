@@ -155,7 +155,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 				STEPLENGTH_MAX, 1);
 		this.steplength = new JSpinner(this.steplengthModel);
 		((JSpinner.NumberEditor) this.steplength.getEditor()).getTextField()
-				.addFocusListener(model.getStepByStepStateHandler());
+				.addFocusListener(model.getSbsStateHandler());
 		// delay
 		this.delayLabel = new JLabel("delay");
 		this.delayModel = new SpinnerNumberModel(1, DELAY_MIN, DELAY_MAX, 1);
@@ -184,10 +184,10 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.pause.setActionCommand(PAUSE.toString());
 		this.stop.setActionCommand(STOP.toString());
 		// action listener
-		this.toBeginning.addActionListener(model.getStepByStepStateHandler());
-		this.backward.addActionListener(model.getStepByStepStateHandler());
-		this.forward.addActionListener(model.getStepByStepStateHandler());
-		this.toEnd.addActionListener(model.getStepByStepStateHandler());
+		this.toBeginning.addActionListener(model.getSbsStateHandler());
+		this.backward.addActionListener(model.getSbsStateHandler());
+		this.forward.addActionListener(model.getSbsStateHandler());
+		this.toEnd.addActionListener(model.getSbsStateHandler());
 		this.play.addActionListener(model.getAnimationStateHandler());
 		this.pause.addActionListener(model.getAnimationStateHandler());
 		this.stop.addActionListener(model.getAnimationStateHandler());

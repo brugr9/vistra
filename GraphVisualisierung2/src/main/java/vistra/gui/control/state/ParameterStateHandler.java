@@ -37,13 +37,13 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
- * An a parameter state handler. A parameter state machine handles a graph and
- * an algorithm as parameter for generating a traversal-object.
+ * An a parameter state handler. A graph and an algorithm are seen as parameters
+ * for generating a traversal.
  * <p>
  * As a part of the graphic user interface control, this state handler is an
- * action listener (file menu and edit pop-up for the graph) and an item
- * listener (algorithm combo box), too. Furthermore, this handler listens on
- * graph-events (adding/deletion of edges and vertices).
+ * action listener (graph I/O and value editing), a graph-event listener
+ * (adding/deletion of edges and vertices) and an item listener (algorithm
+ * selection), too.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -299,9 +299,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void setViewGraphEdited() {
 		// Graph
 		this.setGraphSaved(false);
+		this.setEditing(true);
 		// Algorithm
-		this.model.setAlgorithmsEnabled(false);
-		this.model.notifyObservers(EventSource.ALGORITHM);
+		this.enableAlgorithms(false);
 	}
 
 	/**
@@ -310,10 +310,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void setViewGraphSaved() {
 		// Graph
 		this.setGraphSaved(true);
+		this.setEditing(true);
 		this.enableMenu(true);
 		// Algorithm
-		this.model.setAlgorithmsEnabled(true);
-		this.model.notifyObservers(EventSource.ALGORITHM);
+		this.enableAlgorithms(true);
 	}
 
 	/**
@@ -322,10 +322,11 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void setViewAlgorithmSelected() {
 		// Graph
+		this.setGraphSaved(true);
+		this.setEditing(true);
 		this.enableMenu(true);
 		// Algorithm
-		this.model.setAlgorithmsEnabled(true);
-		this.model.notifyObservers(EventSource.ALGORITHM);
+		this.enableAlgorithms(true);
 	}
 
 	/**
@@ -333,16 +334,14 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void setViewOff() {
 		// Graph
+		this.setEditing(false);
 		this.enableMenu(false);
-		this.setGraphEditable(false);
 		// Algorithm
-		this.model.setAlgorithmsEnabled(false);
-		this.model.notifyObservers(EventSource.ALGORITHM);
+		this.enableAlgorithms(false);
 	}
 
 	/**
-	 * A helper method for state view setter: Handles enabling/disabling the
-	 * menu elements.
+	 * A helper method for state view setter: Enables the menu elements.
 	 * 
 	 * @param enabled
 	 *            the enabled to set
@@ -351,6 +350,17 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		this.model.setMenuEnabled(enabled);
 		this.model.setSaveEnabled(!this.model.isGraphSaved());
 		this.model.notifyObservers(EventSource.GRAPH);
+	}
+
+	/**
+	 * A helper method for state view setter: Enables the algorithms.
+	 * 
+	 * @param enabled
+	 *            the enabled to set
+	 */
+	private void enableAlgorithms(boolean enabled) {
+		this.model.setAlgorithmsEnabled(enabled);
+		this.model.notifyObservers(EventSource.ALGORITHM);
 	}
 
 	/**
@@ -385,6 +395,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
+				// Graph
 				IExtendedGraph graph = this.core.newGraph(edgeType);
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
@@ -392,9 +403,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				graph.addGraphEventListener(this);
 				this.model.setGraph(graph);
 				this.model.setGraphFile(false);
-				this.model.setGraphSaved(true);
 				this.model.setStart(null);
 				this.model.setEnd(null);
+				// Algorithm
 				this.updateAlgorithms();
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
@@ -434,6 +445,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				/* dialog */
 				option = fileChooser.showOpenDialog(top);
 				if (option == JFileChooser.APPROVE_OPTION) {
+					// Graph
 					File source = fileChooser.getSelectedFile();
 					IExtendedGraph graph = this.core.openGraph(source);
 					String name = source.getName();
@@ -441,9 +453,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					graph.addGraphEventListener(this);
 					this.model.setGraph(graph);
 					this.model.setGraphFile(true);
-					this.model.setGraphSaved(true);
 					this.model.setStart(null);
 					this.model.setEnd(null);
+					// Algorithm
 					this.updateAlgorithms();
 					this.model.setSelectedAlgorithmIndex(0);
 					this.selectAlgorithm();
@@ -463,8 +475,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void saveGraph() throws Exception {
 		try {
 			this.core.saveGraph();
-			this.model.setGraphSaved(true);
-			this.model.setAlgorithmsEnabled(true);
+			this.setEditing(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -519,10 +530,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void editGraph() throws Exception {
 		try {
-			this.model.setGraphSaved(false);
 			this.model.setSelectedAlgorithmIndex(0);
 			this.selectAlgorithm();
-			this.model.setAlgorithmsEnabled(false);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -539,22 +548,32 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 
 			/* deny user interaction */
-			this.setState(new ParameterStateOff(this));
+			this.setViewOff();
+			/* Graph */
+			if (this.model.getProgress() > 0)
+				((SbsStateHandler) this.model.getSbsStateHandler())
+						.toBeginning();
+			IExtendedGraph graph = this.model.getGraph();
 			/* Algorithm */
 			int index = this.model.getSelectedAlgorithmIndex();
 			this.core.selectAlgorithm(index);
 			String description = this.core.getAlgorithmDescription();
 			this.model.setAlgorithmDescription(description);
 			/* Traversal */
-			IExtendedGraph graph = this.model.getGraph();
 			ITraversal traversal = this.core.traverse(graph);
 			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
 
+			// TODO message eventually: an algorithm generated an empty
+			// traversal (no steps) ...
+			if (traversal.size() == 0 && index > 0) {
+				return 0;
+			}
+
 			return index;
 
 		} catch (Exception e) {
-			this.setState(new ParameterStateGraphSaved(this));
+			this.setViewGraphSaved();
 			throw e;
 		}
 
@@ -578,16 +597,20 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	/**
 	 * A helper method: Handles setting the graph editable.
 	 * 
-	 * @param enabled
-	 *            the editable to set
+	 * @param editing
+	 *            the editing to set
 	 */
-	private void setGraphEditable(boolean editable) {
-		if (editable) {
+	private void setEditing(boolean editing) {
+		if (editing)
 			this.model.setMode(Mode.EDITING);
-			this.model.notifyObservers(MODE);
-		}
-		this.model.setEditingEnabled(editable);
-		this.model.notifyObservers(GRAPH);
+		else
+			this.model.setMode(Mode.PICKING);
+		this.model.setModeEnabled(editing);
+		this.model.setVertexEnabled(editing);
+		this.model.setEdgeEnabled(editing);
+		// TODO
+		this.model.setEditingEnabled(editing);
+		this.model.notifyObservers(MODE);
 	}
 
 	/**

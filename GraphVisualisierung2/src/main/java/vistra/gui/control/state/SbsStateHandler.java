@@ -70,7 +70,6 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	public SbsStateHandler(IGuiModel model) {
 		super();
-		this.state = new SbsStateOff(this);
 		this.model = (GuiModel) model;
 		this.blinkListener = new BlinkListener(NUMBER_OF_BLINKS);
 		int timeDivider = 2; // divides the delay into two parts: blink and show
@@ -78,6 +77,11 @@ public final class SbsStateHandler extends Observable implements
 		int blinkDelay = this.model.getDelay()
 				/ (timeDivider * numberOfSteps * NUMBER_OF_BLINKS) * A_SECOND;
 		this.timer = new Timer(blinkDelay, this.blinkListener);
+		try {
+			this.setState(new SbsStateOff(this));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -151,7 +155,7 @@ public final class SbsStateHandler extends Observable implements
 	public void handleToBeginning() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleToBeginning();
+			this.state.handleBeginning();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -190,7 +194,7 @@ public final class SbsStateHandler extends Observable implements
 	public void handleToEnd() throws Exception {
 		try {
 			this.state.exit();
-			this.state.handleToEnd();
+			this.state.handleEnd();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -226,11 +230,11 @@ public final class SbsStateHandler extends Observable implements
 	}
 
 	/**
-	 * State view setter: Sets the step-by-step view elements for state: at
+	 * State view setter: Sets the step-by-step view elements for state:
 	 * beginning.
 	 */
 	void setViewBeginning() {
-		this.model.setStepByStepEnabled(true);
+		this.model.setSbsEnabled(true);
 		this.model.setBackwardEnabled(false);
 		this.model.setToBeginningEnabled(false);
 		this.model.notifyObservers(EventSource.STEP_BY_STEP);
@@ -240,15 +244,15 @@ public final class SbsStateHandler extends Observable implements
 	 * State view setter: Sets the step-by-step view elements for state: inter.
 	 */
 	void setViewInter() {
-		this.model.setStepByStepEnabled(true);
+		this.model.setSbsEnabled(true);
 		this.model.notifyObservers(EventSource.STEP_BY_STEP);
 	}
 
 	/**
-	 * State view setter: Sets the step-by-step view elements for state: at end.
+	 * State view setter: Sets the step-by-step view elements for state: end.
 	 */
 	void setViewEnd() {
-		this.model.setStepByStepEnabled(true);
+		this.model.setSbsEnabled(true);
 		this.model.setForwardEnabled(false);
 		this.model.setToEndEnabled(false);
 		this.model.notifyObservers(EventSource.STEP_BY_STEP);
@@ -258,8 +262,7 @@ public final class SbsStateHandler extends Observable implements
 	 * State view setter: Sets the step-by-step view elements for state: off.
 	 */
 	void setViewOff() {
-		this.model.setSteplengthEnabled(false);
-		this.model.setStepByStepEnabled(false);
+		this.model.setSbsEnabled(false);
 		this.model.notifyObservers(EventSource.STEP_BY_STEP);
 	}
 

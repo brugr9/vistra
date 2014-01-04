@@ -19,28 +19,28 @@ public interface ISbsStateHandler extends IControlStateHandler, FocusListener,
 		ActionListener {
 
 	/**
-	 * Handles an interaction: to beginning |<<.
+	 * Handles an interaction: to beginning.
 	 * 
 	 * @throws Exception
 	 */
 	void handleToBeginning() throws Exception;
 
 	/**
-	 * Handles an interaction: backward <<.
+	 * Handles an interaction: backward.
 	 * 
 	 * @throws Exception
 	 */
 	void handleBackward() throws Exception;
 
 	/**
-	 * Handles an interaction: forward >>.
+	 * Handles an interaction: forward.
 	 * 
 	 * @throws Exception
 	 */
 	void handleForward() throws Exception;
 
 	/**
-	 * Handles an interaction: to end (>>|.
+	 * Handles an interaction: to end.
 	 * 
 	 * @throws Exception
 	 */

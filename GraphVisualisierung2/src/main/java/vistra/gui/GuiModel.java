@@ -79,7 +79,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private ITraversal traversal;
 	private int progress;
 	// Step-by-Step
-	private ISbsStateHandler stepByStepStateHandler;
+	private ISbsStateHandler sbsStateHandler;
 	private int steplength;
 	private boolean steplengthEnabled;
 	private boolean toBeginningEnabled;
@@ -163,7 +163,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.traversal = null;
 		this.progress = 0;
 		// Step-by-Step
-		this.stepByStepStateHandler = null;
+		this.sbsStateHandler = null;
 		this.steplength = 1;
 		this.steplengthEnabled = false;
 		this.toBeginningEnabled = false;
@@ -318,7 +318,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 */
 	@Override
 	public void setTraversalEnabled(boolean menuEnabled) {
-		this.setStepByStepEnabled(menuEnabled);
+		this.setSbsEnabled(menuEnabled);
 		this.setAnimationEnabled(menuEnabled);
 	}
 
@@ -331,7 +331,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setStepByStepEnabled(boolean menuEnabled) {
+	public void setSbsEnabled(boolean menuEnabled) {
 		// spinner
 		this.setSteplengthEnabled(menuEnabled);
 		// button
@@ -931,8 +931,8 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ISbsStateHandler getStepByStepStateHandler() {
-		return stepByStepStateHandler;
+	public ISbsStateHandler getSbsStateHandler() {
+		return sbsStateHandler;
 	}
 
 	/*
@@ -1748,9 +1748,8 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setStepByStepStateHandler(
-			ISbsStateHandler stepByStepStateHandler) {
-		this.stepByStepStateHandler = stepByStepStateHandler;
+	public void setSbsStateHandler(ISbsStateHandler sbsStateHandler) {
+		this.sbsStateHandler = sbsStateHandler;
 		this.setChanged();
 	}
 

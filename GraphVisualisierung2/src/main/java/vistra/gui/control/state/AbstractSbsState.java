@@ -58,7 +58,7 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 * 
 	 * @throws Exception
 	 */
-	void handleToBeginning() throws Exception {
+	void handleBeginning() throws Exception {
 		try {
 			this.stateHandler.toBeginning();
 			this.stateHandler
@@ -110,7 +110,7 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 * 
 	 * @throws Exception
 	 */
-	void handleToEnd() throws Exception {
+	void handleEnd() throws Exception {
 		try {
 			this.stateHandler.toEnd();
 			this.stateHandler.setState(new SbsStateEnd(this.stateHandler));

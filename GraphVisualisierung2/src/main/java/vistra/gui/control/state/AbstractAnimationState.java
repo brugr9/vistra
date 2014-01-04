@@ -43,12 +43,13 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles playing.
+	 * Handles play.
 	 * 
 	 * @throws Exception
 	 */
-	void handlePlaying() throws Exception {
+	void handlePlay() throws Exception {
 		try {
+			this.stateHandler.startAnimation();
 			this.stateHandler.setState(new AnimationStatePlaying(
 					this.stateHandler));
 		} catch (Exception ex) {
@@ -57,12 +58,13 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles paused.
+	 * Handles pause.
 	 * 
 	 * @throws Exception
 	 */
-	void handlePaused() throws Exception {
+	void handlePause() throws Exception {
 		try {
+			this.stateHandler.pauseAnimation();
 			this.stateHandler.setState(new AnimationStatePaused(
 					this.stateHandler));
 		} catch (Exception ex) {
@@ -71,12 +73,13 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles stopped.
+	 * Handles stop.
 	 * 
 	 * @throws Exception
 	 */
-	void handleStopped() throws Exception {
+	void handleStop() throws Exception {
 		try {
+			this.stateHandler.stopAnimation();
 			this.stateHandler.setState(new AnimationStateStopped(
 					this.stateHandler));
 		} catch (Exception ex) {

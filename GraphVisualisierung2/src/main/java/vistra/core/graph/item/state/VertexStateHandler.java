@@ -226,7 +226,7 @@ public class VertexStateHandler extends VertexLayout implements
 			if (this.isEnd())
 				this.setLayoutSolution();
 			else {
-				this.setFont(FontPalette.emphasised);
+				this.setFont(FontPalette.normal);
 				this.setFontColor(ColorPalette.darkblue);
 				this.setStroke(StrokePalette.visited);
 				this.setStrokeColor(ColorPalette.red);
@@ -252,7 +252,7 @@ public class VertexStateHandler extends VertexLayout implements
 			else if (this.isEnd())
 				this.setLayoutSolution();
 			else {
-				this.setFont(FontPalette.emphasised);
+				this.setFont(FontPalette.normal);
 				this.setFontColor(ColorPalette.darkblue);
 				this.setStroke(StrokePalette.visited);
 				this.setStrokeColor(ColorPalette.red);
