@@ -66,6 +66,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private IExtendedGraph graph;
 	private IVertexLayout start;
 	private IVertexLayout end;
+	private IVertexLayout focus;
 	private boolean graphFile;
 	private boolean graphSaved;
 	private Mode mode;
@@ -150,6 +151,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 		this.graph = null;
 		this.start = null;
 		this.end = null;
+		this.focus = null;
 		this.graphFile = false;
 		this.graphSaved = false;
 		this.mode = null;
@@ -803,6 +805,19 @@ public final class GuiModel extends Observable implements IGuiModel {
 	@Override
 	public IVertexLayout getEnd() {
 		return end;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#getEnd()
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IVertexLayout getFocus() {
+		return focus;
 	}
 
 	/*
@@ -1607,6 +1622,20 @@ public final class GuiModel extends Observable implements IGuiModel {
 	@Override
 	public void setEnd(IVertexLayout end) {
 		this.end = end;
+		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.gui.IGuiModel#setEnd(vistra.core.graph.item.IVertexLayout)
+	 */
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setFocus(IVertexLayout focus) {
+		this.focus = focus;
 		this.setChanged();
 	}
 

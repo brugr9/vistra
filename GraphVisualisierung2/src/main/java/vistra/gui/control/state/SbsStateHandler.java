@@ -375,7 +375,8 @@ public final class SbsStateHandler extends Observable implements
 			for (int i = 0; i < steplength; i++) {
 				if (progress < max) {
 					/* modify the graph */
-					this.blink();
+					// TODO
+					// this.blink();
 					step = traversal.next();
 					description = step.getDescription();
 					step.execute();

@@ -28,13 +28,6 @@ public interface IVertexStateHandler extends IItemStateHandler {
 	void handleUpdated(String value) throws Exception;
 
 	/**
-	 * Handles focus on.
-	 * 
-	 * @throws Exception
-	 */
-	void handleFocusOn() throws Exception;
-
-	/**
 	 * Returns the visited status.
 	 * 
 	 * @return {@code true} if visited

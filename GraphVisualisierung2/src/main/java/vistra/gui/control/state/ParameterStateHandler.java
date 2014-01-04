@@ -405,10 +405,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setGraphFile(false);
 				this.model.setStart(null);
 				this.model.setEnd(null);
+				this.model.notifyObservers(GRAPH);
 				// Algorithm
 				this.updateAlgorithms();
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
+				this.model.notifyObservers(ALGORITHM);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -455,10 +457,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					this.model.setGraphFile(true);
 					this.model.setStart(null);
 					this.model.setEnd(null);
+					this.model.notifyObservers(GRAPH);
 					// Algorithm
 					this.updateAlgorithms();
 					this.model.setSelectedAlgorithmIndex(0);
 					this.selectAlgorithm();
+					this.model.notifyObservers(ALGORITHM);
 				}
 			}
 			return option;
@@ -475,6 +479,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void saveGraph() throws Exception {
 		try {
 			this.core.saveGraph();
+			this.model.notifyObservers(GRAPH);
 			this.setEditing(true);
 		} catch (Exception e) {
 			throw e;
@@ -515,7 +520,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setGraphFile(true);
 				this.model.setGraphSaved(true);
 				this.model.notifyObservers(GRAPH);
-				this.model.setAlgorithmsEnabled(true);
+				this.enableAlgorithms(true);
 			}
 			return option;
 		} catch (Exception e) {

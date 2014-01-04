@@ -89,19 +89,6 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleFocusOn() throws Exception {
-		try {
-			this.state.exit();
-			this.state.handleFocusOn();
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void handleVisited() throws Exception {
 		try {
 			this.state.exit();

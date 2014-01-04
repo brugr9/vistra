@@ -263,6 +263,11 @@ public interface IGuiModel {
 	public abstract IVertexLayout getEnd();
 
 	/**
+	 * @return the focus
+	 */
+	public abstract IVertexLayout getFocus();
+
+	/**
 	 * @return the graphFile
 	 */
 	public abstract boolean isGraphFile();
@@ -591,6 +596,12 @@ public interface IGuiModel {
 	 *            the end to set
 	 */
 	public abstract void setEnd(IVertexLayout end);
+
+	/**
+	 * @param focus
+	 *            the focus to set
+	 */
+	public abstract void setFocus(IVertexLayout focus);
 
 	/**
 	 * @param graphFile

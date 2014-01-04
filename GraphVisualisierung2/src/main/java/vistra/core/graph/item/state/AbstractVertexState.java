@@ -71,20 +71,6 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 	}
 
 	/**
-	 * Handles focus on.
-	 * 
-	 * @throws Exception
-	 */
-	void handleFocusOn() throws Exception {
-		try {
-			this.stateHandler.setState(new FocusOnVertexState(
-					this.stateHandler));
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * Handles visited.
 	 * 
 	 * @throws Exception
