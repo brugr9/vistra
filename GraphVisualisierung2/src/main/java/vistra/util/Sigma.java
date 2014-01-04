@@ -1,7 +1,9 @@
 package vistra.util;
 
+import java.text.DecimalFormatSymbols;
+
 /**
- * Some signs used.
+ * Some signs.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -12,9 +14,9 @@ public interface Sigma {
 	/**
 	 * A sign for an initial state.
 	 * 
-	 * TODO single sign for infinity
 	 */
-	public final static String INFINITY = "inf";
+	public final static String INFINITY = new DecimalFormatSymbols()
+			.getInfinity();
 
 	/**
 	 * An array of signs from A to Z in upper case.
