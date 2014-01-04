@@ -11,6 +11,7 @@ import java.awt.Font;
  * 
  * @see StrokePalette
  * @see ColorPalette
+ * @see ShapePalette
  * 
  */
 public enum FontPalette {

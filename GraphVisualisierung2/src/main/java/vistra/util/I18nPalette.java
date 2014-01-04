@@ -5,6 +5,8 @@ import java.util.Locale;
 /**
  * A palette for i18n.
  * 
+ * Use the lower-case constants for getting directly a BCP47 language tag.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */

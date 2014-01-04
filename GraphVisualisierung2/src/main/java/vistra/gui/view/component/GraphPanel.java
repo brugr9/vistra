@@ -30,7 +30,6 @@ import vistra.gui.control.IControl.EventSource;
 import vistra.gui.view.IView;
 import vistra.gui.view.mouse.Mouse;
 import vistra.util.ColorPalette;
-import vistra.util.VistraConstants;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
 import edu.uci.ics.jung.visualization.RenderContext;
@@ -48,6 +47,8 @@ import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 public class GraphPanel extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 177109739873034494L;
+
+	private final static double E_LABEL_CLOSENESS = 0.5;
 
 	/**
 	 * A field for a title.
@@ -112,8 +113,7 @@ public class GraphPanel extends JPanel implements Observer {
 		rc.setVertexFontTransformer(new VertexFont());
 		// transformer: edge
 		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertexLayout, IEdgeLayout>(
-				VistraConstants.E_LABEL_CLOSENESS,
-				VistraConstants.E_LABEL_CLOSENESS));
+				E_LABEL_CLOSENESS, E_LABEL_CLOSENESS));
 		rc.setEdgeShapeTransformer(new EdgeShape.Line<IVertexLayout, IEdgeLayout>());
 		rc.setEdgeStrokeTransformer(new EdgeStroke());
 		rc.setEdgeArrowStrokeTransformer(new EdgeStroke());

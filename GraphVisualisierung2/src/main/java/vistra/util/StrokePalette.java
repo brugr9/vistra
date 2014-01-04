@@ -11,6 +11,7 @@ import java.awt.BasicStroke;
  * 
  * @see FontPalette
  * @see ColorPalette
+ * @see ShapePalette
  */
 public enum StrokePalette {
 
@@ -19,8 +20,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: default
 	 * <li>Stroke: solid
-	 * 
-	 * @see ItemLayoutConstant
 	 */
 	UNEXPLORED(StrokeWidth.widthDefault, StrokePattern.solid),
 	/**
@@ -28,8 +27,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: dashed
-	 * 
-	 * @see ItemLayoutConstant
 	 */
 	BACK(StrokeWidth.widthBold, StrokePattern.dashed),
 	/**
@@ -37,8 +34,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: short dashed
-	 * 
-	 * @see ItemLayoutConstant
 	 */
 	FORWARD(StrokeWidth.widthBold, StrokePattern.shortDashed),
 	/**
@@ -46,8 +41,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: dash-point
-	 * 
-	 * @see ItemLayoutConstant
 	 */
 	CROSS(StrokeWidth.widthBold, StrokePattern.dashPoint),
 	/**
@@ -55,8 +48,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: solid
-	 * 
-	 * @see ItemLayoutConstant
 	 */
 	VISITED(StrokeWidth.widthBold, StrokePattern.solid),
 	/**
@@ -64,8 +55,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: dashed
-	 * 
-	 * @see ItemLayoutConstant
 	 */
 	DISCARDED(StrokeWidth.widthBold, StrokePattern.dashed),
 
@@ -112,8 +101,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: default
 	 * <li>Stroke: solid
-	 * 
-	 * @see VistraConstants
 	 */
 	public final static BasicStroke unexplored = UNEXPLORED.getStorke();
 
@@ -122,8 +109,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: dashed
-	 * 
-	 * @see VistraConstants
 	 */
 	public final static BasicStroke back = BACK.getStorke();
 
@@ -132,8 +117,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: short dashed
-	 * 
-	 * @see VistraConstants
 	 */
 	public final static BasicStroke forward = FORWARD.getStorke();
 
@@ -142,8 +125,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: dash-point
-	 * 
-	 * @see VistraConstants
 	 */
 	public final static BasicStroke cross = CROSS.getStorke();
 
@@ -152,8 +133,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: solid
-	 * 
-	 * @see VistraConstants
 	 */
 	public final static BasicStroke visited = VISITED.getStorke();
 
@@ -162,8 +141,6 @@ public enum StrokePalette {
 	 * <ul>
 	 * <li>Width: bold
 	 * <li>Stroke: dashed
-	 * 
-	 * @see VistraConstants
 	 */
 	public final static BasicStroke discarded = DISCARDED.getStorke();
 

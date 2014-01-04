@@ -10,6 +10,7 @@ import java.awt.Color;
  * 
  * @see FontPalette
  * @see StrokePalette
+ * @see ShapePalette
  */
 public abstract class ColorPalette {
 

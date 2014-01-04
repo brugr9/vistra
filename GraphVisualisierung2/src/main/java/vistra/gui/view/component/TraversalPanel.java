@@ -195,7 +195,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 		/* progress bar */
 		this.progress = new JProgressBar();
 		this.progress.setBackground(ColorPalette.darkgrey);
-		this.progress.setForeground(ColorPalette.green);
+		this.progress.setForeground(ColorPalette.darkgreen);
 		this.progress.setValue(0);
 		this.progress.setMaximum(0);
 		this.progress.setVisible(true);
@@ -232,9 +232,9 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.setLayout(new GridLayout(5, 1));
 		this.add(this.steplengthPanel);
 		this.add(this.delayPanel);
-		this.add(this.progress);
 		this.add(this.sbsPanel);
 		this.add(this.animationPanel);
+		this.add(this.progress);
 
 	}
 
