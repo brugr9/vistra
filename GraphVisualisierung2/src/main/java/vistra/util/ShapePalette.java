@@ -5,6 +5,8 @@ import java.awt.geom.Ellipse2D;
 
 /**
  * A shape palette.
+ * <p>
+ * Use the lower-case constants for getting directly a {@code Shape}.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
