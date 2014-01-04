@@ -341,29 +341,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * A helper method for state view setter: Enables the menu elements.
-	 * 
-	 * @param enabled
-	 *            the enabled to set
-	 */
-	private void enableMenu(boolean enabled) {
-		this.model.setMenuEnabled(enabled);
-		this.model.setSaveEnabled(!this.model.isGraphSaved());
-		this.model.notifyObservers(EventSource.GRAPH);
-	}
-
-	/**
-	 * A helper method for state view setter: Enables the algorithms.
-	 * 
-	 * @param enabled
-	 *            the enabled to set
-	 */
-	private void enableAlgorithms(boolean enabled) {
-		this.model.setAlgorithmsEnabled(enabled);
-		this.model.notifyObservers(EventSource.ALGORITHM);
-	}
-
-	/**
 	 * 
 	 * @return 0 if selected, 1 if saved, 2 if edited
 	 * @throws Exception
@@ -585,18 +562,15 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * A helper method: Sets the view elements related to saving a graph.
+	 * A helper method for state view setter: Enables the menu elements.
 	 * 
-	 * @param saved
-	 *            the saved status
-	 * @throws Exception
+	 * @param enabled
+	 *            the enabled to set
 	 */
-	private void setGraphSaved(boolean saved) {
-		this.model.setGraphSaved(saved);
-		this.model.setSaveEnabled(!saved);
-		this.model.notifyObservers(GRAPH);
-		this.model.setAlgorithmsEnabled(saved);
-		this.model.notifyObservers(ALGORITHM);
+	private void enableMenu(boolean enabled) {
+		this.model.setMenuEnabled(enabled);
+		this.model.setSaveEnabled(!this.model.isGraphSaved());
+		this.model.notifyObservers(EventSource.GRAPH);
 	}
 
 	/**
@@ -616,24 +590,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		// TODO
 		this.model.setEditingEnabled(editing);
 		this.model.notifyObservers(MODE);
-	}
-
-	/**
-	 * A helper method: Updates the algorithm list.
-	 * 
-	 * @throws Exception
-	 */
-	private void updateAlgorithms() throws Exception {
-		try {
-			EdgeType edgeType = this.model.getGraph().getEdgeType();
-			this.core.updateSelectableNames(edgeType);
-			String[] selectableNames = this.core.getSelectableNames();
-			this.model.setAlgorithms(selectableNames);
-			this.model.setSelectedAlgorithmIndex(0);
-			this.selectAlgorithm();
-		} catch (Exception e) {
-			throw e;
-		}
 	}
 
 	/**
@@ -703,6 +659,50 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
+	 * A helper method: Sets the view elements related to saving a graph.
+	 * 
+	 * @param saved
+	 *            the saved status
+	 * @throws Exception
+	 */
+	private void setGraphSaved(boolean saved) {
+		this.model.setGraphSaved(saved);
+		this.model.setSaveEnabled(!saved);
+		this.model.notifyObservers(GRAPH);
+		this.model.setAlgorithmsEnabled(saved);
+		this.model.notifyObservers(ALGORITHM);
+	}
+
+	/**
+	 * A helper method for state view setter: Enables the algorithms.
+	 * 
+	 * @param enabled
+	 *            the enabled to set
+	 */
+	private void enableAlgorithms(boolean enabled) {
+		this.model.setAlgorithmsEnabled(enabled);
+		this.model.notifyObservers(EventSource.ALGORITHM);
+	}
+
+	/**
+	 * A helper method: Updates the algorithm list.
+	 * 
+	 * @throws Exception
+	 */
+	private void updateAlgorithms() throws Exception {
+		try {
+			EdgeType edgeType = this.model.getGraph().getEdgeType();
+			this.core.updateSelectableNames(edgeType);
+			String[] selectableNames = this.core.getSelectableNames();
+			this.model.setAlgorithms(selectableNames);
+			this.model.setSelectedAlgorithmIndex(0);
+			this.selectAlgorithm();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
 	 * Doing: Enables or disabled the traversal.
 	 * 
 	 * @param enabled
@@ -723,4 +723,5 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			throw e;
 		}
 	}
+
 }

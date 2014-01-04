@@ -65,6 +65,10 @@ public final class TraversalPanel extends JPanel implements Observer {
 	 */
 	private JPanel steplengthPanel;
 	/**
+	 * A field for a delay panel.
+	 */
+	private JPanel delayPanel;
+	/**
 	 * A field for a step-by-step panel.
 	 */
 	private JPanel sbsPanel;
@@ -73,9 +77,17 @@ public final class TraversalPanel extends JPanel implements Observer {
 	 */
 	private JPanel animationPanel;
 	/**
-	 * A field for a delay panel.
+	 * A field for a progress panel.
 	 */
-	private JPanel delayPanel;
+	private JPanel progressPanel;
+	/**
+	 * A field for an empty panel.
+	 */
+	private JPanel empty1;
+	/**
+	 * A field for an empty panel.
+	 */
+	private JPanel empty2;
 	/**
 	 * A field for a steplength label.
 	 */
@@ -163,6 +175,15 @@ public final class TraversalPanel extends JPanel implements Observer {
 		((JSpinner.NumberEditor) this.delay.getEditor()).getTextField()
 				.addFocusListener(model.getAnimationStateHandler());
 
+		/* progress bar */
+		this.progress = new JProgressBar();
+		this.progress.getWidth();
+		this.progress.setBackground(ColorPalette.darkgrey);
+		this.progress.setForeground(ColorPalette.green);
+		this.progress.setValue(0);
+		this.progress.setMaximum(0);
+		this.progress.setVisible(true);
+
 		/* button */
 		Class<? extends TraversalPanel> c = this.getClass();
 		this.toBeginning = new JButton(new ImageIcon(
@@ -192,27 +213,26 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.pause.addActionListener(model.getAnimationStateHandler());
 		this.stop.addActionListener(model.getAnimationStateHandler());
 
-		/* progress bar */
-		this.progress = new JProgressBar();
-		this.progress.setBackground(ColorPalette.darkgrey);
-		this.progress.setForeground(ColorPalette.darkgreen);
-		this.progress.setValue(0);
-		this.progress.setMaximum(0);
-		this.progress.setVisible(true);
-
 		/* panel */
 		this.steplengthPanel = new JPanel();
 		this.delayPanel = new JPanel();
+		this.progressPanel = new JPanel();
+		this.empty1 = new JPanel();
+		this.empty2 = new JPanel();
 		this.sbsPanel = new JPanel();
 		this.animationPanel = new JPanel();
 		// layout
 		this.steplengthPanel.setLayout(new GridLayout(1, 2));
 		this.delayPanel.setLayout(new GridLayout(1, 2));
+		this.progressPanel.setLayout(new GridLayout(3, 1));
 		this.sbsPanel.setLayout(new GridLayout(1, 4));
 		this.animationPanel.setLayout(new GridLayout(1, 3));
 		// background
 		this.steplengthPanel.setBackground(ColorPalette.antique);
 		this.delayPanel.setBackground(ColorPalette.antique);
+		this.progressPanel.setBackground(ColorPalette.antique);
+		this.empty1.setBackground(ColorPalette.antique);
+		this.empty2.setBackground(ColorPalette.antique);
 		this.sbsPanel.setBackground(ColorPalette.antique);
 		this.animationPanel.setBackground(ColorPalette.antique);
 		// add
@@ -220,6 +240,9 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.steplengthPanel.add(this.steplength);
 		this.delayPanel.add(this.delayLabel);
 		this.delayPanel.add(this.delay);
+		this.progressPanel.add(empty1);
+		this.progressPanel.add(this.progress);
+		this.progressPanel.add(empty2);
 		this.sbsPanel.add(this.toBeginning);
 		this.sbsPanel.add(this.backward);
 		this.sbsPanel.add(this.forward);
@@ -232,9 +255,9 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.setLayout(new GridLayout(5, 1));
 		this.add(this.steplengthPanel);
 		this.add(this.delayPanel);
+		this.add(this.progressPanel);
 		this.add(this.sbsPanel);
 		this.add(this.animationPanel);
-		this.add(this.progress);
 
 	}
 
@@ -267,20 +290,17 @@ public final class TraversalPanel extends JPanel implements Observer {
 					this.stop.setToolTipText(b.getString("stop.label"));
 				} else if (arg == EventSource.ALGORITHM) {
 					this.progress.setMaximum(m.getTraversal().size());
-					this.progress.setValue(m.getProgress());
 				} else if (arg == EventSource.DELAY) {
 					this.delay.setValue(m.getDelay());
 				} else if (arg == EventSource.STEPLENGTH) {
 					this.steplength.setValue(m.getSteplength());
 				} else if (arg == EventSource.STEP_BY_STEP) {
-					this.progress.setValue(m.getProgress());
 					this.steplength.setEnabled(m.isSteplengthEnabled());
 					this.toBeginning.setEnabled(m.isToBeginningEnabled());
 					this.backward.setEnabled(m.isBackwardEnabled());
 					this.forward.setEnabled(m.isForwardEnabled());
 					this.toEnd.setEnabled(m.isToEndEnabled());
 				} else if (arg == EventSource.ANIMATION) {
-					this.progress.setValue(m.getProgress());
 					this.delay.setEnabled(m.isDelayEnabled());
 					this.play.setEnabled(m.isPlayEnabled());
 					this.pause.setEnabled(m.isPauseEnabled());
@@ -290,6 +310,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 					if (m.getPauseEvent() == EventSource.PAUSE)
 						this.pause.setSelected(false);
 				}
+				this.progress.setValue(m.getProgress());
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

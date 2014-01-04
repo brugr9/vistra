@@ -53,10 +53,10 @@ public enum StrokePalette {
 	/**
 	 * Stroke style 'discarded'.
 	 * <ul>
-	 * <li>Width: bold
+	 * <li>Width: default
 	 * <li>Stroke: dashed
 	 */
-	DISCARDED(StrokeWidth.widthBold, StrokePattern.dashed),
+	DISCARDED(StrokeWidth.widthDefault, StrokePattern.dashed),
 
 	;
 

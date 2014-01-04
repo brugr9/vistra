@@ -19,8 +19,8 @@ public enum ShapePalette {
 	/**
 	 * Shape 'default'.
 	 * <ul>
-	 * <li>Width: 45.0
-	 * <li>Height: 40.0
+	 * <li>Width: default
+	 * <li>Height: default
 	 */
 	DEFAULT(ShapeWidth.widthDefault, ShapeHeight.heightDefault),
 
