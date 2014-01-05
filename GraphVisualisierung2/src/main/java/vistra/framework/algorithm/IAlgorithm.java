@@ -36,10 +36,10 @@ public interface IAlgorithm {
 	/**
 	 * Traverses a graph as given.
 	 * 
-	 * @param graph
+	 * @param g
 	 *            the graph to traverse
 	 * @throws AlgorithmException
 	 */
-	void traverse(ITraversableGraph graph) throws AlgorithmException;
+	void traverse(ITraversableGraph g) throws AlgorithmException;
 
 }

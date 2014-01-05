@@ -11,7 +11,7 @@ abstract class AbstractStep implements IStep {
 	/**
 	 * A field for a description.
 	 */
-	String description;
+	StringBuilder description;
 	/**
 	 * A field for a step handler.
 	 */
@@ -21,7 +21,7 @@ abstract class AbstractStep implements IStep {
 	 * Main constructor.
 	 */
 	AbstractStep() {
-		this.description = "";
+		this.description = new StringBuilder();
 		this.stepHandler = new StepHandler();
 	}
 
@@ -46,7 +46,7 @@ abstract class AbstractStep implements IStep {
 	 */
 	@Override
 	public String getDescription() {
-		return this.description;
+		return this.description.toString();
 	}
-	
+
 }

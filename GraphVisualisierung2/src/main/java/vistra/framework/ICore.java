@@ -98,11 +98,11 @@ public interface ICore {
 	 * as immutable list of steps generated during the execution of the
 	 * algorithm. A step contains several commands which modifies the graph.
 	 * 
-	 * @param graph
+	 * @param g
 	 *            the graph to traverse
 	 * @return the traversal
 	 * @throws CoreException
 	 */
-	ITraversal traverse(IExtendedGraph graph) throws CoreException;
+	ITraversal traverse(IExtendedGraph g) throws CoreException;
 
 }

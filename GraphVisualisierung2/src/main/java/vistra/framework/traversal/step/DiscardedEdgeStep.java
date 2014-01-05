@@ -2,8 +2,8 @@ package vistra.framework.traversal.step;
 
 import java.util.List;
 
-import vistra.framework.graph.item.EdgeLayout;
 import vistra.framework.graph.item.IEdge;
+import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.state.command.DiscardedEdgeCommand;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 
@@ -23,11 +23,14 @@ public class DiscardedEdgeStep extends AbstractStep implements IStep {
 	 */
 	public DiscardedEdgeStep(IEdge edge) {
 		super();
-		this.description = "Discarded edge: " + ((EdgeLayout) edge).getId();
 		try {
 			IItemStateCommand command = new DiscardedEdgeCommand(edge);
 			this.stepHandler.addItemStateCommand(command);
 			command.execute();
+			this.description.append("Edge ");
+			if (((IEdgeLayout) edge).getId().length() != 0)
+				this.description.append(((IEdgeLayout) edge).getId() + " ");
+			this.description.append("discarded" + System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -41,13 +44,15 @@ public class DiscardedEdgeStep extends AbstractStep implements IStep {
 	 */
 	public DiscardedEdgeStep(List<IEdge> edges) {
 		super();
-		this.description = "Discarded edges: ";
 		try {
 			for (IEdge edge : edges) {
 				IItemStateCommand command = new DiscardedEdgeCommand(edge);
 				this.stepHandler.addItemStateCommand(command);
 				command.execute();
-				this.description += ((EdgeLayout) edge).getId() + ", ";
+				this.description.append("Edge ");
+				if (((IEdgeLayout) edge).getId().length() != 0)
+					this.description.append(((IEdgeLayout) edge).getId() + " ");
+				this.description.append("discarded" + System.lineSeparator());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

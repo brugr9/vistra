@@ -380,7 +380,7 @@ public final class SbsStateHandler extends Observable implements
 					step = traversal.next();
 					description = step.getDescription();
 					step.execute();
-					stringBuilder.append(description + System.lineSeparator());
+					stringBuilder.append(description);
 					progress++;
 
 					/* update */

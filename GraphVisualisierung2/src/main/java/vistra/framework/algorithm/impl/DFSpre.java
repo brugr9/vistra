@@ -3,10 +3,8 @@ package vistra.framework.algorithm.impl;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.datastructures.NodeQueue;
-import net.datastructures.Queue;
-
-import vistra.framework.algorithm.AlgorithmException;
+import net.datastructures.NodeStack;
+import net.datastructures.Stack;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
@@ -16,25 +14,22 @@ import vistra.framework.traversal.step.VisitStep;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * Breadth-first search (BFS).
+ * Depth-first search (DFS), preorder.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class BFS extends AbstractAlgorithm implements IAlgorithm {
+public class DFSpre extends AbstractAlgorithm implements IAlgorithm {
 
 	/**
 	 * A description.
 	 */
-	private final static String DESCRIPTION = "Die Breitensuche ist als Schleife "
-			+ "implementiert. Es sind sowohl gerichtete als auch ungerichtete Graphen "
-			+ "zulässig. Die Breitensuche wird für jede (schwache) Zusammenhangskomponente "
-			+ "separat durchgefürt.";
+	private final static String DESCRIPTION = "Der Graph wird in Preorder traversiert.";
 
 	/**
 	 * Main constructor.
 	 */
-	public BFS() {
+	public DFSpre() {
 		super();
 		super.setDescription(DESCRIPTION);
 		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
@@ -45,19 +40,18 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(ITraversableGraph g) throws AlgorithmException {
-
+	public void traverse(ITraversableGraph g) {
 		/* Input: A graph g and a root v of g */
 		IVertex v = g.getStart();
-		Queue<IVertex> Q = new NodeQueue<IVertex>();
+		Stack<IVertex> S = new NodeStack<IVertex>();
 		Set<IVertex> V = new HashSet<IVertex>();
-		Q.enqueue(v);
+		S.push(v);
 		V.add(v);
 
 		IVertex tempV, useV;
 		IEdge e = null;
-		while (!Q.isEmpty()) {
-			tempV = Q.dequeue();
+		while (!S.isEmpty()) {
+			tempV = S.pop();
 			if (g.isSuccessor(tempV, v)) {
 				v = tempV;
 				g.stepBy(new VisitStep(e, v));
@@ -66,11 +60,12 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 				useV = g.getOpposite(tempV, outE); // adjacent vertex of tempV
 				if (!V.contains(useV)) {
 					V.add(useV);
-					Q.enqueue(useV);
+					S.push(useV);
 				} else
 					g.stepBy(new BackEdgeStep(outE));
 			}
 		}
+
 	}
 
 }

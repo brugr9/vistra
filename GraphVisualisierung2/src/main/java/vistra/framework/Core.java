@@ -11,7 +11,7 @@ import vistra.framework.algorithm.AlgorithmManagerFactory;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.algorithm.IAlgorithmManager;
 import vistra.framework.algorithm.impl.BFS;
-import vistra.framework.algorithm.impl.DFS;
+import vistra.framework.algorithm.impl.DFSpre;
 import vistra.framework.algorithm.impl.DLS;
 import vistra.framework.algorithm.impl.Default;
 import vistra.framework.algorithm.impl.Dijkstra;
@@ -66,7 +66,7 @@ public class Core implements ICore {
 			this.algorithmManager.addAvailable(new Default());
 			this.algorithmManager.addAvailable(new Test()); // TODO remove
 			this.algorithmManager.addAvailable(new BFS());
-			this.algorithmManager.addAvailable(new DFS());
+			this.algorithmManager.addAvailable(new DFSpre());
 			this.algorithmManager.addAvailable(new DLS());
 			this.algorithmManager.addAvailable(new Dijkstra());
 			this.algorithmManager.addAvailable(new Kruskal());
@@ -184,10 +184,9 @@ public class Core implements ICore {
 		try {
 			/* graph */
 			List<IStep> stepList = new ArrayList<IStep>();
-			ITraversableGraph traversableGraph = new TraversableGraph(graph,
-					stepList);
+			ITraversableGraph g = new TraversableGraph(graph, stepList);
 			/* algorithm */
-			this.algorithm.traverse(traversableGraph);
+			this.algorithm.traverse(g);
 			/* traversal */
 			IBidirectIterator<IStep> stepIterator = new ImmutableBidirectIterator<IStep>(
 					stepList);

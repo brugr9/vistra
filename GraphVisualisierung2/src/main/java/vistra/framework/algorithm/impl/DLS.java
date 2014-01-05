@@ -13,9 +13,9 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 public class DLS extends AbstractAlgorithm implements IAlgorithm {
 
 	/**
-	 * A field for a description.
+	 * A description.
 	 */
-	private final static String ALGO_DESCRIPTION = "Der Graph wird in Postorder traversiert. "
+	private final static String DESCRIPTION = "Der Graph wird in Postorder traversiert. "
 			+ "Es sind sowohl gerichtete als auch ungerichtete Graphen zulässig."
 			+ "Die Knoten werden in Postorder-Reihenfolge nummeriert.";
 
@@ -24,7 +24,7 @@ public class DLS extends AbstractAlgorithm implements IAlgorithm {
 	 */
 	public DLS() {
 		super();
-		super.setDescription(ALGO_DESCRIPTION);
+		super.setDescription(DESCRIPTION);
 		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
 				EdgeType.DIRECTED });
 	}
@@ -33,7 +33,7 @@ public class DLS extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(ITraversableGraph graph) {
+	public void traverse(ITraversableGraph g) {
 		// TODO
 	}
 
