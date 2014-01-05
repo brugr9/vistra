@@ -22,7 +22,7 @@ public interface IView {
 	/**
 	 * A field for the visualisation height.
 	 */
-	public static int VISUALISATION_HEIGHT = 600;
+	public static int VISUALISATION_HEIGHT = 610;
 	/**
 	 * A field for the border.
 	 */
