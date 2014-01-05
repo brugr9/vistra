@@ -1,17 +1,5 @@
 package vistra.gui.control.state;
 
-import static vistra.gui.control.IControl.ControlEvent.ALGORITHM;
-import static vistra.gui.control.IControl.ControlEvent.EDIT;
-import static vistra.gui.control.IControl.ControlEvent.END;
-import static vistra.gui.control.IControl.ControlEvent.GRAPH;
-import static vistra.gui.control.IControl.ControlEvent.MODE;
-import static vistra.gui.control.IControl.ControlEvent.NEW_DIRECTED;
-import static vistra.gui.control.IControl.ControlEvent.NEW_UNDIRECTED;
-import static vistra.gui.control.IControl.ControlEvent.OPEN;
-import static vistra.gui.control.IControl.ControlEvent.SAVE;
-import static vistra.gui.control.IControl.ControlEvent.SAVE_AS;
-import static vistra.gui.control.IControl.ControlEvent.START;
-
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
