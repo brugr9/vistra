@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
@@ -36,7 +36,7 @@ public class ModePopup extends JPopupMenu implements Observer {
 	/**
 	 * Main constructor.
 	 */
-	public ModePopup(IGuiModel model) {
+	public ModePopup(IModel model) {
 		super();
 		this.picking = new JMenuItem("picking");
 		this.editing = new JMenuItem("editing");
@@ -54,7 +54,7 @@ public class ModePopup extends JPopupMenu implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		IGuiModel m = (IGuiModel) o;
+		IModel m = (IModel) o;
 		ResourceBundle b = m.getResourceBundle();
 
 		try {

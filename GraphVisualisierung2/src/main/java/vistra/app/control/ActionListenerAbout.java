@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 
 /**
  * A listener for getting some background information about the program.
@@ -21,7 +21,7 @@ final class ActionListenerAbout extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerAbout(IGuiModel model) {
+	ActionListenerAbout(IModel model) {
 		super(model);
 	}
 

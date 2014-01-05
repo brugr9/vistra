@@ -6,7 +6,7 @@
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>GraphVisualisierung2</name>
-	<url>https://github.com/brugr9/vistra</url>
+	<url>http://scm.geogeek.ch/git/vistra</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

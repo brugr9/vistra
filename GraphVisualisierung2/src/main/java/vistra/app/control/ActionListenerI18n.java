@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
 
 /**
@@ -58,7 +58,7 @@ class ActionListenerI18n extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerI18n(IGuiModel model) {
+	ActionListenerI18n(IModel model) {
 		super(model);
 		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle")
 				.replace(".", File.separator);

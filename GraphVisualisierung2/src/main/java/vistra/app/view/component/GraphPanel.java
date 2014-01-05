@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import vistra.app.GuiModel;
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
+import vistra.app.Model;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.app.view.IView;
 import vistra.app.view.popup.Mouse;
@@ -87,7 +87,7 @@ public class GraphPanel extends JPanel implements Observer {
 	 * @param size
 	 *            the panel size
 	 */
-	public GraphPanel(JFrame top, GuiModel model,
+	public GraphPanel(JFrame top, Model model,
 			Layout<IVertexLayout, IEdgeLayout> layout, Dimension size) {
 		this.setSize(size);
 		this.title = "title";
@@ -142,7 +142,7 @@ public class GraphPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		IGuiModel m = (IGuiModel) o;
+		IModel m = (IModel) o;
 		ResourceBundle b = m.getResourceBundle();
 
 		try {

@@ -1,6 +1,6 @@
 package vistra.app.view;
 
-import vistra.app.GuiModel;
+import vistra.app.Model;
 import vistra.app.control.IControl;
 import vistra.app.view.component.AlgorithmPanel;
 import vistra.app.view.component.GraphPanel;
@@ -39,7 +39,7 @@ public class FullView extends DefaultView implements IView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public FullView(Layout<IVertexLayout, IEdgeLayout> layout, GuiModel model,
+	public FullView(Layout<IVertexLayout, IEdgeLayout> layout, Model model,
 			IControl control) throws Exception {
 		super(layout, model, control);
 		// TODO

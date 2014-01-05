@@ -2,7 +2,7 @@ package vistra.app;
 
 import javax.swing.JOptionPane;
 
-import vistra.app.GuiFactory.ViewType;
+import vistra.app.ApplicationFactory.ViewType;
 
 /**
  * Startup.

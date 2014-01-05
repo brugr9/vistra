@@ -12,8 +12,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.app.GuiModel;
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
+import vistra.app.Model;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.ICore;
 import vistra.framework.graph.IExtendedGraph;
@@ -51,7 +51,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	/**
 	 * A field for a model.
 	 */
-	private GuiModel model;
+	private Model model;
 	/**
 	 * A field for a top component.
 	 */
@@ -65,10 +65,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @param model
 	 *            a gui model
 	 */
-	public ParameterStateHandler(ICore core, IGuiModel model) {
+	public ParameterStateHandler(ICore core, IModel model) {
 		super();
 		this.core = core;
-		this.model = (GuiModel) model;
+		this.model = (Model) model;
 		this.state = new ParameterStateOff(this);
 		this.top = null;
 	}

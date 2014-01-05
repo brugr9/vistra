@@ -1,6 +1,6 @@
 package vistra.app.control;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 import vistra.app.control.state.AnimationStateHandler;
 import vistra.app.control.state.ParameterStateHandler;
 import vistra.app.control.state.SbsStateHandler;
@@ -23,7 +23,7 @@ public final class Control implements IControl {
 	 *            the model
 	 * @throws Exception
 	 */
-	public Control(ICore core, IGuiModel model) throws Exception {
+	public Control(ICore core, IModel model) throws Exception {
 		super();
 		try {
 			/* Action listener */

@@ -10,8 +10,8 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import vistra.app.GuiModel;
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
+import vistra.app.Model;
 import vistra.framework.graph.item.EdgeFactory;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -55,16 +55,16 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	public Mouse(JFrame top, IGuiModel model,
+	public Mouse(JFrame top, IModel model,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		super(viewer.getRenderContext(), new VertexFactory(), new EdgeFactory());
 
 		this.modePopup = new ModePopup(model);
 		this.vertexPopup = new VertexPopup(top, viewer, model);
 		this.edgePopup = new EdgePopup(top, viewer, model);
-		((GuiModel) model).addObserver(this.modePopup);
-		((GuiModel) model).addObserver(this.vertexPopup);
-		((GuiModel) model).addObserver(this.edgePopup);
+		((Model) model).addObserver(this.modePopup);
+		((Model) model).addObserver(this.vertexPopup);
+		((Model) model).addObserver(this.edgePopup);
 
 		this.loadPlugins();
 		if (this.popupEditingPlugin instanceof PopupPlugin) {
@@ -128,7 +128,7 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 	@Override
 	public void update(Observable o, Object arg) {
 
-		IGuiModel m = (IGuiModel) o;
+		IModel m = (IModel) o;
 		ResourceBundle b = m.getResourceBundle();
 
 		try {

@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
 
 /**
@@ -57,7 +57,7 @@ public class ToolBar extends JToolBar implements Observer {
 	 * @param model
 	 *            the model as in MVC
 	 */
-	public ToolBar(IGuiModel model) {
+	public ToolBar(IModel model) {
 
 		Class<? extends ToolBar> c = this.getClass();
 		/* file */
@@ -107,9 +107,9 @@ public class ToolBar extends JToolBar implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		if (o instanceof IGuiModel) {
+		if (o instanceof IModel) {
 
-			IGuiModel m = (IGuiModel) o;
+			IModel m = (IModel) o;
 			ResourceBundle b = m.getResourceBundle();
 
 			try {

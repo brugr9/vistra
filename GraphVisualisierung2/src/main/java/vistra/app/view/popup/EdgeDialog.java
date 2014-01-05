@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.app.control.verifier.EdgeWeightVerifier;
 import vistra.app.control.verifier.ItemIdVerifier;
@@ -69,7 +69,7 @@ public class EdgeDialog extends JDialog {
 	 */
 	public EdgeDialog(IEdgeLayout edge, JFrame top,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
-			IGuiModel model) {
+			IModel model) {
 		super(top, true);
 		this.setResizable(false);
 

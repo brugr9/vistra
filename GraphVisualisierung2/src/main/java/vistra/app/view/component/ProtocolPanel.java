@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.util.ColorPalette;
 
@@ -81,9 +81,9 @@ public final class ProtocolPanel extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof IGuiModel) {
+		if (o instanceof IModel) {
 
-			IGuiModel m = (IGuiModel) o;
+			IModel m = (IModel) o;
 			ResourceBundle b = m.getResourceBundle();
 
 			try {

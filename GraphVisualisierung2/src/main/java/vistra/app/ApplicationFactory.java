@@ -3,13 +3,20 @@ package vistra.app;
 import java.io.File;
 import java.util.Properties;
 
-import vistra.app.GuiFactory.ViewType;
+import vistra.app.control.Control;
+import vistra.app.control.IControl;
+import vistra.app.view.DefaultView;
+import vistra.app.view.FullView;
 import vistra.app.view.IView;
 import vistra.framework.Core;
 import vistra.framework.ICore;
+import vistra.framework.graph.item.IEdgeLayout;
+import vistra.framework.graph.item.IVertexLayout;
+import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 
 /**
- * An application factory.
+ * An application factory for creating MVC based graphic user interfaces.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -29,11 +36,11 @@ final class ApplicationFactory {
 	 * @return the view
 	 * @throws Exception
 	 */
-	protected static IView createApplication() throws Exception {
+	static IView createApplication() throws Exception {
 		try {
 			Properties properties = createProperties();
 			ICore core = new Core(properties);
-			IView view = GuiFactory.createGui(core);
+			IView view = createGui(core);
 			return view;
 		} catch (Exception e) {
 			throw e;
@@ -48,12 +55,11 @@ final class ApplicationFactory {
 	 * @return the view
 	 * @throws Exception
 	 */
-	protected static IView createApplication(ViewType viewType)
-			throws Exception {
+	static IView createApplication(ViewType viewType) throws Exception {
 		try {
 			Properties properties = createProperties();
 			ICore core = new Core(properties);
-			IView view = GuiFactory.createGui(core, viewType);
+			IView view = createGui(core, viewType);
 			return view;
 		} catch (Exception e) {
 			throw e;
@@ -88,6 +94,65 @@ final class ApplicationFactory {
 							+ propertiesName + "\n", e);
 		}
 
+	}
+
+	/**
+	 * Creates a graphic user interface.
+	 * 
+	 * @param core
+	 *            a core
+	 * @return a view as in MVC
+	 * @throws Exception
+	 */
+	static IView createGui(ICore core) throws Exception {
+		try {
+			return createGui(core, ViewType.DEFAULT);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * Creates a graphic user interface.
+	 * 
+	 * @param core
+	 *            a core
+	 * @param type
+	 *            the view type
+	 * @return a view as in MVC
+	 * @throws Exception
+	 */
+	static IView createGui(ICore core, ViewType type) throws Exception {
+		try {
+			// model and control
+			Model model = new Model();
+			IControl control = new Control(core, model);
+			// view
+			IView view;
+			Layout<IVertexLayout, IEdgeLayout> layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
+					model.getGraph());
+			if (type == ViewType.FULL)
+				view = new FullView(layout, model, control);
+			else if (type == ViewType.DEFAULT)
+				view = new DefaultView(layout, model, control);
+			else
+				view = new DefaultView(layout, model, control);
+			// i18n
+			model.getI18nListener().actionPerformed(null);
+			return view;
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * View types.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	enum ViewType {
+		DEFAULT, FULL;
 	}
 
 }

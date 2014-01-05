@@ -18,7 +18,7 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IGuiModel {
+public interface IModel {
 
 	/**
 	 * A grouped setter method for all menus.

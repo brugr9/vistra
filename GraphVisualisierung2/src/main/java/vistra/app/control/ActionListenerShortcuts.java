@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 
 /**
  * A help action listener.
@@ -21,7 +21,7 @@ final class ActionListenerShortcuts extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerShortcuts(IGuiModel model) {
+	ActionListenerShortcuts(IModel model) {
 		super(model);
 	}
 

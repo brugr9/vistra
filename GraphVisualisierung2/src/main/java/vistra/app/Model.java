@@ -19,7 +19,7 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class GuiModel extends Observable implements IGuiModel {
+public final class Model extends Observable implements IModel {
 
 	/* i18n */
 	private ResourceBundle resourceBundle;
@@ -103,7 +103,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	/**
 	 * Main constructor.
 	 */
-	public GuiModel() {
+	public Model() {
 		super();
 
 		/* i18n */

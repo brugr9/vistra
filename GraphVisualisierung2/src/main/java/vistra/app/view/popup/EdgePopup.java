@@ -11,7 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IItemLayout;
@@ -35,7 +35,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * A field for a model.
 	 */
-	private IGuiModel model;
+	private IModel model;
 	/**
 	 * A field for a point.
 	 */
@@ -65,7 +65,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	 */
 	public EdgePopup(JFrame top,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
-			IGuiModel model) {
+			IModel model) {
 		super("edgePopup");
 		/**/
 		this.viewer = viewer;
@@ -152,7 +152,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		IGuiModel m = (IGuiModel) o;
+		IModel m = (IModel) o;
 		ResourceBundle b = m.getResourceBundle();
 
 		try {

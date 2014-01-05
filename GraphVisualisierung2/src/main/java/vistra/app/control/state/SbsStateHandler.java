@@ -16,8 +16,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-import vistra.app.GuiModel;
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
+import vistra.app.Model;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.traversal.ITraversal;
 import vistra.framework.traversal.step.IStep;
@@ -45,7 +45,7 @@ public final class SbsStateHandler extends Observable implements
 	/**
 	 * A field for a model.
 	 */
-	private GuiModel model;
+	private Model model;
 
 	/**
 	 * A field for a timer.
@@ -68,9 +68,9 @@ public final class SbsStateHandler extends Observable implements
 	 * @param model
 	 *            the model
 	 */
-	public SbsStateHandler(IGuiModel model) {
+	public SbsStateHandler(IModel model) {
 		super();
-		this.model = (GuiModel) model;
+		this.model = (Model) model;
 		this.blinkListener = new BlinkListener(NUMBER_OF_BLINKS);
 		int timeDivider = 2; // divides the delay into two parts: blink and show
 		int numberOfSteps = 2; // number of steps per blink: backward, forward
@@ -491,7 +491,7 @@ public final class SbsStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			GuiModel model = SbsStateHandler.this.model;
+			Model model = SbsStateHandler.this.model;
 			Timer timer = SbsStateHandler.this.timer;
 
 			try {

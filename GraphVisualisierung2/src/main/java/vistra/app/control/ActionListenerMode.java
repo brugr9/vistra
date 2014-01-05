@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
@@ -22,7 +22,7 @@ class ActionListenerMode extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerMode(IGuiModel model) {
+	ActionListenerMode(IModel model) {
 		super(model);
 	}
 

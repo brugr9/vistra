@@ -7,7 +7,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import vistra.app.GuiModel;
+import vistra.app.Model;
 import vistra.app.control.IControl;
 import vistra.app.view.component.AlgorithmPanel;
 import vistra.app.view.component.GraphPanel;
@@ -78,7 +78,7 @@ public class DefaultView extends JFrame implements IView {
 	 * @throws Exception
 	 */
 	public DefaultView(Layout<IVertexLayout, IEdgeLayout> layout,
-			GuiModel model, IControl control) throws Exception {
+			Model model, IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(model.getResourceBundle().getString("app.label"));

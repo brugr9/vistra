@@ -18,7 +18,7 @@ import javax.swing.JToggleButton;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
-import vistra.app.IGuiModel;
+import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.util.ColorPalette;
 
@@ -144,7 +144,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 	 * @param size
 	 *            the panel size
 	 */
-	public TraversalPanel(IGuiModel model, Dimension size) {
+	public TraversalPanel(IModel model, Dimension size) {
 		super();
 		this.setSize(size);
 		this.border = BorderFactory.createTitledBorder("traversalPanel");
@@ -258,9 +258,9 @@ public final class TraversalPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		if (o instanceof IGuiModel) {
+		if (o instanceof IModel) {
 
-			IGuiModel m = (IGuiModel) o;
+			IModel m = (IModel) o;
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
