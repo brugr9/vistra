@@ -1,14 +1,5 @@
 package vistra.gui.view.component;
 
-import static vistra.gui.control.IControl.EventSource.BACKWARD;
-import static vistra.gui.control.IControl.EventSource.FORWARD;
-import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.PAUSE;
-import static vistra.gui.control.IControl.EventSource.PLAY;
-import static vistra.gui.control.IControl.EventSource.STOP;
-import static vistra.gui.control.IControl.EventSource.TO_BEGINNING;
-import static vistra.gui.control.IControl.EventSource.TO_END;
-
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Observable;
@@ -28,7 +19,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
 import vistra.gui.IGuiModel;
-import vistra.gui.control.IControl.EventSource;
+import vistra.gui.control.IControl.ControlEvent;
 import vistra.util.ColorPalette;
 
 /**
@@ -197,13 +188,13 @@ public final class TraversalPanel extends JPanel implements Observer {
 				new ImageIcon(c.getResource("pause.png")));
 		this.stop = new JButton(new ImageIcon(c.getResource("stop.png")));
 		// action command
-		this.toBeginning.setActionCommand(TO_BEGINNING.toString());
-		this.backward.setActionCommand(BACKWARD.toString());
-		this.forward.setActionCommand(FORWARD.toString());
-		this.toEnd.setActionCommand(TO_END.toString());
-		this.play.setActionCommand(PLAY.toString());
-		this.pause.setActionCommand(PAUSE.toString());
-		this.stop.setActionCommand(STOP.toString());
+		this.toBeginning.setActionCommand(ControlEvent.toBeginning);
+		this.backward.setActionCommand(ControlEvent.backward);
+		this.forward.setActionCommand(ControlEvent.forward);
+		this.toEnd.setActionCommand(ControlEvent.toEnd);
+		this.play.setActionCommand(ControlEvent.play);
+		this.pause.setActionCommand(ControlEvent.pause);
+		this.stop.setActionCommand(ControlEvent.stop);
 		// action listener
 		this.toBeginning.addActionListener(model.getSbsStateHandler());
 		this.backward.addActionListener(model.getSbsStateHandler());
@@ -274,7 +265,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 
 			try {
 
-				if (arg == I18N) {
+				if (arg == ControlEvent.I18N) {
 					this.border.setTitle(b.getString("traversal.label"));
 					//
 					this.steplengthLabel.setText(b.getString("setStep.label"));
@@ -288,29 +279,33 @@ public final class TraversalPanel extends JPanel implements Observer {
 					this.play.setToolTipText(b.getString("play.label"));
 					this.pause.setToolTipText(b.getString("pause.label"));
 					this.stop.setToolTipText(b.getString("stop.label"));
-				} else if (arg == EventSource.ALGORITHM) {
-					this.progress.setMaximum(m.getTraversal().size());
-				} else if (arg == EventSource.DELAY) {
-					this.delay.setValue(m.getDelay());
-				} else if (arg == EventSource.STEPLENGTH) {
-					this.steplength.setValue(m.getSteplength());
-				} else if (arg == EventSource.STEP_BY_STEP) {
-					this.steplength.setEnabled(m.isSteplengthEnabled());
-					this.toBeginning.setEnabled(m.isToBeginningEnabled());
-					this.backward.setEnabled(m.isBackwardEnabled());
-					this.forward.setEnabled(m.isForwardEnabled());
-					this.toEnd.setEnabled(m.isToEndEnabled());
-				} else if (arg == EventSource.ANIMATION) {
-					this.delay.setEnabled(m.isDelayEnabled());
-					this.play.setEnabled(m.isPlayEnabled());
-					this.pause.setEnabled(m.isPauseEnabled());
-					this.stop.setEnabled(m.isStopEnabled());
-					this.pause.setToolTipText(m.getPauseLabel());
-					this.pause.setActionCommand(m.getPauseEvent().toString());
-					if (m.getPauseEvent() == EventSource.PAUSE)
-						this.pause.setSelected(false);
+				} else {
+					if (arg == ControlEvent.ALGORITHM) {
+						this.progress.setMaximum(m.getTraversal().size());
+					} else if (arg == ControlEvent.DELAY) {
+						this.delay.setValue(m.getDelay());
+					} else if (arg == ControlEvent.STEPLENGTH) {
+						this.steplength.setValue(m.getSteplength());
+					} else if (arg == ControlEvent.STEP_BY_STEP) {
+						this.steplength.setEnabled(m.isSteplengthEnabled());
+						this.toBeginning.setEnabled(m.isToBeginningEnabled());
+						this.backward.setEnabled(m.isBackwardEnabled());
+						this.forward.setEnabled(m.isForwardEnabled());
+						this.toEnd.setEnabled(m.isToEndEnabled());
+					} else if (arg == ControlEvent.ANIMATION) {
+						this.delay.setEnabled(m.isDelayEnabled());
+						this.play.setEnabled(m.isPlayEnabled());
+						this.pause.setEnabled(m.isPauseEnabled());
+						this.stop.setEnabled(m.isStopEnabled());
+						this.pause.setToolTipText(m.getPauseLabel());
+						// TODO
+						this.pause.setActionCommand(m.getPauseEvent()
+								.getValue());
+						if (m.getPauseEvent() == ControlEvent.PAUSE)
+							this.pause.setSelected(false);
+					}
+					this.progress.setValue(m.getProgress());
 				}
-				this.progress.setValue(m.getProgress());
 
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),

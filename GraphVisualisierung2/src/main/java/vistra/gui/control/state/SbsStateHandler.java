@@ -1,11 +1,11 @@
 package vistra.gui.control.state;
 
 import static vistra.gui.control.IControl.A_SECOND;
-import static vistra.gui.control.IControl.EventSource.BACKWARD;
-import static vistra.gui.control.IControl.EventSource.FORWARD;
-import static vistra.gui.control.IControl.EventSource.STEPLENGTH;
-import static vistra.gui.control.IControl.EventSource.TO_BEGINNING;
-import static vistra.gui.control.IControl.EventSource.TO_END;
+import static vistra.gui.control.IControl.ControlEvent.BACKWARD;
+import static vistra.gui.control.IControl.ControlEvent.FORWARD;
+import static vistra.gui.control.IControl.ControlEvent.STEPLENGTH;
+import static vistra.gui.control.IControl.ControlEvent.TO_BEGINNING;
+import static vistra.gui.control.IControl.ControlEvent.TO_END;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +20,7 @@ import vistra.core.traversal.ITraversal;
 import vistra.core.traversal.step.IStep;
 import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
-import vistra.gui.control.IControl.EventSource;
+import vistra.gui.control.IControl.ControlEvent;
 
 /**
  * A step-by-step state handler. A step-by-step state machine handles the
@@ -237,7 +237,7 @@ public final class SbsStateHandler extends Observable implements
 		this.model.setSbsEnabled(true);
 		this.model.setBackwardEnabled(false);
 		this.model.setToBeginningEnabled(false);
-		this.model.notifyObservers(EventSource.STEP_BY_STEP);
+		this.model.notifyObservers(ControlEvent.STEP_BY_STEP);
 	}
 
 	/**
@@ -245,7 +245,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	void setViewInter() {
 		this.model.setSbsEnabled(true);
-		this.model.notifyObservers(EventSource.STEP_BY_STEP);
+		this.model.notifyObservers(ControlEvent.STEP_BY_STEP);
 	}
 
 	/**
@@ -255,7 +255,7 @@ public final class SbsStateHandler extends Observable implements
 		this.model.setSbsEnabled(true);
 		this.model.setForwardEnabled(false);
 		this.model.setToEndEnabled(false);
-		this.model.notifyObservers(EventSource.STEP_BY_STEP);
+		this.model.notifyObservers(ControlEvent.STEP_BY_STEP);
 	}
 
 	/**
@@ -263,7 +263,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	void setViewOff() {
 		this.model.setSbsEnabled(false);
-		this.model.notifyObservers(EventSource.STEP_BY_STEP);
+		this.model.notifyObservers(ControlEvent.STEP_BY_STEP);
 	}
 
 	/**

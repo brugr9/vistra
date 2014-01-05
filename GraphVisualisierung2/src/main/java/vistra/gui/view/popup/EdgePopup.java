@@ -1,8 +1,5 @@
 package vistra.gui.view.popup;
 
-import static vistra.gui.control.IControl.EventSource.EDIT;
-import static vistra.gui.control.IControl.EventSource.I18N;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
@@ -18,6 +15,7 @@ import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.ControlEvent;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -77,7 +75,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 
 		/**/
 		this.property = new JMenuItem("property");
-		this.property.setActionCommand(EDIT.toString());
+		this.property.setActionCommand(ControlEvent.edit);
 		this.property.addActionListener(model.getParameterStateHandler());
 		this.addPropertyItemListener(top);
 		//
@@ -158,15 +156,15 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == I18N) {
+			if (arg == ControlEvent.I18N) {
 				this.setLabel(b.getString("edge.label"));
 				this.property.setText(b.getString("edit.label"));
 				this.delete.setText(b.getString("delete.label"));
 			}
 			/**/
-			this.setEnabled(m.isEdgeEnabled());
-			this.property.setEnabled(m.isEdgeEnabled());
-			this.delete.setEnabled(m.isEdgeEnabled());
+			this.setEnabled(m.isEditingEnabled());
+			this.property.setEnabled(m.isEditingEnabled());
+			this.delete.setEnabled(m.isEditingEnabled());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);

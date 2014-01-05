@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
-import vistra.gui.control.IControl.EventSource;
+import vistra.gui.control.IControl.ControlEvent;
 import vistra.gui.control.state.IAnimationStateHandler;
 import vistra.gui.control.state.IParameterStateHandler;
 import vistra.gui.control.state.ISbsStateHandler;
@@ -375,7 +375,7 @@ public interface IGuiModel {
 	/**
 	 * @return the pauseEvent
 	 */
-	public abstract EventSource getPauseEvent();
+	public abstract ControlEvent getPauseEvent();
 
 	/**
 	 * @return the pauseEnabled
@@ -735,7 +735,7 @@ public interface IGuiModel {
 	 * @param pauseEvent
 	 *            the pauseEvent to set
 	 */
-	public abstract void setPauseEvent(EventSource pauseEvent);
+	public abstract void setPauseEvent(ControlEvent pauseEvent);
 
 	/**
 	 * @param pauseEnabled

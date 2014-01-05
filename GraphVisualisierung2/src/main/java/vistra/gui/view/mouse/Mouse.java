@@ -1,7 +1,7 @@
 package vistra.gui.view.mouse;
 
-import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.MODE;
+import static vistra.gui.control.IControl.ControlEvent.I18N;
+import static vistra.gui.control.IControl.ControlEvent.MODE;
 
 import java.util.Observable;
 import java.util.Observer;

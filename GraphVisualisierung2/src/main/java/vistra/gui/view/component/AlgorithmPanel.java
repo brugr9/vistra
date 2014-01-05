@@ -18,7 +18,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
 import vistra.gui.IGuiModel;
-import vistra.gui.control.IControl.EventSource;
+import vistra.gui.control.IControl.ControlEvent;
 import vistra.util.ColorPalette;
 
 /**
@@ -110,19 +110,16 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 
 			try {
 
-				if (arg == EventSource.I18N) {
+				if (arg == ControlEvent.I18N) {
 					this.border.setTitle(b.getString("algorithm.label"));
-				} else if (arg == EventSource.GRAPH) {
-					this.combo.setEnabled(m.isAlgorithmsEnabled());
-				} else if (arg == EventSource.ALGORITHM) {
+				} else if (arg == ControlEvent.ALGORITHM) {
 					this.comboModel = new DefaultComboBoxModel<String>(
 							m.getAlgorithms());
 					this.combo.setSelectedIndex(m.getSelectedAlgorithmIndex());
-					this.combo.setEnabled(m.isAlgorithmsEnabled());
 					this.text.setText(m.getAlgorithmDescription());
 					this.text.setCaretPosition(1);
 				}
-
+				this.combo.setEnabled(m.isAlgorithmsEnabled());
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),
 						b.getString("app.label"), 1, null);

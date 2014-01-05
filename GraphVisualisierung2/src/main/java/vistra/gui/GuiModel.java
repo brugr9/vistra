@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import vistra.core.graph.IExtendedGraph;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
-import vistra.gui.control.IControl.EventSource;
+import vistra.gui.control.IControl.ControlEvent;
 import vistra.gui.control.state.IAnimationStateHandler;
 import vistra.gui.control.state.IParameterStateHandler;
 import vistra.gui.control.state.ISbsStateHandler;
@@ -93,7 +93,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	private boolean delayEnabled;
 	private boolean playEnabled;
 	private String pauseLabel;
-	private EventSource pauseEvent;
+	private ControlEvent pauseEvent;
 	private boolean pauseEnabled;
 	private boolean stopEnabled;
 
@@ -1102,7 +1102,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public EventSource getPauseEvent() {
+	public ControlEvent getPauseEvent() {
 		return pauseEvent;
 	}
 
@@ -1950,7 +1950,7 @@ public final class GuiModel extends Observable implements IGuiModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setPauseEvent(EventSource pauseEvent) {
+	public void setPauseEvent(ControlEvent pauseEvent) {
 		this.pauseEvent = pauseEvent;
 		this.setChanged();
 	}

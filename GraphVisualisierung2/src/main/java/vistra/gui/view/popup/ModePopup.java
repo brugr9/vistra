@@ -1,8 +1,5 @@
 package vistra.gui.view.popup;
 
-import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.MODE;
-
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -12,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
 import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.ControlEvent;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
@@ -60,11 +58,11 @@ public class ModePopup extends JPopupMenu implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == I18N) {
+			if (arg == ControlEvent.I18N) {
 				this.picking.setText(b.getString("picking.label"));
 				this.editing.setText(b.getString("edit.label"));
 			}
-			if (arg == MODE) {
+			if (arg == ControlEvent.MODE) {
 				this.picking.setEnabled(m.isPickingEnabled());
 				this.editing.setEnabled(m.isEditingEnabled());
 			}

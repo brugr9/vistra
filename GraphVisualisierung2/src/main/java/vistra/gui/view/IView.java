@@ -18,11 +18,11 @@ public interface IView {
 	/**
 	 * A field for the frame height.
 	 */
-	public static int FRAME_HEIGHT = 700;
+	public static int FRAME_HEIGHT = 710;
 	/**
 	 * A field for the visualisation height.
 	 */
-	public static int VISUALISATION_HEIGHT = 640;
+	public static int VISUALISATION_HEIGHT = 600;
 	/**
 	 * A field for the border.
 	 */

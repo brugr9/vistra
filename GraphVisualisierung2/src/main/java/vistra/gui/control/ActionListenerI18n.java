@@ -1,7 +1,5 @@
 package vistra.gui.control;
 
-import static vistra.gui.control.IControl.EventSource.I18N;
-
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Locale;
@@ -11,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.ControlEvent;
 
 /**
  * An i18n action listener.
@@ -107,7 +106,7 @@ class ActionListenerI18n extends AbstractActionListener {
 			/* protocol */
 			this.model.setProtocol(about);
 			/* update the view */
-			this.model.notifyObservers(I18N);
+			this.model.notifyObservers(ControlEvent.I18N);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);

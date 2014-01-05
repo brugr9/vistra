@@ -1,10 +1,5 @@
 package vistra.gui.view.popup;
 
-import static vistra.gui.control.IControl.EventSource.EDIT;
-import static vistra.gui.control.IControl.EventSource.END;
-import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.START;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
@@ -21,6 +16,7 @@ import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IItemLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.ControlEvent;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -54,7 +50,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 */
 	private JCheckBoxMenuItem start;
 	/**
-	 * A field for an end check box.
+	 * A field for a finish check box.
 	 */
 	private JCheckBoxMenuItem end;
 	/**
@@ -87,17 +83,17 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 
 		/**/
 		this.start = new JCheckBoxMenuItem("start");
-		this.start.setActionCommand(START.toString());
+		this.start.setActionCommand(ControlEvent.start);
 		this.start.addActionListener(model.getParameterStateHandler());
 		this.start.addActionListener(new StartActionListener());
 		//
 		this.end = new JCheckBoxMenuItem("end");
-		this.end.setActionCommand(END.toString());
+		this.end.setActionCommand(ControlEvent.end);
 		this.end.addActionListener(model.getParameterStateHandler());
 		this.end.addActionListener(new EndActionListener());
 		//
 		this.property = new JMenuItem("property");
-		this.property.setActionCommand(EDIT.toString());
+		this.property.setActionCommand(ControlEvent.edit);
 		this.property.addActionListener(model.getParameterStateHandler());
 		//
 		this.delete = new JMenuItem("delete");
@@ -222,7 +218,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == I18N) {
+			if (arg == ControlEvent.I18N) {
 				this.setLabel(b.getString("vertex.label"));
 				this.start.setText(b.getString("start.label"));
 				this.end.setText(b.getString("finish.label"));
@@ -230,11 +226,11 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 				this.delete.setText(b.getString("delete.label"));
 			}
 			/**/
-			this.setEnabled(m.isVertexEnabled());
-			this.start.setEnabled(m.isVertexEnabled());
-			this.end.setEnabled(m.isVertexEnabled());
-			this.property.setEnabled(m.isVertexEnabled());
-			this.delete.setEnabled(m.isVertexEnabled());
+			this.setEnabled(m.isEditingEnabled());
+			this.start.setEnabled(m.isEditingEnabled());
+			this.end.setEnabled(m.isEditingEnabled());
+			this.property.setEnabled(m.isEditingEnabled());
+			this.delete.setEnabled(m.isEditingEnabled());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);

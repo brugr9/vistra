@@ -1,12 +1,6 @@
 package vistra.gui.control.state;
 
 import static vistra.gui.control.IControl.A_SECOND;
-import static vistra.gui.control.IControl.EventSource.ANIMATION;
-import static vistra.gui.control.IControl.EventSource.DELAY;
-import static vistra.gui.control.IControl.EventSource.PAUSE;
-import static vistra.gui.control.IControl.EventSource.PLAY;
-import static vistra.gui.control.IControl.EventSource.RESUME;
-import static vistra.gui.control.IControl.EventSource.STOP;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +13,7 @@ import javax.swing.Timer;
 
 import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.ControlEvent;
 
 /**
  * An animation state handler. An animation state machine handles the animated
@@ -92,7 +87,7 @@ public final class AnimationStateHandler extends Observable implements
 			this.model.setDelay(value);
 			this.animationTimer.setDelay(value * A_SECOND);
 			/* update the view */
-			this.model.notifyObservers(DELAY);
+			this.model.notifyObservers(ControlEvent.DELAY);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -107,13 +102,13 @@ public final class AnimationStateHandler extends Observable implements
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String c = e.getActionCommand();
-			if (c.equals(PLAY.toString()))
+			if (c.equals(ControlEvent.play))
 				this.handlePlaying();
-			else if (c.equals(PAUSE.toString()))
+			else if (c.equals(ControlEvent.pause))
 				this.handlePaused();
-			else if (c.equals(RESUME.toString()))
+			else if (c.equals(ControlEvent.resume))
 				this.handlePlaying();
-			else if (c.equals(STOP.toString()))
+			else if (c.equals(ControlEvent.stop))
 				this.handleStopped();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
@@ -216,9 +211,9 @@ public final class AnimationStateHandler extends Observable implements
 			String label = this.model.getResourceBundle().getString(
 					"pause.label");
 			this.model.setPauseLabel(label);
-			this.model.setPauseEvent(PAUSE);
+			this.model.setPauseEvent(ControlEvent.PAUSE);
 			//
-			this.model.notifyObservers(ANIMATION);
+			this.model.notifyObservers(ControlEvent.ANIMATION);
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -238,9 +233,9 @@ public final class AnimationStateHandler extends Observable implements
 			String label = this.model.getResourceBundle().getString(
 					"pause.label");
 			this.model.setPauseLabel(label);
-			this.model.setPauseEvent(PAUSE);
+			this.model.setPauseEvent(ControlEvent.PAUSE);
 			//
-			this.model.notifyObservers(ANIMATION);
+			this.model.notifyObservers(ControlEvent.ANIMATION);
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -260,9 +255,9 @@ public final class AnimationStateHandler extends Observable implements
 			String label = this.model.getResourceBundle().getString(
 					"resume.label");
 			this.model.setPauseLabel(label);
-			this.model.setPauseEvent(RESUME);
+			this.model.setPauseEvent(ControlEvent.RESUME);
 			//
-			this.model.notifyObservers(ANIMATION);
+			this.model.notifyObservers(ControlEvent.ANIMATION);
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -276,7 +271,7 @@ public final class AnimationStateHandler extends Observable implements
 	void setViewOff() throws Exception {
 		try {
 			this.model.setAnimationEnabled(false);
-			this.model.notifyObservers(ANIMATION);
+			this.model.notifyObservers(ControlEvent.ANIMATION);
 		} catch (Exception ex) {
 			throw ex;
 		}

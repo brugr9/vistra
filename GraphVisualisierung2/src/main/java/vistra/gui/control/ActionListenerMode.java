@@ -1,12 +1,11 @@
 package vistra.gui.control;
 
-import static vistra.gui.control.IControl.EventSource.MODE;
-
 import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
 
 import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.ControlEvent;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
@@ -36,7 +35,7 @@ class ActionListenerMode extends AbstractActionListener {
 		try {
 			String c = e.getActionCommand();
 			this.model.setMode(Mode.valueOf(c));
-			this.model.notifyObservers(MODE);
+			this.model.notifyObservers(ControlEvent.MODE);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);

@@ -15,6 +15,7 @@ import vistra.gui.view.component.AlgorithmPanel;
 import vistra.gui.view.component.GraphPanel;
 import vistra.gui.view.component.MenuBar;
 import vistra.gui.view.component.ProtocolPanel;
+import vistra.gui.view.component.ToolBar;
 import vistra.gui.view.component.TraversalPanel;
 import vistra.util.ColorPalette;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -25,6 +26,7 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
  * This view instantiates
  * <ul>
  * <li>a {@link MenuBar}
+ * <li>a {@link ToolBar}
  * <li>a {@link GraphPanel}
  * <li>a controller panel with a {@link AlgorithmPanel} and a
  * {@link TraversalPanel}
@@ -40,7 +42,11 @@ public class DefaultView extends JFrame implements IView {
 	/**
 	 * A field for the menu bar.
 	 */
-	protected final MenuBar menuBar;
+	private final MenuBar menuBar;
+	/**
+	 * A field for a tool bar.
+	 */
+	private final ToolBar toolBar;
 	/**
 	 * A field for a graph panel.
 	 */
@@ -82,6 +88,7 @@ public class DefaultView extends JFrame implements IView {
 
 		/* Components */
 		this.menuBar = new MenuBar(model);
+		this.toolBar = new ToolBar(model);
 		this.graphPanel = new GraphPanel(this, model, layout, new Dimension(
 				VISUALISATION_WIDTH, VISUALISATION_HEIGHT));
 		int width = FRAME_WIDTH - VISUALISATION_WIDTH;
@@ -93,6 +100,7 @@ public class DefaultView extends JFrame implements IView {
 		this.protocolPanel = new ProtocolPanel(new Dimension(width, 400));
 		// components observe the model
 		model.addObserver(this.menuBar);
+		model.addObserver(this.toolBar);
 		model.addObserver(this.graphPanel);
 		model.addObserver(this.algorithmPanel);
 		model.addObserver(this.traversalPanel);
@@ -109,6 +117,7 @@ public class DefaultView extends JFrame implements IView {
 		/* this */
 		this.setJMenuBar(this.menuBar);
 		this.setLayout(new BorderLayout());
+		this.add(this.toolBar, BorderLayout.NORTH);
 		this.add(this.graphPanel, BorderLayout.WEST);
 		this.add(this.anotherPanel, BorderLayout.EAST);
 		this.setVisible(true);

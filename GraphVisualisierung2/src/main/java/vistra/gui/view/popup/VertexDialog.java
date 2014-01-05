@@ -1,7 +1,5 @@
 package vistra.gui.view.popup;
 
-import static vistra.gui.control.IControl.EventSource.EDIT;
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -20,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import vistra.core.graph.item.IEdgeLayout;
 import vistra.core.graph.item.IVertexLayout;
 import vistra.gui.IGuiModel;
+import vistra.gui.control.IControl.ControlEvent;
 import vistra.gui.control.verifier.ItemIdVerifier;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -83,7 +82,7 @@ public class VertexDialog extends JDialog {
 		/* button panel */
 		// button
 		JButton ok = new JButton("OK");
-		ok.setActionCommand(EDIT.toString());
+		ok.setActionCommand(ControlEvent.edit);
 		ok.addActionListener(model.getParameterStateHandler());
 		JButton cancel = new JButton("Cancel");
 		cancel.setActionCommand("Cancel");

@@ -1,12 +1,5 @@
 package vistra.gui.view.component;
 
-import static vistra.gui.control.IControl.EventSource.I18N;
-import static vistra.gui.control.IControl.EventSource.NEW_DIRECTED;
-import static vistra.gui.control.IControl.EventSource.NEW_UNDIRECTED;
-import static vistra.gui.control.IControl.EventSource.OPEN;
-import static vistra.gui.control.IControl.EventSource.SAVE;
-import static vistra.gui.control.IControl.EventSource.SAVE_AS;
-
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -18,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import vistra.gui.IGuiModel;
-import vistra.gui.control.IControl.EventSource;
+import vistra.gui.control.IControl.ControlEvent;
 import vistra.util.I18nPalette;
 
 /**
@@ -119,9 +112,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.saveAs.addActionListener(model.getParameterStateHandler());
 			this.quit.addActionListener(model.getQuitListener());
 			// command
-			this.open.setActionCommand(OPEN.toString());
-			this.save.setActionCommand(SAVE.toString());
-			this.saveAs.setActionCommand(SAVE_AS.toString());
+			this.open.setActionCommand(ControlEvent.open);
+			this.save.setActionCommand(ControlEvent.save);
+			this.saveAs.setActionCommand(ControlEvent.saveAs);
 			{// graph
 				this.newGraph = new JMenu("newGraph");
 				this.undirected = new JMenuItem("undirected");
@@ -132,8 +125,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 				this.directed.addActionListener(model
 						.getParameterStateHandler());
 				// command
-				this.undirected.setActionCommand(NEW_UNDIRECTED.toString());
-				this.directed.setActionCommand(NEW_DIRECTED.toString());
+				this.undirected.setActionCommand(ControlEvent.newUndirected);
+				this.directed.setActionCommand(ControlEvent.newDirected);
 				// add
 				this.newGraph.add(this.undirected);
 				this.newGraph.add(this.directed);
@@ -201,7 +194,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 
 			try {
 
-				if (arg == I18N) {
+				if (arg == ControlEvent.I18N) {
 
 					{// JMenu fileMenu
 						// setText
@@ -218,6 +211,10 @@ public final class MenuBar extends JMenuBar implements Observer {
 						this.file.setMnemonic(b.getString("file.mnemonic")
 								.toCharArray()[0]);
 						this.newGraph.setMnemonic(b.getString("new.mnemonic")
+								.toCharArray()[0]);
+						this.undirected.setMnemonic(b.getString(
+								"undirected.label").toCharArray()[0]);
+						this.directed.setMnemonic(b.getString("directed.label")
 								.toCharArray()[0]);
 						this.open.setMnemonic(b.getString("open.mnemonic")
 								.toCharArray()[0]);
@@ -280,7 +277,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 								.getString("about.accelerator")));
 					}
 
-				} else if (arg == EventSource.GRAPH) {
+				} else if (arg == ControlEvent.GRAPH) {
 					this.saveAs.setEnabled(m.isSaveEnabled());
 				} else {
 

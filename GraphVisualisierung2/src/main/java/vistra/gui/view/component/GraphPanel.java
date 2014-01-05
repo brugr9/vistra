@@ -26,7 +26,7 @@ import vistra.core.graph.item.transformer.VertexStroke;
 import vistra.core.graph.item.transformer.VertexStrokeColor;
 import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
-import vistra.gui.control.IControl.EventSource;
+import vistra.gui.control.IControl.ControlEvent;
 import vistra.gui.view.IView;
 import vistra.gui.view.mouse.Mouse;
 import vistra.util.ColorPalette;
@@ -146,9 +146,9 @@ public class GraphPanel extends JPanel implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == EventSource.I18N)
+			if (arg == ControlEvent.I18N)
 				this.title = b.getString("graph.label");
-			if (arg == EventSource.GRAPH) {
+			else if (arg == ControlEvent.GRAPH) {
 				this.name = m.getGraph().getName();
 				if (!m.isGraphSaved())
 					this.name += "*";

@@ -1,16 +1,16 @@
 package vistra.gui.control.state;
 
-import static vistra.gui.control.IControl.EventSource.ALGORITHM;
-import static vistra.gui.control.IControl.EventSource.EDIT;
-import static vistra.gui.control.IControl.EventSource.END;
-import static vistra.gui.control.IControl.EventSource.GRAPH;
-import static vistra.gui.control.IControl.EventSource.MODE;
-import static vistra.gui.control.IControl.EventSource.NEW_DIRECTED;
-import static vistra.gui.control.IControl.EventSource.NEW_UNDIRECTED;
-import static vistra.gui.control.IControl.EventSource.OPEN;
-import static vistra.gui.control.IControl.EventSource.SAVE;
-import static vistra.gui.control.IControl.EventSource.SAVE_AS;
-import static vistra.gui.control.IControl.EventSource.START;
+import static vistra.gui.control.IControl.ControlEvent.ALGORITHM;
+import static vistra.gui.control.IControl.ControlEvent.EDIT;
+import static vistra.gui.control.IControl.ControlEvent.END;
+import static vistra.gui.control.IControl.ControlEvent.GRAPH;
+import static vistra.gui.control.IControl.ControlEvent.MODE;
+import static vistra.gui.control.IControl.ControlEvent.NEW_DIRECTED;
+import static vistra.gui.control.IControl.ControlEvent.NEW_UNDIRECTED;
+import static vistra.gui.control.IControl.ControlEvent.OPEN;
+import static vistra.gui.control.IControl.ControlEvent.SAVE;
+import static vistra.gui.control.IControl.ControlEvent.SAVE_AS;
+import static vistra.gui.control.IControl.ControlEvent.START;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -31,7 +31,7 @@ import vistra.core.graph.item.IVertexLayout;
 import vistra.core.traversal.ITraversal;
 import vistra.gui.GuiModel;
 import vistra.gui.IGuiModel;
-import vistra.gui.control.IControl.EventSource;
+import vistra.gui.control.IControl.ControlEvent;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
@@ -96,21 +96,21 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.top = (Container) ((JComponent) e.getSource())
 					.getTopLevelAncestor();
 
-			if (c.equals(NEW_UNDIRECTED.toString())) {
+			if (c.equals(ControlEvent.newUndirected)) {
 				this.handleNewGraphUndirected();
-			} else if (c.equals(NEW_DIRECTED.toString())) {
+			} else if (c.equals(ControlEvent.newDirected)) {
 				this.handleNewGraphDirected();
-			} else if (c.equals(OPEN.toString())) {
+			} else if (c.equals(ControlEvent.open)) {
 				this.handleOpenGraph();
-			} else if (c.equals(SAVE.toString())) {
+			} else if (c.equals(ControlEvent.save)) {
 				this.handleSaveGraph();
-			} else if (c.equals(SAVE_AS.toString())) {
+			} else if (c.equals(ControlEvent.saveAs)) {
 				this.handleSaveGraphAs();
-			} else if (c.equals(EDIT.toString())) {
+			} else if (c.equals(ControlEvent.edit)) {
 				this.handleEditGraph();
-			} else if (c.equals(START.toString())) {
+			} else if (c.equals(ControlEvent.start)) {
 				this.handleEditGraph();
-			} else if (c.equals(END.toString())) {
+			} else if (c.equals(ControlEvent.end)) {
 				this.handleEditGraph();
 			}
 
@@ -382,12 +382,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setGraphFile(false);
 				this.model.setStart(null);
 				this.model.setEnd(null);
-				this.model.notifyObservers(GRAPH);
+				this.model.notifyObservers(ControlEvent.GRAPH);
 				// Algorithm
 				this.updateAlgorithms();
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
-				this.model.notifyObservers(ALGORITHM);
+				this.model.notifyObservers(ControlEvent.ALGORITHM);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -434,12 +434,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					this.model.setGraphFile(true);
 					this.model.setStart(null);
 					this.model.setEnd(null);
-					this.model.notifyObservers(GRAPH);
+					this.model.notifyObservers(ControlEvent.GRAPH);
 					// Algorithm
 					this.updateAlgorithms();
 					this.model.setSelectedAlgorithmIndex(0);
 					this.selectAlgorithm();
-					this.model.notifyObservers(ALGORITHM);
+					this.model.notifyObservers(ControlEvent.ALGORITHM);
 				}
 			}
 			return option;
@@ -456,7 +456,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void saveGraph() throws Exception {
 		try {
 			this.core.saveGraph();
-			this.model.notifyObservers(GRAPH);
+			this.model.notifyObservers(ControlEvent.GRAPH);
 			this.setEditing(true);
 		} catch (Exception e) {
 			throw e;
@@ -496,7 +496,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.core.saveGraphAs(file);
 				this.model.setGraphFile(true);
 				this.model.setGraphSaved(true);
-				this.model.notifyObservers(GRAPH);
+				this.model.notifyObservers(ControlEvent.GRAPH);
 				this.enableAlgorithms(true);
 			}
 			return option;
@@ -570,7 +570,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private void enableMenu(boolean enabled) {
 		this.model.setMenuEnabled(enabled);
 		this.model.setSaveEnabled(!this.model.isGraphSaved());
-		this.model.notifyObservers(EventSource.GRAPH);
+		this.model.notifyObservers(ControlEvent.GRAPH);
 	}
 
 	/**
@@ -589,7 +589,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		this.model.setEdgeEnabled(editing);
 		// TODO
 		this.model.setEditingEnabled(editing);
-		this.model.notifyObservers(MODE);
+		this.model.notifyObservers(ControlEvent.MODE);
 	}
 
 	/**
@@ -668,9 +668,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private void setGraphSaved(boolean saved) {
 		this.model.setGraphSaved(saved);
 		this.model.setSaveEnabled(!saved);
-		this.model.notifyObservers(GRAPH);
+		this.model.notifyObservers(ControlEvent.GRAPH);
 		this.model.setAlgorithmsEnabled(saved);
-		this.model.notifyObservers(ALGORITHM);
+		this.model.notifyObservers(ControlEvent.ALGORITHM);
 	}
 
 	/**
@@ -681,7 +681,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	private void enableAlgorithms(boolean enabled) {
 		this.model.setAlgorithmsEnabled(enabled);
-		this.model.notifyObservers(EventSource.ALGORITHM);
+		this.model.notifyObservers(ControlEvent.ALGORITHM);
 	}
 
 	/**
