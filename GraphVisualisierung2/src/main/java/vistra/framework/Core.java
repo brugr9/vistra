@@ -193,8 +193,8 @@ public class Core implements ICore {
 			// TODO
 			// while (stepIterator.hasNext())
 			// stepIterator.next();
-			// while (stepIterator.hasPrevious())
-			// stepIterator.previous().undo();
+			while (stepIterator.hasPrevious())
+				stepIterator.previous().undo();
 			ITraversal traversal = new Traversal(stepIterator);
 			return traversal;
 		} catch (Exception e) {

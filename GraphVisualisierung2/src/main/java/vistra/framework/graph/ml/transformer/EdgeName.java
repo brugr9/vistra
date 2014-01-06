@@ -1,4 +1,4 @@
-package vistra.framework.graph.item.transformer;
+package vistra.framework.graph.ml.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
@@ -10,7 +10,7 @@ import vistra.framework.graph.item.IEdgeLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeID implements Transformer<IEdgeLayout, String> {
+public class EdgeName implements Transformer<IEdgeLayout, String> {
 
 	/**
 	 * {@inheritDoc}

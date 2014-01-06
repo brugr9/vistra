@@ -30,7 +30,7 @@ abstract class AbstractItemStateCommand implements IItemStateCommand {
 	 */
 	@Override
 	public void undo() throws Exception {
-		this.stateHandler.setPreviousState();
+		this.stateHandler.handlePreviousState();
 	}
 
 }

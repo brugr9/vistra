@@ -36,11 +36,11 @@ public interface IItemStateHandler {
 	void handleSolution() throws Exception;
 
 	/**
-	 * Sets the previous state: removes the last state from the cellar and sets
-	 * the removed state as actual state.
+	 * Handles the previous state: removes the last state from the cellar and
+	 * sets the removed state as actual state.
 	 * 
 	 * @throws Exception
 	 */
-	void setPreviousState() throws Exception;
+	void handlePreviousState() throws Exception;
 
 }

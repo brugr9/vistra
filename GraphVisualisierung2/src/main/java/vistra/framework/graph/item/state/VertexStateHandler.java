@@ -134,7 +134,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setPreviousState() throws Exception {
+	public void handlePreviousState() throws Exception {
 		try {
 			this.state.exit();
 			// begin cellar

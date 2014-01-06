@@ -158,7 +158,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setPreviousState() throws Exception {
+	public void handlePreviousState() throws Exception {
 		try {
 			this.state.exit();
 			// begin cellar

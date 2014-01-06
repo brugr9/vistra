@@ -1,11 +1,6 @@
 package vistra.app.control.state;
 
 import static vistra.app.control.IControl.A_SECOND;
-import static vistra.app.control.IControl.ControlEvent.BACKWARD;
-import static vistra.app.control.IControl.ControlEvent.FORWARD;
-import static vistra.app.control.IControl.ControlEvent.STEPLENGTH;
-import static vistra.app.control.IControl.ControlEvent.TO_BEGINNING;
-import static vistra.app.control.IControl.ControlEvent.TO_END;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,17 +41,26 @@ public final class SbsStateHandler extends Observable implements
 	 * A field for a model.
 	 */
 	private Model model;
-
+	/**
+	 * A field for a step.
+	 */
+	private IStep step;
 	/**
 	 * A field for a timer.
 	 */
 	private Timer timer;
-
+	/**
+	 * A field for an off.
+	 */
+	private boolean off;
+	/**
+	 * A field for a counter.
+	 */
+	private int counter;
 	/**
 	 * A field for a blink listener.
 	 */
 	private BlinkListener blinkListener;
-
 	/**
 	 * A field for a number of blinks.
 	 */
@@ -71,12 +75,15 @@ public final class SbsStateHandler extends Observable implements
 	public SbsStateHandler(IModel model) {
 		super();
 		this.model = (Model) model;
-		this.blinkListener = new BlinkListener(NUMBER_OF_BLINKS);
+		this.step = null;
+		this.blinkListener = new BlinkListener();
 		int timeDivider = 2; // divides the delay into two parts: blink and show
 		int numberOfSteps = 2; // number of steps per blink: backward, forward
 		int blinkDelay = this.model.getDelay()
 				/ (timeDivider * numberOfSteps * NUMBER_OF_BLINKS) * A_SECOND;
 		this.timer = new Timer(blinkDelay, this.blinkListener);
+		this.off = true;
+		this.counter = 0;
 		try {
 			this.setState(new SbsStateOff(this));
 		} catch (Exception e) {
@@ -104,7 +111,7 @@ public final class SbsStateHandler extends Observable implements
 			/* set the value */
 			this.model.setSteplength(value);
 			/* update the view */
-			this.model.notifyObservers(STEPLENGTH);
+			this.model.notifyObservers(ControlEvent.STEPLENGTH);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -119,13 +126,13 @@ public final class SbsStateHandler extends Observable implements
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String c = e.getActionCommand();
-			if (c.equals(TO_BEGINNING.toString()))
+			if (c.equals(ControlEvent.toBeginning))
 				this.handleToBeginning();
-			else if (c.equals(BACKWARD.toString()))
+			else if (c.equals(ControlEvent.backward))
 				this.handleBackward();
-			else if (c.equals(FORWARD.toString()))
+			else if (c.equals(ControlEvent.forward))
 				this.handleForward();
-			else if (c.equals(TO_END.toString()))
+			else if (c.equals(ControlEvent.toEnd))
 				this.handleToEnd();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
@@ -295,7 +302,8 @@ public final class SbsStateHandler extends Observable implements
 			/* here we go ... */
 			while (ok) {
 				/* modify the graph */
-				traversal.previous();
+				this.step = traversal.previous();
+				this.step.undo();
 				ok = traversal.hasPrevious();
 			}
 
@@ -330,7 +338,8 @@ public final class SbsStateHandler extends Observable implements
 			for (int i = 0; i < steplength; i++) {
 				if (min < progress) {
 					/* modify the graph */
-					traversal.previous();
+					this.step = traversal.previous();
+					this.step.undo();
 					progress--;
 
 					/* update */
@@ -367,25 +376,23 @@ public final class SbsStateHandler extends Observable implements
 			int steplength = this.model.getSteplength();
 			int progress = this.model.getProgress();
 			int max = this.model.getTraversal().size();
-			IStep step = null;
 			String description = "";
 			StringBuilder stringBuilder = this.model.getProtocol();
 
 			/* here we go ... */
 			for (int i = 0; i < steplength; i++) {
 				if (progress < max) {
-					/* modify the graph */
-					// TODO
-					// this.blink();
-					step = traversal.next();
-					description = step.getDescription();
-					step.execute();
+					/* get the step */
+					this.step = traversal.next();
+					description = this.step.getDescription();
 					stringBuilder.append(description);
-					progress++;
-
 					/* update */
-					this.model.setProgress(progress);
+					this.model.setProgress(++progress);
 					this.model.setProtocol(stringBuilder);
+					this.model.notifyObservers();
+					/* modify the graph */
+					// this.blink();
+					this.step.execute();
 					this.model.notifyObservers();
 				} else {
 					stringBuilder.append(traversal.getDescription()
@@ -411,14 +418,21 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	private void blink() throws InterruptedException {
 		// TODO
-		// if (this.model.isBlinkEnabled()) {
-		this.timer.start();
-		this.setChanged();
 		try {
-			this.wait();
-		} catch (InterruptedException ex) {
-			throw ex;
+			// if (this.model.isBlinkEnabled()) {
+			this.off = true;
+			this.counter = 0;
+			this.timer.start();
+			while (counter < NUMBER_OF_BLINKS) {
+				;
+			}
+			this.timer.stop();
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, ex.toString(), model
+					.getResourceBundle().getString("app.label"), 1, null);
+			ex.printStackTrace();
 		}
+
 		// }
 	}
 
@@ -433,7 +447,6 @@ public final class SbsStateHandler extends Observable implements
 
 		try {
 
-			IStep step = null;
 			String description = "";
 			StringBuilder stringBuilder = this.model.getProtocol();
 			boolean ok = traversal.hasNext();
@@ -441,9 +454,9 @@ public final class SbsStateHandler extends Observable implements
 			/* here we go ... */
 			while (ok) {
 				/* modify the graph */
-				step = traversal.next();
-				description = step.getDescription();
-				step.execute();
+				this.step = traversal.next();
+				this.step.execute();
+				description = this.step.getDescription();
 				stringBuilder.append(description + System.lineSeparator());
 				ok = traversal.hasNext();
 			}
@@ -471,44 +484,24 @@ public final class SbsStateHandler extends Observable implements
 	private final class BlinkListener implements ActionListener {
 
 		/**
-		 * A field for a number of blinks.
-		 */
-		private final int numberOfBlinks;
-
-		/**
-		 * Main constructor.
-		 * 
-		 * @param blinks
-		 *            the number of blinks
-		 */
-		BlinkListener(int numberOfBlinks) {
-			this.numberOfBlinks = numberOfBlinks;
-		}
-
-		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
-			Model model = SbsStateHandler.this.model;
-			Timer timer = SbsStateHandler.this.timer;
-
 			try {
-				boolean off = true;
-				int counter = 0;
-				if (counter < numberOfBlinks) {
-					if (off)
-						model.getTraversal().next().execute();
-					else
-						model.getTraversal().previous().undo();
-					model.notifyObservers();
-					off = !off;
-					counter++;
-				} else {
-					timer.stop();
-					timer.notify();
-				}
+				Model model = SbsStateHandler.this.model;
+				IStep step = SbsStateHandler.this.step;
+				boolean off = SbsStateHandler.this.off;
+				int counter = SbsStateHandler.this.counter;
+
+				if (off)
+					step.execute();
+				else
+					step.undo();
+				off = !off;
+				counter = counter++;
+				model.notifyObservers();
+
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, ex.toString(), model
 						.getResourceBundle().getString("app.label"), 1, null);
@@ -516,7 +509,6 @@ public final class SbsStateHandler extends Observable implements
 			}
 
 		}
-
 	}
 
 }
