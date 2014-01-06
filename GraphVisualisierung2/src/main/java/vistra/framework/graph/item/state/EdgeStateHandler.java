@@ -189,13 +189,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * A layout modifier: Sets the layout as discovery-edge.
+	 * A layout modifier: Sets the layout as visited (discovery-edge).
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutDiscovery() throws Exception {
+	void setLayoutVisited() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.red);

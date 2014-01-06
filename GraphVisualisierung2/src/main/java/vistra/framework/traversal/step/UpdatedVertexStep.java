@@ -45,12 +45,10 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 	 * @param value
 	 *            a value
 	 */
-	public UpdatedVertexStep(List<IVertex> vertices, String value) {
+	public UpdatedVertexStep(Iterable<IVertex> vertices, String value) {
 		super();
 		try {
-			IVertex vertex;
-			for (int index = 0; index < vertices.size(); index++) {
-				vertex = vertices.get(index);
+			for (IVertex vertex : vertices) {
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
 				this.stepHandler.addItemStateCommand(command);
@@ -66,7 +64,7 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 	}
 
 	/**
-	 * Multi item / multi value constructor.
+	 * TODO map Multi item / multi value constructor.
 	 * 
 	 * @param vertices
 	 *            the vertices

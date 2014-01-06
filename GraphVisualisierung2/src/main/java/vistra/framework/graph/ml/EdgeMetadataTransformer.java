@@ -21,7 +21,7 @@ public class EdgeMetadataTransformer implements
 	 */
 	@Override
 	public IEdgeLayout transform(EdgeMetadata meta) {
-		IEdgeLayout layout = EdgeFactory.createEdgeLayout();
+		IEdgeLayout layout = EdgeFactory.createEdge();
 		layout.setId(meta.getId());
 		layout.setWeight(Convert.toInteger(meta
 				.getProperty(ExtendedGraphMLWriter.E_WEIGHT)));

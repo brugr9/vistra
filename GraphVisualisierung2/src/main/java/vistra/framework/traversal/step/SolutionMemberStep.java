@@ -28,13 +28,17 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 	public SolutionMemberStep(IEdge edge, IVertex vertex) {
 		super();
 		try {
+			//
 			IItemStateCommand edgeCommand = new SolutionMemberEdgeCommand(edge);
 			IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
 					vertex);
+			//
 			this.stepHandler.addItemStateCommand(edgeCommand);
 			this.stepHandler.addItemStateCommand(vertexCommand);
+			//
 			edgeCommand.execute();
 			vertexCommand.execute();
+			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + ": Solution member ");
 			if (((IEdgeLayout) edge).getId().length() != 0)
@@ -62,14 +66,18 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 			for (int index = 0; index < edges.size(); index++) {
 				edge = edges.get(index);
 				vertex = vertices.get(index);
+				//
 				IItemStateCommand edgeCommand = new SolutionMemberEdgeCommand(
 						edge);
 				IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
 						vertex);
+				//
 				this.stepHandler.addItemStateCommand(edgeCommand);
 				this.stepHandler.addItemStateCommand(vertexCommand);
+				//
 				edgeCommand.execute();
 				vertexCommand.execute();
+				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
 						+ ": Solution member ");

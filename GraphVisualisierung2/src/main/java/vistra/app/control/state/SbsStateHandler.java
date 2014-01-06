@@ -36,7 +36,6 @@ public final class SbsStateHandler extends Observable implements
 	 * A field for a step-by-step state.
 	 */
 	private AbstractSbsState state;
-
 	/**
 	 * A field for a model.
 	 */
@@ -297,14 +296,12 @@ public final class SbsStateHandler extends Observable implements
 		ITraversal traversal = this.model.getTraversal();
 
 		try {
-			boolean ok = true;
-			/* here we go ... */
-			while (ok) {
-				/* modify the graph */
+			this.step.undo();
+			this.model.notifyObservers();
+			while (traversal.hasPrevious()) {
+				this.step = traversal.previous();
 				this.step.undo();
-				ok = traversal.hasPrevious();
-				if (ok)
-					this.step = traversal.previous();
+				this.model.notifyObservers();
 			}
 			/* update */
 			this.model.setProgress(0);
@@ -337,10 +334,8 @@ public final class SbsStateHandler extends Observable implements
 				if (min < progress) {
 					/* modify the graph */
 					this.step.undo();
+					this.model.setProgress(--progress);
 					this.step = traversal.previous();
-					progress--;
-					/* update */
-					this.model.setProgress(progress);
 					this.model.notifyObservers();
 				} else {
 					break;
@@ -452,9 +447,9 @@ public final class SbsStateHandler extends Observable implements
 			while (ok) {
 				/* modify the graph */
 				this.step = traversal.next();
-				this.step.execute();
 				description = this.step.getDescription();
 				stringBuilder.append(description + System.lineSeparator());
+				this.step.execute();
 				ok = traversal.hasNext();
 			}
 

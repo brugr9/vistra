@@ -48,19 +48,19 @@ public class Test extends AbstractAlgorithm implements IAlgorithm {
 		ArrayList<IVertex> vertices = new ArrayList<IVertex>(
 				graph.getVertices());
 		ArrayList<IEdge> edges = new ArrayList<IEdge>(graph.getEdges());
+
 		/* vertex */
 		// init
-		graph.stepBy(new InitialisedVertexStep(vertices));
+		graph.stepBy(new InitialisedVertexStep(graph.getVertices()));
 		// value
 		graph.stepBy(new UpdatedVertexStep(vertices, "5"));
 		/* vertex/edge combined */
 		graph.stepBy(new VisitStep(edges, vertices));
 		graph.stepBy(new SolutionMemberStep(edges.get(5), vertices.get(6)));
-		// edge
+		/* edge */
 		graph.stepBy(new BackEdgeStep(edges.get(1)));
 		graph.stepBy(new ForwardEdgeStep(edges.get(2)));
 		graph.stepBy(new CrossEdgeStep(edges.get(3)));
 		graph.stepBy(new DiscardedEdgeStep(edges.get(4)));
-
 	}
 }

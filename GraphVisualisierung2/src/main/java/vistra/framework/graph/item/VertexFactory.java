@@ -36,28 +36,39 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	}
 
 	/**
-	 * Creates a vertex.
+	 * Creates a labeled vertex.
 	 * 
 	 * @return the vertex.
 	 */
 	@Override
 	public IVertexLayout create() {
-		return createVertexLayout();
+		return createLabeledVertex();
 	}
 
 	/**
-	 * Creates a vertex layout.
+	 * Creates a labeled vertex.
 	 * 
-	 * @return the vertex layout
+	 * @return the vertex
 	 */
-	public static IVertexLayout createVertexLayout() {
+	public static IVertexLayout createLabeledVertex() {
+		IVertexLayout vertex = createVertex();
+		vertex.setId(SIGMA.next());
+		return vertex;
+	}
+
+	/**
+	 * Creates a vertex.
+	 * 
+	 * @return the vertex
+	 */
+	public static IVertexLayout createVertex() {
 		IVertexStateHandler vertex = new VertexStateHandler();
 		try {
 			vertex.handleUnexplored();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		((IVertexLayout) vertex).setId(SIGMA.next());
 		return (IVertexLayout) vertex;
 	}
+
 }

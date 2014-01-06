@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.io.File;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 import javax.swing.JComboBox;
@@ -363,6 +364,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				option = this.confirmSavingGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
 				// Graph
+				if (this.model.getGraph() != null)
+					this.clearGraph();
 				IExtendedGraph graph = this.core.newGraph(edgeType);
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
@@ -415,16 +418,18 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				option = fileChooser.showOpenDialog(top);
 				if (option == JFileChooser.APPROVE_OPTION) {
 					// Graph
+					if (this.model.getGraph() != null)
+						this.clearGraph();
 					File source = fileChooser.getSelectedFile();
 					IExtendedGraph graph = this.core.openGraph(source);
 					String name = source.getName();
 					graph.setName(name);
 					graph.addGraphEventListener(this);
 					this.model.setGraph(graph);
-					this.model.setGraphFile(true);
 					this.model.setStart(null);
 					this.model.setEnd(null);
-					this.model.notifyObservers(ControlEvent.GRAPH);
+					this.model.setGraphFile(true);
+					this.setGraphSaved(false);
 					// Algorithm
 					this.updateAlgorithms();
 					this.model.setSelectedAlgorithmIndex(0);
@@ -597,6 +602,28 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		// TODO
 		this.model.setEditingEnabled(editing);
 		this.model.notifyObservers(ControlEvent.MODE);
+	}
+
+	/**
+	 * Removes all vertices and edges from the graph.
+	 * 
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unused")
+	private void clearGraph() throws Exception {
+		try {
+			IExtendedGraph graph = this.model.getGraph();
+			graph.removeGraphEventListener(this);
+			Collection<IEdgeLayout> edges = graph.getEdges();
+			Collection<IVertexLayout> vertices = graph.getVertices();
+			for (IEdgeLayout e : edges)
+				e = null;
+			for (IVertexLayout v : vertices)
+				v = null;
+			graph = null;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**

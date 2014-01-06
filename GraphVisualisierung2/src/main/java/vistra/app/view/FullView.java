@@ -7,9 +7,6 @@ import vistra.app.view.component.GraphPanel;
 import vistra.app.view.component.MenuBar;
 import vistra.app.view.component.ToolBar;
 import vistra.app.view.component.TraversalPanel;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
-import edu.uci.ics.jung.algorithms.layout.Layout;
 
 /**
  * A view as in MVC.
@@ -39,9 +36,8 @@ public class FullView extends DefaultView implements IView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public FullView(Layout<IVertexLayout, IEdgeLayout> layout, Model model,
-			IControl control) throws Exception {
-		super(layout, model, control);
+	public FullView(Model model, IControl control) throws Exception {
+		super(model, control);
 		// TODO
 		this.setVisible(true);
 	}

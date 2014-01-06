@@ -15,10 +15,7 @@ import vistra.app.view.component.MenuBar;
 import vistra.app.view.component.ProtocolPanel;
 import vistra.app.view.component.ToolBar;
 import vistra.app.view.component.TraversalPanel;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.util.ColorPalette;
-import edu.uci.ics.jung.algorithms.layout.Layout;
 
 /**
  * A view as in MVC.
@@ -77,8 +74,7 @@ public class DefaultView extends JFrame implements IView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public DefaultView(Layout<IVertexLayout, IEdgeLayout> layout,
-			Model model, IControl control) throws Exception {
+	public DefaultView(Model model, IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(model.getResourceBundle().getString("app.label"));
@@ -89,7 +85,7 @@ public class DefaultView extends JFrame implements IView {
 		/* Components */
 		this.menuBar = new MenuBar(model);
 		this.toolBar = new ToolBar(model);
-		this.graphPanel = new GraphPanel(this, model, layout, new Dimension(
+		this.graphPanel = new GraphPanel(this, model, new Dimension(
 				VISUALISATION_WIDTH, VISUALISATION_HEIGHT));
 		int width = FRAME_WIDTH - VISUALISATION_WIDTH;
 		// TODO height

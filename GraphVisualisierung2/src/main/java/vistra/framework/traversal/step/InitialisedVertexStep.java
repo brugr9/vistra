@@ -1,7 +1,5 @@
 package vistra.framework.traversal.step;
 
-import java.util.List;
-
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
@@ -41,7 +39,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 	 * @param vertices
 	 *            the vertices
 	 */
-	public InitialisedVertexStep(List<IVertex> vertices) {
+	public InitialisedVertexStep(Iterable<IVertex> vertices) {
 		super();
 		try {
 			for (IVertex vertex : vertices) {

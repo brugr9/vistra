@@ -22,10 +22,9 @@ public class GraphMetadataTransformer implements
 	 */
 	@Override
 	public IExtendedGraph transform(GraphMetadata meta) {
-		IExtendedGraph graph = GraphFactory.createGraph();
 		EdgeType edgeType = meta.getEdgeDefault() == EdgeDefault.UNDIRECTED ? EdgeType.UNDIRECTED
 				: EdgeType.DIRECTED;
-		graph.setEdgeType(edgeType);
+		IExtendedGraph graph = GraphFactory.create(edgeType);
 		return graph;
 	}
 

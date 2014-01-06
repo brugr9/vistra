@@ -10,10 +10,6 @@ import vistra.app.view.FullView;
 import vistra.app.view.IView;
 import vistra.framework.Core;
 import vistra.framework.ICore;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
-import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 
 /**
  * An application factory for creating MVC based graphic user interfaces.
@@ -129,14 +125,12 @@ final class ApplicationFactory {
 			IControl control = new Control(core, model);
 			// view
 			IView view;
-			Layout<IVertexLayout, IEdgeLayout> layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
-					model.getGraph());
 			if (type == ViewType.FULL)
-				view = new FullView(layout, model, control);
+				view = new FullView(model, control);
 			else if (type == ViewType.DEFAULT)
-				view = new DefaultView(layout, model, control);
+				view = new DefaultView(model, control);
 			else
-				view = new DefaultView(layout, model, control);
+				view = new DefaultView(model, control);
 			// i18n
 			model.getI18nListener().actionPerformed(null);
 			return view;

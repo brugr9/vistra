@@ -32,10 +32,6 @@ public final class ExtendedGraphMLReader {
 	 * A field for a hyper edge metadata transformer.
 	 */
 	private final HyperEdgeMetadataTransformer hyperEdgeTransformer;
-	/**
-	 * A field for a delegated reader.
-	 */
-	private GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout> delegate;
 
 	/**
 	 * Main constructor.
@@ -45,7 +41,6 @@ public final class ExtendedGraphMLReader {
 		this.vertexTransformer = new VertexMetadataTransformer();
 		this.edgeTransformer = new EdgeMetadataTransformer();
 		this.hyperEdgeTransformer = new HyperEdgeMetadataTransformer();
-		this.delegate = null;
 	}
 
 	/**
@@ -58,13 +53,12 @@ public final class ExtendedGraphMLReader {
 	 */
 	public IExtendedGraph read(Reader r) throws Exception {
 		try {
-			this.delegate = new GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout>(
+			GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout> mlReader = new GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout>(
 					r, this.graphTransformer, this.vertexTransformer,
 					this.edgeTransformer, this.hyperEdgeTransformer);
-			this.delegate.init();
-			IExtendedGraph graph = this.delegate.readGraph();
-			this.delegate.close();
-			this.delegate = null;
+			mlReader.init();
+			IExtendedGraph graph = mlReader.readGraph();
+			mlReader.close();
 			return graph;
 		} catch (Exception e) {
 			throw e;

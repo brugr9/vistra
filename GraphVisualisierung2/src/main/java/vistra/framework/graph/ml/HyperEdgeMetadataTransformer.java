@@ -21,7 +21,7 @@ public class HyperEdgeMetadataTransformer implements
 	 */
 	@Override
 	public IEdgeLayout transform(HyperEdgeMetadata meta) {
-		IEdgeLayout layout = EdgeFactory.createEdgeLayout();
+		IEdgeLayout layout = EdgeFactory.createEdge();
 		layout.setId(meta.getId());
 		layout.setWeight(Convert.toInteger(meta
 				.getProperty(ExtendedGraphMLWriter.E_WEIGHT)));

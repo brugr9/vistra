@@ -20,15 +20,15 @@ public class EdgeFactory implements Factory<IEdgeLayout> {
 	 */
 	@Override
 	public IEdgeLayout create() {
-		return createEdgeLayout();
+		return createEdge();
 	}
 
 	/**
-	 * Creates an edge layout.
+	 * Creates an edge.
 	 * 
-	 * @return the edge layout
+	 * @return the edge
 	 */
-	public static IEdgeLayout createEdgeLayout() {
+	public static IEdgeLayout createEdge() {
 		IEdgeStateHandler edge = new EdgeStateHandler();
 		try {
 			edge.handleUnexplored();

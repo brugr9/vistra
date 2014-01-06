@@ -21,7 +21,7 @@ public class VertexMetadataTransformer implements
 	 */
 	@Override
 	public IVertexLayout transform(NodeMetadata meta) {
-		IVertexLayout layout = VertexFactory.createVertexLayout();
+		IVertexLayout layout = VertexFactory.createVertex();
 		layout.setId(meta.getId());
 		layout.setLocation(Convert.toPoint2D(
 				meta.getProperty(ExtendedGraphMLWriter.V_LOC_X),

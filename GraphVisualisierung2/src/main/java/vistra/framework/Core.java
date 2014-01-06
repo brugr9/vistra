@@ -190,9 +190,6 @@ public class Core implements ICore {
 			/* traversal */
 			IBidirectIterator<IStep> stepIterator = new ImmutableBidirectIterator<IStep>(
 					stepList);
-			// TODO
-			// while (stepIterator.hasNext())
-			// stepIterator.next();
 			while (stepIterator.hasPrevious())
 				stepIterator.previous().undo();
 			ITraversal traversal = new Traversal(stepIterator);

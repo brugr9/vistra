@@ -1,9 +1,6 @@
 package vistra.framework.graph;
 
-import java.util.List;
-
 import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IItemLayout;
 import vistra.framework.graph.item.IVertexLayout;
 import edu.uci.ics.jung.graph.SparseGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -55,17 +52,6 @@ public final class GraphFactory {
 		IExtendedGraph graph = createGraph();
 		graph.setEdgeType(edgeType);
 		return graph;
-	}
-
-	/**
-	 * Converts a list of {@code IItemLayout} to an array.
-	 * 
-	 * @param list
-	 *            the list
-	 * @return the array
-	 */
-	public static IItemLayout[] toArray(List<IItemLayout> list) {
-		return list.toArray(new IItemLayout[list.size()]);
 	}
 
 }

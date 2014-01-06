@@ -31,10 +31,13 @@ public class VisitStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
 			IItemStateCommand vertexCommand = new VisitedVertexCommand(vertex);
+			//
 			this.stepHandler.addItemStateCommand(edgeCommand);
 			this.stepHandler.addItemStateCommand(vertexCommand);
+			//
 			edgeCommand.execute();
 			vertexCommand.execute();
+			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + " visited");
 			if (((IEdgeLayout) edge).getId().length() != 0)
