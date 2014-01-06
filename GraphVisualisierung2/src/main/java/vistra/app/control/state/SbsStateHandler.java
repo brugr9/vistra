@@ -297,21 +297,19 @@ public final class SbsStateHandler extends Observable implements
 		ITraversal traversal = this.model.getTraversal();
 
 		try {
-			boolean ok = traversal.hasPrevious();
-
+			boolean ok = true;
 			/* here we go ... */
 			while (ok) {
 				/* modify the graph */
-				this.step = traversal.previous();
 				this.step.undo();
 				ok = traversal.hasPrevious();
+				if (ok)
+					this.step = traversal.previous();
 			}
-
 			/* update */
 			this.model.setProgress(0);
 			this.model.setProtocol(new StringBuilder().append(" "));
 			this.model.notifyObservers();
-
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -338,10 +336,9 @@ public final class SbsStateHandler extends Observable implements
 			for (int i = 0; i < steplength; i++) {
 				if (min < progress) {
 					/* modify the graph */
-					this.step = traversal.previous();
 					this.step.undo();
+					this.step = traversal.previous();
 					progress--;
-
 					/* update */
 					this.model.setProgress(progress);
 					this.model.notifyObservers();

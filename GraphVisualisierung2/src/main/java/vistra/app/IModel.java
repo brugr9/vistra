@@ -128,11 +128,6 @@ public interface IModel {
 	public abstract ActionListener getAboutListener();
 
 	/**
-	 * @return the quitListener
-	 */
-	public abstract ActionListener getQuitListener();
-
-	/**
 	 * @return the fileEnabled
 	 */
 	public abstract boolean isFileEnabled();
@@ -433,12 +428,6 @@ public interface IModel {
 	 *            the aboutListener to set
 	 */
 	public abstract void setAboutListener(ActionListener aboutListener);
-
-	/**
-	 * @param quitListener
-	 *            the quitListener to set
-	 */
-	public abstract void setQuitListener(ActionListener quitListener);
 
 	/**
 	 * @param fileEnabled

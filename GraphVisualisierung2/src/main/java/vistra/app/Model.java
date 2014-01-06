@@ -32,7 +32,6 @@ public final class Model extends Observable implements IModel {
 	private ActionListener modeListener;
 	private ActionListener shortcutsListener;
 	private ActionListener aboutListener;
-	private ActionListener quitListener;
 	// File
 	private boolean fileEnabled;
 	private boolean newEnabled;
@@ -117,7 +116,6 @@ public final class Model extends Observable implements IModel {
 		this.modeListener = null;
 		this.shortcutsListener = null;
 		this.aboutListener = null;
-		this.quitListener = null;
 		// File
 		this.fileEnabled = false;
 		this.newEnabled = false;
@@ -454,19 +452,6 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public ActionListener getAboutListener() {
 		return aboutListener;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#getQuitListener()
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ActionListener getQuitListener() {
-		return quitListener;
 	}
 
 	/*
@@ -1241,20 +1226,6 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setAboutListener(ActionListener aboutListener) {
 		this.aboutListener = aboutListener;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setQuitListener(java.awt.event.ActionListener)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setQuitListener(ActionListener quitListener) {
-		this.quitListener = quitListener;
 		this.setChanged();
 	}
 

@@ -110,11 +110,12 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.open.addActionListener(model.getParameterStateHandler());
 			this.save.addActionListener(model.getParameterStateHandler());
 			this.saveAs.addActionListener(model.getParameterStateHandler());
-			this.quit.addActionListener(model.getQuitListener());
+			this.quit.addActionListener(model.getParameterStateHandler());
 			// command
 			this.open.setActionCommand(ControlEvent.open);
 			this.save.setActionCommand(ControlEvent.save);
 			this.saveAs.setActionCommand(ControlEvent.saveAs);
+			this.quit.setActionCommand(ControlEvent.quit);
 			{// graph
 				this.newGraph = new JMenu("newGraph");
 				this.undirected = new JMenuItem("undirected");

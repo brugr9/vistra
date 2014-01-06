@@ -77,6 +77,9 @@ public interface IControl {
 		//
 		STOP("stop"),
 
+		//
+		QUIT("quit"),
+
 		;
 
 		/**
@@ -157,6 +160,8 @@ public interface IControl {
 		public static final String resume = RESUME.getValue();
 		//
 		public static final String stop = STOP.getValue();
+		//
+		public static final String quit = QUIT.getValue();
 
 	}
 

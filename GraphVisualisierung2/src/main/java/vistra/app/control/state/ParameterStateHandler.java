@@ -100,6 +100,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.handleEditGraph();
 			} else if (c.equals(ControlEvent.end)) {
 				this.handleEditGraph();
+			} else if (c.equals(ControlEvent.quit)) {
+				this.quit();
 			}
 
 		} catch (Exception ex) {
@@ -546,6 +548,23 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.setViewGraphSaved();
 			throw e;
 		}
+
+	}
+
+	/**
+	 * A method for quitting the program.
+	 */
+	private void quit() {
+
+		int option = 0;
+		if (!this.model.isGraphSaved())
+			try {
+				option = this.confirmSavingGraph();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		if (option != JOptionPane.CANCEL_OPTION)
+			System.exit(0);
 
 	}
 
