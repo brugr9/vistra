@@ -5,7 +5,6 @@ import java.util.Set;
 
 import net.datastructures.NodeQueue;
 import net.datastructures.Queue;
-
 import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
