@@ -8,4 +8,4 @@ vistra -- Desktop-Applikation zur Traversierung von Graphen.
 Ein Algorithmus, wie etwa derjenige von Dijkstra, soll mit diesem System visualisiert werden.
 Das System soll sich als didaktisches Hilfsmittel für beliebige Algorithmen eignen.
 
-Roland Bruggmann (brugr9)
+Roland E. Bruggmann (brugr9)
