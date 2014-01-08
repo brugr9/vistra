@@ -88,12 +88,14 @@ public enum StrokePalette {
 	 * @return the stroke
 	 */
 	public BasicStroke getStorke() {
+		BasicStroke stroke;
 		if (this.pattern == null)
-			return new BasicStroke(width);
+			stroke = new BasicStroke(width);
 		else
-			return new BasicStroke(width, BasicStroke.CAP_SQUARE,
+			stroke = new BasicStroke(width, BasicStroke.CAP_SQUARE,
 					BasicStroke.JOIN_MITER, 10.0f, pattern,
 					StrokePhase.strokeDashPhase);
+		return stroke;
 	}
 
 	/**
