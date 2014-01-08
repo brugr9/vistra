@@ -2,6 +2,11 @@ package vistra.framework.graph.item.state;
 
 import java.util.ArrayList;
 
+import net.datastructures.NodeQueue;
+import net.datastructures.NodeStack;
+import net.datastructures.Queue;
+import net.datastructures.Stack;
+
 import vistra.framework.graph.item.VertexLayout;
 import vistra.framework.util.ColorPalette;
 import vistra.framework.util.FontPalette;
@@ -30,7 +35,7 @@ public class VertexStateHandler extends VertexLayout implements
 	/**
 	 * A field for a cellar.
 	 */
-	private ArrayList<AbstractVertexState> cellar;
+	private Stack<AbstractVertexState> cellar;
 
 	/**
 	 * Main constructor.
@@ -38,7 +43,7 @@ public class VertexStateHandler extends VertexLayout implements
 	public VertexStateHandler() {
 		super();
 		this.state = null;
-		this.cellar = new ArrayList<AbstractVertexState>();
+		this.cellar = new NodeStack<AbstractVertexState>();
 		try {
 			this.setState(new UnexploredVertexState(this));
 		} catch (Exception e) {
@@ -123,7 +128,7 @@ public class VertexStateHandler extends VertexLayout implements
 			this.state = state;
 			this.state.entry();
 			// begin cellar
-			this.cellar.add(state);
+			this.cellar.push(state);
 			// end cellar
 		} catch (Exception e) {
 			throw e;
@@ -138,8 +143,7 @@ public class VertexStateHandler extends VertexLayout implements
 		try {
 			this.state.exit();
 			// begin cellar
-			int index = this.cellar.size() - 1;
-			this.state = this.cellar.remove(index);
+			this.state = this.cellar.pop();
 			// end cellar
 			this.state.entry();
 		} catch (Exception e) {

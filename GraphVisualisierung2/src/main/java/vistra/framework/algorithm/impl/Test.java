@@ -2,6 +2,9 @@ package vistra.framework.algorithm.impl;
 
 import java.util.ArrayList;
 
+import net.datastructures.HashTableMap;
+import net.datastructures.Map;
+
 import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
@@ -53,9 +56,13 @@ public class Test extends AbstractAlgorithm implements IAlgorithm {
 		// init
 		graph.stepBy(new InitialisedVertexStep(graph.getVertices()));
 		// value
-		graph.stepBy(new UpdatedVertexStep(vertices, "5"));
+		graph.stepBy(new UpdatedVertexStep(graph.getVertices(), "5"));
 		/* vertex/edge combined */
-		graph.stepBy(new VisitStep(edges, vertices));
+
+		Map<IEdge, IVertex> map = new HashTableMap<IEdge, IVertex>();
+		for (int i = 0; i < edges.size(); i++)
+			map.put(edges.get(i), vertices.get(i));
+		graph.stepBy(new VisitStep(map));
 		graph.stepBy(new SolutionMemberStep(edges.get(5), vertices.get(6)));
 		/* edge */
 		graph.stepBy(new BackEdgeStep(edges.get(1)));

@@ -2,6 +2,8 @@ package vistra.framework.traversal.step;
 
 import java.util.List;
 
+import net.datastructures.Entry;
+import net.datastructures.Map;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertex;
@@ -90,4 +92,45 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Multi item constructor.
+	 * 
+	 * @param items
+	 *            a map of edges and vertices
+	 */
+	public SolutionMemberStep(Map<IEdge, IVertex> items) {
+		super();
+		try {
+			IEdge edge;
+			IVertex vertex;
+			Iterable<Entry<IEdge, IVertex>> entries = items.entrySet();
+			for (Entry<IEdge, IVertex> entry : entries) {
+				edge = entry.getKey();
+				vertex = entry.getValue();
+				//
+				IItemStateCommand edgeCommand = new SolutionMemberEdgeCommand(
+						edge);
+				IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
+						vertex);
+				//
+				this.stepHandler.addItemStateCommand(edgeCommand);
+				this.stepHandler.addItemStateCommand(vertexCommand);
+				//
+				edgeCommand.execute();
+				vertexCommand.execute();
+				//
+				this.description.append("Vertex "
+						+ ((IVertexLayout) vertex).getId()
+						+ ": Solution member ");
+				if (((IEdgeLayout) edge).getId().length() != 0)
+					this.description.append(" via edge "
+							+ ((IEdgeLayout) edge).getId());
+				this.description.append(System.lineSeparator());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

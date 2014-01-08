@@ -35,11 +35,11 @@ public final class ProtocolPanel extends JPanel implements Observer {
 	/**
 	 * A field for a text area.
 	 */
-	private JTextArea textArea;
+	private JTextArea text;
 	/**
 	 * A field for a scroll pane.
 	 */
-	private JScrollPane scrollPane;
+	private JScrollPane scroll;
 
 	/**
 	 * Main constructor.
@@ -55,25 +55,25 @@ public final class ProtocolPanel extends JPanel implements Observer {
 		this.setBackground(ColorPalette.antique);
 
 		/* text area */
-		this.textArea = new JTextArea();
-		this.textArea.setEditable(false);
-		this.textArea.setMinimumSize(size);
-		this.textArea.setColumns(20);
-		this.textArea.setRows(20);
-		this.textArea.setLineWrap(true);
-		this.textArea.setWrapStyleWord(true);
-		this.textArea.setBackground(ColorPalette.gray);
-		this.textArea.setForeground(ColorPalette.darkblue);
+		this.text = new JTextArea();
+		this.text.setEditable(false);
+		this.text.setMinimumSize(size);
+		this.text.setColumns(20);
+		this.text.setRows(20);
+		this.text.setLineWrap(true);
+		this.text.setWrapStyleWord(true);
+		this.text.setBackground(ColorPalette.gray);
+		this.text.setForeground(ColorPalette.darkblue);
 		// scroll pane
-		this.scrollPane = new JScrollPane(this.textArea);
-		this.scrollPane
+		this.scroll = new JScrollPane(this.text);
+		this.scroll
 				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		this.scrollPane
+		this.scroll
 				.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 		/* this */
 		this.setLayout(new GridLayout(1, 1));
-		this.add(this.scrollPane);
+		this.add(this.scroll);
 	}
 
 	/**
@@ -91,9 +91,8 @@ public final class ProtocolPanel extends JPanel implements Observer {
 				if (arg == ControlEvent.I18N) {
 					this.border.setTitle(b.getString("protocol.label"));
 				}
-				this.textArea.setText(m.getProtocol().toString());
-				this.textArea.setCaretPosition(this.textArea.getDocument()
-						.getLength());
+				this.text.setText(m.getProtocol().toString());
+				this.text.setCaretPosition(this.text.getDocument().getLength());
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),
 						b.getString("app.label"), 1, null);

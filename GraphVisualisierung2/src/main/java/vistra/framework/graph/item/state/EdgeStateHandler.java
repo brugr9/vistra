@@ -2,6 +2,9 @@ package vistra.framework.graph.item.state;
 
 import java.util.ArrayList;
 
+import net.datastructures.NodeStack;
+import net.datastructures.Stack;
+
 import vistra.framework.graph.item.EdgeLayout;
 import vistra.framework.util.ColorPalette;
 import vistra.framework.util.FontPalette;
@@ -28,7 +31,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	/**
 	 * A field for a cellar.
 	 */
-	private ArrayList<AbstractEdgeState> cellar;
+	private Stack<AbstractEdgeState> cellar;
 
 	/**
 	 * Main constructor.
@@ -36,7 +39,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	public EdgeStateHandler() {
 		super();
 		this.state = null;
-		this.cellar = new ArrayList<AbstractEdgeState>();
+		this.cellar = new NodeStack<AbstractEdgeState>();
 		try {
 			this.setState(new UnexploredEdgeState(this));
 		} catch (Exception e) {
@@ -147,7 +150,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.state = state;
 			this.state.entry();
 			// begin cellar
-			this.cellar.add(state);
+			this.cellar.push(state);
 			// end cellar
 		} catch (Exception e) {
 			throw e;
@@ -162,8 +165,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 		try {
 			this.state.exit();
 			// begin cellar
-			int index = this.cellar.size() - 1;
-			this.state = this.cellar.remove(index);
+			this.state = this.cellar.pop();
 			// end cellar
 			this.state.entry();
 		} catch (Exception e) {
