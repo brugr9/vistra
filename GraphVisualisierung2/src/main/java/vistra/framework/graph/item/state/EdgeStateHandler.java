@@ -136,6 +136,20 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void handlePreviousState() throws Exception {
+		try {
+			this.state.exit();
+			this.state = this.cellar.pop();
+			this.state.entry();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
 	 * Sets a state and adds it to the cellar.
 	 * 
 	 * @param state
@@ -146,25 +160,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 		try {
 			this.state = state;
 			this.state.entry();
-			// begin cellar
 			this.cellar.push(state);
-			// end cellar
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void handlePreviousState() throws Exception {
-		try {
-			this.state.exit();
-			// begin cellar
-			this.state = this.cellar.pop();
-			// end cellar
-			this.state.entry();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -287,7 +283,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setLayoutSolution() throws Exception {
 		try {
-			this.setFont(FontPalette.emphasised);
+			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.green);
 			this.setStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.green);
