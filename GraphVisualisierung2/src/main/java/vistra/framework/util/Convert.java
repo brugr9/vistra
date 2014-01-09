@@ -33,7 +33,7 @@ public final class Convert {
 	}
 
 	/**
-	 * Tries to convert two string coordinates to a point.
+	 * Tries to read two strings as coordinates and to convert them to a point.
 	 * 
 	 * @param x
 	 *            the x coordinate

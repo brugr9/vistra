@@ -29,7 +29,6 @@ public final class Model extends Observable implements IModel {
 	/* Menu */
 	// Action listener
 	private ActionListener i18nListener;
-	private ActionListener modeListener;
 	private ActionListener shortcutsListener;
 	private ActionListener aboutListener;
 	// File
@@ -113,7 +112,6 @@ public final class Model extends Observable implements IModel {
 		/* Menu */
 		// Action listener
 		this.i18nListener = null;
-		this.modeListener = null;
 		this.shortcutsListener = null;
 		this.aboutListener = null;
 		// File
@@ -413,19 +411,6 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public ActionListener getI18nListener() {
 		return i18nListener;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#getModeListener()
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ActionListener getModeListener() {
-		return modeListener;
 	}
 
 	/*
@@ -1183,20 +1168,6 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setI18nListener(ActionListener i18nListener) {
 		this.i18nListener = i18nListener;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setModeListener(java.awt.event.ActionListener)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setModeListener(ActionListener modeListener) {
-		this.modeListener = modeListener;
 		this.setChanged();
 	}
 

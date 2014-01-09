@@ -5,7 +5,7 @@ import java.awt.Shape;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.framework.graph.item.IVertexLayout;
-import vistra.framework.util.ShapePalette;
+import vistra.framework.util.palette.ShapePalette;
 
 /**
  * A vertex transformer: shape.

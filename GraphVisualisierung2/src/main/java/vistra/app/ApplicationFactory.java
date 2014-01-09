@@ -12,7 +12,7 @@ import vistra.framework.Core;
 import vistra.framework.ICore;
 
 /**
- * An application factory for creating MVC based graphic user interfaces.
+ * An application factory, creates MVC based graphic user interfaces.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

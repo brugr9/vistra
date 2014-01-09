@@ -383,7 +383,8 @@ public final class SbsStateHandler extends Observable implements
 					this.model.setProtocol(stringBuilder);
 					this.model.notifyObservers();
 					/* modify the graph */
-					// this.blink();
+					// TODO
+					this.blink();
 					this.step.execute();
 					this.model.notifyObservers();
 				} else {
@@ -415,7 +416,7 @@ public final class SbsStateHandler extends Observable implements
 			this.off = true;
 			this.counter = 0;
 			this.timer.start();
-			while (counter < NUMBER_OF_BLINKS) {
+			while (this.counter < NUMBER_OF_BLINKS) {
 				;
 			}
 			this.timer.stop();
@@ -481,22 +482,19 @@ public final class SbsStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				Model model = SbsStateHandler.this.model;
-				IStep step = SbsStateHandler.this.step;
-				boolean off = SbsStateHandler.this.off;
-				int counter = SbsStateHandler.this.counter;
 
-				if (off)
-					step.execute();
+				if (SbsStateHandler.this.off)
+					SbsStateHandler.this.step.execute();
 				else
-					step.undo();
-				off = !off;
-				counter = counter++;
-				model.notifyObservers();
+					SbsStateHandler.this.step.undo();
+				SbsStateHandler.this.off = !SbsStateHandler.this.off;
+				SbsStateHandler.this.counter++;
+				SbsStateHandler.this.model.notifyObservers();
 
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(), model
-						.getResourceBundle().getString("app.label"), 1, null);
+				JOptionPane.showMessageDialog(null, ex.toString(),
+						SbsStateHandler.this.model.getResourceBundle()
+								.getString("app.label"), 1, null);
 				ex.printStackTrace();
 			}
 

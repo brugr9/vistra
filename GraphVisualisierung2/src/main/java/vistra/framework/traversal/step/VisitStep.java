@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.datastructures.Entry;
 import net.datastructures.Map;
-
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertex;
@@ -38,8 +37,9 @@ public class VisitStep extends AbstractStep implements IStep {
 			this.stepHandler.addItemStateCommand(edgeCommand);
 			this.stepHandler.addItemStateCommand(vertexCommand);
 			//
-			edgeCommand.execute();
-			vertexCommand.execute();
+			// edgeCommand.execute();
+			// vertexCommand.execute();
+			this.stepHandler.execute();
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + " visited");
@@ -76,8 +76,9 @@ public class VisitStep extends AbstractStep implements IStep {
 				this.stepHandler.addItemStateCommand(edgeCommand);
 				this.stepHandler.addItemStateCommand(vertexCommand);
 				//
-				edgeCommand.execute();
-				vertexCommand.execute();
+				// edgeCommand.execute();
+				// vertexCommand.execute();
+				this.stepHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId() + " visited");
@@ -114,8 +115,9 @@ public class VisitStep extends AbstractStep implements IStep {
 				this.stepHandler.addItemStateCommand(edgeCommand);
 				this.stepHandler.addItemStateCommand(vertexCommand);
 				//
-				edgeCommand.execute();
-				vertexCommand.execute();
+				// edgeCommand.execute();
+				// vertexCommand.execute();
+				this.stepHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId() + " visited");

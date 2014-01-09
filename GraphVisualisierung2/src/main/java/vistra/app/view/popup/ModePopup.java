@@ -40,8 +40,8 @@ public class ModePopup extends JPopupMenu implements Observer {
 		super();
 		this.picking = new JMenuItem("picking");
 		this.editing = new JMenuItem("editing");
-		this.picking.addActionListener(model.getModeListener());
-		this.editing.addActionListener(model.getModeListener());
+		this.picking.addActionListener(model.getParameterStateHandler());
+		this.editing.addActionListener(model.getParameterStateHandler());
 		this.picking.setActionCommand(Mode.PICKING.toString());
 		this.editing.setActionCommand(Mode.EDITING.toString());
 		this.add(picking);

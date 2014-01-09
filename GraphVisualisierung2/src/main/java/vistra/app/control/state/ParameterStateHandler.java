@@ -98,9 +98,19 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			} else if (c.equals(ControlEvent.edit)) {
 				this.handleEditGraph();
 			} else if (c.equals(ControlEvent.start)) {
-				this.handleEditGraph();
+				// TODO this.handleEditStart();
 			} else if (c.equals(ControlEvent.end)) {
-				this.handleEditGraph();
+				// TODO this.handleEditEnd();
+			} else if (c.equals(Mode.PICKING.toString())) {
+				this.model.setMode(Mode.valueOf(c));
+				this.model.setPickingEnabled(false);
+				this.model.setEditingEnabled(true);
+				this.model.notifyObservers(ControlEvent.MODE);
+			} else if (c.equals(Mode.EDITING.toString())) {
+				this.model.setMode(Mode.valueOf(c));
+				this.model.setPickingEnabled(true);
+				this.model.setEditingEnabled(false);
+				this.model.notifyObservers(ControlEvent.MODE);
 			} else if (c.equals(ControlEvent.quit)) {
 				this.quit();
 			}

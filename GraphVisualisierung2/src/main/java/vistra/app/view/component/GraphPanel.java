@@ -29,7 +29,7 @@ import vistra.framework.graph.item.transformer.VertexLabel;
 import vistra.framework.graph.item.transformer.VertexShape;
 import vistra.framework.graph.item.transformer.VertexStroke;
 import vistra.framework.graph.item.transformer.VertexStrokeColor;
-import vistra.framework.util.ColorPalette;
+import vistra.framework.util.palette.ColorPalette;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.visualization.GraphZoomScrollPane;
@@ -103,7 +103,7 @@ public class GraphPanel extends JPanel implements Observer {
 				model.getGraph());
 		this.viewer = new VisualizationViewer<IVertexLayout, IEdgeLayout>(
 				layout, new Dimension(size.width, size.height - IView.BORDER));
-		this.viewer.setBackground(ColorPalette.WHITE);
+		this.viewer.setBackground(ColorPalette.white);
 		RenderContext<IVertexLayout, IEdgeLayout> rc = this.viewer
 				.getRenderContext();
 		// transformer: vertex

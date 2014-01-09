@@ -1,9 +1,9 @@
-package vistra.framework.util;
+package vistra.framework.util.palette;
 
 import java.awt.Font;
 
 /**
- * A palette defining some customised fonts.
+ * A palette defining some customized fonts.
  * <p>
  * Use the lower-case constants for getting directly a {@code Font}.
  * 
@@ -24,12 +24,12 @@ public enum FontPalette {
 	 */
 	NORMAL("normal", FontStyle.normal, FontSize.normal),
 	/**
-	 * Font 'emphasised'.
+	 * Font 'emphasized'.
 	 * <ul>
-	 * <li>Style: emphasised
-	 * <li>Size: emphasised
+	 * <li>Style: emphasized
+	 * <li>Size: emphasized
 	 */
-	EMPHASISED("emphasised", FontStyle.emphasised, FontSize.emphasised),
+	EMPHASIZED("emphasized", FontStyle.emphasized, FontSize.emphasized),
 
 	;
 
@@ -81,13 +81,13 @@ public enum FontPalette {
 	public final static Font normal = NORMAL.getFont();
 
 	/**
-	 * Font 'emphasised'.
+	 * Font 'emphasized'.
 	 * <ul>
-	 * <li>Size: emphasised
-	 * <li>Style: emphasised
+	 * <li>Size: emphasized
+	 * <li>Style: emphasized
 	 * 
 	 */
-	public final static Font emphasised = EMPHASISED.getFont();
+	public final static Font emphasised = EMPHASIZED.getFont();
 
 	/**
 	 * Font sizes.
@@ -102,9 +102,9 @@ public enum FontPalette {
 		 */
 		FONT_SIZE_NORMAL(18),
 		/**
-		 * Font size: emphasised.
+		 * Font size: emphasized.
 		 */
-		FONT_SIZE_EMPHASISED(20),
+		FONT_SIZE_EMPHASIZED(20),
 
 		;
 
@@ -137,9 +137,9 @@ public enum FontPalette {
 		 */
 		public final static int normal = FONT_SIZE_NORMAL.getSize();
 		/**
-		 * Font size: emphasised.
+		 * Font size: emphasized.
 		 */
-		public final static int emphasised = FONT_SIZE_EMPHASISED.getSize();
+		public final static int emphasized = FONT_SIZE_EMPHASIZED.getSize();
 	}
 
 	/**
@@ -149,15 +149,15 @@ public enum FontPalette {
 	 * 
 	 */
 	public enum FontStyle {
-		
+
 		/**
 		 * Font style: normal.
 		 */
 		FONT_STYLE_NORMAL(Font.PLAIN),
 		/**
-		 * Font style: emphasised.
+		 * Font style: emphasized.
 		 */
-		FONT_STYLE_EMPHASISED(Font.BOLD),
+		FONT_STYLE_EMPHASIZED(Font.BOLD),
 
 		;
 
@@ -190,8 +190,8 @@ public enum FontPalette {
 		 */
 		public final static int normal = FONT_STYLE_NORMAL.getStyle();
 		/**
-		 * Font style: emphasised.
+		 * Font style: emphasized.
 		 */
-		public final static int emphasised = FONT_STYLE_NORMAL.getStyle();
+		public final static int emphasized = FONT_STYLE_EMPHASIZED.getStyle();
 	}
 }

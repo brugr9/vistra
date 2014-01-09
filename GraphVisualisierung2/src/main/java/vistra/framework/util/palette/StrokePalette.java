@@ -1,4 +1,4 @@
-package vistra.framework.util;
+package vistra.framework.util.palette;
 
 import java.awt.BasicStroke;
 

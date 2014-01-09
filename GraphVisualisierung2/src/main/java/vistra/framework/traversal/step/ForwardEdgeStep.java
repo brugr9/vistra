@@ -26,7 +26,8 @@ public class ForwardEdgeStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand command = new ForwardEdgeCommand(edge);
 			this.stepHandler.addItemStateCommand(command);
-			command.execute();
+			// command.execute();
+			this.stepHandler.execute();
 			this.description.append("Forward-edge ");
 			if (((IEdgeLayout) edge).getId().length() != 0)
 				this.description.append(((IEdgeLayout) edge).getId());
@@ -48,7 +49,8 @@ public class ForwardEdgeStep extends AbstractStep implements IStep {
 			for (IEdge edge : edges) {
 				IItemStateCommand command = new ForwardEdgeCommand(edge);
 				this.stepHandler.addItemStateCommand(command);
-				command.execute();
+				// command.execute();
+				this.stepHandler.execute();
 				this.description.append("Forward-edge ");
 				if (((IEdgeLayout) edge).getId().length() != 0)
 					this.description.append(((IEdgeLayout) edge).getId());

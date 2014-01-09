@@ -152,17 +152,15 @@ public class ToolBar extends JToolBar implements Observer {
 						this.picking.setToolTipText(b.getString("mode.label")
 								+ ": " + b.getString("picking.label"));
 					}
-				} else {
-					// file
-					this.newUndirected.setEnabled(m.isUndirectedEnabled());
-					this.newDirected.setEnabled(m.isDirectedEnabled());
-					this.open.setEnabled(m.isOpenEnabled());
-					this.save.setEnabled(m.isSaveEnabled());
-					this.saveAs.setEnabled(m.isSaveAsEnabled());
-					// mode
+				} else if (arg == ControlEvent.MODE) {
 					this.editing.setEnabled(m.isEditingEnabled());
 					this.picking.setEnabled(m.isPickingEnabled());
 				}
+				this.newUndirected.setEnabled(m.isUndirectedEnabled());
+				this.newDirected.setEnabled(m.isDirectedEnabled());
+				this.open.setEnabled(m.isOpenEnabled());
+				this.save.setEnabled(m.isSaveEnabled());
+				this.saveAs.setEnabled(m.isSaveAsEnabled());
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),
 						b.getString("app.label"), 1, null);

@@ -20,7 +20,7 @@ import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
-import vistra.framework.util.ColorPalette;
+import vistra.framework.util.palette.ColorPalette;
 
 /**
  * A traversal panel.

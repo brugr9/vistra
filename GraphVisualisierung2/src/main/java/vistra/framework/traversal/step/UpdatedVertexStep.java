@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.datastructures.Entry;
 import net.datastructures.Map;
-
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
@@ -31,7 +30,9 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand command = new UpdatedVertexCommand(vertex, value);
 			this.stepHandler.addItemStateCommand(command);
-			command.execute();
+			// command.execute();
+			this.stepHandler.execute();
+			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + ", value updated to "
 					+ value + System.lineSeparator());
@@ -55,7 +56,8 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
 				this.stepHandler.addItemStateCommand(command);
-				command.execute();
+				// command.execute();
+				this.stepHandler.execute();
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
 						+ ", value updated to " + value
@@ -85,7 +87,8 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
 				this.stepHandler.addItemStateCommand(command);
-				command.execute();
+				// command.execute();
+				this.stepHandler.execute();
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
 						+ ", value updated to " + value

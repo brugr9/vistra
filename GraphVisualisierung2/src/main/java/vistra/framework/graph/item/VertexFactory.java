@@ -8,7 +8,7 @@ import vistra.framework.graph.item.state.IVertexStateHandler;
 import vistra.framework.graph.item.state.VertexStateHandler;
 import vistra.framework.util.IBidirectIterator;
 import vistra.framework.util.ImmutableBidirectIterator;
-import vistra.framework.util.Sigma;
+import vistra.framework.util.palette.SigmaPalette;
 
 /**
  * A vertex factory.
@@ -29,7 +29,7 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	 */
 	public VertexFactory() {
 		ArrayList<String> sigma = new ArrayList<String>();
-		String[] alphabet = Sigma.ALPHABET;
+		String[] alphabet = SigmaPalette.alphabet;
 		for (int i = 0; i < alphabet.length; i++)
 			sigma.add(alphabet[i]);
 		SIGMA = new ImmutableBidirectIterator<String>(sigma);

@@ -12,7 +12,7 @@ import javax.swing.KeyStroke;
 
 import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
-import vistra.framework.util.I18nPalette;
+import vistra.framework.util.palette.I18nPalette;
 
 /**
  * A menu bar.

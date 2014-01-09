@@ -1,14 +1,11 @@
 package vistra.framework.graph.item.state;
 
-import java.util.ArrayList;
-
 import net.datastructures.NodeStack;
 import net.datastructures.Stack;
-
 import vistra.framework.graph.item.EdgeLayout;
-import vistra.framework.util.ColorPalette;
-import vistra.framework.util.FontPalette;
-import vistra.framework.util.StrokePalette;
+import vistra.framework.util.palette.ColorPalette;
+import vistra.framework.util.palette.FontPalette;
+import vistra.framework.util.palette.StrokePalette;
 
 /**
  * An edge state handler.

@@ -38,8 +38,9 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 			this.stepHandler.addItemStateCommand(edgeCommand);
 			this.stepHandler.addItemStateCommand(vertexCommand);
 			//
-			edgeCommand.execute();
-			vertexCommand.execute();
+			// edgeCommand.execute();
+			// vertexCommand.execute();
+			this.stepHandler.execute();
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + ": Solution member ");
@@ -77,8 +78,9 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 				this.stepHandler.addItemStateCommand(edgeCommand);
 				this.stepHandler.addItemStateCommand(vertexCommand);
 				//
-				edgeCommand.execute();
-				vertexCommand.execute();
+				// edgeCommand.execute();
+				// vertexCommand.execute();
+				this.stepHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
@@ -117,8 +119,9 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 				this.stepHandler.addItemStateCommand(edgeCommand);
 				this.stepHandler.addItemStateCommand(vertexCommand);
 				//
-				edgeCommand.execute();
-				vertexCommand.execute();
+				// edgeCommand.execute();
+				// vertexCommand.execute();
+				this.stepHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()

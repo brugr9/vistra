@@ -16,7 +16,7 @@ import vistra.framework.algorithm.impl.DLS;
 import vistra.framework.algorithm.impl.Default;
 import vistra.framework.algorithm.impl.Dijkstra;
 import vistra.framework.algorithm.impl.Kruskal;
-import vistra.framework.algorithm.impl.Test;
+import vistra.framework.algorithm.impl.SimpleSteps;
 import vistra.framework.graph.GraphManagerFactory;
 import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.IGraphManager;
@@ -64,7 +64,7 @@ public class Core implements ICore {
 			this.graphManager = GraphManagerFactory.create(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(p);
 			this.algorithmManager.addAvailable(new Default());
-			this.algorithmManager.addAvailable(new Test()); // TODO remove
+			this.algorithmManager.addAvailable(new SimpleSteps()); // TODO remove
 			this.algorithmManager.addAvailable(new BFS());
 			this.algorithmManager.addAvailable(new DFSpre());
 			this.algorithmManager.addAvailable(new DLS());

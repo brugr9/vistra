@@ -15,7 +15,7 @@ import vistra.app.view.component.MenuBar;
 import vistra.app.view.component.ProtocolPanel;
 import vistra.app.view.component.ToolBar;
 import vistra.app.view.component.TraversalPanel;
-import vistra.framework.util.ColorPalette;
+import vistra.framework.util.palette.ColorPalette;
 
 /**
  * A view as in MVC.

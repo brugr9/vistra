@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import net.datastructures.HashTableMap;
 import net.datastructures.Map;
-
 import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
@@ -26,7 +25,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Test extends AbstractAlgorithm implements IAlgorithm {
+public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 
 	/**
 	 * A field for a description.
@@ -36,7 +35,7 @@ public class Test extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * Main constructor.
 	 */
-	public Test() {
+	public SimpleSteps() {
 		super();
 		super.setDescription(ALGO_DESCRIPTION);
 		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
@@ -60,7 +59,7 @@ public class Test extends AbstractAlgorithm implements IAlgorithm {
 		/* vertex/edge combined */
 
 		Map<IEdge, IVertex> map = new HashTableMap<IEdge, IVertex>();
-		for (int i = 0; i < edges.size(); i++)
+		for (int i = 0; i < vertices.size(); i++)
 			map.put(edges.get(i), vertices.get(i));
 		graph.stepBy(new VisitStep(map));
 		graph.stepBy(new SolutionMemberStep(edges.get(5), vertices.get(6)));

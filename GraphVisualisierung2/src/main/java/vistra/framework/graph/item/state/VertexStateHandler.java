@@ -1,17 +1,13 @@
 package vistra.framework.graph.item.state;
 
-import java.util.ArrayList;
+import java.text.DecimalFormatSymbols;
 
-import net.datastructures.NodeQueue;
 import net.datastructures.NodeStack;
-import net.datastructures.Queue;
 import net.datastructures.Stack;
-
 import vistra.framework.graph.item.VertexLayout;
-import vistra.framework.util.ColorPalette;
-import vistra.framework.util.FontPalette;
-import vistra.framework.util.Sigma;
-import vistra.framework.util.StrokePalette;
+import vistra.framework.util.palette.ColorPalette;
+import vistra.framework.util.palette.FontPalette;
+import vistra.framework.util.palette.StrokePalette;
 
 /**
  * A vertex state handler.
@@ -152,13 +148,13 @@ public class VertexStateHandler extends VertexLayout implements
 	}
 
 	/**
-	 * A layout modifier: Initialises a vertex value.
+	 * A layout modifier: Initializes a vertex value.
 	 * 
 	 * @throws Exception
 	 */
 	void setLayoutInitialised() throws Exception {
 		try {
-			this.setLayoutUpdated(Sigma.INFINITY);
+			this.setLayoutUpdated(new DecimalFormatSymbols().getInfinity());
 		} catch (Exception e) {
 			throw e;
 		}

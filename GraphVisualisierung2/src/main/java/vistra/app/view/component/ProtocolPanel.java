@@ -16,7 +16,7 @@ import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
-import vistra.framework.util.ColorPalette;
+import vistra.framework.util.palette.ColorPalette;
 
 /**
  * A protocol panel.
@@ -62,7 +62,7 @@ public final class ProtocolPanel extends JPanel implements Observer {
 		this.text.setRows(20);
 		this.text.setLineWrap(true);
 		this.text.setWrapStyleWord(true);
-		this.text.setBackground(ColorPalette.gray);
+		this.text.setBackground(ColorPalette.grey);
 		this.text.setForeground(ColorPalette.darkblue);
 		// scroll pane
 		this.scroll = new JScrollPane(this.text);

@@ -25,7 +25,7 @@ class ActionListenerI18n extends AbstractActionListener {
 	private final String i18nBaseName;
 
 	/**
-	 * A field for a list of shortcuts.
+	 * A field for a list of shortcuts. TODO i18n
 	 */
 	private final String shortcuts = "<html>"
 			+ "<h4>All Modes:</h4>"

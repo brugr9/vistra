@@ -113,11 +113,6 @@ public interface IModel {
 	public abstract ActionListener getI18nListener();
 
 	/**
-	 * @return the modeListener
-	 */
-	public abstract ActionListener getModeListener();
-
-	/**
 	 * @return the shortcutsListener
 	 */
 	public abstract ActionListener getShortcutsListener();
@@ -410,12 +405,6 @@ public interface IModel {
 	 *            the i18nListener to set
 	 */
 	public abstract void setI18nListener(ActionListener i18nListener);
-
-	/**
-	 * @param modeListener
-	 *            the modeListener to set
-	 */
-	public abstract void setModeListener(ActionListener modeListener);
 
 	/**
 	 * @param shortcutsListener
