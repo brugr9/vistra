@@ -87,7 +87,7 @@ public enum FontPalette {
 	 * <li>Style: emphasized
 	 * 
 	 */
-	public final static Font emphasised = EMPHASIZED.getFont();
+	public final static Font emphasized = EMPHASIZED.getFont();
 
 	/**
 	 * Font sizes.

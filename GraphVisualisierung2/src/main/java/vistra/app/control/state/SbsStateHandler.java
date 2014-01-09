@@ -384,7 +384,7 @@ public final class SbsStateHandler extends Observable implements
 					this.model.notifyObservers();
 					/* modify the graph */
 					// TODO
-					this.blink();
+					// this.blink();
 					this.step.execute();
 					this.model.notifyObservers();
 				} else {
