@@ -19,6 +19,7 @@ import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.IControl.ParameterEvent;
 import vistra.framework.util.palette.ColorPalette;
 
 /**
@@ -112,7 +113,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 
 				if (arg == ControlEvent.I18N) {
 					this.border.setTitle(b.getString("algorithm.label"));
-				} else if (arg == ControlEvent.ALGORITHM) {
+				} else if (arg == ParameterEvent.ALGORITHM) {
 					this.comboModel = new DefaultComboBoxModel<String>(
 							m.getAlgorithms());
 					this.combo.setSelectedIndex(m.getSelectedAlgorithmIndex());

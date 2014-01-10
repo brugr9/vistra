@@ -14,6 +14,7 @@ import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.IControl.ParameterEvent;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IItemLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -54,9 +55,9 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 */
 	private JCheckBoxMenuItem end;
 	/**
-	 * A field for a property menu item.
+	 * A field for a dialog menu item.
 	 */
-	private JMenuItem property;
+	private JMenuItem dialog;
 	/**
 	 * A field for a delete menu item.
 	 */
@@ -73,8 +74,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 *            the gui model
 	 */
 	public VertexPopup(JFrame top,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
-			IModel model) {
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer, IModel model) {
 		super("vertexPopup");
 		this.viewer = viewer;
 		this.model = (IModel) model;
@@ -83,18 +83,18 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 
 		/**/
 		this.start = new JCheckBoxMenuItem("start");
-		this.start.setActionCommand(ControlEvent.start);
+		this.start.setActionCommand(ParameterEvent.start);
 		this.start.addActionListener(model.getParameterStateHandler());
 		this.start.addActionListener(new StartActionListener());
 		//
 		this.end = new JCheckBoxMenuItem("end");
-		this.end.setActionCommand(ControlEvent.end);
+		this.end.setActionCommand(ParameterEvent.end);
 		this.end.addActionListener(model.getParameterStateHandler());
 		this.end.addActionListener(new EndActionListener());
 		//
-		this.property = new JMenuItem("property");
-		this.property.setActionCommand(ControlEvent.edit);
-		this.property.addActionListener(model.getParameterStateHandler());
+		this.dialog = new JMenuItem("property");
+		this.dialog.setActionCommand(ParameterEvent.edit);
+		this.dialog.addActionListener(model.getParameterStateHandler());
 		//
 		this.delete = new JMenuItem("delete");
 		this.delete.addActionListener(new DeleteActionListener());
@@ -103,7 +103,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		this.add(this.start);
 		this.add(this.end);
 		this.addSeparator();
-		this.add(this.property);
+		this.add(this.dialog);
 		this.addSeparator();
 		this.add(this.delete);
 	}
@@ -198,9 +198,8 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	public void addPropertyItemListener(final JFrame top) {
-		this.property.addActionListener(new ActionListener() {
+		this.dialog.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VertexPopup.this.showDialog(top);
@@ -222,15 +221,16 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 				this.setLabel(b.getString("vertex.label"));
 				this.start.setText(b.getString("start.label"));
 				this.end.setText(b.getString("finish.label"));
-				this.property.setText(b.getString("edit.label"));
+				this.dialog.setText(b.getString("edit.label"));
 				this.delete.setText(b.getString("delete.label"));
 			}
 			/**/
-			this.setEnabled(m.isEditingEnabled());
-			this.start.setEnabled(m.isEditingEnabled());
-			this.end.setEnabled(m.isEditingEnabled());
-			this.property.setEnabled(m.isEditingEnabled());
-			this.delete.setEnabled(m.isEditingEnabled());
+			this.setEnabled(m.isEditVertexEnabled());
+			this.start.setEnabled(m.isEditVertexEnabled());
+			this.end.setEnabled(m.isEditVertexEnabled());
+			this.dialog.setEnabled(m.isEditVertexEnabled());
+			// TODO delete vertex
+			this.delete.setEnabled(m.isEditVertexEnabled());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);

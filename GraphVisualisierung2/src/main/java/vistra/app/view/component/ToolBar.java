@@ -11,6 +11,7 @@ import javax.swing.JToolBar;
 
 import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.IControl.ParameterEvent;
 
 /**
  * A tool bar.
@@ -81,11 +82,11 @@ public class ToolBar extends JToolBar implements Observer {
 		this.editing.addActionListener(model.getParameterStateHandler());
 		this.picking.addActionListener(model.getParameterStateHandler());
 		// command
-		this.newUndirected.setActionCommand(ControlEvent.newUndirected);
-		this.newDirected.setActionCommand(ControlEvent.newDirected);
-		this.open.setActionCommand(ControlEvent.open);
-		this.save.setActionCommand(ControlEvent.save);
-		this.saveAs.setActionCommand(ControlEvent.saveAs);
+		this.newUndirected.setActionCommand(ParameterEvent.newUndirected);
+		this.newDirected.setActionCommand(ParameterEvent.newDirected);
+		this.open.setActionCommand(ParameterEvent.open);
+		this.save.setActionCommand(ParameterEvent.save);
+		this.saveAs.setActionCommand(ParameterEvent.saveAs);
 		this.editing.setActionCommand(ControlEvent.editing);
 		this.picking.setActionCommand(ControlEvent.picking);
 
@@ -153,8 +154,8 @@ public class ToolBar extends JToolBar implements Observer {
 								+ ": " + b.getString("picking.label"));
 					}
 				} else if (arg == ControlEvent.MODE) {
-					this.editing.setEnabled(m.isEditingEnabled());
-					this.picking.setEnabled(m.isPickingEnabled());
+					this.editing.setEnabled(m.isSelectEditingModeEnabled());
+					this.picking.setEnabled(m.isSelectPickingModeEnabled());
 				}
 				this.newUndirected.setEnabled(m.isUndirectedEnabled());
 				this.newDirected.setEnabled(m.isDirectedEnabled());

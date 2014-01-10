@@ -138,9 +138,9 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 				this.edgePopup.setLabel(b.getString("edge.label"));
 			} else if (arg == MODE) {
 				this.setMode(m.getMode());
-				this.modePopup.setEnabled(m.isModeEnabled());
-				this.vertexPopup.setEnabled(m.isVertexEnabled());
-				this.edgePopup.setEnabled(m.isEdgeEnabled());
+				this.modePopup.setEnabled(m.isSwitchModeEnabled());
+				this.vertexPopup.setEnabled(m.isEditVertexEnabled());
+				this.edgePopup.setEnabled(m.isEditEdgeEnabled());
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),

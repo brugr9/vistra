@@ -19,7 +19,10 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
+import vistra.app.control.IControl.AnimationEvent;
 import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.IControl.ParameterEvent;
+import vistra.app.control.IControl.SbsEvent;
 import vistra.framework.util.palette.ColorPalette;
 
 /**
@@ -188,13 +191,13 @@ public final class TraversalPanel extends JPanel implements Observer {
 				new ImageIcon(c.getResource("pause.png")));
 		this.stop = new JButton(new ImageIcon(c.getResource("stop.png")));
 		// action command
-		this.toBeginning.setActionCommand(ControlEvent.toBeginning);
-		this.backward.setActionCommand(ControlEvent.backward);
-		this.forward.setActionCommand(ControlEvent.forward);
-		this.toEnd.setActionCommand(ControlEvent.toEnd);
-		this.play.setActionCommand(ControlEvent.play);
-		this.pause.setActionCommand(ControlEvent.pause);
-		this.stop.setActionCommand(ControlEvent.stop);
+		this.toBeginning.setActionCommand(SbsEvent.toBeginning);
+		this.backward.setActionCommand(SbsEvent.backward);
+		this.forward.setActionCommand(SbsEvent.forward);
+		this.toEnd.setActionCommand(SbsEvent.toEnd);
+		this.play.setActionCommand(AnimationEvent.play);
+		this.pause.setActionCommand(AnimationEvent.pause);
+		this.stop.setActionCommand(AnimationEvent.stop);
 		// action listener
 		this.toBeginning.addActionListener(model.getSbsStateHandler());
 		this.backward.addActionListener(model.getSbsStateHandler());
@@ -280,19 +283,19 @@ public final class TraversalPanel extends JPanel implements Observer {
 					this.pause.setToolTipText(b.getString("pause.label"));
 					this.stop.setToolTipText(b.getString("stop.label"));
 				} else {
-					if (arg == ControlEvent.ALGORITHM) {
+					if (arg == ParameterEvent.ALGORITHM) {
 						this.progress.setMaximum(m.getTraversal().size());
-					} else if (arg == ControlEvent.DELAY) {
+					} else if (arg == AnimationEvent.DELAY) {
 						this.delay.setValue(m.getDelay());
-					} else if (arg == ControlEvent.STEPLENGTH) {
+					} else if (arg == SbsEvent.STEPLENGTH) {
 						this.steplength.setValue(m.getSteplength());
-					} else if (arg == ControlEvent.STEP_BY_STEP) {
+					} else if (arg == SbsEvent.STEP_BY_STEP) {
 						this.steplength.setEnabled(m.isSteplengthEnabled());
 						this.toBeginning.setEnabled(m.isToBeginningEnabled());
 						this.backward.setEnabled(m.isBackwardEnabled());
 						this.forward.setEnabled(m.isForwardEnabled());
 						this.toEnd.setEnabled(m.isToEndEnabled());
-					} else if (arg == ControlEvent.ANIMATION) {
+					} else if (arg == AnimationEvent.ANIMATION) {
 						this.delay.setEnabled(m.isDelayEnabled());
 						this.play.setEnabled(m.isPlayEnabled());
 						this.pause.setEnabled(m.isPauseEnabled());
@@ -301,7 +304,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 						// TODO
 						this.pause.setActionCommand(m.getPauseEvent()
 								.getValue());
-						if (m.getPauseEvent() == ControlEvent.PAUSE)
+						if (m.getPauseEvent() == AnimationEvent.PAUSE)
 							this.pause.setSelected(false);
 					}
 					this.progress.setValue(m.getProgress());

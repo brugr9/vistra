@@ -13,7 +13,7 @@ import javax.swing.Timer;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.IControl.SbsEvent;
 import vistra.framework.traversal.ITraversal;
 import vistra.framework.traversal.step.IStep;
 
@@ -110,7 +110,7 @@ public final class SbsStateHandler extends Observable implements
 			/* set the value */
 			this.model.setSteplength(value);
 			/* update the view */
-			this.model.notifyObservers(ControlEvent.STEPLENGTH);
+			this.model.notifyObservers(SbsEvent.STEPLENGTH);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -125,13 +125,13 @@ public final class SbsStateHandler extends Observable implements
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String c = e.getActionCommand();
-			if (c.equals(ControlEvent.toBeginning))
+			if (c.equals(SbsEvent.toBeginning))
 				this.handleToBeginning();
-			else if (c.equals(ControlEvent.backward))
+			else if (c.equals(SbsEvent.backward))
 				this.handleBackward();
-			else if (c.equals(ControlEvent.forward))
+			else if (c.equals(SbsEvent.forward))
 				this.handleForward();
-			else if (c.equals(ControlEvent.toEnd))
+			else if (c.equals(SbsEvent.toEnd))
 				this.handleToEnd();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
@@ -243,7 +243,7 @@ public final class SbsStateHandler extends Observable implements
 		this.model.setSbsEnabled(true);
 		this.model.setBackwardEnabled(false);
 		this.model.setToBeginningEnabled(false);
-		this.model.notifyObservers(ControlEvent.STEP_BY_STEP);
+		this.model.notifyObservers(SbsEvent.STEP_BY_STEP);
 	}
 
 	/**
@@ -251,7 +251,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	void setViewInter() {
 		this.model.setSbsEnabled(true);
-		this.model.notifyObservers(ControlEvent.STEP_BY_STEP);
+		this.model.notifyObservers(SbsEvent.STEP_BY_STEP);
 	}
 
 	/**
@@ -261,7 +261,7 @@ public final class SbsStateHandler extends Observable implements
 		this.model.setSbsEnabled(true);
 		this.model.setForwardEnabled(false);
 		this.model.setToEndEnabled(false);
-		this.model.notifyObservers(ControlEvent.STEP_BY_STEP);
+		this.model.notifyObservers(SbsEvent.STEP_BY_STEP);
 	}
 
 	/**
@@ -269,7 +269,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	void setViewOff() {
 		this.model.setSbsEnabled(false);
-		this.model.notifyObservers(ControlEvent.STEP_BY_STEP);
+		this.model.notifyObservers(SbsEvent.STEP_BY_STEP);
 	}
 
 	/**
@@ -416,10 +416,6 @@ public final class SbsStateHandler extends Observable implements
 			this.off = true;
 			this.counter = 0;
 			this.timer.start();
-			while (this.counter < NUMBER_OF_BLINKS) {
-				;
-			}
-			this.timer.stop();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -482,7 +478,6 @@ public final class SbsStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-
 				if (SbsStateHandler.this.off)
 					SbsStateHandler.this.step.execute();
 				else

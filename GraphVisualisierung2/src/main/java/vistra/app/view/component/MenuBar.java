@@ -12,6 +12,7 @@ import javax.swing.KeyStroke;
 
 import vistra.app.IModel;
 import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.IControl.ParameterEvent;
 import vistra.framework.util.palette.I18nPalette;
 
 /**
@@ -112,9 +113,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.saveAs.addActionListener(model.getParameterStateHandler());
 			this.quit.addActionListener(model.getParameterStateHandler());
 			// command
-			this.open.setActionCommand(ControlEvent.open);
-			this.save.setActionCommand(ControlEvent.save);
-			this.saveAs.setActionCommand(ControlEvent.saveAs);
+			this.open.setActionCommand(ParameterEvent.open);
+			this.save.setActionCommand(ParameterEvent.save);
+			this.saveAs.setActionCommand(ParameterEvent.saveAs);
 			this.quit.setActionCommand(ControlEvent.quit);
 			{// graph
 				this.newGraph = new JMenu("newGraph");
@@ -126,8 +127,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 				this.directed.addActionListener(model
 						.getParameterStateHandler());
 				// command
-				this.undirected.setActionCommand(ControlEvent.newUndirected);
-				this.directed.setActionCommand(ControlEvent.newDirected);
+				this.undirected.setActionCommand(ParameterEvent.newUndirected);
+				this.directed.setActionCommand(ParameterEvent.newDirected);
 				// add
 				this.newGraph.add(this.undirected);
 				this.newGraph.add(this.directed);
@@ -278,8 +279,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 								.getString("about.accelerator")));
 					}
 
-				} else if (arg == ControlEvent.GRAPH) {
-					this.saveAs.setEnabled(m.isSaveEnabled());
+				} else if (arg == ParameterEvent.GRAPH) {
+					this.save.setEnabled(m.isSaveEnabled());
 				} else {
 
 					// file

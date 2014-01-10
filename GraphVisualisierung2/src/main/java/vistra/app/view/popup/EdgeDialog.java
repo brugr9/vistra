@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.IControl.ParameterEvent;
 import vistra.app.control.verifier.EdgeWeightVerifier;
 import vistra.app.control.verifier.ItemIdVerifier;
 import vistra.framework.graph.item.IEdgeLayout;
@@ -58,18 +58,18 @@ public class EdgeDialog extends JDialog {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param edge
-	 *            an edge
 	 * @param top
 	 *            a top frame
 	 * @param viewer
 	 *            a visualization viewer
 	 * @param model
 	 *            a gui model
+	 * @param edge
+	 *            an edge
 	 */
-	public EdgeDialog(IEdgeLayout edge, JFrame top,
+	public EdgeDialog(JFrame top,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
-			IModel model) {
+			IModel model, IEdgeLayout edge) {
 		super(top, true);
 		this.setResizable(false);
 
@@ -98,7 +98,7 @@ public class EdgeDialog extends JDialog {
 		/* button panel */
 		// button
 		JButton ok = new JButton("OK");
-		ok.setActionCommand(ControlEvent.edit);
+		ok.setActionCommand(ParameterEvent.edit);
 		ok.addActionListener(model.getParameterStateHandler());
 		JButton cancel = new JButton("Cancel");
 		cancel.setActionCommand("Cancel");

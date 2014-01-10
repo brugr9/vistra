@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.IControl.AnimationEvent;
 import vistra.app.control.state.IAnimationStateHandler;
 import vistra.app.control.state.IParameterStateHandler;
 import vistra.app.control.state.ISbsStateHandler;
@@ -41,11 +41,11 @@ public final class Model extends Observable implements IModel {
 	private boolean saveAsEnabled;
 	private boolean quitEnabled;
 	// Edit
-	private boolean modeEnabled;
-	private boolean editingEnabled;
-	private boolean pickingEnabled;
-	private boolean vertexEnabled;
-	private boolean edgeEnabled;
+	private boolean switchModeEnabled;
+	private boolean selectEditingModeEnabled;
+	private boolean selectPickingModeEnabled;
+	private boolean editVertexEnabled;
+	private boolean editEdgeEnabled;
 	// I18n
 	private boolean i18nEnabled;
 	private boolean deCHEnabled;
@@ -91,7 +91,7 @@ public final class Model extends Observable implements IModel {
 	private boolean delayEnabled;
 	private boolean playEnabled;
 	private String pauseLabel;
-	private ControlEvent pauseEvent;
+	private AnimationEvent pauseEvent;
 	private boolean pauseEnabled;
 	private boolean stopEnabled;
 
@@ -124,11 +124,11 @@ public final class Model extends Observable implements IModel {
 		this.saveAsEnabled = false;
 		this.quitEnabled = false;
 		// Edit
-		this.modeEnabled = false;
-		this.editingEnabled = false;
-		this.pickingEnabled = false;
-		this.vertexEnabled = false;
-		this.edgeEnabled = false;
+		this.switchModeEnabled = false;
+		this.selectEditingModeEnabled = false;
+		this.selectPickingModeEnabled = false;
+		this.editVertexEnabled = false;
+		this.editEdgeEnabled = false;
 		// i18n
 		this.i18nEnabled = false;
 		this.deCHEnabled = false;
@@ -186,13 +186,7 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setMenuEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setMenuEnabled(boolean)
 	 */
 	@Override
 	public void setMenuEnabled(boolean menuEnabled) {
@@ -206,10 +200,7 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setMenuFileEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setMenuFileEnabled(boolean)
 	 */
 	@Override
 	public void setMenuFileEnabled(boolean menuEnabled) {
@@ -230,18 +221,15 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setMenuModeEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setMenuModeEnabled(boolean)
 	 */
 	@Override
 	public void setMenuModeEnabled(boolean menuEnabled) {
 		// Menu
-		this.setModeEnabled(menuEnabled);
+		this.setSwitchModeEnabled(menuEnabled);
 		// MenuItem
-		this.setMenuEditEnabled(menuEnabled);
-		this.setPickingEnabled(menuEnabled);
+		this.setSelectEditingModeEnabled(menuEnabled);
+		this.setSelectPickingModeEnabled(menuEnabled);
 
 		this.setChanged();
 	}
@@ -249,18 +237,12 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setMenuEditEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setMenuEditEnabled(boolean)
 	 */
 	@Override
 	public void setMenuEditEnabled(boolean menuEnabled) {
-		// Menu
-		this.setEditingEnabled(menuEnabled);
-		// MenuItem
-		this.setVertexEnabled(menuEnabled);
-		this.setEdgeEnabled(menuEnabled);
+		this.setEditVertexEnabled(menuEnabled);
+		this.setEditEdgeEnabled(menuEnabled);
 
 		this.setChanged();
 	}
@@ -268,10 +250,7 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setMenuI18nEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setMenuI18nEnabled(boolean)
 	 */
 	@Override
 	public void setMenuI18nEnabled(boolean menuEnabled) {
@@ -290,10 +269,7 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setMenuHelpEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setMenuHelpEnabled(boolean)
 	 */
 	@Override
 	public void setMenuHelpEnabled(boolean menuEnabled) {
@@ -309,10 +285,7 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setTraversalEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setTraversalEnabled(boolean)
 	 */
 	@Override
 	public void setTraversalEnabled(boolean menuEnabled) {
@@ -323,10 +296,7 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setStepByStepEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setSbsEnabled(boolean)
 	 */
 	@Override
 	public void setSbsEnabled(boolean menuEnabled) {
@@ -344,10 +314,7 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setAnimationEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setAnimationEnabled(boolean)
 	 */
 	@Override
 	public void setAnimationEnabled(boolean menuEnabled) {
@@ -364,10 +331,7 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getResourceBundle()
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#getResourceBundle()
 	 */
 	@Override
 	public ResourceBundle getResourceBundle() {
@@ -377,10 +341,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getShortcutsMessage()
+	 * @see vistra.app.IModel#setResourceBundle(java.util.ResourceBundle)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setResourceBundle(ResourceBundle resourceBundle) {
+		this.resourceBundle = resourceBundle;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getShortcutsMessage()
 	 */
 	@Override
 	public String getShortcutsMessage() {
@@ -390,10 +361,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getAboutMessage()
+	 * @see vistra.app.IModel#setShortcutsMessage(java.lang.String)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setShortcutsMessage(String shortcutsMessage) {
+		this.shortcutsMessage = shortcutsMessage;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getAboutMessage()
 	 */
 	@Override
 	public String getAboutMessage() {
@@ -403,10 +381,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getI18nListener()
+	 * @see vistra.app.IModel#setAboutMessage(java.lang.String)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setAboutMessage(String aboutMessage) {
+		this.aboutMessage = aboutMessage;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getI18nListener()
 	 */
 	@Override
 	public ActionListener getI18nListener() {
@@ -416,10 +401,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getShortcutsListener()
+	 * @see vistra.app.IModel#setI18nListener(java.awt.event.ActionListener)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setI18nListener(ActionListener i18nListener) {
+		this.i18nListener = i18nListener;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getShortcutsListener()
 	 */
 	@Override
 	public ActionListener getShortcutsListener() {
@@ -429,10 +421,18 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getAboutListener()
+	 * @see
+	 * vistra.app.IModel#setShortcutsListener(java.awt.event.ActionListener)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setShortcutsListener(ActionListener shortcutsListener) {
+		this.shortcutsListener = shortcutsListener;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getAboutListener()
 	 */
 	@Override
 	public ActionListener getAboutListener() {
@@ -442,10 +442,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isFileEnabled()
+	 * @see vistra.app.IModel#setAboutListener(java.awt.event.ActionListener)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setAboutListener(ActionListener aboutListener) {
+		this.aboutListener = aboutListener;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isFileEnabled()
 	 */
 	@Override
 	public boolean isFileEnabled() {
@@ -455,10 +462,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isNewEnabled()
+	 * @see vistra.app.IModel#setFileEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setFileEnabled(boolean fileEnabled) {
+		this.fileEnabled = fileEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isNewEnabled()
 	 */
 	@Override
 	public boolean isNewEnabled() {
@@ -468,10 +482,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isUndirectedEnabled()
+	 * @see vistra.app.IModel#setNewEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setNewEnabled(boolean newEnabled) {
+		this.newEnabled = newEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isUndirectedEnabled()
 	 */
 	@Override
 	public boolean isUndirectedEnabled() {
@@ -481,10 +502,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isDirectedEnabled()
+	 * @see vistra.app.IModel#setUndirectedEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setUndirectedEnabled(boolean undirectedEnabled) {
+		this.undirectedEnabled = undirectedEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isDirectedEnabled()
 	 */
 	@Override
 	public boolean isDirectedEnabled() {
@@ -494,10 +522,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isOpenEnabled()
+	 * @see vistra.app.IModel#setDirectedEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setDirectedEnabled(boolean directedEnabled) {
+		this.directedEnabled = directedEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isOpenEnabled()
 	 */
 	@Override
 	public boolean isOpenEnabled() {
@@ -507,10 +542,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isSaveEnabled()
+	 * @see vistra.app.IModel#setOpenEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setOpenEnabled(boolean openEnabled) {
+		this.openEnabled = openEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isSaveEnabled()
 	 */
 	@Override
 	public boolean isSaveEnabled() {
@@ -520,10 +562,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isSaveAsEnabled()
+	 * @see vistra.app.IModel#setSaveEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setSaveEnabled(boolean saveEnabled) {
+		this.saveEnabled = saveEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isSaveAsEnabled()
 	 */
 	@Override
 	public boolean isSaveAsEnabled() {
@@ -533,10 +582,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isQuitEnabled()
+	 * @see vistra.app.IModel#setSaveAsEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setSaveAsEnabled(boolean saveAsEnabled) {
+		this.saveAsEnabled = saveAsEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isQuitEnabled()
 	 */
 	@Override
 	public boolean isQuitEnabled() {
@@ -546,75 +602,117 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isModeEnabled()
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setQuitEnabled(boolean)
 	 */
 	@Override
-	public boolean isModeEnabled() {
-		return modeEnabled;
+	public void setQuitEnabled(boolean quitEnabled) {
+		this.quitEnabled = quitEnabled;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isEditingEnabled()
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#isSwitchModeEnabled()
 	 */
 	@Override
-	public boolean isEditingEnabled() {
-		return editingEnabled;
+	public boolean isSwitchModeEnabled() {
+		return switchModeEnabled;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isPickingEnabled()
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setSwitchModeEnabled(boolean)
 	 */
 	@Override
-	public boolean isPickingEnabled() {
-		return pickingEnabled;
+	public void setSwitchModeEnabled(boolean switchModeEnabled) {
+		this.switchModeEnabled = switchModeEnabled;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isVertexEnabled()
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#isSelectEditingModeEnabled()
 	 */
 	@Override
-	public boolean isVertexEnabled() {
-		return vertexEnabled;
+	public boolean isSelectEditingModeEnabled() {
+		return selectEditingModeEnabled;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isEdgeEnabled()
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setSelectEditingModeEnabled(boolean)
 	 */
 	@Override
-	public boolean isEdgeEnabled() {
-		return edgeEnabled;
+	public void setSelectEditingModeEnabled(boolean selectEditingModeEnabled) {
+		this.selectEditingModeEnabled = selectEditingModeEnabled;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isI18nEnabled()
+	 * @see vistra.app.IModel#isSelectPickingModeEnabled()
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public boolean isSelectPickingModeEnabled() {
+		return selectPickingModeEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#setSelectPickingModeEnabled(boolean)
+	 */
+	@Override
+	public void setSelectPickingModeEnabled(boolean selectPickingModeEnabled) {
+		this.selectPickingModeEnabled = selectPickingModeEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isEditVertexEnabled()
+	 */
+	@Override
+	public boolean isEditVertexEnabled() {
+		return editVertexEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#setEditVertexEnabled(boolean)
+	 */
+	@Override
+	public void setEditVertexEnabled(boolean editVertexEnabled) {
+		this.editVertexEnabled = editVertexEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isEditEdgeEnabled()
+	 */
+	@Override
+	public boolean isEditEdgeEnabled() {
+		return editEdgeEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#setEditEdgeEnabled(boolean)
+	 */
+	@Override
+	public void setEditEdgeEnabled(boolean editEdgeEnabled) {
+		this.editEdgeEnabled = editEdgeEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isI18nEnabled()
 	 */
 	@Override
 	public boolean isI18nEnabled() {
@@ -624,10 +722,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isDeCHEnabled()
+	 * @see vistra.app.IModel#setI18nEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setI18nEnabled(boolean i18nEnabled) {
+		this.i18nEnabled = i18nEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isDeCHEnabled()
 	 */
 	@Override
 	public boolean isDeCHEnabled() {
@@ -637,10 +742,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isDeDEEnabled()
+	 * @see vistra.app.IModel#setDeCHEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setDeCHEnabled(boolean deCHEnabled) {
+		this.deCHEnabled = deCHEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isDeDEEnabled()
 	 */
 	@Override
 	public boolean isDeDEEnabled() {
@@ -650,10 +762,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isFrFREnabled()
+	 * @see vistra.app.IModel#setDeDEEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setDeDEEnabled(boolean deDEEnabled) {
+		this.deDEEnabled = deDEEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isFrFREnabled()
 	 */
 	@Override
 	public boolean isFrFREnabled() {
@@ -663,10 +782,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isEnGBEnabled()
+	 * @see vistra.app.IModel#setFrFREnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setFrFREnabled(boolean frFREnabled) {
+		this.frFREnabled = frFREnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isEnGBEnabled()
 	 */
 	@Override
 	public boolean isEnGBEnabled() {
@@ -676,10 +802,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isEnUSEnabled()
+	 * @see vistra.app.IModel#setEnGBEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setEnGBEnabled(boolean enGBEnabled) {
+		this.enGBEnabled = enGBEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isEnUSEnabled()
 	 */
 	@Override
 	public boolean isEnUSEnabled() {
@@ -689,10 +822,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isHelpEnabled()
+	 * @see vistra.app.IModel#setEnUSEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setEnUSEnabled(boolean enUSEnabled) {
+		this.enUSEnabled = enUSEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isHelpEnabled()
 	 */
 	@Override
 	public boolean isHelpEnabled() {
@@ -702,10 +842,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isShortcutsEnabled()
+	 * @see vistra.app.IModel#setHelpEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setHelpEnabled(boolean helpEnabled) {
+		this.helpEnabled = helpEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isShortcutsEnabled()
 	 */
 	@Override
 	public boolean isShortcutsEnabled() {
@@ -715,10 +862,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isAboutEnabled()
+	 * @see vistra.app.IModel#setShortcutsEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setShortcutsEnabled(boolean shortcutsEnabled) {
+		this.shortcutsEnabled = shortcutsEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isAboutEnabled()
 	 */
 	@Override
 	public boolean isAboutEnabled() {
@@ -728,10 +882,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getParameterStateHandler()
+	 * @see vistra.app.IModel#setAboutEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setAboutEnabled(boolean aboutEnabled) {
+		this.aboutEnabled = aboutEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getParameterStateHandler()
 	 */
 	@Override
 	public IParameterStateHandler getParameterStateHandler() {
@@ -741,10 +902,19 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getGraph()
+	 * @see vistra.app.IModel#setParameterStateHandler(vistra.app.control.state.
+	 * IParameterStateHandler)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setParameterStateHandler(
+			IParameterStateHandler parameterStateHandler) {
+		this.parameterStateHandler = parameterStateHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getGraph()
 	 */
 	@Override
 	public IExtendedGraph getGraph() {
@@ -754,10 +924,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getStart()
+	 * @see vistra.app.IModel#setGraph(vistra.framework.graph.IExtendedGraph)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setGraph(IExtendedGraph graph) {
+		this.graph = graph;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getStart()
 	 */
 	@Override
 	public IVertexLayout getStart() {
@@ -767,10 +944,18 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getEnd()
+	 * @see
+	 * vistra.app.IModel#setStart(vistra.framework.graph.item.IVertexLayout)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setStart(IVertexLayout start) {
+		this.start = start;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getEnd()
 	 */
 	@Override
 	public IVertexLayout getEnd() {
@@ -780,10 +965,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getEnd()
+	 * @see vistra.app.IModel#setEnd(vistra.framework.graph.item.IVertexLayout)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setEnd(IVertexLayout end) {
+		this.end = end;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getFocus()
 	 */
 	@Override
 	public IVertexLayout getFocus() {
@@ -793,10 +985,18 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isGraphFile()
+	 * @see
+	 * vistra.app.IModel#setFocus(vistra.framework.graph.item.IVertexLayout)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setFocus(IVertexLayout focus) {
+		this.focus = focus;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isGraphFile()
 	 */
 	@Override
 	public boolean isGraphFile() {
@@ -806,10 +1006,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isGraphSaved()
+	 * @see vistra.app.IModel#setGraphFile(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setGraphFile(boolean graphFile) {
+		this.graphFile = graphFile;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isGraphSaved()
 	 */
 	@Override
 	public boolean isGraphSaved() {
@@ -819,10 +1026,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getMode()
+	 * @see vistra.app.IModel#setGraphSaved(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setGraphSaved(boolean graphSaved) {
+		this.graphSaved = graphSaved;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getMode()
 	 */
 	@Override
 	public Mode getMode() {
@@ -832,10 +1046,18 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getAlgorithms()
+	 * @see vistra.app.IModel#setMode(edu.uci.ics.jung.visualization.control.
+	 * ModalGraphMouse.Mode)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setMode(Mode mode) {
+		this.mode = mode;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getAlgorithms()
 	 */
 	@Override
 	public String[] getAlgorithms() {
@@ -845,10 +1067,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isAlgorithmsEnabled()
+	 * @see vistra.app.IModel#setAlgorithms(java.lang.String[])
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setAlgorithms(String[] algorithms) {
+		this.algorithms = algorithms;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isAlgorithmsEnabled()
 	 */
 	@Override
 	public boolean isAlgorithmsEnabled() {
@@ -858,10 +1087,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getSelectedAlgorithmIndex()
+	 * @see vistra.app.IModel#setAlgorithmsEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setAlgorithmsEnabled(boolean algorithmsEnabled) {
+		this.algorithmsEnabled = algorithmsEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getSelectedAlgorithmIndex()
 	 */
 	@Override
 	public int getSelectedAlgorithmIndex() {
@@ -871,10 +1107,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getAlgorithmDescription()
+	 * @see vistra.app.IModel#setSelectedAlgorithmIndex(int)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setSelectedAlgorithmIndex(int selectedAlgorithmIndex) {
+		this.selectedAlgorithmIndex = selectedAlgorithmIndex;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getAlgorithmDescription()
 	 */
 	@Override
 	public String getAlgorithmDescription() {
@@ -884,10 +1127,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getTraversal()
+	 * @see vistra.app.IModel#setAlgorithmDescription(java.lang.String)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setAlgorithmDescription(String algorithmDescription) {
+		this.algorithmDescription = algorithmDescription;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getTraversal()
 	 */
 	@Override
 	public ITraversal getTraversal() {
@@ -897,10 +1147,18 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getProgress()
+	 * @see
+	 * vistra.app.IModel#setTraversal(vistra.framework.traversal.ITraversal)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setTraversal(ITraversal traversal) {
+		this.traversal = traversal;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getProgress()
 	 */
 	@Override
 	public int getProgress() {
@@ -910,10 +1168,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getStepByStepStateHandler()
+	 * @see vistra.app.IModel#setProgress(int)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setProgress(int progress) {
+		this.progress = progress;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getSbsStateHandler()
 	 */
 	@Override
 	public ISbsStateHandler getSbsStateHandler() {
@@ -923,10 +1188,18 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getSteplength()
+	 * @see vistra.app.IModel#setSbsStateHandler(vistra.app.control.state.
+	 * ISbsStateHandler)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setSbsStateHandler(ISbsStateHandler sbsStateHandler) {
+		this.sbsStateHandler = sbsStateHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getSteplength()
 	 */
 	@Override
 	public int getSteplength() {
@@ -936,10 +1209,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isSteplengthEnabled()
+	 * @see vistra.app.IModel#setSteplength(int)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setSteplength(int steplength) {
+		this.steplength = steplength;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isSteplengthEnabled()
 	 */
 	@Override
 	public boolean isSteplengthEnabled() {
@@ -949,10 +1229,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isToBeginningEnabled()
+	 * @see vistra.app.IModel#setSteplengthEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setSteplengthEnabled(boolean steplengthEnabled) {
+		this.steplengthEnabled = steplengthEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isToBeginningEnabled()
 	 */
 	@Override
 	public boolean isToBeginningEnabled() {
@@ -962,10 +1249,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isBackwardEnabled()
+	 * @see vistra.app.IModel#setToBeginningEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setToBeginningEnabled(boolean toBeginningEnabled) {
+		this.toBeginningEnabled = toBeginningEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isBackwardEnabled()
 	 */
 	@Override
 	public boolean isBackwardEnabled() {
@@ -975,10 +1269,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isForwardEnabled()
+	 * @see vistra.app.IModel#setBackwardEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setBackwardEnabled(boolean backwardEnabled) {
+		this.backwardEnabled = backwardEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isForwardEnabled()
 	 */
 	@Override
 	public boolean isForwardEnabled() {
@@ -988,10 +1289,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isToEndEnabled()
+	 * @see vistra.app.IModel#setForwardEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setForwardEnabled(boolean forwardEnabled) {
+		this.forwardEnabled = forwardEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isToEndEnabled()
 	 */
 	@Override
 	public boolean isToEndEnabled() {
@@ -1001,10 +1309,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getAnimationStateHandler()
+	 * @see vistra.app.IModel#setToEndEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setToEndEnabled(boolean toEndEnabled) {
+		this.toEndEnabled = toEndEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getAnimationStateHandler()
 	 */
 	@Override
 	public IAnimationStateHandler getAnimationStateHandler() {
@@ -1014,10 +1329,19 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getDelay()
+	 * @see vistra.app.IModel#setAnimationStateHandler(vistra.app.control.state.
+	 * IAnimationStateHandler)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setAnimationStateHandler(
+			IAnimationStateHandler animationStateHandler) {
+		this.animationStateHandler = animationStateHandler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getDelay()
 	 */
 	@Override
 	public int getDelay() {
@@ -1027,10 +1351,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isDelayEnabled()
+	 * @see vistra.app.IModel#setDelay(int)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isDelayEnabled()
 	 */
 	@Override
 	public boolean isDelayEnabled() {
@@ -1040,10 +1371,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isPlayEnabled()
+	 * @see vistra.app.IModel#setDelayEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setDelayEnabled(boolean delayEnabled) {
+		this.delayEnabled = delayEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isPlayEnabled()
 	 */
 	@Override
 	public boolean isPlayEnabled() {
@@ -1053,10 +1391,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getPauseLabel()
+	 * @see vistra.app.IModel#setPlayEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setPlayEnabled(boolean playEnabled) {
+		this.playEnabled = playEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getPauseLabel()
 	 */
 	@Override
 	public String getPauseLabel() {
@@ -1066,23 +1411,38 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getPauseEvent()
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setPauseLabel(java.lang.String)
 	 */
 	@Override
-	public ControlEvent getPauseEvent() {
+	public void setPauseLabel(String pauseLabel) {
+		this.pauseLabel = pauseLabel;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getPauseEvent()
+	 */
+	@Override
+	public AnimationEvent getPauseEvent() {
 		return pauseEvent;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isPauseEnabled()
+	 * @see
+	 * vistra.app.IModel#setPauseEvent(vistra.app.control.IControl.ControlEvent)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setPauseEvent(AnimationEvent pauseEvent) {
+		this.pauseEvent = pauseEvent;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isPauseEnabled()
 	 */
 	@Override
 	public boolean isPauseEnabled() {
@@ -1092,10 +1452,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#isStopEnabled()
+	 * @see vistra.app.IModel#setPauseEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setPauseEnabled(boolean pauseEnabled) {
+		this.pauseEnabled = pauseEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#isStopEnabled()
 	 */
 	@Override
 	public boolean isStopEnabled() {
@@ -1105,10 +1472,17 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#getProtocol()
+	 * @see vistra.app.IModel#setStopEnabled(boolean)
 	 */
-	/**
-	 * {@inheritDoc}
+	@Override
+	public void setStopEnabled(boolean stopEnabled) {
+		this.stopEnabled = stopEnabled;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getProtocol()
 	 */
 	@Override
 	public StringBuilder getProtocol() {
@@ -1118,825 +1492,11 @@ public final class Model extends Observable implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.gui.IGuiModel#setResourceBundle(java.util.ResourceBundle)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setResourceBundle(ResourceBundle resourceBundle) {
-		this.resourceBundle = resourceBundle;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setShortcutsMessage(java.lang.String)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setShortcutsMessage(String shortcutsMessage) {
-		this.shortcutsMessage = shortcutsMessage;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setAboutMessage(java.lang.String)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setAboutMessage(String aboutMessage) {
-		this.aboutMessage = aboutMessage;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setI18nListener(java.awt.event.ActionListener)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setI18nListener(ActionListener i18nListener) {
-		this.i18nListener = i18nListener;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * vistra.gui.IGuiModel#setShortcutsListener(java.awt.event.ActionListener)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setShortcutsListener(ActionListener shortcutsListener) {
-		this.shortcutsListener = shortcutsListener;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setAboutListener(java.awt.event.ActionListener)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setAboutListener(ActionListener aboutListener) {
-		this.aboutListener = aboutListener;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setFileEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setFileEnabled(boolean fileEnabled) {
-		this.fileEnabled = fileEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setNewEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setNewEnabled(boolean newEnabled) {
-		this.newEnabled = newEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setUndirectedEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setUndirectedEnabled(boolean undirectedEnabled) {
-		this.undirectedEnabled = undirectedEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setDirectedEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDirectedEnabled(boolean directedEnabled) {
-		this.directedEnabled = directedEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setOpenEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setOpenEnabled(boolean openEnabled) {
-		this.openEnabled = openEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setSaveEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setSaveEnabled(boolean saveEnabled) {
-		this.saveEnabled = saveEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setSaveAsEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setSaveAsEnabled(boolean saveAsEnabled) {
-		this.saveAsEnabled = saveAsEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setQuitEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setQuitEnabled(boolean quitEnabled) {
-		this.quitEnabled = quitEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setModeEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setModeEnabled(boolean modeEnabled) {
-		this.modeEnabled = modeEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setEditingEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setEditingEnabled(boolean editingEnabled) {
-		this.editingEnabled = editingEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setPickingEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setPickingEnabled(boolean pickingEnabled) {
-		this.pickingEnabled = pickingEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setVertexEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setVertexEnabled(boolean vertexEnabled) {
-		this.vertexEnabled = vertexEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setEdgeEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setEdgeEnabled(boolean edgeEnabled) {
-		this.edgeEnabled = edgeEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setI18nEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setI18nEnabled(boolean i18nEnabled) {
-		this.i18nEnabled = i18nEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setDeCHEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDeCHEnabled(boolean deCHEnabled) {
-		this.deCHEnabled = deCHEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setDeDEEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDeDEEnabled(boolean deDEEnabled) {
-		this.deDEEnabled = deDEEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setFrFREnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setFrFREnabled(boolean frFREnabled) {
-		this.frFREnabled = frFREnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setEnGBEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setEnGBEnabled(boolean enGBEnabled) {
-		this.enGBEnabled = enGBEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setEnUSEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setEnUSEnabled(boolean enUSEnabled) {
-		this.enUSEnabled = enUSEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setHelpEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setHelpEnabled(boolean helpEnabled) {
-		this.helpEnabled = helpEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setShortcutsEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setShortcutsEnabled(boolean shortcutsEnabled) {
-		this.shortcutsEnabled = shortcutsEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setAboutEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setAboutEnabled(boolean aboutEnabled) {
-		this.aboutEnabled = aboutEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * vistra.gui.IGuiModel#setParameterStateHandler(vistra.gui.control.state
-	 * .IParameterStateHandler)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setParameterStateHandler(
-			IParameterStateHandler parameterStateHandler) {
-		this.parameterStateHandler = parameterStateHandler;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setGraph(vistra.core.graph.IExtendedGraph)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setGraph(IExtendedGraph graph) {
-		this.graph = graph;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setStart(vistra.core.graph.item.IVertexLayout)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setStart(IVertexLayout start) {
-		this.start = start;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setEnd(vistra.core.graph.item.IVertexLayout)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setEnd(IVertexLayout end) {
-		this.end = end;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setEnd(vistra.core.graph.item.IVertexLayout)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setFocus(IVertexLayout focus) {
-		this.focus = focus;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setGraphFile(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setGraphFile(boolean graphFile) {
-		this.graphFile = graphFile;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setGraphSaved(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setGraphSaved(boolean graphSaved) {
-		this.graphSaved = graphSaved;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setMode(edu.uci.ics.jung.visualization.control.
-	 * ModalGraphMouse.Mode)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setMode(Mode mode) {
-		this.mode = mode;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setAlgorithms(java.lang.String[])
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setAlgorithms(String[] algorithms) {
-		this.algorithms = algorithms;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setAlgorithmsEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setAlgorithmsEnabled(boolean algorithmsEnabled) {
-		this.algorithmsEnabled = algorithmsEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setSelectedAlgorithmIndex(int)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setSelectedAlgorithmIndex(int selectedAlgorithmIndex) {
-		this.selectedAlgorithmIndex = selectedAlgorithmIndex;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setAlgorithmDescription(java.lang.String)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setAlgorithmDescription(String algorithmDescription) {
-		this.algorithmDescription = algorithmDescription;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setTraversal(vistra.core.traversal.ITraversal)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setTraversal(ITraversal traversal) {
-		this.traversal = traversal;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setProgress(int)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setProgress(int progress) {
-		this.progress = progress;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * vistra.gui.IGuiModel#setStepByStepStateHandler(vistra.gui.control.state
-	 * .ISbsStateHandler)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setSbsStateHandler(ISbsStateHandler sbsStateHandler) {
-		this.sbsStateHandler = sbsStateHandler;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setSteplength(int)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setSteplength(int steplength) {
-		this.steplength = steplength;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setSteplengthEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setSteplengthEnabled(boolean steplengthEnabled) {
-		this.steplengthEnabled = steplengthEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setToBeginningEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setToBeginningEnabled(boolean toBeginningEnabled) {
-		this.toBeginningEnabled = toBeginningEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setBackwardEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setBackwardEnabled(boolean backwardEnabled) {
-		this.backwardEnabled = backwardEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setForwardEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setForwardEnabled(boolean forwardEnabled) {
-		this.forwardEnabled = forwardEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setToEndEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setToEndEnabled(boolean toEndEnabled) {
-		this.toEndEnabled = toEndEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * vistra.gui.IGuiModel#setAnimationStateHandler(vistra.gui.control.state
-	 * .IAnimationStateHandler)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setAnimationStateHandler(
-			IAnimationStateHandler animationStateHandler) {
-		this.animationStateHandler = animationStateHandler;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setDelay(int)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDelay(int delay) {
-		this.delay = delay;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setDelayEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDelayEnabled(boolean delayEnabled) {
-		this.delayEnabled = delayEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setPlayEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setPlayEnabled(boolean playEnabled) {
-		this.playEnabled = playEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setPauseLabel(java.lang.String)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setPauseLabel(String pauseLabel) {
-		this.pauseLabel = pauseLabel;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * vistra.gui.IGuiModel#setPauseEvent(vistra.gui.control.IControl.EventSource
-	 * )
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setPauseEvent(ControlEvent pauseEvent) {
-		this.pauseEvent = pauseEvent;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setPauseEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setPauseEnabled(boolean pauseEnabled) {
-		this.pauseEnabled = pauseEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setStopEnabled(boolean)
-	 */
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setStopEnabled(boolean stopEnabled) {
-		this.stopEnabled = stopEnabled;
-		this.setChanged();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.gui.IGuiModel#setProtocol(java.lang.StringBuilder)
-	 */
-	/**
-	 * {@inheritDoc}
+	 * @see vistra.app.IModel#setProtocol(java.lang.StringBuilder)
 	 */
 	@Override
 	public void setProtocol(StringBuilder protocol) {
 		this.protocol = protocol;
-		this.setChanged();
 	}
 
 }

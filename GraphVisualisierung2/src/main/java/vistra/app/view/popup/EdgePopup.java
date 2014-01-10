@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
+import vistra.app.Model;
 import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.IControl.ParameterEvent;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IItemLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -29,13 +31,17 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	private static final long serialVersionUID = 3273304014704565148L;
 
 	/**
+	 * A field for a top frame.
+	 */
+	private JFrame top;
+	/**
 	 * A field for a visualization viewer.
 	 */
 	private final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
 	/**
 	 * A field for a model.
 	 */
-	private IModel model;
+	private Model model;
 	/**
 	 * A field for a point.
 	 */
@@ -45,9 +51,9 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	 */
 	private IEdgeLayout edge;
 	/**
-	 * A field for a property menu item.
+	 * A field for a dialog menu item.
 	 */
-	private JMenuItem property;
+	private JMenuItem dialog;
 	/**
 	 * A field for a delete menu item.
 	 */
@@ -64,53 +70,23 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	 *            the gui model
 	 */
 	public EdgePopup(JFrame top,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
-			IModel model) {
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer, IModel model) {
 		super("edgePopup");
 		/**/
+		this.top = top;
 		this.viewer = viewer;
-		this.model = model;
+		this.model = (Model) model;
 		this.point = null;
 		this.edge = null;
-
 		/**/
-		this.property = new JMenuItem("property");
-		this.property.setActionCommand(ControlEvent.edit);
-		this.property.addActionListener(model.getParameterStateHandler());
-		this.addPropertyItemListener(top);
-		//
+		this.dialog = new JMenuItem("dialog");
+		this.dialog.addActionListener(new DialogActionListener());
 		this.delete = new JMenuItem("delete");
 		this.delete.addActionListener(new DeleteActionListener());
-
 		/**/
-		this.add(this.property);
+		this.add(this.dialog);
 		this.addSeparator();
 		this.add(this.delete);
-	}
-
-	/**
-	 * Shows the dialog.
-	 * 
-	 * @param owner
-	 */
-	private void showDialog(JFrame owner) {
-		if (this.point != null && this.edge != null) {
-			EdgeDialog dialog = new EdgeDialog(this.edge, owner, this.viewer,
-					this.model);
-			dialog.setLocation((int) this.point.getX() + owner.getX(),
-					(int) this.point.getY() + owner.getY());
-			dialog.setVisible(true);
-		}
-	}
-
-	/**
-	 * Deletes the item.
-	 */
-	private void delete() {
-		if (this.edge != null) {
-			this.viewer.getPickedEdgeState().pick(this.edge, false);
-			this.viewer.getGraphLayout().getGraph().removeEdge(this.edge);
-		}
 	}
 
 	/**
@@ -128,22 +104,8 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	 */
 	@Override
 	public void setPopupLocation(Point2D point) {
-		if (point != null) {
+		if (point != null)
 			this.point = point;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void addPropertyItemListener(final JFrame top) {
-		this.property.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EdgePopup.this.showDialog(top);
-			}
-		});
 	}
 
 	/**
@@ -158,13 +120,13 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		try {
 			if (arg == ControlEvent.I18N) {
 				this.setLabel(b.getString("edge.label"));
-				this.property.setText(b.getString("edit.label"));
+				this.dialog.setText(b.getString("edit.label"));
 				this.delete.setText(b.getString("delete.label"));
 			}
 			/**/
-			this.setEnabled(m.isEditingEnabled());
-			this.property.setEnabled(m.isEditingEnabled());
-			this.delete.setEnabled(m.isEditingEnabled());
+			this.setEnabled(m.isEditEdgeEnabled());
+			this.dialog.setEnabled(m.isEditEdgeEnabled());
+			this.delete.setEnabled(m.isEditEdgeEnabled());
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);
@@ -178,11 +140,33 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
+	private class DialogActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (point != null && edge != null) {
+				EdgeDialog dialog = new EdgeDialog(top, viewer, model, edge);
+				dialog.setLocation((int) point.getX() + top.getX(),
+						(int) point.getY() + top.getY());
+				dialog.setVisible(true);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
 	private class DeleteActionListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			EdgePopup.this.delete();
+			if (edge != null) {
+				viewer.getPickedEdgeState().pick(edge, false);
+				viewer.getGraphLayout().getGraph().removeEdge(edge);
+				model.notifyObservers(ParameterEvent.GRAPH);
+			}
 		}
 	}
 
