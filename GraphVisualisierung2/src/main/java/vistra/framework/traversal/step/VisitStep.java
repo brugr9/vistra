@@ -13,7 +13,7 @@ import vistra.framework.graph.item.state.command.VisitedEdgeCommand;
 import vistra.framework.graph.item.state.command.VisitedVertexCommand;
 
 /**
- * A step: visit vertex over edge. TODO parameter: a map
+ * A step: visit vertex over edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -34,12 +34,12 @@ public class VisitStep extends AbstractStep implements IStep {
 			IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
 			IItemStateCommand vertexCommand = new VisitedVertexCommand(vertex);
 			//
-			this.stepHandler.addItemStateCommand(edgeCommand);
-			this.stepHandler.addItemStateCommand(vertexCommand);
+			this.commandHandler.addCommand(edgeCommand);
+			this.commandHandler.addCommand(vertexCommand);
 			//
 			// edgeCommand.execute();
 			// vertexCommand.execute();
-			this.stepHandler.execute();
+			this.commandHandler.execute();
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + " visited");
@@ -73,12 +73,12 @@ public class VisitStep extends AbstractStep implements IStep {
 				IItemStateCommand vertexCommand = new VisitedVertexCommand(
 						vertex);
 				//
-				this.stepHandler.addItemStateCommand(edgeCommand);
-				this.stepHandler.addItemStateCommand(vertexCommand);
+				this.commandHandler.addCommand(edgeCommand);
+				this.commandHandler.addCommand(vertexCommand);
 				//
 				// edgeCommand.execute();
 				// vertexCommand.execute();
-				this.stepHandler.execute();
+				this.commandHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId() + " visited");
@@ -112,12 +112,12 @@ public class VisitStep extends AbstractStep implements IStep {
 				IItemStateCommand vertexCommand = new VisitedVertexCommand(
 						vertex);
 				//
-				this.stepHandler.addItemStateCommand(edgeCommand);
-				this.stepHandler.addItemStateCommand(vertexCommand);
+				this.commandHandler.addCommand(edgeCommand);
+				this.commandHandler.addCommand(vertexCommand);
 				//
 				// edgeCommand.execute();
 				// vertexCommand.execute();
-				this.stepHandler.execute();
+				this.commandHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId() + " visited");

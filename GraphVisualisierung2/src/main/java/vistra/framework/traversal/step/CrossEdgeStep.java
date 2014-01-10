@@ -25,9 +25,9 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 		super();
 		try {
 			IItemStateCommand command = new CrossEdgeCommand(edge);
-			this.stepHandler.addItemStateCommand(command);
+			this.commandHandler.addCommand(command);
 			// command.execute();
-			this.stepHandler.execute();
+			this.commandHandler.execute();
 			this.description.append("Cross-edge ");
 			if (((IEdgeLayout) edge).getId().length() != 0)
 				this.description.append(((IEdgeLayout) edge).getId());
@@ -48,9 +48,9 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 		try {
 			for (IEdge edge : edges) {
 				IItemStateCommand command = new CrossEdgeCommand(edge);
-				this.stepHandler.addItemStateCommand(command);
+				this.commandHandler.addCommand(command);
 				// command.execute();
-				this.stepHandler.execute();
+				this.commandHandler.execute();
 				this.description.append("Cross-edge ");
 				if (((IEdgeLayout) edge).getId().length() != 0)
 					this.description.append(((IEdgeLayout) edge).getId());

@@ -6,7 +6,7 @@ package vistra.framework.util;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface ICommandHandler {
+public interface ICommandHandler extends ICommand {
 
 	/**
 	 * Adds a command.

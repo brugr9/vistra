@@ -4,15 +4,15 @@ import vistra.framework.graph.item.state.command.IItemStateCommand;
 import vistra.framework.util.ICommand;
 
 /**
- * A step handler interface. A step handler is a command handler specialised on
- * item-state-commands.
+ * An item-state-command handler interface (macro command). A
+ * {@code ICommandHandler} specialized on {@code IItemStateCommand}s.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * @see IStep
  * @see IItemStateCommand
  * 
  */
-interface IStepHandler extends ICommand {
+interface IItemStateCommandHandler extends ICommand {
 
 	/**
 	 * Adds an item-state command.
@@ -21,6 +21,6 @@ interface IStepHandler extends ICommand {
 	 *            the item-state command to add
 	 * @throws Exception
 	 */
-	void addItemStateCommand(IItemStateCommand command) throws Exception;
+	void addCommand(IItemStateCommand command) throws Exception;
 
 }

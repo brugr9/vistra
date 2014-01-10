@@ -13,16 +13,16 @@ abstract class AbstractStep implements IStep {
 	 */
 	StringBuilder description;
 	/**
-	 * A field for a step handler.
+	 * A field for a command handler.
 	 */
-	IStepHandler stepHandler;
+	IItemStateCommandHandler commandHandler;
 
 	/**
 	 * Main constructor.
 	 */
 	AbstractStep() {
 		this.description = new StringBuilder();
-		this.stepHandler = new StepHandler();
+		this.commandHandler = new ItemStateCommandHandler();
 	}
 
 	/**
@@ -30,7 +30,7 @@ abstract class AbstractStep implements IStep {
 	 */
 	@Override
 	public void execute() throws Exception {
-		this.stepHandler.execute();
+		this.commandHandler.execute();
 	}
 
 	/**
@@ -38,7 +38,7 @@ abstract class AbstractStep implements IStep {
 	 */
 	@Override
 	public void undo() throws Exception {
-		this.stepHandler.undo();
+		this.commandHandler.undo();
 	}
 
 	/**

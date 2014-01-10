@@ -6,12 +6,13 @@ import java.util.List;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 
 /**
- * A step handler is a command handler specialised on item-state-commands.
+ * An item-state-command handler (macro command). A {@code ICommandHandler}
+ * specialized on {@code IItemStateCommand}s.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class StepHandler implements IStepHandler {
+class ItemStateCommandHandler implements IItemStateCommandHandler {
 
 	/**
 	 * A field for a list of item-state commands.
@@ -21,7 +22,7 @@ class StepHandler implements IStepHandler {
 	/**
 	 * Main constructor.
 	 */
-	StepHandler() {
+	ItemStateCommandHandler() {
 		this.commands = new ArrayList<IItemStateCommand>();
 	}
 
@@ -48,7 +49,7 @@ class StepHandler implements IStepHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addItemStateCommand(IItemStateCommand command) throws Exception {
+	public void addCommand(IItemStateCommand command) throws Exception {
 		this.commands.add(command);
 	}
 

@@ -29,9 +29,9 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 		super();
 		try {
 			IItemStateCommand command = new UpdatedVertexCommand(vertex, value);
-			this.stepHandler.addItemStateCommand(command);
+			this.commandHandler.addCommand(command);
 			// command.execute();
-			this.stepHandler.execute();
+			this.commandHandler.execute();
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + ", value updated to "
@@ -55,9 +55,9 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 			for (IVertex vertex : vertices) {
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
-				this.stepHandler.addItemStateCommand(command);
+				this.commandHandler.addCommand(command);
 				// command.execute();
-				this.stepHandler.execute();
+				this.commandHandler.execute();
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
 						+ ", value updated to " + value
@@ -86,9 +86,9 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 				value = values.get(index);
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
-				this.stepHandler.addItemStateCommand(command);
+				this.commandHandler.addCommand(command);
 				// command.execute();
-				this.stepHandler.execute();
+				this.commandHandler.execute();
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
 						+ ", value updated to " + value
@@ -116,8 +116,9 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 				value = entry.getValue();
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
-				this.stepHandler.addItemStateCommand(command);
-				command.execute();
+				this.commandHandler.addCommand(command);
+				// command.execute();
+				this.commandHandler.execute();
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
 						+ ", value updated to " + value

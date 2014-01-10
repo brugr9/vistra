@@ -35,12 +35,12 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 			IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
 					vertex);
 			//
-			this.stepHandler.addItemStateCommand(edgeCommand);
-			this.stepHandler.addItemStateCommand(vertexCommand);
+			this.commandHandler.addCommand(edgeCommand);
+			this.commandHandler.addCommand(vertexCommand);
 			//
 			// edgeCommand.execute();
 			// vertexCommand.execute();
-			this.stepHandler.execute();
+			this.commandHandler.execute();
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + ": Solution member ");
@@ -75,12 +75,12 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 				IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
 						vertex);
 				//
-				this.stepHandler.addItemStateCommand(edgeCommand);
-				this.stepHandler.addItemStateCommand(vertexCommand);
+				this.commandHandler.addCommand(edgeCommand);
+				this.commandHandler.addCommand(vertexCommand);
 				//
 				// edgeCommand.execute();
 				// vertexCommand.execute();
-				this.stepHandler.execute();
+				this.commandHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
@@ -116,12 +116,12 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 				IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
 						vertex);
 				//
-				this.stepHandler.addItemStateCommand(edgeCommand);
-				this.stepHandler.addItemStateCommand(vertexCommand);
+				this.commandHandler.addCommand(edgeCommand);
+				this.commandHandler.addCommand(vertexCommand);
 				//
 				// edgeCommand.execute();
 				// vertexCommand.execute();
-				this.stepHandler.execute();
+				this.commandHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
