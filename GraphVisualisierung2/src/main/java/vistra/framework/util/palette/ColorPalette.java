@@ -28,7 +28,7 @@ public enum ColorPalette {
 	 */
 	GREEN(155, 205, 50),
 	/**
-	 * The color darkgreen in the sRGB space.
+	 * The color dark green in the sRGB space.
 	 */
 	DARKGREEN(90, 110, 80),
 	/**
@@ -40,7 +40,7 @@ public enum ColorPalette {
 	 */
 	BLUE(210, 220, 250),
 	/**
-	 * The color darkblue in the sRGB space.
+	 * The color dark blue in the sRGB space.
 	 */
 	DARKBLUE(65, 70, 140),
 	/**
@@ -56,7 +56,7 @@ public enum ColorPalette {
 	 */
 	GREY(210, 210, 210),
 	/**
-	 * The color darkgrey in the sRGB space.
+	 * The color dark grey in the sRGB space.
 	 */
 	DARKGREY(140, 135, 130),
 	/**
@@ -121,7 +121,7 @@ public enum ColorPalette {
 	 */
 	public final static Color green = GREEN.getColor();
 	/**
-	 * The color darkgreen in the sRGB space.
+	 * The color dark green in the sRGB space.
 	 */
 	public final static Color darkgreen = DARKGREEN.getColor();
 	/**
@@ -133,7 +133,7 @@ public enum ColorPalette {
 	 */
 	public final static Color blue = BLUE.getColor();
 	/**
-	 * The color darkblue in the sRGB space.
+	 * The color dark blue in the sRGB space.
 	 */
 	public final static Color darkblue = DARKBLUE.getColor();
 	/**
@@ -149,7 +149,7 @@ public enum ColorPalette {
 	 */
 	public final static Color grey = GREY.getColor();
 	/**
-	 * The color darkgrey in the sRGB space.
+	 * The color dark grey in the sRGB space.
 	 */
 	public final static Color darkgrey = DARKGREY.getColor();
 	/**

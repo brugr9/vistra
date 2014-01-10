@@ -3,7 +3,7 @@ package vistra.framework.util.palette;
 import java.awt.BasicStroke;
 
 /**
- * A palette defining some customised strokes.
+ * A palette defining some customized strokes.
  * <p>
  * Use the lower-case constants for getting directly a {@code BasicStroke}.
  * 

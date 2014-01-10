@@ -17,12 +17,12 @@ import vistra.framework.ICore;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-final class ApplicationFactory {
+final class AppFactory {
 
 	/**
 	 * A main (no-)constructor.
 	 */
-	private ApplicationFactory() {
+	private AppFactory() {
 	}
 
 	/**
@@ -69,7 +69,7 @@ final class ApplicationFactory {
 	 */
 	private static Properties createProperties() throws Exception {
 
-		String propertiesName = ApplicationFactory.class.getPackage().getName()
+		String propertiesName = AppFactory.class.getPackage().getName()
 				.replace(".", File.separator)
 				+ File.separator + "Application.properties";
 
@@ -77,15 +77,15 @@ final class ApplicationFactory {
 
 			Properties properties = null;
 			properties = new Properties();
-			properties.load(ApplicationFactory.class.getClassLoader()
+			properties.load(AppFactory.class.getClassLoader()
 					.getResourceAsStream(propertiesName));
 			return properties;
 
 		} catch (SecurityException e) {
-			throw new Exception(ApplicationFactory.class.getName(), e);
+			throw new Exception(AppFactory.class.getName(), e);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(
-					ApplicationFactory.class.getName()
+					AppFactory.class.getName()
 							+ ": \nCannot load properties file "
 							+ propertiesName + "\n", e);
 		}

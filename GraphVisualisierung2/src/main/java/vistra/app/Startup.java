@@ -2,7 +2,7 @@ package vistra.app;
 
 import javax.swing.JOptionPane;
 
-import vistra.app.ApplicationFactory.ViewType;
+import vistra.app.AppFactory.ViewType;
 
 /**
  * Startup.
@@ -22,7 +22,7 @@ public class Startup {
 		// @Override
 		// public void run() {
 		try {
-			ApplicationFactory.createApplication(ViewType.DEFAULT);
+			AppFactory.createApplication(ViewType.DEFAULT);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(
 					null,
