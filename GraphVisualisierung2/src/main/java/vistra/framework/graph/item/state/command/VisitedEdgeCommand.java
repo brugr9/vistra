@@ -27,7 +27,7 @@ public class VisitedEdgeCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleVisited();
+		((EdgeStateHandler) super.itemStateHandler).handleVisited();
 	}
 
 }

@@ -13,16 +13,16 @@ abstract class AbstractItemStateCommand implements IItemStateCommand {
 	/**
 	 * A field for a state handler.
 	 */
-	protected IItemStateHandler stateHandler;
+	protected IItemStateHandler itemStateHandler;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param stateHandler
-	 *            an state handler
+	 * @param itemStateHandler
+	 *            an item state handler
 	 */
-	AbstractItemStateCommand(IItemStateHandler stateHandler) {
-		this.stateHandler = stateHandler;
+	AbstractItemStateCommand(IItemStateHandler itemStateHandler) {
+		this.itemStateHandler = itemStateHandler;
 	}
 
 	/**
@@ -30,7 +30,7 @@ abstract class AbstractItemStateCommand implements IItemStateCommand {
 	 */
 	@Override
 	public void undo() throws Exception {
-		this.stateHandler.handlePreviousState();
+		this.itemStateHandler.handlePreviousState();
 	}
 
 }

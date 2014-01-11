@@ -27,7 +27,7 @@ public class VisitedVertexCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((VertexStateHandler) super.stateHandler).handleVisited();
+		((VertexStateHandler) super.itemStateHandler).handleVisited();
 	}
 
 }

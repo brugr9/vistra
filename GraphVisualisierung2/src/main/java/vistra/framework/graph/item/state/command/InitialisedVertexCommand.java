@@ -27,7 +27,7 @@ public class InitialisedVertexCommand extends AbstractItemStateCommand
 	 */
 	@Override
 	public void execute() throws Exception {
-		((VertexStateHandler) super.stateHandler).handleInitialised();
+		((VertexStateHandler) super.itemStateHandler).handleInitialised();
 	}
 
 }

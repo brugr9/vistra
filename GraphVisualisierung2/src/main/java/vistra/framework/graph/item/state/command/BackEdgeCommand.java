@@ -28,7 +28,7 @@ public class BackEdgeCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleBack();
+		((EdgeStateHandler) super.itemStateHandler).handleBack();
 	}
 
 }

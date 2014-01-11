@@ -66,8 +66,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Collection<IEdge> getInEdges(IVertex vertex) {
-		return this.delegate.getInEdges(vertex);
+	public Collection<IEdge> getInEdges(IVertex v) {
+		return this.delegate.getInEdges(v);
 	}
 
 	/*
@@ -79,8 +79,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Collection<IEdge> getOutEdges(IVertex vertex) {
-		return this.delegate.getOutEdges(vertex);
+	public Collection<IEdge> getOutEdges(IVertex v) {
+		return this.delegate.getOutEdges(v);
 	}
 
 	/*
@@ -92,8 +92,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Collection<IVertex> getPredecessors(IVertex vertex) {
-		return this.delegate.getPredecessors(vertex);
+	public Collection<IVertex> getPredecessors(IVertex v) {
+		return this.delegate.getPredecessors(v);
 	}
 
 	/*
@@ -105,8 +105,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Collection<IVertex> getSuccessors(IVertex vertex) {
-		return this.delegate.getSuccessors(vertex);
+	public Collection<IVertex> getSuccessors(IVertex v) {
+		return this.delegate.getSuccessors(v);
 	}
 
 	/*
@@ -118,8 +118,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int inDegree(IVertex vertex) {
-		return this.delegate.inDegree(vertex);
+	public int inDegree(IVertex v) {
+		return this.delegate.inDegree(v);
 	}
 
 	/*
@@ -131,8 +131,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int outDegree(IVertex vertex) {
-		return this.delegate.outDegree(vertex);
+	public int outDegree(IVertex v) {
+		return this.delegate.outDegree(v);
 	}
 
 	/*
@@ -172,8 +172,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getPredecessorCount(IVertex vertex) {
-		return this.delegate.getPredecessorCount(vertex);
+	public int getPredecessorCount(IVertex v) {
+		return this.delegate.getPredecessorCount(v);
 	}
 
 	/*
@@ -185,8 +185,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getSuccessorCount(IVertex vertex) {
-		return this.delegate.getSuccessorCount(vertex);
+	public int getSuccessorCount(IVertex v) {
+		return this.delegate.getSuccessorCount(v);
 	}
 
 	/*
@@ -225,8 +225,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isSource(IVertex vertex, IEdge edge) {
-		return this.delegate.isSource(vertex, edge);
+	public boolean isSource(IVertex v, IEdge e) {
+		return this.delegate.isSource(v, e);
 	}
 
 	/*
@@ -239,8 +239,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isDest(IVertex vertex, IEdge edge) {
-		return this.delegate.isDest(vertex, edge);
+	public boolean isDest(IVertex v, IEdge e) {
+		return this.delegate.isDest(v, e);
 	}
 
 	/*
@@ -280,8 +280,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Pair<IVertex> getEndpoints(IEdge edge) {
-		return this.delegate.getEndpoints(edge);
+	public Pair<IVertex> getEndpoints(IEdge e) {
+		return this.delegate.getEndpoints(e);
 	}
 
 	/*
@@ -294,8 +294,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IVertex getOpposite(IVertex vertex, IEdge edge) {
-		return this.delegate.getOpposite(vertex, edge);
+	public IVertex getOpposite(IVertex v, IEdge e) {
+		return this.delegate.getOpposite(v, e);
 	}
 
 	/*
@@ -333,8 +333,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean containsVertex(IVertex vertex) {
-		return this.delegate.containsVertex(vertex);
+	public boolean containsVertex(IVertex v) {
+		return this.delegate.containsVertex(v);
 	}
 
 	/*
@@ -346,8 +346,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean containsEdge(IEdge edge) {
-		return this.delegate.containsEdge(edge);
+	public boolean containsEdge(IEdge e) {
+		return this.delegate.containsEdge(e);
 	}
 
 	/*
@@ -385,8 +385,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Collection<IVertex> getNeighbors(IVertex vertex) {
-		return this.delegate.getNeighbors(vertex);
+	public Collection<IVertex> getNeighbors(IVertex v) {
+		return this.delegate.getNeighbors(v);
 	}
 
 	/*
@@ -398,8 +398,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Collection<IEdge> getIncidentEdges(IVertex vertex) {
-		return this.delegate.getIncidentEdges(vertex);
+	public Collection<IEdge> getIncidentEdges(IVertex v) {
+		return this.delegate.getIncidentEdges(v);
 	}
 
 	/*
@@ -412,8 +412,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Collection<IVertex> getIncidentVertices(IEdge edge) {
-		return this.delegate.getIncidentVertices(edge);
+	public Collection<IVertex> getIncidentVertices(IEdge e) {
+		return this.delegate.getIncidentVertices(e);
 	}
 
 	/*
@@ -536,8 +536,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isIncident(IVertex vertex, IEdge edge) {
-		return this.delegate.isIncident(vertex, edge);
+	public boolean isIncident(IVertex v, IEdge e) {
+		return this.delegate.isIncident(v, e);
 	}
 
 	/*
@@ -549,8 +549,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int degree(IVertex vertex) {
-		return this.delegate.degree(vertex);
+	public int degree(IVertex v) {
+		return this.delegate.degree(v);
 	}
 
 	/*
@@ -562,8 +562,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getNeighborCount(IVertex vertex) {
-		return this.delegate.getNeighborCount(vertex);
+	public int getNeighborCount(IVertex v) {
+		return this.delegate.getNeighborCount(v);
 	}
 
 	/*
@@ -575,8 +575,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int getIncidentCount(IEdge edge) {
-		return this.delegate.getIncidentCount(edge);
+	public int getIncidentCount(IEdge e) {
+		return this.delegate.getIncidentCount(e);
 	}
 
 	/*
@@ -588,8 +588,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public EdgeType getEdgeType(IEdge edge) {
-		return this.delegate.getEdgeType(edge);
+	public EdgeType getEdgeType(IEdge e) {
+		return this.delegate.getEdgeType(e);
 	}
 
 	/*
@@ -651,11 +651,9 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 */
 	@Override
 	public IVertex getStart() {
-		ArrayList<IVertex> vertices = new ArrayList<IVertex>();
-		vertices.addAll(this.delegate.getVertices());
-		for (IVertex vertex : vertices)
-			if (vertex.isStart())
-				return vertex;
+		for (IVertex v : this.delegate.getVertices())
+			if (v.isStart())
+				return v;
 		return null;
 	}
 
@@ -664,11 +662,9 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 */
 	@Override
 	public IVertex getEnd() {
-		ArrayList<IVertex> vertices = new ArrayList<IVertex>();
-		vertices.addAll(this.delegate.getVertices());
-		for (IVertex vertex : vertices)
-			if (vertex.isEnd())
-				return vertex;
+		for (IVertex v : this.delegate.getVertices())
+			if (v.isEnd())
+				return v;
 		return null;
 	}
 
@@ -676,19 +672,18 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isVisited(IVertex vertex) {
-		IVertexStateHandler handler = (IVertexStateHandler) vertex;
-		return handler.isVisited();
+	public boolean isVisited(IVertex v) {
+		return ((IVertexStateHandler) v).isVisited();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void stepBy(IStep step) throws Exception {
+	public void stepBy(IStep s) throws Exception {
 		try {
-			step.execute();
-			this.steps.add(step);
+			s.execute();
+			this.steps.add(s);
 		} catch (Exception e) {
 			throw e;
 		}

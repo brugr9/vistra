@@ -35,7 +35,7 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * A field for the graph to traverse.
 	 */
-	private ITraversableGraph graph;
+	private ITraversableGraph g;
 
 	/**
 	 * A field for an edge weights decoration key.
@@ -62,17 +62,17 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 		super.setDescription(DESCRIPTION);
 		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
 				EdgeType.DIRECTED });
-		this.graph = null;
+		this.g = null;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(ITraversableGraph graph) throws AlgorithmException {
+	public void traverse(ITraversableGraph g) throws AlgorithmException {
 		try {
 			// TODO
-			this.graph = graph;
+			this.g = g;
 			WEIGHT = new Object();
 			// IVertex s = graph.getStart();
 			DefaultComparator comparator = new DefaultComparator();

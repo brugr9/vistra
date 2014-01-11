@@ -35,7 +35,7 @@ public class UpdatedVertexCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((VertexStateHandler) super.stateHandler).handleUpdated(this.value);
+		((VertexStateHandler) super.itemStateHandler).handleUpdated(this.value);
 	}
 
 }

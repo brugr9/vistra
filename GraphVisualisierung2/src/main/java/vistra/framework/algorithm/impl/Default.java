@@ -35,7 +35,7 @@ public class Default extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(ITraversableGraph graph) throws AlgorithmException {
+	public void traverse(ITraversableGraph g) throws AlgorithmException {
 		// Does nothing on execute.
 	}
 

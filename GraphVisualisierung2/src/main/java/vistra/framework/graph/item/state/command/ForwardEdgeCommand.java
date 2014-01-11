@@ -27,7 +27,7 @@ public class ForwardEdgeCommand extends AbstractItemStateCommand implements
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.stateHandler).handleForward();
+		((EdgeStateHandler) super.itemStateHandler).handleForward();
 	}
 
 }
