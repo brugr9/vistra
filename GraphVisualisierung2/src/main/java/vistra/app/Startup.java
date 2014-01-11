@@ -1,5 +1,7 @@
 package vistra.app;
 
+import java.awt.EventQueue;
+
 import javax.swing.JOptionPane;
 
 import vistra.app.AppFactory.ViewType;
@@ -18,20 +20,21 @@ public class Startup {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// EventQueue.invokeLater(new Runnable() {
-		// @Override
-		// public void run() {
-		try {
-			AppFactory.createApplication(ViewType.DEFAULT);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(
-					null,
-					"Sorry, somthing went totally wrong:\n" + e.toString()
-							+ e.getCause(), null, 1, null);
-			e.printStackTrace();
-		}
-		// }
-		// });
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					AppFactory.createApplication(ViewType.DEFAULT);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(
+							null,
+							"Sorry, somthing went totally wrong:\n"
+									+ e.toString() + e.getCause(), null, 1,
+							null);
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }

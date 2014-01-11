@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ControlNotify;
+import vistra.app.control.IControl.ActionCommandGeneral;
 import vistra.framework.graph.item.EdgeFactory;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -130,7 +130,7 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ControlNotify.I18N) {
+			if (arg == ActionCommandGeneral.I18N) {
 				this.modePopup.setLabel(b.getString("mode.label"));
 				this.vertexPopup.setLabel(b.getString("vertex.label"));
 				this.edgePopup.setLabel(b.getString("edge.label"));

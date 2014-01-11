@@ -101,6 +101,8 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		this.dialog.addActionListener(new DialogActionListener());
 		this.delete = new JMenuItem("delete");
 		this.delete.addActionListener(new DeleteActionListener());
+		this.delete.setActionCommand(ActionCommandParameter.delete);
+		this.delete.addActionListener(model.getParameterStateHandler());
 
 		/**/
 		this.add(this.start);

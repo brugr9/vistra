@@ -14,13 +14,15 @@ public interface IControl {
 	public final static int A_SECOND = 1000;
 
 	/**
-	 * Control notify.
+	 * Some general action commands.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	public enum ControlNotify {
+	public enum ActionCommandGeneral {
 		I18N, QUIT;
+		public static final String i18n = I18N.toString();
+		public static final String quit = QUIT.toString();
 	}
 
 	/**

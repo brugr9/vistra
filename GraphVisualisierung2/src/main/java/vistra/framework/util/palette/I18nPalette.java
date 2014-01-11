@@ -62,11 +62,10 @@ public enum I18nPalette {
 	/**
 	 * Main constructor.
 	 * 
-	 */
-	/**
-	 * 
 	 * @param language
+	 *            the language
 	 * @param country
+	 *            the country
 	 */
 	I18nPalette(String language, String country) {
 		this.language = language;

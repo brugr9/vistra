@@ -13,6 +13,7 @@ import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
 import vistra.app.Model;
+import vistra.app.control.IControl.ActionCommandParameter;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IItemLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -81,6 +82,9 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		this.dialog.addActionListener(new DialogActionListener());
 		this.delete = new JMenuItem("delete");
 		this.delete.addActionListener(new DeleteActionListener());
+		this.delete.setActionCommand(ActionCommandParameter.delete);
+		this.delete.addActionListener(model.getParameterStateHandler());
+
 		/**/
 		this.add(this.dialog);
 		this.addSeparator();

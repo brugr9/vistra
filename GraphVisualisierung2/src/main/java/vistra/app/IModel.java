@@ -1,5 +1,6 @@
 package vistra.app;
 
+import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
@@ -672,5 +673,16 @@ public interface IModel {
 	 *            the protocol to set
 	 */
 	public abstract void setProtocol(StringBuilder protocol);
+
+	/**
+	 * @return the top
+	 */
+	public abstract Container getTop();
+
+	/**
+	 * @param top
+	 *            the top to set
+	 */
+	public abstract void setTop(Container top);
 
 }

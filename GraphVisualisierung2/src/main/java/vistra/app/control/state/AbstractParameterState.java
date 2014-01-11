@@ -1,5 +1,6 @@
 package vistra.app.control.state;
 
+import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.util.AbstractState;
 import vistra.framework.util.IState;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -156,12 +157,13 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	void handleSelectAlgorithm() throws Exception {
 		try {
 			int index = this.stateHandler.selectAlgorithm();
-			if (index == 0)
-				this.stateHandler.setState(new ParameterStateGraphSaved(
-						this.stateHandler));
-			else
-				this.stateHandler.setState(new ParameterStateAlgorithmSelected(
-						this.stateHandler));
+			this.stateHandler.handleIdle();
+			// if (index > 0)
+			// this.stateHandler.setState(new ParameterStateAlgorithmSelected(
+			// this.stateHandler));
+			// else
+			// this.stateHandler.setState(new ParameterStateGraphSaved(
+			// this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}

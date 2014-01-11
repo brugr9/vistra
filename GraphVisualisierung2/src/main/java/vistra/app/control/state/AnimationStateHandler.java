@@ -56,14 +56,15 @@ public final class AnimationStateHandler extends Observable implements
 	public AnimationStateHandler(IModel model) {
 		super();
 		this.model = (Model) model;
-		this.animationListener = new AnimationListener();
-		int animationDelay = this.model.getDelay() * A_SECOND;
-		this.animationTimer = new Timer(animationDelay, this.animationListener);
 		try {
+			this.state = new AnimationStateOff(this);
 			this.setState(new AnimationStateOff(this));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		this.animationListener = new AnimationListener();
+		int animationDelay = this.model.getDelay() * A_SECOND;
+		this.animationTimer = new Timer(animationDelay, this.animationListener);
 	}
 
 	/**

@@ -12,7 +12,7 @@ import javax.swing.KeyStroke;
 
 import vistra.app.IModel;
 import vistra.app.control.IControl.ActionCommandParameter;
-import vistra.app.control.IControl.ControlNotify;
+import vistra.app.control.IControl.ActionCommandGeneral;
 import vistra.framework.util.palette.I18nPalette;
 
 /**
@@ -116,7 +116,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.open.setActionCommand(ActionCommandParameter.open);
 			this.save.setActionCommand(ActionCommandParameter.save);
 			this.saveAs.setActionCommand(ActionCommandParameter.saveAs);
-			this.quit.setActionCommand(ControlNotify.QUIT.toString());
+			this.quit.setActionCommand(ActionCommandGeneral.quit);
 			{// graph
 				this.newGraph = new JMenu("newGraph");
 				this.undirected = new JMenuItem("undirected");

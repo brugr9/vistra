@@ -1,5 +1,6 @@
 package vistra.app;
 
+import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -19,6 +20,8 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
  * 
  */
 public final class Model extends Observable implements IModel {
+
+	private Container top;
 
 	/* i18n */
 	private ResourceBundle resourceBundle;
@@ -103,6 +106,8 @@ public final class Model extends Observable implements IModel {
 	public Model() {
 		super();
 
+		this.top = null;
+
 		/* i18n */
 		this.resourceBundle = null;
 		this.shortcutsMessage = "";
@@ -154,7 +159,7 @@ public final class Model extends Observable implements IModel {
 		this.algorithms = null;
 		this.algorithmsEnabled = false;
 		this.selectedAlgorithmIndex = 0;
-		this.algorithmDescription = " ";
+		this.algorithmDescription = "";
 
 		/* Traversal */
 		this.traversal = null;
@@ -326,6 +331,26 @@ public final class Model extends Observable implements IModel {
 		this.setStopEnabled(menuEnabled);
 
 		this.setChanged();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getResourceBundle()
+	 */
+	@Override
+	public Container getTop() {
+		return top;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#setResourceBundle(java.util.ResourceBundle)
+	 */
+	@Override
+	public void setTop(Container top) {
+		this.top = top;
 	}
 
 	/*

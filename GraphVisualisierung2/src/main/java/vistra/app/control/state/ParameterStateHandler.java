@@ -16,7 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.app.control.IControl.ActionCommandParameter;
-import vistra.app.control.IControl.ControlNotify;
+import vistra.app.control.IControl.ActionCommandGeneral;
 import vistra.framework.ICore;
 import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.item.IEdgeLayout;
@@ -54,10 +54,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * A field for a model.
 	 */
 	private Model model;
-	/**
-	 * A field for a top component.
-	 */
-	private Container top;
 
 	/**
 	 * Main constructor.
@@ -71,8 +67,13 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		super();
 		this.core = core;
 		this.model = (Model) model;
-		this.state = new ParameterStateOff(this);
-		this.top = null;
+		try {
+			this.state = new ParameterStateOff(this);
+			this.setState(new ParameterStateOff(this));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -83,8 +84,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 
 			String c = e.getActionCommand();
-			this.top = (Container) ((JComponent) e.getSource())
+			Container top = (Container) ((JComponent) e.getSource())
 					.getTopLevelAncestor();
+			this.model.setTop(top);
 
 			if (c.equals(ActionCommandParameter.newUndirected)) {
 				this.handleNewGraphUndirected();
@@ -108,7 +110,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			} else if (c.equals(Mode.EDITING.toString())) {
 				this.setMode(Mode.EDITING);
 				this.model.notifyObservers();
-			} else if (c.equals(ControlNotify.QUIT.toString())) {
+			} else if (c.equals(ActionCommandGeneral.quit)) {
 				this.quit();
 			}
 
@@ -356,10 +358,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	int idle() throws Exception {
 		int selected = 0, saved = 1, edited = 2;
 		if (this.model.isGraphSaved()) {
-			if (this.model.getTraversal() != null)
-				return selected;
-			else
+			if (this.model.getTraversal().isEmpty())
 				return saved;
+			else
+				return selected;
 		} else {
 			return edited;
 		}
@@ -397,9 +399,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.setMode(Mode.EDITING);
 				/* Algorithm */
 				this.updateAlgorithms();
-				this.model.setSelectedAlgorithmIndex(0);
-				this.selectAlgorithm();
-				this.model.notifyObservers();
 			}
 		} catch (Exception e) {
 			throw e;
@@ -434,7 +433,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				fileChooser.setFileFilter(filter);
 
 				/* dialog */
-				option = fileChooser.showOpenDialog(top);
+				option = fileChooser.showOpenDialog(this.model.getTop());
 				if (option == JFileChooser.APPROVE_OPTION) {
 					// Graph
 					if (this.model.getGraph() != null)
@@ -453,9 +452,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					this.setMode(Mode.PICKING);
 					/* Algorithm */
 					this.updateAlgorithms();
-					this.model.setSelectedAlgorithmIndex(0);
-					this.selectAlgorithm();
-					this.model.notifyObservers();
 				}
 			}
 			return option;
@@ -473,7 +469,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			this.core.saveGraph();
 			this.model.setGraphSaved(true);
-			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -506,13 +501,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			fileChooser.setDialogTitle(this.model.getResourceBundle()
 					.getString("saveas.label"));
 			/* dialog */
-			int option = fileChooser.showSaveDialog(this.top);
+			int option = fileChooser.showSaveDialog(this.model.getTop());
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
 				this.core.saveGraphAs(file);
 				this.model.setGraphFile(true);
 				this.model.setGraphSaved(true);
-				this.model.notifyObservers();
 			}
 			return option;
 		} catch (Exception e) {
@@ -537,7 +531,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			}
 			// revert saved status
 			this.model.setGraphSaved(false);
-			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -567,15 +560,16 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			ITraversal traversal = this.core.traverse(graph);
 			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
-			// an algorithm generated an empty traversal (no steps) ...
-			if (traversal.size() == 0 && index > 0) {
-				// TODO message eventually
-				return 0;
+			if (index > 0) {
+				if (traversal.isEmpty())
+					// TODO message eventually
+					return 0;
+				/* Mode */
+				this.setMode(Mode.PICKING);
+			} else {
+				this.setMode(Mode.EDITING);
 			}
-			/* Mode */
-			this.setMode(Mode.PICKING);
 			// done
-			this.model.notifyObservers();
 			return index;
 		} catch (Exception e) {
 			throw e;
@@ -656,8 +650,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			ResourceBundle b = this.model.getResourceBundle();
 			String message = b.getString("graph.label") + ": "
 					+ b.getString("save.label") + "?";
-			int option = JOptionPane.showConfirmDialog(top, message,
-					b.getString("app.label"), JOptionPane.YES_NO_CANCEL_OPTION,
+			int option = JOptionPane.showConfirmDialog(this.model.getTop(),
+					message, b.getString("app.label"),
+					JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE);
 			/* delegate */
 			if (option == JOptionPane.YES_OPTION) {
@@ -687,7 +682,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.model.setSelectPickingModeEnabled(true);
 		}
 		this.model.setSwitchModeEnabled(true);
-		this.model.notifyObservers();
 	}
 
 	/**

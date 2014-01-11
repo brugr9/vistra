@@ -31,8 +31,8 @@ public final class Control implements IControl {
 			model.setShortcutsListener(new ActionListenerShortcuts(model));
 			model.setAboutListener(new ActionListenerAbout(model));
 			/* State handler */
-			model.setSbsStateHandler(new SbsStateHandler(model));
 			model.setAnimationStateHandler(new AnimationStateHandler(model));
+			model.setSbsStateHandler(new SbsStateHandler(model));
 			model.setParameterStateHandler(new ParameterStateHandler(core,
 					model));
 			/* Parameter */

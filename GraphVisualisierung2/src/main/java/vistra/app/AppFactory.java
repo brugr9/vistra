@@ -26,8 +26,7 @@ final class AppFactory {
 	}
 
 	/**
-	 * Creates an application with core and a default graphic user interface
-	 * (MVC).
+	 * Creates an application with a graphic user interface (MVC).
 	 * 
 	 * @return the view
 	 * @throws Exception
@@ -44,8 +43,7 @@ final class AppFactory {
 	}
 
 	/**
-	 * Creates an application with core and a graphic user interface (MVC) of
-	 * given type.
+	 * Creates an application with a graphic user interface (MVC) of given type.
 	 * 
 	 * @param viewType
 	 * @return the view
@@ -84,10 +82,9 @@ final class AppFactory {
 		} catch (SecurityException e) {
 			throw new Exception(AppFactory.class.getName(), e);
 		} catch (Exception e) {
-			throw new IllegalArgumentException(
-					AppFactory.class.getName()
-							+ ": \nCannot load properties file "
-							+ propertiesName + "\n", e);
+			throw new IllegalArgumentException(AppFactory.class.getName()
+					+ ": \nCannot load properties file " + propertiesName
+					+ "\n", e);
 		}
 
 	}

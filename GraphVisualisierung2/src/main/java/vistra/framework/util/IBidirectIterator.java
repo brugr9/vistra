@@ -21,8 +21,8 @@ public interface IBidirectIterator<E> extends Iterable<E>, Iterator<E> {
 
 	/**
 	 * Returns {@code true} if the iteration has no elements. (In other words,
-	 * returns {@code true} if {@link #previous} or {@link #next} would throwing
-	 * an exception.)
+	 * returns {@code true} if {@link #previous} or {@link #next} would throw an
+	 * exception.)
 	 * 
 	 * @return {@code true} if the iteration has no elements
 	 */
