@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import vistra.app.control.IControl.AnimationEvent;
 import vistra.app.control.state.IAnimationStateHandler;
 import vistra.app.control.state.IParameterStateHandler;
 import vistra.app.control.state.ISbsStateHandler;
@@ -91,7 +90,7 @@ public final class Model extends Observable implements IModel {
 	private boolean delayEnabled;
 	private boolean playEnabled;
 	private String pauseLabel;
-	private AnimationEvent pauseEvent;
+	private String pauseActionCommand;
 	private boolean pauseEnabled;
 	private boolean stopEnabled;
 
@@ -174,7 +173,7 @@ public final class Model extends Observable implements IModel {
 		this.delayEnabled = false;
 		this.playEnabled = false;
 		this.pauseLabel = "";
-		this.pauseEvent = null;
+		this.pauseActionCommand = null;
 		this.pauseEnabled = false;
 		this.stopEnabled = false;
 
@@ -193,6 +192,7 @@ public final class Model extends Observable implements IModel {
 		// Menu
 		this.setMenuFileEnabled(menuEnabled);
 		this.setMenuModeEnabled(menuEnabled);
+		this.setMenuEditEnabled(menuEnabled);
 		this.setMenuI18nEnabled(menuEnabled);
 		this.setMenuHelpEnabled(menuEnabled);
 	}
@@ -1424,8 +1424,8 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getPauseEvent()
 	 */
 	@Override
-	public AnimationEvent getPauseEvent() {
-		return pauseEvent;
+	public String getPauseActionCommand() {
+		return pauseActionCommand;
 	}
 
 	/*
@@ -1435,8 +1435,8 @@ public final class Model extends Observable implements IModel {
 	 * vistra.app.IModel#setPauseEvent(vistra.app.control.IControl.ControlEvent)
 	 */
 	@Override
-	public void setPauseEvent(AnimationEvent pauseEvent) {
-		this.pauseEvent = pauseEvent;
+	public void setPauseActionCommand(String pauseActionCommand) {
+		this.pauseActionCommand = pauseActionCommand;
 	}
 
 	/*

@@ -41,17 +41,14 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 			case 0:
 				this.stateHandler.setState(new ParameterStateAlgorithmSelected(
 						this.stateHandler));
-				// this.stateHandler.setViewAlgorithmSelected();
 				break;
 			case 1:
 				this.stateHandler.setState(new ParameterStateGraphSaved(
 						this.stateHandler));
-				// this.stateHandler.setViewGraphSaved();
 				break;
 			default:
 				this.stateHandler.setState(new ParameterStateGraphEdited(
 						this.stateHandler));
-				// this.stateHandler.setViewGraphEdited();
 				break;
 			}
 		} catch (Exception e) {

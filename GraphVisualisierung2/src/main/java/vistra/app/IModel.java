@@ -3,7 +3,6 @@ package vistra.app;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
-import vistra.app.control.IControl.AnimationEvent;
 import vistra.app.control.state.IAnimationStateHandler;
 import vistra.app.control.state.IParameterStateHandler;
 import vistra.app.control.state.ISbsStateHandler;
@@ -631,15 +630,15 @@ public interface IModel {
 	public abstract void setPauseLabel(String pauseLabel);
 
 	/**
-	 * @return the pauseEvent
+	 * @return the pauseActionCommand
 	 */
-	public abstract AnimationEvent getPauseEvent();
+	public abstract String getPauseActionCommand();
 
 	/**
-	 * @param pauseEvent
-	 *            the pauseEvent to set
+	 * @param pauseActionCommand
+	 *            the pauseActionCommand to set
 	 */
-	public abstract void setPauseEvent(AnimationEvent pauseEvent);
+	public abstract void setPauseActionCommand(String pauseActionCommand);
 
 	/**
 	 * @return the pauseEnabled

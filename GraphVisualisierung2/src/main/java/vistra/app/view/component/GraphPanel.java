@@ -14,8 +14,6 @@ import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ControlEvent;
-import vistra.app.control.IControl.ParameterEvent;
 import vistra.app.view.IView;
 import vistra.app.view.popup.Mouse;
 import vistra.framework.graph.item.IEdgeLayout;
@@ -153,15 +151,13 @@ public class GraphPanel extends JPanel implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ControlEvent.I18N)
-				this.title = b.getString("graph.label");
-			else if (arg == ParameterEvent.GRAPH) {
-				this.name = m.getGraph().getName();
-				if (!m.isGraphSaved())
-					this.name += "*";
-				this.layout.setGraph(m.getGraph());
-			}
+			// if (arg == ControlNotify.I18N)
+			this.title = b.getString("graph.label");
+			this.name = m.getGraph().getName();
+			if (!m.isGraphSaved())
+				this.name += "*";
 			this.border.setTitle(this.title + ": " + this.name);
+			this.layout.setGraph(m.getGraph());
 			this.viewer.repaint();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),

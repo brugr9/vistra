@@ -34,4 +34,16 @@ class AnimationStatePlaying extends AbstractAnimationState implements IState {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void startDo() throws Exception {
+		try {
+			super.stateHandler.startAnimation();
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
 }

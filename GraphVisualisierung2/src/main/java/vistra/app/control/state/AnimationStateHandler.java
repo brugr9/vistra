@@ -13,7 +13,7 @@ import javax.swing.Timer;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.AnimationEvent;
+import vistra.app.control.IControl.ActionCommandAnimation;
 
 /**
  * An animation state handler. An animation state machine handles the animated
@@ -87,7 +87,7 @@ public final class AnimationStateHandler extends Observable implements
 			this.model.setDelay(value);
 			this.animationTimer.setDelay(value * A_SECOND);
 			/* update the view */
-			this.model.notifyObservers(AnimationEvent.DELAY);
+			this.model.notifyObservers();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -102,13 +102,13 @@ public final class AnimationStateHandler extends Observable implements
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String c = e.getActionCommand();
-			if (c.equals(AnimationEvent.play))
+			if (c.equals(ActionCommandAnimation.play))
 				this.handlePlaying();
-			else if (c.equals(AnimationEvent.pause))
+			else if (c.equals(ActionCommandAnimation.pause))
 				this.handlePaused();
-			else if (c.equals(AnimationEvent.resume))
+			else if (c.equals(ActionCommandAnimation.resume))
 				this.handlePlaying();
-			else if (c.equals(AnimationEvent.stop))
+			else if (c.equals(ActionCommandAnimation.stop))
 				this.handleStopped();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
@@ -211,9 +211,9 @@ public final class AnimationStateHandler extends Observable implements
 			String label = this.model.getResourceBundle().getString(
 					"pause.label");
 			this.model.setPauseLabel(label);
-			this.model.setPauseEvent(AnimationEvent.PAUSE);
+			this.model.setPauseActionCommand(ActionCommandAnimation.pause);
 			//
-			this.model.notifyObservers(AnimationEvent.ANIMATION);
+			this.model.notifyObservers();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -233,9 +233,9 @@ public final class AnimationStateHandler extends Observable implements
 			String label = this.model.getResourceBundle().getString(
 					"pause.label");
 			this.model.setPauseLabel(label);
-			this.model.setPauseEvent(AnimationEvent.PAUSE);
+			this.model.setPauseActionCommand(ActionCommandAnimation.pause);
 			//
-			this.model.notifyObservers(AnimationEvent.ANIMATION);
+			this.model.notifyObservers();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -255,9 +255,9 @@ public final class AnimationStateHandler extends Observable implements
 			String label = this.model.getResourceBundle().getString(
 					"resume.label");
 			this.model.setPauseLabel(label);
-			this.model.setPauseEvent(AnimationEvent.RESUME);
+			this.model.setPauseActionCommand(ActionCommandAnimation.resume);
 			//
-			this.model.notifyObservers(AnimationEvent.ANIMATION);
+			this.model.notifyObservers();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -271,7 +271,7 @@ public final class AnimationStateHandler extends Observable implements
 	void setViewOff() throws Exception {
 		try {
 			this.model.setAnimationEnabled(false);
-			this.model.notifyObservers(AnimationEvent.ANIMATION);
+			this.model.notifyObservers();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -286,15 +286,12 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	void startAnimation() throws Exception {
 		try {
-			// TODO cast etc. ...
-			((ParameterStateHandler) this.model.getParameterStateHandler())
-					.setViewOff();
-			this.model.getSbsStateHandler().handleOff();
 			/* go to the first step eventually */
 			if (this.model.getProgress() == this.model.getTraversal().size())
 				((SbsStateHandler) this.model.getSbsStateHandler())
 						.toBeginning();
-			/* simply start the timer */
+			((SbsStateHandler) this.model.getSbsStateHandler()).handleOff();
+			/* start the timer */
 			this.animationTimer.start();
 			this.setChanged();
 		} catch (Exception e) {
@@ -309,7 +306,6 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	void pauseAnimation() throws Exception {
 		try {
-			/* simply stop the timer */
 			this.animationTimer.stop();
 			this.setChanged();
 		} catch (Exception ex) {
@@ -324,7 +320,6 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	void resumeAnimation() throws Exception {
 		try {
-			/* simply start the timer */
 			this.animationTimer.start();
 			this.setChanged();
 		} catch (Exception ex) {
@@ -339,13 +334,9 @@ public final class AnimationStateHandler extends Observable implements
 	 */
 	void stopAnimation() throws Exception {
 		try {
-			/* simply stop the timer */
 			this.animationTimer.stop();
 			this.setChanged();
-			// TODO cast etc. ...
-			((ParameterStateHandler) this.model.getParameterStateHandler())
-					.setViewAlgorithmSelected();
-			this.model.getSbsStateHandler().handleIdle();
+			((SbsStateHandler) this.model.getSbsStateHandler()).handleIdle();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -365,7 +356,7 @@ public final class AnimationStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				IModel m = AnimationStateHandler.this.model;
+				Model m = AnimationStateHandler.this.model;
 				if (m.getProgress() < m.getTraversal().size())
 					((SbsStateHandler) m.getSbsStateHandler()).forward();
 				else

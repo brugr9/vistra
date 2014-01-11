@@ -19,10 +19,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.AnimationEvent;
-import vistra.app.control.IControl.ControlEvent;
-import vistra.app.control.IControl.ParameterEvent;
-import vistra.app.control.IControl.SbsEvent;
+import vistra.app.control.IControl.ActionCommandAnimation;
+import vistra.app.control.IControl.ActionCommandSbs;
 import vistra.framework.util.palette.ColorPalette;
 
 /**
@@ -191,13 +189,13 @@ public final class TraversalPanel extends JPanel implements Observer {
 				new ImageIcon(c.getResource("pause.png")));
 		this.stop = new JButton(new ImageIcon(c.getResource("stop.png")));
 		// action command
-		this.toBeginning.setActionCommand(SbsEvent.toBeginning);
-		this.backward.setActionCommand(SbsEvent.backward);
-		this.forward.setActionCommand(SbsEvent.forward);
-		this.toEnd.setActionCommand(SbsEvent.toEnd);
-		this.play.setActionCommand(AnimationEvent.play);
-		this.pause.setActionCommand(AnimationEvent.pause);
-		this.stop.setActionCommand(AnimationEvent.stop);
+		this.toBeginning.setActionCommand(ActionCommandSbs.toBeginning);
+		this.backward.setActionCommand(ActionCommandSbs.backward);
+		this.forward.setActionCommand(ActionCommandSbs.forward);
+		this.toEnd.setActionCommand(ActionCommandSbs.toEnd);
+		this.play.setActionCommand(ActionCommandAnimation.play);
+		this.pause.setActionCommand(ActionCommandAnimation.pause);
+		this.stop.setActionCommand(ActionCommandAnimation.stop);
 		// action listener
 		this.toBeginning.addActionListener(model.getSbsStateHandler());
 		this.backward.addActionListener(model.getSbsStateHandler());
@@ -267,49 +265,44 @@ public final class TraversalPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-
-				if (arg == ControlEvent.I18N) {
-					this.border.setTitle(b.getString("traversal.label"));
-					//
-					this.steplengthLabel.setText(b.getString("setStep.label"));
-					this.delayLabel.setText(b.getString("setDelay.label"));
-					//
-					this.toBeginning.setToolTipText(b.getString("home.label"));
-					this.backward.setToolTipText(b.getString("backward.label"));
-					this.forward.setToolTipText(b.getString("forward.label"));
-					this.toEnd.setToolTipText(b.getString("end.label"));
-					//
-					this.play.setToolTipText(b.getString("play.label"));
-					this.pause.setToolTipText(b.getString("pause.label"));
-					this.stop.setToolTipText(b.getString("stop.label"));
-				} else {
-					if (arg == ParameterEvent.ALGORITHM) {
-						this.progress.setMaximum(m.getTraversal().size());
-					} else if (arg == AnimationEvent.DELAY) {
-						this.delay.setValue(m.getDelay());
-					} else if (arg == SbsEvent.STEPLENGTH) {
-						this.steplength.setValue(m.getSteplength());
-					} else if (arg == SbsEvent.STEP_BY_STEP) {
-						this.steplength.setEnabled(m.isSteplengthEnabled());
-						this.toBeginning.setEnabled(m.isToBeginningEnabled());
-						this.backward.setEnabled(m.isBackwardEnabled());
-						this.forward.setEnabled(m.isForwardEnabled());
-						this.toEnd.setEnabled(m.isToEndEnabled());
-					} else if (arg == AnimationEvent.ANIMATION) {
-						this.delay.setEnabled(m.isDelayEnabled());
-						this.play.setEnabled(m.isPlayEnabled());
-						this.pause.setEnabled(m.isPauseEnabled());
-						this.stop.setEnabled(m.isStopEnabled());
-						this.pause.setToolTipText(m.getPauseLabel());
-						// TODO
-						this.pause.setActionCommand(m.getPauseEvent()
-								.getValue());
-						if (m.getPauseEvent() == AnimationEvent.PAUSE)
-							this.pause.setSelected(false);
-					}
-					this.progress.setValue(m.getProgress());
-				}
-
+				// if (arg == ControlNotify.I18N) {
+				this.border.setTitle(b.getString("traversal.label"));
+				//
+				this.steplengthLabel.setText(b.getString("setStep.label"));
+				this.delayLabel.setText(b.getString("setDelay.label"));
+				//
+				this.toBeginning.setToolTipText(b.getString("home.label"));
+				this.backward.setToolTipText(b.getString("backward.label"));
+				this.forward.setToolTipText(b.getString("forward.label"));
+				this.toEnd.setToolTipText(b.getString("end.label"));
+				//
+				this.play.setToolTipText(b.getString("play.label"));
+				this.pause.setToolTipText(b.getString("pause.label"));
+				this.stop.setToolTipText(b.getString("stop.label"));
+				// } else {
+				//
+				this.progress.setMaximum(m.getTraversal().size());
+				this.progress.setValue(m.getProgress());
+				//
+				this.steplength.setValue(m.getSteplength());
+				this.steplength.setEnabled(m.isSteplengthEnabled());
+				//
+				this.toBeginning.setEnabled(m.isToBeginningEnabled());
+				this.backward.setEnabled(m.isBackwardEnabled());
+				this.forward.setEnabled(m.isForwardEnabled());
+				this.toEnd.setEnabled(m.isToEndEnabled());
+				//
+				this.delay.setValue(m.getDelay());
+				this.delay.setEnabled(m.isDelayEnabled());
+				//
+				this.play.setEnabled(m.isPlayEnabled());
+				this.pause.setEnabled(m.isPauseEnabled());
+				this.pause.setActionCommand(m.getPauseActionCommand());
+				if (m.getPauseActionCommand() == ActionCommandAnimation.pause)
+					this.pause.setSelected(false);
+				this.pause.setToolTipText(m.getPauseLabel());
+				this.stop.setEnabled(m.isStopEnabled());
+				// }
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),
 						b.getString("app.label"), 1, null);

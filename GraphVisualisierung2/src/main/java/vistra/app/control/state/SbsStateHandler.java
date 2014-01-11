@@ -13,7 +13,7 @@ import javax.swing.Timer;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.SbsEvent;
+import vistra.app.control.IControl.ActionCommandSbs;
 import vistra.framework.traversal.ITraversal;
 import vistra.framework.traversal.step.IStep;
 
@@ -110,7 +110,7 @@ public final class SbsStateHandler extends Observable implements
 			/* set the value */
 			this.model.setSteplength(value);
 			/* update the view */
-			this.model.notifyObservers(SbsEvent.STEPLENGTH);
+			this.model.notifyObservers();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -125,13 +125,13 @@ public final class SbsStateHandler extends Observable implements
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String c = e.getActionCommand();
-			if (c.equals(SbsEvent.toBeginning))
+			if (c.equals(ActionCommandSbs.toBeginning))
 				this.handleToBeginning();
-			else if (c.equals(SbsEvent.backward))
+			else if (c.equals(ActionCommandSbs.backward))
 				this.handleBackward();
-			else if (c.equals(SbsEvent.forward))
+			else if (c.equals(ActionCommandSbs.forward))
 				this.handleForward();
-			else if (c.equals(SbsEvent.toEnd))
+			else if (c.equals(ActionCommandSbs.toEnd))
 				this.handleToEnd();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
@@ -243,7 +243,7 @@ public final class SbsStateHandler extends Observable implements
 		this.model.setSbsEnabled(true);
 		this.model.setBackwardEnabled(false);
 		this.model.setToBeginningEnabled(false);
-		this.model.notifyObservers(SbsEvent.STEP_BY_STEP);
+		this.model.notifyObservers();
 	}
 
 	/**
@@ -251,7 +251,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	void setViewInter() {
 		this.model.setSbsEnabled(true);
-		this.model.notifyObservers(SbsEvent.STEP_BY_STEP);
+		this.model.notifyObservers();
 	}
 
 	/**
@@ -261,7 +261,7 @@ public final class SbsStateHandler extends Observable implements
 		this.model.setSbsEnabled(true);
 		this.model.setForwardEnabled(false);
 		this.model.setToEndEnabled(false);
-		this.model.notifyObservers(SbsEvent.STEP_BY_STEP);
+		this.model.notifyObservers();
 	}
 
 	/**
@@ -269,7 +269,7 @@ public final class SbsStateHandler extends Observable implements
 	 */
 	void setViewOff() {
 		this.model.setSbsEnabled(false);
-		this.model.notifyObservers(SbsEvent.STEP_BY_STEP);
+		this.model.notifyObservers();
 	}
 
 	/**
@@ -296,13 +296,11 @@ public final class SbsStateHandler extends Observable implements
 		ITraversal traversal = this.model.getTraversal();
 
 		try {
-			this.step.undo();
-			this.model.notifyObservers();
 			while (traversal.hasPrevious()) {
-				this.step = traversal.previous();
 				this.step.undo();
-				this.model.notifyObservers();
+				this.step = traversal.previous();
 			}
+			this.step.undo();
 			/* update */
 			this.model.setProgress(0);
 			this.model.setProtocol(new StringBuilder().append(" "));
@@ -342,7 +340,7 @@ public final class SbsStateHandler extends Observable implements
 				}
 			}
 
-			this.model.setProtocol(new StringBuilder().append(" "));
+			this.model.setProtocol(new StringBuilder());
 			this.model.notifyObservers();
 
 		} catch (Exception ex) {
@@ -445,7 +443,7 @@ public final class SbsStateHandler extends Observable implements
 				/* modify the graph */
 				this.step = traversal.next();
 				description = this.step.getDescription();
-				stringBuilder.append(description + System.lineSeparator());
+				stringBuilder.append(description);
 				this.step.execute();
 				ok = traversal.hasNext();
 			}
@@ -453,8 +451,7 @@ public final class SbsStateHandler extends Observable implements
 			/* update */
 			int max = this.model.getTraversal().size();
 			this.model.setProgress(max);
-			stringBuilder.append(traversal.getDescription()
-					+ System.lineSeparator());
+			stringBuilder.append(traversal.getDescription());
 			this.model.setProtocol(stringBuilder);
 			this.model.notifyObservers();
 

@@ -28,7 +28,19 @@ class ParameterStateGraphSaved extends AbstractParameterState implements IState 
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewGraphSaved();
+			super.stateHandler.setViewEnableAlgorithms(true);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void doExit() throws Exception {
+		try {
+			super.stateHandler.setViewEnableAlgorithms(false);
 		} catch (Exception e) {
 			throw e;
 		}

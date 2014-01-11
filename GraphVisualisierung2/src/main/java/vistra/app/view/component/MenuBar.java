@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ControlEvent;
-import vistra.app.control.IControl.ParameterEvent;
+import vistra.app.control.IControl.ActionCommandParameter;
+import vistra.app.control.IControl.ControlNotify;
 import vistra.framework.util.palette.I18nPalette;
 
 /**
@@ -105,7 +105,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.file = new JMenu("fileMenu");
 			this.open = new JMenuItem("open");
 			this.save = new JMenuItem("save");
-			this.saveAs = new JMenuItem("save");
+			this.saveAs = new JMenuItem("saveAs");
 			this.quit = new JMenuItem("quit");
 			// listener
 			this.open.addActionListener(model.getParameterStateHandler());
@@ -113,10 +113,10 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.saveAs.addActionListener(model.getParameterStateHandler());
 			this.quit.addActionListener(model.getParameterStateHandler());
 			// command
-			this.open.setActionCommand(ParameterEvent.open);
-			this.save.setActionCommand(ParameterEvent.save);
-			this.saveAs.setActionCommand(ParameterEvent.saveAs);
-			this.quit.setActionCommand(ControlEvent.quit);
+			this.open.setActionCommand(ActionCommandParameter.open);
+			this.save.setActionCommand(ActionCommandParameter.save);
+			this.saveAs.setActionCommand(ActionCommandParameter.saveAs);
+			this.quit.setActionCommand(ControlNotify.QUIT.toString());
 			{// graph
 				this.newGraph = new JMenu("newGraph");
 				this.undirected = new JMenuItem("undirected");
@@ -127,8 +127,10 @@ public final class MenuBar extends JMenuBar implements Observer {
 				this.directed.addActionListener(model
 						.getParameterStateHandler());
 				// command
-				this.undirected.setActionCommand(ParameterEvent.newUndirected);
-				this.directed.setActionCommand(ParameterEvent.newDirected);
+				this.undirected
+						.setActionCommand(ActionCommandParameter.newUndirected);
+				this.directed
+						.setActionCommand(ActionCommandParameter.newDirected);
 				// add
 				this.newGraph.add(this.undirected);
 				this.newGraph.add(this.directed);
@@ -167,9 +169,9 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.i18n.add(this.enUS);
 		}
 		{// info
-			this.help = new JMenu("helpMenu");
-			this.shortcuts = new JMenuItem("shortcutsMenuItem");
-			this.about = new JMenuItem("aboutMenuItem");
+			this.help = new JMenu("help");
+			this.shortcuts = new JMenuItem("shortcuts");
+			this.about = new JMenuItem("about");
 			// listener
 			this.shortcuts.addActionListener(model.getShortcutsListener());
 			this.about.addActionListener(model.getAboutListener());
@@ -195,117 +197,108 @@ public final class MenuBar extends JMenuBar implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-
-				if (arg == ControlEvent.I18N) {
-
-					{// JMenu fileMenu
-						// setText
-						this.file.setText(b.getString("file.label"));
-						this.newGraph.setText(b.getString("new.label"));
-						this.undirected
-								.setText(b.getString("undirected.label"));
-						this.directed.setText(b.getString("directed.label"));
-						this.open.setText(b.getString("open.label"));
-						this.save.setText(b.getString("save.label"));
-						this.saveAs.setText(b.getString("saveas.label"));
-						this.quit.setText(b.getString("quit.label"));
-						// setMnemonic
-						this.file.setMnemonic(b.getString("file.mnemonic")
-								.toCharArray()[0]);
-						this.newGraph.setMnemonic(b.getString("new.mnemonic")
-								.toCharArray()[0]);
-						this.undirected.setMnemonic(b.getString(
-								"undirected.label").toCharArray()[0]);
-						this.directed.setMnemonic(b.getString("directed.label")
-								.toCharArray()[0]);
-						this.open.setMnemonic(b.getString("open.mnemonic")
-								.toCharArray()[0]);
-						this.save.setMnemonic(b.getString("save.mnemonic")
-								.toCharArray()[0]);
-						this.saveAs.setMnemonic(b.getString("saveas.mnemonic")
-								.toCharArray()[0]);
-						this.quit.setMnemonic(b.getString("quit.mnemonic")
-								.toCharArray()[0]);
-						// setAccelerator
-						this.open.setAccelerator(KeyStroke.getKeyStroke(b
-								.getString("open.accelerator")));
-						this.save.setAccelerator(KeyStroke.getKeyStroke(b
-								.getString("save.accelerator")));
-						this.saveAs.setAccelerator(KeyStroke.getKeyStroke(b
-								.getString("saveas.accelerator")));
-						this.quit.setAccelerator(KeyStroke.getKeyStroke(b
-								.getString("quit.accelerator")));
-					}
-					{// JMenu i18nMenu
-						// setText
-						this.i18n.setText(b.getString("i18n.label"));
-						// setMnemonic
-						this.i18n.setMnemonic(b.getString("i18n.mnemonic")
-								.toCharArray()[0]);
-						// setText
-						// this.deCH.setText(b.getString("deCH.label"));
-						this.deDE.setText(b.getString("deDE.label"));
-						this.frFR.setText(b.getString("frFR.label"));
-						// this.enGB.setText(b.getString("enGB.label"));
-						this.enUS.setText(b.getString("enUS.label"));
-						// setMnemonic
-						// this.deCH.setMnemonic(b.getString("deCH.mnemonic")
-						// .toCharArray()[0]);
-						this.deDE.setMnemonic(b.getString("deDE.mnemonic")
-								.toCharArray()[0]);
-						this.frFR.setMnemonic(b.getString("frFR.mnemonic")
-								.toCharArray()[0]);
-						// this.enGB.setMnemonic(b.getString("enGB.mnemonic")
-						// .toCharArray()[0]);
-						this.enUS.setMnemonic(b.getString("enUS.mnemonic")
-								.toCharArray()[0]);
-					}
-					{// JMenu infoMenu
-						// setText
-						this.help.setText(b.getString("help.label"));
-						this.shortcuts.setText(b.getString("shortcuts.label"));
-						this.about.setText(b.getString("about.label"));
-						// setMnemonic
-						this.help.setMnemonic(b.getString("help.mnemonic")
-								.toCharArray()[0]);
-						this.shortcuts.setMnemonic(b.getString(
-								"shortcuts.mnemonic").toCharArray()[0]);
-						this.about.setMnemonic(b.getString("about.mnemonic")
-								.toCharArray()[0]);
-						// setAccelerator
-						this.shortcuts.setAccelerator(KeyStroke.getKeyStroke(b
-								.getString("shortcuts.accelerator")));
-						this.about.setAccelerator(KeyStroke.getKeyStroke(b
-								.getString("about.accelerator")));
-					}
-
-				} else if (arg == ParameterEvent.GRAPH) {
-					this.save.setEnabled(m.isSaveEnabled());
-				} else {
-
-					// file
-					this.file.setEnabled(m.isFileEnabled());
-					this.newGraph.setEnabled(m.isNewEnabled());
-					this.undirected.setEnabled(m.isUndirectedEnabled());
-					this.directed.setEnabled(m.isDirectedEnabled());
-					this.open.setEnabled(m.isOpenEnabled());
-					this.save.setEnabled(m.isSaveEnabled());
-					this.saveAs.setEnabled(m.isSaveAsEnabled());
-					this.quit.setEnabled(m.isQuitEnabled());
-					// i18n
-					this.i18n.setEnabled(m.isI18nEnabled());
-					// this.deCH.setEnabled(m.isDeCHEnabled());
-					this.deDE.setEnabled(m.isDeDEEnabled());
-					this.frFR.setEnabled(m.isFrFREnabled());
-					// this.enGB.setEnabled(m.isEnGBEnabled());
-					this.enUS.setEnabled(m.isEnUSEnabled());
-					// info
-					this.help.setEnabled(m.isHelpEnabled());
-					this.shortcuts.setEnabled(m.isShortcutsEnabled());
-					this.about.setEnabled(m.isAboutEnabled());
-
+				// if (arg == ControlNotify.I18N) {
+				{// JMenu fileMenu
+					// setText
+					this.file.setText(b.getString("file.label"));
+					this.newGraph.setText(b.getString("new.label"));
+					this.undirected.setText(b.getString("undirected.label"));
+					this.directed.setText(b.getString("directed.label"));
+					this.open.setText(b.getString("open.label"));
+					this.save.setText(b.getString("save.label"));
+					this.saveAs.setText(b.getString("saveas.label"));
+					this.quit.setText(b.getString("quit.label"));
+					// setMnemonic
+					this.file.setMnemonic(b.getString("file.mnemonic")
+							.toCharArray()[0]);
+					this.newGraph.setMnemonic(b.getString("new.mnemonic")
+							.toCharArray()[0]);
+					this.undirected.setMnemonic(b.getString("undirected.label")
+							.toCharArray()[0]);
+					this.directed.setMnemonic(b.getString("directed.label")
+							.toCharArray()[0]);
+					this.open.setMnemonic(b.getString("open.mnemonic")
+							.toCharArray()[0]);
+					this.save.setMnemonic(b.getString("save.mnemonic")
+							.toCharArray()[0]);
+					this.saveAs.setMnemonic(b.getString("saveas.mnemonic")
+							.toCharArray()[0]);
+					this.quit.setMnemonic(b.getString("quit.mnemonic")
+							.toCharArray()[0]);
+					// setAccelerator
+					this.open.setAccelerator(KeyStroke.getKeyStroke(b
+							.getString("open.accelerator")));
+					this.save.setAccelerator(KeyStroke.getKeyStroke(b
+							.getString("save.accelerator")));
+					this.saveAs.setAccelerator(KeyStroke.getKeyStroke(b
+							.getString("saveas.accelerator")));
+					this.quit.setAccelerator(KeyStroke.getKeyStroke(b
+							.getString("quit.accelerator")));
 				}
-
+				{// JMenu i18nMenu
+					// setText
+					this.i18n.setText(b.getString("i18n.label"));
+					// setMnemonic
+					this.i18n.setMnemonic(b.getString("i18n.mnemonic")
+							.toCharArray()[0]);
+					// setText
+					// this.deCH.setText(b.getString("deCH.label"));
+					this.deDE.setText(b.getString("deDE.label"));
+					this.frFR.setText(b.getString("frFR.label"));
+					// this.enGB.setText(b.getString("enGB.label"));
+					this.enUS.setText(b.getString("enUS.label"));
+					// setMnemonic
+					// this.deCH.setMnemonic(b.getString("deCH.mnemonic")
+					// .toCharArray()[0]);
+					this.deDE.setMnemonic(b.getString("deDE.mnemonic")
+							.toCharArray()[0]);
+					this.frFR.setMnemonic(b.getString("frFR.mnemonic")
+							.toCharArray()[0]);
+					// this.enGB.setMnemonic(b.getString("enGB.mnemonic")
+					// .toCharArray()[0]);
+					this.enUS.setMnemonic(b.getString("enUS.mnemonic")
+							.toCharArray()[0]);
+				}
+				{// JMenu infoMenu
+					// setText
+					this.help.setText(b.getString("help.label"));
+					this.shortcuts.setText(b.getString("shortcuts.label"));
+					this.about.setText(b.getString("about.label"));
+					// setMnemonic
+					this.help.setMnemonic(b.getString("help.mnemonic")
+							.toCharArray()[0]);
+					this.shortcuts.setMnemonic(b
+							.getString("shortcuts.mnemonic").toCharArray()[0]);
+					this.about.setMnemonic(b.getString("about.mnemonic")
+							.toCharArray()[0]);
+					// setAccelerator
+					this.shortcuts.setAccelerator(KeyStroke.getKeyStroke(b
+							.getString("shortcuts.accelerator")));
+					this.about.setAccelerator(KeyStroke.getKeyStroke(b
+							.getString("about.accelerator")));
+				}
+				// } else {
+				// file
+				this.file.setEnabled(m.isFileEnabled());
+				this.newGraph.setEnabled(m.isNewEnabled());
+				this.undirected.setEnabled(m.isUndirectedEnabled());
+				this.directed.setEnabled(m.isDirectedEnabled());
+				this.open.setEnabled(m.isOpenEnabled());
+				this.save.setEnabled(m.isSaveEnabled());
+				this.saveAs.setEnabled(m.isSaveAsEnabled());
+				this.quit.setEnabled(m.isQuitEnabled());
+				// i18n
+				this.i18n.setEnabled(m.isI18nEnabled());
+				// this.deCH.setEnabled(m.isDeCHEnabled());
+				this.deDE.setEnabled(m.isDeDEEnabled());
+				this.frFR.setEnabled(m.isFrFREnabled());
+				// this.enGB.setEnabled(m.isEnGBEnabled());
+				this.enUS.setEnabled(m.isEnUSEnabled());
+				// info
+				this.help.setEnabled(m.isHelpEnabled());
+				this.shortcuts.setEnabled(m.isShortcutsEnabled());
+				this.about.setEnabled(m.isAboutEnabled());
+				// }
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),
 						b.getString("app.label"), 1, null);

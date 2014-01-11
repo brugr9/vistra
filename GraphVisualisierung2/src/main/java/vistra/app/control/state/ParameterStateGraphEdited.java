@@ -29,7 +29,19 @@ class ParameterStateGraphEdited extends AbstractParameterState implements
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewGraphEdited();
+			super.stateHandler.setViewGraphSaved(false);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void doExit() throws Exception {
+		try {
+			super.stateHandler.setViewGraphSaved(true);
 		} catch (Exception e) {
 			throw e;
 		}

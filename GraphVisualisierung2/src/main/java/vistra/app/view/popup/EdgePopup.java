@@ -13,8 +13,6 @@ import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ControlEvent;
-import vistra.app.control.IControl.ParameterEvent;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IItemLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -118,15 +116,16 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ControlEvent.I18N) {
-				this.setLabel(b.getString("edge.label"));
-				this.dialog.setText(b.getString("edit.label"));
-				this.delete.setText(b.getString("delete.label"));
-			}
-			/**/
+			// if (arg == ControlNotify.I18N) {
+			this.setLabel(b.getString("edge.label"));
+			this.dialog.setText(b.getString("edit.label"));
+			this.delete.setText(b.getString("delete.label"));
+
+			// } else {
 			this.setEnabled(m.isEditEdgeEnabled());
 			this.dialog.setEnabled(m.isEditEdgeEnabled());
 			this.delete.setEnabled(m.isEditEdgeEnabled());
+			// }
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);
@@ -165,7 +164,6 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 			if (edge != null) {
 				viewer.getPickedEdgeState().pick(edge, false);
 				viewer.getGraphLayout().getGraph().removeEdge(edge);
-				model.notifyObservers(ParameterEvent.GRAPH);
 			}
 		}
 	}

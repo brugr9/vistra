@@ -29,7 +29,7 @@ class ParameterStateAlgorithmSelected extends AbstractParameterState implements
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewAlgorithmSelected();
+			super.stateHandler.setViewEnableTraversal(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -39,21 +39,9 @@ class ParameterStateAlgorithmSelected extends AbstractParameterState implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void startDo() throws Exception {
+	protected void doExit() throws Exception {
 		try {
-			super.stateHandler.enableTraversal(true);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void stopDo() throws Exception {
-		try {
-			super.stateHandler.enableTraversal(false);
+			super.stateHandler.setViewEnableTraversal(false);
 		} catch (Exception e) {
 			throw e;
 		}

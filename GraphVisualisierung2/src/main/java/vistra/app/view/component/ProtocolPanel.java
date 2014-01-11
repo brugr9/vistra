@@ -15,7 +15,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.util.palette.ColorPalette;
 
 /**
@@ -87,10 +86,9 @@ public final class ProtocolPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-
-				if (arg == ControlEvent.I18N) {
-					this.border.setTitle(b.getString("protocol.label"));
-				}
+				// if (arg == ControlNotify.I18N) {
+				this.border.setTitle(b.getString("protocol.label"));
+				// }
 				this.text.setText(m.getProtocol().toString());
 				this.text.setCaretPosition(this.text.getDocument().getLength());
 			} catch (Exception e) {

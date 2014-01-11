@@ -28,7 +28,19 @@ class ParameterStateOff extends AbstractParameterState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewOff();
+			super.stateHandler.setViewEnableMenu(false);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void doExit() throws Exception {
+		try {
+			super.stateHandler.setViewEnableMenu(true);
 		} catch (Exception e) {
 			throw e;
 		}
