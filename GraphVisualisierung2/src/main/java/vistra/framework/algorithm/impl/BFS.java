@@ -45,30 +45,35 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	 */
 	@Override
 	public void traverse(ITraversableGraph g) throws AlgorithmException {
+		try {
+			/* Input: A graph g and a root v of g */
+			IVertex v = g.getStart();
+			Queue<IVertex> Q = new NodeQueue<IVertex>();
+			Set<IVertex> V = new HashSet<IVertex>();
+			Q.enqueue(v);
+			V.add(v);
 
-		/* Input: A graph g and a root v of g */
-		IVertex v = g.getStart();
-		Queue<IVertex> Q = new NodeQueue<IVertex>();
-		Set<IVertex> V = new HashSet<IVertex>();
-		Q.enqueue(v);
-		V.add(v);
-
-		IVertex tempV, useV;
-		IEdge e = null;
-		while (!Q.isEmpty()) {
-			tempV = Q.dequeue();
-			if (g.isSuccessor(tempV, v)) {
-				v = tempV;
-				g.stepBy(new VisitStep(e, v));
+			IVertex tempV, useV;
+			IEdge e = null;
+			while (!Q.isEmpty()) {
+				tempV = Q.dequeue();
+				if (g.isSuccessor(tempV, v)) {
+					v = tempV;
+					g.stepBy(new VisitStep(e, v));
+				}
+				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
+															// tempV
+					useV = g.getOpposite(tempV, outE); // adjacent vertex of
+														// tempV
+					if (!V.contains(useV)) {
+						V.add(useV);
+						Q.enqueue(useV);
+					} else
+						g.stepBy(new BackEdgeStep(outE));
+				}
 			}
-			for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of tempV
-				useV = g.getOpposite(tempV, outE); // adjacent vertex of tempV
-				if (!V.contains(useV)) {
-					V.add(useV);
-					Q.enqueue(useV);
-				} else
-					g.stepBy(new BackEdgeStep(outE));
-			}
+		} catch (Exception e) {
+			throw new AlgorithmException(e);
 		}
 	}
 

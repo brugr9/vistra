@@ -1,7 +1,5 @@
 package vistra.framework.traversal.step;
 
-import java.util.List;
-
 import net.datastructures.Entry;
 import net.datastructures.Map;
 import vistra.framework.graph.item.IEdge;
@@ -33,13 +31,8 @@ public class VisitStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
 			IItemStateCommand vertexCommand = new VisitedVertexCommand(vertex);
-			//
 			this.commandHandler.addCommand(edgeCommand);
 			this.commandHandler.addCommand(vertexCommand);
-			//
-			// edgeCommand.execute();
-			// vertexCommand.execute();
-			this.commandHandler.execute();
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + " visited");
@@ -47,46 +40,6 @@ public class VisitStep extends AbstractStep implements IStep {
 				this.description.append(" via edge "
 						+ ((IEdgeLayout) edge).getId());
 			this.description.append(System.lineSeparator());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Multi pair of items constructor, visit vertex via edge.
-	 * 
-	 * @param edges
-	 *            the edges to discover
-	 * @param vertices
-	 *            the vertices to visit
-	 */
-	public VisitStep(List<IEdge> edges, List<IVertex> vertices) {
-		super();
-		try {
-			IEdge edge;
-			IVertex vertex;
-			for (int index = 0; index < edges.size(); index++) {
-				edge = edges.get(index);
-				vertex = vertices.get(index);
-				//
-				IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
-				IItemStateCommand vertexCommand = new VisitedVertexCommand(
-						vertex);
-				//
-				this.commandHandler.addCommand(edgeCommand);
-				this.commandHandler.addCommand(vertexCommand);
-				//
-				// edgeCommand.execute();
-				// vertexCommand.execute();
-				this.commandHandler.execute();
-				//
-				this.description.append("Vertex "
-						+ ((IVertexLayout) vertex).getId() + " visited");
-				if (((IEdgeLayout) edge).getId().length() != 0)
-					this.description.append(" via edge "
-							+ ((IEdgeLayout) edge).getId());
-				this.description.append(System.lineSeparator());
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -111,13 +64,8 @@ public class VisitStep extends AbstractStep implements IStep {
 				IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
 				IItemStateCommand vertexCommand = new VisitedVertexCommand(
 						vertex);
-				//
 				this.commandHandler.addCommand(edgeCommand);
 				this.commandHandler.addCommand(vertexCommand);
-				//
-				// edgeCommand.execute();
-				// vertexCommand.execute();
-				this.commandHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId() + " visited");

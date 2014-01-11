@@ -1,7 +1,5 @@
 package vistra.framework.traversal.step;
 
-import java.util.List;
-
 import net.datastructures.Entry;
 import net.datastructures.Map;
 import vistra.framework.graph.item.IVertex;
@@ -30,8 +28,6 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand command = new UpdatedVertexCommand(vertex, value);
 			this.commandHandler.addCommand(command);
-			// command.execute();
-			this.commandHandler.execute();
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + ", value updated to "
@@ -56,39 +52,7 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
 				this.commandHandler.addCommand(command);
-				// command.execute();
-				this.commandHandler.execute();
-				this.description.append("Vertex "
-						+ ((IVertexLayout) vertex).getId()
-						+ ", value updated to " + value
-						+ System.lineSeparator());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Multi item / multi value constructor.
-	 * 
-	 * @param vertices
-	 *            the vertices
-	 * @param values
-	 *            the values
-	 */
-	public UpdatedVertexStep(List<IVertex> vertices, List<String> values) {
-		super();
-		try {
-			IVertex vertex;
-			String value;
-			for (int index = 0; index < vertices.size(); index++) {
-				vertex = vertices.get(index);
-				value = values.get(index);
-				IItemStateCommand command = new UpdatedVertexCommand(vertex,
-						value);
-				this.commandHandler.addCommand(command);
-				// command.execute();
-				this.commandHandler.execute();
+				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
 						+ ", value updated to " + value
@@ -114,11 +78,11 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 			for (Entry<IVertex, String> entry : entries) {
 				vertex = entry.getKey();
 				value = entry.getValue();
+				//
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
 				this.commandHandler.addCommand(command);
-				// command.execute();
-				this.commandHandler.execute();
+				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
 						+ ", value updated to " + value

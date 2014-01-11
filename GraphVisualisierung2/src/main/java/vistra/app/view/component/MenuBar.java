@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ActionCommandParameter;
 import vistra.app.control.IControl.ActionCommandGeneral;
+import vistra.app.control.IControl.ActionCommandParameter;
 import vistra.framework.util.palette.I18nPalette;
 
 /**

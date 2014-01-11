@@ -114,11 +114,12 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	boolean isVisited(IVertex vertex);
 
 	/**
-	 * A step method: does a step.
+	 * A step method: executes a step and adds the step to the traversal.
 	 * 
 	 * @param step
-	 *            the step to do
+	 *            the step
+	 * @throws Exception
 	 */
-	void stepBy(IStep step);
+	void stepBy(IStep step) throws Exception;
 
 }

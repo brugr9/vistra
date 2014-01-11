@@ -1,7 +1,5 @@
 package vistra.framework.traversal.step;
 
-import java.util.List;
-
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.state.command.DiscardedEdgeCommand;
@@ -26,8 +24,7 @@ public class DiscardedEdgeStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand command = new DiscardedEdgeCommand(edge);
 			this.commandHandler.addCommand(command);
-			// command.execute();
-			this.commandHandler.execute();
+			//
 			this.description.append("Edge ");
 			if (((IEdgeLayout) edge).getId().length() != 0)
 				this.description.append(((IEdgeLayout) edge).getId() + " ");
@@ -43,14 +40,13 @@ public class DiscardedEdgeStep extends AbstractStep implements IStep {
 	 * @param edges
 	 *            the edges
 	 */
-	public DiscardedEdgeStep(List<IEdge> edges) {
+	public DiscardedEdgeStep(Iterable<IEdge> edges) {
 		super();
 		try {
 			for (IEdge edge : edges) {
 				IItemStateCommand command = new DiscardedEdgeCommand(edge);
 				this.commandHandler.addCommand(command);
-				// command.execute();
-				this.commandHandler.execute();
+				//
 				this.description.append("Edge ");
 				if (((IEdgeLayout) edge).getId().length() != 0)
 					this.description.append(((IEdgeLayout) edge).getId() + " ");

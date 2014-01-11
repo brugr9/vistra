@@ -82,10 +82,8 @@ public final class SbsStateHandler extends Observable implements
 		}
 		this.step = null;
 		this.blinkListener = new BlinkListener();
-		int timeDivider = 2; // divides the delay into two parts: blink and show
-		int numberOfSteps = 2; // number of steps per blink: backward, forward
-		int blinkDelay = this.model.getDelay()
-				/ (timeDivider * numberOfSteps * NUMBER_OF_BLINKS) * A_SECOND;
+		int blinkDelay = this.model.getDelay() / (2 * 2 * NUMBER_OF_BLINKS)
+				* A_SECOND;
 		this.timer = new Timer(blinkDelay, this.blinkListener);
 		this.off = true;
 		this.counter = 0;
@@ -274,6 +272,7 @@ public final class SbsStateHandler extends Observable implements
 	}
 
 	/**
+	 * Doing: Step-by-Step backward until reaching the beginning.
 	 * 
 	 * @return -1 if at beginning, 1 if at end, 0 else
 	 */
@@ -288,28 +287,17 @@ public final class SbsStateHandler extends Observable implements
 	}
 
 	/**
-	 * Doing: Step-by-Step backward until reaching the beginning.
+	 * Doing: Step-by-Step backward until executing the first step.
 	 * 
 	 * @throws Exception
 	 */
 	void toBeginning() throws Exception {
-
-		ITraversal traversal = this.model.getTraversal();
-
 		try {
-			while (traversal.hasPrevious()) {
-				this.step.undo();
-				this.step = traversal.previous();
-			}
-			this.step.undo();
-			/* update */
-			this.model.setProgress(0);
-			this.model.setProtocol(new StringBuilder().append(" "));
-			this.model.notifyObservers();
+			while (this.backward())
+				;
 		} catch (Exception ex) {
 			throw ex;
 		}
-
 	}
 
 	/**
@@ -319,37 +307,26 @@ public final class SbsStateHandler extends Observable implements
 	 * @throws Exception
 	 */
 	boolean backward() throws Exception {
-
-		ITraversal traversal = this.model.getTraversal();
-
+		ITraversal t = this.model.getTraversal();
 		try {
-
-			int steplength = this.model.getSteplength();
-			int min = 0;
 			int progress = this.model.getProgress();
-
 			/* here we go ... */
-			for (int i = 0; i < steplength; i++) {
-				if (min < progress) {
-					/* modify the graph */
-					this.step.undo();
-					this.model.setProgress(--progress);
-					this.step = traversal.previous();
-					this.model.notifyObservers();
+			for (int i = 0; i < this.model.getSteplength(); i++) {
+				this.step.undo();
+				this.model.setProgress(--progress);
+				this.model.notifyObservers();
+				if (t.hasPrevious()) {
+					this.step = t.previous();
 				} else {
 					break;
 				}
 			}
-
 			this.model.setProtocol(new StringBuilder());
 			this.model.notifyObservers();
-
 		} catch (Exception ex) {
 			throw ex;
 		}
-
-		return traversal.hasPrevious();
-
+		return t.hasPrevious();
 	}
 
 	/**
@@ -359,48 +336,31 @@ public final class SbsStateHandler extends Observable implements
 	 * @throws Exception
 	 */
 	boolean forward() throws Exception {
-
-		ITraversal traversal = this.model.getTraversal();
-
+		ITraversal t = this.model.getTraversal();
 		try {
-
-			int steplength = this.model.getSteplength();
 			int progress = this.model.getProgress();
-			int max = this.model.getTraversal().size();
 			String description = "";
 			StringBuilder stringBuilder = this.model.getProtocol();
-
 			/* here we go ... */
-			for (int i = 0; i < steplength; i++) {
-				if (progress < max) {
-					/* get the step */
-					this.step = traversal.next();
-					description = this.step.getDescription();
-					stringBuilder.append(description);
-					/* update */
-					this.model.setProgress(++progress);
-					this.model.setProtocol(stringBuilder);
-					this.model.notifyObservers();
-					/* modify the graph */
+			for (int i = 0; i < this.model.getSteplength(); i++) {
+				if (t.hasNext()) {
+					this.step = t.next();
 					// TODO
 					// this.blink();
 					this.step.execute();
-					this.model.notifyObservers();
-				} else {
-					stringBuilder.append(traversal.getDescription()
-							+ System.lineSeparator());
+					this.model.setProgress(++progress);
+					description = this.step.getDescription();
+					stringBuilder.append(description);
 					this.model.setProtocol(stringBuilder);
 					this.model.notifyObservers();
+				} else {
 					break;
 				}
 			}
-
 		} catch (Exception ex) {
 			throw ex;
 		}
-
-		return traversal.hasNext();
-
+		return t.hasNext();
 	}
 
 	/**
@@ -416,50 +376,24 @@ public final class SbsStateHandler extends Observable implements
 			this.counter = 0;
 			this.timer.start();
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, ex.toString(), model
-					.getResourceBundle().getString("app.label"), 1, null);
-			ex.printStackTrace();
+			throw ex;
 		}
 
 		// }
 	}
 
 	/**
-	 * Doing: Step-by-Step forward until reaching the end.
+	 * Doing: Step-by-Step forward until executing the last step.
 	 * 
 	 * @throws Exception
 	 */
 	void toEnd() throws Exception {
-
-		ITraversal traversal = this.model.getTraversal();
-
 		try {
-
-			String description = "";
-			StringBuilder stringBuilder = this.model.getProtocol();
-			boolean ok = traversal.hasNext();
-
-			/* here we go ... */
-			while (ok) {
-				/* modify the graph */
-				this.step = traversal.next();
-				description = this.step.getDescription();
-				stringBuilder.append(description);
-				this.step.execute();
-				ok = traversal.hasNext();
-			}
-
-			/* update */
-			int max = this.model.getTraversal().size();
-			this.model.setProgress(max);
-			stringBuilder.append(traversal.getDescription());
-			this.model.setProtocol(stringBuilder);
-			this.model.notifyObservers();
-
+			while (this.forward())
+				;
 		} catch (Exception ex) {
 			throw ex;
 		}
-
 	}
 
 	/**

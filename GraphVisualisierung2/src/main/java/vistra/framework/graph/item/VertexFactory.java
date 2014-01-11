@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.framework.graph.item.state.IVertexStateHandler;
 import vistra.framework.graph.item.state.VertexStateHandler;
 import vistra.framework.util.IBidirectIterator;
 import vistra.framework.util.ImmutableBidirectIterator;
@@ -25,14 +24,10 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	private static IBidirectIterator<String> SIGMA;
 
 	/**
-	 * 
+	 * Main constructor.
 	 */
 	public VertexFactory() {
-		ArrayList<String> sigma = new ArrayList<String>();
-		String[] alphabet = SigmaPalette.alphabet;
-		for (int i = 0; i < alphabet.length; i++)
-			sigma.add(alphabet[i]);
-		SIGMA = new ImmutableBidirectIterator<String>(sigma);
+		resetSigma();
 	}
 
 	/**
@@ -52,6 +47,8 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	 */
 	public static IVertexLayout createLabeledVertex() {
 		IVertexLayout vertex = createVertex();
+		if (!SIGMA.hasNext())
+			resetSigma();
 		vertex.setId(SIGMA.next());
 		return vertex;
 	}
@@ -62,13 +59,15 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	 * @return the vertex
 	 */
 	public static IVertexLayout createVertex() {
-		IVertexStateHandler vertex = new VertexStateHandler();
-		try {
-			vertex.handleUnexplored();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (IVertexLayout) vertex;
+		return (IVertexLayout) new VertexStateHandler();
+	}
+
+	public static void resetSigma() {
+		ArrayList<String> sigma = new ArrayList<String>();
+		String[] alphabet = SigmaPalette.alphabet;
+		for (int i = 0; i < alphabet.length; i++)
+			sigma.add(alphabet[i]);
+		SIGMA = new ImmutableBidirectIterator<String>(sigma);
 	}
 
 }

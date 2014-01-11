@@ -99,11 +99,23 @@ abstract class AbstractEdgeState extends AbstractState implements IState {
 	 */
 	void handleSolution() throws Exception {
 		try {
-			this.stateHandler.setState(new SolutionEdgeState(
-					this.stateHandler));
+			this.stateHandler
+					.setState(new SolutionEdgeState(this.stateHandler));
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
+	/**
+	 * Handles previous state.
+	 * 
+	 * @throws Exception
+	 */
+	void handlePreviousState() throws Exception {
+		try {
+			this.stateHandler.setPreviousState();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }

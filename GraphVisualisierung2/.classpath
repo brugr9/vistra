@@ -32,6 +32,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="doc/net.datastructures/net-datastructures-5-0.jar"/>
+	<classpathentry kind="lib" path="doc/net.datastructures/net-datastructures-5-0.jar" sourcepath="doc/net.datastructures/net-datastructures-5-0-src-selected.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/GraphVisualisierung2/doc/net.datastructures/net-datastructures-5-0-src-selected.zip!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

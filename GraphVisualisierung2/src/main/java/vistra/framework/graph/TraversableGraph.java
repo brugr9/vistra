@@ -685,8 +685,13 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void stepBy(IStep step) {
-		this.steps.add(step);
+	public void stepBy(IStep step) throws Exception {
+		try {
+			step.execute();
+			this.steps.add(step);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

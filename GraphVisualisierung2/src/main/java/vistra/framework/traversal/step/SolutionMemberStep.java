@@ -1,7 +1,5 @@
 package vistra.framework.traversal.step;
 
-import java.util.List;
-
 import net.datastructures.Entry;
 import net.datastructures.Map;
 import vistra.framework.graph.item.IEdge;
@@ -38,10 +36,6 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 			this.commandHandler.addCommand(edgeCommand);
 			this.commandHandler.addCommand(vertexCommand);
 			//
-			// edgeCommand.execute();
-			// vertexCommand.execute();
-			this.commandHandler.execute();
-			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + ": Solution member ");
 			if (((IEdgeLayout) edge).getId().length() != 0)
@@ -54,52 +48,10 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 	}
 
 	/**
-	 * Multi pair of items constructor.
-	 * 
-	 * @param edges
-	 *            the edges to discover
-	 * @param vertices
-	 *            the vertices to visit
-	 */
-	public SolutionMemberStep(List<IEdge> edges, List<IVertex> vertices) {
-		super();
-		try {
-			IEdge edge;
-			IVertex vertex;
-			for (int index = 0; index < edges.size(); index++) {
-				edge = edges.get(index);
-				vertex = vertices.get(index);
-				//
-				IItemStateCommand edgeCommand = new SolutionMemberEdgeCommand(
-						edge);
-				IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
-						vertex);
-				//
-				this.commandHandler.addCommand(edgeCommand);
-				this.commandHandler.addCommand(vertexCommand);
-				//
-				// edgeCommand.execute();
-				// vertexCommand.execute();
-				this.commandHandler.execute();
-				//
-				this.description.append("Vertex "
-						+ ((IVertexLayout) vertex).getId()
-						+ ": Solution member ");
-				if (((IEdgeLayout) edge).getId().length() != 0)
-					this.description.append(" via edge "
-							+ ((IEdgeLayout) edge).getId());
-				this.description.append(System.lineSeparator());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Multi item constructor.
 	 * 
 	 * @param items
-	 *            a map of edges and vertices
+	 *            a map of edges to discover and vertices to visit
 	 */
 	public SolutionMemberStep(Map<IEdge, IVertex> items) {
 		super();
@@ -118,10 +70,6 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 				//
 				this.commandHandler.addCommand(edgeCommand);
 				this.commandHandler.addCommand(vertexCommand);
-				//
-				// edgeCommand.execute();
-				// vertexCommand.execute();
-				this.commandHandler.execute();
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()

@@ -17,7 +17,7 @@ public class VertexCoordY implements Transformer<IVertexLayout, String> {
 	 */
 	@Override
 	public String transform(IVertexLayout vertex) {
-		return String.valueOf((int) vertex.getLocation().getY());
+		return String.valueOf(vertex.getLocation().getY());
 	}
 
 }

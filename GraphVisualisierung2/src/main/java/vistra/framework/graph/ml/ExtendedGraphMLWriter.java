@@ -25,8 +25,8 @@ public final class ExtendedGraphMLWriter extends
 	// geometry: x, y
 	public final static String V_LOC_X = "coord.x";
 	public final static String V_LOC_Y = "coord.y";
-	public final static int V_LOC_X_DEFAULT = 0;
-	public final static int V_LOC_Y_DEFAULT = 0;
+	public final static Double V_LOC_X_DEFAULT = 0d;
+	public final static Double V_LOC_Y_DEFAULT = 0d;
 	public final static String V_LOC_X_COMMENT = "Vertex x coordinate";
 	public final static String V_LOC_Y_COMMENT = "Vertex y coordinate";
 	// quality: start, end
@@ -57,11 +57,11 @@ public final class ExtendedGraphMLWriter extends
 		// vertex: x
 		this.addVertexData(ExtendedGraphMLWriter.V_LOC_X,
 				ExtendedGraphMLWriter.V_LOC_X_COMMENT,
-				Integer.toString(ExtendedGraphMLWriter.V_LOC_X_DEFAULT),
+				Double.toString(ExtendedGraphMLWriter.V_LOC_X_DEFAULT),
 				new VertexCoordX());
 		// vertex: y
 		this.addVertexData(ExtendedGraphMLWriter.V_LOC_Y, V_LOC_Y_COMMENT,
-				Integer.toString(ExtendedGraphMLWriter.V_LOC_Y_DEFAULT),
+				Double.toString(ExtendedGraphMLWriter.V_LOC_Y_DEFAULT),
 				new VertexCoordY());
 		// vertex: start
 		this.addVertexData(ExtendedGraphMLWriter.V_START,

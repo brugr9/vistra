@@ -64,7 +64,8 @@ public class Core implements ICore {
 			this.graphManager = GraphManagerFactory.create(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(p);
 			this.algorithmManager.addAvailable(new Default());
-			this.algorithmManager.addAvailable(new SimpleSteps()); // TODO remove
+			this.algorithmManager.addAvailable(new SimpleSteps()); // TODO
+																	// remove
 			this.algorithmManager.addAvailable(new BFS());
 			this.algorithmManager.addAvailable(new DFSpre());
 			this.algorithmManager.addAvailable(new DLS());
@@ -183,15 +184,15 @@ public class Core implements ICore {
 
 		try {
 			/* graph */
-			List<IStep> stepList = new ArrayList<IStep>();
-			ITraversableGraph g = new TraversableGraph(graph, stepList);
+			List<IStep> steps = new ArrayList<IStep>();
+			ITraversableGraph g = new TraversableGraph(graph, steps);
 			/* algorithm */
 			this.algorithm.traverse(g);
 			/* traversal */
+			for (int i = steps.size() - 1; i >= 0; i--)
+				steps.get(i).undo();
 			IBidirectIterator<IStep> stepIterator = new ImmutableBidirectIterator<IStep>(
-					stepList);
-			while (stepIterator.hasPrevious())
-				stepIterator.previous().undo();
+					steps);
 			ITraversal traversal = new Traversal(stepIterator);
 			return traversal;
 		} catch (Exception e) {

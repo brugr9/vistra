@@ -5,6 +5,7 @@ import java.util.Set;
 
 import net.datastructures.NodeStack;
 import net.datastructures.Stack;
+import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
@@ -40,30 +41,36 @@ public class DFSpre extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(ITraversableGraph g) {
-		/* Input: A graph g and a root v of g */
-		IVertex v = g.getStart();
-		Stack<IVertex> S = new NodeStack<IVertex>();
-		Set<IVertex> V = new HashSet<IVertex>();
-		S.push(v);
-		V.add(v);
+	public void traverse(ITraversableGraph g) throws AlgorithmException {
+		try {
+			/* Input: A graph g and a root v of g */
+			IVertex v = g.getStart();
+			Stack<IVertex> S = new NodeStack<IVertex>();
+			Set<IVertex> V = new HashSet<IVertex>();
+			S.push(v);
+			V.add(v);
 
-		IVertex tempV, useV;
-		IEdge e = null;
-		while (!S.isEmpty()) {
-			tempV = S.pop();
-			if (g.isSuccessor(tempV, v)) {
-				v = tempV;
-				g.stepBy(new VisitStep(e, v));
+			IVertex tempV, useV;
+			IEdge e = null;
+			while (!S.isEmpty()) {
+				tempV = S.pop();
+				if (g.isSuccessor(tempV, v)) {
+					v = tempV;
+					g.stepBy(new VisitStep(e, v));
+				}
+				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
+															// tempV
+					useV = g.getOpposite(tempV, outE); // adjacent vertex of
+														// tempV
+					if (!V.contains(useV)) {
+						V.add(useV);
+						S.push(useV);
+					} else
+						g.stepBy(new BackEdgeStep(outE));
+				}
 			}
-			for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of tempV
-				useV = g.getOpposite(tempV, outE); // adjacent vertex of tempV
-				if (!V.contains(useV)) {
-					V.add(useV);
-					S.push(useV);
-				} else
-					g.stepBy(new BackEdgeStep(outE));
-			}
+		} catch (Exception e) {
+			throw new AlgorithmException(e);
 		}
 
 	}

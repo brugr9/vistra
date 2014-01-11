@@ -47,26 +47,35 @@ public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 	 */
 	@Override
 	public void traverse(ITraversableGraph graph) throws AlgorithmException {
-		ArrayList<IVertex> vertices = new ArrayList<IVertex>(
-				graph.getVertices());
-		ArrayList<IEdge> edges = new ArrayList<IEdge>(graph.getEdges());
+		try {
 
-		/* vertex */
-		// init
-		graph.stepBy(new InitialisedVertexStep(graph.getVertices()));
-		// value
-		graph.stepBy(new UpdatedVertexStep(graph.getVertices(), "5"));
-		/* vertex/edge combined */
+			// graph.stepBy(new DiscardedEdgeStep(graph.getEdges()));
+			// graph.stepBy(new InitialisedVertexStep(graph.getVertices()));
+			// graph.stepBy(new UpdatedVertexStep(graph.getVertices(), "5"));
 
-		Map<IEdge, IVertex> map = new HashTableMap<IEdge, IVertex>();
-		for (int i = 0; i < vertices.size(); i++)
-			map.put(edges.get(i), vertices.get(i));
-		graph.stepBy(new VisitStep(map));
-		graph.stepBy(new SolutionMemberStep(edges.get(5), vertices.get(6)));
-		/* edge */
-		graph.stepBy(new BackEdgeStep(edges.get(1)));
-		graph.stepBy(new ForwardEdgeStep(edges.get(2)));
-		graph.stepBy(new CrossEdgeStep(edges.get(3)));
-		graph.stepBy(new DiscardedEdgeStep(edges.get(4)));
+			ArrayList<IVertex> vertices = new ArrayList<IVertex>(
+					graph.getVertices());
+			ArrayList<IEdge> edges = new ArrayList<IEdge>(graph.getEdges());
+
+			/* vertex */
+			// init
+			graph.stepBy(new InitialisedVertexStep(graph.getVertices()));
+			// value
+			graph.stepBy(new UpdatedVertexStep(graph.getVertices(), "5"));
+			/* vertex/edge combined */
+
+			Map<IEdge, IVertex> map = new HashTableMap<IEdge, IVertex>();
+			for (int i = 0; i < vertices.size(); i++)
+				map.put(edges.get(i), vertices.get(i));
+			graph.stepBy(new VisitStep(map));
+			graph.stepBy(new SolutionMemberStep(edges.get(5), vertices.get(6)));
+			/* edge */
+			graph.stepBy(new BackEdgeStep(edges.get(1)));
+			graph.stepBy(new ForwardEdgeStep(edges.get(2)));
+			graph.stepBy(new CrossEdgeStep(edges.get(3)));
+			graph.stepBy(new DiscardedEdgeStep(edges.get(4)));
+		} catch (Exception e) {
+			throw new AlgorithmException(e);
+		}
 	}
 }

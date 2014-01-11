@@ -1,7 +1,5 @@
 package vistra.framework.traversal.step;
 
-import java.util.List;
-
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.state.command.CrossEdgeCommand;
@@ -26,8 +24,7 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand command = new CrossEdgeCommand(edge);
 			this.commandHandler.addCommand(command);
-			// command.execute();
-			this.commandHandler.execute();
+			//
 			this.description.append("Cross-edge ");
 			if (((IEdgeLayout) edge).getId().length() != 0)
 				this.description.append(((IEdgeLayout) edge).getId());
@@ -43,14 +40,13 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 	 * @param edges
 	 *            the edges
 	 */
-	public CrossEdgeStep(List<IEdge> edges) {
+	public CrossEdgeStep(Iterable<IEdge> edges) {
 		super();
 		try {
 			for (IEdge edge : edges) {
 				IItemStateCommand command = new CrossEdgeCommand(edge);
 				this.commandHandler.addCommand(command);
-				// command.execute();
-				this.commandHandler.execute();
+				//
 				this.description.append("Cross-edge ");
 				if (((IEdgeLayout) edge).getId().length() != 0)
 					this.description.append(((IEdgeLayout) edge).getId());

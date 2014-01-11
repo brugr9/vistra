@@ -24,8 +24,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand command = new InitialisedVertexCommand(vertex);
 			this.commandHandler.addCommand(command);
-			// command.execute();
-			this.commandHandler.execute();
+			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + " initialised"
 					+ System.lineSeparator());
@@ -46,8 +45,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 			for (IVertex vertex : vertices) {
 				IItemStateCommand command = new InitialisedVertexCommand(vertex);
 				this.commandHandler.addCommand(command);
-				// command.execute();
-				this.commandHandler.execute();
+				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId() + " initialised"
 						+ System.lineSeparator());

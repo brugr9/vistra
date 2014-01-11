@@ -41,21 +41,22 @@ public final class Convert {
 	 *            the y coordinate
 	 * @return the point
 	 */
-	public static Point2D toPoint2D(String x, String y) {
-		int xInt, yInt;
+	public static Point2D toPoint2D(String xS, String yS) {
+		double x, y;
 		Point2D p;
 		try {
-			xInt = Integer.parseInt(x);
+			x = Double.parseDouble(xS);
 		} catch (Exception e) {
-			throw new UnsupportedOperationException("x: " + x, e);
+			throw new UnsupportedOperationException("x: " + xS, e);
 		}
 		try {
-			yInt = Integer.parseInt(y);
+			y = Double.parseDouble(yS);
 		} catch (Exception e) {
-			throw new UnsupportedOperationException("y: " + y, e);
+			throw new UnsupportedOperationException("y: " + yS, e);
 		}
 		try {
-			p = new Point(xInt, yInt);
+			p = new Point();
+			p.setLocation(x, y);
 		} catch (Exception e) {
 			throw new UnsupportedOperationException("point", e);
 		}

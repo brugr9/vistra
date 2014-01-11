@@ -35,8 +35,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	public EdgeStateHandler() {
 		super();
-		this.state = null;
 		this.cellar = new NodeStack<AbstractEdgeState>();
+		this.state = new UnexploredEdgeState(this);
 		try {
 			this.setState(new UnexploredEdgeState(this));
 		} catch (Exception e) {
@@ -142,15 +142,14 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	public void handlePreviousState() throws Exception {
 		try {
 			this.state.exit();
-			this.state = this.cellar.pop();
-			this.state.entry();
+			this.state.handlePreviousState();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Sets a state and adds it to the cellar.
+	 * Sets a state, does the entry and pushes it on the cellar.
 	 * 
 	 * @param state
 	 *            the state to set
@@ -161,6 +160,21 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 			this.state = state;
 			this.state.entry();
 			this.cellar.push(state);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Sets the previous state.
+	 * 
+	 * @throws Exception
+	 */
+	void setPreviousState() throws Exception {
+		try {
+			this.cellar.pop();
+			this.state = this.cellar.top();
+			this.state.entry();
 		} catch (Exception e) {
 			throw e;
 		}

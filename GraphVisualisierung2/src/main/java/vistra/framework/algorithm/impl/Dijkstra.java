@@ -70,13 +70,17 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 	 */
 	@Override
 	public void traverse(ITraversableGraph graph) throws AlgorithmException {
-		// TODO
-		this.graph = graph;
-		WEIGHT = new Object();
-		// IVertex s = graph.getStart();
-		DefaultComparator comparator = new DefaultComparator();
-		Q = new HeapAdaptablePriorityQueue<Integer, IVertex>(comparator);
-		// dijkstraVisit(s);
+		try {
+			// TODO
+			this.graph = graph;
+			WEIGHT = new Object();
+			// IVertex s = graph.getStart();
+			DefaultComparator comparator = new DefaultComparator();
+			Q = new HeapAdaptablePriorityQueue<Integer, IVertex>(comparator);
+			// dijkstraVisit(s);
+		} catch (Exception e) {
+			throw new AlgorithmException(e);
+		}
 	}
 
 	/**

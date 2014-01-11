@@ -98,4 +98,17 @@ abstract class AbstractVertexState extends AbstractState implements IState {
 		}
 	}
 
+	/**
+	 * Handles previous state.
+	 * 
+	 * @throws Exception
+	 */
+	void handlePreviousState() throws Exception {
+		try {
+			this.stateHandler.setPreviousState();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
 }

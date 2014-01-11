@@ -17,9 +17,10 @@ public class EdgeLabel implements Transformer<IEdgeLayout, String> {
 	 */
 	@Override
 	public String transform(IEdgeLayout edge) {
-		String label = "";
-		String id = edge.getId().trim();
-		String value = Integer.toString(edge.getWeight());
+		String label = "", id = "", value = "";
+		if (edge.getId() != null)
+			id = edge.getId();
+		value = Integer.toString(edge.getWeight());
 		if (id != "" && value != "")
 			label = id + ": " + value;
 		else

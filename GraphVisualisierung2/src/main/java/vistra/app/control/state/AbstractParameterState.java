@@ -1,6 +1,5 @@
 package vistra.app.control.state;
 
-import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.util.AbstractState;
 import vistra.framework.util.IState;
 import edu.uci.ics.jung.graph.util.EdgeType;

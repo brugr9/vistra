@@ -15,8 +15,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ActionCommandParameter;
 import vistra.app.control.IControl.ActionCommandGeneral;
+import vistra.app.control.IControl.ActionCommandParameter;
 import vistra.framework.ICore;
 import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.item.IEdgeLayout;

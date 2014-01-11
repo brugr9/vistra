@@ -38,8 +38,8 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	public VertexStateHandler() {
 		super();
-		this.state = null;
 		this.cellar = new NodeStack<AbstractVertexState>();
+		this.state = new UnexploredVertexState(this);
 		try {
 			this.setState(new UnexploredVertexState(this));
 		} catch (Exception e) {
@@ -119,15 +119,14 @@ public class VertexStateHandler extends VertexLayout implements
 	public void handlePreviousState() throws Exception {
 		try {
 			this.state.exit();
-			this.state = this.cellar.pop();
-			this.state.entry();
+			this.state.handlePreviousState();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Sets a state and adds it to the cellar.
+	 * Sets a state.
 	 * 
 	 * @param state
 	 *            the state to set
@@ -138,6 +137,21 @@ public class VertexStateHandler extends VertexLayout implements
 			this.state = state;
 			this.state.entry();
 			this.cellar.push(state);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Sets the previous state.
+	 * 
+	 * @throws Exception
+	 */
+	void setPreviousState() throws Exception {
+		try {
+			this.cellar.pop();
+			this.state = this.cellar.top();
+			this.state.entry();
 		} catch (Exception e) {
 			throw e;
 		}
