@@ -1,6 +1,5 @@
 package vistra.framework.util;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -92,15 +91,9 @@ public class ImmutableBidirectIterator<E> implements IBidirectIterator<E> {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Iterator<E> iterator() {
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
+	 * 
+	 * Unsupported operation.
+	 * 
 	 */
 	@Override
 	public void remove() {

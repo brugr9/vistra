@@ -1,6 +1,5 @@
 package vistra.framework;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import vistra.framework.algorithm.IAlgorithm;
@@ -50,14 +49,6 @@ class Traversal implements ITraversal {
 	public Traversal(IBidirectIterator<IStep> steps, String description) {
 		this.steps = steps;
 		this.description = description;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Iterator<IStep> iterator() {
-		return this;
 	}
 
 	/**
