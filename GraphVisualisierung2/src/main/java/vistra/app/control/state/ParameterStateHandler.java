@@ -48,9 +48,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	private AbstractParameterState state;
 	/**
-	 * A field for a core.
+	 * A field for a parameter manager.
 	 */
-	private IParameterManager core;
+	private IParameterManager parameterManager;
 	/**
 	 * A field for a model.
 	 */
@@ -59,14 +59,15 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param core
-	 *            a core
+	 * @param parameterManager
+	 *            a parameter manager
 	 * @param model
 	 *            a gui model
 	 */
-	public ParameterStateHandler(IParameterManager core, IModel model) {
+	public ParameterStateHandler(IParameterManager parameterManager,
+			IModel model) {
 		super();
-		this.core = core;
+		this.parameterManager = parameterManager;
 		this.model = (Model) model;
 		try {
 			this.state = new ParameterStateOff(this);
@@ -388,7 +389,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				/* Graph */
 				if (this.model.getGraph() != null)
 					this.clearGraph();
-				IExtendedGraph graph = this.core.newGraph(edgeType);
+				IExtendedGraph graph = this.parameterManager.newGraph(edgeType);
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
 				//
@@ -429,7 +430,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				/* file chooser setup */
 				JFileChooser fileChooser = newFileChooser();
 				// filter
-				FileNameExtensionFilter filter = this.core.getGraphFilter();
+				FileNameExtensionFilter filter = this.parameterManager
+						.getGraphFilter();
 				fileChooser.addChoosableFileFilter(filter);
 				fileChooser.setFileFilter(filter);
 
@@ -440,7 +442,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					if (this.model.getGraph() != null)
 						this.clearGraph();
 					File source = fileChooser.getSelectedFile();
-					IExtendedGraph graph = this.core.openGraph(source);
+					IExtendedGraph graph = this.parameterManager
+							.openGraph(source);
 					String name = source.getName();
 					//
 					graph.setName(name);
@@ -466,7 +469,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void saveGraph() throws Exception {
 		try {
-			this.core.saveGraph();
+			this.parameterManager.saveGraph();
 			this.model.setGraphSaved(true);
 		} catch (Exception e) {
 			throw e;
@@ -493,7 +496,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			fileChooser
 					.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			// filter
-			FileNameExtensionFilter filter = this.core.getGraphFilter();
+			FileNameExtensionFilter filter = this.parameterManager
+					.getGraphFilter();
 			fileChooser.addChoosableFileFilter(filter);
 			fileChooser.setFileFilter(filter);
 			// title
@@ -503,7 +507,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			int option = fileChooser.showSaveDialog(this.model.getTop());
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
-				this.core.saveGraphAs(file);
+				this.parameterManager.saveGraphAs(file);
 				this.model.setGraphFile(true);
 				this.model.setGraphSaved(true);
 				// TODO algorithms
@@ -553,11 +557,13 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			IExtendedGraph graph = this.model.getGraph();
 			/* Algorithm */
 			int index = this.model.getSelectedAlgorithmIndex();
-			this.core.selectAlgorithm(index);
-			String description = this.core.getAlgorithmDescription();
+			this.parameterManager.selectAlgorithm(index);
+			String description = this.parameterManager
+					.getAlgorithmDescription();
 			this.model.setAlgorithmDescription(description);
 			/* Traversal */
-			ITraversal traversal = this.core.executeAlgorithm(graph);
+			ITraversal traversal = this.parameterManager
+					.executeAlgorithm(graph);
 			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
 			if (traversal.isEmpty()) {
@@ -690,8 +696,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private void updateAlgorithms() throws Exception {
 		try {
 			EdgeType edgeType = this.model.getGraph().getEdgeType();
-			this.core.updateSelectableAlgorithms(edgeType);
-			String[] selectableNames = this.core.getSelectableAlgorithmNames();
+			this.parameterManager.updateSelectableAlgorithms(edgeType);
+			String[] selectableNames = this.parameterManager
+					.getSelectableAlgorithmNames();
 			this.model.setAlgorithms(selectableNames);
 			this.model.setSelectedAlgorithmIndex(0);
 			this.selectAlgorithm();

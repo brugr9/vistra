@@ -17,13 +17,14 @@ public final class Control implements IControl {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param core
-	 *            the core
+	 * @param parameterManager
+	 *            the parameter manager
 	 * @param model
 	 *            the model
 	 * @throws Exception
 	 */
-	public Control(IParameterManager core, IModel model) throws Exception {
+	public Control(IParameterManager parameterManager, IModel model)
+			throws Exception {
 		super();
 		try {
 			/* Action listener */
@@ -33,8 +34,8 @@ public final class Control implements IControl {
 			/* State handler */
 			model.setAnimationStateHandler(new AnimationStateHandler(model));
 			model.setSbsStateHandler(new SbsStateHandler(model));
-			model.setParameterStateHandler(new ParameterStateHandler(core,
-					model));
+			model.setParameterStateHandler(new ParameterStateHandler(
+					parameterManager, model));
 		} catch (Exception e) {
 			throw e;
 		}

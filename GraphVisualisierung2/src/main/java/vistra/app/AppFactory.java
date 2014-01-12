@@ -8,8 +8,8 @@ import vistra.app.control.IControl;
 import vistra.app.view.DefaultView;
 import vistra.app.view.FullView;
 import vistra.app.view.IView;
-import vistra.framework.ParameterManager;
 import vistra.framework.IParameterManager;
+import vistra.framework.ParameterManager;
 
 /**
  * An application factory, creates MVC based graphic user interfaces.
@@ -34,8 +34,9 @@ final class AppFactory {
 	static IView createApplication() throws Exception {
 		try {
 			Properties properties = createProperties();
-			IParameterManager core = new ParameterManager(properties);
-			IView view = createGui(core);
+			IParameterManager parameterManager = new ParameterManager(
+					properties);
+			IView view = createGui(parameterManager);
 			return view;
 		} catch (Exception e) {
 			throw e;
@@ -52,8 +53,9 @@ final class AppFactory {
 	static IView createApplication(ViewType viewType) throws Exception {
 		try {
 			Properties properties = createProperties();
-			IParameterManager core = new ParameterManager(properties);
-			IView view = createGui(core, viewType);
+			IParameterManager parameterManager = new ParameterManager(
+					properties);
+			IView view = createGui(parameterManager, viewType);
 			return view;
 		} catch (Exception e) {
 			throw e;
@@ -92,14 +94,14 @@ final class AppFactory {
 	/**
 	 * Creates a graphic user interface.
 	 * 
-	 * @param core
-	 *            a core
+	 * @param parameterManager
+	 *            a parameter manager
 	 * @return a view as in MVC
 	 * @throws Exception
 	 */
-	static IView createGui(IParameterManager core) throws Exception {
+	static IView createGui(IParameterManager parameterManager) throws Exception {
 		try {
-			return createGui(core, ViewType.DEFAULT);
+			return createGui(parameterManager, ViewType.DEFAULT);
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -108,18 +110,19 @@ final class AppFactory {
 	/**
 	 * Creates a graphic user interface.
 	 * 
-	 * @param core
-	 *            a core
+	 * @param parameterManager
+	 *            a parameter manager
 	 * @param type
 	 *            the view type
 	 * @return a view as in MVC
 	 * @throws Exception
 	 */
-	static IView createGui(IParameterManager core, ViewType type) throws Exception {
+	static IView createGui(IParameterManager parameterManager, ViewType type)
+			throws Exception {
 		try {
 			// model and control
 			IModel model = new Model();
-			IControl control = new Control(core, model);
+			IControl control = new Control(parameterManager, model);
 			// view
 			IView view;
 			if (type == ViewType.FULL)

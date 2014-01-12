@@ -183,7 +183,8 @@ public class ParameterManager implements IParameterManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ITraversal executeAlgorithm(IExtendedGraph graph) throws ParameterException {
+	public ITraversal executeAlgorithm(IExtendedGraph graph)
+			throws ParameterException {
 		try {
 			/* graph */
 			List<IStep> steps = new ArrayList<IStep>();
