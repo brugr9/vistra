@@ -107,19 +107,19 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	/**
 	 * Returns the visited state of a vertex.
 	 * 
-	 * @param vertex
+	 * @param v
 	 *            the vertex to check
 	 * @return {@code true} if visited
 	 */
-	boolean isVisited(IVertex vertex);
+	boolean isVisited(IVertex v);
 
 	/**
 	 * A step method: executes a step and adds the step to the traversal.
 	 * 
-	 * @param step
+	 * @param s
 	 *            the step
 	 * @throws Exception
 	 */
-	void stepBy(IStep step) throws Exception;
+	void stepBy(IStep s) throws Exception;
 
 }

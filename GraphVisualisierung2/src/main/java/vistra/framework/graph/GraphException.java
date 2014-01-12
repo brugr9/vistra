@@ -8,7 +8,7 @@ package vistra.framework.graph;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GraphException extends Exception {
+class GraphException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 

@@ -12,7 +12,8 @@ import vistra.framework.graph.ml.ExtendedGraphMLWriter;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * A graph manager. Manages opening and saving (read/write) graphs.
+ * A graph manager. Holds a graph instance and manages e.g. opening and saving
+ * (read/write) graphs.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
