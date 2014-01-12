@@ -26,7 +26,7 @@ class SolutionEdgeState extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutSolution();
+			super.stateHandler.setSolution();
 		} catch (Exception e) {
 			throw e;
 		}

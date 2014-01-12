@@ -688,5 +688,6 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 			throw e;
 		}
 	}
+	// TODO method per step constructor
 
 }

@@ -26,7 +26,7 @@ class CrossEdgeState extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutCross();
+			super.stateHandler.setCross();
 		} catch (Exception e) {
 			throw e;
 		}

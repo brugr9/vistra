@@ -1,5 +1,7 @@
 package vistra.framework;
 
+import java.util.ListIterator;
+
 import vistra.framework.step.IStep;
 import vistra.framework.util.IBidirectIterator;
 
@@ -9,6 +11,7 @@ import vistra.framework.util.IBidirectIterator;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
+ * @see ListIterator
  */
 public interface ITraversal extends IBidirectIterator<IStep> {
 

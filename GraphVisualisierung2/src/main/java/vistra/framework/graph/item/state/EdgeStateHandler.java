@@ -23,21 +23,16 @@ import vistra.framework.util.palette.StrokePalette;
 public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 
 	/**
-	 * A field for a state.
+	 * A field for a stack of states.
 	 */
-	private AbstractEdgeState state;
-	/**
-	 * A field for a cellar.
-	 */
-	private Stack<AbstractEdgeState> stack;
+	private Stack<AbstractEdgeState> state;
 
 	/**
 	 * Main constructor.
 	 */
 	public EdgeStateHandler() {
 		super();
-		this.stack = new NodeStack<AbstractEdgeState>();
-		this.state = new UnexploredEdgeState(this);
+		this.state = new NodeStack<AbstractEdgeState>();
 		try {
 			this.setState(new UnexploredEdgeState(this));
 		} catch (Exception e) {
@@ -51,8 +46,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleUnexplored() throws Exception {
 		try {
-			this.state.exit();
-			this.state.handleUnexplored();
+			this.state.top().exit();
+			this.state.top().handleUnexplored();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -64,8 +59,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleBack() throws Exception {
 		try {
-			this.state.exit();
-			this.state.handleBack();
+			this.state.top().exit();
+			this.state.top().handleBack();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -77,8 +72,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleForward() throws Exception {
 		try {
-			this.state.exit();
-			this.state.handleForward();
+			this.state.top().exit();
+			this.state.top().handleForward();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -90,8 +85,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleCross() throws Exception {
 		try {
-			this.state.exit();
-			this.state.handleCross();
+			this.state.top().exit();
+			this.state.top().handleCross();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -103,8 +98,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleDiscarded() throws Exception {
 		try {
-			this.state.exit();
-			this.state.handleDiscarded();
+			this.state.top().exit();
+			this.state.top().handleDiscarded();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -116,8 +111,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleVisited() throws Exception {
 		try {
-			this.state.exit();
-			this.state.handleVisited();
+			this.state.top().exit();
+			this.state.top().handleVisited();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -129,8 +124,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleSolution() throws Exception {
 		try {
-			this.state.exit();
-			this.state.handleSolution();
+			this.state.top().exit();
+			this.state.top().handleSolution();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -142,15 +137,15 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handlePreviousState() throws Exception {
 		try {
-			this.state.exit();
-			this.state.handlePreviousState();
+			this.state.top().exit();
+			this.state.top().handlePreviousState();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Sets a state, does the entry and pushes it on the cellar.
+	 * Sets the state and does the entry.
 	 * 
 	 * @param state
 	 *            the state to set
@@ -158,35 +153,33 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setState(AbstractEdgeState state) throws Exception {
 		try {
-			this.stack.push(state);
-			this.state = state;
-			this.state.entry();
+			this.state.push(state);
+			this.state.top().entry();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * Sets the previous state.
+	 * Sets the previous state and does the entry.
 	 * 
 	 * @throws Exception
 	 */
 	void setPreviousState() throws Exception {
 		try {
-			this.stack.pop();
-			this.state = this.stack.top();
-			this.state.entry();
+			this.state.pop();
+			this.state.top().entry();
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 
 	/**
-	 * A layout modifier: Sets the layout to unexplored-edge.
+	 * Property: Sets the layout to unexplored-edge.
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutUnexplored() throws Exception {
+	void setUnexplored() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
@@ -199,13 +192,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * A layout modifier: Sets the layout as visited (discovery-edge).
+	 * Property: Sets the layout as visited (discovery-edge).
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutVisited() throws Exception {
+	void setVisited() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.red);
@@ -218,13 +211,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * A layout modifier: Sets the layout as back-edge.
+	 * Property: Sets the layout as back-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutBack() throws Exception {
+	void setBack() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
@@ -237,13 +230,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * A layout modifier: Sets the layout as forward-edge.
+	 * Property: Sets the layout as forward-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutForward() throws Exception {
+	void setForward() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
@@ -256,13 +249,13 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * A layout modifier: Sets the layout as cross-edge.
+	 * Property: Sets the layout as cross-edge.
 	 * <p>
 	 * (see doc/vistra/adt/11DiGraphs_handout.pdf, page 8)
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutCross() throws Exception {
+	void setCross() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
@@ -275,11 +268,11 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * A layout modifier: Sets the layout as discarded-edge.
+	 * Property: Sets the layout as discarded-edge.
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutDiscarded() throws Exception {
+	void setDiscarded() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
@@ -292,11 +285,11 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * A layout modifier: Sets the layout as solution-member-edge.
+	 * Property: Sets the layout as solution-member-edge.
 	 * 
 	 * @throws Exception
 	 */
-	void setLayoutSolution() throws Exception {
+	void setSolution() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.green);

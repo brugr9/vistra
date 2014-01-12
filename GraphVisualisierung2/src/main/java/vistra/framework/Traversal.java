@@ -1,5 +1,6 @@
 package vistra.framework;
 
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import vistra.framework.algorithm.IAlgorithm;
@@ -12,6 +13,7 @@ import vistra.framework.util.IBidirectIterator;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
+ * @see ListIterator
  * @see IAlgorithm
  * @see TraversableGraph
  * 

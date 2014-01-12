@@ -26,7 +26,7 @@ class UnexploredVertexState extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutUnexplored();
+			super.stateHandler.setUnexplored();
 		} catch (Exception e) {
 			throw e;
 		}

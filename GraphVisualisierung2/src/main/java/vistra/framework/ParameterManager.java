@@ -190,10 +190,12 @@ public class ParameterManager implements IParameterManager {
 			/* algorithm */
 			this.algorithm.traverse(g);
 			/* traversal */
-			for (int i = steps.size() - 1; i >= 0; i--)
-				steps.get(i).undo();
 			IBidirectIterator<IStep> stepIterator = new ImmutableBidirectIterator<IStep>(
 					steps);
+			while (stepIterator.hasNext())
+				stepIterator.next();
+			while (stepIterator.hasPrevious())
+				stepIterator.previous().undo();
 			ITraversal traversal = new Traversal(stepIterator);
 			traversal.setDescription(this.algorithm.getDescription());
 			return traversal;

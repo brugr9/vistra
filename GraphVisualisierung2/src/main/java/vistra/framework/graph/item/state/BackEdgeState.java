@@ -26,7 +26,7 @@ class BackEdgeState extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setLayoutBack();
+			super.stateHandler.setBack();
 		} catch (Exception e) {
 			throw e;
 		}

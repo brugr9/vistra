@@ -42,7 +42,7 @@ class Vertex extends Observable implements IVertex {
 	 */
 	@Override
 	public boolean isStart() {
-		return start;
+		return this.start;
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Vertex extends Observable implements IVertex {
 	 */
 	@Override
 	public boolean isEnd() {
-		return end;
+		return this.end;
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Vertex extends Observable implements IVertex {
 	 */
 	@Override
 	public String getValue() {
-		return value;
+		return this.value;
 	}
 
 }
