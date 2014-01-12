@@ -7,7 +7,7 @@ import vistra.framework.util.IBidirectIterator;
 
 /**
  * An interface for a traversal as an immutable, bidirectional iterator over
- * steps.
+ * steps. A step contains one or more commands each of them modifying the graph.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

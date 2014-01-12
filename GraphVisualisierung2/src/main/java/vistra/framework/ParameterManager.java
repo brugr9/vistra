@@ -29,9 +29,9 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * A parameter manager. The manager gives access to the graph and the algorithm
- * by delegating method calls to a manager specialized on graphs and a manager
- * specialized on algorithms (facade pattern). Furthermore, this manager holds
- * an algorithm which can be changed (strategy pattern).
+ * by delegating its method calls to a manager specialized on graphs or
+ * algorithms (facade pattern). Furthermore, this manager holds an algorithm
+ * which can be changed (strategy pattern).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

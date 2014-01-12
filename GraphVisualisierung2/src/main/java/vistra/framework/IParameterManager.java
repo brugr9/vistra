@@ -94,9 +94,9 @@ public interface IParameterManager {
 	String getAlgorithmDescription() throws ParameterException;
 
 	/**
-	 * Traverses a graph as given by executing the algorithm. Returns traversal
-	 * as immutable list of steps generated during the execution of the
-	 * algorithm. A step contains several commands which modifies the graph.
+	 * Traverses a graph as given by executing the algorithm. Returns a
+	 * traversal as immutable list of {@code IStep}s generated during the
+	 * execution of the algorithm.
 	 * 
 	 * @param g
 	 *            the graph to traverse
