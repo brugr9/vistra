@@ -3,14 +3,14 @@ package vistra.app.control.state;
 import vistra.framework.util.IState;
 
 /**
- * A step-by-step state: at the beginning.
+ * A step-by-step state: at the end.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see SbsStateHandler
+ * @see StepByStep
  * 
  */
-class SbsStateBeginning extends AbstractSbsState implements IState {
+class SbsAtEnd extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
@@ -18,7 +18,7 @@ class SbsStateBeginning extends AbstractSbsState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	SbsStateBeginning(ISbsStateHandler stateHandler) {
+	SbsAtEnd(IStepByStep stateHandler) {
 		super(stateHandler);
 	}
 
@@ -28,7 +28,7 @@ class SbsStateBeginning extends AbstractSbsState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewBeginning();
+			super.handler.setViewEnd();
 		} catch (Exception e) {
 			throw e;
 		}

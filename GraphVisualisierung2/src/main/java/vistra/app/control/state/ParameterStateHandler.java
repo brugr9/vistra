@@ -28,8 +28,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
- * An a parameter state handler. A graph and an algorithm are seen as parameters
- * for generating a traversal.
+ * A parameter handler: handles a graph and an algorithm as parameter for
+ * generating a traversal-object.
  * <p>
  * As a part of the graphic user interface control, this state handler is an
  * action listener (graph I/O and value editing), a graph-event listener
@@ -38,8 +38,8 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see SbsStateHandler
- * @see AnimationStateHandler
+ * @see StepByStep
+ * @see Animation
  */
 public final class ParameterStateHandler implements IParameterStateHandler {
 
@@ -64,13 +64,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @param model
 	 *            a gui model
 	 */
-	public ParameterStateHandler(IParameterManager parameterManager,
-			IModel model) {
+	public ParameterStateHandler(IParameterManager parameterManager, IModel model) {
 		super();
 		this.parameterManager = parameterManager;
 		this.model = (Model) model;
 		try {
-			this.state = new ParameterStateOff(this);
+			this.state = new ParameterOff(this);
 			this.model.setGraphSaved(true);
 			this.handleNewGraphUndirected();
 		} catch (Exception e) {
@@ -552,8 +551,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			// TODO deny user interaction during render
 			/* Graph */
 			if (this.model.getProgress() > 0)
-				((SbsStateHandler) this.model.getSbsStateHandler())
-						.toBeginning();
+				((StepByStep) this.model.getSbsStateHandler()).toBeginning();
 			IExtendedGraph graph = this.model.getGraph();
 			/* Algorithm */
 			int index = this.model.getSelectedAlgorithmIndex();

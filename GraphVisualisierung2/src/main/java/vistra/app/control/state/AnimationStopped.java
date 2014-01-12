@@ -3,14 +3,14 @@ package vistra.app.control.state;
 import vistra.framework.util.IState;
 
 /**
- * An animation state: off.
+ * An animation state: stopped.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see AnimationStateHandler
+ * @see Animation
  * 
  */
-class AnimationStateOff extends AbstractAnimationState implements IState {
+class AnimationStopped extends AbstractAnimationState implements IState {
 
 	/**
 	 * Main constructor.
@@ -18,7 +18,7 @@ class AnimationStateOff extends AbstractAnimationState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	AnimationStateOff(IAnimationStateHandler stateHandler) {
+	AnimationStopped(IAnimation stateHandler) {
 		super(stateHandler);
 	}
 
@@ -28,7 +28,19 @@ class AnimationStateOff extends AbstractAnimationState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewOff();
+			super.handler.setViewStopped();
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void startDo() throws Exception {
+		try {
+			super.handler.stopAnimation();
 		} catch (Exception ex) {
 			throw ex;
 		}

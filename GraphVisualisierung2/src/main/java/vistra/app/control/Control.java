@@ -1,9 +1,9 @@
 package vistra.app.control;
 
 import vistra.app.IModel;
-import vistra.app.control.state.AnimationStateHandler;
+import vistra.app.control.state.Animation;
 import vistra.app.control.state.ParameterStateHandler;
-import vistra.app.control.state.SbsStateHandler;
+import vistra.app.control.state.StepByStep;
 import vistra.framework.IParameterManager;
 
 /**
@@ -32,8 +32,8 @@ public final class Control implements IControl {
 			model.setShortcutsListener(new ActionListenerShortcuts(model));
 			model.setAboutListener(new ActionListenerAbout(model));
 			/* State handler */
-			model.setAnimationStateHandler(new AnimationStateHandler(model));
-			model.setSbsStateHandler(new SbsStateHandler(model));
+			model.setAnimationStateHandler(new Animation(model));
+			model.setSbsStateHandler(new StepByStep(model));
 			model.setParameterStateHandler(new ParameterStateHandler(
 					parameterManager, model));
 		} catch (Exception e) {

@@ -18,8 +18,8 @@ import vistra.framework.ITraversal;
 import vistra.framework.step.IStep;
 
 /**
- * A step-by-step state handler. A step-by-step state machine handles the
- * step-by-step iteration over a traversal-object.
+ * A step-by-step handler: handles the step-by-step iteration over a
+ * traversal-object.
  * <p>
  * As a part of the graphic user interface control, this state handler is a
  * focus listener (step length setting) and an action listener (buttons), too.
@@ -27,10 +27,9 @@ import vistra.framework.step.IStep;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  * @see ParameterStateHandler
- * @see AnimationStateHandler
+ * @see Animation
  */
-public final class SbsStateHandler extends Observable implements
-		ISbsStateHandler {
+public final class StepByStep extends Observable implements IStepByStep {
 
 	/**
 	 * A field for a step-by-step state.
@@ -71,7 +70,7 @@ public final class SbsStateHandler extends Observable implements
 	 * @param model
 	 *            the model
 	 */
-	public SbsStateHandler(IModel model) {
+	public StepByStep(IModel model) {
 		super();
 		this.model = (Model) model;
 		this.step = null;
@@ -82,7 +81,7 @@ public final class SbsStateHandler extends Observable implements
 		this.off = true;
 		this.counter = 0;
 		try {
-			this.state = new SbsStateOff(this);
+			this.state = new SbsOff(this);
 			this.handleOff();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -410,18 +409,20 @@ public final class SbsStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (SbsStateHandler.this.off)
-					SbsStateHandler.this.step.execute();
+				if (StepByStep.this.off)
+					StepByStep.this.step.execute();
 				else
-					SbsStateHandler.this.step.undo();
-				SbsStateHandler.this.off = !SbsStateHandler.this.off;
-				SbsStateHandler.this.counter++;
-				SbsStateHandler.this.model.notifyObservers();
+					StepByStep.this.step.undo();
+				StepByStep.this.off = !StepByStep.this.off;
+				StepByStep.this.counter++;
+				StepByStep.this.model.notifyObservers();
 
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.toString(),
-						SbsStateHandler.this.model.getResourceBundle()
-								.getString("app.label"), 1, null);
+				JOptionPane.showMessageDialog(
+						null,
+						ex.toString(),
+						StepByStep.this.model.getResourceBundle().getString(
+								"app.label"), 1, null);
 				ex.printStackTrace();
 			}
 

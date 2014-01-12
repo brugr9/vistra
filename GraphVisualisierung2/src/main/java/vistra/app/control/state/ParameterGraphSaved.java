@@ -10,7 +10,7 @@ import vistra.framework.util.IState;
  * @see ParameterStateHandler
  * 
  */
-class ParameterStateGraphSaved extends AbstractParameterState implements IState {
+class ParameterGraphSaved extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
@@ -18,7 +18,7 @@ class ParameterStateGraphSaved extends AbstractParameterState implements IState 
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterStateGraphSaved(IParameterStateHandler stateHandler) {
+	ParameterGraphSaved(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -28,7 +28,7 @@ class ParameterStateGraphSaved extends AbstractParameterState implements IState 
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewEnableAlgorithms(true);
+			super.handler.setViewEnableAlgorithms(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -40,7 +40,7 @@ class ParameterStateGraphSaved extends AbstractParameterState implements IState 
 	@Override
 	protected void doExit() throws Exception {
 		try {
-			super.stateHandler.setViewEnableAlgorithms(false);
+			super.handler.setViewEnableAlgorithms(false);
 		} catch (Exception e) {
 			throw e;
 		}

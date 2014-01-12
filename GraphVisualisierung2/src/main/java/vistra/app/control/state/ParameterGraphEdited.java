@@ -3,14 +3,14 @@ package vistra.app.control.state;
 import vistra.framework.util.IState;
 
 /**
- * A parameter state: algorithm selected.
+ * A parameter state: graph edited.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  * @see ParameterStateHandler
  * 
  */
-class ParameterStateAlgorithmSelected extends AbstractParameterState implements
+class ParameterGraphEdited extends AbstractParameterState implements
 		IState {
 
 	/**
@@ -19,7 +19,7 @@ class ParameterStateAlgorithmSelected extends AbstractParameterState implements
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterStateAlgorithmSelected(IParameterStateHandler stateHandler) {
+	ParameterGraphEdited(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -29,7 +29,7 @@ class ParameterStateAlgorithmSelected extends AbstractParameterState implements
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewEnableTraversal(true);
+			super.handler.setViewGraphSaved(false);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -41,7 +41,7 @@ class ParameterStateAlgorithmSelected extends AbstractParameterState implements
 	@Override
 	protected void doExit() throws Exception {
 		try {
-			super.stateHandler.setViewEnableTraversal(false);
+			super.handler.setViewGraphSaved(true);
 		} catch (Exception e) {
 			throw e;
 		}

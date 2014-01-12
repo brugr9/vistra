@@ -8,24 +8,24 @@ import vistra.framework.util.IState;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see SbsStateHandler
+ * @see StepByStep
  * 
  */
 abstract class AbstractSbsState extends AbstractState implements IState {
 
 	/**
-	 * A field for a state handler.
+	 * A field for a handler.
 	 */
-	protected SbsStateHandler stateHandler;
+	protected StepByStep handler;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param stateHandler
-	 *            a stateHandler
+	 * @param handler
+	 *            a handler
 	 */
-	protected AbstractSbsState(ISbsStateHandler stateHandler) {
-		this.stateHandler = (SbsStateHandler) stateHandler;
+	protected AbstractSbsState(IStepByStep handler) {
+		this.handler = (StepByStep) handler;
 	}
 
 	/**
@@ -35,17 +35,15 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 */
 	void handleIdle() throws Exception {
 		try {
-			switch (this.stateHandler.idle()) {
+			switch (this.handler.idle()) {
 			case -1:
-				this.stateHandler.setState(new SbsStateBeginning(
-						this.stateHandler));
+				this.handler.setState(new SbsAtBeginning(this.handler));
 				break;
 			case 1:
-				this.stateHandler.setState(new SbsStateEnd(this.stateHandler));
+				this.handler.setState(new SbsAtEnd(this.handler));
 				break;
 			default:
-				this.stateHandler
-						.setState(new SbsStateInter(this.stateHandler));
+				this.handler.setState(new SbsInter(this.handler));
 				break;
 			}
 		} catch (Exception ex) {
@@ -60,9 +58,8 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 */
 	void handleBeginning() throws Exception {
 		try {
-			this.stateHandler.toBeginning();
-			this.stateHandler
-					.setState(new SbsStateBeginning(this.stateHandler));
+			this.handler.toBeginning();
+			this.handler.setState(new SbsAtBeginning(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -75,13 +72,11 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 */
 	void handleBackward() throws Exception {
 		try {
-			boolean hasPrevious = this.stateHandler.backward();
+			boolean hasPrevious = this.handler.backward();
 			if (hasPrevious)
-				this.stateHandler
-						.setState(new SbsStateInter(this.stateHandler));
+				this.handler.setState(new SbsInter(this.handler));
 			else
-				this.stateHandler.setState(new SbsStateBeginning(
-						this.stateHandler));
+				this.handler.setState(new SbsAtBeginning(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -94,12 +89,11 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 */
 	void handleForward() throws Exception {
 		try {
-			boolean hasNext = this.stateHandler.forward();
+			boolean hasNext = this.handler.forward();
 			if (hasNext)
-				this.stateHandler
-						.setState(new SbsStateInter(this.stateHandler));
+				this.handler.setState(new SbsInter(this.handler));
 			else
-				this.stateHandler.setState(new SbsStateEnd(this.stateHandler));
+				this.handler.setState(new SbsAtEnd(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -112,8 +106,8 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 */
 	void handleEnd() throws Exception {
 		try {
-			this.stateHandler.toEnd();
-			this.stateHandler.setState(new SbsStateEnd(this.stateHandler));
+			this.handler.toEnd();
+			this.handler.setState(new SbsAtEnd(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -126,7 +120,7 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 */
 	void handleOff() throws Exception {
 		try {
-			this.stateHandler.setState(new SbsStateOff(this.stateHandler));
+			this.handler.setState(new SbsOff(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}

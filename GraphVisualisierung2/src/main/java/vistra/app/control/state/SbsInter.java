@@ -7,10 +7,10 @@ import vistra.framework.util.IState;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see SbsStateHandler
+ * @see StepByStep
  * 
  */
-class SbsStateInter extends AbstractSbsState implements IState {
+class SbsInter extends AbstractSbsState implements IState {
 
 	/**
 	 * Main constructor.
@@ -18,7 +18,7 @@ class SbsStateInter extends AbstractSbsState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	SbsStateInter(ISbsStateHandler stateHandler) {
+	SbsInter(IStepByStep stateHandler) {
 		super(stateHandler);
 	}
 
@@ -28,7 +28,7 @@ class SbsStateInter extends AbstractSbsState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewInter();
+			super.handler.setViewInter();
 		} catch (Exception e) {
 			throw e;
 		}

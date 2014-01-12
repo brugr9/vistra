@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-import vistra.app.control.state.IAnimationStateHandler;
+import vistra.app.control.state.IAnimation;
 import vistra.app.control.state.IParameterStateHandler;
-import vistra.app.control.state.ISbsStateHandler;
+import vistra.app.control.state.IStepByStep;
 import vistra.framework.ITraversal;
 import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.item.IVertexLayout;
@@ -80,7 +80,7 @@ public final class Model extends Observable implements IModel {
 	private ITraversal traversal;
 	private int progress;
 	// Step-by-Step
-	private ISbsStateHandler sbsStateHandler;
+	private IStepByStep sbsStateHandler;
 	private int steplength;
 	private boolean steplengthEnabled;
 	private boolean toBeginningEnabled;
@@ -88,7 +88,7 @@ public final class Model extends Observable implements IModel {
 	private boolean forwardEnabled;
 	private boolean toEndEnabled;
 	// Animation
-	private IAnimationStateHandler animationStateHandler;
+	private IAnimation animationStateHandler;
 	private int delay;
 	private boolean delayEnabled;
 	private boolean playEnabled;
@@ -1206,7 +1206,7 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getSbsStateHandler()
 	 */
 	@Override
-	public ISbsStateHandler getSbsStateHandler() {
+	public IStepByStep getSbsStateHandler() {
 		return sbsStateHandler;
 	}
 
@@ -1217,7 +1217,7 @@ public final class Model extends Observable implements IModel {
 	 * ISbsStateHandler)
 	 */
 	@Override
-	public void setSbsStateHandler(ISbsStateHandler sbsStateHandler) {
+	public void setSbsStateHandler(IStepByStep sbsStateHandler) {
 		this.sbsStateHandler = sbsStateHandler;
 	}
 
@@ -1347,7 +1347,7 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getAnimationStateHandler()
 	 */
 	@Override
-	public IAnimationStateHandler getAnimationStateHandler() {
+	public IAnimation getAnimationStateHandler() {
 		return animationStateHandler;
 	}
 
@@ -1359,7 +1359,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public void setAnimationStateHandler(
-			IAnimationStateHandler animationStateHandler) {
+			IAnimation animationStateHandler) {
 		this.animationStateHandler = animationStateHandler;
 	}
 

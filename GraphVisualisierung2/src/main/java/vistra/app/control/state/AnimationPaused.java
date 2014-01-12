@@ -7,10 +7,10 @@ import vistra.framework.util.IState;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see AnimationStateHandler
+ * @see Animation
  * 
  */
-class AnimationStatePaused extends AbstractAnimationState implements IState {
+class AnimationPaused extends AbstractAnimationState implements IState {
 
 	/**
 	 * Main constructor.
@@ -18,7 +18,7 @@ class AnimationStatePaused extends AbstractAnimationState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	AnimationStatePaused(IAnimationStateHandler stateHandler) {
+	AnimationPaused(IAnimation stateHandler) {
 		super(stateHandler);
 	}
 
@@ -28,7 +28,7 @@ class AnimationStatePaused extends AbstractAnimationState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewPaused();
+			super.handler.setViewPaused();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -40,7 +40,7 @@ class AnimationStatePaused extends AbstractAnimationState implements IState {
 	@Override
 	protected void startDo() throws Exception {
 		try {
-			super.stateHandler.pauseAnimation();
+			super.handler.pauseAnimation();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -52,9 +52,9 @@ class AnimationStatePaused extends AbstractAnimationState implements IState {
 	@Override
 	void handlePause() throws Exception {
 		try {
-			this.stateHandler.resumeAnimation();
-			this.stateHandler.setState(new AnimationStatePlaying(
-					this.stateHandler));
+			this.handler.resumeAnimation();
+			this.handler.setState(new AnimationPlaying(
+					this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}

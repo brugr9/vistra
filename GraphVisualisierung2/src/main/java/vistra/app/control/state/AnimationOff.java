@@ -3,14 +3,14 @@ package vistra.app.control.state;
 import vistra.framework.util.IState;
 
 /**
- * A step-by-step state: off.
+ * An animation state: off.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see SbsStateHandler
+ * @see Animation
  * 
  */
-class SbsStateOff extends AbstractSbsState implements IState {
+class AnimationOff extends AbstractAnimationState implements IState {
 
 	/**
 	 * Main constructor.
@@ -18,7 +18,7 @@ class SbsStateOff extends AbstractSbsState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	SbsStateOff(ISbsStateHandler stateHandler) {
+	AnimationOff(IAnimation stateHandler) {
 		super(stateHandler);
 	}
 
@@ -27,7 +27,11 @@ class SbsStateOff extends AbstractSbsState implements IState {
 	 */
 	@Override
 	protected void doEntry() throws Exception {
-		super.stateHandler.setViewOff();
+		try {
+			super.handler.setViewOff();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 }

@@ -4,9 +4,9 @@ import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
-import vistra.app.control.state.IAnimationStateHandler;
+import vistra.app.control.state.IAnimation;
 import vistra.app.control.state.IParameterStateHandler;
-import vistra.app.control.state.ISbsStateHandler;
+import vistra.app.control.state.IStepByStep;
 import vistra.framework.ITraversal;
 import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.item.IVertexLayout;
@@ -500,13 +500,13 @@ public interface IModel {
 	/**
 	 * @return the sbsStateHandler
 	 */
-	public abstract ISbsStateHandler getSbsStateHandler();
+	public abstract IStepByStep getSbsStateHandler();
 
 	/**
 	 * @param sbsStateHandler
 	 *            the sbsStateHandler to set
 	 */
-	public abstract void setSbsStateHandler(ISbsStateHandler sbsStateHandler);
+	public abstract void setSbsStateHandler(IStepByStep sbsStateHandler);
 
 	/**
 	 * @return the steplength
@@ -577,14 +577,14 @@ public interface IModel {
 	/**
 	 * @return the animationStateHandler
 	 */
-	public abstract IAnimationStateHandler getAnimationStateHandler();
+	public abstract IAnimation getAnimationStateHandler();
 
 	/**
 	 * @param animationStateHandler
 	 *            the animationStateHandler to set
 	 */
 	public abstract void setAnimationStateHandler(
-			IAnimationStateHandler animationStateHandler);
+			IAnimation animationStateHandler);
 
 	/**
 	 * @return the delay

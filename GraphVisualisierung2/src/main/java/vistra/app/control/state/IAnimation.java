@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
 /**
- * An interface for an animation state handler. An animation state machine
- * handles the animated iteration over a traversal-object.
+ * An interface for an animation handler: handles the animated iteration over a
+ * traversal-object.
  * <p>
  * As a part of the graphic user interface control, this state handler is an is
  * a focus listener (delay setting) and an action listener (buttons), too.
@@ -13,10 +13,10 @@ import java.awt.event.FocusListener;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  * @see IParameterStateHandler
- * @see ISbsStateHandler
+ * @see IStepByStep
  */
-public interface IAnimationStateHandler extends IControlStateHandler,
-		FocusListener, ActionListener {
+public interface IAnimation extends IControlContext, FocusListener,
+		ActionListener {
 
 	/**
 	 * Handles an interaction: play.

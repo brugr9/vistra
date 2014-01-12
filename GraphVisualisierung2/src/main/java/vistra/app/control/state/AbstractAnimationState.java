@@ -8,24 +8,24 @@ import vistra.framework.util.IState;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see AnimationStateHandler
+ * @see Animation
  * 
  */
 abstract class AbstractAnimationState extends AbstractState implements IState {
 
 	/**
-	 * A field for a state handler.
+	 * A field for a handler.
 	 */
-	protected AnimationStateHandler stateHandler;
+	protected Animation handler;
 
 	/**
 	 * Main constructor.
 	 * 
-	 * @param stateHandler
-	 *            a stateHandler
+	 * @param handler
+	 *            a handler
 	 */
-	protected AbstractAnimationState(IAnimationStateHandler stateHandler) {
-		this.stateHandler = (AnimationStateHandler) stateHandler;
+	protected AbstractAnimationState(IAnimation handler) {
+		this.handler = (Animation) handler;
 	}
 
 	/**
@@ -35,8 +35,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handleIdle() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStateStopped(
-					this.stateHandler));
+			this.handler.setState(new AnimationStopped(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -49,8 +48,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handlePlay() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStatePlaying(
-					this.stateHandler));
+			this.handler.setState(new AnimationPlaying(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -63,8 +61,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handlePause() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStatePaused(
-					this.stateHandler));
+			this.handler.setState(new AnimationPaused(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -77,8 +74,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handleStop() throws Exception {
 		try {
-			this.stateHandler.setState(new AnimationStateStopped(
-					this.stateHandler));
+			this.handler.setState(new AnimationStopped(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -91,8 +87,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 */
 	void handleOff() throws Exception {
 		try {
-			this.stateHandler
-					.setState(new AnimationStateOff(this.stateHandler));
+			this.handler.setState(new AnimationOff(this.handler));
 		} catch (Exception ex) {
 			throw ex;
 		}

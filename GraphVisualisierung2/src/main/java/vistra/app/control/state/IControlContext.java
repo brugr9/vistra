@@ -1,13 +1,12 @@
 package vistra.app.control.state;
 
 /**
- * An interface for a control state handler. All control state handler can
- * handle off and idle.
+ * An interface for a control context: handles off and idle.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-interface IControlStateHandler {
+interface IControlContext {
 
 	/**
 	 * Handles idle.

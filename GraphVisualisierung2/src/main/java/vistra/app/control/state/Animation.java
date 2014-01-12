@@ -16,8 +16,7 @@ import vistra.app.Model;
 import vistra.app.control.IControl.ActionCommandAnimation;
 
 /**
- * An animation state handler. An animation state machine handles the animated
- * iteration over a traversal-object.
+ * An animation handler: handles the animated iteration over a traversal-object.
  * <p>
  * As a part of the graphic user interface control, this state handler is an is
  * a focus listener (delay setting) and an action listener (buttons), too.
@@ -25,10 +24,10 @@ import vistra.app.control.IControl.ActionCommandAnimation;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  * @see ParameterStateHandler
- * @see SbsStateHandler
+ * @see StepByStep
  */
-public final class AnimationStateHandler extends Observable implements
-		IAnimationStateHandler {
+public final class Animation extends Observable implements
+		IAnimation {
 
 	/**
 	 * A field for a state.
@@ -53,14 +52,14 @@ public final class AnimationStateHandler extends Observable implements
 	 * @param model
 	 *            a model
 	 */
-	public AnimationStateHandler(IModel model) {
+	public Animation(IModel model) {
 		super();
 		this.model = (Model) model;
 		this.animationListener = new AnimationListener();
 		int animationDelay = this.model.getDelay() * A_SECOND;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
 		try {
-			this.state = new AnimationStateOff(this);
+			this.state = new AnimationOff(this);
 			this.handleOff();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -289,9 +288,8 @@ public final class AnimationStateHandler extends Observable implements
 		try {
 			/* go to the first step eventually */
 			if (this.model.getProgress() == this.model.getTraversal().size())
-				((SbsStateHandler) this.model.getSbsStateHandler())
-						.toBeginning();
-			((SbsStateHandler) this.model.getSbsStateHandler()).handleOff();
+				((StepByStep) this.model.getSbsStateHandler()).toBeginning();
+			((StepByStep) this.model.getSbsStateHandler()).handleOff();
 			/* start the timer */
 			this.animationTimer.start();
 			this.setChanged();
@@ -337,7 +335,7 @@ public final class AnimationStateHandler extends Observable implements
 		try {
 			this.animationTimer.stop();
 			this.setChanged();
-			((SbsStateHandler) this.model.getSbsStateHandler()).handleIdle();
+			((StepByStep) this.model.getSbsStateHandler()).handleIdle();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -357,9 +355,9 @@ public final class AnimationStateHandler extends Observable implements
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				Model m = AnimationStateHandler.this.model;
+				Model m = Animation.this.model;
 				if (m.getProgress() < m.getTraversal().size())
-					((SbsStateHandler) m.getSbsStateHandler()).forward();
+					((StepByStep) m.getSbsStateHandler()).forward();
 				else
 					m.getAnimationStateHandler().handleStopped();
 			} catch (Exception ex) {

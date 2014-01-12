@@ -3,15 +3,14 @@ package vistra.app.control.state;
 import vistra.framework.util.IState;
 
 /**
- * A parameter state: graph edited.
+ * A parameter state: off.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  * @see ParameterStateHandler
  * 
  */
-class ParameterStateGraphEdited extends AbstractParameterState implements
-		IState {
+class ParameterOff extends AbstractParameterState implements IState {
 
 	/**
 	 * Main constructor.
@@ -19,7 +18,7 @@ class ParameterStateGraphEdited extends AbstractParameterState implements
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterStateGraphEdited(IParameterStateHandler stateHandler) {
+	ParameterOff(IParameterStateHandler stateHandler) {
 		super(stateHandler);
 	}
 
@@ -29,7 +28,7 @@ class ParameterStateGraphEdited extends AbstractParameterState implements
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setViewGraphSaved(false);
+			super.handler.setViewEnableMenu(false);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -41,7 +40,7 @@ class ParameterStateGraphEdited extends AbstractParameterState implements
 	@Override
 	protected void doExit() throws Exception {
 		try {
-			super.stateHandler.setViewGraphSaved(true);
+			super.handler.setViewEnableMenu(true);
 		} catch (Exception e) {
 			throw e;
 		}
