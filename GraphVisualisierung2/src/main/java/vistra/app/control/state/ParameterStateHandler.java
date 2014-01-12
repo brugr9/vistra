@@ -69,11 +69,11 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		this.model = (Model) model;
 		try {
 			this.state = new ParameterStateOff(this);
-			this.setState(new ParameterStateOff(this));
+			this.model.setGraphSaved(true);
+			this.handleNewGraphUndirected();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**

@@ -17,10 +17,10 @@ interface IItemStateCommandHandler extends ICommand {
 	/**
 	 * Adds an item-state command.
 	 * 
-	 * @param command
+	 * @param c
 	 *            the item-state command to add
 	 * @throws Exception
 	 */
-	void addCommand(IItemStateCommand command) throws Exception;
+	void addCommand(IItemStateCommand c) throws Exception;
 
 }

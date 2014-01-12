@@ -31,8 +31,8 @@ class ItemStateCommandHandler implements IItemStateCommandHandler {
 	 */
 	@Override
 	public void execute() throws Exception {
-		for (IItemStateCommand command : this.commands)
-			command.execute();
+		for (IItemStateCommand c : this.commands)
+			c.execute();
 	}
 
 	/**
@@ -49,8 +49,8 @@ class ItemStateCommandHandler implements IItemStateCommandHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addCommand(IItemStateCommand command) throws Exception {
-		this.commands.add(command);
+	public void addCommand(IItemStateCommand c) throws Exception {
+		this.commands.add(c);
 	}
 
 }

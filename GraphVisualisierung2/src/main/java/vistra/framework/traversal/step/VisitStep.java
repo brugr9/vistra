@@ -36,9 +36,10 @@ public class VisitStep extends AbstractStep implements IStep {
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + " visited");
-			if (((IEdgeLayout) edge).getId().length() != 0)
-				this.description.append(" via edge "
-						+ ((IEdgeLayout) edge).getId());
+			if (((IEdgeLayout) edge).getId() != null)
+				if (((IEdgeLayout) edge).getId().length() != 0)
+					this.description.append(" via edge "
+							+ ((IEdgeLayout) edge).getId());
 			this.description.append(System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,9 +70,10 @@ public class VisitStep extends AbstractStep implements IStep {
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId() + " visited");
-				if (((IEdgeLayout) edge).getId().length() != 0)
-					this.description.append(" via edge "
-							+ ((IEdgeLayout) edge).getId());
+				if (((IEdgeLayout) edge).getId() != null)
+					if (((IEdgeLayout) edge).getId().length() != 0)
+						this.description.append(" via edge "
+								+ ((IEdgeLayout) edge).getId());
 				this.description.append(System.lineSeparator());
 			}
 		} catch (Exception e) {

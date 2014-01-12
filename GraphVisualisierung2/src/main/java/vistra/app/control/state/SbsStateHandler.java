@@ -74,12 +74,6 @@ public final class SbsStateHandler extends Observable implements
 	public SbsStateHandler(IModel model) {
 		super();
 		this.model = (Model) model;
-		try {
-			this.state = new SbsStateOff(this);
-			this.setState(new SbsStateOff(this));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		this.step = null;
 		this.blinkListener = new BlinkListener();
 		int blinkDelay = this.model.getDelay() / (2 * 2 * NUMBER_OF_BLINKS)
@@ -87,6 +81,12 @@ public final class SbsStateHandler extends Observable implements
 		this.timer = new Timer(blinkDelay, this.blinkListener);
 		this.off = true;
 		this.counter = 0;
+		try {
+			this.state = new SbsStateOff(this);
+			this.handleOff();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

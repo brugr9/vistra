@@ -35,9 +35,6 @@ public final class Control implements IControl {
 			model.setSbsStateHandler(new SbsStateHandler(model));
 			model.setParameterStateHandler(new ParameterStateHandler(core,
 					model));
-			/* Parameter */
-			model.setGraphSaved(true);
-			model.getParameterStateHandler().handleNewGraphUndirected();
 		} catch (Exception e) {
 			throw e;
 		}
