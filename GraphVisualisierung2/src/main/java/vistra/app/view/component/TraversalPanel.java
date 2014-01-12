@@ -266,7 +266,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ActionCommandGeneral.I18N) {
+				if (arg == ActionCommandGeneral.i18n) {
 					this.border.setTitle(b.getString("traversal.label"));
 					//
 					this.steplengthLabel.setText(b.getString("setStep.label"));

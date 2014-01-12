@@ -109,7 +109,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ActionCommandGeneral.I18N) {
+				if (arg == ActionCommandGeneral.i18n) {
 					this.border.setTitle(b.getString("algorithm.label"));
 				} else {
 					this.comboModel = new DefaultComboBoxModel<String>(

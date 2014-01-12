@@ -152,7 +152,7 @@ public class GraphPanel extends JPanel implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ActionCommandGeneral.I18N)
+			if (arg == ActionCommandGeneral.i18n)
 				this.title = b.getString("graph.label");
 			this.name = m.getGraph().getName();
 			if (!m.isGraphSaved())

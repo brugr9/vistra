@@ -34,7 +34,6 @@ public class EdgeWeightVerifier extends AbstractVerifier {
 			}
 			return true;
 		}
-
 		return false;
 	}
 }

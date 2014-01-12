@@ -116,7 +116,7 @@ public class ToolBar extends JToolBar implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ActionCommandGeneral.I18N) {
+				if (arg == ActionCommandGeneral.i18n) {
 					{// file
 						// setToolTipText
 						this.newUndirected.setToolTipText(b

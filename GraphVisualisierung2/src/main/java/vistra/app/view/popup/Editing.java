@@ -18,7 +18,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
 
 /**
- * An adapted JUNG mouse plug-in for editing vertices and edges.
+ * An adapted JUNG mouse plug-in for editing graph items.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

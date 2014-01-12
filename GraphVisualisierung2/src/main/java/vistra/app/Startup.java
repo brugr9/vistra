@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import vistra.app.AppFactory.ViewType;
 
 /**
- * Startup.
+ * Startup: Application entry point.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

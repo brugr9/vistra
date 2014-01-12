@@ -139,7 +139,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ActionCommandGeneral.I18N) {
+			if (arg == ActionCommandGeneral.i18n) {
 				this.setLabel(b.getString("vertex.label"));
 				this.start.setText(b.getString("start.label"));
 				this.end.setText(b.getString("finish.label"));

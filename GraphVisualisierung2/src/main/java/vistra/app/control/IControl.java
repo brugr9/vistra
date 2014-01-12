@@ -21,6 +21,7 @@ public interface IControl {
 	 */
 	public enum ActionCommandGeneral {
 		I18N, QUIT;
+		public final static String i18n = I18N.toString();
 		public final static String quit = QUIT.toString();
 	}
 

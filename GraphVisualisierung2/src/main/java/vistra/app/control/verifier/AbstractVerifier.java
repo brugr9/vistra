@@ -35,9 +35,9 @@ abstract class AbstractVerifier extends InputVerifier {
 	public boolean shouldYieldFocus(JComponent input) {
 		if (input instanceof JTextComponent) {
 			JTextComponent textField = (JTextComponent) input;
-			boolean inputOK = this.verify(input);
+			boolean ok = this.verify(input);
 
-			if (inputOK) {
+			if (ok) {
 				this.lastGood = textField.getText();
 				return true;
 			} else {

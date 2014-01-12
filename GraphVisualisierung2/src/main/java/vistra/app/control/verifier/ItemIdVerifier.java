@@ -33,14 +33,14 @@ public class ItemIdVerifier extends AbstractVerifier {
 	 *            the last good
 	 * @param item
 	 *            a graph item
-	 * @param vv
+	 * @param viewer
 	 *            a visualization viewer
 	 */
 	public ItemIdVerifier(String lastGood, IItemLayout item,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> vv) {
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		super(lastGood);
 		this.item = item;
-		this.graph = (IExtendedGraph) vv.getGraphLayout().getGraph();
+		this.graph = (IExtendedGraph) viewer.getGraphLayout().getGraph();
 	}
 
 	/**
@@ -48,7 +48,6 @@ public class ItemIdVerifier extends AbstractVerifier {
 	 */
 	@Override
 	public boolean verify(JComponent input) {
-
 		if (input instanceof JTextComponent) {
 			String text = ((JTextComponent) input).getText().trim();
 			return !text.isEmpty()
@@ -56,7 +55,6 @@ public class ItemIdVerifier extends AbstractVerifier {
 							.unusedId(text));
 		}
 		return false;
-
 	}
 
 }
