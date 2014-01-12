@@ -19,7 +19,7 @@ class ParameterGraphEdited extends AbstractParameterState implements
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterGraphEdited(IParameterStateHandler stateHandler) {
+	ParameterGraphEdited(IParameterHandler stateHandler) {
 		super(stateHandler);
 	}
 

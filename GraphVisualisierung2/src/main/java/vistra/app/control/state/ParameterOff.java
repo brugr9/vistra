@@ -18,7 +18,7 @@ class ParameterOff extends AbstractParameterState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterOff(IParameterStateHandler stateHandler) {
+	ParameterOff(IParameterHandler stateHandler) {
 		super(stateHandler);
 	}
 

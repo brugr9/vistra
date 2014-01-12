@@ -6,7 +6,7 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 
 import vistra.app.control.state.IAnimation;
-import vistra.app.control.state.IParameterStateHandler;
+import vistra.app.control.state.IParameterHandler;
 import vistra.app.control.state.IStepByStep;
 import vistra.framework.ITraversal;
 import vistra.framework.graph.IExtendedGraph;
@@ -61,7 +61,7 @@ public final class Model extends Observable implements IModel {
 	private boolean aboutEnabled;
 
 	/* Parameter */
-	private IParameterStateHandler parameterStateHandler;
+	private IParameterHandler parameterStateHandler;
 	// Graph
 	private IExtendedGraph graph;
 	private IVertexLayout start;
@@ -920,7 +920,7 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getParameterStateHandler()
 	 */
 	@Override
-	public IParameterStateHandler getParameterStateHandler() {
+	public IParameterHandler getParameterStateHandler() {
 		return parameterStateHandler;
 	}
 
@@ -932,7 +932,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public void setParameterStateHandler(
-			IParameterStateHandler parameterStateHandler) {
+			IParameterHandler parameterStateHandler) {
 		this.parameterStateHandler = parameterStateHandler;
 	}
 

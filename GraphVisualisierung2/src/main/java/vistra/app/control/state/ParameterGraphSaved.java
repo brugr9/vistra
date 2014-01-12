@@ -18,7 +18,7 @@ class ParameterGraphSaved extends AbstractParameterState implements IState {
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterGraphSaved(IParameterStateHandler stateHandler) {
+	ParameterGraphSaved(IParameterHandler stateHandler) {
 		super(stateHandler);
 	}
 

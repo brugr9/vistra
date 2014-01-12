@@ -41,7 +41,7 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
  * @see StepByStep
  * @see Animation
  */
-public final class ParameterStateHandler implements IParameterStateHandler {
+public final class ParameterStateHandler implements IParameterHandler {
 
 	/**
 	 * A field for a state.

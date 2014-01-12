@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import vistra.app.control.state.IAnimation;
-import vistra.app.control.state.IParameterStateHandler;
+import vistra.app.control.state.IParameterHandler;
 import vistra.app.control.state.IStepByStep;
 import vistra.framework.ITraversal;
 import vistra.framework.graph.IExtendedGraph;
@@ -345,14 +345,14 @@ public interface IModel {
 	/**
 	 * @return the parameterStateHandler
 	 */
-	public abstract IParameterStateHandler getParameterStateHandler();
+	public abstract IParameterHandler getParameterStateHandler();
 
 	/**
 	 * @param parameterStateHandler
 	 *            the parameterStateHandler to set
 	 */
 	public abstract void setParameterStateHandler(
-			IParameterStateHandler parameterStateHandler);
+			IParameterHandler parameterStateHandler);
 
 	/**
 	 * @return the graph

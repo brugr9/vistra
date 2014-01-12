@@ -25,7 +25,7 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	 * @param handler
 	 *            a handler
 	 */
-	protected AbstractParameterState(IParameterStateHandler handler) {
+	protected AbstractParameterState(IParameterHandler handler) {
 		this.handler = (ParameterStateHandler) handler;
 	}
 

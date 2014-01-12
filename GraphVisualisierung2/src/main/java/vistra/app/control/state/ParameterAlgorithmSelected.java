@@ -19,7 +19,7 @@ class ParameterAlgorithmSelected extends AbstractParameterState implements
 	 * @param stateHandler
 	 *            a stateHandler
 	 */
-	ParameterAlgorithmSelected(IParameterStateHandler stateHandler) {
+	ParameterAlgorithmSelected(IParameterHandler stateHandler) {
 		super(stateHandler);
 	}
 
