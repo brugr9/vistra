@@ -1,4 +1,4 @@
-package vistra.framework.traversal.step;
+package vistra.framework.step;
 
 /**
  * An abstract step.
@@ -15,14 +15,14 @@ abstract class AbstractStep implements IStep {
 	/**
 	 * A field for a command handler.
 	 */
-	IItemStateCommandHandler commandHandler;
+	IItemStateCommandHandler handler;
 
 	/**
 	 * Main constructor.
 	 */
 	AbstractStep() {
 		this.description = new StringBuilder();
-		this.commandHandler = new ItemStateCommandHandler();
+		this.handler = new ItemStateCommandHandler();
 	}
 
 	/**
@@ -30,7 +30,7 @@ abstract class AbstractStep implements IStep {
 	 */
 	@Override
 	public void execute() throws Exception {
-		this.commandHandler.execute();
+		this.handler.execute();
 	}
 
 	/**
@@ -38,7 +38,7 @@ abstract class AbstractStep implements IStep {
 	 */
 	@Override
 	public void undo() throws Exception {
-		this.commandHandler.undo();
+		this.handler.undo();
 	}
 
 	/**

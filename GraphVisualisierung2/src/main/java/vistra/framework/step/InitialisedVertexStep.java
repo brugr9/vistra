@@ -1,4 +1,4 @@
-package vistra.framework.traversal.step;
+package vistra.framework.step;
 
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.IVertexLayout;
@@ -6,7 +6,7 @@ import vistra.framework.graph.item.state.command.IItemStateCommand;
 import vistra.framework.graph.item.state.command.InitialisedVertexCommand;
 
 /**
- * A step: initialised vertex.
+ * A step: initialized vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -23,7 +23,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 		super();
 		try {
 			IItemStateCommand command = new InitialisedVertexCommand(vertex);
-			this.commandHandler.addCommand(command);
+			this.handler.addCommand(command);
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + " initialised"
@@ -44,7 +44,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 		try {
 			for (IVertex vertex : vertices) {
 				IItemStateCommand command = new InitialisedVertexCommand(vertex);
-				this.commandHandler.addCommand(command);
+				this.handler.addCommand(command);
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId() + " initialised"

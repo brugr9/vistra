@@ -9,14 +9,14 @@ import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.traversal.step.BackEdgeStep;
-import vistra.framework.traversal.step.CrossEdgeStep;
-import vistra.framework.traversal.step.DiscardedEdgeStep;
-import vistra.framework.traversal.step.ForwardEdgeStep;
-import vistra.framework.traversal.step.InitialisedVertexStep;
-import vistra.framework.traversal.step.SolutionMemberStep;
-import vistra.framework.traversal.step.UpdatedVertexStep;
-import vistra.framework.traversal.step.VisitStep;
+import vistra.framework.step.BackEdgeStep;
+import vistra.framework.step.CrossEdgeStep;
+import vistra.framework.step.DiscardedEdgeStep;
+import vistra.framework.step.ForwardEdgeStep;
+import vistra.framework.step.InitialisedVertexStep;
+import vistra.framework.step.SolutionMemberStep;
+import vistra.framework.step.UpdatedVertexStep;
+import vistra.framework.step.VisitStep;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

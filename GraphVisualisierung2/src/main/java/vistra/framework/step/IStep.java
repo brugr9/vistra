@@ -1,6 +1,5 @@
-package vistra.framework.traversal.step;
+package vistra.framework.step;
 
-import vistra.framework.traversal.Traversal;
 import vistra.framework.util.ICommand;
 
 /**
@@ -9,7 +8,6 @@ import vistra.framework.util.ICommand;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see Traversal
  */
 public interface IStep extends ICommand {
 

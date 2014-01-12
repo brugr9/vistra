@@ -10,8 +10,8 @@ import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.traversal.step.BackEdgeStep;
-import vistra.framework.traversal.step.VisitStep;
+import vistra.framework.step.BackEdgeStep;
+import vistra.framework.step.VisitStep;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

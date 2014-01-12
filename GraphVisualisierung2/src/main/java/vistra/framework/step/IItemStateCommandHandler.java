@@ -1,4 +1,4 @@
-package vistra.framework.traversal.step;
+package vistra.framework.step;
 
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 import vistra.framework.util.ICommand;

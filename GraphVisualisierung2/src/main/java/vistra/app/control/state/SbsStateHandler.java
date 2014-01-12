@@ -14,8 +14,8 @@ import javax.swing.Timer;
 import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.app.control.IControl.ActionCommandSbs;
-import vistra.framework.traversal.ITraversal;
-import vistra.framework.traversal.step.IStep;
+import vistra.framework.ITraversal;
+import vistra.framework.step.IStep;
 
 /**
  * A step-by-step state handler. A step-by-step state machine handles the

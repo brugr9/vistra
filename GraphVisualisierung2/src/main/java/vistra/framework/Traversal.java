@@ -1,11 +1,11 @@
-package vistra.framework.traversal;
+package vistra.framework;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.TraversableGraph;
-import vistra.framework.traversal.step.IStep;
+import vistra.framework.step.IStep;
 import vistra.framework.util.IBidirectIterator;
 
 /**
@@ -17,16 +17,16 @@ import vistra.framework.util.IBidirectIterator;
  * @see TraversableGraph
  * 
  */
-public class Traversal implements ITraversal {
+class Traversal implements ITraversal {
 
 	/**
 	 * A field for an iterator over steps.
 	 */
 	private IBidirectIterator<IStep> steps;
 	/**
-	 * A field for a description (e.g. statistics etc.).
+	 * A field for a description.
 	 */
-	private StringBuilder description;
+	private String description;
 
 	/**
 	 * Main constructor.
@@ -34,9 +34,22 @@ public class Traversal implements ITraversal {
 	 * @param steps
 	 *            an iterator over steps
 	 */
-	public Traversal(IBidirectIterator<IStep> steps) {
+	Traversal(IBidirectIterator<IStep> steps) {
 		this.steps = steps;
-		this.description = new StringBuilder();
+		this.description = "";
+	}
+
+	/**
+	 * Another constructor.
+	 * 
+	 * @param steps
+	 *            an iterator over steps
+	 * @param description
+	 *            a description
+	 */
+	public Traversal(IBidirectIterator<IStep> steps, String description) {
+		this.steps = steps;
+		this.description = description;
 	}
 
 	/**
@@ -109,7 +122,7 @@ public class Traversal implements ITraversal {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setDescription(StringBuilder description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -117,7 +130,7 @@ public class Traversal implements ITraversal {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StringBuilder getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 

@@ -1,6 +1,6 @@
-package vistra.framework.traversal;
+package vistra.framework;
 
-import vistra.framework.traversal.step.IStep;
+import vistra.framework.step.IStep;
 import vistra.framework.util.IBidirectIterator;
 
 /**
@@ -18,13 +18,13 @@ public interface ITraversal extends IBidirectIterator<IStep> {
 	 * @param description
 	 *            the description
 	 */
-	void setDescription(StringBuilder description);
+	void setDescription(String description);
 
 	/**
 	 * Returns the description.
 	 * 
 	 * @return the description
 	 */
-	StringBuilder getDescription();
+	String getDescription();
 
 }

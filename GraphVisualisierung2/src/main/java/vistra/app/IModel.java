@@ -7,9 +7,9 @@ import java.util.ResourceBundle;
 import vistra.app.control.state.IAnimationStateHandler;
 import vistra.app.control.state.IParameterStateHandler;
 import vistra.app.control.state.ISbsStateHandler;
+import vistra.framework.ITraversal;
 import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.item.IVertexLayout;
-import vistra.framework.traversal.ITraversal;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 public interface IModel {

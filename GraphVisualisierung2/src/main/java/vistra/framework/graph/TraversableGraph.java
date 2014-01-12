@@ -8,8 +8,7 @@ import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.state.IVertexStateHandler;
-import vistra.framework.traversal.Traversal;
-import vistra.framework.traversal.step.IStep;
+import vistra.framework.step.IStep;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.GraphDecorator;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -28,8 +27,8 @@ import edu.uci.ics.jung.graph.util.Pair;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  * @see IAlgorithm
+ * @see ITraversal
  * @see IStep
- * @see Traversal
  * 
  */
 public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements

@@ -1,4 +1,4 @@
-package vistra.framework.traversal.step;
+package vistra.framework.step;
 
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IEdgeLayout;
@@ -23,7 +23,7 @@ public class ForwardEdgeStep extends AbstractStep implements IStep {
 		super();
 		try {
 			IItemStateCommand command = new ForwardEdgeCommand(edge);
-			this.commandHandler.addCommand(command);
+			this.handler.addCommand(command);
 			//
 			this.description.append("Forward-edge ");
 			if (((IEdgeLayout) edge).getId() != null)
@@ -46,7 +46,7 @@ public class ForwardEdgeStep extends AbstractStep implements IStep {
 		try {
 			for (IEdge edge : edges) {
 				IItemStateCommand command = new ForwardEdgeCommand(edge);
-				this.commandHandler.addCommand(command);
+				this.handler.addCommand(command);
 				//
 				this.description.append("Forward-edge ");
 				if (((IEdgeLayout) edge).getId() != null)

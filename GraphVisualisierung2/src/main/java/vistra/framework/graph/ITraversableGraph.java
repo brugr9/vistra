@@ -4,8 +4,7 @@ import java.util.Collection;
 
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.traversal.Traversal;
-import vistra.framework.traversal.step.IStep;
+import vistra.framework.step.IStep;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -20,7 +19,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * generating a {@code Traversal}.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * @see Traversal
+ * 
+ * @see ITraversal
  */
 public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 

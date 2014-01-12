@@ -22,16 +22,14 @@ import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.IGraphManager;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.TraversableGraph;
-import vistra.framework.traversal.ITraversal;
-import vistra.framework.traversal.Traversal;
-import vistra.framework.traversal.step.IStep;
+import vistra.framework.step.IStep;
 import vistra.framework.util.IBidirectIterator;
 import vistra.framework.util.ImmutableBidirectIterator;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * A parameter manager. This manager gives access to the graph and the algorithm
- * by delegating method calls to a manager specialized on a graph and a manager
+ * A parameter manager. The manager gives access to the graph and the algorithm
+ * by delegating method calls to a manager specialized on graphs and a manager
  * specialized on algorithms (facade pattern). Furthermore, this manager holds
  * an algorithm which can be changed (strategy pattern).
  * 
@@ -197,6 +195,7 @@ public class ParameterManager implements IParameterManager {
 			IBidirectIterator<IStep> stepIterator = new ImmutableBidirectIterator<IStep>(
 					steps);
 			ITraversal traversal = new Traversal(stepIterator);
+			traversal.setDescription(this.algorithm.getDescription());
 			return traversal;
 		} catch (Exception e) {
 			throw new ParameterException(e);
