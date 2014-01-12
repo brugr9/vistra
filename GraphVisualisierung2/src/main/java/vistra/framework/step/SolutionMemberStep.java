@@ -33,8 +33,8 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 			IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
 					vertex);
 			//
-			this.handler.addCommand(edgeCommand);
-			this.handler.addCommand(vertexCommand);
+			this.commandHandler.addCommand(edgeCommand);
+			this.commandHandler.addCommand(vertexCommand);
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + ": Solution member ");
@@ -69,8 +69,8 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 				IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
 						vertex);
 				//
-				this.handler.addCommand(edgeCommand);
-				this.handler.addCommand(vertexCommand);
+				this.commandHandler.addCommand(edgeCommand);
+				this.commandHandler.addCommand(vertexCommand);
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()

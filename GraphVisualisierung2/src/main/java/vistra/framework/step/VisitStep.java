@@ -31,8 +31,8 @@ public class VisitStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
 			IItemStateCommand vertexCommand = new VisitedVertexCommand(vertex);
-			this.handler.addCommand(edgeCommand);
-			this.handler.addCommand(vertexCommand);
+			this.commandHandler.addCommand(edgeCommand);
+			this.commandHandler.addCommand(vertexCommand);
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + " visited");
@@ -65,8 +65,8 @@ public class VisitStep extends AbstractStep implements IStep {
 				IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
 				IItemStateCommand vertexCommand = new VisitedVertexCommand(
 						vertex);
-				this.handler.addCommand(edgeCommand);
-				this.handler.addCommand(vertexCommand);
+				this.commandHandler.addCommand(edgeCommand);
+				this.commandHandler.addCommand(vertexCommand);
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId() + " visited");

@@ -1,7 +1,8 @@
 package vistra.framework.step;
 
 /**
- * An abstract step.
+ * An abstract step. Delegates its execute- and undo-method to an
+ * {@code IItemStateCommandHandler} (macro command).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -13,16 +14,16 @@ abstract class AbstractStep implements IStep {
 	 */
 	StringBuilder description;
 	/**
-	 * A field for a command handler.
+	 * A field for an item-state-command handler.
 	 */
-	IItemStateCommandHandler handler;
+	IItemStateCommandHandler commandHandler;
 
 	/**
 	 * Main constructor.
 	 */
 	AbstractStep() {
 		this.description = new StringBuilder();
-		this.handler = new ItemStateCommandHandler();
+		this.commandHandler = new ItemStateCommandHandler();
 	}
 
 	/**
@@ -30,7 +31,7 @@ abstract class AbstractStep implements IStep {
 	 */
 	@Override
 	public void execute() throws Exception {
-		this.handler.execute();
+		this.commandHandler.execute();
 	}
 
 	/**
@@ -38,7 +39,7 @@ abstract class AbstractStep implements IStep {
 	 */
 	@Override
 	public void undo() throws Exception {
-		this.handler.undo();
+		this.commandHandler.undo();
 	}
 
 	/**

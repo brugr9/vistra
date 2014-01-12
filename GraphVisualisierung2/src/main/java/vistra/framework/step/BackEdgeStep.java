@@ -23,7 +23,7 @@ public class BackEdgeStep extends AbstractStep implements IStep {
 		super();
 		try {
 			IItemStateCommand command = new BackEdgeCommand(edge);
-			this.handler.addCommand(command);
+			this.commandHandler.addCommand(command);
 			//
 			this.description.append("Back-edge ");
 			if (((IEdgeLayout) edge).getId() != null)
@@ -46,7 +46,7 @@ public class BackEdgeStep extends AbstractStep implements IStep {
 		try {
 			for (IEdge edge : edges) {
 				IItemStateCommand command = new BackEdgeCommand(edge);
-				this.handler.addCommand(command);
+				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Back-edge ");
 				if (((IEdgeLayout) edge).getId() != null)

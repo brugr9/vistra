@@ -27,7 +27,7 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 		super();
 		try {
 			IItemStateCommand command = new UpdatedVertexCommand(vertex, value);
-			this.handler.addCommand(command);
+			this.commandHandler.addCommand(command);
 			//
 			this.description.append("Vertex "
 					+ ((IVertexLayout) vertex).getId() + ", value updated to "
@@ -51,7 +51,7 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 			for (IVertex vertex : vertices) {
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
-				this.handler.addCommand(command);
+				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
@@ -81,7 +81,7 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 				//
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
 						value);
-				this.handler.addCommand(command);
+				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Vertex "
 						+ ((IVertexLayout) vertex).getId()
