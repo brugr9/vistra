@@ -29,7 +29,7 @@ class ParameterGraphEdited extends AbstractParameterState implements
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.handler.setViewGraphSaved(false);
+			super.handler.setGraphSaved(false);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -41,7 +41,7 @@ class ParameterGraphEdited extends AbstractParameterState implements
 	@Override
 	protected void doExit() throws Exception {
 		try {
-			super.handler.setViewGraphSaved(true);
+			super.handler.setGraphSaved(true);
 		} catch (Exception e) {
 			throw e;
 		}

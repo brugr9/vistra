@@ -233,10 +233,9 @@ public final class StepByStep extends Observable implements IStepByStep {
 	}
 
 	/**
-	 * State view setter: Sets the step-by-step view elements for state:
-	 * beginning.
+	 * Property: Sets the step-by-step view elements for state: beginning.
 	 */
-	void setViewBeginning() {
+	void setBeginning() {
 		this.model.setSbsEnabled(true);
 		this.model.setBackwardEnabled(false);
 		this.model.setToBeginningEnabled(false);
@@ -244,17 +243,17 @@ public final class StepByStep extends Observable implements IStepByStep {
 	}
 
 	/**
-	 * State view setter: Sets the step-by-step view elements for state: inter.
+	 * Property: Sets the step-by-step view elements for state: inter.
 	 */
-	void setViewInter() {
+	void setInter() {
 		this.model.setSbsEnabled(true);
 		this.model.notifyObservers();
 	}
 
 	/**
-	 * State view setter: Sets the step-by-step view elements for state: end.
+	 * Property: Sets the step-by-step view elements for state: end.
 	 */
-	void setViewEnd() {
+	void setEnd() {
 		this.model.setSbsEnabled(true);
 		this.model.setForwardEnabled(false);
 		this.model.setToEndEnabled(false);
@@ -262,15 +261,15 @@ public final class StepByStep extends Observable implements IStepByStep {
 	}
 
 	/**
-	 * State view setter: Sets the step-by-step view elements for state: off.
+	 * Property: Sets the step-by-step view elements for state: off.
 	 */
-	void setViewOff() {
+	void setOff() {
 		this.model.setSbsEnabled(false);
 		this.model.notifyObservers();
 	}
 
 	/**
-	 * Doing: Step-by-Step backward until reaching the beginning.
+	 * Doing: Returns -1 if at beginning, 1 if at end, 0 else (inter).
 	 * 
 	 * @return -1 if at beginning, 1 if at end, 0 else
 	 */
@@ -308,10 +307,17 @@ public final class StepByStep extends Observable implements IStepByStep {
 		ITraversal t = this.model.getTraversal();
 		try {
 			int progress = this.model.getProgress();
+			StringBuilder protocol = this.model.getProtocol();
 			/* here we go ... */
-			for (int i = 0; i < this.model.getSteplength(); i++) {
+			for (int i = this.model.getSteplength(); 0 < i; i--) {
 				this.step.undo();
 				this.model.setProgress(--progress);
+				// remove step description
+				String description = this.step.getDescription();
+				int index = protocol.lastIndexOf(description);
+				protocol.delete(index, index + description.length());
+				this.model.setProtocol(protocol);
+				//
 				this.model.notifyObservers();
 				if (t.hasPrevious()) {
 					this.step = t.previous();
@@ -319,8 +325,6 @@ public final class StepByStep extends Observable implements IStepByStep {
 					break;
 				}
 			}
-			this.model.setProtocol(new StringBuilder());
-			this.model.notifyObservers();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -334,22 +338,22 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * @throws Exception
 	 */
 	boolean forward() throws Exception {
-		ITraversal t = this.model.getTraversal();
+		ITraversal traversal = this.model.getTraversal();
 		try {
 			int progress = this.model.getProgress();
 			String description = "";
-			StringBuilder stringBuilder = this.model.getProtocol();
+			StringBuilder protocol = this.model.getProtocol();
 			/* here we go ... */
 			for (int i = 0; i < this.model.getSteplength(); i++) {
-				if (t.hasNext()) {
-					this.step = t.next();
+				if (traversal.hasNext()) {
+					this.step = traversal.next();
 					// TODO
 					// this.blink();
 					this.step.execute();
 					this.model.setProgress(++progress);
 					description = this.step.getDescription();
-					stringBuilder.append(description);
-					this.model.setProtocol(stringBuilder);
+					protocol.append(description);
+					this.model.setProtocol(protocol);
 					this.model.notifyObservers();
 				} else {
 					break;
@@ -358,7 +362,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 		} catch (Exception ex) {
 			throw ex;
 		}
-		return t.hasNext();
+		return traversal.hasNext();
 	}
 
 	/**

@@ -28,7 +28,7 @@ class ParameterGraphSaved extends AbstractParameterState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.handler.setViewEnableAlgorithms(true);
+			super.handler.setEnableAlgorithms(true);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -40,7 +40,7 @@ class ParameterGraphSaved extends AbstractParameterState implements IState {
 	@Override
 	protected void doExit() throws Exception {
 		try {
-			super.handler.setViewEnableAlgorithms(false);
+			super.handler.setEnableAlgorithms(false);
 		} catch (Exception e) {
 			throw e;
 		}

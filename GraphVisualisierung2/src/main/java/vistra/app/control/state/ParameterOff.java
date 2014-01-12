@@ -28,7 +28,7 @@ class ParameterOff extends AbstractParameterState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.handler.setViewEnableMenu(false);
+			super.handler.setEnableMenu(false);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -40,7 +40,7 @@ class ParameterOff extends AbstractParameterState implements IState {
 	@Override
 	protected void doExit() throws Exception {
 		try {
-			super.handler.setViewEnableMenu(true);
+			super.handler.setEnableMenu(true);
 		} catch (Exception e) {
 			throw e;
 		}

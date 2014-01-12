@@ -196,11 +196,11 @@ public final class Animation extends Observable implements IAnimation {
 	}
 
 	/**
-	 * State view setter: Sets the animation view elements for state: stopped.
+	 * Property: Sets the animation view elements for state: stopped.
 	 * 
 	 * @throws Exception
 	 */
-	void setViewStopped() throws Exception {
+	void setStopped() throws Exception {
 		try {
 			this.model.setAnimationEnabled(true);
 			this.model.setPauseEnabled(false);
@@ -218,11 +218,11 @@ public final class Animation extends Observable implements IAnimation {
 	}
 
 	/**
-	 * State view setter: Sets the animation view elements for state: playing.
+	 * Property: Sets the animation view elements for state: playing.
 	 * 
 	 * @throws Exception
 	 */
-	void setViewPlaying() throws Exception {
+	void setPlaying() throws Exception {
 		try {
 			this.model.setAnimationEnabled(true);
 			this.model.setDelayEnabled(false);
@@ -240,11 +240,11 @@ public final class Animation extends Observable implements IAnimation {
 	}
 
 	/**
-	 * State view setter: Sets the animation view elements for state: paused.
+	 * Property: Sets the animation view elements for state: paused.
 	 * 
 	 * @throws Exception
 	 */
-	void setViewPaused() throws Exception {
+	void setPaused() throws Exception {
 		try {
 			this.model.setAnimationEnabled(true);
 			this.model.setDelayEnabled(false);
@@ -262,11 +262,11 @@ public final class Animation extends Observable implements IAnimation {
 	}
 
 	/**
-	 * State view setter: Sets the animation view elements for state: off.
+	 * Property: Sets the animation view elements for state: off.
 	 * 
 	 * @throws Exception
 	 */
-	void setViewOff() throws Exception {
+	void setOff() throws Exception {
 		try {
 			this.model.setAnimationEnabled(false);
 			this.model.notifyObservers();

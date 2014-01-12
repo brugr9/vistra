@@ -28,7 +28,7 @@ class SbsAtBeginning extends AbstractSbsState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.handler.setViewBeginning();
+			super.handler.setBeginning();
 		} catch (Exception e) {
 			throw e;
 		}

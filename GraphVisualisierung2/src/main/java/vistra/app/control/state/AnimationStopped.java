@@ -28,7 +28,7 @@ class AnimationStopped extends AbstractAnimationState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.handler.setViewStopped();
+			super.handler.setStopped();
 		} catch (Exception ex) {
 			throw ex;
 		}

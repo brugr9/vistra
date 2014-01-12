@@ -28,7 +28,7 @@ class SbsInter extends AbstractSbsState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.handler.setViewInter();
+			super.handler.setInter();
 		} catch (Exception e) {
 			throw e;
 		}

@@ -28,7 +28,7 @@ class AnimationPlaying extends AbstractAnimationState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.handler.setViewPlaying();
+			super.handler.setPlaying();
 		} catch (Exception ex) {
 			throw ex;
 		}

@@ -293,13 +293,13 @@ public final class ParameterStateHandler implements IParameterHandler {
 	}
 
 	/**
-	 * State view setter: Sets the graph as saved or not saved.
+	 * Property: Sets the graph as saved or not saved.
 	 * 
 	 * @param saved
 	 *            the saved to set
 	 * @throws Exception
 	 */
-	void setViewGraphSaved(boolean saved) {
+	void setGraphSaved(boolean saved) {
 		this.model.setGraphSaved(saved);
 		if (this.model.isGraphFile())
 			this.model.setSaveEnabled(!saved);
@@ -307,24 +307,24 @@ public final class ParameterStateHandler implements IParameterHandler {
 	}
 
 	/**
-	 * State view setter: Enables or disables selecting the algorithms.
+	 * Property: Enables or disables selecting the algorithms.
 	 * 
 	 * @param enabled
 	 *            the enabled to set
 	 */
-	void setViewEnableAlgorithms(boolean enabled) {
+	void setEnableAlgorithms(boolean enabled) {
 		this.model.setAlgorithmsEnabled(enabled);
 		this.model.notifyObservers();
 	}
 
 	/**
-	 * State view setter: Enables or disables the traversal.
+	 * Property: Enables or disables the traversal.
 	 * 
 	 * @param enabled
 	 *            the enabled to set
 	 * @throws Exception
 	 */
-	void setViewEnableTraversal(boolean enabled) throws Exception {
+	void setEnableTraversal(boolean enabled) throws Exception {
 		try {
 			if (enabled) {
 				this.model.getAnimationStateHandler().handleIdle();
@@ -344,12 +344,12 @@ public final class ParameterStateHandler implements IParameterHandler {
 	}
 
 	/**
-	 * State view setter: Enables or disables the menu.
+	 * Property: Enables or disables the menu.
 	 * 
 	 * @param enabled
 	 *            the enabled to set
 	 */
-	void setViewEnableMenu(boolean enabled) {
+	void setEnableMenu(boolean enabled) {
 		this.model.setMenuEnabled(enabled);
 		this.model.setSaveEnabled(!this.model.isGraphSaved());
 		this.model.notifyObservers();

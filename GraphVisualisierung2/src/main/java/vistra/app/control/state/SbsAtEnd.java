@@ -28,7 +28,7 @@ class SbsAtEnd extends AbstractSbsState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.handler.setViewEnd();
+			super.handler.setEnd();
 		} catch (Exception e) {
 			throw e;
 		}

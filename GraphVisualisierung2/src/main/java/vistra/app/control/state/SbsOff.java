@@ -27,7 +27,7 @@ class SbsOff extends AbstractSbsState implements IState {
 	 */
 	@Override
 	protected void doEntry() throws Exception {
-		super.handler.setViewOff();
+		super.handler.setOff();
 	}
 
 }
