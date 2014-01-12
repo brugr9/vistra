@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ActionCommandParameter;
+import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.app.control.verifier.ItemIdVerifier;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -83,7 +83,7 @@ public class VertexDialog extends JDialog {
 		/* button panel */
 		// button
 		JButton ok = new JButton("OK");
-		ok.setActionCommand(ActionCommandParameter.edit);
+		ok.setActionCommand(ParameterEvent.edit);
 		ok.addActionListener(model.getParameterStateHandler());
 		JButton cancel = new JButton("Cancel");
 		cancel.setActionCommand("Cancel");

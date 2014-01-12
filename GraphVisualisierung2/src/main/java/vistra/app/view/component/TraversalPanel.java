@@ -19,9 +19,9 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ActionCommandAnimation;
-import vistra.app.control.IControl.ActionCommandGeneral;
-import vistra.app.control.IControl.ActionCommandSbs;
+import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.state.Animation.AnimationEvent;
+import vistra.app.control.state.StepByStep.SbsEvent;
 import vistra.framework.util.palette.ColorPalette;
 
 /**
@@ -190,13 +190,13 @@ public final class TraversalPanel extends JPanel implements Observer {
 				new ImageIcon(c.getResource("pause.png")));
 		this.stop = new JButton(new ImageIcon(c.getResource("stop.png")));
 		// action command
-		this.toBeginning.setActionCommand(ActionCommandSbs.toBeginning);
-		this.backward.setActionCommand(ActionCommandSbs.backward);
-		this.forward.setActionCommand(ActionCommandSbs.forward);
-		this.toEnd.setActionCommand(ActionCommandSbs.toEnd);
-		this.play.setActionCommand(ActionCommandAnimation.play);
-		this.pause.setActionCommand(ActionCommandAnimation.pause);
-		this.stop.setActionCommand(ActionCommandAnimation.stop);
+		this.toBeginning.setActionCommand(SbsEvent.toBeginning);
+		this.backward.setActionCommand(SbsEvent.backward);
+		this.forward.setActionCommand(SbsEvent.forward);
+		this.toEnd.setActionCommand(SbsEvent.toEnd);
+		this.play.setActionCommand(AnimationEvent.play);
+		this.pause.setActionCommand(AnimationEvent.pause);
+		this.stop.setActionCommand(AnimationEvent.stop);
 		// action listener
 		this.toBeginning.addActionListener(model.getSbsStateHandler());
 		this.backward.addActionListener(model.getSbsStateHandler());
@@ -266,7 +266,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ActionCommandGeneral.i18n) {
+				if (arg == ControlEvent.i18n) {
 					this.border.setTitle(b.getString("traversal.label"));
 					//
 					this.steplengthLabel.setText(b.getString("setStep.label"));
@@ -299,7 +299,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 					this.play.setEnabled(m.isPlayEnabled());
 					this.pause.setEnabled(m.isPauseEnabled());
 					this.pause.setActionCommand(m.getPauseActionCommand());
-					if (m.getPauseActionCommand() == ActionCommandAnimation.pause)
+					if (m.getPauseActionCommand() == AnimationEvent.pause)
 						this.pause.setSelected(false);
 					this.pause.setToolTipText(m.getPauseLabel());
 					this.stop.setEnabled(m.isStopEnabled());

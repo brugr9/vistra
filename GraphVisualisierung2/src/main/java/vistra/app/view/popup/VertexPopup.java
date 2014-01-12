@@ -14,8 +14,8 @@ import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ActionCommandGeneral;
-import vistra.app.control.IControl.ActionCommandParameter;
+import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IItemLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -82,12 +82,12 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 
 		/**/
 		this.start = new JCheckBoxMenuItem("start");
-		this.start.setActionCommand(ActionCommandParameter.start);
+		this.start.setActionCommand(ParameterEvent.start);
 		this.start.addActionListener(model.getParameterStateHandler());
 		this.start.addActionListener(new StartActionListener());
 		//
 		this.end = new JCheckBoxMenuItem("end");
-		this.end.setActionCommand(ActionCommandParameter.end);
+		this.end.setActionCommand(ParameterEvent.end);
 		this.end.addActionListener(model.getParameterStateHandler());
 		this.end.addActionListener(new EndActionListener());
 		//
@@ -95,7 +95,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		this.dialog.addActionListener(new DialogActionListener());
 		this.delete = new JMenuItem("delete");
 		this.delete.addActionListener(new DeleteActionListener());
-		this.delete.setActionCommand(ActionCommandParameter.delete);
+		this.delete.setActionCommand(ParameterEvent.delete);
 		this.delete.addActionListener(model.getParameterStateHandler());
 
 		/**/
@@ -139,7 +139,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ActionCommandGeneral.i18n) {
+			if (arg == ControlEvent.i18n) {
 				this.setLabel(b.getString("vertex.label"));
 				this.start.setText(b.getString("start.label"));
 				this.end.setText(b.getString("finish.label"));

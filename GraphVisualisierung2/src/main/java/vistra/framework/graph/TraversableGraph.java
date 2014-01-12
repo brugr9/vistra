@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import vistra.framework.ITraversal;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;

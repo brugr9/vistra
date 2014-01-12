@@ -10,8 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ActionCommandGeneral;
-import vistra.app.control.IControl.ActionCommandParameter;
+import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
@@ -83,12 +83,11 @@ public class ToolBar extends JToolBar implements Observer {
 		this.editing.addActionListener(model.getParameterStateHandler());
 		this.picking.addActionListener(model.getParameterStateHandler());
 		// command
-		this.newUndirected
-				.setActionCommand(ActionCommandParameter.newUndirected);
-		this.newDirected.setActionCommand(ActionCommandParameter.newDirected);
-		this.open.setActionCommand(ActionCommandParameter.open);
-		this.save.setActionCommand(ActionCommandParameter.save);
-		this.saveAs.setActionCommand(ActionCommandParameter.saveAs);
+		this.newUndirected.setActionCommand(ParameterEvent.newUndirected);
+		this.newDirected.setActionCommand(ParameterEvent.newDirected);
+		this.open.setActionCommand(ParameterEvent.open);
+		this.save.setActionCommand(ParameterEvent.save);
+		this.saveAs.setActionCommand(ParameterEvent.saveAs);
 		this.editing.setActionCommand(Mode.EDITING.toString());
 		this.picking.setActionCommand(Mode.PICKING.toString());
 
@@ -116,7 +115,7 @@ public class ToolBar extends JToolBar implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ActionCommandGeneral.i18n) {
+				if (arg == ControlEvent.i18n) {
 					{// file
 						// setToolTipText
 						this.newUndirected.setToolTipText(b

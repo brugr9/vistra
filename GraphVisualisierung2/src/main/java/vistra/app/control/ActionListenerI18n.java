@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ActionCommandGeneral;
+import vistra.app.control.IControl.ControlEvent;
 
 /**
  * An i18n action listener.
@@ -107,7 +107,7 @@ class ActionListenerI18n extends AbstractActionListener {
 			this.model.setProtocol(about);
 			/* update the view */
 			// TODO
-			this.model.notifyObservers(ActionCommandGeneral.i18n);
+			this.model.notifyObservers(ControlEvent.i18n);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);

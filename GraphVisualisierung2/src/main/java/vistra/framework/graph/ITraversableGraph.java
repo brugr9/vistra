@@ -2,6 +2,7 @@ package vistra.framework.graph;
 
 import java.util.Collection;
 
+import vistra.framework.ITraversal;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.step.IStep;

@@ -15,8 +15,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ActionCommandGeneral;
-import vistra.app.control.IControl.ActionCommandParameter;
+import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.IParameterManager;
 import vistra.framework.ITraversal;
 import vistra.framework.graph.IExtendedGraph;
@@ -64,7 +63,8 @@ public final class ParameterStateHandler implements IParameterHandler {
 	 * @param model
 	 *            a gui model
 	 */
-	public ParameterStateHandler(IParameterManager parameterManager, IModel model) {
+	public ParameterStateHandler(IParameterManager parameterManager,
+			IModel model) {
 		super();
 		this.parameterManager = parameterManager;
 		this.model = (Model) model;
@@ -89,21 +89,21 @@ public final class ParameterStateHandler implements IParameterHandler {
 					.getTopLevelAncestor();
 			this.model.setTop(top);
 
-			if (c.equals(ActionCommandParameter.newUndirected)) {
+			if (c.equals(ParameterEvent.newUndirected)) {
 				this.handleNewGraphUndirected();
-			} else if (c.equals(ActionCommandParameter.newDirected)) {
+			} else if (c.equals(ParameterEvent.newDirected)) {
 				this.handleNewGraphDirected();
-			} else if (c.equals(ActionCommandParameter.open)) {
+			} else if (c.equals(ParameterEvent.open)) {
 				this.handleOpenGraph();
-			} else if (c.equals(ActionCommandParameter.save)) {
+			} else if (c.equals(ParameterEvent.save)) {
 				this.handleSaveGraph();
-			} else if (c.equals(ActionCommandParameter.saveAs)) {
+			} else if (c.equals(ParameterEvent.saveAs)) {
 				this.handleSaveGraphAs();
-			} else if (c.equals(ActionCommandParameter.edit)) {
+			} else if (c.equals(ParameterEvent.edit)) {
 				this.handleEditGraph();
-			} else if (c.equals(ActionCommandParameter.start)) {
+			} else if (c.equals(ParameterEvent.start)) {
 				// TODO this.handleEditStart();
-			} else if (c.equals(ActionCommandParameter.end)) {
+			} else if (c.equals(ParameterEvent.end)) {
 				// TODO this.handleEditEnd();
 			} else if (c.equals(Mode.PICKING.toString())) {
 				this.setMode(Mode.PICKING);
@@ -111,7 +111,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 			} else if (c.equals(Mode.EDITING.toString())) {
 				this.setMode(Mode.EDITING);
 				this.model.notifyObservers();
-			} else if (c.equals(ActionCommandGeneral.quit)) {
+			} else if (c.equals(ControlEvent.quit)) {
 				this.quit();
 			}
 
@@ -718,6 +718,71 @@ public final class ParameterStateHandler implements IParameterHandler {
 			}
 		if (option != JOptionPane.CANCEL_OPTION)
 			System.exit(0);
+	}
+
+	/**
+	 * Parameter events.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum ParameterEvent {
+
+		//
+		NEW_UNDIRECTED("newUndirected"),
+		//
+		NEW_DIRECTED("newDirected"),
+		//
+		OPEN("open"),
+		//
+		SAVE("save"),
+		//
+		SAVE_AS("saveAs"),
+		//
+		EDIT("edit"),
+		//
+		START("start"),
+		//
+		END("end"),
+		//
+		DELETE("delete"),
+
+		;
+
+		/**
+		 * A field for a value.
+		 */
+		private String value;
+
+		/**
+		 * Main constructor.
+		 * 
+		 * @param value
+		 *            a value
+		 */
+		ParameterEvent(String value) {
+			this.value = value;
+		}
+
+		/**
+		 * Returns the value.
+		 * 
+		 * @return the value
+		 */
+		public String getValue() {
+			return this.value;
+		}
+
+		public static final String newUndirected = NEW_UNDIRECTED.getValue();
+		public static final String newDirected = NEW_DIRECTED.getValue();
+		public static final String open = OPEN.getValue();
+		public static final String save = SAVE.getValue();
+		public static final String saveAs = SAVE_AS.getValue();
+		public static final String edit = EDIT.getValue();
+		public static final String start = START.getValue();
+		public static final String end = END.getValue();
+		public static final String delete = DELETE.getValue();
+
 	}
 
 }

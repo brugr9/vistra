@@ -13,7 +13,6 @@ import javax.swing.Timer;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ActionCommandSbs;
 import vistra.framework.ITraversal;
 import vistra.framework.step.IStep;
 
@@ -123,13 +122,13 @@ public final class StepByStep extends Observable implements IStepByStep {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String c = e.getActionCommand();
-			if (c.equals(ActionCommandSbs.toBeginning))
+			if (c.equals(SbsEvent.toBeginning))
 				this.handleToBeginning();
-			else if (c.equals(ActionCommandSbs.backward))
+			else if (c.equals(SbsEvent.backward))
 				this.handleBackward();
-			else if (c.equals(ActionCommandSbs.forward))
+			else if (c.equals(SbsEvent.forward))
 				this.handleForward();
-			else if (c.equals(ActionCommandSbs.toEnd))
+			else if (c.equals(SbsEvent.toEnd))
 				this.handleToEnd();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
@@ -429,4 +428,56 @@ public final class StepByStep extends Observable implements IStepByStep {
 		}
 	}
 
+	/**
+	 * Step-by-step events.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum SbsEvent {
+
+		//
+		STEPLENGTH("steplenth"),
+		//
+		TO_BEGINNING("toBeginning"),
+		//
+		BACKWARD("backward"),
+		//
+		FORWARD("forward"),
+		//
+		TO_END("toEnd"),
+
+		;
+
+		/**
+		 * A field for a value.
+		 */
+		private String value;
+
+		/**
+		 * Main constructor.
+		 * 
+		 * @param value
+		 *            a value
+		 */
+		SbsEvent(String value) {
+			this.value = value;
+		}
+
+		/**
+		 * Returns the value.
+		 * 
+		 * @return the value
+		 */
+		public String getValue() {
+			return this.value;
+		}
+
+		public static final String steplength = STEPLENGTH.getValue();
+		public static final String toBeginning = TO_BEGINNING.getValue();
+		public static final String backward = BACKWARD.getValue();
+		public static final String forward = FORWARD.getValue();
+		public static final String toEnd = TO_END.getValue();
+
+	}
 }

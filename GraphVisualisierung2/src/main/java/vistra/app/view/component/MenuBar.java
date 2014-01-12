@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ActionCommandGeneral;
-import vistra.app.control.IControl.ActionCommandParameter;
+import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.framework.util.palette.I18nPalette;
 
 /**
@@ -113,10 +113,10 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.saveAs.addActionListener(model.getParameterStateHandler());
 			this.quit.addActionListener(model.getParameterStateHandler());
 			// command
-			this.open.setActionCommand(ActionCommandParameter.open);
-			this.save.setActionCommand(ActionCommandParameter.save);
-			this.saveAs.setActionCommand(ActionCommandParameter.saveAs);
-			this.quit.setActionCommand(ActionCommandGeneral.quit);
+			this.open.setActionCommand(ParameterEvent.open);
+			this.save.setActionCommand(ParameterEvent.save);
+			this.saveAs.setActionCommand(ParameterEvent.saveAs);
+			this.quit.setActionCommand(ControlEvent.quit);
 			{// graph
 				this.newGraph = new JMenu("newGraph");
 				this.undirected = new JMenuItem("undirected");
@@ -127,10 +127,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 				this.directed.addActionListener(model
 						.getParameterStateHandler());
 				// command
-				this.undirected
-						.setActionCommand(ActionCommandParameter.newUndirected);
-				this.directed
-						.setActionCommand(ActionCommandParameter.newDirected);
+				this.undirected.setActionCommand(ParameterEvent.newUndirected);
+				this.directed.setActionCommand(ParameterEvent.newDirected);
 				// add
 				this.newGraph.add(this.undirected);
 				this.newGraph.add(this.directed);
@@ -197,7 +195,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ActionCommandGeneral.i18n) {
+				if (arg == ControlEvent.i18n) {
 					{// JMenu fileMenu
 						// setText
 						this.file.setText(b.getString("file.label"));

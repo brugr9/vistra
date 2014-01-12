@@ -13,7 +13,6 @@ import javax.swing.Timer;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ActionCommandAnimation;
 
 /**
  * An animation handler: handles the animated iteration over a traversal-object.
@@ -26,8 +25,7 @@ import vistra.app.control.IControl.ActionCommandAnimation;
  * @see ParameterStateHandler
  * @see StepByStep
  */
-public final class Animation extends Observable implements
-		IAnimation {
+public final class Animation extends Observable implements IAnimation {
 
 	/**
 	 * A field for a state.
@@ -102,13 +100,13 @@ public final class Animation extends Observable implements
 	public void actionPerformed(ActionEvent e) {
 		try {
 			String c = e.getActionCommand();
-			if (c.equals(ActionCommandAnimation.play))
+			if (c.equals(AnimationEvent.play))
 				this.handlePlaying();
-			else if (c.equals(ActionCommandAnimation.pause))
+			else if (c.equals(AnimationEvent.pause))
 				this.handlePaused();
-			else if (c.equals(ActionCommandAnimation.resume))
+			else if (c.equals(AnimationEvent.resume))
 				this.handlePlaying();
-			else if (c.equals(ActionCommandAnimation.stop))
+			else if (c.equals(AnimationEvent.stop))
 				this.handleStopped();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
@@ -211,7 +209,7 @@ public final class Animation extends Observable implements
 			String label = this.model.getResourceBundle().getString(
 					"pause.label");
 			this.model.setPauseLabel(label);
-			this.model.setPauseActionCommand(ActionCommandAnimation.pause);
+			this.model.setPauseActionCommand(AnimationEvent.pause);
 			//
 			this.model.notifyObservers();
 		} catch (Exception ex) {
@@ -233,7 +231,7 @@ public final class Animation extends Observable implements
 			String label = this.model.getResourceBundle().getString(
 					"pause.label");
 			this.model.setPauseLabel(label);
-			this.model.setPauseActionCommand(ActionCommandAnimation.pause);
+			this.model.setPauseActionCommand(AnimationEvent.pause);
 			//
 			this.model.notifyObservers();
 		} catch (Exception ex) {
@@ -255,7 +253,7 @@ public final class Animation extends Observable implements
 			String label = this.model.getResourceBundle().getString(
 					"resume.label");
 			this.model.setPauseLabel(label);
-			this.model.setPauseActionCommand(ActionCommandAnimation.resume);
+			this.model.setPauseActionCommand(AnimationEvent.resume);
 			//
 			this.model.notifyObservers();
 		} catch (Exception ex) {
@@ -364,6 +362,59 @@ public final class Animation extends Observable implements
 				ex.printStackTrace();
 			}
 		}
+
+	}
+
+	/**
+	 * Animation events.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum AnimationEvent {
+
+		//
+		DELAY("delay"),
+		//
+		PLAY("play"),
+		//
+		PAUSE("pause"),
+		//
+		RESUME("resume"),
+		//
+		STOP("stop"),
+
+		;
+
+		/**
+		 * A field for a value.
+		 */
+		private String value;
+
+		/**
+		 * Main constructor.
+		 * 
+		 * @param value
+		 *            a value
+		 */
+		AnimationEvent(String value) {
+			this.value = value;
+		}
+
+		/**
+		 * Returns the value.
+		 * 
+		 * @return the value
+		 */
+		public String getValue() {
+			return this.value;
+		}
+
+		public static final String delay = DELAY.getValue();
+		public static final String play = PLAY.getValue();
+		public static final String pause = PAUSE.getValue();
+		public static final String resume = RESUME.getValue();
+		public static final String stop = STOP.getValue();
 
 	}
 

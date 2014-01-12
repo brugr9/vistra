@@ -13,8 +13,8 @@ import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ActionCommandGeneral;
-import vistra.app.control.IControl.ActionCommandParameter;
+import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IItemLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -76,7 +76,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		this.dialog.addActionListener(new DialogActionListener());
 		this.delete = new JMenuItem("delete");
 		this.delete.addActionListener(new DeleteActionListener());
-		this.delete.setActionCommand(ActionCommandParameter.delete);
+		this.delete.setActionCommand(ParameterEvent.delete);
 		this.delete.addActionListener(model.getParameterStateHandler());
 
 		/**/
@@ -114,7 +114,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ActionCommandGeneral.i18n) {
+			if (arg == ControlEvent.i18n) {
 				this.setLabel(b.getString("edge.label"));
 				this.dialog.setText(b.getString("edit.label"));
 				this.delete.setText(b.getString("delete.label"));
