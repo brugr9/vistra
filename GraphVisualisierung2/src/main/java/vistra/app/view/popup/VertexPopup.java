@@ -14,6 +14,7 @@ import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
 import vistra.app.Model;
+import vistra.app.control.IControl.ActionCommandGeneral;
 import vistra.app.control.IControl.ActionCommandParameter;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IItemLayout;
@@ -30,10 +31,6 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 
 	private static final long serialVersionUID = 3273304014704565148L;
 
-	/**
-	 * A field for a top frame.
-	 */
-	private JFrame top;
 	/**
 	 * A field for a visualization viewer.
 	 */
@@ -70,17 +67,14 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param top
-	 *            the top frame
 	 * @param viewer
 	 *            the visualization viewer
 	 * @param model
 	 *            the gui model
 	 */
-	public VertexPopup(JFrame top,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer, IModel model) {
+	public VertexPopup(VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
+			IModel model) {
 		super("vertexPopup");
-		this.top = top;
 		this.viewer = viewer;
 		this.model = (Model) model;
 		this.point = null;
@@ -145,19 +139,19 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			// if (arg == ControlNotify.I18N) {
-			this.setLabel(b.getString("vertex.label"));
-			this.start.setText(b.getString("start.label"));
-			this.end.setText(b.getString("finish.label"));
-			this.dialog.setText(b.getString("edit.label"));
-			this.delete.setText(b.getString("delete.label"));
-			// } else {
-			this.setEnabled(m.isEditVertexEnabled());
-			this.start.setEnabled(m.isEditVertexEnabled());
-			this.end.setEnabled(m.isEditVertexEnabled());
-			this.dialog.setEnabled(m.isEditVertexEnabled());
-			this.delete.setEnabled(m.isEditVertexEnabled());
-			// }
+			if (arg == ActionCommandGeneral.I18N) {
+				this.setLabel(b.getString("vertex.label"));
+				this.start.setText(b.getString("start.label"));
+				this.end.setText(b.getString("finish.label"));
+				this.dialog.setText(b.getString("edit.label"));
+				this.delete.setText(b.getString("delete.label"));
+			} else {
+				this.setEnabled(m.isEditVertexEnabled());
+				this.start.setEnabled(m.isEditVertexEnabled());
+				this.end.setEnabled(m.isEditVertexEnabled());
+				this.dialog.setEnabled(m.isEditVertexEnabled());
+				this.delete.setEnabled(m.isEditVertexEnabled());
+			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);
@@ -176,10 +170,10 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (point != null && vertex != null) {
-				VertexDialog dialog = new VertexDialog(vertex, top, viewer,
-						model);
-				dialog.setLocation((int) point.getX() + top.getX(),
-						(int) point.getY() + top.getY());
+				VertexDialog dialog = new VertexDialog((JFrame) model.getTop(),
+						viewer, model, vertex);
+				dialog.setLocation((int) point.getX() + model.getTop().getX(),
+						(int) point.getY() + model.getTop().getY());
 				dialog.setVisible(true);
 			}
 		}
@@ -250,7 +244,16 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		public void actionPerformed(ActionEvent e) {
 			if (vertex != null) {
 				viewer.getPickedVertexState().pick(vertex, false);
+				if (vertex == model.getStart()) {
+					model.setStart(null);
+					model.notifyObservers();
+				}
+				if (vertex == model.getEnd()) {
+					model.setEnd(null);
+					model.notifyObservers();
+				}
 				viewer.getGraphLayout().getGraph().removeVertex(vertex);
+				viewer.repaint();
 			}
 		}
 	}

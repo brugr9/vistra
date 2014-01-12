@@ -1,6 +1,6 @@
 package vistra.app.view;
 
-import vistra.app.Model;
+import vistra.app.IModel;
 import vistra.app.control.IControl;
 import vistra.app.view.component.AlgorithmPanel;
 import vistra.app.view.component.GraphPanel;
@@ -36,7 +36,7 @@ public class FullView extends DefaultView implements IView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public FullView(Model model, IControl control) throws Exception {
+	public FullView(IModel model, IControl control) throws Exception {
 		super(model, control);
 		// TODO
 		this.setVisible(true);

@@ -23,7 +23,7 @@ import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EditingPlugin extends
+public class Editing extends
 		EditingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
 
 	/**
@@ -44,7 +44,7 @@ public class EditingPlugin extends
 	 * @param edgeFactory
 	 *            the edge factory
 	 */
-	public EditingPlugin(Factory<IVertexLayout> vertexFactory,
+	public Editing(Factory<IVertexLayout> vertexFactory,
 			Factory<IEdgeLayout> edgeFactory) {
 		super(vertexFactory, edgeFactory);
 	}
@@ -183,6 +183,7 @@ public class EditingPlugin extends
 							vertex, this.edgeIsDirected);
 				}
 				this.viewer.repaint();
+
 			}
 			this.startVertex = null;
 			this.down = null;

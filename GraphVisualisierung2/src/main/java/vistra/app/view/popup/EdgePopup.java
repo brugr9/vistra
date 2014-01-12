@@ -13,6 +13,7 @@ import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
 import vistra.app.Model;
+import vistra.app.control.IControl.ActionCommandGeneral;
 import vistra.app.control.IControl.ActionCommandParameter;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IItemLayout;
@@ -29,10 +30,6 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 
 	private static final long serialVersionUID = 3273304014704565148L;
 
-	/**
-	 * A field for a top frame.
-	 */
-	private JFrame top;
 	/**
 	 * A field for a visualization viewer.
 	 */
@@ -61,18 +58,15 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param top
-	 *            the top frame
 	 * @param viewer
 	 *            the visualization viewer
 	 * @param model
 	 *            the gui model
 	 */
-	public EdgePopup(JFrame top,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer, IModel model) {
+	public EdgePopup(VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
+			IModel model) {
 		super("edgePopup");
 		/**/
-		this.top = top;
 		this.viewer = viewer;
 		this.model = (Model) model;
 		this.point = null;
@@ -120,16 +114,15 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			// if (arg == ControlNotify.I18N) {
-			this.setLabel(b.getString("edge.label"));
-			this.dialog.setText(b.getString("edit.label"));
-			this.delete.setText(b.getString("delete.label"));
-
-			// } else {
-			this.setEnabled(m.isEditEdgeEnabled());
-			this.dialog.setEnabled(m.isEditEdgeEnabled());
-			this.delete.setEnabled(m.isEditEdgeEnabled());
-			// }
+			if (arg == ActionCommandGeneral.I18N) {
+				this.setLabel(b.getString("edge.label"));
+				this.dialog.setText(b.getString("edit.label"));
+				this.delete.setText(b.getString("delete.label"));
+			} else {
+				this.setEnabled(m.isEditEdgeEnabled());
+				this.dialog.setEnabled(m.isEditEdgeEnabled());
+				this.delete.setEnabled(m.isEditEdgeEnabled());
+			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
 					b.getString("app.label"), 1, null);
@@ -148,9 +141,10 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (point != null && edge != null) {
-				EdgeDialog dialog = new EdgeDialog(top, viewer, model, edge);
-				dialog.setLocation((int) point.getX() + top.getX(),
-						(int) point.getY() + top.getY());
+				EdgeDialog dialog = new EdgeDialog((JFrame) model.getTop(),
+						viewer, model, edge);
+				dialog.setLocation((int) point.getX() + model.getTop().getX(),
+						(int) point.getY() + model.getTop().getY());
 				dialog.setVisible(true);
 			}
 		}
@@ -168,6 +162,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 			if (edge != null) {
 				viewer.getPickedEdgeState().pick(edge, false);
 				viewer.getGraphLayout().getGraph().removeEdge(edge);
+				viewer.repaint();
 			}
 		}
 	}

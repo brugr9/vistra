@@ -48,17 +48,19 @@ public class VertexDialog extends JDialog {
 	/**
 	 * Main constructor.
 	 * 
-	 * @param vertex
-	 *            a vertex
+	 * 
 	 * @param top
 	 *            a top frame
 	 * @param viewer
 	 *            a visualization viewer
 	 * @param model
 	 *            a gui model
+	 * @param vertex
+	 *            a vertex
 	 */
-	public VertexDialog(IVertexLayout vertex, JFrame top,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer, IModel model) {
+	public VertexDialog(JFrame top,
+			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
+			IModel model, IVertexLayout vertex) {
 		super(top, true);
 		this.setResizable(false);
 

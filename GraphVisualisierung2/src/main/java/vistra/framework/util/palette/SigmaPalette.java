@@ -1,5 +1,7 @@
 package vistra.framework.util.palette;
 
+import java.text.DecimalFormatSymbols;
+
 /**
  * A sigma palette.
  * 
@@ -15,6 +17,10 @@ public enum SigmaPalette {
 	ALPHABET(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
 			"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W",
 			"X", "Y", "Z" }),
+	/**
+	 * Sign for infinity.
+	 */
+	INFINITY(new String[] { new DecimalFormatSymbols().getInfinity() }),
 
 	;
 
@@ -46,5 +52,9 @@ public enum SigmaPalette {
 	 * Signs from A to Z in upper case.
 	 */
 	public final static String[] alphabet = ALPHABET.getSigma();
+	/**
+	 * Sign for infinity.
+	 */
+	public final static String infinity = INFINITY.getSigma()[0];
 
 }

@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import vistra.app.IModel;
@@ -46,20 +45,18 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 	/**
 	 * Main constructor.
 	 * 
-	 * @param top
-	 *            a top frame
 	 * @param model
 	 *            a gui model
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	public Mouse(JFrame top, IModel model,
+	public Mouse(IModel model,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
 		super(viewer.getRenderContext(), new VertexFactory(), new EdgeFactory());
 
 		this.modePopup = new ModePopup(model);
-		this.vertexPopup = new VertexPopup(top, viewer, model);
-		this.edgePopup = new EdgePopup(top, viewer, model);
+		this.vertexPopup = new VertexPopup(viewer, model);
+		this.edgePopup = new EdgePopup(viewer, model);
 		((Model) model).addObserver(this.modePopup);
 		((Model) model).addObserver(this.vertexPopup);
 		((Model) model).addObserver(this.edgePopup);
@@ -73,7 +70,7 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 			((PopupPlugin) this.popupEditingPlugin)
 					.setVertexPopup(this.vertexPopup);
 		}
-		this.setMode(model.getMode()); // TODO evtl. methode überschreiben
+		this.setMode(Mode.PICKING); // TODO use?
 	}
 
 	/**
@@ -86,13 +83,12 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 				new CrossoverScalingControl(), 0, this.in, this.out);
 		this.add(this.scalingPlugin);
 		/* picking */
-		this.pickingPlugin = new PickingPlugin();
+		this.pickingPlugin = new Picking();
 		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<IVertexLayout, IEdgeLayout>();
 		/* editing */
 		this.popupEditingPlugin = new PopupPlugin(this.vertexFactory,
 				this.edgeFactory);
-		this.editingPlugin = new EditingPlugin(this.vertexFactory,
-				this.edgeFactory);
+		this.editingPlugin = new Editing(this.vertexFactory, this.edgeFactory);
 		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<IVertexLayout, IEdgeLayout>();
 	}
 

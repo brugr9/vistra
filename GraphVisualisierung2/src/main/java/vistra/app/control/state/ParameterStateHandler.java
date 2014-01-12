@@ -21,6 +21,7 @@ import vistra.framework.ICore;
 import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.VertexFactory;
 import vistra.framework.traversal.ITraversal;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -300,7 +301,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void setViewGraphSaved(boolean saved) {
 		this.model.setGraphSaved(saved);
-		this.model.setSaveEnabled(!saved);
+		if (this.model.isGraphFile())
+			this.model.setSaveEnabled(!saved);
 		this.model.notifyObservers();
 	}
 
@@ -375,9 +377,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @throws Exception
 	 */
 	void newGraph(EdgeType edgeType) throws Exception {
-
 		try {
-
 			int option = 0;
 			if (!this.model.isGraphSaved())
 				option = this.confirmSavingGraph();
@@ -395,8 +395,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setStart(null);
 				this.model.setEnd(null);
 				this.model.setGraphFile(false);
-				/* Mode */
-				this.setMode(Mode.EDITING);
+				VertexFactory.resetSigma();
 				/* Algorithm */
 				this.updateAlgorithms();
 			}
@@ -419,7 +418,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @throws Exception
 	 */
 	int openGraph() throws Exception {
-
 		try {
 			int option = 1;
 			if (!this.model.isGraphSaved())
@@ -448,8 +446,6 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					this.model.setStart(null);
 					this.model.setEnd(null);
 					this.model.setGraphFile(false);
-					/* Mode */
-					this.setMode(Mode.PICKING);
 					/* Algorithm */
 					this.updateAlgorithms();
 				}
@@ -507,6 +503,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.core.saveGraphAs(file);
 				this.model.setGraphFile(true);
 				this.model.setGraphSaved(true);
+				// TODO algorithms
+				this.model.setSelectedAlgorithmIndex(0);
+				this.selectAlgorithm();
 			}
 			return option;
 		} catch (Exception e) {
@@ -527,10 +526,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			// revert algorithm selection
 			if (this.model.isAlgorithmsEnabled()) {
 				this.model.setSelectedAlgorithmIndex(0);
-				this.handleSelectAlgorithm();
+				this.selectAlgorithm();
 			}
-			// revert saved status
-			this.model.setGraphSaved(false);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -582,16 +579,18 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unused")
+
 	private void clearGraph() throws Exception {
 		try {
 			IExtendedGraph graph = this.model.getGraph();
 			graph.removeGraphEventListener(this);
 			Collection<IEdgeLayout> edges = graph.getEdges();
 			Collection<IVertexLayout> vertices = graph.getVertices();
-			for (IEdgeLayout e : edges)
+			for (@SuppressWarnings("unused")
+			IEdgeLayout e : edges)
 				e = null;
-			for (IVertexLayout v : vertices)
+			for (@SuppressWarnings("unused")
+			IVertexLayout v : vertices)
 				v = null;
 			graph = null;
 			this.model.notifyObservers();

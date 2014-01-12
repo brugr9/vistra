@@ -20,7 +20,6 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	/**
 	 * A field for some signs.
 	 */
-	// TODO recursion
 	private static IBidirectIterator<String> SIGMA;
 
 	/**
@@ -62,6 +61,9 @@ public class VertexFactory implements Factory<IVertexLayout> {
 		return (IVertexLayout) new VertexStateHandler();
 	}
 
+	/**
+	 * Resets the sigma used for labeled vertex.
+	 */
 	public static void resetSigma() {
 		ArrayList<String> sigma = new ArrayList<String>();
 		String[] alphabet = SigmaPalette.alphabet;

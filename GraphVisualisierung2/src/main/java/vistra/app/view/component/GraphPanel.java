@@ -14,6 +14,7 @@ import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
 import vistra.app.Model;
+import vistra.app.control.IControl.ActionCommandGeneral;
 import vistra.app.view.IView;
 import vistra.app.view.popup.Mouse;
 import vistra.framework.graph.item.IEdgeLayout;
@@ -89,7 +90,7 @@ public class GraphPanel extends JPanel implements Observer {
 	 * @param size
 	 *            the panel size
 	 */
-	public GraphPanel(JFrame top, Model model, Dimension size) {
+	public GraphPanel(JFrame top, IModel model, Dimension size) {
 		this.setSize(size);
 		this.title = "title";
 		this.name = "name";
@@ -128,8 +129,8 @@ public class GraphPanel extends JPanel implements Observer {
 		// TODO rc.setEdgeDrawPaintTransformer(new EdgeFontColor());
 
 		/* mouse */
-		this.mouse = new Mouse(top, model, this.viewer);
-		model.addObserver(this.mouse);
+		this.mouse = new Mouse(model, this.viewer);
+		((Model) model).addObserver(this.mouse);
 		this.viewer.setGraphMouse(this.mouse);
 		this.viewer.addKeyListener(this.mouse.getModeKeyListener());
 
@@ -151,8 +152,8 @@ public class GraphPanel extends JPanel implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			// if (arg == ControlNotify.I18N)
-			this.title = b.getString("graph.label");
+			if (arg == ActionCommandGeneral.I18N)
+				this.title = b.getString("graph.label");
 			this.name = m.getGraph().getName();
 			if (!m.isGraphSaved())
 				this.name += "*";

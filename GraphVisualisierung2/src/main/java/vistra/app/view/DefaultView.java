@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.app.control.IControl;
 import vistra.app.view.component.AlgorithmPanel;
@@ -74,7 +75,7 @@ public class DefaultView extends JFrame implements IView {
 	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public DefaultView(Model model, IControl control) throws Exception {
+	public DefaultView(IModel model, IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(model.getResourceBundle().getString("app.label"));
@@ -95,12 +96,12 @@ public class DefaultView extends JFrame implements IView {
 				400));
 		this.protocolPanel = new ProtocolPanel(new Dimension(width, 400));
 		// components observe the model
-		model.addObserver(this.menuBar);
-		model.addObserver(this.toolBar);
-		model.addObserver(this.graphPanel);
-		model.addObserver(this.algorithmPanel);
-		model.addObserver(this.traversalPanel);
-		model.addObserver(this.protocolPanel);
+		((Model) model).addObserver(this.menuBar);
+		((Model) model).addObserver(this.toolBar);
+		((Model) model).addObserver(this.graphPanel);
+		((Model) model).addObserver(this.algorithmPanel);
+		((Model) model).addObserver(this.traversalPanel);
+		((Model) model).addObserver(this.protocolPanel);
 
 		/* another panel */
 		this.anotherPanel = new JPanel();

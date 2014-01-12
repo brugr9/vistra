@@ -1,19 +1,19 @@
 package vistra.framework.graph.item.state;
 
-import java.text.DecimalFormatSymbols;
-
 import net.datastructures.NodeStack;
 import net.datastructures.Stack;
 import vistra.framework.graph.item.VertexLayout;
 import vistra.framework.util.palette.ColorPalette;
 import vistra.framework.util.palette.FontPalette;
+import vistra.framework.util.palette.SigmaPalette;
 import vistra.framework.util.palette.StrokePalette;
 
 /**
  * A vertex state handler.
  * <p>
- * As being an item state handler, this handler has a cellar at its disposal. It
- * is therefore able to hold the state history and to set a previous state.
+ * As being an item state handler, this handler has a stack as cellar at its
+ * disposal. It is therefore able to hold the state history and to set a
+ * previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -31,14 +31,14 @@ public class VertexStateHandler extends VertexLayout implements
 	/**
 	 * A field for a cellar.
 	 */
-	private Stack<AbstractVertexState> cellar;
+	private Stack<AbstractVertexState> stack;
 
 	/**
 	 * Main constructor.
 	 */
 	public VertexStateHandler() {
 		super();
-		this.cellar = new NodeStack<AbstractVertexState>();
+		this.stack = new NodeStack<AbstractVertexState>();
 		this.state = new UnexploredVertexState(this);
 		try {
 			this.setState(new UnexploredVertexState(this));
@@ -134,9 +134,9 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setState(AbstractVertexState state) throws Exception {
 		try {
+			this.stack.push(state);
 			this.state = state;
 			this.state.entry();
-			this.cellar.push(state);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -149,8 +149,8 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setPreviousState() throws Exception {
 		try {
-			this.cellar.pop();
-			this.state = this.cellar.top();
+			this.stack.pop();
+			this.state = this.stack.top();
 			this.state.entry();
 		} catch (Exception e) {
 			throw e;
@@ -164,7 +164,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setLayoutInitialised() throws Exception {
 		try {
-			this.setLayoutUpdated(new DecimalFormatSymbols().getInfinity());
+			this.setLayoutUpdated(SigmaPalette.infinity);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -195,18 +195,12 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setLayoutUnexplored() throws Exception {
 		try {
-			if (this.isStart())
-				this.setLayoutVisited();
-			else if (this.isEnd())
-				this.setLayoutVisited();
-			else {
-				this.setFont(FontPalette.normal);
-				this.setFontColor(ColorPalette.darkblue);
-				this.setStroke(StrokePalette.unexplored);
-				this.setStrokeColor(ColorPalette.darkblue);
-				this.setFillColor(ColorPalette.orange);
-				this.notifyObservers();
-			}
+			this.setFont(FontPalette.normal);
+			this.setFontColor(ColorPalette.darkblue);
+			this.setStroke(StrokePalette.unexplored);
+			this.setStrokeColor(ColorPalette.darkblue);
+			this.setFillColor(ColorPalette.orange);
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}

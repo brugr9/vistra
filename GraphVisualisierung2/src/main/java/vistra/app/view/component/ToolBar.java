@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 import vistra.app.IModel;
+import vistra.app.control.IControl.ActionCommandGeneral;
 import vistra.app.control.IControl.ActionCommandParameter;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
@@ -115,45 +116,45 @@ public class ToolBar extends JToolBar implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				// if (arg == ControlNotify.I18N) {
-				{// file
-					// setToolTipText
-					this.newUndirected.setToolTipText(b
-							.getString("undirected.label"));
-					this.newDirected.setToolTipText(b
-							.getString("directed.label"));
-					this.open.setToolTipText(b.getString("open.label"));
-					//
-					this.save.setToolTipText(b.getString("save.label"));
-					this.saveAs.setToolTipText(b.getString("saveas.label"));
-					// setMnemonic
-					this.newUndirected.setMnemonic(b.getString(
-							"undirected.label").toCharArray()[0]);
-					this.newDirected.setMnemonic(b.getString("directed.label")
-							.toCharArray()[0]);
-					this.open.setMnemonic(b.getString("open.mnemonic")
-							.toCharArray()[0]);
-					//
-					this.save.setMnemonic(b.getString("save.mnemonic")
-							.toCharArray()[0]);
-					this.saveAs.setMnemonic(b.getString("saveas.mnemonic")
-							.toCharArray()[0]);
+				if (arg == ActionCommandGeneral.I18N) {
+					{// file
+						// setToolTipText
+						this.newUndirected.setToolTipText(b
+								.getString("undirected.label"));
+						this.newDirected.setToolTipText(b
+								.getString("directed.label"));
+						this.open.setToolTipText(b.getString("open.label"));
+						//
+						this.save.setToolTipText(b.getString("save.label"));
+						this.saveAs.setToolTipText(b.getString("saveas.label"));
+						// setMnemonic
+						this.newUndirected.setMnemonic(b.getString(
+								"undirected.label").toCharArray()[0]);
+						this.newDirected.setMnemonic(b.getString(
+								"directed.label").toCharArray()[0]);
+						this.open.setMnemonic(b.getString("open.mnemonic")
+								.toCharArray()[0]);
+						//
+						this.save.setMnemonic(b.getString("save.mnemonic")
+								.toCharArray()[0]);
+						this.saveAs.setMnemonic(b.getString("saveas.mnemonic")
+								.toCharArray()[0]);
+					}
+					{// mode
+						this.editing.setToolTipText(b.getString("mode.label")
+								+ ": " + b.getString("edit.label"));
+						this.picking.setToolTipText(b.getString("mode.label")
+								+ ": " + b.getString("picking.label"));
+					}
+				} else {
+					this.editing.setEnabled(m.isSelectEditingModeEnabled());
+					this.picking.setEnabled(m.isSelectPickingModeEnabled());
+					this.newUndirected.setEnabled(m.isUndirectedEnabled());
+					this.newDirected.setEnabled(m.isDirectedEnabled());
+					this.open.setEnabled(m.isOpenEnabled());
+					this.save.setEnabled(m.isSaveEnabled());
+					this.saveAs.setEnabled(m.isSaveAsEnabled());
 				}
-				{// mode
-					this.editing.setToolTipText(b.getString("mode.label")
-							+ ": " + b.getString("edit.label"));
-					this.picking.setToolTipText(b.getString("mode.label")
-							+ ": " + b.getString("picking.label"));
-				}
-				// } else {
-				this.editing.setEnabled(m.isSelectEditingModeEnabled());
-				this.picking.setEnabled(m.isSelectPickingModeEnabled());
-				this.newUndirected.setEnabled(m.isUndirectedEnabled());
-				this.newDirected.setEnabled(m.isDirectedEnabled());
-				this.open.setEnabled(m.isOpenEnabled());
-				this.save.setEnabled(m.isSaveEnabled());
-				this.saveAs.setEnabled(m.isSaveAsEnabled());
-				// }
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),
 						b.getString("app.label"), 1, null);

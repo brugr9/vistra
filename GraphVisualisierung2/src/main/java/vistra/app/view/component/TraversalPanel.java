@@ -20,6 +20,7 @@ import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
 import vistra.app.control.IControl.ActionCommandAnimation;
+import vistra.app.control.IControl.ActionCommandGeneral;
 import vistra.app.control.IControl.ActionCommandSbs;
 import vistra.framework.util.palette.ColorPalette;
 
@@ -265,44 +266,44 @@ public final class TraversalPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				// if (arg == ControlNotify.I18N) {
-				this.border.setTitle(b.getString("traversal.label"));
-				//
-				this.steplengthLabel.setText(b.getString("setStep.label"));
-				this.delayLabel.setText(b.getString("setDelay.label"));
-				//
-				this.toBeginning.setToolTipText(b.getString("home.label"));
-				this.backward.setToolTipText(b.getString("backward.label"));
-				this.forward.setToolTipText(b.getString("forward.label"));
-				this.toEnd.setToolTipText(b.getString("end.label"));
-				//
-				this.play.setToolTipText(b.getString("play.label"));
-				this.pause.setToolTipText(b.getString("pause.label"));
-				this.stop.setToolTipText(b.getString("stop.label"));
-				// } else {
-				//
-				this.progress.setMaximum(m.getTraversal().size());
-				this.progress.setValue(m.getProgress());
-				//
-				this.steplength.setValue(m.getSteplength());
-				this.steplength.setEnabled(m.isSteplengthEnabled());
-				//
-				this.toBeginning.setEnabled(m.isToBeginningEnabled());
-				this.backward.setEnabled(m.isBackwardEnabled());
-				this.forward.setEnabled(m.isForwardEnabled());
-				this.toEnd.setEnabled(m.isToEndEnabled());
-				//
-				this.delay.setValue(m.getDelay());
-				this.delay.setEnabled(m.isDelayEnabled());
-				//
-				this.play.setEnabled(m.isPlayEnabled());
-				this.pause.setEnabled(m.isPauseEnabled());
-				this.pause.setActionCommand(m.getPauseActionCommand());
-				if (m.getPauseActionCommand() == ActionCommandAnimation.pause)
-					this.pause.setSelected(false);
-				this.pause.setToolTipText(m.getPauseLabel());
-				this.stop.setEnabled(m.isStopEnabled());
-				// }
+				if (arg == ActionCommandGeneral.I18N) {
+					this.border.setTitle(b.getString("traversal.label"));
+					//
+					this.steplengthLabel.setText(b.getString("setStep.label"));
+					this.delayLabel.setText(b.getString("setDelay.label"));
+					//
+					this.toBeginning.setToolTipText(b.getString("home.label"));
+					this.backward.setToolTipText(b.getString("backward.label"));
+					this.forward.setToolTipText(b.getString("forward.label"));
+					this.toEnd.setToolTipText(b.getString("end.label"));
+					//
+					this.play.setToolTipText(b.getString("play.label"));
+					this.pause.setToolTipText(b.getString("pause.label"));
+					this.stop.setToolTipText(b.getString("stop.label"));
+				} else {
+					//
+					this.progress.setMaximum(m.getTraversal().size());
+					this.progress.setValue(m.getProgress());
+					//
+					this.steplength.setValue(m.getSteplength());
+					this.steplength.setEnabled(m.isSteplengthEnabled());
+					//
+					this.toBeginning.setEnabled(m.isToBeginningEnabled());
+					this.backward.setEnabled(m.isBackwardEnabled());
+					this.forward.setEnabled(m.isForwardEnabled());
+					this.toEnd.setEnabled(m.isToEndEnabled());
+					//
+					this.delay.setValue(m.getDelay());
+					this.delay.setEnabled(m.isDelayEnabled());
+					//
+					this.play.setEnabled(m.isPlayEnabled());
+					this.pause.setEnabled(m.isPauseEnabled());
+					this.pause.setActionCommand(m.getPauseActionCommand());
+					if (m.getPauseActionCommand() == ActionCommandAnimation.pause)
+						this.pause.setSelected(false);
+					this.pause.setToolTipText(m.getPauseLabel());
+					this.stop.setEnabled(m.isStopEnabled());
+				}
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e.toString(),
 						b.getString("app.label"), 1, null);

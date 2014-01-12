@@ -18,7 +18,7 @@ import edu.uci.ics.jung.visualization.picking.PickedState;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class PickingPlugin extends
+public class Picking extends
 		PickingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
 
 	/**
@@ -29,7 +29,7 @@ public class PickingPlugin extends
 	/**
 	 * Main constructor.
 	 */
-	public PickingPlugin() {
+	public Picking() {
 		super();
 	}
 
@@ -48,7 +48,8 @@ public class PickingPlugin extends
 						.getMultiLayerTransformer();
 				Point2D graphPoint = mt.inverseTransform(point);
 				Point2D graphDown = mt.inverseTransform(this.down);
-				Layout<IVertexLayout, IEdgeLayout> layout = viewer.getGraphLayout();
+				Layout<IVertexLayout, IEdgeLayout> layout = viewer
+						.getGraphLayout();
 				double dx = graphPoint.getX() - graphDown.getX();
 				double dy = graphPoint.getY() - graphDown.getY();
 				PickedState<IVertexLayout> ps = viewer.getPickedVertexState();
@@ -71,7 +72,7 @@ public class PickingPlugin extends
 			}
 			if (this.vertex != null)
 				e.consume();
-			viewer.repaint();
+			this.viewer.repaint();
 		}
 	}
 

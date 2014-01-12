@@ -10,8 +10,9 @@ import vistra.framework.util.palette.StrokePalette;
 /**
  * An edge state handler.
  * <p>
- * As being an item state handler, this handler has a cellar at its disposal. It
- * is therefore able to hold the state history and to set a previous state.
+ * As being an item state handler, this handler has a stack as cellar at its
+ * disposal. It is therefore able to hold the state history and to set a
+ * previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -28,14 +29,14 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	/**
 	 * A field for a cellar.
 	 */
-	private Stack<AbstractEdgeState> cellar;
+	private Stack<AbstractEdgeState> stack;
 
 	/**
 	 * Main constructor.
 	 */
 	public EdgeStateHandler() {
 		super();
-		this.cellar = new NodeStack<AbstractEdgeState>();
+		this.stack = new NodeStack<AbstractEdgeState>();
 		this.state = new UnexploredEdgeState(this);
 		try {
 			this.setState(new UnexploredEdgeState(this));
@@ -157,9 +158,9 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setState(AbstractEdgeState state) throws Exception {
 		try {
+			this.stack.push(state);
 			this.state = state;
 			this.state.entry();
-			this.cellar.push(state);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -172,8 +173,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setPreviousState() throws Exception {
 		try {
-			this.cellar.pop();
-			this.state = this.cellar.top();
+			this.stack.pop();
+			this.state = this.stack.top();
 			this.state.entry();
 		} catch (Exception e) {
 			throw e;

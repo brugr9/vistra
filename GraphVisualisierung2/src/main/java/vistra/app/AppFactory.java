@@ -118,7 +118,7 @@ final class AppFactory {
 	static IView createGui(ICore core, ViewType type) throws Exception {
 		try {
 			// model and control
-			Model model = new Model();
+			IModel model = new Model();
 			IControl control = new Control(core, model);
 			// view
 			IView view;

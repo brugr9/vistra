@@ -3,8 +3,8 @@ package vistra.framework.graph.item.state;
 /**
  * An interface for an item state handler.
  * <p>
- * This handler has a cellar at its disposal. It is therefore able to hold the
- * state history and to set a previous state.
+ * This handler has a stack as cellar at its disposal. It is therefore able to
+ * hold the state history and to set a previous state.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
