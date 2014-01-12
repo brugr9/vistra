@@ -17,7 +17,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class AlgorithmManager implements IAlgorithmManager {
+final class AlgorithmManager implements IAlgorithmManager {
 
 	/**
 	 * A field for a list of algorithms available.
@@ -34,7 +34,7 @@ public final class AlgorithmManager implements IAlgorithmManager {
 	 * @param p
 	 *            the properties
 	 */
-	public AlgorithmManager(Properties p) {
+	AlgorithmManager(Properties p) {
 		super();
 		this.supported = new ArrayList<IAlgorithm>();
 		available = new ArrayList<IAlgorithm>();

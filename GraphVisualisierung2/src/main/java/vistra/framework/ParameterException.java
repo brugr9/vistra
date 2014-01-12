@@ -1,14 +1,14 @@
 package vistra.framework;
 
 /**
- * Core Exception<br>
+ * Parameter Exception<br>
  * This class extends <code>Exception</code> that indicates conditions that a
  * reasonable application might want to catch.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class CoreException extends Exception {
+public class ParameterException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,7 +17,7 @@ public class CoreException extends Exception {
 	 * The cause is not initialised, and may subsequently be initialised by a
 	 * call to {@link #initCause}.
 	 */
-	public CoreException() {
+	public ParameterException() {
 		super();
 	}
 
@@ -30,7 +30,7 @@ public class CoreException extends Exception {
 	 *            the detail message. The detail message is saved for later
 	 *            retrieval by the {@link #getMessage()} method.
 	 */
-	public CoreException(String message) {
+	public ParameterException(String message) {
 		super(message);
 	}
 
@@ -49,7 +49,7 @@ public class CoreException extends Exception {
 	 *            permitted, and indicates that the cause is nonexistent or
 	 *            unknown.)
 	 */
-	public CoreException(String message, Throwable cause) {
+	public ParameterException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
@@ -67,7 +67,7 @@ public class CoreException extends Exception {
 	 *            permitted, and indicates that the cause is nonexistent or
 	 *            unknown.)
 	 */
-	public CoreException(Throwable cause) {
+	public ParameterException(Throwable cause) {
 		super(cause);
 	}
 }

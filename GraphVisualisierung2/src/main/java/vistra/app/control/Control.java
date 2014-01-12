@@ -4,7 +4,7 @@ import vistra.app.IModel;
 import vistra.app.control.state.AnimationStateHandler;
 import vistra.app.control.state.ParameterStateHandler;
 import vistra.app.control.state.SbsStateHandler;
-import vistra.framework.ICore;
+import vistra.framework.IParameterManager;
 
 /**
  * A control as in MVC.
@@ -23,7 +23,7 @@ public final class Control implements IControl {
 	 *            the model
 	 * @throws Exception
 	 */
-	public Control(ICore core, IModel model) throws Exception {
+	public Control(IParameterManager core, IModel model) throws Exception {
 		super();
 		try {
 			/* Action listener */

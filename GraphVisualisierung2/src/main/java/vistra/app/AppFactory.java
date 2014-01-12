@@ -8,8 +8,8 @@ import vistra.app.control.IControl;
 import vistra.app.view.DefaultView;
 import vistra.app.view.FullView;
 import vistra.app.view.IView;
-import vistra.framework.Core;
-import vistra.framework.ICore;
+import vistra.framework.ParameterManager;
+import vistra.framework.IParameterManager;
 
 /**
  * An application factory, creates MVC based graphic user interfaces.
@@ -34,7 +34,7 @@ final class AppFactory {
 	static IView createApplication() throws Exception {
 		try {
 			Properties properties = createProperties();
-			ICore core = new Core(properties);
+			IParameterManager core = new ParameterManager(properties);
 			IView view = createGui(core);
 			return view;
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ final class AppFactory {
 	static IView createApplication(ViewType viewType) throws Exception {
 		try {
 			Properties properties = createProperties();
-			ICore core = new Core(properties);
+			IParameterManager core = new ParameterManager(properties);
 			IView view = createGui(core, viewType);
 			return view;
 		} catch (Exception e) {
@@ -97,7 +97,7 @@ final class AppFactory {
 	 * @return a view as in MVC
 	 * @throws Exception
 	 */
-	static IView createGui(ICore core) throws Exception {
+	static IView createGui(IParameterManager core) throws Exception {
 		try {
 			return createGui(core, ViewType.DEFAULT);
 		} catch (Exception ex) {
@@ -115,7 +115,7 @@ final class AppFactory {
 	 * @return a view as in MVC
 	 * @throws Exception
 	 */
-	static IView createGui(ICore core, ViewType type) throws Exception {
+	static IView createGui(IParameterManager core, ViewType type) throws Exception {
 		try {
 			// model and control
 			IModel model = new Model();

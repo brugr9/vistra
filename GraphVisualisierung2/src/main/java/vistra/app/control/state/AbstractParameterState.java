@@ -155,9 +155,7 @@ abstract class AbstractParameterState extends AbstractState implements IState {
 	 */
 	void handleSelectAlgorithm() throws Exception {
 		try {
-			// TODO
 			int index = this.stateHandler.selectAlgorithm();
-			// this.stateHandler.handleIdle();
 			if (index > 0)
 				this.stateHandler.setState(new ParameterStateAlgorithmSelected(
 						this.stateHandler));

@@ -17,7 +17,7 @@ import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.app.control.IControl.ActionCommandGeneral;
 import vistra.app.control.IControl.ActionCommandParameter;
-import vistra.framework.ICore;
+import vistra.framework.IParameterManager;
 import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertexLayout;
@@ -50,7 +50,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	/**
 	 * A field for a core.
 	 */
-	private ICore core;
+	private IParameterManager core;
 	/**
 	 * A field for a model.
 	 */
@@ -64,7 +64,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 * @param model
 	 *            a gui model
 	 */
-	public ParameterStateHandler(ICore core, IModel model) {
+	public ParameterStateHandler(IParameterManager core, IModel model) {
 		super();
 		this.core = core;
 		this.model = (Model) model;
@@ -328,12 +328,15 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			if (enabled) {
 				this.model.getAnimationStateHandler().handleIdle();
+				this.setMode(Mode.PICKING);
 				ResourceBundle b = this.model.getResourceBundle();
 				JOptionPane.showMessageDialog(null,
 						b.getString("render.message"),
 						b.getString("app.label"), 1, null);
-			} else
+			} else {
 				this.model.getAnimationStateHandler().handleOff();
+				this.setMode(Mode.EDITING);
+			}
 			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -554,17 +557,12 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			String description = this.core.getAlgorithmDescription();
 			this.model.setAlgorithmDescription(description);
 			/* Traversal */
-			ITraversal traversal = this.core.traverse(graph);
+			ITraversal traversal = this.core.executeAlgorithm(graph);
 			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
-			if (index > 0) {
-				if (traversal.isEmpty())
-					// TODO message eventually
-					return 0;
-				/* Mode */
-				this.setMode(Mode.PICKING);
-			} else {
-				this.setMode(Mode.EDITING);
+			if (traversal.isEmpty()) {
+				// TODO message eventually
+				index = 0;
 			}
 			// done
 			return index;
@@ -667,10 +665,11 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	}
 
 	/**
-	 * A helper method: Sets the mode.
+	 * A helper method: Sets the mouse mode.
 	 * 
 	 * @param mode
 	 *            the mode to set
+	 * @see Mode
 	 */
 	private void setMode(Mode mode) {
 		this.model.setMode(mode);
@@ -691,8 +690,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private void updateAlgorithms() throws Exception {
 		try {
 			EdgeType edgeType = this.model.getGraph().getEdgeType();
-			this.core.updateSelectableNames(edgeType);
-			String[] selectableNames = this.core.getSelectableNames();
+			this.core.updateSelectableAlgorithms(edgeType);
+			String[] selectableNames = this.core.getSelectableAlgorithmNames();
 			this.model.setAlgorithms(selectableNames);
 			this.model.setSelectedAlgorithmIndex(0);
 			this.selectAlgorithm();

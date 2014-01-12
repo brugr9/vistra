@@ -30,13 +30,15 @@ import vistra.framework.util.ImmutableBidirectIterator;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * A core, gives access to mainly important methods (facade pattern) and holds
+ * A parameter manager. This manager gives access to the graph and the algorithm
+ * by delegating method calls to a manager specialized on a graph and a manager
+ * specialized on algorithms (facade pattern). Furthermore, this manager holds
  * an algorithm which can be changed (strategy pattern).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Core implements ICore {
+public class ParameterManager implements IParameterManager {
 
 	/**
 	 * A field for a graph manager.
@@ -59,7 +61,7 @@ public class Core implements ICore {
 	 * @param p
 	 *            the properties
 	 */
-	public Core(Properties p) {
+	public ParameterManager(Properties p) {
 		try {
 			this.graphManager = GraphManagerFactory.create(p);
 			this.algorithmManager = AlgorithmManagerFactory.create(p);
@@ -88,11 +90,11 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph openGraph(File source) throws CoreException {
+	public IExtendedGraph openGraph(File source) throws ParameterException {
 		try {
 			return this.graphManager.open(source);
 		} catch (Exception e) {
-			throw new CoreException(e);
+			throw new ParameterException(e);
 		}
 	}
 
@@ -100,11 +102,11 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph newGraph(EdgeType edgeType) throws CoreException {
+	public IExtendedGraph newGraph(EdgeType edgeType) throws ParameterException {
 		try {
 			return this.graphManager.newGraph(edgeType);
 		} catch (Exception e) {
-			throw new CoreException(e);
+			throw new ParameterException(e);
 		}
 	}
 
@@ -112,11 +114,11 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void saveGraph() throws CoreException {
+	public void saveGraph() throws ParameterException {
 		try {
 			this.graphManager.save();
 		} catch (Exception e) {
-			throw new CoreException(e);
+			throw new ParameterException(e);
 		}
 	}
 
@@ -124,11 +126,11 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void saveGraphAs(File file) throws CoreException {
+	public void saveGraphAs(File file) throws ParameterException {
 		try {
 			this.graphManager.saveAs(file);
 		} catch (Exception e) {
-			throw new CoreException(e);
+			throw new ParameterException(e);
 		}
 	}
 
@@ -136,11 +138,12 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updateSelectableNames(EdgeType edgeType) throws CoreException {
+	public void updateSelectableAlgorithms(EdgeType edgeType)
+			throws ParameterException {
 		try {
 			this.algorithmManager.updateSupported(edgeType);
 		} catch (Exception e) {
-			throw new CoreException(e);
+			throw new ParameterException(e);
 		}
 	}
 
@@ -148,11 +151,11 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String[] getSelectableNames() throws CoreException {
+	public String[] getSelectableAlgorithmNames() throws ParameterException {
 		try {
 			return this.algorithmManager.getNames();
 		} catch (Exception e) {
-			throw new CoreException(e);
+			throw new ParameterException(e);
 		}
 	}
 
@@ -160,11 +163,11 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void selectAlgorithm(int index) throws CoreException {
+	public void selectAlgorithm(int index) throws ParameterException {
 		try {
 			this.algorithm = this.algorithmManager.getSupported(index);
 		} catch (Exception e) {
-			throw new CoreException(e);
+			throw new ParameterException(e);
 		}
 	}
 
@@ -180,8 +183,7 @@ public class Core implements ICore {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ITraversal traverse(IExtendedGraph graph) throws CoreException {
-
+	public ITraversal executeAlgorithm(IExtendedGraph graph) throws ParameterException {
 		try {
 			/* graph */
 			List<IStep> steps = new ArrayList<IStep>();
@@ -196,8 +198,7 @@ public class Core implements ICore {
 			ITraversal traversal = new Traversal(stepIterator);
 			return traversal;
 		} catch (Exception e) {
-			throw new CoreException(e);
+			throw new ParameterException(e);
 		}
-
 	}
 }
