@@ -6,7 +6,6 @@ import net.datastructures.Entry;
 import vistra.framework.ITraversal;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.step.IStep;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -114,16 +113,6 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @return {@code true} if visited
 	 */
 	boolean isVisited(IVertex v);
-
-	/**
-	 * A step method: executes a step and adds the step to the traversal.
-	 * 
-	 * @param s
-	 *            the step
-	 * @throws Exception
-	 * @deprecated
-	 */
-	void stepBy(IStep s) throws Exception;
 
 	/**
 	 * A step method: Back edge.
@@ -242,15 +231,6 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @throws Exception
 	 */
 	void stepVisit(IVertex v, IEdge e) throws Exception;
-
-	/**
-	 * A step method: Visit vertex over edge.
-	 * 
-	 * @param items
-	 *            the edges to discover and the vertices to visit
-	 * @throws Exception
-	 */
-	void stepVisit(Iterable<Entry<IVertex, IEdge>> items) throws Exception;
 
 	/**
 	 * A step method: Solution-member vertex over edge.

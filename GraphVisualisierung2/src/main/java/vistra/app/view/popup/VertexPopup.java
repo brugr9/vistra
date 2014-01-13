@@ -56,10 +56,6 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 */
 	private JCheckBoxMenuItem end;
 	/**
-	 * A field for a dialog menu item.
-	 */
-	private JMenuItem dialog;
-	/**
 	 * A field for a delete menu item.
 	 */
 	private JMenuItem delete;
@@ -91,8 +87,6 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		this.end.addActionListener(model.getParameterStateHandler());
 		this.end.addActionListener(new EndActionListener());
 		//
-		this.dialog = new JMenuItem("dialog");
-		this.dialog.addActionListener(new DialogActionListener());
 		this.delete = new JMenuItem("delete");
 		this.delete.addActionListener(new DeleteActionListener());
 		this.delete.setActionCommand(ParameterEvent.delete);
@@ -101,8 +95,6 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		/**/
 		this.add(this.start);
 		this.add(this.end);
-		this.addSeparator();
-		this.add(this.dialog);
 		this.addSeparator();
 		this.add(this.delete);
 	}
@@ -143,13 +135,11 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 				this.setLabel(b.getString("vertex.label"));
 				this.start.setText(b.getString("start.label"));
 				this.end.setText(b.getString("finish.label"));
-				this.dialog.setText(b.getString("edit.label"));
 				this.delete.setText(b.getString("delete.label"));
 			} else {
 				this.setEnabled(m.isEditVertexEnabled());
 				this.start.setEnabled(m.isEditVertexEnabled());
 				this.end.setEnabled(m.isEditVertexEnabled());
-				this.dialog.setEnabled(m.isEditVertexEnabled());
 				this.delete.setEnabled(m.isEditVertexEnabled());
 			}
 		} catch (Exception e) {
@@ -158,25 +148,6 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 			e.printStackTrace();
 		}
 
-	}
-
-	/**
-	 * 
-	 * @author Roland Bruggmann (brugr9@bfh.ch)
-	 * 
-	 */
-	private class DialogActionListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (point != null && vertex != null) {
-				VertexDialog dialog = new VertexDialog((JFrame) model.getTop(),
-						viewer, model, vertex);
-				dialog.setLocation((int) point.getX() + model.getTop().getX(),
-						(int) point.getY() + model.getTop().getY());
-				dialog.setVisible(true);
-			}
-		}
 	}
 
 	/**

@@ -27,7 +27,7 @@ public class SolutionMemberEdgeCommand extends AbstractItemStateCommand implemen
 	 */
 	@Override
 	public void execute() throws Exception {
-		((EdgeStateHandler) super.itemStateHandler).handleSolution();
+		((EdgeStateHandler) super.itemStateHandler).handleSolutionMember();
 	}
 
 }

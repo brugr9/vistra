@@ -1,6 +1,5 @@
 package vistra.framework.algorithm.impl;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,9 +45,7 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	public void traverse(ITraversableGraph g) throws AlgorithmException {
 		try {
 			/* Input: A graph g and a root v of g */
-			// TODO IVertex v = g.getStart();
-			IVertex v = new ArrayList<IVertex>(g.getVertices()).get(0);
-			// end Todo
+			IVertex v = g.getStart();
 			Queue<IVertex> Q = new NodeQueue<IVertex>();
 			Set<IVertex> V = new HashSet<IVertex>();
 			Q.enqueue(v);
@@ -60,7 +57,7 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 				tempV = Q.dequeue();
 				if (g.isSuccessor(tempV, v)) {
 					v = tempV;
-					g.stepVisit(v, e);
+					g.stepVisit(v, e); // visit vertex via edge
 				}
 				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
 															// tempV
@@ -70,7 +67,7 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 						V.add(useV);
 						Q.enqueue(useV);
 					} else
-						g.stepBackEdge(outE);
+						g.stepBackEdge(outE); // back-edge
 				}
 			}
 		} catch (Exception ex) {

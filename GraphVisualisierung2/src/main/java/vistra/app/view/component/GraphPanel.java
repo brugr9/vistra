@@ -17,6 +17,7 @@ import vistra.app.Model;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.app.view.IView;
 import vistra.app.view.popup.Mouse;
+import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.transformer.EdgeFont;
@@ -103,7 +104,8 @@ public class GraphPanel extends JPanel implements Observer {
 
 		/* viewer */
 		this.layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
-				model.getGraph(), new VertexLocation());
+				model.getGraph());
+		// TODO this.layout.setInitializer(new VertexLocation());
 		this.viewer = new VisualizationViewer<IVertexLayout, IEdgeLayout>(
 				layout, new Dimension(size.width, size.height - IView.BORDER));
 		this.viewer.setBackground(ColorPalette.white);
@@ -117,7 +119,7 @@ public class GraphPanel extends JPanel implements Observer {
 		rc.setVertexDrawPaintTransformer(new VertexStrokeColor());
 		rc.setVertexFillPaintTransformer(new VertexFillColor());
 		rc.setVertexLabelTransformer(new VertexLabel());
-		rc.setVertexDrawPaintTransformer(new VertexFontColor());
+		// rc.setVertexDrawPaintTransformer(new VertexFontColor());
 		rc.setVertexFontTransformer(new VertexFont());
 		// transformer: edge
 		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertexLayout, IEdgeLayout>(
@@ -129,7 +131,7 @@ public class GraphPanel extends JPanel implements Observer {
 		rc.setArrowDrawPaintTransformer(new EdgeStrokeColor());
 		rc.setEdgeLabelTransformer(new EdgeLabel());
 		rc.setEdgeFontTransformer(new EdgeFont());
-		rc.setEdgeDrawPaintTransformer(new EdgeFontColor());
+		// rc.setEdgeDrawPaintTransformer(new EdgeFontColor());
 
 		/* mouse */
 		this.mouse = new Mouse(model, this.viewer);

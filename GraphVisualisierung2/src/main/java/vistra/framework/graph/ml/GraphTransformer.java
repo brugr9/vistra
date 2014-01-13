@@ -9,12 +9,12 @@ import edu.uci.ics.jung.io.graphml.GraphMetadata;
 import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;
 
 /**
- * An graph metadata transformer for reading an extended GraphML file.
+ * An graph transformer for reading an extended GraphML file.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class GraphMetadataTransformer implements
+public class GraphTransformer implements
 		Transformer<GraphMetadata, IExtendedGraph> {
 
 	/**

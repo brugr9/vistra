@@ -7,8 +7,8 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.framework.graph.ml.ExtendedGraphMLReader;
-import vistra.framework.graph.ml.ExtendedGraphMLWriter;
+import vistra.framework.graph.ml.GraphReader;
+import vistra.framework.graph.ml.GraphWriter;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -18,7 +18,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  * @see ExtendedGraph
- * @see ExtendedGraphMLWriter
+ * @see GraphWriter
  */
 class GraphManager implements IGraphManager {
 
@@ -37,11 +37,11 @@ class GraphManager implements IGraphManager {
 	/**
 	 * A field for an extended GraphML reader.
 	 */
-	private ExtendedGraphMLReader reader;
+	private GraphReader reader;
 	/**
 	 * A field for an extended GraphML writer.
 	 */
-	private ExtendedGraphMLWriter writer;
+	private GraphWriter writer;
 
 	/**
 	 * Main constructor.
@@ -59,8 +59,8 @@ class GraphManager implements IGraphManager {
 				p.getProperty("filenameextension.graph"));
 		this.fileNameExtensionFilter = filter;
 		/* GraphML */
-		this.reader = new ExtendedGraphMLReader();
-		this.writer = new ExtendedGraphMLWriter();
+		this.reader = new GraphReader();
+		this.writer = new GraphWriter();
 	}
 
 	/**

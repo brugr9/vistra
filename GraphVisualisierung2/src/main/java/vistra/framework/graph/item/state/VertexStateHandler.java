@@ -3,7 +3,7 @@ package vistra.framework.graph.item.state;
 import net.datastructures.NodeStack;
 import net.datastructures.Stack;
 import vistra.framework.graph.item.VertexLayout;
-import vistra.framework.graph.ml.ExtendedGraphMLWriter;
+import vistra.framework.graph.ml.GraphWriter;
 import vistra.framework.util.palette.ColorPalette;
 import vistra.framework.util.palette.FontPalette;
 import vistra.framework.util.palette.SigmaPalette;
@@ -99,7 +99,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolution() throws Exception {
+	public void handleSolutionMember() throws Exception {
 		try {
 			this.state.top().exit();
 			this.state.top().handleSolution();
@@ -197,7 +197,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setPropertyUnexplored() throws Exception {
 		try {
-			this.setValue(ExtendedGraphMLWriter.V_VALUE_DEFAULT);
+			this.setValue(GraphWriter.V_VALUE_DEFAULT);
 			this.setVisited(false);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
@@ -254,7 +254,7 @@ public class VertexStateHandler extends VertexLayout implements
 	 * 
 	 * @throws Exception
 	 */
-	void setPropertySolution() throws Exception {
+	void setPropertySolutionMember() throws Exception {
 		try {
 			this.setVisited(true);
 			this.setFont(FontPalette.normal);

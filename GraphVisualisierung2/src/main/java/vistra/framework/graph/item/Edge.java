@@ -2,7 +2,7 @@ package vistra.framework.graph.item;
 
 import java.util.Observable;
 
-import vistra.framework.graph.ml.ExtendedGraphMLWriter;
+import vistra.framework.graph.ml.GraphWriter;
 
 /**
  * An edge.
@@ -21,7 +21,7 @@ class Edge extends Observable implements IEdge {
 	 * Main constructor.
 	 */
 	Edge() {
-		this.weight = ExtendedGraphMLWriter.E_WEIGHT_DEFAULT;
+		this.weight = GraphWriter.E_WEIGHT_DEFAULT;
 	}
 
 	/**

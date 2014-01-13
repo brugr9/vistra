@@ -39,14 +39,6 @@ public class EdgeDialog extends JDialog {
 	 */
 	private final JPanel content;
 	/**
-	 * A field for a label: name.
-	 */
-	private JLabel nameLbl;
-	/**
-	 * A field for a text field: name.
-	 */
-	private JTextField name;
-	/**
 	 * A field for a label: weight.
 	 */
 	private JLabel weightLbl;
@@ -77,10 +69,6 @@ public class EdgeDialog extends JDialog {
 		this.setTitle(b.getString("edge.label"));
 
 		/* content */
-		// name
-		this.nameLbl = new JLabel(b.getString("name.label"));
-		this.name = new JTextField("name");
-		this.name.setColumns(10);
 		// weigth
 		this.weightLbl = new JLabel(b.getString("weight.label"));
 		this.weight = new JTextField("weight");
@@ -89,8 +77,6 @@ public class EdgeDialog extends JDialog {
 		this.content = new JPanel();
 		this.content.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.content.setLayout(new GridLayout(2, 2, 0, 0));
-		this.content.add(this.nameLbl);
-		this.content.add(this.name);
 		this.content.add(this.weightLbl);
 		this.content.add(this.weight);
 		this.setText(edge, viewer);
@@ -148,7 +134,6 @@ public class EdgeDialog extends JDialog {
 	 */
 	private void updateText(final IEdgeLayout edge,
 			final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
-		edge.setId(this.name.getText().trim());
 		edge.setWeight(Convert.toInteger(this.weight.getText()));
 		viewer.repaint();
 		this.dispose();
@@ -160,10 +145,7 @@ public class EdgeDialog extends JDialog {
 	 */
 	private void setText(IEdgeLayout edge,
 			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
-		this.name.setText(edge.getId());
 		this.weight.setText(String.valueOf(edge.getWeight()));
-		this.name.setInputVerifier(new ItemIdVerifier(this.name.getText()
-				.trim(), edge, viewer));
 		this.weight.setInputVerifier(new EdgeWeightVerifier(this.weight
 				.getText().trim()));
 	}

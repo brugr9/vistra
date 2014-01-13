@@ -2,7 +2,7 @@ package vistra.framework.graph.item;
 
 import java.util.Observable;
 
-import vistra.framework.graph.ml.ExtendedGraphMLWriter;
+import vistra.framework.graph.ml.GraphWriter;
 import vistra.framework.util.palette.SigmaPalette;
 
 /**
@@ -38,10 +38,10 @@ class Vertex extends Observable implements IVertex {
 	 */
 	Vertex() {
 		super();
-		this.start = ExtendedGraphMLWriter.V_START_DEFAULT;
-		this.end = ExtendedGraphMLWriter.V_END_DEFAULT;
+		this.start = GraphWriter.V_START_DEFAULT;
+		this.end = GraphWriter.V_END_DEFAULT;
 		this.visited = false;
-		this.value = ExtendedGraphMLWriter.V_VALUE_DEFAULT;
+		this.value = GraphWriter.V_VALUE_DEFAULT;
 	}
 
 	/**

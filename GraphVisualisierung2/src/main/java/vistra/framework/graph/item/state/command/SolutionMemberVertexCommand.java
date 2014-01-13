@@ -27,7 +27,7 @@ public class SolutionMemberVertexCommand extends AbstractItemStateCommand implem
 	 */
 	@Override
 	public void execute() throws Exception {
-		((VertexStateHandler) super.itemStateHandler).handleSolution();
+		((VertexStateHandler) super.itemStateHandler).handleSolutionMember();
 	}
 
 }

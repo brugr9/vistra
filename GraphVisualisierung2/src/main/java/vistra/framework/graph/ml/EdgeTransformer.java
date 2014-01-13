@@ -8,13 +8,12 @@ import vistra.framework.util.Convert;
 import edu.uci.ics.jung.io.graphml.EdgeMetadata;
 
 /**
- * An edge metadata transformer for reading an extended GraphML file.
+ * An edge transformer for reading an extended GraphML file.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeMetadataTransformer implements
-		Transformer<EdgeMetadata, IEdgeLayout> {
+public class EdgeTransformer implements Transformer<EdgeMetadata, IEdgeLayout> {
 
 	/**
 	 * {@inheritDoc}
@@ -24,7 +23,7 @@ public class EdgeMetadataTransformer implements
 		IEdgeLayout layout = EdgeFactory.createEdge();
 		layout.setId(meta.getId());
 		layout.setWeight(Convert.toInteger(meta
-				.getProperty(ExtendedGraphMLWriter.E_WEIGHT)));
+				.getProperty(GraphWriter.E_WEIGHT)));
 		return layout;
 	}
 

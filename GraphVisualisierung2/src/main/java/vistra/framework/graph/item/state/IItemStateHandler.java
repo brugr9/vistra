@@ -33,7 +33,7 @@ public interface IItemStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void handleSolution() throws Exception;
+	void handleSolutionMember() throws Exception;
 
 	/**
 	 * Handles the previous state: removes the last state from the cellar and

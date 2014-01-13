@@ -13,15 +13,14 @@ import vistra.framework.graph.ml.transformer.VertexValue;
 import edu.uci.ics.jung.io.GraphMLWriter;
 
 /**
- * An extended GraphMLWriter for writing an extended graph to a GraphML file.
+ * A GraphMLWriter for writing an extended graph to a GraphML file.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class ExtendedGraphMLWriter extends
+public final class GraphWriter extends
 		GraphMLWriter<IVertexLayout, IEdgeLayout> {
 
-	// TODO extract
 	// geometry: x, y
 	public final static String V_LOC_X = "coord.x";
 	public final static String V_LOC_Y = "coord.y";
@@ -51,42 +50,34 @@ public final class ExtendedGraphMLWriter extends
 	/**
 	 * Main constructor.
 	 */
-	public ExtendedGraphMLWriter() {
+	public GraphWriter() {
 		// vertex: id
 		this.setVertexIDs(new VertexID());
 		// vertex: x
-		this.addVertexData(ExtendedGraphMLWriter.V_LOC_X,
-				ExtendedGraphMLWriter.V_LOC_X_COMMENT,
-				Double.toString(ExtendedGraphMLWriter.V_LOC_X_DEFAULT),
+		this.addVertexData(GraphWriter.V_LOC_X, GraphWriter.V_LOC_X_COMMENT,
+				Double.toString(GraphWriter.V_LOC_X_DEFAULT),
 				new VertexCoordX());
 		// vertex: y
-		this.addVertexData(ExtendedGraphMLWriter.V_LOC_Y, V_LOC_Y_COMMENT,
-				Double.toString(ExtendedGraphMLWriter.V_LOC_Y_DEFAULT),
+		this.addVertexData(GraphWriter.V_LOC_Y, V_LOC_Y_COMMENT,
+				Double.toString(GraphWriter.V_LOC_Y_DEFAULT),
 				new VertexCoordY());
 		// vertex: start
-		this.addVertexData(ExtendedGraphMLWriter.V_START,
-				ExtendedGraphMLWriter.V_START_COMMENT,
-				Boolean.toString(ExtendedGraphMLWriter.V_START_DEFAULT),
+		this.addVertexData(GraphWriter.V_START, GraphWriter.V_START_COMMENT,
+				Boolean.toString(GraphWriter.V_START_DEFAULT),
 				new VertexStart());
 		// vertex: end
-		this.addVertexData(ExtendedGraphMLWriter.V_END,
-				ExtendedGraphMLWriter.V_END_COMMENT,
-				Boolean.toString(ExtendedGraphMLWriter.V_END_DEFAULT),
-				new VertexEnd());
+		this.addVertexData(GraphWriter.V_END, GraphWriter.V_END_COMMENT,
+				Boolean.toString(GraphWriter.V_END_DEFAULT), new VertexEnd());
 		// vertex: value
-		this.addVertexData(ExtendedGraphMLWriter.V_VALUE,
-				ExtendedGraphMLWriter.V_VALUE_COMMENT,
-				ExtendedGraphMLWriter.V_VALUE_DEFAULT, new VertexValue());
+		this.addVertexData(GraphWriter.V_VALUE, GraphWriter.V_VALUE_COMMENT,
+				GraphWriter.V_VALUE_DEFAULT, new VertexValue());
 		// edge: name
-		this.addEdgeData(ExtendedGraphMLWriter.E_NAME,
-				ExtendedGraphMLWriter.E_NAME_COMMENT,
-				ExtendedGraphMLWriter.E_NAME_DEFAULT, new EdgeId());
+		this.addEdgeData(GraphWriter.E_NAME, GraphWriter.E_NAME_COMMENT,
+				GraphWriter.E_NAME_DEFAULT, new EdgeId());
 		// edge: weight
-		this.addEdgeData(ExtendedGraphMLWriter.E_WEIGHT,
-				ExtendedGraphMLWriter.E_WEIGHT_COMMENT,
-				Integer.toString(ExtendedGraphMLWriter.E_WEIGHT_DEFAULT),
+		this.addEdgeData(GraphWriter.E_WEIGHT, GraphWriter.E_WEIGHT_COMMENT,
+				Integer.toString(GraphWriter.E_WEIGHT_DEFAULT),
 				new EdgeWeight());
-
 	}
 
 }

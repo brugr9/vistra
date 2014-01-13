@@ -8,12 +8,12 @@ import vistra.framework.util.Convert;
 import edu.uci.ics.jung.io.graphml.NodeMetadata;
 
 /**
- * A vertex metadata transformer for reading an extended GraphML file.
+ * A vertex transformer for reading an extended GraphML file.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexMetadataTransformer implements
+public class VertexTransformer implements
 		Transformer<NodeMetadata, IVertexLayout> {
 
 	/**
@@ -24,12 +24,12 @@ public class VertexMetadataTransformer implements
 		IVertexLayout layout = VertexFactory.createVertex();
 		layout.setId(meta.getId());
 		layout.setLocation(Convert.toPoint2D(
-				meta.getProperty(ExtendedGraphMLWriter.V_LOC_X),
-				meta.getProperty(ExtendedGraphMLWriter.V_LOC_Y)));
+				meta.getProperty(GraphWriter.V_LOC_X),
+				meta.getProperty(GraphWriter.V_LOC_Y)));
 		layout.setStart(Boolean.parseBoolean(meta
-				.getProperty(ExtendedGraphMLWriter.V_START)));
+				.getProperty(GraphWriter.V_START)));
 		layout.setEnd(Boolean.parseBoolean(meta
-				.getProperty(ExtendedGraphMLWriter.V_END)));
+				.getProperty(GraphWriter.V_END)));
 		return layout;
 	}
 

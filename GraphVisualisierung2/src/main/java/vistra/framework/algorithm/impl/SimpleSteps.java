@@ -3,6 +3,7 @@ package vistra.framework.algorithm.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.datastructures.Entry;
 import net.datastructures.HashTableMap;
 import net.datastructures.Map;
 import vistra.framework.algorithm.AlgorithmException;
@@ -42,10 +43,6 @@ public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 	public void traverse(ITraversableGraph g) throws AlgorithmException {
 		try {
 
-			// graph.stepBy(new DiscardedEdgeStep(g.getEdges()));
-			// graph.stepBy(new InitialisedVertexStep(g.getVertices()));
-			// graph.stepBy(new UpdatedVertexStep(g.getVertices(), "5"));
-
 			Map<IVertex, IEdge> items = new HashTableMap<IVertex, IEdge>();
 			List<IVertex> v = new ArrayList<IVertex>(g.getVertices());
 			List<IEdge> e = new ArrayList<IEdge>(g.getEdges());
@@ -57,7 +54,9 @@ public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 			/* value */
 			g.stepUpdatedVertex(v.get(1), 5);
 			/* visit */
-			g.stepVisit(items.entrySet());
+			for (Entry<IVertex, IEdge> entry : items.entrySet()) {
+				g.stepVisit(entry.getKey(), entry.getValue());
+			}
 			/* edge */
 			g.stepBackEdge(e.get(1));
 			g.stepForwardEdge(e.get(2));
@@ -65,6 +64,7 @@ public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 			g.stepDiscardedEdge(e.get(4));
 			/* solution */
 			g.stepSolutionMember(v.get(4), e.get(0));
+			
 		} catch (Exception e) {
 			throw new AlgorithmException(e);
 		}

@@ -706,19 +706,6 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * 
 	 */
 	@Override
-	public void stepBy(IStep step) throws Exception {
-		try {
-			this.add(step);
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 */
-	@Override
 	public void stepBackEdge(IEdge e) throws Exception {
 		try {
 			IStep step = new BackEdgeStep(e);
@@ -878,21 +865,6 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	public void stepVisit(IVertex v, IEdge e) throws Exception {
 		try {
 			IStep step = new VisitStep(v, e);
-			this.add(step);
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 */
-	@Override
-	public void stepVisit(Iterable<Entry<IVertex, IEdge>> items)
-			throws Exception {
-		try {
-			IStep step = new VisitStep(items);
 			this.add(step);
 		} catch (Exception ex) {
 			throw ex;

@@ -122,7 +122,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleSolution() throws Exception {
+	public void handleSolutionMember() throws Exception {
 		try {
 			this.state.top().exit();
 			this.state.top().handleSolution();
@@ -289,7 +289,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void setPropertySolution() throws Exception {
+	void setPropertySolutionMember() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.green);

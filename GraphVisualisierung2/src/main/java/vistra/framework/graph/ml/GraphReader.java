@@ -9,38 +9,38 @@ import vistra.framework.graph.item.IVertexLayout;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 
 /**
- * An extended GraphMLWriter for reading an extended graph from a GraphML file.
+ * A GraphMLReader for reading in an extended graph from a GraphML file.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public final class ExtendedGraphMLReader {
+public final class GraphReader {
 
 	/**
-	 * A field for a graph metadata transformer.
+	 * A field for a graph transformer.
 	 */
-	private final GraphMetadataTransformer graphTransformer;
+	private final GraphTransformer graphTransformer;
 	/**
-	 * A field for a vertex metadata transformer.
+	 * A field for a vertex transformer.
 	 */
-	private final VertexMetadataTransformer vertexTransformer;
+	private final VertexTransformer vertexTransformer;
 	/**
-	 * A field for a edge metadata transformer.
+	 * A field for a edge transformer.
 	 */
-	private final EdgeMetadataTransformer edgeTransformer;
+	private final EdgeTransformer edgeTransformer;
 	/**
-	 * A field for a hyper edge metadata transformer.
+	 * A field for a hyper-edge transformer.
 	 */
-	private final HyperEdgeMetadataTransformer hyperEdgeTransformer;
+	private final HyperEdgeTransformer hyperEdgeTransformer;
 
 	/**
 	 * Main constructor.
 	 */
-	public ExtendedGraphMLReader() {
-		this.graphTransformer = new GraphMetadataTransformer();
-		this.vertexTransformer = new VertexMetadataTransformer();
-		this.edgeTransformer = new EdgeMetadataTransformer();
-		this.hyperEdgeTransformer = new HyperEdgeMetadataTransformer();
+	public GraphReader() {
+		this.graphTransformer = new GraphTransformer();
+		this.vertexTransformer = new VertexTransformer();
+		this.edgeTransformer = new EdgeTransformer();
+		this.hyperEdgeTransformer = new HyperEdgeTransformer();
 	}
 
 	/**
