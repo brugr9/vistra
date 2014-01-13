@@ -3,6 +3,7 @@ package vistra.framework.graph.item;
 import java.util.Observable;
 
 import vistra.framework.graph.ml.ExtendedGraphMLWriter;
+import vistra.framework.util.palette.SigmaPalette;
 
 /**
  * A vertex.
@@ -23,6 +24,11 @@ class Vertex extends Observable implements IVertex {
 	boolean end;
 
 	/**
+	 * A field for a visited value.
+	 */
+	boolean visited;
+
+	/**
 	 * A field for a value.
 	 */
 	String value;
@@ -34,6 +40,7 @@ class Vertex extends Observable implements IVertex {
 		super();
 		this.start = ExtendedGraphMLWriter.V_START_DEFAULT;
 		this.end = ExtendedGraphMLWriter.V_END_DEFAULT;
+		this.visited = false;
 		this.value = ExtendedGraphMLWriter.V_VALUE_DEFAULT;
 	}
 
@@ -57,8 +64,29 @@ class Vertex extends Observable implements IVertex {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getValue() {
-		return this.value;
+	public boolean isInitialized() {
+		return this.value == SigmaPalette.infinity;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isVisited() {
+		return this.visited;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer getDistance() {
+		if (this.value == SigmaPalette.infinity)
+			return Integer.MAX_VALUE;
+		else if (this.value == "")
+			return null;
+		else
+			return Integer.parseInt(this.value);
 	}
 
 }

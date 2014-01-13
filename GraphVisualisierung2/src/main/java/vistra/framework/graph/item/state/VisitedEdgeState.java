@@ -26,7 +26,7 @@ class VisitedEdgeState extends AbstractEdgeState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setVisited();
+			super.stateHandler.setPropertyVisited();
 		} catch (Exception e) {
 			throw e;
 		}

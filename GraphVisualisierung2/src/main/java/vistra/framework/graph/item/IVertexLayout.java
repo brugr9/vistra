@@ -44,6 +44,14 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	void setEnd(boolean end);
 
 	/**
+	 * Sets the visited.
+	 * 
+	 * @param visited
+	 *            the visited to set
+	 */
+	void setVisited(boolean visited);
+
+	/**
 	 * Sets a value.
 	 * 
 	 * @param value
@@ -64,5 +72,15 @@ public interface IVertexLayout extends IVertex, IItemLayout {
 	 * @return the colour
 	 */
 	Color getFillColor();
+
+	/**
+	 * Returns the value. If the vertex is initialized, the sign for infinity
+	 * will be returned ( {@code SigmaPalette.infinity}). If the vertex is
+	 * whether initialized nor holding a value, an empty string will be
+	 * returned.
+	 * 
+	 * @return the value
+	 */
+	String getValue();
 
 }

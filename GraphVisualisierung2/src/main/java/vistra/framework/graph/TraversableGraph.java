@@ -4,12 +4,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.datastructures.Entry;
+
 import vistra.framework.ITraversal;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.state.IVertexStateHandler;
+import vistra.framework.step.BackEdgeStep;
+import vistra.framework.step.CrossEdgeStep;
+import vistra.framework.step.DiscardedEdgeStep;
+import vistra.framework.step.ForwardEdgeStep;
 import vistra.framework.step.IStep;
+import vistra.framework.step.InitialisedVertexStep;
+import vistra.framework.step.SolutionMemberStep;
+import vistra.framework.step.UpdatedVertexStep;
+import vistra.framework.step.VisitStep;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.GraphDecorator;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -21,9 +31,9 @@ import edu.uci.ics.jung.graph.util.Pair;
  * <ul>
  * <li>Modifiers are not supported anymore: vertices and edges can neither been
  * added nor removed.
- * <li>In addition, this graph serves with a 'step'-method which an
+ * <li>In addition, this graph serves with 'step'-methods which an
  * {@code IAlgorithm}-developer can use for traversing over the graph and
- * generating a {@code Traversal}.
+ * generating steps of a {@code Traversal}.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -677,17 +687,246 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Executes a step as given and adds it to the list of steps.
+	 * 
+	 * @param step
+	 *            the step
+	 * @throws Exception
 	 */
-	@Override
-	public void stepBy(IStep s) throws Exception {
+	private void add(IStep step) throws Exception {
 		try {
-			s.execute();
-			this.steps.add(s);
-		} catch (Exception e) {
-			throw e;
+			step.execute();
+			this.steps.add(step);
+		} catch (Exception ex) {
+			throw ex;
 		}
 	}
-	// TODO method per step constructor
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepBy(IStep step) throws Exception {
+		try {
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepBackEdge(IEdge e) throws Exception {
+		try {
+			IStep step = new BackEdgeStep(e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepBackEdge(Iterable<IEdge> e) throws Exception {
+		try {
+			IStep step = new BackEdgeStep(e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepCrossEdge(IEdge e) throws Exception {
+		try {
+			IStep step = new CrossEdgeStep(e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepCrossEdge(Iterable<IEdge> e) throws Exception {
+		try {
+			IStep step = new CrossEdgeStep(e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepForwardEdge(IEdge e) throws Exception {
+		try {
+			IStep step = new ForwardEdgeStep(e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepForwardEdge(Iterable<IEdge> e) throws Exception {
+		try {
+			IStep step = new ForwardEdgeStep(e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepDiscardedEdge(IEdge e) throws Exception {
+		try {
+			IStep step = new DiscardedEdgeStep(e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepDiscardedEdge(Iterable<IEdge> e) throws Exception {
+		try {
+			IStep step = new DiscardedEdgeStep(e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepInitializedVertex(IVertex s, Iterable<IVertex> i)
+			throws Exception {
+		try {
+			IStep step = new InitialisedVertexStep(s, i);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepUpdatedVertex(IVertex u, Integer value) throws Exception {
+		try {
+			IStep step = new UpdatedVertexStep(u, value);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepUpdatedVertex(Iterable<Entry<IVertex, Integer>> u)
+			throws Exception {
+		try {
+			IStep step = new UpdatedVertexStep(u);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepVisit(IVertex v, IEdge e) throws Exception {
+		try {
+			IStep step = new VisitStep(v, e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepVisit(Iterable<Entry<IVertex, IEdge>> items)
+			throws Exception {
+		try {
+			IStep step = new VisitStep(items);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepSolutionMember(IVertex v, IEdge e) throws Exception {
+		try {
+			IStep step = new SolutionMemberStep(v, e);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepSolutionMember(Iterable<Entry<IVertex, IEdge>> items)
+			throws Exception {
+		try {
+			IStep step = new SolutionMemberStep(items);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
 
 }

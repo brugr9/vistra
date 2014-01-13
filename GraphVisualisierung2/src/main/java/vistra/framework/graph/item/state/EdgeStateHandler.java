@@ -145,7 +145,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * Sets the state and does the entry.
+	 * Pushes the state and does the top entry.
 	 * 
 	 * @param state
 	 *            the state to set
@@ -161,7 +161,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	}
 
 	/**
-	 * Sets the previous state and does the entry.
+	 * Pops the previous state and does the top entry.
 	 * 
 	 * @throws Exception
 	 */
@@ -179,7 +179,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void setUnexplored() throws Exception {
+	void setPropertyUnexplored() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
@@ -198,7 +198,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void setVisited() throws Exception {
+	void setPropertyVisited() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.red);
@@ -217,7 +217,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void setBack() throws Exception {
+	void setPropertyBack() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
@@ -236,7 +236,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void setForward() throws Exception {
+	void setPropertyForward() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
@@ -255,7 +255,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void setCross() throws Exception {
+	void setPropertyCross() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
@@ -272,7 +272,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void setDiscarded() throws Exception {
+	void setPropertyDiscarded() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
@@ -289,7 +289,7 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 * 
 	 * @throws Exception
 	 */
-	void setSolution() throws Exception {
+	void setPropertySolution() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.green);

@@ -36,7 +36,7 @@ public class DLS extends AbstractAlgorithm implements IAlgorithm {
 	@Override
 	public void traverse(ITraversableGraph g) throws AlgorithmException {
 		try {
-			// TODO
+			// TODO DLS
 		} catch (Exception e) {
 			throw new AlgorithmException(e);
 		}

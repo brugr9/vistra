@@ -58,6 +58,15 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void setVisited(boolean visited) {
+		this.visited = visited;
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void setValue(String value) {
 		this.value = value;
 		this.setChanged();
@@ -177,4 +186,11 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 		return this.layout.getFontColor();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getValue() {
+		return this.value;
+	}
 }

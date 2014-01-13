@@ -26,7 +26,7 @@ class InitialisedVertexState extends AbstractVertexState implements IState {
 	@Override
 	protected void doEntry() throws Exception {
 		try {
-			super.stateHandler.setInitialised();
+			super.stateHandler.setPropertyInitialised();
 		} catch (Exception e) {
 			throw e;
 		}

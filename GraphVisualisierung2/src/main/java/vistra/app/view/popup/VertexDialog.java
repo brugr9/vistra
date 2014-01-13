@@ -26,6 +26,7 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
  * A vertex property dialog.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
+ * @deprecated
  * 
  */
 public class VertexDialog extends JDialog {

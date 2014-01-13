@@ -1,7 +1,6 @@
 package vistra.framework.step;
 
 import net.datastructures.Entry;
-import net.datastructures.Map;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertex;
@@ -20,12 +19,12 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 	/**
 	 * Single pair of items constructor.
 	 * 
-	 * @param edge
-	 *            the edge to discover
 	 * @param vertex
-	 *            the vertex to visit
+	 *            a vertex
+	 * @param edge
+	 *            an edge
 	 */
-	public SolutionMemberStep(IEdge edge, IVertex vertex) {
+	public SolutionMemberStep(IVertex vertex, IEdge edge) {
 		super();
 		try {
 			//
@@ -52,17 +51,16 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 	 * Multi item constructor.
 	 * 
 	 * @param items
-	 *            a map of edges to discover and vertices to visit
+	 *            the edges and the vertices
 	 */
-	public SolutionMemberStep(Map<IEdge, IVertex> items) {
+	public SolutionMemberStep(Iterable<Entry<IVertex, IEdge>> items) {
 		super();
 		try {
 			IEdge edge;
 			IVertex vertex;
-			Iterable<Entry<IEdge, IVertex>> entries = items.entrySet();
-			for (Entry<IEdge, IVertex> entry : entries) {
-				edge = entry.getKey();
-				vertex = entry.getValue();
+			for (Entry<IVertex, IEdge> entry : items) {
+				vertex = entry.getKey();
+				edge = entry.getValue();
 				//
 				IItemStateCommand edgeCommand = new SolutionMemberEdgeCommand(
 						edge);

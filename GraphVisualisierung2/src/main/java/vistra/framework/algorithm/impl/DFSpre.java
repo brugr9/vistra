@@ -10,8 +10,6 @@ import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.step.BackEdgeStep;
-import vistra.framework.step.VisitStep;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -56,7 +54,7 @@ public class DFSpre extends AbstractAlgorithm implements IAlgorithm {
 				tempV = S.pop();
 				if (g.isSuccessor(tempV, v)) {
 					v = tempV;
-					g.stepBy(new VisitStep(e, v));
+					g.stepVisit(v, e);
 				}
 				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
 															// tempV
@@ -66,7 +64,7 @@ public class DFSpre extends AbstractAlgorithm implements IAlgorithm {
 						V.add(useV);
 						S.push(useV);
 					} else
-						g.stepBy(new BackEdgeStep(outE));
+						g.stepBackEdge(outE);
 				}
 			}
 		} catch (Exception e) {

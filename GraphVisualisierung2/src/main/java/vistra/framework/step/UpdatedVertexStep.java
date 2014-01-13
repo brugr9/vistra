@@ -1,7 +1,6 @@
 package vistra.framework.step;
 
 import net.datastructures.Entry;
-import net.datastructures.Map;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
@@ -9,6 +8,8 @@ import vistra.framework.graph.item.state.command.UpdatedVertexCommand;
 
 /**
  * A step: updated vertex.
+ * 
+ * The integer values get parsed to string.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -23,10 +24,11 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 	 * @param value
 	 *            the values
 	 */
-	public UpdatedVertexStep(IVertex vertex, String value) {
+	public UpdatedVertexStep(IVertex vertex, Integer value) {
 		super();
 		try {
-			IItemStateCommand command = new UpdatedVertexCommand(vertex, value);
+			IItemStateCommand command = new UpdatedVertexCommand(vertex,
+					value.toString());
 			this.commandHandler.addCommand(command);
 			//
 			this.description.append("Vertex "
@@ -44,13 +46,14 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 	 *            the vertices
 	 * @param value
 	 *            a value
+	 * @deprecated
 	 */
-	public UpdatedVertexStep(Iterable<IVertex> vertices, String value) {
+	public UpdatedVertexStep(Iterable<IVertex> vertices, Integer value) {
 		super();
 		try {
 			for (IVertex vertex : vertices) {
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
-						value);
+						value.toString());
 				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Vertex "
@@ -66,21 +69,20 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 	/**
 	 * Multi item / multi value constructor.
 	 * 
-	 * @param items
-	 *            a map of vertices and values
+	 * @param u
+	 *            the vertices to update with a value as given
 	 */
-	public UpdatedVertexStep(Map<IVertex, String> items) {
+	public UpdatedVertexStep(Iterable<Entry<IVertex, Integer>> u) {
 		super();
 		try {
 			IVertex vertex;
-			String value;
-			Iterable<Entry<IVertex, String>> entries = items.entrySet();
-			for (Entry<IVertex, String> entry : entries) {
+			Integer value;
+			for (Entry<IVertex, Integer> entry : u) {
 				vertex = entry.getKey();
 				value = entry.getValue();
 				//
 				IItemStateCommand command = new UpdatedVertexCommand(vertex,
-						value);
+						value.toString());
 				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Vertex "

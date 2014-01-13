@@ -2,10 +2,14 @@ package vistra.framework.graph;
 
 import java.util.Collection;
 
+import net.datastructures.Entry;
+import net.datastructures.Map;
+
 import vistra.framework.ITraversal;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.step.IStep;
+import vistra.framework.util.palette.SigmaPalette;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -120,7 +124,156 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @param s
 	 *            the step
 	 * @throws Exception
+	 * @deprecated
 	 */
 	void stepBy(IStep s) throws Exception;
+
+	/**
+	 * A step method: Back edge.
+	 * 
+	 * @param e
+	 *            the edge
+	 * @throws Exception
+	 */
+	void stepBackEdge(IEdge e) throws Exception;
+
+	/**
+	 * A step method: Back edge.
+	 * 
+	 * @param e
+	 *            the edges
+	 * @throws Exception
+	 */
+	void stepBackEdge(Iterable<IEdge> e) throws Exception;
+
+	/**
+	 * A step method: Cross edge.
+	 * 
+	 * @param e
+	 *            the edge
+	 * @throws Exception
+	 */
+	void stepCrossEdge(IEdge e) throws Exception;
+
+	/**
+	 * A step method: Cack edge.
+	 * 
+	 * @param e
+	 *            the edges
+	 * @throws Exception
+	 */
+	void stepCrossEdge(Iterable<IEdge> e) throws Exception;
+
+	/**
+	 * A step method: Forward edge.
+	 * 
+	 * @param e
+	 *            the edge
+	 * @throws Exception
+	 */
+	void stepForwardEdge(IEdge e) throws Exception;
+
+	/**
+	 * A step method: Forward edge.
+	 * 
+	 * @param e
+	 *            the edges
+	 * @throws Exception
+	 */
+	void stepForwardEdge(Iterable<IEdge> e) throws Exception;
+
+	/**
+	 * A step method: Discarded edge.
+	 * 
+	 * @param e
+	 *            the edge
+	 * @throws Exception
+	 */
+	void stepDiscardedEdge(IEdge e) throws Exception;
+
+	/**
+	 * A step method: Discarded edge.
+	 * 
+	 * @param e
+	 *            the edges
+	 * @throws Exception
+	 */
+	void stepDiscardedEdge(Iterable<IEdge> e) throws Exception;
+
+	/**
+	 * A step method: Initialized vertex.
+	 * 
+	 * The start vertex value will be set as {@code 0}, the other vertices value
+	 * as {@code SigmaPalette.infinity}.
+	 * 
+	 * @param s
+	 *            the start vertex
+	 * @param i
+	 *            the other vertices
+	 * @throws Exception
+	 */
+	void stepInitializedVertex(IVertex s, Iterable<IVertex> i) throws Exception;
+
+	/**
+	 * A step method: Updated vertex.
+	 * 
+	 * @param u
+	 *            the vertex to update
+	 * @param value
+	 *            the value to set
+	 * @throws Exception
+	 */
+	void stepUpdatedVertex(IVertex u, Integer value) throws Exception;
+
+	/**
+	 * A step method: Updated vertex.
+	 * 
+	 * @param u
+	 *            the vertices to update with a value as given
+	 * @throws Exception
+	 */
+	void stepUpdatedVertex(Iterable<Entry<IVertex, Integer>> u)
+			throws Exception;
+
+	/**
+	 * A step method: Visit vertex over edge.
+	 * 
+	 * @param v
+	 *            the vertex to visit
+	 * @param e
+	 *            the edge to discover
+	 * @throws Exception
+	 */
+	void stepVisit(IVertex v, IEdge e) throws Exception;
+
+	/**
+	 * A step method: Visit vertex over edge.
+	 * 
+	 * @param items
+	 *            the edges to discover and the vertices to visit
+	 * @throws Exception
+	 */
+	void stepVisit(Iterable<Entry<IVertex, IEdge>> items) throws Exception;
+
+	/**
+	 * A step method: Solution-member vertex over edge.
+	 * 
+	 * @param v
+	 *            a vertex
+	 * @param e
+	 *            an edge
+	 * @throws Exception
+	 */
+	void stepSolutionMember(IVertex v, IEdge e) throws Exception;
+
+	/**
+	 * A step method: Solution-member vertex over edge.
+	 * 
+	 * @param items
+	 *            the vertices and edges
+	 * @throws Exception
+	 */
+	void stepSolutionMember(Iterable<Entry<IVertex, IEdge>> items)
+			throws Exception;
 
 }

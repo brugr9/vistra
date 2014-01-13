@@ -1,13 +1,12 @@
 package vistra.framework.step;
 
 import net.datastructures.Entry;
-import net.datastructures.Map;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
-import vistra.framework.graph.item.state.command.VisitedEdgeCommand;
+import vistra.framework.graph.item.state.command.DiscoveryEdgeCommand;
 import vistra.framework.graph.item.state.command.VisitedVertexCommand;
 
 /**
@@ -21,15 +20,15 @@ public class VisitStep extends AbstractStep implements IStep {
 	/**
 	 * Single pair of items constructor, visit vertex via edge.
 	 * 
-	 * @param edge
-	 *            the edge to discover
 	 * @param vertex
 	 *            the vertex to visit
+	 * @param edge
+	 *            the edge to discover
 	 */
-	public VisitStep(IEdge edge, IVertex vertex) {
+	public VisitStep(IVertex vertex, IEdge edge) {
 		super();
 		try {
-			IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
+			IItemStateCommand edgeCommand = new DiscoveryEdgeCommand(edge);
 			IItemStateCommand vertexCommand = new VisitedVertexCommand(vertex);
 			this.commandHandler.addCommand(edgeCommand);
 			this.commandHandler.addCommand(vertexCommand);
@@ -50,19 +49,18 @@ public class VisitStep extends AbstractStep implements IStep {
 	 * Multi item constructor, visit vertex via edge.
 	 * 
 	 * @param items
-	 *            a map of edges and vertices
+	 *            the edges and vertices to visit
 	 */
-	public VisitStep(Map<IEdge, IVertex> items) {
+	public VisitStep(Iterable<Entry<IVertex, IEdge>> items) {
 		super();
 		try {
 			IEdge edge;
 			IVertex vertex;
-			Iterable<Entry<IEdge, IVertex>> entries = items.entrySet();
-			for (Entry<IEdge, IVertex> entry : entries) {
-				edge = entry.getKey();
-				vertex = entry.getValue();
+			for (Entry<IVertex, IEdge> entry : items) {
+				vertex = entry.getKey();
+				edge = entry.getValue();
 				//
-				IItemStateCommand edgeCommand = new VisitedEdgeCommand(edge);
+				IItemStateCommand edgeCommand = new DiscoveryEdgeCommand(edge);
 				IItemStateCommand vertexCommand = new VisitedVertexCommand(
 						vertex);
 				this.commandHandler.addCommand(edgeCommand);

@@ -29,10 +29,6 @@ public class VertexStateHandler extends VertexLayout implements
 	 * A field for a stack of states.
 	 */
 	private Stack<AbstractVertexState> state;
-	/**
-	 * A field for a visited value.
-	 */
-	private boolean isVisited;
 
 	/**
 	 * Main constructor.
@@ -40,7 +36,6 @@ public class VertexStateHandler extends VertexLayout implements
 	public VertexStateHandler() {
 		super();
 		this.state = new NodeStack<AbstractVertexState>();
-		this.isVisited = false;
 		try {
 			this.setState(new UnexploredVertexState(this));
 		} catch (Exception e) {
@@ -163,9 +158,9 @@ public class VertexStateHandler extends VertexLayout implements
 	 * 
 	 * @throws Exception
 	 */
-	void setInitialised() throws Exception {
+	void setPropertyInitialised() throws Exception {
 		try {
-			this.setUpdated(SigmaPalette.infinity);
+			this.setPropertyUpdated(SigmaPalette.infinity);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -178,10 +173,10 @@ public class VertexStateHandler extends VertexLayout implements
 	 *            the value to set
 	 * @throws Exception
 	 */
-	void setUpdated(String value) throws Exception {
+	void setPropertyUpdated(String value) throws Exception {
 		try {
 			this.setValue(value);
-			this.isVisited = false;
+			this.setVisited(false);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setStroke(StrokePalette.unexplored);
@@ -200,10 +195,10 @@ public class VertexStateHandler extends VertexLayout implements
 	 * 
 	 * @throws Exception
 	 */
-	void setUnexplored() throws Exception {
+	void setPropertyUnexplored() throws Exception {
 		try {
 			this.setValue(ExtendedGraphMLWriter.V_VALUE_DEFAULT);
-			this.isVisited = false;
+			this.setVisited(false);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setStroke(StrokePalette.unexplored);
@@ -223,9 +218,9 @@ public class VertexStateHandler extends VertexLayout implements
 	 * 
 	 * @throws Exception
 	 */
-	void setFocusOn() throws Exception {
+	void setPropertyFocusOn() throws Exception {
 		try {
-			this.setVisited();
+			this.setPropertyVisited();
 			this.setFillColor(ColorPalette.citron);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -240,9 +235,9 @@ public class VertexStateHandler extends VertexLayout implements
 	 * 
 	 * @throws Exception
 	 */
-	void setVisited() throws Exception {
+	void setPropertyVisited() throws Exception {
 		try {
-			this.isVisited = true;
+			this.setVisited(true);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setStroke(StrokePalette.visited);
@@ -259,9 +254,9 @@ public class VertexStateHandler extends VertexLayout implements
 	 * 
 	 * @throws Exception
 	 */
-	void setSolution() throws Exception {
+	void setPropertySolution() throws Exception {
 		try {
-			this.isVisited = true;
+			this.setVisited(true);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.green);
 			this.setStroke(StrokePalette.visited);
@@ -271,16 +266,6 @@ public class VertexStateHandler extends VertexLayout implements
 		} catch (Exception e) {
 			throw e;
 		}
-	}
-
-	/**
-	 * Guard: Returns {@code true} if visited.
-	 * 
-	 * @return {@code true} if visited
-	 */
-	@Override
-	public boolean isVisited() {
-		return this.isVisited;
 	}
 
 }

@@ -1,7 +1,11 @@
 package vistra.framework.algorithm.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
+import net.datastructures.Entry;
 import net.datastructures.HashTableMap;
 import net.datastructures.Map;
 import vistra.framework.algorithm.AlgorithmException;
@@ -53,27 +57,25 @@ public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 			// graph.stepBy(new InitialisedVertexStep(g.getVertices()));
 			// graph.stepBy(new UpdatedVertexStep(g.getVertices(), "5"));
 
-			ArrayList<IVertex> vertices = new ArrayList<IVertex>(
-					g.getVertices());
-			ArrayList<IEdge> edges = new ArrayList<IEdge>(g.getEdges());
+			Map<IVertex, IEdge> items = new HashTableMap<IVertex, IEdge>();
+			List<IVertex> v = new ArrayList<IVertex>(g.getVertices());
+			List<IEdge> e = new ArrayList<IEdge>(g.getEdges());
+			for (int i = 0; i < v.size(); i++)
+				items.put(v.get(i), e.get(i));
 
-			/* vertex */
-			// init
-			g.stepBy(new InitialisedVertexStep(g.getVertices()));
-			// value
-			g.stepBy(new UpdatedVertexStep(g.getVertices(), "5"));
-			/* vertex/edge combined */
-
-			Map<IEdge, IVertex> map = new HashTableMap<IEdge, IVertex>();
-			for (int i = 0; i < vertices.size(); i++)
-				map.put(edges.get(i), vertices.get(i));
-			g.stepBy(new VisitStep(map));
-			g.stepBy(new SolutionMemberStep(edges.get(5), vertices.get(6)));
+			/* init */
+			g.stepInitializedVertex(v.get(0), g.getVertices());
+			/* value */
+			g.stepUpdatedVertex(v.get(1), 5);
+			/* visit */
+			g.stepVisit(items.entrySet());
 			/* edge */
-			g.stepBy(new BackEdgeStep(edges.get(1)));
-			g.stepBy(new ForwardEdgeStep(edges.get(2)));
-			g.stepBy(new CrossEdgeStep(edges.get(3)));
-			g.stepBy(new DiscardedEdgeStep(edges.get(4)));
+			g.stepBackEdge(e.get(1));
+			g.stepForwardEdge(e.get(2));
+			g.stepCrossEdge(e.get(3));
+			g.stepDiscardedEdge(e.get(4));
+			/* solution */
+			g.stepSolutionMember(v.get(4), e.get(0));
 		} catch (Exception e) {
 			throw new AlgorithmException(e);
 		}

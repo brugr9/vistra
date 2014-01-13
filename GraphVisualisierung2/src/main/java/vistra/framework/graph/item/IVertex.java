@@ -23,13 +23,29 @@ public interface IVertex extends IItem {
 	boolean isEnd();
 
 	/**
-	 * Returns the value. If the vertex is initialized, the sign for infinity
-	 * will be returned ( {@code SigmaPalette.infinity}). If the vertex is
-	 * whether initialized nor holding a value, an empty string will be
-	 * returned.
+	 * Returns the distance.
+	 * <ul>
+	 * <li>If the vertex is initialized (infinity), {@code Integer.MAX_VALUE}
+	 * will be returned.
+	 * <li>If the vertex is not yet initialized (value == ""), {@code null} will
+	 * be returned.
 	 * 
-	 * @return the value
+	 * @return the distance
 	 */
-	String getValue();
+	Integer getDistance();
+
+	/**
+	 * Returns {@code true} if initialized.
+	 * 
+	 * @return {@code true} if initialized
+	 */
+	boolean isInitialized();
+
+	/**
+	 * Returns {@code true} if visited.
+	 * 
+	 * @return {@code true} if visited
+	 */
+	public boolean isVisited();
 
 }

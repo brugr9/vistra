@@ -9,7 +9,7 @@ import vistra.framework.graph.item.state.EdgeStateHandler;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VisitedEdgeCommand extends AbstractItemStateCommand implements
+public class DiscoveryEdgeCommand extends AbstractItemStateCommand implements
 		IItemStateCommand {
 
 	/**
@@ -18,7 +18,7 @@ public class VisitedEdgeCommand extends AbstractItemStateCommand implements
 	 * @param edge
 	 *            an edge
 	 */
-	public VisitedEdgeCommand(IEdge edge) {
+	public DiscoveryEdgeCommand(IEdge edge) {
 		super((EdgeStateHandler) edge);
 	}
 

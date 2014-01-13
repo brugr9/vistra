@@ -1,5 +1,6 @@
 package vistra.framework.algorithm.impl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,8 +11,6 @@ import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.step.BackEdgeStep;
-import vistra.framework.step.VisitStep;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -47,7 +46,9 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	public void traverse(ITraversableGraph g) throws AlgorithmException {
 		try {
 			/* Input: A graph g and a root v of g */
-			IVertex v = g.getStart();
+			// TODO IVertex v = g.getStart();
+			IVertex v = new ArrayList<IVertex>(g.getVertices()).get(0);
+			// end Todo
 			Queue<IVertex> Q = new NodeQueue<IVertex>();
 			Set<IVertex> V = new HashSet<IVertex>();
 			Q.enqueue(v);
@@ -59,7 +60,7 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 				tempV = Q.dequeue();
 				if (g.isSuccessor(tempV, v)) {
 					v = tempV;
-					g.stepBy(new VisitStep(e, v));
+					g.stepVisit(v, e);
 				}
 				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
 															// tempV
@@ -69,11 +70,11 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 						V.add(useV);
 						Q.enqueue(useV);
 					} else
-						g.stepBy(new BackEdgeStep(outE));
+						g.stepBackEdge(outE);
 				}
 			}
-		} catch (Exception e) {
-			throw new AlgorithmException(e);
+		} catch (Exception ex) {
+			throw new AlgorithmException(ex);
 		}
 	}
 
