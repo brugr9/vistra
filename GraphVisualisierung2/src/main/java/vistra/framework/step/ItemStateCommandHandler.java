@@ -5,7 +5,6 @@ import java.util.List;
 
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 
-
 /**
  * An item-state-command handler (macro command). A {@code ICommandHandler}
  * specialized on {@code IItemStateCommand}s.
@@ -41,9 +40,8 @@ class ItemStateCommandHandler implements IItemStateCommandHandler {
 	 */
 	@Override
 	public void undo() throws Exception {
-		for (int i = this.commands.size() - 1; i >= 0; i--) {
-			this.commands.get(i).undo();
-		}
+		for (IItemStateCommand c : this.commands)
+			c.undo();
 	}
 
 	/**

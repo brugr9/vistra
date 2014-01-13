@@ -25,11 +25,11 @@ public class DiscardedEdgeStep extends AbstractStep implements IStep {
 			IItemStateCommand command = new DiscardedEdgeCommand(edge);
 			this.commandHandler.addCommand(command);
 			//
-			this.description.append("Edge ");
+			this.description.append("Edge");
 			if (((IEdgeLayout) edge).getId() != null)
 				if (((IEdgeLayout) edge).getId().length() != 0)
-					this.description.append(((IEdgeLayout) edge).getId() + " ");
-			this.description.append("discarded" + System.lineSeparator());
+					this.description.append(" " + ((IEdgeLayout) edge).getId());
+			this.description.append(" discarded" + System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,12 +48,12 @@ public class DiscardedEdgeStep extends AbstractStep implements IStep {
 				IItemStateCommand command = new DiscardedEdgeCommand(edge);
 				this.commandHandler.addCommand(command);
 				//
-				this.description.append("Edge ");
+				this.description.append("Edge");
 				if (((IEdgeLayout) edge).getId() != null)
 					if (((IEdgeLayout) edge).getId().length() != 0)
-						this.description.append(((IEdgeLayout) edge).getId()
-								+ " ");
-				this.description.append("discarded" + System.lineSeparator());
+						this.description.append(" "
+								+ ((IEdgeLayout) edge).getId());
+				this.description.append(" discarded" + System.lineSeparator());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

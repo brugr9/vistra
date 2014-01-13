@@ -3,13 +3,10 @@ package vistra.framework.graph;
 import java.util.Collection;
 
 import net.datastructures.Entry;
-import net.datastructures.Map;
-
 import vistra.framework.ITraversal;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.step.IStep;
-import vistra.framework.util.palette.SigmaPalette;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 

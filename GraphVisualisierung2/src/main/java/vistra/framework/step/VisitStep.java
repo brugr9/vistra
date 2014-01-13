@@ -5,8 +5,8 @@ import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.IVertexLayout;
-import vistra.framework.graph.item.state.command.IItemStateCommand;
 import vistra.framework.graph.item.state.command.DiscoveryEdgeCommand;
+import vistra.framework.graph.item.state.command.IItemStateCommand;
 import vistra.framework.graph.item.state.command.VisitedVertexCommand;
 
 /**

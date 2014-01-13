@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import net.datastructures.Entry;
-
 import vistra.framework.ITraversal;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.item.IEdge;

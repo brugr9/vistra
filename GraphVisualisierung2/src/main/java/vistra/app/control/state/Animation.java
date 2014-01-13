@@ -202,6 +202,8 @@ public final class Animation extends Observable implements IAnimation {
 	 */
 	void setStopped() throws Exception {
 		try {
+			((StepByStep) this.model.getSbsStateHandler()).handleIdle();
+			//
 			this.model.setAnimationEnabled(true);
 			this.model.setPauseEnabled(false);
 			this.model.setStopEnabled(false);
@@ -224,6 +226,8 @@ public final class Animation extends Observable implements IAnimation {
 	 */
 	void setPlaying() throws Exception {
 		try {
+			((StepByStep) this.model.getSbsStateHandler()).handleOff();
+			//
 			this.model.setAnimationEnabled(true);
 			this.model.setDelayEnabled(false);
 			this.model.setPlayEnabled(false);
@@ -287,7 +291,6 @@ public final class Animation extends Observable implements IAnimation {
 			/* go to the first step eventually */
 			if (this.model.getProgress() == this.model.getTraversal().size())
 				((StepByStep) this.model.getSbsStateHandler()).toBeginning();
-			((StepByStep) this.model.getSbsStateHandler()).handleOff();
 			/* start the timer */
 			this.animationTimer.start();
 			this.setChanged();
@@ -333,7 +336,6 @@ public final class Animation extends Observable implements IAnimation {
 		try {
 			this.animationTimer.stop();
 			this.setChanged();
-			((StepByStep) this.model.getSbsStateHandler()).handleIdle();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -354,8 +356,8 @@ public final class Animation extends Observable implements IAnimation {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				Model m = Animation.this.model;
-				if (m.getProgress() < m.getTraversal().size())
-					((StepByStep) m.getSbsStateHandler()).forward();
+				if (m.getTraversal().hasNext())
+					m.getSbsStateHandler().handleForward();
 				else
 					m.getAnimationStateHandler().handleStopped();
 			} catch (Exception ex) {

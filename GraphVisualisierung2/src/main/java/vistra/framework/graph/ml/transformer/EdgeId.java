@@ -10,7 +10,7 @@ import vistra.framework.graph.item.IEdgeLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeName implements Transformer<IEdgeLayout, String> {
+public class EdgeId implements Transformer<IEdgeLayout, String> {
 
 	/**
 	 * {@inheritDoc}

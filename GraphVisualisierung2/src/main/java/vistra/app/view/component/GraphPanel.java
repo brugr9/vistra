@@ -20,12 +20,15 @@ import vistra.app.view.popup.Mouse;
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.transformer.EdgeFont;
+import vistra.framework.graph.item.transformer.EdgeFontColor;
 import vistra.framework.graph.item.transformer.EdgeLabel;
 import vistra.framework.graph.item.transformer.EdgeStroke;
 import vistra.framework.graph.item.transformer.EdgeStrokeColor;
 import vistra.framework.graph.item.transformer.VertexFillColor;
 import vistra.framework.graph.item.transformer.VertexFont;
+import vistra.framework.graph.item.transformer.VertexFontColor;
 import vistra.framework.graph.item.transformer.VertexLabel;
+import vistra.framework.graph.item.transformer.VertexLocation;
 import vistra.framework.graph.item.transformer.VertexShape;
 import vistra.framework.graph.item.transformer.VertexStroke;
 import vistra.framework.graph.item.transformer.VertexStrokeColor;
@@ -100,7 +103,7 @@ public class GraphPanel extends JPanel implements Observer {
 
 		/* viewer */
 		this.layout = new StaticLayout<IVertexLayout, IEdgeLayout>(
-				model.getGraph());
+				model.getGraph(), new VertexLocation());
 		this.viewer = new VisualizationViewer<IVertexLayout, IEdgeLayout>(
 				layout, new Dimension(size.width, size.height - IView.BORDER));
 		this.viewer.setBackground(ColorPalette.white);
@@ -114,7 +117,7 @@ public class GraphPanel extends JPanel implements Observer {
 		rc.setVertexDrawPaintTransformer(new VertexStrokeColor());
 		rc.setVertexFillPaintTransformer(new VertexFillColor());
 		rc.setVertexLabelTransformer(new VertexLabel());
-		// TODO rc.setVertexDrawPaintTransformer(new VertexFontColor());
+		rc.setVertexDrawPaintTransformer(new VertexFontColor());
 		rc.setVertexFontTransformer(new VertexFont());
 		// transformer: edge
 		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<IVertexLayout, IEdgeLayout>(
@@ -126,7 +129,7 @@ public class GraphPanel extends JPanel implements Observer {
 		rc.setArrowDrawPaintTransformer(new EdgeStrokeColor());
 		rc.setEdgeLabelTransformer(new EdgeLabel());
 		rc.setEdgeFontTransformer(new EdgeFont());
-		// TODO rc.setEdgeDrawPaintTransformer(new EdgeFontColor());
+		rc.setEdgeDrawPaintTransformer(new EdgeFontColor());
 
 		/* mouse */
 		this.mouse = new Mouse(model, this.viewer);

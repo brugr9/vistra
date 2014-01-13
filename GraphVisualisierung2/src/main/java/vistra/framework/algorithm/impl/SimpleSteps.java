@@ -1,11 +1,8 @@
 package vistra.framework.algorithm.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
-import net.datastructures.Entry;
 import net.datastructures.HashTableMap;
 import net.datastructures.Map;
 import vistra.framework.algorithm.AlgorithmException;
@@ -13,14 +10,6 @@ import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.step.BackEdgeStep;
-import vistra.framework.step.CrossEdgeStep;
-import vistra.framework.step.DiscardedEdgeStep;
-import vistra.framework.step.ForwardEdgeStep;
-import vistra.framework.step.InitialisedVertexStep;
-import vistra.framework.step.SolutionMemberStep;
-import vistra.framework.step.UpdatedVertexStep;
-import vistra.framework.step.VisitStep;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

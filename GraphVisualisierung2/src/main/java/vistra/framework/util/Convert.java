@@ -43,22 +43,13 @@ public final class Convert {
 	 */
 	public static Point2D toPoint2D(String xS, String yS) {
 		double x, y;
-		Point2D p;
+		Point2D p = new Point();
 		try {
 			x = Double.parseDouble(xS);
-		} catch (Exception e) {
-			throw new UnsupportedOperationException("x: " + xS, e);
-		}
-		try {
 			y = Double.parseDouble(yS);
-		} catch (Exception e) {
-			throw new UnsupportedOperationException("y: " + yS, e);
-		}
-		try {
-			p = new Point();
 			p.setLocation(x, y);
 		} catch (Exception e) {
-			throw new UnsupportedOperationException("point", e);
+			// TODO
 		}
 		return p;
 	}

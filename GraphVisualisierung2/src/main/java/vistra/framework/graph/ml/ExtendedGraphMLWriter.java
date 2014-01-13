@@ -2,7 +2,7 @@ package vistra.framework.graph.ml;
 
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertexLayout;
-import vistra.framework.graph.ml.transformer.EdgeName;
+import vistra.framework.graph.ml.transformer.EdgeId;
 import vistra.framework.graph.ml.transformer.EdgeWeight;
 import vistra.framework.graph.ml.transformer.VertexCoordX;
 import vistra.framework.graph.ml.transformer.VertexCoordY;
@@ -80,7 +80,7 @@ public final class ExtendedGraphMLWriter extends
 		// edge: name
 		this.addEdgeData(ExtendedGraphMLWriter.E_NAME,
 				ExtendedGraphMLWriter.E_NAME_COMMENT,
-				ExtendedGraphMLWriter.E_NAME_DEFAULT, new EdgeName());
+				ExtendedGraphMLWriter.E_NAME_DEFAULT, new EdgeId());
 		// edge: weight
 		this.addEdgeData(ExtendedGraphMLWriter.E_WEIGHT,
 				ExtendedGraphMLWriter.E_WEIGHT_COMMENT,
