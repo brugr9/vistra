@@ -61,7 +61,7 @@ public class ModePopup extends JPopupMenu implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ControlEvent.i18n) {
+			if (arg == ControlEvent.I18N) {
 				this.picking.setText(b.getString("picking.label"));
 				this.editing.setText(b.getString("edit.label"));
 			} else {

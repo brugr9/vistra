@@ -87,7 +87,7 @@ public final class ProtocolPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ControlEvent.i18n) {
+				if (arg == ControlEvent.I18N) {
 					this.border.setTitle(b.getString("protocol.label"));
 				}
 				this.text.setText(m.getProtocol().toString());

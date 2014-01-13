@@ -126,7 +126,7 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ControlEvent.i18n) {
+			if (arg == ControlEvent.I18N) {
 				this.modePopup.setLabel(b.getString("mode.label"));
 				this.vertexPopup.setLabel(b.getString("vertex.label"));
 				this.edgePopup.setLabel(b.getString("edge.label"));

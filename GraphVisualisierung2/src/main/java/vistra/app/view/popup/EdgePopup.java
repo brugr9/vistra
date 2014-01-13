@@ -114,7 +114,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ControlEvent.i18n) {
+			if (arg == ControlEvent.I18N) {
 				this.setLabel(b.getString("edge.label"));
 				this.dialog.setText(b.getString("edit.label"));
 				this.delete.setText(b.getString("delete.label"));

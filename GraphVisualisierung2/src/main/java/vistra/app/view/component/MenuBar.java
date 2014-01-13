@@ -195,7 +195,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ControlEvent.i18n) {
+				if (arg == ControlEvent.I18N) {
 					{// JMenu fileMenu
 						// setText
 						this.file.setText(b.getString("file.label"));

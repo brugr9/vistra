@@ -107,7 +107,7 @@ class ActionListenerI18n extends AbstractActionListener {
 			this.model.setProtocol(about);
 			/* update the view */
 			// TODO
-			this.model.notifyObservers(ControlEvent.i18n);
+			this.model.notifyObservers(ControlEvent.I18N);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);
