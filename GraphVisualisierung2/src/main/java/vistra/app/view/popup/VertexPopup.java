@@ -41,6 +41,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * A field for a point.
 	 */
+	@SuppressWarnings("unused")
 	private Point2D point;
 	/**
 	 * A field for a vertex.
