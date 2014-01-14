@@ -2,14 +2,6 @@ package vistra.framework.graph.ml;
 
 import vistra.framework.graph.item.IEdgeLayout;
 import vistra.framework.graph.item.IVertexLayout;
-import vistra.framework.graph.ml.transformer.EdgeId;
-import vistra.framework.graph.ml.transformer.EdgeWeight;
-import vistra.framework.graph.ml.transformer.VertexCoordX;
-import vistra.framework.graph.ml.transformer.VertexCoordY;
-import vistra.framework.graph.ml.transformer.VertexEnd;
-import vistra.framework.graph.ml.transformer.VertexID;
-import vistra.framework.graph.ml.transformer.VertexStart;
-import vistra.framework.graph.ml.transformer.VertexValue;
 import edu.uci.ics.jung.io.GraphMLWriter;
 
 /**

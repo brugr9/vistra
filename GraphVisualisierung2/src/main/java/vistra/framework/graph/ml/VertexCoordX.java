@@ -1,4 +1,4 @@
-package vistra.framework.graph.ml.transformer;
+package vistra.framework.graph.ml;
 
 import org.apache.commons.collections15.Transformer;
 
