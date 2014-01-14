@@ -5,7 +5,7 @@ import org.apache.commons.collections15.Transformer;
 import vistra.framework.graph.item.IVertexLayout;
 
 /**
- * A vertex transformer: x-coordinate.
+ * A transformer for writing a GraphML file: vertex x-coordinate.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

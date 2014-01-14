@@ -5,7 +5,7 @@ import org.apache.commons.collections15.Transformer;
 import vistra.framework.graph.item.IEdgeLayout;
 
 /**
- * An edge transformer: weight.
+ * A transformer for writing a GraphML file: edge weight.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
