@@ -19,13 +19,16 @@ import vistra.app.view.IView;
 import vistra.app.view.popup.Mouse;
 import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
+import vistra.framework.graph.item.transformer.ArrowStroke;
 import vistra.framework.graph.item.transformer.EdgeFont;
 import vistra.framework.graph.item.transformer.EdgeLabel;
+import vistra.framework.graph.item.transformer.EdgeLabelRenderer;
 import vistra.framework.graph.item.transformer.EdgeStroke;
 import vistra.framework.graph.item.transformer.EdgeStrokeColor;
 import vistra.framework.graph.item.transformer.VertexFillColor;
 import vistra.framework.graph.item.transformer.VertexFont;
 import vistra.framework.graph.item.transformer.VertexLabel;
+import vistra.framework.graph.item.transformer.VertexLabelRenderer;
 import vistra.framework.graph.item.transformer.VertexShape;
 import vistra.framework.graph.item.transformer.VertexStroke;
 import vistra.framework.graph.item.transformer.VertexStrokeColor;
@@ -101,13 +104,13 @@ public class GraphPanel extends JPanel implements Observer {
 		/* viewer */
 		this.layout = new StaticLayout<ILayoutVertex, ILayoutEdge>(
 				model.getGraph());
-		// TODO this.layout.setInitializer(new VertexLocation());
 		this.viewer = new VisualizationViewer<ILayoutVertex, ILayoutEdge>(
 				layout, new Dimension(size.width, size.height - IView.BORDER));
 		this.viewer.setBackground(ColorPalette.white);
 		RenderContext<ILayoutVertex, ILayoutEdge> rc = this.viewer
 				.getRenderContext();
-		// transformer: vertex
+
+		/* transformer: vertex */
 		this.viewer.getRenderer().getVertexLabelRenderer()
 				.setPosition(Position.CNTR);
 		rc.setVertexShapeTransformer(new VertexShape());
@@ -115,19 +118,20 @@ public class GraphPanel extends JPanel implements Observer {
 		rc.setVertexDrawPaintTransformer(new VertexStrokeColor());
 		rc.setVertexFillPaintTransformer(new VertexFillColor());
 		rc.setVertexLabelTransformer(new VertexLabel());
-		// rc.setVertexDrawPaintTransformer(new VertexFontColor());
 		rc.setVertexFontTransformer(new VertexFont());
-		// transformer: edge
+		rc.setVertexLabelRenderer(new VertexLabelRenderer());
+
+		/* transformer: edge */
 		rc.setEdgeLabelClosenessTransformer(new ConstantDirectionalEdgeValueTransformer<ILayoutVertex, ILayoutEdge>(
 				E_LABEL_CLOSENESS, E_LABEL_CLOSENESS));
 		rc.setEdgeShapeTransformer(new EdgeShape.Line<ILayoutVertex, ILayoutEdge>());
 		rc.setEdgeStrokeTransformer(new EdgeStroke());
-		rc.setEdgeArrowStrokeTransformer(new EdgeStroke());
 		rc.setEdgeDrawPaintTransformer(new EdgeStrokeColor());
+		rc.setEdgeArrowStrokeTransformer(new ArrowStroke());
 		rc.setArrowDrawPaintTransformer(new EdgeStrokeColor());
 		rc.setEdgeLabelTransformer(new EdgeLabel());
 		rc.setEdgeFontTransformer(new EdgeFont());
-		// rc.setEdgeDrawPaintTransformer(new EdgeFontColor());
+		rc.setEdgeLabelRenderer(new EdgeLabelRenderer());
 
 		/* mouse */
 		this.mouse = new Mouse(model, this.viewer);
@@ -138,6 +142,7 @@ public class GraphPanel extends JPanel implements Observer {
 		/* zoom */
 		this.zoom = new GraphZoomScrollPane(this.viewer);
 		this.zoom.setSize(size);
+
 		/* this */
 		this.add(this.zoom, BorderLayout.CENTER);
 

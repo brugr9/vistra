@@ -151,7 +151,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.setSize(size);
 		this.border = BorderFactory.createTitledBorder("traversalPanel");
 		this.setBorder(border);
-		this.setBackground(ColorPalette.antique);
+		this.setBackground(ColorPalette.apricot);
 
 		/* spinner */
 		// step length
@@ -221,13 +221,13 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.sbsPanel.setLayout(new GridLayout(1, 4));
 		this.animationPanel.setLayout(new GridLayout(1, 3));
 		// background
-		this.steplengthPanel.setBackground(ColorPalette.antique);
-		this.delayPanel.setBackground(ColorPalette.antique);
-		this.progressPanel.setBackground(ColorPalette.antique);
-		this.empty1.setBackground(ColorPalette.antique);
-		this.empty2.setBackground(ColorPalette.antique);
-		this.sbsPanel.setBackground(ColorPalette.antique);
-		this.animationPanel.setBackground(ColorPalette.antique);
+		this.steplengthPanel.setBackground(ColorPalette.apricot);
+		this.delayPanel.setBackground(ColorPalette.apricot);
+		this.progressPanel.setBackground(ColorPalette.apricot);
+		this.empty1.setBackground(ColorPalette.apricot);
+		this.empty2.setBackground(ColorPalette.apricot);
+		this.sbsPanel.setBackground(ColorPalette.apricot);
+		this.animationPanel.setBackground(ColorPalette.apricot);
 		// add
 		this.steplengthPanel.add(this.steplengthLabel);
 		this.steplengthPanel.add(this.steplength);

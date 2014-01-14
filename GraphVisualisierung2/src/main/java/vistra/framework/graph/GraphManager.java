@@ -101,8 +101,7 @@ class GraphManager implements IGraphManager {
 			layout.setInitializer(new VertexLocation());
 			// TODO end
 			this.graph = this.reader.read(new FileReader(this.file));
-			String name = file.getName();
-			this.graph.setName(name);
+			this.graph.setName(this.file.getName());
 			return this.graph;
 		} catch (Exception e) {
 			throw e;
@@ -124,7 +123,6 @@ class GraphManager implements IGraphManager {
 			for (@SuppressWarnings("unused")
 			ILayoutVertex v : vertices)
 				v = null;
-			this.graph = null;
 		} catch (Exception e) {
 			throw e;
 		}
@@ -155,7 +153,6 @@ class GraphManager implements IGraphManager {
 		} catch (Exception e) {
 			throw e;
 		}
-
 	}
 
 	/**

@@ -65,7 +65,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 		this.setSize(size);
 		this.border = BorderFactory.createTitledBorder("algorithmPanel");
 		this.setBorder(border);
-		this.setBackground(ColorPalette.antique);
+		this.setBackground(ColorPalette.apricot);
 
 		/* combo */
 		this.comboModel = new DefaultComboBoxModel<String>(

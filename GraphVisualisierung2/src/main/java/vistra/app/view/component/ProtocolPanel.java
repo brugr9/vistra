@@ -52,7 +52,7 @@ public final class ProtocolPanel extends JPanel implements Observer {
 		this.setMinimumSize(size);
 		this.border = BorderFactory.createTitledBorder("protocolPanel");
 		this.setBorder(border);
-		this.setBackground(ColorPalette.antique);
+		this.setBackground(ColorPalette.apricot);
 
 		/* text area */
 		this.text = new JTextArea();

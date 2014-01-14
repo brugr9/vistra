@@ -184,6 +184,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setStroke(StrokePalette.unexplored);
+			this.setArrowStroke(StrokePalette.unexplored);
 			this.setStrokeColor(ColorPalette.darkblue);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -203,6 +204,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.red);
 			this.setStroke(StrokePalette.visited);
+			this.setArrowStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.red);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -222,6 +224,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setStroke(StrokePalette.back);
+			this.setArrowStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.darkgreen);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -241,6 +244,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setStroke(StrokePalette.forward);
+			this.setArrowStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.darkgreen);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -260,6 +264,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgreen);
 			this.setStroke(StrokePalette.cross);
+			this.setArrowStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.darkgreen);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -277,6 +282,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setStroke(StrokePalette.discarded);
+			this.setArrowStroke(StrokePalette.unexplored);
 			this.setStrokeColor(ColorPalette.darkblue);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -294,6 +300,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.green);
 			this.setStroke(StrokePalette.visited);
+			this.setArrowStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.green);
 			this.notifyObservers();
 		} catch (Exception e) {

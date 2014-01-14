@@ -106,7 +106,7 @@ public class DefaultView extends JFrame implements IView {
 		/* another panel */
 		this.anotherPanel = new JPanel();
 		this.anotherPanel.setLayout(new BorderLayout());
-		this.anotherPanel.setBackground((Color) ColorPalette.antique);
+		this.anotherPanel.setBackground((Color) ColorPalette.apricot);
 		this.anotherPanel.add(this.algorithmPanel, BorderLayout.NORTH);
 		this.anotherPanel.add(this.traversalPanel, BorderLayout.CENTER);
 		this.anotherPanel.add(this.protocolPanel, BorderLayout.SOUTH);

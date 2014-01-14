@@ -16,6 +16,10 @@ public class LayoutEdge extends Edge implements ILayoutEdge {
 	 * A field for an item layout to work with.
 	 */
 	private LayoutItem layout;
+	/**
+	 * A field for an arrow stroke.
+	 */
+	private Stroke arrowStroke;
 
 	/**
 	 * Main constructor.
@@ -23,6 +27,7 @@ public class LayoutEdge extends Edge implements ILayoutEdge {
 	public LayoutEdge() {
 		super();
 		this.layout = new LayoutItem();
+		this.arrowStroke = null;
 	}
 
 	/**
@@ -112,6 +117,18 @@ public class LayoutEdge extends Edge implements ILayoutEdge {
 	@Override
 	public Color getFontColor() {
 		return this.layout.getFontColor();
+	}
+
+	@Override
+	public void setArrowStroke(Stroke stroke) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Stroke getArrowStroke() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

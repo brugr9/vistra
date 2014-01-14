@@ -407,6 +407,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 				this.model.setEnd(null);
 				this.model.setGraphSaved(false);
 				this.model.setGraphFile(false);
+				this.model.notifyObservers();
 				/* Algorithm */
 				this.updateAlgorithms();
 			}
@@ -445,7 +446,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 				/* dialog */
 				option = fileChooser.showOpenDialog(this.model.getTop());
 				if (option == JFileChooser.APPROVE_OPTION) {
-					// Graph
+					/* Graph */
 					File source = fileChooser.getSelectedFile();
 					ILayoutGraph graph = this.parameterManager
 							.openGraph(source);
@@ -455,6 +456,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 					this.model.setEnd(null);
 					this.model.setGraphSaved(true);
 					this.model.setGraphFile(true);
+					this.model.notifyObservers();
 					/* Algorithm */
 					this.updateAlgorithms();
 				}
@@ -474,6 +476,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 		try {
 			this.parameterManager.saveGraph();
 			this.model.setGraphSaved(true);
+			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -509,10 +512,13 @@ public final class ParameterStateHandler implements IParameterHandler {
 			/* dialog */
 			int option = fileChooser.showSaveDialog(this.model.getTop());
 			if (option == JFileChooser.APPROVE_OPTION) {
+				/* Graph */
 				File file = fileChooser.getSelectedFile();
 				this.parameterManager.saveGraphAs(file);
 				this.model.setGraphFile(true);
 				this.model.setGraphSaved(true);
+				this.model.notifyObservers();
+				/* Algorithm */
 				// TODO algorithms
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
@@ -538,6 +544,8 @@ public final class ParameterStateHandler implements IParameterHandler {
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
 			}
+			this.model.setGraphSaved(false);
+			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}

@@ -16,9 +16,9 @@ import java.awt.Color;
 public enum ColorPalette {
 
 	/**
-	 * The color antique in the sRGB space.
+	 * The color apricot in the sRGB space.
 	 */
-	ANTIQUE(235, 215, 200),
+	APRICOT(235, 215, 200),
 	/**
 	 * The color red in the sRGB space.
 	 */
@@ -109,9 +109,9 @@ public enum ColorPalette {
 	}
 
 	/**
-	 * The color antique.
+	 * The color apricot.
 	 */
-	public final static Color antique = ANTIQUE.getColor();
+	public final static Color apricot = APRICOT.getColor();
 	/**
 	 * The color red in the sRGB space.
 	 */

@@ -61,7 +61,7 @@ public interface ILayoutItem {
 	String getId();
 
 	/**
-	 * Sets the stroke.
+	 * Retruns the stroke.
 	 * 
 	 * @return the stroke
 	 */

@@ -1,5 +1,7 @@
 package vistra.framework.graph.item;
 
+import java.awt.Stroke;
+
 /**
  * An layout edge interface.
  * 
@@ -15,5 +17,20 @@ public interface ILayoutEdge extends IEdge, ILayoutItem {
 	 *            the weight to set
 	 */
 	void setWeight(int weight);
+
+	/**
+	 * Sets the arrow stroke.
+	 * 
+	 * @param stroke
+	 *            the arrow stroke
+	 */
+	void setArrowStroke(Stroke stroke);
+
+	/**
+	 * Retruns the arrow stroke.
+	 * 
+	 * @return the arrow stroke
+	 */
+	Stroke getArrowStroke();
 
 }
