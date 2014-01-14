@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 
 /**
- * A vertex layout interface.
+ * A layout vertex interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see Layout<V, E>
  */
-public interface IVertexLayout extends IVertex, IItemLayout {
+public interface ILayoutVertex extends IVertex, ILayoutItem {
 
 	/**
 	 * Sets the location.

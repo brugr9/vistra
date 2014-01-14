@@ -4,7 +4,7 @@ import java.awt.Stroke;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.framework.graph.item.IEdgeLayout;
+import vistra.framework.graph.item.ILayoutEdge;
 
 /**
  * An edge transformer: stroke.
@@ -12,13 +12,13 @@ import vistra.framework.graph.item.IEdgeLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeStroke implements Transformer<IEdgeLayout, Stroke> {
+public class EdgeStroke implements Transformer<ILayoutEdge, Stroke> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Stroke transform(IEdgeLayout edge) {
+	public Stroke transform(ILayoutEdge edge) {
 		return edge.getStroke();
 	}
 }

@@ -3,7 +3,7 @@ package vistra.app.view.popup;
 import java.awt.geom.Point2D;
 import java.util.Observer;
 
-import vistra.framework.graph.item.IItemLayout;
+import vistra.framework.graph.item.ILayoutItem;
 
 /**
  * An item pop-up menu interface.
@@ -19,7 +19,7 @@ public interface IItemPopup extends Observer {
 	 * @param item
 	 *            the item to set
 	 */
-	void setItem(IItemLayout item);
+	void setItem(ILayoutItem item);
 
 	/**
 	 * Sets the location.

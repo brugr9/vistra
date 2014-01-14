@@ -10,8 +10,8 @@ import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.graph.item.EdgeFactory;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.VertexFactory;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AnimatedPickingGraphMousePlugin;
@@ -26,7 +26,7 @@ import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
+public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 		implements Observer {
 
 	/**
@@ -51,7 +51,7 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 	 *            a visualization viewer
 	 */
 	public Mouse(IModel model,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
+			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
 		super(viewer.getRenderContext(), new VertexFactory(), new EdgeFactory());
 
 		this.modePopup = new ModePopup(model);
@@ -84,12 +84,12 @@ public class Mouse extends EditingModalGraphMouse<IVertexLayout, IEdgeLayout>
 		this.add(this.scalingPlugin);
 		/* picking */
 		this.pickingPlugin = new Picking();
-		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<IVertexLayout, IEdgeLayout>();
+		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
 		/* editing */
 		this.popupEditingPlugin = new PopupPlugin(this.vertexFactory,
 				this.edgeFactory);
 		this.editingPlugin = new Editing(this.vertexFactory, this.edgeFactory);
-		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<IVertexLayout, IEdgeLayout>();
+		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
 	}
 
 	/**

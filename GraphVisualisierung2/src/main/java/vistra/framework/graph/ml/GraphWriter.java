@@ -1,7 +1,7 @@
 package vistra.framework.graph.ml;
 
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.io.GraphMLWriter;
 
 /**
@@ -11,7 +11,7 @@ import edu.uci.ics.jung.io.GraphMLWriter;
  * 
  */
 public final class GraphWriter extends
-		GraphMLWriter<IVertexLayout, IEdgeLayout> {
+		GraphMLWriter<ILayoutVertex, ILayoutEdge> {
 
 	// geometry: x, y
 	public final static String V_LOC_X = "coord.x";

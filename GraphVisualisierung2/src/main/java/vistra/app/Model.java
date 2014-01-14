@@ -9,8 +9,8 @@ import vistra.app.control.state.IAnimation;
 import vistra.app.control.state.IParameterHandler;
 import vistra.app.control.state.IStepByStep;
 import vistra.framework.ITraversal;
-import vistra.framework.graph.IExtendedGraph;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.ILayoutGraph;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**
@@ -63,10 +63,10 @@ public final class Model extends Observable implements IModel {
 	/* Parameter */
 	private IParameterHandler parameterStateHandler;
 	// Graph
-	private IExtendedGraph graph;
-	private IVertexLayout start;
-	private IVertexLayout end;
-	private IVertexLayout focus;
+	private ILayoutGraph graph;
+	private ILayoutVertex start;
+	private ILayoutVertex end;
+	private ILayoutVertex focus;
 	private boolean graphFile;
 	private boolean graphSaved;
 	private Mode mode;
@@ -942,7 +942,7 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getGraph()
 	 */
 	@Override
-	public IExtendedGraph getGraph() {
+	public ILayoutGraph getGraph() {
 		return graph;
 	}
 
@@ -952,7 +952,7 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#setGraph(vistra.framework.graph.IExtendedGraph)
 	 */
 	@Override
-	public void setGraph(IExtendedGraph graph) {
+	public void setGraph(ILayoutGraph graph) {
 		this.graph = graph;
 	}
 
@@ -962,7 +962,7 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getStart()
 	 */
 	@Override
-	public IVertexLayout getStart() {
+	public ILayoutVertex getStart() {
 		return start;
 	}
 
@@ -973,7 +973,7 @@ public final class Model extends Observable implements IModel {
 	 * vistra.app.IModel#setStart(vistra.framework.graph.item.IVertexLayout)
 	 */
 	@Override
-	public void setStart(IVertexLayout start) {
+	public void setStart(ILayoutVertex start) {
 		this.start = start;
 	}
 
@@ -983,7 +983,7 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getEnd()
 	 */
 	@Override
-	public IVertexLayout getEnd() {
+	public ILayoutVertex getEnd() {
 		return end;
 	}
 
@@ -993,7 +993,7 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#setEnd(vistra.framework.graph.item.IVertexLayout)
 	 */
 	@Override
-	public void setEnd(IVertexLayout end) {
+	public void setEnd(ILayoutVertex end) {
 		this.end = end;
 	}
 
@@ -1003,7 +1003,7 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getFocus()
 	 */
 	@Override
-	public IVertexLayout getFocus() {
+	public ILayoutVertex getFocus() {
 		return focus;
 	}
 
@@ -1014,7 +1014,7 @@ public final class Model extends Observable implements IModel {
 	 * vistra.app.IModel#setFocus(vistra.framework.graph.item.IVertexLayout)
 	 */
 	@Override
-	public void setFocus(IVertexLayout focus) {
+	public void setFocus(ILayoutVertex focus) {
 		this.focus = focus;
 	}
 

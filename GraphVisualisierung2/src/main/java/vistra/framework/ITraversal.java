@@ -15,19 +15,4 @@ import vistra.framework.util.IBidirectIterator;
  */
 public interface ITraversal extends IBidirectIterator<IStep> {
 
-	/**
-	 * Sets the a description.
-	 * 
-	 * @param description
-	 *            the description
-	 */
-	void setDescription(String description);
-
-	/**
-	 * Returns the description.
-	 * 
-	 * @return the description
-	 */
-	String getDescription();
-
 }

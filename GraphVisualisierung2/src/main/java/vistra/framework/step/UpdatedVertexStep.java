@@ -1,8 +1,8 @@
 package vistra.framework.step;
 
 import net.datastructures.Entry;
+import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 import vistra.framework.graph.item.state.command.UpdatedVertexCommand;
 
@@ -32,7 +32,7 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 			this.commandHandler.addCommand(command);
 			//
 			this.description.append("Vertex "
-					+ ((IVertexLayout) vertex).getId() + ", value updated to "
+					+ ((ILayoutVertex) vertex).getId() + ", value updated to "
 					+ value + System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Vertex "
-						+ ((IVertexLayout) vertex).getId()
+						+ ((ILayoutVertex) vertex).getId()
 						+ ", value updated to " + value
 						+ System.lineSeparator());
 			}
@@ -86,7 +86,7 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Vertex "
-						+ ((IVertexLayout) vertex).getId()
+						+ ((ILayoutVertex) vertex).getId()
 						+ ", value updated to " + value
 						+ System.lineSeparator());
 			}

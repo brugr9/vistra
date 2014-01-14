@@ -10,24 +10,24 @@ import vistra.framework.graph.item.state.EdgeStateHandler;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeFactory implements Factory<IEdgeLayout> {
+public class EdgeFactory implements Factory<ILayoutEdge> {
 
 	/**
-	 * Creates an edge.
+	 * Creates a layout edge.
 	 * 
 	 * @return the edge
 	 */
 	@Override
-	public IEdgeLayout create() {
+	public ILayoutEdge create() {
 		return createEdge();
 	}
 
 	/**
-	 * Creates an edge.
+	 * Creates a layout edge.
 	 * 
 	 * @return the edge
 	 */
-	public static IEdgeLayout createEdge() {
-		return (IEdgeLayout) new EdgeStateHandler();
+	public static ILayoutEdge createEdge() {
+		return (ILayoutEdge) new EdgeStateHandler();
 	}
 }

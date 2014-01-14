@@ -2,7 +2,7 @@ package vistra.framework.graph.item.state;
 
 import net.datastructures.NodeStack;
 import net.datastructures.Stack;
-import vistra.framework.graph.item.VertexLayout;
+import vistra.framework.graph.item.LayoutVertex;
 import vistra.framework.graph.ml.GraphWriter;
 import vistra.framework.util.palette.ColorPalette;
 import vistra.framework.util.palette.FontPalette;
@@ -22,20 +22,20 @@ import vistra.framework.util.palette.StrokePalette;
  * @see EdgeStateHandler
  * 
  */
-public class VertexStateHandler extends VertexLayout implements
+public class VertexStateHandler extends LayoutVertex implements
 		IVertexStateHandler {
 
 	/**
 	 * A field for a stack of states.
 	 */
-	private Stack<AbstractVertexState> state;
+	private Stack<AbstractVertexState> stateStack;
 
 	/**
 	 * Main constructor.
 	 */
 	public VertexStateHandler() {
 		super();
-		this.state = new NodeStack<AbstractVertexState>();
+		this.stateStack = new NodeStack<AbstractVertexState>();
 		try {
 			this.setState(new UnexploredVertexState(this));
 		} catch (Exception e) {
@@ -49,8 +49,8 @@ public class VertexStateHandler extends VertexLayout implements
 	@Override
 	public void handleUnexplored() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleUnexplored();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleUnexplored();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -62,8 +62,8 @@ public class VertexStateHandler extends VertexLayout implements
 	@Override
 	public void handleInitialised() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleInitialised();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleInitialised();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -75,8 +75,8 @@ public class VertexStateHandler extends VertexLayout implements
 	@Override
 	public void handleUpdated(String value) throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleUpdated(value);
+			this.stateStack.top().exit();
+			this.stateStack.top().handleUpdated(value);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -88,8 +88,8 @@ public class VertexStateHandler extends VertexLayout implements
 	@Override
 	public void handleVisited() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleVisited();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleVisited();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -101,8 +101,8 @@ public class VertexStateHandler extends VertexLayout implements
 	@Override
 	public void handleSolutionMember() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleSolution();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleSolution();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -114,8 +114,8 @@ public class VertexStateHandler extends VertexLayout implements
 	@Override
 	public void handlePreviousState() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handlePreviousState();
+			this.stateStack.top().exit();
+			this.stateStack.top().handlePreviousState();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -130,8 +130,8 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setState(AbstractVertexState state) throws Exception {
 		try {
-			this.state.push(state);
-			this.state.top().entry();
+			this.stateStack.push(state);
+			this.stateStack.top().entry();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -144,8 +144,8 @@ public class VertexStateHandler extends VertexLayout implements
 	 */
 	void setPreviousState() throws Exception {
 		try {
-			this.state.pop();
-			this.state.top().entry();
+			this.stateStack.pop();
+			this.stateStack.top().entry();
 		} catch (Exception e) {
 			throw e;
 		}

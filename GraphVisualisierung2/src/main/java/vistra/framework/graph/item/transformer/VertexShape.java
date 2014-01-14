@@ -4,7 +4,7 @@ import java.awt.Shape;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.util.palette.ShapePalette;
 
 /**
@@ -13,13 +13,13 @@ import vistra.framework.util.palette.ShapePalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexShape implements Transformer<IVertexLayout, Shape> {
+public class VertexShape implements Transformer<ILayoutVertex, Shape> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Shape transform(IVertexLayout vertex) {
+	public Shape transform(ILayoutVertex vertex) {
 		return ShapePalette.shapeDefault;
 	}
 

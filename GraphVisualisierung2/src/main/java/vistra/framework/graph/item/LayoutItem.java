@@ -6,12 +6,12 @@ import java.awt.Stroke;
 import java.util.Observable;
 
 /**
- * An item layout.
+ * A layout item.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see Layout<V, E>
  */
-class ItemLayout extends Observable implements IItemLayout {
+class LayoutItem extends Observable implements ILayoutItem {
 
 	/**
 	 * A field for an identifier.
@@ -37,7 +37,7 @@ class ItemLayout extends Observable implements IItemLayout {
 	/**
 	 * Main constructor.
 	 */
-	ItemLayout() {
+	LayoutItem() {
 		super();
 		this.id = "";
 		this.stroke = null;

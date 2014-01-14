@@ -1,7 +1,7 @@
 package vistra.framework.step;
 
+import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 import vistra.framework.graph.item.state.command.InitialisedVertexCommand;
 import vistra.framework.graph.item.state.command.SolutionMemberVertexCommand;
@@ -28,7 +28,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 			IItemStateCommand command = new InitialisedVertexCommand(i);
 			this.commandHandler.addCommand(command);
 			//
-			this.description.append("Vertex " + ((IVertexLayout) i).getId()
+			this.description.append("Vertex " + ((ILayoutVertex) i).getId()
 					+ " initialised" + System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Vertex "
-						+ ((IVertexLayout) vertex).getId() + " initialised"
+						+ ((ILayoutVertex) vertex).getId() + " initialised"
 						+ System.lineSeparator());
 			}
 		} catch (Exception e) {
@@ -75,7 +75,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 					s);
 			this.commandHandler.addCommand(solutionMember);
 			this.description.append("Start vertex "
-					+ ((IVertexLayout) s).getId() + " initialised"
+					+ ((ILayoutVertex) s).getId() + " initialised"
 					+ System.lineSeparator());
 			//
 			for (IVertex vertex : i) {
@@ -83,7 +83,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Vertex "
-						+ ((IVertexLayout) vertex).getId() + " initialised"
+						+ ((ILayoutVertex) vertex).getId() + " initialised"
 						+ System.lineSeparator());
 			}
 		} catch (Exception e) {

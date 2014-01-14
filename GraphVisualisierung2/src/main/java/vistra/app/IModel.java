@@ -8,8 +8,8 @@ import vistra.app.control.state.IAnimation;
 import vistra.app.control.state.IParameterHandler;
 import vistra.app.control.state.IStepByStep;
 import vistra.framework.ITraversal;
-import vistra.framework.graph.IExtendedGraph;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.ILayoutGraph;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 public interface IModel {
@@ -357,46 +357,46 @@ public interface IModel {
 	/**
 	 * @return the graph
 	 */
-	public abstract IExtendedGraph getGraph();
+	public abstract ILayoutGraph getGraph();
 
 	/**
 	 * @param graph
 	 *            the graph to set
 	 */
-	public abstract void setGraph(IExtendedGraph graph);
+	public abstract void setGraph(ILayoutGraph graph);
 
 	/**
 	 * @return the start
 	 */
-	public abstract IVertexLayout getStart();
+	public abstract ILayoutVertex getStart();
 
 	/**
 	 * @param start
 	 *            the start to set
 	 */
-	public abstract void setStart(IVertexLayout start);
+	public abstract void setStart(ILayoutVertex start);
 
 	/**
 	 * @return the end
 	 */
-	public abstract IVertexLayout getEnd();
+	public abstract ILayoutVertex getEnd();
 
 	/**
 	 * @param end
 	 *            the end to set
 	 */
-	public abstract void setEnd(IVertexLayout end);
+	public abstract void setEnd(ILayoutVertex end);
 
 	/**
 	 * @return the focus
 	 */
-	public abstract IVertexLayout getFocus();
+	public abstract ILayoutVertex getFocus();
 
 	/**
 	 * @param focus
 	 *            the focus to set
 	 */
-	public abstract void setFocus(IVertexLayout focus);
+	public abstract void setFocus(ILayoutVertex focus);
 
 	/**
 	 * @return the graphFile

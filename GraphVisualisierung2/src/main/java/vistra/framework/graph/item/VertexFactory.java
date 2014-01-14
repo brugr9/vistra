@@ -15,7 +15,7 @@ import vistra.framework.util.palette.SigmaPalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexFactory implements Factory<IVertexLayout> {
+public class VertexFactory implements Factory<ILayoutVertex> {
 
 	/**
 	 * A field for some signs.
@@ -30,22 +30,22 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	}
 
 	/**
-	 * Creates a labeled vertex.
+	 * Creates a labeled layout vertex.
 	 * 
 	 * @return the vertex.
 	 */
 	@Override
-	public IVertexLayout create() {
+	public ILayoutVertex create() {
 		return createLabeledVertex();
 	}
 
 	/**
-	 * Creates a labeled vertex.
+	 * Creates a labeled layout vertex.
 	 * 
 	 * @return the vertex
 	 */
-	public static IVertexLayout createLabeledVertex() {
-		IVertexLayout vertex = createVertex();
+	public static ILayoutVertex createLabeledVertex() {
+		ILayoutVertex vertex = createVertex();
 		if (!SIGMA.hasNext())
 			resetSigma();
 		vertex.setId(SIGMA.next());
@@ -53,16 +53,16 @@ public class VertexFactory implements Factory<IVertexLayout> {
 	}
 
 	/**
-	 * Creates a vertex.
+	 * Creates a layout vertex.
 	 * 
 	 * @return the vertex
 	 */
-	public static IVertexLayout createVertex() {
-		return (IVertexLayout) new VertexStateHandler();
+	public static ILayoutVertex createVertex() {
+		return (ILayoutVertex) new VertexStateHandler();
 	}
 
 	/**
-	 * Resets the sigma used for labeled vertex.
+	 * Resets the sigma used for the layout vertex.
 	 */
 	public static void resetSigma() {
 		ArrayList<String> sigma = new ArrayList<String>();

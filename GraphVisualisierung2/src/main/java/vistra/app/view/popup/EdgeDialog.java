@@ -18,8 +18,8 @@ import javax.swing.border.EmptyBorder;
 import vistra.app.IModel;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.app.control.verifier.EdgeWeightVerifier;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.util.Convert;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
@@ -59,8 +59,8 @@ public class EdgeDialog extends JDialog {
 	 *            an edge
 	 */
 	public EdgeDialog(JFrame top,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
-			IModel model, IEdgeLayout edge) {
+			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer,
+			IModel model, ILayoutEdge edge) {
 		super(top, true);
 		this.setResizable(false);
 
@@ -108,8 +108,8 @@ public class EdgeDialog extends JDialog {
 	 * @param okButton
 	 * @param cancelButton
 	 */
-	private void setListeners(final IEdgeLayout edge,
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
+	private void setListeners(final ILayoutEdge edge,
+			final VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer,
 			final JButton okButton, final JButton cancelButton) {
 
 		okButton.addActionListener(new ActionListener() {
@@ -131,8 +131,8 @@ public class EdgeDialog extends JDialog {
 	 * @param edge
 	 * @param viewer
 	 */
-	private void updateText(final IEdgeLayout edge,
-			final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
+	private void updateText(final ILayoutEdge edge,
+			final VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
 		edge.setWeight(Convert.toInteger(this.weight.getText()));
 		viewer.repaint();
 		this.dispose();
@@ -142,8 +142,8 @@ public class EdgeDialog extends JDialog {
 	 * @param edge
 	 * @param viewer
 	 */
-	private void setText(IEdgeLayout edge,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
+	private void setText(ILayoutEdge edge,
+			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
 		this.weight.setText(String.valueOf(edge.getWeight()));
 		this.weight.setInputVerifier(new EdgeWeightVerifier(this.weight
 				.getText().trim()));

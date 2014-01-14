@@ -2,7 +2,7 @@ package vistra.framework.graph.item.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.framework.graph.item.IEdgeLayout;
+import vistra.framework.graph.item.ILayoutEdge;
 
 /**
  * An edge transformer: label.
@@ -10,13 +10,13 @@ import vistra.framework.graph.item.IEdgeLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class EdgeLabel implements Transformer<IEdgeLayout, String> {
+public class EdgeLabel implements Transformer<ILayoutEdge, String> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String transform(IEdgeLayout edge) {
+	public String transform(ILayoutEdge edge) {
 		String label = "", id = "", value = "";
 		if (edge.getId() != null)
 			id = edge.getId();

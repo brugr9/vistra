@@ -5,12 +5,12 @@ import java.awt.Font;
 import java.awt.Stroke;
 
 /**
- * An item layout interface.
+ * A layout item interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see Layout<V, E>
  */
-public interface IItemLayout {
+public interface ILayoutItem {
 
 	/**
 	 * Sets an identifier.

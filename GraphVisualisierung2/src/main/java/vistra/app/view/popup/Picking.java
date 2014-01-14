@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.MultiLayerTransformer;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -19,12 +19,12 @@ import edu.uci.ics.jung.visualization.picking.PickedState;
  * 
  */
 public class Picking extends
-		PickingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
+		PickingGraphMousePlugin<ILayoutVertex, ILayoutEdge> {
 
 	/**
 	 * A field for a JUNG visualization viewer.
 	 */
-	private VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
+	private VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer;
 
 	/**
 	 * Main constructor.
@@ -40,7 +40,7 @@ public class Picking extends
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (this.locked == false) {
-			this.viewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+			this.viewer = (VisualizationViewer<ILayoutVertex, ILayoutEdge>) e
 					.getSource();
 			if (this.vertex != null) {
 				Point point = e.getPoint();
@@ -48,13 +48,13 @@ public class Picking extends
 						.getMultiLayerTransformer();
 				Point2D graphPoint = mt.inverseTransform(point);
 				Point2D graphDown = mt.inverseTransform(this.down);
-				Layout<IVertexLayout, IEdgeLayout> layout = viewer
+				Layout<ILayoutVertex, ILayoutEdge> layout = viewer
 						.getGraphLayout();
 				double dx = graphPoint.getX() - graphDown.getX();
 				double dy = graphPoint.getY() - graphDown.getY();
-				PickedState<IVertexLayout> ps = viewer.getPickedVertexState();
+				PickedState<ILayoutVertex> ps = viewer.getPickedVertexState();
 
-				for (IVertexLayout v : ps.getPicked()) {
+				for (ILayoutVertex v : ps.getPicked()) {
 					Point2D vp = layout.transform(v);
 					vp.setLocation(vp.getX() + dx, vp.getY() + dy);
 					layout.setLocation(v, vp);

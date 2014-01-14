@@ -4,7 +4,6 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.io.File;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 import javax.swing.JComboBox;
@@ -18,10 +17,9 @@ import vistra.app.Model;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.IParameterManager;
 import vistra.framework.ITraversal;
-import vistra.framework.graph.IExtendedGraph;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
-import vistra.framework.graph.item.VertexFactory;
+import vistra.framework.graph.ILayoutGraph;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.graph.event.GraphEvent;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
@@ -30,10 +28,10 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
  * A parameter handler: handles a graph and an algorithm as parameter for
  * generating a traversal-object.
  * <p>
- * As a part of the graphic user interface control, this state handler is an
- * action listener (graph I/O and value editing), a graph-event listener
- * (adding/deletion of edges and vertices) and an item listener (algorithm
- * selection), too.
+ * As part of the graphic user interface control, this state handler is an
+ * action listener (graph I/O and item value editing), a graph-event listener
+ * (adding/deletion of graph item) and an item listener (algorithm selection),
+ * too.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -128,7 +126,6 @@ public final class ParameterStateHandler implements IParameterHandler {
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		try {
-
 			if (e.getStateChange() == ItemEvent.SELECTED) {
 				/* get the value */
 				@SuppressWarnings("unchecked")
@@ -136,7 +133,6 @@ public final class ParameterStateHandler implements IParameterHandler {
 				this.model.setSelectedAlgorithmIndex(box.getSelectedIndex());
 				this.handleSelectAlgorithm();
 			}
-
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null);
@@ -148,7 +144,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void handleGraphEvent(GraphEvent<IVertexLayout, IEdgeLayout> evt) {
+	public void handleGraphEvent(GraphEvent<ILayoutVertex, ILayoutEdge> evt) {
 		try {
 			// item added
 			// item deleted
@@ -282,6 +278,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 	 * 
 	 * @param state
 	 *            the state to set
+	 * @throws Exception
 	 */
 	void setState(AbstractParameterState state) throws Exception {
 		try {
@@ -299,11 +296,15 @@ public final class ParameterStateHandler implements IParameterHandler {
 	 *            the saved to set
 	 * @throws Exception
 	 */
-	void setGraphSaved(boolean saved) {
-		this.model.setGraphSaved(saved);
-		if (this.model.isGraphFile())
-			this.model.setSaveEnabled(!saved);
-		this.model.notifyObservers();
+	void setGraphSaved(boolean saved) throws Exception {
+		try {
+			this.model.setGraphSaved(saved);
+			if (this.model.isGraphFile())
+				this.model.setSaveEnabled(!saved);
+			this.model.notifyObservers();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -311,10 +312,15 @@ public final class ParameterStateHandler implements IParameterHandler {
 	 * 
 	 * @param enabled
 	 *            the enabled to set
+	 * @throws Exception
 	 */
-	void setEnableAlgorithms(boolean enabled) {
-		this.model.setAlgorithmsEnabled(enabled);
-		this.model.notifyObservers();
+	void setEnableAlgorithms(boolean enabled) throws Exception {
+		try {
+			this.model.setAlgorithmsEnabled(enabled);
+			this.model.notifyObservers();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -348,11 +354,16 @@ public final class ParameterStateHandler implements IParameterHandler {
 	 * 
 	 * @param enabled
 	 *            the enabled to set
+	 * @throws Exception
 	 */
-	void setEnableMenu(boolean enabled) {
-		this.model.setMenuEnabled(enabled);
-		this.model.setSaveEnabled(!this.model.isGraphSaved());
-		this.model.notifyObservers();
+	void setEnableMenu(boolean enabled) throws Exception {
+		try {
+			this.model.setMenuEnabled(enabled);
+			this.model.setSaveEnabled(!this.model.isGraphSaved());
+			this.model.notifyObservers();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	/**
@@ -386,19 +397,16 @@ public final class ParameterStateHandler implements IParameterHandler {
 				option = this.confirmSavingGraph();
 			if (option != JOptionPane.CANCEL_OPTION) {
 				/* Graph */
-				if (this.model.getGraph() != null)
-					this.clearGraph();
-				IExtendedGraph graph = this.parameterManager.newGraph(edgeType);
+				ILayoutGraph graph = this.parameterManager.newGraph(edgeType);
 				String name = this.model.getResourceBundle().getString(
 						"defaultname");
-				//
 				graph.setName(name);
 				graph.addGraphEventListener(this);
 				this.model.setGraph(graph);
 				this.model.setStart(null);
 				this.model.setEnd(null);
+				this.model.setGraphSaved(false);
 				this.model.setGraphFile(false);
-				VertexFactory.resetSigma();
 				/* Algorithm */
 				this.updateAlgorithms();
 			}
@@ -438,19 +446,15 @@ public final class ParameterStateHandler implements IParameterHandler {
 				option = fileChooser.showOpenDialog(this.model.getTop());
 				if (option == JFileChooser.APPROVE_OPTION) {
 					// Graph
-					if (this.model.getGraph() != null)
-						this.clearGraph();
 					File source = fileChooser.getSelectedFile();
-					IExtendedGraph graph = this.parameterManager
+					ILayoutGraph graph = this.parameterManager
 							.openGraph(source);
-					String name = source.getName();
-					//
-					graph.setName(name);
 					graph.addGraphEventListener(this);
 					this.model.setGraph(graph);
 					this.model.setStart(null);
 					this.model.setEnd(null);
-					this.model.setGraphFile(false);
+					this.model.setGraphSaved(true);
+					this.model.setGraphFile(true);
 					/* Algorithm */
 					this.updateAlgorithms();
 				}
@@ -546,13 +550,15 @@ public final class ParameterStateHandler implements IParameterHandler {
 	 * @throws Exception
 	 */
 	int selectAlgorithm() throws Exception {
-
 		try {
-			// TODO deny user interaction during render
+			// deny user interaction
+			// TODO disable all interaction item (menu etc.)
+			this.setMode(Mode.PICKING);
+			this.model.notifyObservers();
 			/* Graph */
 			if (this.model.getProgress() > 0)
 				((StepByStep) this.model.getSbsStateHandler()).toBeginning();
-			IExtendedGraph graph = this.model.getGraph();
+			ILayoutGraph graph = this.model.getGraph();
 			/* Algorithm */
 			int index = this.model.getSelectedAlgorithmIndex();
 			this.parameterManager.selectAlgorithm(index);
@@ -564,38 +570,8 @@ public final class ParameterStateHandler implements IParameterHandler {
 					.executeAlgorithm(graph);
 			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
-			if (traversal.isEmpty()) {
-				// TODO message eventually
-				index = 0;
-			}
 			// done
 			return index;
-		} catch (Exception e) {
-			throw e;
-		}
-
-	}
-
-	/**
-	 * Removes all vertices and edges from the graph.
-	 * 
-	 * @throws Exception
-	 */
-
-	private void clearGraph() throws Exception {
-		try {
-			IExtendedGraph graph = this.model.getGraph();
-			graph.removeGraphEventListener(this);
-			Collection<IEdgeLayout> edges = graph.getEdges();
-			Collection<IVertexLayout> vertices = graph.getVertices();
-			for (@SuppressWarnings("unused")
-			IEdgeLayout e : edges)
-				e = null;
-			for (@SuppressWarnings("unused")
-			IVertexLayout v : vertices)
-				v = null;
-			graph = null;
-			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -684,6 +660,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 			this.model.setSelectPickingModeEnabled(true);
 		}
 		this.model.setSwitchModeEnabled(true);
+		this.model.notifyObservers();
 	}
 
 	/**

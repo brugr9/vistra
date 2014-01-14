@@ -1,7 +1,8 @@
 package vistra.framework.graph;
 
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
+import vistra.framework.graph.item.VertexFactory;
 import edu.uci.ics.jung.graph.SparseGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
@@ -20,37 +21,38 @@ public final class GraphFactory {
 	}
 
 	/**
-	 * Creates an undirected {@code IExtendedGraph}.
+	 * Creates an undirected {@code ILayoutGraph}.
 	 * 
 	 * @return the graph
 	 */
-	public IExtendedGraph create() {
+	public ILayoutGraph create() {
 		return create(EdgeType.UNDIRECTED);
 	}
 
 	/**
-	 * Creates a default JUNG {@code SparseGraph} and extends it to an
-	 * {@code IExtendedGraph}.
-	 * 
-	 * @return the graph
-	 */
-	public static IExtendedGraph createGraph() {
-		IExtendedGraph graph = new ExtendedGraph(
-				new SparseGraph<IVertexLayout, IEdgeLayout>());
-		return graph;
-	}
-
-	/**
-	 * Creates an {@code IExtendedGraph} with edge type as given based on a JUNG
+	 * Creates an {@code ILayoutGraph} with edge type as given based on a JUNG
 	 * {@code SparseGraph}.
 	 * 
 	 * @param edgeType
 	 *            the edge type
 	 * @return the graph
 	 */
-	public static IExtendedGraph create(EdgeType edgeType) {
-		IExtendedGraph graph = createGraph();
+	public static ILayoutGraph create(EdgeType edgeType) {
+		ILayoutGraph graph = createGraph();
 		graph.setEdgeType(edgeType);
+		return graph;
+	}
+
+	/**
+	 * Creates a default JUNG {@code SparseGraph} and extends it to an
+	 * {@code ILayoutGraph}.
+	 * 
+	 * @return the graph
+	 */
+	private static ILayoutGraph createGraph() {
+		ILayoutGraph graph = new LayoutGraph(
+				new SparseGraph<ILayoutVertex, ILayoutEdge>());
+		VertexFactory.resetSigma();
 		return graph;
 	}
 

@@ -2,9 +2,9 @@ package vistra.framework.step;
 
 import net.datastructures.Entry;
 import vistra.framework.graph.item.IEdge;
-import vistra.framework.graph.item.IEdgeLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 import vistra.framework.graph.item.state.command.SolutionMemberEdgeCommand;
 import vistra.framework.graph.item.state.command.SolutionMemberVertexCommand;
@@ -36,11 +36,11 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 			this.commandHandler.addCommand(vertexCommand);
 			//
 			this.description.append("Vertex "
-					+ ((IVertexLayout) vertex).getId() + ": Solution member");
-			if (((IEdgeLayout) edge).getId() != null)
-				if (((IEdgeLayout) edge).getId().length() != 0)
+					+ ((ILayoutVertex) vertex).getId() + ": Solution member");
+			if (((ILayoutEdge) edge).getId() != null)
+				if (((ILayoutEdge) edge).getId().length() != 0)
 					this.description.append(" via edge "
-							+ ((IEdgeLayout) edge).getId());
+							+ ((ILayoutEdge) edge).getId());
 			this.description.append(System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,12 +71,12 @@ public class SolutionMemberStep extends AbstractStep implements IStep {
 				this.commandHandler.addCommand(vertexCommand);
 				//
 				this.description.append("Vertex "
-						+ ((IVertexLayout) vertex).getId()
+						+ ((ILayoutVertex) vertex).getId()
 						+ ": Solution member");
-				if (((IEdgeLayout) edge).getId() != null)
-					if (((IEdgeLayout) edge).getId().length() != 0)
+				if (((ILayoutEdge) edge).getId() != null)
+					if (((ILayoutEdge) edge).getId().length() != 0)
 						this.description.append(" via edge "
-								+ ((IEdgeLayout) edge).getId());
+								+ ((ILayoutEdge) edge).getId());
 				this.description.append(System.lineSeparator());
 			}
 		} catch (Exception e) {

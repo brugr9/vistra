@@ -3,10 +3,10 @@ package vistra.app.control.verifier;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
-import vistra.framework.graph.IExtendedGraph;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IItemLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.ILayoutGraph;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutItem;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -20,11 +20,11 @@ public class ItemIdVerifier extends AbstractVerifier {
 	/**
 	 * A field for an item.
 	 */
-	private final IItemLayout item;
+	private final ILayoutItem item;
 	/**
 	 * A field for a graph.
 	 */
-	private final IExtendedGraph graph;
+	private final ILayoutGraph graph;
 
 	/**
 	 * Main constructor.
@@ -36,11 +36,11 @@ public class ItemIdVerifier extends AbstractVerifier {
 	 * @param viewer
 	 *            a visualization viewer
 	 */
-	public ItemIdVerifier(String lastGood, IItemLayout item,
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer) {
+	public ItemIdVerifier(String lastGood, ILayoutItem item,
+			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
 		super(lastGood);
 		this.item = item;
-		this.graph = (IExtendedGraph) viewer.getGraphLayout().getGraph();
+		this.graph = (ILayoutGraph) viewer.getGraphLayout().getGraph();
 	}
 
 	/**

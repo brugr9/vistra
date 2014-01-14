@@ -2,7 +2,7 @@ package vistra.framework.graph.item.state;
 
 import net.datastructures.NodeStack;
 import net.datastructures.Stack;
-import vistra.framework.graph.item.EdgeLayout;
+import vistra.framework.graph.item.LayoutEdge;
 import vistra.framework.util.palette.ColorPalette;
 import vistra.framework.util.palette.FontPalette;
 import vistra.framework.util.palette.StrokePalette;
@@ -20,19 +20,19 @@ import vistra.framework.util.palette.StrokePalette;
  * @see VertexStateHandler
  * 
  */
-public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
+public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 
 	/**
 	 * A field for a stack of states.
 	 */
-	private Stack<AbstractEdgeState> state;
+	private Stack<AbstractEdgeState> stateStack;
 
 	/**
 	 * Main constructor.
 	 */
 	public EdgeStateHandler() {
 		super();
-		this.state = new NodeStack<AbstractEdgeState>();
+		this.stateStack = new NodeStack<AbstractEdgeState>();
 		try {
 			this.setState(new UnexploredEdgeState(this));
 		} catch (Exception e) {
@@ -46,8 +46,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleUnexplored() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleUnexplored();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleUnexplored();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -59,8 +59,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleBack() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleBack();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleBack();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -72,8 +72,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleForward() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleForward();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleForward();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -85,8 +85,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleCross() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleCross();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleCross();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -98,8 +98,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleDiscarded() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleDiscarded();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleDiscarded();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -111,8 +111,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleVisited() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleVisited();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleVisited();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -124,8 +124,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handleSolutionMember() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handleSolution();
+			this.stateStack.top().exit();
+			this.stateStack.top().handleSolution();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -137,8 +137,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	@Override
 	public void handlePreviousState() throws Exception {
 		try {
-			this.state.top().exit();
-			this.state.top().handlePreviousState();
+			this.stateStack.top().exit();
+			this.stateStack.top().handlePreviousState();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -153,8 +153,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setState(AbstractEdgeState state) throws Exception {
 		try {
-			this.state.push(state);
-			this.state.top().entry();
+			this.stateStack.push(state);
+			this.stateStack.top().entry();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -167,8 +167,8 @@ public class EdgeStateHandler extends EdgeLayout implements IEdgeStateHandler {
 	 */
 	void setPreviousState() throws Exception {
 		try {
-			this.state.pop();
-			this.state.top().entry();
+			this.stateStack.pop();
+			this.stateStack.top().entry();
 		} catch (Exception e) {
 			throw e;
 		}

@@ -2,8 +2,8 @@ package vistra.framework.graph;
 
 import java.io.Serializable;
 
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -14,7 +14,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
+public interface ILayoutGraph extends Graph<ILayoutVertex, ILayoutEdge>,
 		Serializable {
 
 	/**
@@ -51,13 +51,13 @@ public interface IExtendedGraph extends Graph<IVertexLayout, IEdgeLayout>,
 	 * Adds {@code listener} as a listener to this graph.
 	 */
 	void addGraphEventListener(
-			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
+			GraphEventListener<ILayoutVertex, ILayoutEdge> listener);
 
 	/**
 	 * Removes {@code listener} as a listener to this graph.
 	 */
 	void removeGraphEventListener(
-			GraphEventListener<IVertexLayout, IEdgeLayout> listener);
+			GraphEventListener<ILayoutVertex, ILayoutEdge> listener);
 
 	/**
 	 * Checks an item identifier.

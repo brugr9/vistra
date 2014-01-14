@@ -4,7 +4,7 @@ import java.io.File;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.framework.graph.IExtendedGraph;
+import vistra.framework.graph.ILayoutGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -30,7 +30,7 @@ public interface IParameterManager {
 	 * @return the graph
 	 * @throws ParameterException
 	 */
-	IExtendedGraph newGraph(EdgeType edgeType) throws ParameterException;
+	ILayoutGraph newGraph(EdgeType edgeType) throws ParameterException;
 
 	/**
 	 * Opens a graph given as file.
@@ -40,7 +40,7 @@ public interface IParameterManager {
 	 * @return the graph
 	 * @throws ParameterException
 	 */
-	IExtendedGraph openGraph(File source) throws ParameterException;
+	ILayoutGraph openGraph(File source) throws ParameterException;
 
 	/**
 	 * Saves the graph as GraphML-file.
@@ -103,6 +103,6 @@ public interface IParameterManager {
 	 * @return the traversal
 	 * @throws ParameterException
 	 */
-	ITraversal executeAlgorithm(IExtendedGraph g) throws ParameterException;
+	ITraversal executeAlgorithm(ILayoutGraph g) throws ParameterException;
 
 }

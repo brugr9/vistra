@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutVertex;
 
 /**
  * A vertex transformer: location.
@@ -12,13 +12,13 @@ import vistra.framework.graph.item.IVertexLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexLocation implements Transformer<IVertexLayout, Point2D> {
+public class VertexLocation implements Transformer<ILayoutVertex, Point2D> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Point2D transform(IVertexLayout layout) {
+	public Point2D transform(ILayoutVertex layout) {
 		return layout.getLocation();
 	}
 

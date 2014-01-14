@@ -5,24 +5,24 @@ import java.awt.Font;
 import java.awt.Stroke;
 
 /**
- * An edge layout.
+ * A layout edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see Layout<V, E>
  */
-public class EdgeLayout extends Edge implements IEdgeLayout {
+public class LayoutEdge extends Edge implements ILayoutEdge {
 
 	/**
 	 * A field for an item layout to work with.
 	 */
-	private ItemLayout layout;
+	private LayoutItem layout;
 
 	/**
 	 * Main constructor.
 	 */
-	public EdgeLayout() {
+	public LayoutEdge() {
 		super();
-		this.layout = new ItemLayout();
+		this.layout = new LayoutItem();
 	}
 
 	/**

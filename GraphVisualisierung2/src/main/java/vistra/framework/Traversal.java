@@ -111,20 +111,4 @@ class Traversal implements ITraversal {
 		return this.steps.previous();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getDescription() {
-		return this.description;
-	}
-
 }

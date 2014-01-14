@@ -15,9 +15,9 @@ import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IItemLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutItem;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -33,7 +33,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * A field for a visualization viewer.
 	 */
-	private final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
+	private final VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer;
 	/**
 	 * A field for a model.
 	 */
@@ -45,7 +45,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * A field for a edge.
 	 */
-	private IEdgeLayout edge;
+	private ILayoutEdge edge;
 	/**
 	 * A field for a dialog menu item.
 	 */
@@ -63,7 +63,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	 * @param model
 	 *            the gui model
 	 */
-	public EdgePopup(VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
+	public EdgePopup(VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer,
 			IModel model) {
 		super("edgePopup");
 		/**/
@@ -89,9 +89,9 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setItem(IItemLayout item) {
-		if (item instanceof IVertexLayout) {
-			this.edge = (IEdgeLayout) item;
+	public void setItem(ILayoutItem item) {
+		if (item instanceof ILayoutVertex) {
+			this.edge = (ILayoutEdge) item;
 		}
 	}
 

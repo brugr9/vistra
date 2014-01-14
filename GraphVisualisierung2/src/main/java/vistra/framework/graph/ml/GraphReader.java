@@ -3,9 +3,9 @@ package vistra.framework.graph.ml;
 import java.io.IOException;
 import java.io.Reader;
 
-import vistra.framework.graph.IExtendedGraph;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.ILayoutGraph;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 
 /**
@@ -44,20 +44,20 @@ public final class GraphReader {
 	}
 
 	/**
-	 * Reads a GraphML-file to a graph.
+	 * Reads in a GraphML-file.
 	 * 
 	 * @param r
 	 *            a reader
 	 * @return the graph
 	 * @throws IOException
 	 */
-	public IExtendedGraph read(Reader r) throws Exception {
+	public ILayoutGraph read(Reader r) throws Exception {
 		try {
-			GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout> mlReader = new GraphMLReader2<IExtendedGraph, IVertexLayout, IEdgeLayout>(
+			GraphMLReader2<ILayoutGraph, ILayoutVertex, ILayoutEdge> mlReader = new GraphMLReader2<ILayoutGraph, ILayoutVertex, ILayoutEdge>(
 					r, this.graphTransformer, this.vertexTransformer,
 					this.edgeTransformer, this.hyperEdgeTransformer);
 			mlReader.init();
-			IExtendedGraph graph = mlReader.readGraph();
+			ILayoutGraph graph = mlReader.readGraph();
 			mlReader.close();
 			return graph;
 		} catch (Exception e) {

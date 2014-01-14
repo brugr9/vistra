@@ -15,9 +15,9 @@ import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.app.control.IControl.ControlEvent;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IItemLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutItem;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 /**
@@ -33,7 +33,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * A field for a visualization viewer.
 	 */
-	private final VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
+	private final VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer;
 	/**
 	 * A field for a model.
 	 */
@@ -46,7 +46,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * A field for a vertex.
 	 */
-	private IVertexLayout vertex;
+	private ILayoutVertex vertex;
 	/**
 	 * A field for a start check box.
 	 */
@@ -68,7 +68,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 * @param model
 	 *            the gui model
 	 */
-	public VertexPopup(VisualizationViewer<IVertexLayout, IEdgeLayout> viewer,
+	public VertexPopup(VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer,
 			IModel model) {
 		super("vertexPopup");
 		this.viewer = viewer;
@@ -103,9 +103,9 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setItem(IItemLayout item) {
-		if (item instanceof IVertexLayout) {
-			this.vertex = (IVertexLayout) item;
+	public void setItem(ILayoutItem item) {
+		if (item instanceof ILayoutVertex) {
+			this.vertex = (ILayoutVertex) item;
 			this.start.setSelected(this.vertex.isStart());
 			this.end.setSelected(this.vertex.isEnd());
 		}
@@ -161,7 +161,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		public void actionPerformed(ActionEvent e) {
 			if (vertex != null) {
 				if (start.isSelected()) {
-					IVertexLayout previousStart = model.getStart();
+					ILayoutVertex previousStart = model.getStart();
 					if (previousStart != null)
 						previousStart.setStart(false);
 					model.setStart(vertex);
@@ -188,7 +188,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		public void actionPerformed(ActionEvent e) {
 			if (vertex != null) {
 				if (end.isSelected()) {
-					IVertexLayout previousEnd = model.getEnd();
+					ILayoutVertex previousEnd = model.getEnd();
 					if (previousEnd != null)
 						previousEnd.setEnd(false);
 					model.setEnd(vertex);

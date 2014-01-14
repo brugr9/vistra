@@ -1,7 +1,7 @@
 package vistra.framework.step;
 
 import vistra.framework.graph.item.IEdge;
-import vistra.framework.graph.item.IEdgeLayout;
+import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.state.command.CrossEdgeCommand;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 
@@ -26,9 +26,9 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 			this.commandHandler.addCommand(command);
 			//
 			this.description.append("Cross-edge");
-			if (((IEdgeLayout) edge).getId() != null)
-				if (((IEdgeLayout) edge).getId().length() != 0)
-					this.description.append(" " + ((IEdgeLayout) edge).getId());
+			if (((ILayoutEdge) edge).getId() != null)
+				if (((ILayoutEdge) edge).getId().length() != 0)
+					this.description.append(" " + ((ILayoutEdge) edge).getId());
 			this.description.append(System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,10 +49,10 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Cross-edge");
-				if (((IEdgeLayout) edge).getId() != null)
-					if (((IEdgeLayout) edge).getId().length() != 0)
+				if (((ILayoutEdge) edge).getId() != null)
+					if (((ILayoutEdge) edge).getId().length() != 0)
 						this.description.append(" "
-								+ ((IEdgeLayout) edge).getId());
+								+ ((ILayoutEdge) edge).getId());
 				this.description.append(System.lineSeparator());
 			}
 		} catch (Exception e) {

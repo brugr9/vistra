@@ -2,7 +2,7 @@ package vistra.framework.graph.item.transformer;
 
 import org.apache.commons.collections15.Transformer;
 
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutVertex;
 
 /**
  * A vertex transformer: label.
@@ -10,13 +10,13 @@ import vistra.framework.graph.item.IVertexLayout;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class VertexLabel implements Transformer<IVertexLayout, String> {
+public class VertexLabel implements Transformer<ILayoutVertex, String> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String transform(IVertexLayout vertex) {
+	public String transform(ILayoutVertex vertex) {
 		String label = "", id = "", value = "";
 		if (vertex.getId() != null)
 			id = vertex.getId();

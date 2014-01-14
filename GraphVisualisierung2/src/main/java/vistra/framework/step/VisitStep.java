@@ -1,9 +1,9 @@
 package vistra.framework.step;
 
 import vistra.framework.graph.item.IEdge;
-import vistra.framework.graph.item.IEdgeLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
-import vistra.framework.graph.item.IVertexLayout;
 import vistra.framework.graph.item.state.command.DiscoveryEdgeCommand;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 import vistra.framework.graph.item.state.command.VisitedVertexCommand;
@@ -33,11 +33,11 @@ public class VisitStep extends AbstractStep implements IStep {
 			this.commandHandler.addCommand(vertexCommand);
 			//
 			this.description.append("Vertex "
-					+ ((IVertexLayout) vertex).getId() + " visited");
-			if (((IEdgeLayout) edge).getId() != null)
-				if (((IEdgeLayout) edge).getId().length() != 0)
+					+ ((ILayoutVertex) vertex).getId() + " visited");
+			if (((ILayoutEdge) edge).getId() != null)
+				if (((ILayoutEdge) edge).getId().length() != 0)
 					this.description.append(" via edge "
-							+ ((IEdgeLayout) edge).getId());
+							+ ((ILayoutEdge) edge).getId());
 			this.description.append(System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();

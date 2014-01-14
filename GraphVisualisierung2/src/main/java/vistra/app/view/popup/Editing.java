@@ -6,9 +6,9 @@ import java.awt.geom.Point2D;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.framework.graph.IExtendedGraph;
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.ILayoutGraph;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
@@ -24,17 +24,17 @@ import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
  * 
  */
 public class Editing extends
-		EditingGraphMousePlugin<IVertexLayout, IEdgeLayout> {
+		EditingGraphMousePlugin<ILayoutVertex, ILayoutEdge> {
 
 	/**
 	 * A field for a JUNG visualization viewer.
 	 */
-	private VisualizationViewer<IVertexLayout, IEdgeLayout> viewer;
+	private VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer;
 
 	/**
 	 * A field for a JUNG layout.
 	 */
-	private Layout<IVertexLayout, IEdgeLayout> layout;
+	private Layout<ILayoutVertex, ILayoutEdge> layout;
 
 	/**
 	 * Main constructor.
@@ -44,8 +44,8 @@ public class Editing extends
 	 * @param edgeFactory
 	 *            the edge factory
 	 */
-	public Editing(Factory<IVertexLayout> vertexFactory,
-			Factory<IEdgeLayout> edgeFactory) {
+	public Editing(Factory<ILayoutVertex> vertexFactory,
+			Factory<ILayoutEdge> edgeFactory) {
 		super(vertexFactory, edgeFactory);
 	}
 
@@ -100,27 +100,27 @@ public class Editing extends
 	public void mousePressed(MouseEvent e) {
 		if (this.checkModifiers(e)) {
 
-			this.viewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+			this.viewer = (VisualizationViewer<ILayoutVertex, ILayoutEdge>) e
 					.getSource();
 			this.layout = this.viewer.getModel().getGraphLayout();
 			final Point2D p = e.getPoint();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = this.viewer
+			GraphElementAccessor<ILayoutVertex, ILayoutEdge> pickSupport = this.viewer
 					.getPickSupport();
 
 			if (pickSupport != null) {
-				Graph<IVertexLayout, IEdgeLayout> graph = this.layout
+				Graph<ILayoutVertex, ILayoutEdge> graph = this.layout
 						.getGraph();
 
 				// set default edge type
 				this.edgeIsDirected = EdgeType.DIRECTED;
-				if (graph instanceof IExtendedGraph) {
-					IExtendedGraph eg = (IExtendedGraph) graph;
+				if (graph instanceof ILayoutGraph) {
+					ILayoutGraph eg = (ILayoutGraph) graph;
 					if (eg.getEdgeType() == EdgeType.UNDIRECTED) {
 						this.edgeIsDirected = EdgeType.UNDIRECTED;
 					}
 				}
 
-				final IVertexLayout vertex = pickSupport.getVertex(this.layout,
+				final ILayoutVertex vertex = pickSupport.getVertex(this.layout,
 						p.getX(), p.getY());
 
 				if (vertex != null) {
@@ -141,7 +141,7 @@ public class Editing extends
 					}
 				} else {
 					/* vertex */
-					IVertexLayout newVertex = this.vertexFactory.create();
+					ILayoutVertex newVertex = this.vertexFactory.create();
 					graph.addVertex(newVertex);
 
 					Point2D point = this.viewer.getRenderContext()
@@ -166,18 +166,18 @@ public class Editing extends
 	public void mouseReleased(MouseEvent e) {
 		if (this.checkModifiers(e)) {
 
-			this.viewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+			this.viewer = (VisualizationViewer<ILayoutVertex, ILayoutEdge>) e
 					.getSource();
 			final Point2D p = e.getPoint();
 			this.layout = this.viewer.getModel().getGraphLayout();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = this.viewer
+			GraphElementAccessor<ILayoutVertex, ILayoutEdge> pickSupport = this.viewer
 					.getPickSupport();
 
 			if (pickSupport != null) {
-				final IVertexLayout vertex = pickSupport.getVertex(layout,
+				final ILayoutVertex vertex = pickSupport.getVertex(layout,
 						p.getX(), p.getY());
 				if (vertex != null && this.startVertex != null) {
-					Graph<IVertexLayout, IEdgeLayout> graph = this.viewer
+					Graph<ILayoutVertex, ILayoutEdge> graph = this.viewer
 							.getGraphLayout().getGraph();
 					graph.addEdge(this.edgeFactory.create(), this.startVertex,
 							vertex, this.edgeIsDirected);

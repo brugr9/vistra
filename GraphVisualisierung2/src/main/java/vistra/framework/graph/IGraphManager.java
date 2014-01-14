@@ -22,7 +22,7 @@ public interface IGraphManager {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	IExtendedGraph newGraph(EdgeType edgeType) throws Exception;
+	ILayoutGraph newGraph(EdgeType edgeType) throws Exception;
 
 	/**
 	 * Opens a GraphML-file as graph.
@@ -32,7 +32,7 @@ public interface IGraphManager {
 	 * @return the graph
 	 * @throws Exception
 	 */
-	IExtendedGraph open(File file) throws Exception;
+	ILayoutGraph open(File file) throws Exception;
 
 	/**
 	 * Saves the graph as GraphML-file.

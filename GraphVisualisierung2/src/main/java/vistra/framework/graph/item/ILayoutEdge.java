@@ -1,12 +1,12 @@
 package vistra.framework.graph.item;
 
 /**
- * An edge layout interface.
+ * An layout edge interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see Layout<V, E>
  */
-public interface IEdgeLayout extends IEdge, IItemLayout {
+public interface ILayoutEdge extends IEdge, ILayoutItem {
 
 	/**
 	 * Sets a weight.

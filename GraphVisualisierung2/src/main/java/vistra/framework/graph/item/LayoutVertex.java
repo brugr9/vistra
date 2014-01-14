@@ -6,17 +6,17 @@ import java.awt.Stroke;
 import java.awt.geom.Point2D;
 
 /**
- * A vertex layout.
+ * A layout vertex.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
- * 
+ * @see Layout<V, E>
  */
-public class VertexLayout extends Vertex implements IVertexLayout {
+public class LayoutVertex extends Vertex implements ILayoutVertex {
 
 	/**
-	 * A field for an item layout to work with.
+	 * A field for a layout item to work with.
 	 */
-	private ItemLayout layout;
+	private LayoutItem layout;
 	/**
 	 * A field for the location.
 	 */
@@ -29,9 +29,9 @@ public class VertexLayout extends Vertex implements IVertexLayout {
 	/**
 	 * Main constructor.
 	 */
-	protected VertexLayout() {
+	protected LayoutVertex() {
 		super();
-		this.layout = new ItemLayout();
+		this.layout = new LayoutItem();
 		this.location = null;
 		this.fillColor = null;
 	}

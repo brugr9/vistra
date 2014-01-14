@@ -3,7 +3,7 @@ package vistra.framework.graph.ml;
 import org.apache.commons.collections15.Transformer;
 
 import vistra.framework.graph.GraphFactory;
-import vistra.framework.graph.IExtendedGraph;
+import vistra.framework.graph.ILayoutGraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.io.graphml.GraphMetadata;
 import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;
@@ -15,16 +15,16 @@ import edu.uci.ics.jung.io.graphml.GraphMetadata.EdgeDefault;
  * 
  */
 public class GraphTransformer implements
-		Transformer<GraphMetadata, IExtendedGraph> {
+		Transformer<GraphMetadata, ILayoutGraph> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph transform(GraphMetadata meta) {
+	public ILayoutGraph transform(GraphMetadata meta) {
 		EdgeType edgeType = meta.getEdgeDefault() == EdgeDefault.UNDIRECTED ? EdgeType.UNDIRECTED
 				: EdgeType.DIRECTED;
-		IExtendedGraph graph = GraphFactory.create(edgeType);
+		ILayoutGraph graph = GraphFactory.create(edgeType);
 		return graph;
 	}
 

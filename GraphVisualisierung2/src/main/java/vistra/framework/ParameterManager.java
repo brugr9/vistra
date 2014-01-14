@@ -18,8 +18,8 @@ import vistra.framework.algorithm.impl.Dijkstra;
 import vistra.framework.algorithm.impl.Kruskal;
 import vistra.framework.algorithm.impl.SimpleSteps;
 import vistra.framework.graph.GraphManagerFactory;
-import vistra.framework.graph.IExtendedGraph;
 import vistra.framework.graph.IGraphManager;
+import vistra.framework.graph.ILayoutGraph;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.TraversableGraph;
 import vistra.framework.step.IStep;
@@ -29,9 +29,9 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
  * A parameter manager. The manager gives access to the graph and the algorithm
- * by delegating its method calls to a manager specialized on graphs or
- * algorithms (facade pattern). Furthermore, this manager holds an algorithm
- * which can be changed (strategy pattern).
+ * by delegating its method calls to manager specialized on graphs or algorithms
+ * (facade pattern). Furthermore, this manager holds an algorithm which can be
+ * changed (strategy pattern).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -88,7 +88,7 @@ public class ParameterManager implements IParameterManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph openGraph(File source) throws ParameterException {
+	public ILayoutGraph openGraph(File source) throws ParameterException {
 		try {
 			return this.graphManager.open(source);
 		} catch (Exception e) {
@@ -100,7 +100,7 @@ public class ParameterManager implements IParameterManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph newGraph(EdgeType edgeType) throws ParameterException {
+	public ILayoutGraph newGraph(EdgeType edgeType) throws ParameterException {
 		try {
 			return this.graphManager.newGraph(edgeType);
 		} catch (Exception e) {
@@ -181,7 +181,7 @@ public class ParameterManager implements IParameterManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ITraversal executeAlgorithm(IExtendedGraph graph)
+	public ITraversal executeAlgorithm(ILayoutGraph graph)
 			throws ParameterException {
 		try {
 			/* graph */
@@ -197,7 +197,6 @@ public class ParameterManager implements IParameterManager {
 			while (stepIterator.hasPrevious())
 				stepIterator.previous().undo();
 			ITraversal traversal = new Traversal(stepIterator);
-			traversal.setDescription(this.algorithm.getDescription());
 			return traversal;
 		} catch (Exception e) {
 			throw new ParameterException(e);

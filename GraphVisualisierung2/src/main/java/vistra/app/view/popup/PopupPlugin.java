@@ -8,9 +8,9 @@ import javax.swing.JPopupMenu;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IItemLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutItem;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;
@@ -23,7 +23,7 @@ import edu.uci.ics.jung.visualization.control.EditingPopupGraphMousePlugin;
  * 
  */
 public class PopupPlugin extends
-		EditingPopupGraphMousePlugin<IVertexLayout, IEdgeLayout> {
+		EditingPopupGraphMousePlugin<ILayoutVertex, ILayoutEdge> {
 
 	/**
 	 * A field for a switch-mode pop-up menu.
@@ -46,8 +46,8 @@ public class PopupPlugin extends
 	 * @param edgeFactory
 	 *            an edge factory
 	 */
-	public PopupPlugin(Factory<IVertexLayout> vertexFactory,
-			Factory<IEdgeLayout> edgeFactory) {
+	public PopupPlugin(Factory<ILayoutVertex> vertexFactory,
+			Factory<ILayoutEdge> edgeFactory) {
 		super(vertexFactory, edgeFactory);
 		this.modePopup = null;
 		this.vertexPopup = null;
@@ -62,15 +62,15 @@ public class PopupPlugin extends
 		if (e.getSource() instanceof VisualizationViewer<?, ?>) {
 
 			@SuppressWarnings("unchecked")
-			VisualizationViewer<IVertexLayout, IEdgeLayout> viewer = (VisualizationViewer<IVertexLayout, IEdgeLayout>) e
+			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer = (VisualizationViewer<ILayoutVertex, ILayoutEdge>) e
 					.getSource();
 
 			Point2D point = e.getPoint();
-			GraphElementAccessor<IVertexLayout, IEdgeLayout> pickSupport = viewer
+			GraphElementAccessor<ILayoutVertex, ILayoutEdge> pickSupport = viewer
 					.getPickSupport();
 
 			if (pickSupport != null) {
-				IVertexLayout vertex = pickSupport.getVertex(
+				ILayoutVertex vertex = pickSupport.getVertex(
 						viewer.getGraphLayout(), point.getX(), point.getY());
 
 				if (vertex != null && this.vertexPopup != null) {
@@ -78,7 +78,7 @@ public class PopupPlugin extends
 					this.vertexPopup.show(viewer, e.getX(), e.getY());
 				}
 
-				IEdgeLayout edge = pickSupport.getEdge(viewer.getGraphLayout(),
+				ILayoutEdge edge = pickSupport.getEdge(viewer.getGraphLayout(),
 						point.getX(), point.getY());
 
 				if (edge != null && this.edgePopup != null) {
@@ -107,7 +107,7 @@ public class PopupPlugin extends
 	 * @param popUp
 	 *            a pop-up
 	 */
-	private void updateItemMenu(IItemLayout item, Point2D point,
+	private void updateItemMenu(ILayoutItem item, Point2D point,
 			JPopupMenu popUp) {
 		for (Component comp : popUp.getComponents()) {
 			if (comp instanceof IItemPopup) {

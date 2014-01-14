@@ -3,12 +3,18 @@ package vistra.framework.graph;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Collection;
 import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
+import vistra.framework.graph.item.transformer.VertexLocation;
 import vistra.framework.graph.ml.GraphReader;
 import vistra.framework.graph.ml.GraphWriter;
+import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -17,7 +23,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see ExtendedGraph
+ * @see LayoutGraph
+ * @see GraphReader
  * @see GraphWriter
  */
 class GraphManager implements IGraphManager {
@@ -25,7 +32,7 @@ class GraphManager implements IGraphManager {
 	/**
 	 * A field for a graph.
 	 */
-	private IExtendedGraph graph;
+	private ILayoutGraph graph;
 	/**
 	 * A field for a file.
 	 */
@@ -67,8 +74,10 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph newGraph(EdgeType edgeType) throws Exception {
+	public ILayoutGraph newGraph(EdgeType edgeType) throws Exception {
 		try {
+			if (this.graph != null)
+				this.clearGraph(); // TODO nessessary?
 			this.file = new File("");
 			this.graph = GraphFactory.create(edgeType);
 			return this.graph;
@@ -81,11 +90,41 @@ class GraphManager implements IGraphManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public IExtendedGraph open(File file) throws Exception {
+	public ILayoutGraph open(File file) throws Exception {
 		try {
+			if (this.graph != null)
+				this.clearGraph(); // TODO nessessary?
 			this.file = file;
+			// TODO temporary layout with VertexLocation
+			Layout<ILayoutVertex, ILayoutEdge> layout = new StaticLayout<ILayoutVertex, ILayoutEdge>(
+					this.graph);
+			layout.setInitializer(new VertexLocation());
+			// TODO end
 			this.graph = this.reader.read(new FileReader(this.file));
+			String name = file.getName();
+			this.graph.setName(name);
 			return this.graph;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/**
+	 * Removes all vertices and edges from the graph.
+	 * 
+	 * @throws Exception
+	 */
+	private void clearGraph() throws Exception {
+		try {
+			Collection<ILayoutEdge> edges = this.graph.getEdges();
+			Collection<ILayoutVertex> vertices = this.graph.getVertices();
+			for (@SuppressWarnings("unused")
+			ILayoutEdge e : edges)
+				e = null;
+			for (@SuppressWarnings("unused")
+			ILayoutVertex v : vertices)
+				v = null;
+			this.graph = null;
 		} catch (Exception e) {
 			throw e;
 		}

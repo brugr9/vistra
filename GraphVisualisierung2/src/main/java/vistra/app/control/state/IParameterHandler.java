@@ -3,8 +3,8 @@ package vistra.app.control.state;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 
-import vistra.framework.graph.item.IEdgeLayout;
-import vistra.framework.graph.item.IVertexLayout;
+import vistra.framework.graph.item.ILayoutEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.graph.event.GraphEventListener;
 
 /**
@@ -23,7 +23,7 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
  */
 public interface IParameterHandler extends IControlContext,
 		ActionListener, ItemListener,
-		GraphEventListener<IVertexLayout, IEdgeLayout> {
+		GraphEventListener<ILayoutVertex, ILayoutEdge> {
 
 	/**
 	 * Handles an interaction: new undirected graph.
