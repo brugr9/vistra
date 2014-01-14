@@ -27,6 +27,7 @@ class ActionListenerI18n extends AbstractActionListener {
 	/**
 	 * A field for a list of shortcuts. TODO i18n
 	 */
+	@SuppressWarnings("nls")
 	private final String shortcuts = "<html>"
 			+ "<h4>All Modes:</h4>"
 			+ "<small>LC = left-click; RC = right-click</small>"
@@ -60,8 +61,8 @@ class ActionListenerI18n extends AbstractActionListener {
 	 */
 	ActionListenerI18n(IModel model) {
 		super(model);
-		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle")
-				.replace(".", File.separator);
+		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle") //$NON-NLS-1$
+				.replace(".", File.separator); //$NON-NLS-1$
 		this.actionPerformed(null);
 	}
 
@@ -96,10 +97,10 @@ class ActionListenerI18n extends AbstractActionListener {
 			this.model.setShortcutsMessage(this.shortcuts);
 			/* about message */
 			StringBuilder about = new StringBuilder();
-			about.append(b.getString("app.label"));
+			about.append(b.getString("app.label")); //$NON-NLS-1$
 			about.append(System.lineSeparator());
 			about.append(System.lineSeparator());
-			about.append(b.getString("about.message").replaceAll("\n",
+			about.append(b.getString("about.message").replaceAll("\n", //$NON-NLS-1$ //$NON-NLS-2$
 					System.lineSeparator()));
 			about.append(System.lineSeparator());
 			this.model.setAboutMessage(about.toString());
@@ -110,7 +111,7 @@ class ActionListenerI18n extends AbstractActionListener {
 			this.model.notifyObservers(ControlEvent.I18N);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
-					.getResourceBundle().getString("app.label"), 1, null);
+					.getResourceBundle().getString("app.label"), 1, null); //$NON-NLS-1$
 			ex.printStackTrace();
 		}
 	}

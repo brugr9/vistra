@@ -26,11 +26,8 @@ public class Startup {
 				try {
 					AppFactory.createApplication(ViewType.DEFAULT);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(
-							null,
-							"Sorry, somthing went totally wrong:\n"
-									+ e.toString() + e.getCause(), null, 1,
-							null);
+					JOptionPane.showMessageDialog(null,
+							e.toString() + e.getCause(), null, 1, null);
 					e.printStackTrace();
 				}
 			}
