@@ -52,9 +52,11 @@ public final class Animation extends Observable implements IAnimation {
 	public Animation(IModel model) {
 		super();
 		this.model = (Model) model;
+		// timer
 		this.animationListener = new AnimationListener();
 		int animationDelay = this.model.getDelay() * ConstantPalette.aSecond;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
+		// state
 		try {
 			this.state = new AnimationOff(this);
 			this.handleOff();

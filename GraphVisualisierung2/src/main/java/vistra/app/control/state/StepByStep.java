@@ -42,10 +42,6 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 */
 	private IStep step;
 	/**
-	 * A field for a timer.
-	 */
-	private Timer timer;
-	/**
 	 * A field for an off.
 	 */
 	private boolean off;
@@ -53,6 +49,10 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * A field for a counter.
 	 */
 	private int counter;
+	/**
+	 * A field for a blink timer.
+	 */
+	private Timer blinkTimer;
 	/**
 	 * A field for a blink listener.
 	 */
@@ -71,13 +71,15 @@ public final class StepByStep extends Observable implements IStepByStep {
 	public StepByStep(IModel model) {
 		super();
 		this.model = (Model) model;
+		// timer
 		this.step = null;
-		this.blinkListener = new BlinkListener();
-		int blinkDelay = this.model.getDelay() / (2 * 2 * NUMBER_OF_BLINKS)
-				* ConstantPalette.aSecond;
-		this.timer = new Timer(blinkDelay, this.blinkListener);
 		this.off = true;
 		this.counter = 0;
+		this.blinkListener = new BlinkListener();
+		int blinkDelay = (this.model.getDelay() * ConstantPalette.aSecond)
+				/ (4 * NUMBER_OF_BLINKS);
+		this.blinkTimer = new Timer(blinkDelay, this.blinkListener);
+		// state
 		try {
 			this.state = new SbsOff(this);
 			this.handleOff();
@@ -305,7 +307,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 	boolean backward() throws Exception {
 		ITraversal traversal = this.model.getTraversal();
 		try {
-			IStep step = null;
+			IStep step;
 			int progress = this.model.getProgress();
 			/* here we go ... */
 			for (int i = 0; i < this.model.getSteplength(); i++) {
@@ -332,20 +334,6 @@ public final class StepByStep extends Observable implements IStepByStep {
 	}
 
 	/**
-	 * A helper method: Deletes a string from protocol.
-	 * 
-	 * @param str
-	 *            the string to delete
-	 */
-	private void delete(String str) {
-		StringBuilder protocol = this.model.getProtocol();
-		int start, end;
-		start = protocol.lastIndexOf(str);
-		end = start + str.length();
-		protocol.delete(start, end);
-	}
-
-	/**
 	 * Doing: Step-by-Step forward for a step length.
 	 * 
 	 * @return <code>true</code> if the traversal has a next step.
@@ -354,7 +342,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 	boolean forward() throws Exception {
 		ITraversal traversal = this.model.getTraversal();
 		try {
-			IStep step = null;
+			IStep step;
 			int progress = this.model.getProgress();
 			StringBuilder protocol = this.model.getProtocol();
 			/* here we go ... */
@@ -363,8 +351,11 @@ public final class StepByStep extends Observable implements IStepByStep {
 					// step
 					step = traversal.next();
 					// TODO
-					// if(this.model.isBlinkEnabled())
-					this.blink(step);
+					// if (this.model.isBlinkEnabled()) {
+					// this.step = step;
+					// this.startBlink();
+					// this.wait();
+					// }
 					step.execute();
 					this.model.setProgress(++progress);
 					// protocol
@@ -383,26 +374,6 @@ public final class StepByStep extends Observable implements IStepByStep {
 	}
 
 	/**
-	 * A helper method: Helping a step to blink by starting the related timer.
-	 * 
-	 * @param step
-	 *            the step to blink
-	 * @throws Exception
-	 */
-	private void blink(IStep step) throws Exception {
-		try {
-			// TODO
-			// if (this.model.isBlinkEnabled()) {
-			this.step = step;
-			this.off = true;
-			this.counter = 0;
-			this.timer.start();
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
-
-	/**
 	 * Doing: Step-by-Step forward until executing the last step.
 	 * 
 	 * @throws Exception
@@ -414,6 +385,28 @@ public final class StepByStep extends Observable implements IStepByStep {
 		} catch (Exception ex) {
 			throw ex;
 		}
+	}
+
+	/**
+	 * A helper method: Deletes a string from protocol.
+	 * 
+	 * @param str
+	 *            the string to delete
+	 */
+	private void delete(String str) {
+		StringBuilder protocol = this.model.getProtocol();
+		int start, end;
+		start = protocol.lastIndexOf(str);
+		end = start + str.length();
+		protocol.delete(start, end);
+	}
+
+	/**
+	 * Starts the blink timer.
+	 */
+	void startBlink() {
+		this.blinkTimer.start();
+		this.setChanged();
 	}
 
 	/**
@@ -430,16 +423,19 @@ public final class StepByStep extends Observable implements IStepByStep {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (off)
+				if (off) {
 					step.execute();
-				else {
+				} else {
 					step.undo();
 					counter++;
 				}
-				model.notifyObservers();
 				off = !off;
-				if (counter == NUMBER_OF_BLINKS)
-					timer.stop();
+				if (counter == NUMBER_OF_BLINKS) {
+					blinkTimer.stop();
+					setChanged();
+					off = true;
+					counter = 0;
+				}
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(
 						null,
