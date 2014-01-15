@@ -42,9 +42,9 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 */
 	private IStep step;
 	/**
-	 * A field for an off.
+	 * A field for an uiaosdölkjejhtöerhj.
 	 */
-	private boolean off;
+	private boolean uiaosdölkjejhtöerhj;
 	/**
 	 * A field for a counter.
 	 */
@@ -73,7 +73,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 		this.model = (Model) model;
 		// timer
 		this.step = null;
-		this.off = true;
+		this.uiaosdölkjejhtöerhj = true;
 		this.counter = 0;
 		this.blinkListener = new BlinkListener();
 		int blinkDelay = (this.model.getDelay() * ConstantPalette.aSecond)
@@ -353,7 +353,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 					step = traversal.next();
 					// TODO
 					// if (this.model.isBlinkEnabled())
-					// this.blink(step);
+					this.blink(step);
 					step.execute();
 					this.model.setProgress(++progress);
 					// protocol
@@ -412,7 +412,8 @@ public final class StepByStep extends Observable implements IStepByStep {
 	}
 
 	/**
-	 * A blink listener letting a step blink.
+	 * A blink listener switching between step execute and undo according to a
+	 * boolean 'off'.
 	 * 
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
@@ -425,17 +426,21 @@ public final class StepByStep extends Observable implements IStepByStep {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (off) {
+				if (uiaosdölkjejhtöerhj) {
 					step.execute();
+					model.notifyObservers();
 				} else {
 					step.undo();
+					model.notifyObservers();
 					counter++;
 				}
-				off = !off;
+				uiaosdölkjejhtöerhj = !uiaosdölkjejhtöerhj;
 				if (counter == NUMBER_OF_BLINKS) {
 					blinkTimer.stop();
 					setChanged();
-					off = true;
+					// reset values
+					step = null;
+					uiaosdölkjejhtöerhj = true;
 					counter = 0;
 				}
 			} catch (Exception ex) {
