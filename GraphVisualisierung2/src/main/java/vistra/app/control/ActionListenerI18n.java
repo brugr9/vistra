@@ -103,8 +103,6 @@ public class ActionListenerI18n extends AbstractActionListener {
 					System.lineSeparator()));
 			about.append(System.lineSeparator());
 			this.model.setAboutMessage(about.toString());
-			/* protocol */
-			this.model.setProtocol(about);
 			/* update the view */
 			this.model.notifyObservers(I18nEvent.I18N);
 		} catch (Exception ex) {

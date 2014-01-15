@@ -1,6 +1,7 @@
 package vistra.app.control;
 
 import vistra.app.IModel;
+import vistra.app.Model;
 import vistra.app.control.state.Animation;
 import vistra.app.control.state.ParameterStateHandler;
 import vistra.app.control.state.StepByStep;
@@ -81,6 +82,9 @@ public class Control implements IControl {
 		try {
 			this.animation.handleOff();
 			this.i18n.actionPerformed(null);
+			this.model.setProtocol(this.model.getProtocol().append(
+					this.model.getAboutMessage()));
+			((Model) this.model).notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
