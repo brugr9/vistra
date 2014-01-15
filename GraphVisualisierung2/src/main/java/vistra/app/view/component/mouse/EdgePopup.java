@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
-import vistra.app.Model;
 import vistra.app.control.ActionListenerI18n.I18nEvent;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.framework.graph.item.ILayoutEdge;
@@ -37,7 +36,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 	/**
 	 * A field for a model.
 	 */
-	private Model model;
+	private IModel model;
 	/**
 	 * A field for a point.
 	 */
@@ -68,7 +67,7 @@ public class EdgePopup extends JPopupMenu implements IItemPopup {
 		super("edgePopup");
 		/**/
 		this.viewer = viewer;
-		this.model = (Model) model;
+		this.model = model;
 		this.point = null;
 		this.edge = null;
 		/**/

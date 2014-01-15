@@ -64,6 +64,7 @@ public class Control implements IControl {
 		this.model.setStepByStep(this.stepByStep);
 		this.model.setParameterStateHandler(this.parameterStateHandler);
 		try {
+			// graph mustn't be null for creating the view
 			this.parameterStateHandler.handleNewGraphUndirected();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,9 +80,7 @@ public class Control implements IControl {
 	public void init() throws Exception {
 		try {
 			this.animation.handleOff();
-			// this.model.getI18nListener().actionPerformed(null);
-			// ((Model) this.model).notifyObservers();
-			// this.parameterStateHandler.handleNewGraphUndirected();
+			this.i18n.actionPerformed(null);
 		} catch (Exception e) {
 			throw e;
 		}

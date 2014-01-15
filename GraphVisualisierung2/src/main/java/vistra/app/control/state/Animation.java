@@ -204,7 +204,7 @@ public final class Animation extends Observable implements IAnimation {
 	 */
 	void setStopped() throws Exception {
 		try {
-			((StepByStep) this.model.getSbsStateHandler()).handleIdle();
+			((StepByStep) this.model.getStepByStep()).handleIdle();
 			//
 			this.model.setAnimationEnabled(true);
 			this.model.setPauseEnabled(false);
@@ -228,7 +228,7 @@ public final class Animation extends Observable implements IAnimation {
 	 */
 	void setPlaying() throws Exception {
 		try {
-			((StepByStep) this.model.getSbsStateHandler()).handleOff();
+			((StepByStep) this.model.getStepByStep()).handleOff();
 			//
 			this.model.setAnimationEnabled(true);
 			this.model.setDelayEnabled(false);
@@ -292,7 +292,7 @@ public final class Animation extends Observable implements IAnimation {
 		try {
 			/* go to the first step eventually */
 			if (this.model.getProgress() == this.model.getTraversal().size())
-				((StepByStep) this.model.getSbsStateHandler()).toBeginning();
+				((StepByStep) this.model.getStepByStep()).toBeginning();
 			/* start the timer */
 			this.animationTimer.start();
 			this.setChanged();
@@ -357,11 +357,11 @@ public final class Animation extends Observable implements IAnimation {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				Model m = Animation.this.model;
+				IModel m = Animation.this.model;
 				if (m.getTraversal().hasNext())
-					m.getSbsStateHandler().handleForward();
+					m.getStepByStep().handleForward();
 				else
-					m.getAnimationStateHandler().handleStopped();
+					m.getAnimation().handleStopped();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

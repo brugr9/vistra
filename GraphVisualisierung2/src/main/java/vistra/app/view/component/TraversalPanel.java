@@ -160,13 +160,13 @@ public final class TraversalPanel extends JPanel implements Observer {
 				STEPLENGTH_MAX, 1);
 		this.steplength = new JSpinner(this.steplengthModel);
 		((JSpinner.NumberEditor) this.steplength.getEditor()).getTextField()
-				.addFocusListener(model.getSbsStateHandler());
+				.addFocusListener(model.getStepByStep());
 		// delay
 		this.delayLabel = new JLabel("delay");
 		this.delayModel = new SpinnerNumberModel(1, DELAY_MIN, DELAY_MAX, 1);
 		this.delay = new JSpinner(this.delayModel);
 		((JSpinner.NumberEditor) this.delay.getEditor()).getTextField()
-				.addFocusListener(model.getAnimationStateHandler());
+				.addFocusListener(model.getAnimation());
 
 		/* progress bar */
 		this.progress = new JProgressBar();
@@ -198,13 +198,13 @@ public final class TraversalPanel extends JPanel implements Observer {
 		this.pause.setActionCommand(AnimationEvent.pause);
 		this.stop.setActionCommand(AnimationEvent.stop);
 		// action listener
-		this.toBeginning.addActionListener(model.getSbsStateHandler());
-		this.backward.addActionListener(model.getSbsStateHandler());
-		this.forward.addActionListener(model.getSbsStateHandler());
-		this.toEnd.addActionListener(model.getSbsStateHandler());
-		this.play.addActionListener(model.getAnimationStateHandler());
-		this.pause.addActionListener(model.getAnimationStateHandler());
-		this.stop.addActionListener(model.getAnimationStateHandler());
+		this.toBeginning.addActionListener(model.getStepByStep());
+		this.backward.addActionListener(model.getStepByStep());
+		this.forward.addActionListener(model.getStepByStep());
+		this.toEnd.addActionListener(model.getStepByStep());
+		this.play.addActionListener(model.getAnimation());
+		this.pause.addActionListener(model.getAnimation());
+		this.stop.addActionListener(model.getAnimation());
 
 		/* panel */
 		this.steplengthPanel = new JPanel();

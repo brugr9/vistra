@@ -61,7 +61,7 @@ public final class Model extends Observable implements IModel {
 	private boolean aboutEnabled;
 
 	/* Parameter */
-	private IParameterStateHandler parameterHandler;
+	private IParameterStateHandler parameterStateHandler;
 	// Graph
 	private ILayoutGraph graph;
 	private ILayoutVertex start;
@@ -186,7 +186,7 @@ public final class Model extends Observable implements IModel {
 		// State handler
 		this.animation = null;
 		this.stepByStep = null;
-		this.parameterHandler = null;
+		this.parameterStateHandler = null;
 
 	}
 
@@ -222,8 +222,6 @@ public final class Model extends Observable implements IModel {
 		this.setSaveEnabled(menuEnabled);
 		this.setSaveAsEnabled(menuEnabled);
 		this.setQuitEnabled(menuEnabled);
-
-		this.setChanged();
 	}
 
 	/*
@@ -238,8 +236,6 @@ public final class Model extends Observable implements IModel {
 		// MenuItem
 		this.setSelectEditingModeEnabled(menuEnabled);
 		this.setSelectPickingModeEnabled(menuEnabled);
-
-		this.setChanged();
 	}
 
 	/*
@@ -251,8 +247,6 @@ public final class Model extends Observable implements IModel {
 	public void setMenuEditEnabled(boolean menuEnabled) {
 		this.setEditVertexEnabled(menuEnabled);
 		this.setEditEdgeEnabled(menuEnabled);
-
-		this.setChanged();
 	}
 
 	/*
@@ -270,8 +264,6 @@ public final class Model extends Observable implements IModel {
 		this.setFrFREnabled(menuEnabled);
 		this.setEnGBEnabled(menuEnabled);
 		this.setEnUSEnabled(menuEnabled);
-
-		this.setChanged();
 	}
 
 	/*
@@ -286,8 +278,6 @@ public final class Model extends Observable implements IModel {
 		// MenuItem
 		this.setShortcutsEnabled(menuEnabled);
 		this.setAboutEnabled(menuEnabled);
-
-		this.setChanged();
 	}
 
 	/*
@@ -315,8 +305,6 @@ public final class Model extends Observable implements IModel {
 		this.setBackwardEnabled(menuEnabled);
 		this.setForwardEnabled(menuEnabled);
 		this.setToEndEnabled(menuEnabled);
-
-		this.setChanged();
 	}
 
 	/*
@@ -332,7 +320,26 @@ public final class Model extends Observable implements IModel {
 		this.setPlayEnabled(menuEnabled);
 		this.setPauseEnabled(menuEnabled);
 		this.setStopEnabled(menuEnabled);
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#getTop()
+	 */
+	@Override
+	public Container getTop() {
+		return this.top;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see vistra.app.IModel#setTop(java.awt.Container)
+	 */
+	@Override
+	public void setTop(Container top) {
+		this.top = top;
 		this.setChanged();
 	}
 
@@ -342,28 +349,8 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getResourceBundle()
 	 */
 	@Override
-	public Container getTop() {
-		return top;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.app.IModel#setResourceBundle(java.util.ResourceBundle)
-	 */
-	@Override
-	public void setTop(Container top) {
-		this.top = top;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see vistra.app.IModel#getResourceBundle()
-	 */
-	@Override
 	public ResourceBundle getResourceBundle() {
-		return resourceBundle;
+		return this.resourceBundle;
 	}
 
 	/*
@@ -374,6 +361,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setResourceBundle(ResourceBundle resourceBundle) {
 		this.resourceBundle = resourceBundle;
+		this.setChanged();
 	}
 
 	/*
@@ -383,7 +371,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public String getShortcutsMessage() {
-		return shortcutsMessage;
+		return this.shortcutsMessage;
 	}
 
 	/*
@@ -394,6 +382,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setShortcutsMessage(String shortcutsMessage) {
 		this.shortcutsMessage = shortcutsMessage;
+		this.setChanged();
 	}
 
 	/*
@@ -403,7 +392,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public String getAboutMessage() {
-		return aboutMessage;
+		return this.aboutMessage;
 	}
 
 	/*
@@ -414,6 +403,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setAboutMessage(String aboutMessage) {
 		this.aboutMessage = aboutMessage;
+		this.setChanged();
 	}
 
 	/*
@@ -423,7 +413,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public ActionListener getI18nListener() {
-		return i18nListener;
+		return this.i18nListener;
 	}
 
 	/*
@@ -434,6 +424,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setI18nListener(ActionListener i18nListener) {
 		this.i18nListener = i18nListener;
+		this.setChanged();
 	}
 
 	/*
@@ -443,7 +434,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public ActionListener getShortcutsListener() {
-		return shortcutsListener;
+		return this.shortcutsListener;
 	}
 
 	/*
@@ -455,6 +446,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setShortcutsListener(ActionListener shortcutsListener) {
 		this.shortcutsListener = shortcutsListener;
+		this.setChanged();
 	}
 
 	/*
@@ -464,7 +456,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public ActionListener getAboutListener() {
-		return aboutListener;
+		return this.aboutListener;
 	}
 
 	/*
@@ -475,6 +467,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setAboutListener(ActionListener aboutListener) {
 		this.aboutListener = aboutListener;
+		this.setChanged();
 	}
 
 	/*
@@ -484,7 +477,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isFileEnabled() {
-		return fileEnabled;
+		return this.fileEnabled;
 	}
 
 	/*
@@ -495,6 +488,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setFileEnabled(boolean fileEnabled) {
 		this.fileEnabled = fileEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -504,7 +498,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isNewEnabled() {
-		return newEnabled;
+		return this.newEnabled;
 	}
 
 	/*
@@ -515,6 +509,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setNewEnabled(boolean newEnabled) {
 		this.newEnabled = newEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -524,7 +519,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isUndirectedEnabled() {
-		return undirectedEnabled;
+		return this.undirectedEnabled;
 	}
 
 	/*
@@ -535,6 +530,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setUndirectedEnabled(boolean undirectedEnabled) {
 		this.undirectedEnabled = undirectedEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -544,7 +540,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isDirectedEnabled() {
-		return directedEnabled;
+		return this.directedEnabled;
 	}
 
 	/*
@@ -555,6 +551,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setDirectedEnabled(boolean directedEnabled) {
 		this.directedEnabled = directedEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -564,7 +561,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isOpenEnabled() {
-		return openEnabled;
+		return this.openEnabled;
 	}
 
 	/*
@@ -575,6 +572,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setOpenEnabled(boolean openEnabled) {
 		this.openEnabled = openEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -584,7 +582,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isSaveEnabled() {
-		return saveEnabled;
+		return this.saveEnabled;
 	}
 
 	/*
@@ -595,6 +593,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setSaveEnabled(boolean saveEnabled) {
 		this.saveEnabled = saveEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -604,7 +603,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isSaveAsEnabled() {
-		return saveAsEnabled;
+		return this.saveAsEnabled;
 	}
 
 	/*
@@ -615,6 +614,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setSaveAsEnabled(boolean saveAsEnabled) {
 		this.saveAsEnabled = saveAsEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -624,7 +624,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isQuitEnabled() {
-		return quitEnabled;
+		return this.quitEnabled;
 	}
 
 	/*
@@ -635,6 +635,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setQuitEnabled(boolean quitEnabled) {
 		this.quitEnabled = quitEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -644,7 +645,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isSwitchModeEnabled() {
-		return switchModeEnabled;
+		return this.switchModeEnabled;
 	}
 
 	/*
@@ -655,6 +656,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setSwitchModeEnabled(boolean switchModeEnabled) {
 		this.switchModeEnabled = switchModeEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -664,7 +666,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isSelectEditingModeEnabled() {
-		return selectEditingModeEnabled;
+		return this.selectEditingModeEnabled;
 	}
 
 	/*
@@ -675,6 +677,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setSelectEditingModeEnabled(boolean selectEditingModeEnabled) {
 		this.selectEditingModeEnabled = selectEditingModeEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -684,7 +687,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isSelectPickingModeEnabled() {
-		return selectPickingModeEnabled;
+		return this.selectPickingModeEnabled;
 	}
 
 	/*
@@ -695,6 +698,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setSelectPickingModeEnabled(boolean selectPickingModeEnabled) {
 		this.selectPickingModeEnabled = selectPickingModeEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -704,7 +708,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isEditVertexEnabled() {
-		return editVertexEnabled;
+		return this.editVertexEnabled;
 	}
 
 	/*
@@ -715,6 +719,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setEditVertexEnabled(boolean editVertexEnabled) {
 		this.editVertexEnabled = editVertexEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -724,7 +729,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isEditEdgeEnabled() {
-		return editEdgeEnabled;
+		return this.editEdgeEnabled;
 	}
 
 	/*
@@ -735,6 +740,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setEditEdgeEnabled(boolean editEdgeEnabled) {
 		this.editEdgeEnabled = editEdgeEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -744,7 +750,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isI18nEnabled() {
-		return i18nEnabled;
+		return this.i18nEnabled;
 	}
 
 	/*
@@ -755,6 +761,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setI18nEnabled(boolean i18nEnabled) {
 		this.i18nEnabled = i18nEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -764,7 +771,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isDeCHEnabled() {
-		return deCHEnabled;
+		return this.deCHEnabled;
 	}
 
 	/*
@@ -775,6 +782,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setDeCHEnabled(boolean deCHEnabled) {
 		this.deCHEnabled = deCHEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -784,7 +792,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isDeDEEnabled() {
-		return deDEEnabled;
+		return this.deDEEnabled;
 	}
 
 	/*
@@ -795,6 +803,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setDeDEEnabled(boolean deDEEnabled) {
 		this.deDEEnabled = deDEEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -804,7 +813,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isFrFREnabled() {
-		return frFREnabled;
+		return this.frFREnabled;
 	}
 
 	/*
@@ -815,6 +824,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setFrFREnabled(boolean frFREnabled) {
 		this.frFREnabled = frFREnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -824,7 +834,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isEnGBEnabled() {
-		return enGBEnabled;
+		return this.enGBEnabled;
 	}
 
 	/*
@@ -835,6 +845,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setEnGBEnabled(boolean enGBEnabled) {
 		this.enGBEnabled = enGBEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -844,7 +855,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isEnUSEnabled() {
-		return enUSEnabled;
+		return this.enUSEnabled;
 	}
 
 	/*
@@ -855,6 +866,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setEnUSEnabled(boolean enUSEnabled) {
 		this.enUSEnabled = enUSEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -864,7 +876,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isHelpEnabled() {
-		return helpEnabled;
+		return this.helpEnabled;
 	}
 
 	/*
@@ -875,6 +887,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setHelpEnabled(boolean helpEnabled) {
 		this.helpEnabled = helpEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -884,7 +897,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isShortcutsEnabled() {
-		return shortcutsEnabled;
+		return this.shortcutsEnabled;
 	}
 
 	/*
@@ -895,6 +908,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setShortcutsEnabled(boolean shortcutsEnabled) {
 		this.shortcutsEnabled = shortcutsEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -904,7 +918,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isAboutEnabled() {
-		return aboutEnabled;
+		return this.aboutEnabled;
 	}
 
 	/*
@@ -915,6 +929,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setAboutEnabled(boolean aboutEnabled) {
 		this.aboutEnabled = aboutEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -924,7 +939,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public IParameterStateHandler getParameterStateHandler() {
-		return parameterHandler;
+		return this.parameterStateHandler;
 	}
 
 	/*
@@ -934,8 +949,10 @@ public final class Model extends Observable implements IModel {
 	 * IParameterStateHandler)
 	 */
 	@Override
-	public void setParameterStateHandler(IParameterStateHandler parameterStateHandler) {
-		this.parameterHandler = parameterStateHandler;
+	public void setParameterStateHandler(
+			IParameterStateHandler parameterStateHandler) {
+		this.parameterStateHandler = parameterStateHandler;
+		this.setChanged();
 	}
 
 	/*
@@ -945,17 +962,18 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public ILayoutGraph getGraph() {
-		return graph;
+		return this.graph;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.app.IModel#setGraph(vistra.framework.graph.IExtendedGraph)
+	 * @see vistra.app.IModel#setGraph(vistra.framework.graph.ILayoutGraph)
 	 */
 	@Override
 	public void setGraph(ILayoutGraph graph) {
 		this.graph = graph;
+		this.setChanged();
 	}
 
 	/*
@@ -965,18 +983,19 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public ILayoutVertex getStart() {
-		return start;
+		return this.start;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * vistra.app.IModel#setStart(vistra.framework.graph.item.IVertexLayout)
+	 * vistra.app.IModel#setStart(vistra.framework.graph.item.ILayoutVertex)
 	 */
 	@Override
 	public void setStart(ILayoutVertex start) {
 		this.start = start;
+		this.setChanged();
 	}
 
 	/*
@@ -986,17 +1005,18 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public ILayoutVertex getEnd() {
-		return end;
+		return this.end;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.app.IModel#setEnd(vistra.framework.graph.item.IVertexLayout)
+	 * @see vistra.app.IModel#setEnd(vistra.framework.graph.item.ILayoutVertex)
 	 */
 	@Override
 	public void setEnd(ILayoutVertex end) {
 		this.end = end;
+		this.setChanged();
 	}
 
 	/*
@@ -1006,18 +1026,19 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public ILayoutVertex getFocus() {
-		return focus;
+		return this.focus;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * vistra.app.IModel#setFocus(vistra.framework.graph.item.IVertexLayout)
+	 * vistra.app.IModel#setFocus(vistra.framework.graph.item.ILayoutVertex)
 	 */
 	@Override
 	public void setFocus(ILayoutVertex focus) {
 		this.focus = focus;
+		this.setChanged();
 	}
 
 	/*
@@ -1027,7 +1048,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isGraphFile() {
-		return graphFile;
+		return this.graphFile;
 	}
 
 	/*
@@ -1038,6 +1059,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setGraphFile(boolean graphFile) {
 		this.graphFile = graphFile;
+		this.setChanged();
 	}
 
 	/*
@@ -1047,7 +1069,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isGraphSaved() {
-		return graphSaved;
+		return this.graphSaved;
 	}
 
 	/*
@@ -1058,6 +1080,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setGraphSaved(boolean graphSaved) {
 		this.graphSaved = graphSaved;
+		this.setChanged();
 	}
 
 	/*
@@ -1067,7 +1090,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public Mode getMode() {
-		return mode;
+		return this.mode;
 	}
 
 	/*
@@ -1079,6 +1102,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setMode(Mode mode) {
 		this.mode = mode;
+		this.setChanged();
 	}
 
 	/*
@@ -1088,7 +1112,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public String[] getAlgorithms() {
-		return algorithms;
+		return this.algorithms;
 	}
 
 	/*
@@ -1099,6 +1123,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setAlgorithms(String[] algorithms) {
 		this.algorithms = algorithms;
+		this.setChanged();
 	}
 
 	/*
@@ -1108,7 +1133,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isAlgorithmsEnabled() {
-		return algorithmsEnabled;
+		return this.algorithmsEnabled;
 	}
 
 	/*
@@ -1119,6 +1144,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setAlgorithmsEnabled(boolean algorithmsEnabled) {
 		this.algorithmsEnabled = algorithmsEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -1128,7 +1154,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public int getSelectedAlgorithmIndex() {
-		return selectedAlgorithmIndex;
+		return this.selectedAlgorithmIndex;
 	}
 
 	/*
@@ -1139,6 +1165,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setSelectedAlgorithmIndex(int selectedAlgorithmIndex) {
 		this.selectedAlgorithmIndex = selectedAlgorithmIndex;
+		this.setChanged();
 	}
 
 	/*
@@ -1148,7 +1175,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public String getAlgorithmDescription() {
-		return algorithmDescription;
+		return this.algorithmDescription;
 	}
 
 	/*
@@ -1159,6 +1186,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setAlgorithmDescription(String algorithmDescription) {
 		this.algorithmDescription = algorithmDescription;
+		this.setChanged();
 	}
 
 	/*
@@ -1168,18 +1196,18 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public ITraversal getTraversal() {
-		return traversal;
+		return this.traversal;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * vistra.app.IModel#setTraversal(vistra.framework.traversal.ITraversal)
+	 * @see vistra.app.IModel#setTraversal(vistra.framework.ITraversal)
 	 */
 	@Override
 	public void setTraversal(ITraversal traversal) {
 		this.traversal = traversal;
+		this.setChanged();
 	}
 
 	/*
@@ -1189,7 +1217,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public int getProgress() {
-		return progress;
+		return this.progress;
 	}
 
 	/*
@@ -1200,27 +1228,29 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setProgress(int progress) {
 		this.progress = progress;
+		this.setChanged();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.app.IModel#getSbsStateHandler()
+	 * @see vistra.app.IModel#getStepByStep()
 	 */
 	@Override
-	public IStepByStep getSbsStateHandler() {
-		return stepByStep;
+	public IStepByStep getStepByStep() {
+		return this.stepByStep;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.app.IModel#setSbsStateHandler(vistra.app.control.state.
-	 * ISbsStateHandler)
+	 * @see
+	 * vistra.app.IModel#setStepByStep(vistra.app.control.state.IStepByStep)
 	 */
 	@Override
-	public void setStepByStep(IStepByStep sbsStateHandler) {
-		this.stepByStep = sbsStateHandler;
+	public void setStepByStep(IStepByStep stepByStep) {
+		this.stepByStep = stepByStep;
+		this.setChanged();
 	}
 
 	/*
@@ -1230,7 +1260,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public int getSteplength() {
-		return steplength;
+		return this.steplength;
 	}
 
 	/*
@@ -1241,6 +1271,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setSteplength(int steplength) {
 		this.steplength = steplength;
+		this.setChanged();
 	}
 
 	/*
@@ -1250,7 +1281,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isSteplengthEnabled() {
-		return steplengthEnabled;
+		return this.steplengthEnabled;
 	}
 
 	/*
@@ -1261,6 +1292,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setSteplengthEnabled(boolean steplengthEnabled) {
 		this.steplengthEnabled = steplengthEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -1270,7 +1302,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isToBeginningEnabled() {
-		return toBeginningEnabled;
+		return this.toBeginningEnabled;
 	}
 
 	/*
@@ -1281,6 +1313,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setToBeginningEnabled(boolean toBeginningEnabled) {
 		this.toBeginningEnabled = toBeginningEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -1290,7 +1323,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isBackwardEnabled() {
-		return backwardEnabled;
+		return this.backwardEnabled;
 	}
 
 	/*
@@ -1301,6 +1334,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setBackwardEnabled(boolean backwardEnabled) {
 		this.backwardEnabled = backwardEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -1310,7 +1344,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isForwardEnabled() {
-		return forwardEnabled;
+		return this.forwardEnabled;
 	}
 
 	/*
@@ -1321,6 +1355,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setForwardEnabled(boolean forwardEnabled) {
 		this.forwardEnabled = forwardEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -1330,7 +1365,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isToEndEnabled() {
-		return toEndEnabled;
+		return this.toEndEnabled;
 	}
 
 	/*
@@ -1341,27 +1376,28 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setToEndEnabled(boolean toEndEnabled) {
 		this.toEndEnabled = toEndEnabled;
+		this.setChanged();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.app.IModel#getAnimationStateHandler()
+	 * @see vistra.app.IModel#getAnimation()
 	 */
 	@Override
-	public IAnimation getAnimationStateHandler() {
-		return animation;
+	public IAnimation getAnimation() {
+		return this.animation;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.app.IModel#setAnimationStateHandler(vistra.app.control.state.
-	 * IAnimationStateHandler)
+	 * @see vistra.app.IModel#setAnimation(vistra.app.control.state.IAnimation)
 	 */
 	@Override
-	public void setAnimation(IAnimation animationStateHandler) {
-		this.animation = animationStateHandler;
+	public void setAnimation(IAnimation animation) {
+		this.animation = animation;
+		this.setChanged();
 	}
 
 	/*
@@ -1371,7 +1407,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public int getDelay() {
-		return delay;
+		return this.delay;
 	}
 
 	/*
@@ -1382,6 +1418,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setDelay(int delay) {
 		this.delay = delay;
+		this.setChanged();
 	}
 
 	/*
@@ -1391,7 +1428,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isDelayEnabled() {
-		return delayEnabled;
+		return this.delayEnabled;
 	}
 
 	/*
@@ -1402,6 +1439,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setDelayEnabled(boolean delayEnabled) {
 		this.delayEnabled = delayEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -1411,7 +1449,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isPlayEnabled() {
-		return playEnabled;
+		return this.playEnabled;
 	}
 
 	/*
@@ -1422,6 +1460,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setPlayEnabled(boolean playEnabled) {
 		this.playEnabled = playEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -1431,7 +1470,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public String getPauseLabel() {
-		return pauseLabel;
+		return this.pauseLabel;
 	}
 
 	/*
@@ -1442,27 +1481,28 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setPauseLabel(String pauseLabel) {
 		this.pauseLabel = pauseLabel;
+		this.setChanged();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see vistra.app.IModel#getPauseEvent()
+	 * @see vistra.app.IModel#getPauseActionCommand()
 	 */
 	@Override
 	public String getPauseActionCommand() {
-		return pauseActionCommand;
+		return this.pauseActionCommand;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * vistra.app.IModel#setPauseEvent(vistra.app.control.IControl.ControlEvent)
+	 * @see vistra.app.IModel#setPauseActionCommand(java.lang.String)
 	 */
 	@Override
 	public void setPauseActionCommand(String pauseActionCommand) {
 		this.pauseActionCommand = pauseActionCommand;
+		this.setChanged();
 	}
 
 	/*
@@ -1472,7 +1512,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isPauseEnabled() {
-		return pauseEnabled;
+		return this.pauseEnabled;
 	}
 
 	/*
@@ -1483,6 +1523,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setPauseEnabled(boolean pauseEnabled) {
 		this.pauseEnabled = pauseEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -1492,7 +1533,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public boolean isStopEnabled() {
-		return stopEnabled;
+		return this.stopEnabled;
 	}
 
 	/*
@@ -1503,6 +1544,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setStopEnabled(boolean stopEnabled) {
 		this.stopEnabled = stopEnabled;
+		this.setChanged();
 	}
 
 	/*
@@ -1512,7 +1554,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public StringBuilder getProtocol() {
-		return protocol;
+		return this.protocol;
 	}
 
 	/*
@@ -1523,6 +1565,7 @@ public final class Model extends Observable implements IModel {
 	@Override
 	public void setProtocol(StringBuilder protocol) {
 		this.protocol = protocol;
+		this.setChanged();
 	}
 
 }

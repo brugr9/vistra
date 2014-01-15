@@ -79,18 +79,18 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		/**/
 		this.start = new JCheckBoxMenuItem("start");
 		this.start.setActionCommand(ParameterEvent.start);
-		this.start.addActionListener(model.getParameterStateHandler());
+		this.start.addActionListener(this.model.getParameterStateHandler());
 		this.start.addActionListener(new StartActionListener());
 		//
 		this.end = new JCheckBoxMenuItem("end");
 		this.end.setActionCommand(ParameterEvent.end);
-		this.end.addActionListener(model.getParameterStateHandler());
+		this.end.addActionListener(this.model.getParameterStateHandler());
 		this.end.addActionListener(new EndActionListener());
 		//
 		this.delete = new JMenuItem("delete");
 		this.delete.addActionListener(new DeleteActionListener());
 		this.delete.setActionCommand(ParameterEvent.delete);
-		this.delete.addActionListener(model.getParameterStateHandler());
+		this.delete.addActionListener(this.model.getParameterStateHandler());
 
 		/**/
 		this.add(this.start);

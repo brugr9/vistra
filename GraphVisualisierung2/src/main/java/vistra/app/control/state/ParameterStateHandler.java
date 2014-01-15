@@ -67,9 +67,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		this.model = (Model) model;
 		try {
 			this.state = new ParameterOff(this);
+			// as we like to start with a call for handleNewGraphUndirected() or
+			// handleNewGraphDirected(),
+			// setGraphSaved(true) denies the confirmSavingGraph():
 			this.model.setGraphSaved(true);
-			// TODO remove
-			// this.handleNewGraphUndirected();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -331,19 +332,19 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void setEnableTraversal(boolean enabled) throws Exception {
 		try {
 			if (enabled) {
-				this.model.getAnimationStateHandler().handleIdle();
+				this.model.getAnimation().handleIdle();
 				this.setMode(Mode.PICKING);
 				ResourceBundle b = this.model.getResourceBundle();
 				StringBuilder message = new StringBuilder();
-				message.append(b.getString("render.message")
-						+ System.lineSeparator());
+				message.append(b.getString("render.message"));
 				// JOptionPane.showMessageDialog(null,
 				// message.toString(),
 				// b.getString("app.label"), 1, null);
+				message.append(System.lineSeparator());
 				this.model.setProtocol(message);
 				this.model.notifyObservers();
 			} else {
-				this.model.getAnimationStateHandler().handleOff();
+				this.model.getAnimation().handleOff();
 				this.setMode(Mode.EDITING);
 				this.model.notifyObservers();
 			}
@@ -457,9 +458,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					this.model.setGraph(graph);
 					this.model.setStart(null);
 					this.model.setEnd(null);
-					this.model.setGraphSaved(true);
 					this.model.setGraphFile(true);
-					this.model.notifyObservers();
+					// this.model.setGraphSaved(true);
+					// this.model.notifyObservers();
 					/* Algorithm */
 					this.updateAlgorithms();
 				}
@@ -478,8 +479,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void saveGraph() throws Exception {
 		try {
 			this.parameterManager.saveGraph();
-			this.model.setGraphSaved(true);
-			this.model.notifyObservers();
+			// this.model.setGraphSaved(true);
+			// this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -519,8 +520,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				File file = fileChooser.getSelectedFile();
 				this.parameterManager.saveGraphAs(file);
 				this.model.setGraphFile(true);
-				this.model.setGraphSaved(true);
-				this.model.notifyObservers();
+				// this.model.setGraphSaved(true);
+				// this.model.notifyObservers();
 				/* Algorithm */
 				// TODO algorithms
 				this.model.setSelectedAlgorithmIndex(0);
@@ -541,14 +542,14 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			// revert traversal
 			if (this.model.isToBeginningEnabled())
-				this.model.getSbsStateHandler().handleToBeginning();
+				this.model.getStepByStep().handleToBeginning();
 			// revert algorithm selection
 			if (this.model.isAlgorithmsEnabled()) {
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
 			}
-			this.model.setGraphSaved(false);
-			this.model.notifyObservers();
+			// this.model.setGraphSaved(false);
+			// this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -567,7 +568,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			this.setMode(Mode.PICKING);
 			/* Graph */
 			if (this.model.getProgress() > 0)
-				((StepByStep) this.model.getSbsStateHandler()).toBeginning();
+				((StepByStep) this.model.getStepByStep()).toBeginning();
 			ILayoutGraph graph = this.model.getGraph();
 			/* Algorithm */
 			int index = this.model.getSelectedAlgorithmIndex();
@@ -580,7 +581,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					.executeAlgorithm(graph);
 			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
-			this.model.notifyObservers();
+			// this.model.notifyObservers();
 			// done
 			return index;
 		} catch (Exception e) {
