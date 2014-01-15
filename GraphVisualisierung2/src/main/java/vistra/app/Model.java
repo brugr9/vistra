@@ -114,10 +114,6 @@ public final class Model extends Observable implements IModel {
 		this.aboutMessage = "";
 
 		/* Menu */
-		// Action listener
-		this.i18nListener = null;
-		this.shortcutsListener = null;
-		this.aboutListener = null;
 		// File
 		this.fileEnabled = false;
 		this.newEnabled = false;
@@ -146,7 +142,6 @@ public final class Model extends Observable implements IModel {
 		this.aboutEnabled = false;
 
 		/* Parameter */
-		this.parameterStateHandler = null;
 		// Graph
 		this.graph = null;
 		this.start = null;
@@ -165,7 +160,6 @@ public final class Model extends Observable implements IModel {
 		this.traversal = null;
 		this.progress = 0;
 		// Step-by-Step
-		this.sbsStateHandler = null;
 		this.steplength = 1;
 		this.steplengthEnabled = false;
 		this.toBeginningEnabled = false;
@@ -173,7 +167,6 @@ public final class Model extends Observable implements IModel {
 		this.forwardEnabled = false;
 		this.toEndEnabled = false;
 		// Animation
-		this.animationStateHandler = null;
 		this.delay = 1;
 		this.delayEnabled = false;
 		this.playEnabled = false;
@@ -184,6 +177,16 @@ public final class Model extends Observable implements IModel {
 
 		/* Protocol */
 		this.protocol = new StringBuilder();
+
+		/**/
+		// Action listener
+		this.i18nListener = null;
+		this.shortcutsListener = null;
+		this.aboutListener = null;
+		// State handler
+		this.animationStateHandler = null;
+		this.sbsStateHandler = null;
+		this.parameterStateHandler = null;
 
 	}
 
@@ -931,8 +934,7 @@ public final class Model extends Observable implements IModel {
 	 * IParameterStateHandler)
 	 */
 	@Override
-	public void setParameterStateHandler(
-			IParameterHandler parameterStateHandler) {
+	public void setParameterStateHandler(IParameterHandler parameterStateHandler) {
 		this.parameterStateHandler = parameterStateHandler;
 	}
 
@@ -1358,8 +1360,7 @@ public final class Model extends Observable implements IModel {
 	 * IAnimationStateHandler)
 	 */
 	@Override
-	public void setAnimationStateHandler(
-			IAnimation animationStateHandler) {
+	public void setAnimationStateHandler(IAnimation animationStateHandler) {
 		this.animationStateHandler = animationStateHandler;
 	}
 

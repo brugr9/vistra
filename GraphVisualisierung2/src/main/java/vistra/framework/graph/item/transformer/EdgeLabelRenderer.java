@@ -13,14 +13,13 @@ import vistra.framework.util.palette.ColorPalette;
 import edu.uci.ics.jung.visualization.renderers.DefaultEdgeLabelRenderer;
 
 /**
+ * A label renderer: edge.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class EdgeLabelRenderer extends DefaultEdgeLabelRenderer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	/**
 	 * A field for a layout transformer

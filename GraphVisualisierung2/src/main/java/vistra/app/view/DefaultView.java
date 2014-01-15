@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl;
 import vistra.app.view.component.AlgorithmPanel;
 import vistra.app.view.component.GraphPanel;
 import vistra.app.view.component.MenuBar;
@@ -33,7 +32,7 @@ import vistra.framework.util.palette.ColorPalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class DefaultView extends JFrame implements IView {
+class DefaultView extends JFrame implements IView {
 
 	private static final long serialVersionUID = 1L;
 
@@ -71,11 +70,9 @@ public class DefaultView extends JFrame implements IView {
 	 * 
 	 * @param model
 	 *            a model as in MVC
-	 * @param control
-	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	public DefaultView(IModel model, IControl control) throws Exception {
+	DefaultView(IModel model) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(model.getResourceBundle().getString("app.label"));

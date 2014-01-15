@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.ActionListenerI18n.I18nEvent;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.framework.util.palette.I18nPalette;
 
@@ -116,7 +116,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 			this.open.setActionCommand(ParameterEvent.open);
 			this.save.setActionCommand(ParameterEvent.save);
 			this.saveAs.setActionCommand(ParameterEvent.saveAs);
-			this.quit.setActionCommand(ControlEvent.quit);
+			this.quit.setActionCommand(ParameterEvent.quit);
 			{// graph
 				this.newGraph = new JMenu("newGraph");
 				this.undirected = new JMenuItem("undirected");
@@ -195,7 +195,7 @@ public final class MenuBar extends JMenuBar implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ControlEvent.I18N) {
+				if (arg == I18nEvent.I18N) {
 					{// JMenu fileMenu
 						// setText
 						this.file.setText(b.getString("file.label"));

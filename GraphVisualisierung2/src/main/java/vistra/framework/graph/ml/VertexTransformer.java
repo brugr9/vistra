@@ -28,9 +28,7 @@ public class VertexTransformer implements
 				meta.getProperty(GraphWriter.V_LOC_Y)));
 		layout.setStart(Boolean.parseBoolean(meta
 				.getProperty(GraphWriter.V_START)));
-		layout.setEnd(Boolean.parseBoolean(meta
-				.getProperty(GraphWriter.V_END)));
+		layout.setEnd(Boolean.parseBoolean(meta.getProperty(GraphWriter.V_END)));
 		return layout;
 	}
-
 }

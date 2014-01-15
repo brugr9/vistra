@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.ActionListenerI18n.I18nEvent;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
@@ -61,7 +61,7 @@ public class ModePopup extends JPopupMenu implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ControlEvent.I18N) {
+			if (arg == I18nEvent.I18N) {
 				this.picking.setText(b.getString("picking.label"));
 				this.editing.setText(b.getString("edit.label"));
 			} else {

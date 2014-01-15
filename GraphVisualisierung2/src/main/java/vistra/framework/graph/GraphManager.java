@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
+import vistra.framework.graph.item.VertexFactory;
 import vistra.framework.graph.item.transformer.VertexLocation;
 import vistra.framework.graph.ml.GraphReader;
 import vistra.framework.graph.ml.GraphWriter;
@@ -102,6 +103,9 @@ class GraphManager implements IGraphManager {
 			// TODO end
 			this.graph = this.reader.read(new FileReader(this.file));
 			this.graph.setName(this.file.getName());
+			for (int i = 0; i < this.graph.getVertexCount(); i++) {
+				VertexFactory.nextSigma();
+			}
 			return this.graph;
 		} catch (Exception e) {
 			throw e;

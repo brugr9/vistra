@@ -13,7 +13,7 @@ import javax.swing.JPopupMenu;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.ActionListenerI18n.I18nEvent;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutItem;
@@ -131,7 +131,7 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ControlEvent.I18N) {
+			if (arg == I18nEvent.I18N) {
 				this.setLabel(b.getString("vertex.label"));
 				this.start.setText(b.getString("start.label"));
 				this.end.setText(b.getString("finish.label"));

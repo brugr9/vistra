@@ -18,7 +18,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.ActionListenerI18n.I18nEvent;
 import vistra.framework.util.palette.ColorPalette;
 
 /**
@@ -109,7 +109,7 @@ public final class AlgorithmPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ControlEvent.I18N) {
+				if (arg == I18nEvent.I18N) {
 					this.border.setTitle(b.getString("algorithm.label"));
 				} else {
 					this.comboModel = new DefaultComboBoxModel<String>(

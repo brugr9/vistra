@@ -1,7 +1,5 @@
 package vistra.app.control.state;
 
-import static vistra.app.control.IControl.A_SECOND;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -13,6 +11,7 @@ import javax.swing.Timer;
 
 import vistra.app.IModel;
 import vistra.app.Model;
+import vistra.framework.util.palette.ConstantPalette;
 
 /**
  * An animation handler: handles the animated iteration over a traversal-object.
@@ -54,7 +53,7 @@ public final class Animation extends Observable implements IAnimation {
 		super();
 		this.model = (Model) model;
 		this.animationListener = new AnimationListener();
-		int animationDelay = this.model.getDelay() * A_SECOND;
+		int animationDelay = this.model.getDelay() * ConstantPalette.aSecond;
 		this.animationTimer = new Timer(animationDelay, this.animationListener);
 		try {
 			this.state = new AnimationOff(this);
@@ -83,7 +82,7 @@ public final class Animation extends Observable implements IAnimation {
 			int value = Integer.valueOf(textField.getText());
 			/* set the value */
 			this.model.setDelay(value);
-			this.animationTimer.setDelay(value * A_SECOND);
+			this.animationTimer.setDelay(value * ConstantPalette.aSecond);
 			/* update the view */
 			this.model.notifyObservers();
 		} catch (Exception ex) {

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.ActionListenerI18n.I18nEvent;
 import vistra.framework.graph.item.EdgeFactory;
 import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
@@ -29,6 +29,10 @@ import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
 public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 		implements Observer {
 
+	/**
+	 * A field for a gui model.
+	 */
+	private IModel model;
 	/**
 	 * A field for a switch-mode pop-up menu.
 	 */
@@ -53,7 +57,7 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 	public Mouse(IModel model,
 			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
 		super(viewer.getRenderContext(), new VertexFactory(), new EdgeFactory());
-
+		this.model = model;
 		this.modePopup = new ModePopup(model);
 		this.vertexPopup = new VertexPopup(viewer, model);
 		this.edgePopup = new EdgePopup(viewer, model);
@@ -88,7 +92,8 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 		/* editing */
 		this.popupEditingPlugin = new PopupPlugin(this.vertexFactory,
 				this.edgeFactory);
-		this.editingPlugin = new Editing(this.vertexFactory, this.edgeFactory);
+		this.editingPlugin = new Editing(this.vertexFactory, this.edgeFactory,
+				this.model);
 		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
 	}
 
@@ -126,7 +131,7 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == ControlEvent.I18N) {
+			if (arg == I18nEvent.I18N) {
 				this.modePopup.setLabel(b.getString("mode.label"));
 				this.vertexPopup.setLabel(b.getString("vertex.label"));
 				this.edgePopup.setLabel(b.getString("edge.label"));

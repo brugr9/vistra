@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.ActionListenerI18n.I18nEvent;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
@@ -115,7 +115,7 @@ public class ToolBar extends JToolBar implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ControlEvent.I18N) {
+				if (arg == I18nEvent.I18N) {
 					{// file
 						// setToolTipText
 						this.newUndirected.setToolTipText(b

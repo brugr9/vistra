@@ -4,8 +4,12 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
+import javax.swing.JButton;
+
 import org.apache.commons.collections15.Factory;
 
+import vistra.app.IModel;
+import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.framework.graph.ILayoutGraph;
 import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
@@ -19,6 +23,8 @@ import edu.uci.ics.jung.visualization.control.EditingGraphMousePlugin;
 
 /**
  * An adapted JUNG mouse plug-in for editing graph items.
+ * 
+ * This plugin creates vertices and edges and denies self loops.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -37,16 +43,27 @@ public class Editing extends
 	private Layout<ILayoutVertex, ILayoutEdge> layout;
 
 	/**
+	 * A field for a button.
+	 */
+	private JButton virtualButton;
+
+	/**
 	 * Main constructor.
 	 * 
 	 * @param vertexFactory
 	 *            the vertex factory
 	 * @param edgeFactory
 	 *            the edge factory
+	 * @param model
+	 *            a gui model
 	 */
 	public Editing(Factory<ILayoutVertex> vertexFactory,
-			Factory<ILayoutEdge> edgeFactory) {
+			Factory<ILayoutEdge> edgeFactory, IModel model) {
 		super(vertexFactory, edgeFactory);
+		this.virtualButton = new JButton();
+		// TODO
+		// this.virtualButton.addActionListener(model.getParameterStateHandler());
+		this.virtualButton.setActionCommand(ParameterEvent.edit);
 	}
 
 	/**
@@ -149,6 +166,8 @@ public class Editing extends
 							.inverseTransform(e.getPoint());
 					this.layout.setLocation(newVertex, point);
 					newVertex.setLocation(point);
+					// event an parameterStateHandler
+					this.virtualButton.doClick();
 				}
 			}
 			this.viewer.repaint();
@@ -176,15 +195,19 @@ public class Editing extends
 			if (pickSupport != null) {
 				final ILayoutVertex vertex = pickSupport.getVertex(layout,
 						p.getX(), p.getY());
-				if (vertex != null && this.startVertex != null) {
+				if ((vertex != null && this.startVertex != null)
+						&& (vertex != this.startVertex) // no self loops
+				) {
 					Graph<ILayoutVertex, ILayoutEdge> graph = this.viewer
 							.getGraphLayout().getGraph();
 					graph.addEdge(this.edgeFactory.create(), this.startVertex,
 							vertex, this.edgeIsDirected);
+					// event
+					this.virtualButton.doClick();
 				}
 				this.viewer.repaint();
-
 			}
+
 			this.startVertex = null;
 			this.down = null;
 			// set default edge type
@@ -193,5 +216,4 @@ public class Editing extends
 			this.viewer.removePostRenderPaintable(this.arrowPaintable);
 		}
 	}
-
 }

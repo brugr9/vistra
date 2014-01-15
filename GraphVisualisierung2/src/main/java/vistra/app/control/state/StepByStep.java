@@ -1,7 +1,5 @@
 package vistra.app.control.state;
 
-import static vistra.app.control.IControl.A_SECOND;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -15,6 +13,7 @@ import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.framework.ITraversal;
 import vistra.framework.step.IStep;
+import vistra.framework.util.palette.ConstantPalette;
 
 /**
  * A step-by-step handler: handles the step-by-step iteration over a
@@ -75,7 +74,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 		this.step = null;
 		this.blinkListener = new BlinkListener();
 		int blinkDelay = this.model.getDelay() / (2 * 2 * NUMBER_OF_BLINKS)
-				* A_SECOND;
+				* ConstantPalette.aSecond;
 		this.timer = new Timer(blinkDelay, this.blinkListener);
 		this.off = true;
 		this.counter = 0;

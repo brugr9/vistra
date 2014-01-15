@@ -46,9 +46,7 @@ public class VertexFactory implements Factory<ILayoutVertex> {
 	 */
 	public static ILayoutVertex createLabeledVertex() {
 		ILayoutVertex vertex = createVertex();
-		if (!SIGMA.hasNext())
-			resetSigma();
-		vertex.setId(SIGMA.next());
+		vertex.setId(nextSigma());
 		return vertex;
 	}
 
@@ -59,6 +57,17 @@ public class VertexFactory implements Factory<ILayoutVertex> {
 	 */
 	public static ILayoutVertex createVertex() {
 		return (ILayoutVertex) new VertexStateHandler();
+	}
+
+	/**
+	 * Returns the next sigma.
+	 * 
+	 * @return the next sigma
+	 */
+	public static String nextSigma() {
+		if (!SIGMA.hasNext())
+			resetSigma();
+		return SIGMA.next();
 	}
 
 	/**

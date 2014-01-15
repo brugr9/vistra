@@ -7,7 +7,7 @@ import org.apache.commons.collections15.Transformer;
 import vistra.framework.graph.item.ILayoutVertex;
 
 /**
- * A vertex transformer: font colour.
+ * A vertex transformer: font color.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

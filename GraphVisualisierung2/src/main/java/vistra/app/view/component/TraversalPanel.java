@@ -19,7 +19,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ControlEvent;
+import vistra.app.control.ActionListenerI18n.I18nEvent;
 import vistra.app.control.state.Animation.AnimationEvent;
 import vistra.app.control.state.StepByStep.SbsEvent;
 import vistra.framework.util.palette.ColorPalette;
@@ -266,7 +266,7 @@ public final class TraversalPanel extends JPanel implements Observer {
 			ResourceBundle b = m.getResourceBundle();
 
 			try {
-				if (arg == ControlEvent.I18N) {
+				if (arg == I18nEvent.I18N) {
 					this.border.setTitle(b.getString("traversal.label"));
 					//
 					this.steplengthLabel.setText(b.getString("setStep.label"));

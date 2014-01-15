@@ -14,7 +14,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.IControl.ControlEvent;
 import vistra.framework.IParameterManager;
 import vistra.framework.ITraversal;
 import vistra.framework.graph.ILayoutGraph;
@@ -109,7 +108,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 			} else if (c.equals(Mode.EDITING.toString())) {
 				this.setMode(Mode.EDITING);
 				this.model.notifyObservers();
-			} else if (c.equals(ControlEvent.quit)) {
+			} else if (c.equals(ParameterEvent.quit)) {
 				this.quit();
 			}
 
@@ -731,6 +730,8 @@ public final class ParameterStateHandler implements IParameterHandler {
 		END("end"),
 		//
 		DELETE("delete"),
+		//
+		QUIT("quit"),
 
 		;
 
@@ -767,6 +768,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 		public static final String start = START.getValue();
 		public static final String end = END.getValue();
 		public static final String delete = DELETE.getValue();
+		public static final String quit = QUIT.getValue();
 
 	}
 

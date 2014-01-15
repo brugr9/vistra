@@ -13,14 +13,13 @@ import vistra.framework.util.palette.ColorPalette;
 import edu.uci.ics.jung.visualization.renderers.DefaultVertexLabelRenderer;
 
 /**
+ * A label renderer: vertex.
+ * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
 public class VertexLabelRenderer extends DefaultVertexLabelRenderer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**

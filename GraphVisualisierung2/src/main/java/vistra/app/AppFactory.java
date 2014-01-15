@@ -3,11 +3,15 @@ package vistra.app;
 import java.io.File;
 import java.util.Properties;
 
-import vistra.app.control.Control;
-import vistra.app.control.IControl;
-import vistra.app.view.DefaultView;
-import vistra.app.view.FullView;
+import vistra.app.control.ActionListenerAbout;
+import vistra.app.control.ActionListenerI18n;
+import vistra.app.control.ActionListenerShortcuts;
+import vistra.app.control.state.Animation;
+import vistra.app.control.state.ParameterStateHandler;
+import vistra.app.control.state.StepByStep;
 import vistra.app.view.IView;
+import vistra.app.view.ViewFactory;
+import vistra.app.view.ViewFactory.ViewType;
 import vistra.framework.IParameterManager;
 import vistra.framework.ParameterManager;
 
@@ -31,7 +35,7 @@ final class AppFactory {
 	 * @return the view
 	 * @throws Exception
 	 */
-	static IView createApplication() throws Exception {
+	static IView createApp() throws Exception {
 		try {
 			Properties properties = createProperties();
 			IParameterManager parameterManager = new ParameterManager(
@@ -50,7 +54,7 @@ final class AppFactory {
 	 * @return the view
 	 * @throws Exception
 	 */
-	static IView createApplication(ViewType viewType) throws Exception {
+	static IView createApp(ViewType viewType) throws Exception {
 		try {
 			Properties properties = createProperties();
 			IParameterManager parameterManager = new ParameterManager(
@@ -99,7 +103,8 @@ final class AppFactory {
 	 * @return a view as in MVC
 	 * @throws Exception
 	 */
-	static IView createGui(IParameterManager parameterManager) throws Exception {
+	private static IView createGui(IParameterManager parameterManager)
+			throws Exception {
 		try {
 			return createGui(parameterManager, ViewType.DEFAULT);
 		} catch (Exception ex) {
@@ -108,7 +113,7 @@ final class AppFactory {
 	}
 
 	/**
-	 * Creates a graphic user interface.
+	 * Creates a MVC based graphic user interface.
 	 * 
 	 * @param parameterManager
 	 *            a parameter manager
@@ -117,36 +122,24 @@ final class AppFactory {
 	 * @return a view as in MVC
 	 * @throws Exception
 	 */
-	static IView createGui(IParameterManager parameterManager, ViewType type)
-			throws Exception {
+	private static IView createGui(IParameterManager parameterManager,
+			ViewType type) throws Exception {
 		try {
-			// model and control
 			IModel model = new Model();
-			IControl control = new Control(parameterManager, model);
-			// view
-			IView view;
-			if (type == ViewType.FULL)
-				view = new FullView(model, control);
-			else if (type == ViewType.DEFAULT)
-				view = new DefaultView(model, control);
-			else
-				view = new DefaultView(model, control);
-			// i18n
-			model.getI18nListener().actionPerformed(null);
+			// Action listener
+			model.setI18nListener(new ActionListenerI18n(model));
+			model.setShortcutsListener(new ActionListenerShortcuts(model));
+			model.setAboutListener(new ActionListenerAbout(model));
+			// State handler
+			model.setAnimationStateHandler(new Animation(model));
+			model.setSbsStateHandler(new StepByStep(model));
+			model.setParameterStateHandler(new ParameterStateHandler(
+					parameterManager, model));
+
+			IView view = ViewFactory.create(model, type);
 			return view;
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
-
-	/**
-	 * View types.
-	 * 
-	 * @author Roland Bruggmann (brugr9@bfh.ch)
-	 * 
-	 */
-	enum ViewType {
-		DEFAULT, FULL;
-	}
-
 }

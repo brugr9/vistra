@@ -44,15 +44,16 @@ public class Picking extends
 					.getSource();
 			if (this.vertex != null) {
 				Point point = e.getPoint();
-				MultiLayerTransformer mt = viewer.getRenderContext()
+				MultiLayerTransformer mt = this.viewer.getRenderContext()
 						.getMultiLayerTransformer();
 				Point2D graphPoint = mt.inverseTransform(point);
 				Point2D graphDown = mt.inverseTransform(this.down);
-				Layout<ILayoutVertex, ILayoutEdge> layout = viewer
+				Layout<ILayoutVertex, ILayoutEdge> layout = this.viewer
 						.getGraphLayout();
 				double dx = graphPoint.getX() - graphDown.getX();
 				double dy = graphPoint.getY() - graphDown.getY();
-				PickedState<ILayoutVertex> ps = viewer.getPickedVertexState();
+				PickedState<ILayoutVertex> ps = this.viewer
+						.getPickedVertexState();
 
 				for (ILayoutVertex v : ps.getPicked()) {
 					Point2D vp = layout.transform(v);

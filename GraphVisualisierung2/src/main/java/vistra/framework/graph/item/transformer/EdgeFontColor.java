@@ -7,7 +7,7 @@ import org.apache.commons.collections15.Transformer;
 import vistra.framework.graph.item.ILayoutEdge;
 
 /**
- * An edge transformer: font colour.
+ * An edge transformer: font color.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 

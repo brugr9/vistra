@@ -9,7 +9,6 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import vistra.app.IModel;
-import vistra.app.control.IControl.ControlEvent;
 
 /**
  * An i18n action listener.
@@ -17,7 +16,7 @@ import vistra.app.control.IControl.ControlEvent;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class ActionListenerI18n extends AbstractActionListener {
+public class ActionListenerI18n extends AbstractActionListener {
 
 	/**
 	 * A field for an i18n base name.
@@ -59,7 +58,7 @@ class ActionListenerI18n extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerI18n(IModel model) {
+	public ActionListenerI18n(IModel model) {
 		super(model);
 		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle") //$NON-NLS-1$
 				.replace(".", File.separator); //$NON-NLS-1$
@@ -108,11 +107,22 @@ class ActionListenerI18n extends AbstractActionListener {
 			this.model.setProtocol(about);
 			/* update the view */
 			// TODO
-			this.model.notifyObservers(ControlEvent.I18N);
+			this.model.notifyObservers(I18nEvent.I18N);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
 					.getResourceBundle().getString("app.label"), 1, null); //$NON-NLS-1$
 			ex.printStackTrace();
 		}
 	}
+
+	/**
+	 * I18n events.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum I18nEvent {
+		I18N;
+	}
+
 }

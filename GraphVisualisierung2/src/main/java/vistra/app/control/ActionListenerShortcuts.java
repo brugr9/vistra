@@ -13,7 +13,7 @@ import vistra.app.IModel;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-final class ActionListenerShortcuts extends AbstractActionListener {
+public final class ActionListenerShortcuts extends AbstractActionListener {
 
 	/**
 	 * Main constructor.
@@ -21,7 +21,7 @@ final class ActionListenerShortcuts extends AbstractActionListener {
 	 * @param model
 	 *            the model
 	 */
-	ActionListenerShortcuts(IModel model) {
+	public ActionListenerShortcuts(IModel model) {
 		super(model);
 	}
 
