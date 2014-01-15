@@ -40,33 +40,6 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 	}
 
 	/**
-	 * Multi item / single value constructor.
-	 * 
-	 * @param vertices
-	 *            the vertices
-	 * @param value
-	 *            a value
-	 * @deprecated
-	 */
-	public UpdatedVertexStep(Iterable<IVertex> vertices, Integer value) {
-		super();
-		try {
-			for (IVertex vertex : vertices) {
-				IItemStateCommand command = new UpdatedVertexCommand(vertex,
-						value.toString());
-				this.commandHandler.addCommand(command);
-				//
-				this.description.append("Vertex "
-						+ ((ILayoutVertex) vertex).getId()
-						+ ", value updated to " + value
-						+ System.lineSeparator());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Multi item / multi value constructor.
 	 * 
 	 * @param u
