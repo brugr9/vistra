@@ -3,9 +3,9 @@ package vistra.framework.graph;
 import java.util.Collection;
 
 import net.datastructures.Entry;
-import vistra.framework.ITraversal;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
+import vistra.framework.traversal.ITraversal;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 

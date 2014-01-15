@@ -1,8 +1,8 @@
-package vistra.framework;
+package vistra.framework.traversal;
 
 import java.util.ListIterator;
 
-import vistra.framework.step.IStep;
+import vistra.framework.traversal.step.IStep;
 import vistra.framework.util.IBidirectIterator;
 
 /**

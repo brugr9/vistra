@@ -1,17 +1,17 @@
-package vistra.framework.step;
+package vistra.framework.traversal.step;
 
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.ILayoutEdge;
-import vistra.framework.graph.item.state.command.ForwardEdgeCommand;
+import vistra.framework.graph.item.state.command.BackEdgeCommand;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 
 /**
- * A step: Forward-edge.
+ * A step: Back-edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class ForwardEdgeStep extends AbstractStep implements IStep {
+public class BackEdgeStep extends AbstractStep implements IStep {
 
 	/**
 	 * Single item constructor.
@@ -19,13 +19,13 @@ public class ForwardEdgeStep extends AbstractStep implements IStep {
 	 * @param edge
 	 *            the edge
 	 */
-	public ForwardEdgeStep(IEdge edge) {
+	public BackEdgeStep(IEdge edge) {
 		super();
 		try {
-			IItemStateCommand command = new ForwardEdgeCommand(edge);
+			IItemStateCommand command = new BackEdgeCommand(edge);
 			this.commandHandler.addCommand(command);
 			//
-			this.description.append("Forward-edge");
+			this.description.append("Back-edge");
 			if (((ILayoutEdge) edge).getId() != null)
 				if (((ILayoutEdge) edge).getId().length() != 0)
 					this.description.append(" " + ((ILayoutEdge) edge).getId());
@@ -41,14 +41,14 @@ public class ForwardEdgeStep extends AbstractStep implements IStep {
 	 * @param edges
 	 *            the edges
 	 */
-	public ForwardEdgeStep(Iterable<IEdge> edges) {
+	public BackEdgeStep(Iterable<IEdge> edges) {
 		super();
 		try {
 			for (IEdge edge : edges) {
-				IItemStateCommand command = new ForwardEdgeCommand(edge);
+				IItemStateCommand command = new BackEdgeCommand(edge);
 				this.commandHandler.addCommand(command);
 				//
-				this.description.append("Forward-edge");
+				this.description.append("Back-edge");
 				if (((ILayoutEdge) edge).getId() != null)
 					if (((ILayoutEdge) edge).getId().length() != 0)
 						this.description.append(" "
@@ -59,5 +59,4 @@ public class ForwardEdgeStep extends AbstractStep implements IStep {
 			e.printStackTrace();
 		}
 	}
-
 }

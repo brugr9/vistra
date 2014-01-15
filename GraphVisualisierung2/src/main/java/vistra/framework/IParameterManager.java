@@ -5,6 +5,7 @@ import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.framework.graph.ILayoutGraph;
+import vistra.framework.traversal.ITraversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**

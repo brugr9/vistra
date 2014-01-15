@@ -1,4 +1,4 @@
-package vistra.framework.step;
+package vistra.framework.traversal.step;
 
 import java.util.ArrayList;
 import java.util.List;

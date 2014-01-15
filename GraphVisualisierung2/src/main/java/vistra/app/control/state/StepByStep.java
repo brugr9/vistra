@@ -11,8 +11,8 @@ import javax.swing.Timer;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.framework.ITraversal;
-import vistra.framework.step.IStep;
+import vistra.framework.traversal.ITraversal;
+import vistra.framework.traversal.step.IStep;
 import vistra.framework.util.palette.ConstantPalette;
 
 /**

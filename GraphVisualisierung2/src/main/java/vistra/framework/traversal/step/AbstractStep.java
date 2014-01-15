@@ -1,4 +1,4 @@
-package vistra.framework.step;
+package vistra.framework.traversal.step;
 
 /**
  * An abstract step. Delegates its execute- and undo-method to an

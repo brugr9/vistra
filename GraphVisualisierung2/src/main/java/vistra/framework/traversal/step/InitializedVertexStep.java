@@ -1,4 +1,4 @@
-package vistra.framework.step;
+package vistra.framework.traversal.step;
 
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;

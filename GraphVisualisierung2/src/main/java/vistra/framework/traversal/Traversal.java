@@ -1,11 +1,11 @@
-package vistra.framework;
+package vistra.framework.traversal;
 
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.TraversableGraph;
-import vistra.framework.step.IStep;
+import vistra.framework.traversal.step.IStep;
 import vistra.framework.util.IBidirectIterator;
 
 /**
@@ -18,7 +18,7 @@ import vistra.framework.util.IBidirectIterator;
  * @see TraversableGraph
  * 
  */
-class Traversal implements ITraversal {
+public class Traversal implements ITraversal {
 
 	/**
 	 * A field for an iterator over steps.
@@ -35,7 +35,7 @@ class Traversal implements ITraversal {
 	 * @param steps
 	 *            an iterator over steps
 	 */
-	Traversal(IBidirectIterator<IStep> steps) {
+	public Traversal(IBidirectIterator<IStep> steps) {
 		this.steps = steps;
 		this.solution = "";
 	}

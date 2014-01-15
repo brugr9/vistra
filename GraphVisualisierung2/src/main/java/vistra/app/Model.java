@@ -8,9 +8,9 @@ import java.util.ResourceBundle;
 import vistra.app.control.state.IAnimation;
 import vistra.app.control.state.IParameterStateHandler;
 import vistra.app.control.state.IStepByStep;
-import vistra.framework.ITraversal;
 import vistra.framework.graph.ILayoutGraph;
 import vistra.framework.graph.item.ILayoutVertex;
+import vistra.framework.traversal.ITraversal;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
 
 /**

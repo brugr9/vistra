@@ -1,17 +1,17 @@
-package vistra.framework.step;
+package vistra.framework.traversal.step;
 
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.ILayoutEdge;
-import vistra.framework.graph.item.state.command.CrossEdgeCommand;
+import vistra.framework.graph.item.state.command.ForwardEdgeCommand;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 
 /**
- * A step: Cross-edge.
+ * A step: Forward-edge.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class CrossEdgeStep extends AbstractStep implements IStep {
+public class ForwardEdgeStep extends AbstractStep implements IStep {
 
 	/**
 	 * Single item constructor.
@@ -19,13 +19,13 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 	 * @param edge
 	 *            the edge
 	 */
-	public CrossEdgeStep(IEdge edge) {
+	public ForwardEdgeStep(IEdge edge) {
 		super();
 		try {
-			IItemStateCommand command = new CrossEdgeCommand(edge);
+			IItemStateCommand command = new ForwardEdgeCommand(edge);
 			this.commandHandler.addCommand(command);
 			//
-			this.description.append("Cross-edge");
+			this.description.append("Forward-edge");
 			if (((ILayoutEdge) edge).getId() != null)
 				if (((ILayoutEdge) edge).getId().length() != 0)
 					this.description.append(" " + ((ILayoutEdge) edge).getId());
@@ -36,19 +36,19 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 	}
 
 	/**
-	 * Multi items constructor.
+	 * Multi item constructor.
 	 * 
 	 * @param edges
 	 *            the edges
 	 */
-	public CrossEdgeStep(Iterable<IEdge> edges) {
+	public ForwardEdgeStep(Iterable<IEdge> edges) {
 		super();
 		try {
 			for (IEdge edge : edges) {
-				IItemStateCommand command = new CrossEdgeCommand(edge);
+				IItemStateCommand command = new ForwardEdgeCommand(edge);
 				this.commandHandler.addCommand(command);
 				//
-				this.description.append("Cross-edge");
+				this.description.append("Forward-edge");
 				if (((ILayoutEdge) edge).getId() != null)
 					if (((ILayoutEdge) edge).getId().length() != 0)
 						this.description.append(" "
