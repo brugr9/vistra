@@ -50,7 +50,9 @@ public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 				items.put(v.get(i), e.get(i));
 
 			/* init */
-			g.stepInitializedVertex(v.get(0), g.getVertices());
+			IVertex v0 = v.get(0);
+			v.remove(0);
+			g.stepInitializedVertex(v0, v);
 			/* value */
 			g.stepUpdatedVertex(v.get(1), 5);
 			/* visit */
@@ -64,7 +66,7 @@ public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 			g.stepDiscardedEdge(e.get(4));
 			/* solution */
 			g.stepSolutionMember(v.get(4), e.get(0));
-			
+
 		} catch (Exception e) {
 			throw new AlgorithmException(e);
 		}
