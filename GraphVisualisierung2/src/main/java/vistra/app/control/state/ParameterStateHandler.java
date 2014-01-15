@@ -145,8 +145,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	@Override
 	public void handleGraphEvent(GraphEvent<ILayoutVertex, ILayoutEdge> evt) {
 		try {
-			// item added
-			// item deleted
+			// item added or item deleted
 			this.handleEditGraph();
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
@@ -342,12 +341,11 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				// b.getString("app.label"), 1, null);
 				message.append(System.lineSeparator());
 				this.model.setProtocol(message);
-				this.model.notifyObservers();
 			} else {
 				this.model.getAnimation().handleOff();
 				this.setMode(Mode.EDITING);
-				this.model.notifyObservers();
 			}
+			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -411,10 +409,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				this.model.setEnd(null);
 				this.model.setGraphSaved(false);
 				this.model.setGraphFile(false);
-				this.model.notifyObservers();
 				/* Algorithm */
 				this.updateAlgorithms();
 			}
+			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -459,10 +457,9 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					this.model.setStart(null);
 					this.model.setEnd(null);
 					this.model.setGraphFile(true);
-					// this.model.setGraphSaved(true);
-					// this.model.notifyObservers();
 					/* Algorithm */
 					this.updateAlgorithms();
+					this.model.notifyObservers();
 				}
 			}
 			return option;
@@ -520,12 +517,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				File file = fileChooser.getSelectedFile();
 				this.parameterManager.saveGraphAs(file);
 				this.model.setGraphFile(true);
-				// this.model.setGraphSaved(true);
-				// this.model.notifyObservers();
 				/* Algorithm */
-				// TODO algorithms
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
+				this.model.notifyObservers();
 			}
 			return option;
 		} catch (Exception e) {
@@ -547,9 +542,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			if (this.model.isAlgorithmsEnabled()) {
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
+				this.model.setProtocol(new StringBuilder());
 			}
 			// this.model.setGraphSaved(false);
-			// this.model.notifyObservers();
+			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}

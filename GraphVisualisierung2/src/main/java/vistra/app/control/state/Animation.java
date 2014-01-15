@@ -274,6 +274,8 @@ public final class Animation extends Observable implements IAnimation {
 	 */
 	void setOff() throws Exception {
 		try {
+			this.model.getStepByStep().handleOff();
+			//
 			this.model.setAnimationEnabled(false);
 			this.model.notifyObservers();
 		} catch (Exception ex) {
