@@ -1,5 +1,6 @@
 package vistra.app.view.component.mouse;
 
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
@@ -8,7 +9,6 @@ import javax.swing.JButton;
 
 import org.apache.commons.collections15.Factory;
 
-import vistra.app.IModel;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.framework.graph.ILayoutGraph;
 import vistra.framework.graph.item.ILayoutEdge;
@@ -43,27 +43,16 @@ public class Editing extends
 	private Layout<ILayoutVertex, ILayoutEdge> layout;
 
 	/**
-	 * A field for a button.
-	 */
-	private JButton virtualButton;
-
-	/**
 	 * Main constructor.
 	 * 
 	 * @param vertexFactory
 	 *            the vertex factory
 	 * @param edgeFactory
 	 *            the edge factory
-	 * @param model
-	 *            a gui model
 	 */
 	public Editing(Factory<ILayoutVertex> vertexFactory,
-			Factory<ILayoutEdge> edgeFactory, IModel model) {
+			Factory<ILayoutEdge> edgeFactory) {
 		super(vertexFactory, edgeFactory);
-		this.virtualButton = new JButton();
-		// TODO
-		// this.virtualButton.addActionListener(model.getParameterStateHandler());
-		this.virtualButton.setActionCommand(ParameterEvent.edit);
 	}
 
 	/**
@@ -166,8 +155,6 @@ public class Editing extends
 							.inverseTransform(e.getPoint());
 					this.layout.setLocation(newVertex, point);
 					newVertex.setLocation(point);
-					// event an parameterStateHandler
-					this.virtualButton.doClick();
 				}
 			}
 			this.viewer.repaint();
@@ -202,8 +189,6 @@ public class Editing extends
 							.getGraphLayout().getGraph();
 					graph.addEdge(this.edgeFactory.create(), this.startVertex,
 							vertex, this.edgeIsDirected);
-					// event
-					this.virtualButton.doClick();
 				}
 				this.viewer.repaint();
 			}

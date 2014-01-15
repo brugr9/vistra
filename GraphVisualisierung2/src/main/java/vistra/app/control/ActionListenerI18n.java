@@ -61,7 +61,7 @@ public class ActionListenerI18n extends AbstractActionListener {
 	public ActionListenerI18n(IModel model) {
 		super(model);
 		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle") //$NON-NLS-1$
-				.replace(".", File.separator); //$NON-NLS-1$
+				.replace(".", File.separator);
 		this.actionPerformed(null);
 	}
 
@@ -96,10 +96,10 @@ public class ActionListenerI18n extends AbstractActionListener {
 			this.model.setShortcutsMessage(this.shortcuts);
 			/* about message */
 			StringBuilder about = new StringBuilder();
-			about.append(b.getString("app.label")); //$NON-NLS-1$
+			about.append(b.getString("app.label"));
 			about.append(System.lineSeparator());
 			about.append(System.lineSeparator());
-			about.append(b.getString("about.message").replaceAll("\n", //$NON-NLS-1$ //$NON-NLS-2$
+			about.append(b.getString("about.message").replaceAll("\n",
 					System.lineSeparator()));
 			about.append(System.lineSeparator());
 			this.model.setAboutMessage(about.toString());
@@ -110,7 +110,7 @@ public class ActionListenerI18n extends AbstractActionListener {
 			this.model.notifyObservers(I18nEvent.I18N);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model
-					.getResourceBundle().getString("app.label"), 1, null); //$NON-NLS-1$
+					.getResourceBundle().getString("app.label"), 1, null);
 			ex.printStackTrace();
 		}
 	}

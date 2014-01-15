@@ -1,6 +1,5 @@
 package vistra.app.view.component.mouse;
 
-import java.awt.event.InputEvent;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -15,15 +14,11 @@ import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.VertexFactory;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
-import edu.uci.ics.jung.visualization.annotations.AnnotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.AnimatedPickingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.LabelEditingGraphMousePlugin;
-import edu.uci.ics.jung.visualization.control.RotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
-import edu.uci.ics.jung.visualization.control.ShearingGraphMousePlugin;
-import edu.uci.ics.jung.visualization.control.TranslatingGraphMousePlugin;
 
 /**
  * An adapted JUNG mouse plugin for editing a modal graph.
@@ -33,11 +28,6 @@ import edu.uci.ics.jung.visualization.control.TranslatingGraphMousePlugin;
  */
 public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 		implements Observer {
-
-	/**
-	 * A field for a gui model.
-	 */
-	private IModel model;
 	/**
 	 * A field for a switch-mode pop-up menu.
 	 */
@@ -62,7 +52,6 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 	public Mouse(IModel model,
 			VisualizationViewer<ILayoutVertex, ILayoutEdge> viewer) {
 		super(viewer.getRenderContext(), new VertexFactory(), new EdgeFactory());
-		this.model = model;
 		this.modePopup = new ModePopup(model);
 		this.vertexPopup = new VertexPopup(viewer, model);
 		this.edgePopup = new EdgePopup(viewer, model);
@@ -86,23 +75,27 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 	 */
 	@Override
 	protected void loadPlugins() {
-		pickingPlugin = new Picking();
-		animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
-		translatingPlugin = new TranslatingGraphMousePlugin(
-				InputEvent.BUTTON1_MASK);
-		scalingPlugin = new ScalingGraphMousePlugin(
-				new CrossoverScalingControl(), 0, in, out);
-		rotatingPlugin = new RotatingGraphMousePlugin();
-		shearingPlugin = new ShearingGraphMousePlugin();
-		editingPlugin = new Editing(this.vertexFactory, this.edgeFactory,
-				this.model);
-		labelEditingPlugin = new LabelEditingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
-		annotatingPlugin = new AnnotatingGraphMousePlugin<ILayoutVertex, ILayoutEdge>(
-				rc);
-		popupEditingPlugin = new PopupPlugin(this.vertexFactory,
+
+		/* scaling */
+		this.scalingPlugin = new ScalingGraphMousePlugin(
+				new CrossoverScalingControl(), 0, this.in, this.out);
+		this.add(this.scalingPlugin);
+		/* picking */
+		this.pickingPlugin = new Picking();
+		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
+		/* editing */
+		this.popupEditingPlugin = new PopupPlugin(this.vertexFactory,
 				this.edgeFactory);
-		add(this.scalingPlugin);
-		setMode(Mode.EDITING);
+		this.editingPlugin = new Editing(this.vertexFactory, this.edgeFactory);
+		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
+		// translatingPlugin = new TranslatingGraphMousePlugin(
+		// InputEvent.BUTTON1_MASK);
+		// rotatingPlugin = new RotatingGraphMousePlugin();
+		// shearingPlugin = new ShearingGraphMousePlugin();
+		// annotatingPlugin = new AnnotatingGraphMousePlugin<ILayoutVertex,
+		// ILayoutEdge>(
+		// rc);
+		// setMode(Mode.EDITING);
 	}
 
 	/**
@@ -112,8 +105,8 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 	protected void setPickingMode() {
 		add(this.pickingPlugin);
 		add(this.animatedPickingPlugin);
-		remove(this.popupEditingPlugin);
 		remove(this.editingPlugin);
+		remove(this.popupEditingPlugin);
 		remove(this.labelEditingPlugin);
 	}
 
@@ -124,8 +117,8 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 	protected void setEditingMode() {
 		remove(this.pickingPlugin);
 		remove(this.animatedPickingPlugin);
-		add(this.popupEditingPlugin);
 		add(this.editingPlugin);
+		add(this.popupEditingPlugin);
 		add(this.labelEditingPlugin);
 	}
 

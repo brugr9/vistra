@@ -305,26 +305,22 @@ public final class StepByStep extends Observable implements IStepByStep {
 	boolean backward() throws Exception {
 		ITraversal traversal = this.model.getTraversal();
 		try {
+			IStep step = null;
 			int progress = this.model.getProgress();
-			int index = 0;
-			StringBuilder description;
-			StringBuilder protocol = this.model.getProtocol();
 			/* here we go ... */
-			for (int i = this.model.getSteplength(); 0 < i; i--) {
-				this.step.undo();
-				this.model.setProgress(--progress);
-				// remove description
-				description = new StringBuilder();
-				description.append(this.step.getDescription());
-				if (!traversal.hasNext())
-					description.append(traversal.getSolution());
-				index = protocol.lastIndexOf(description.toString());
-				protocol.delete(index, index + description.length());
-				this.model.setProtocol(protocol);
-				//
-				this.model.notifyObservers();
+			for (int i = 0; i < this.model.getSteplength(); i++) {
 				if (traversal.hasPrevious()) {
-					this.step = traversal.previous();
+					// protocol
+					if (!traversal.hasNext())
+						this.delete(traversal.getSolution());
+					// step
+					step = traversal.previous();
+					step.undo();
+					this.model.setProgress(--progress);
+					// protocol
+					this.delete(step.getDescription());
+					//
+					this.model.notifyObservers();
 				} else {
 					break;
 				}
@@ -336,6 +332,20 @@ public final class StepByStep extends Observable implements IStepByStep {
 	}
 
 	/**
+	 * A helper method: Deletes a string from protocol.
+	 * 
+	 * @param str
+	 *            the string to delete
+	 */
+	private void delete(String str) {
+		StringBuilder protocol = this.model.getProtocol();
+		int start, end;
+		start = protocol.lastIndexOf(str);
+		end = start + str.length();
+		protocol.delete(start, end);
+	}
+
+	/**
 	 * Doing: Step-by-Step forward for a step length.
 	 * 
 	 * @return <code>true</code> if the traversal has a next step.
@@ -344,20 +354,23 @@ public final class StepByStep extends Observable implements IStepByStep {
 	boolean forward() throws Exception {
 		ITraversal traversal = this.model.getTraversal();
 		try {
+			IStep step = null;
 			int progress = this.model.getProgress();
 			StringBuilder protocol = this.model.getProtocol();
 			/* here we go ... */
 			for (int i = 0; i < this.model.getSteplength(); i++) {
 				if (traversal.hasNext()) {
-					this.step = traversal.next();
+					// step
+					step = traversal.next();
 					// TODO
-					// this.blink();
-					this.step.execute();
+					// if(this.model.isBlinkEnabled())
+					this.blink(step);
+					step.execute();
 					this.model.setProgress(++progress);
-					protocol.append(this.step.getDescription());
+					// protocol
+					protocol.append(step.getDescription());
 					if (!traversal.hasNext())
 						protocol.append(traversal.getSolution());
-					this.model.setProtocol(protocol);
 					this.model.notifyObservers();
 				} else {
 					break;
@@ -372,20 +385,21 @@ public final class StepByStep extends Observable implements IStepByStep {
 	/**
 	 * A helper method: Helping a step to blink by starting the related timer.
 	 * 
-	 * @throws InterruptedException
+	 * @param step
+	 *            the step to blink
+	 * @throws Exception
 	 */
-	private void blink() throws InterruptedException {
-		// TODO
+	private void blink(IStep step) throws Exception {
 		try {
+			// TODO
 			// if (this.model.isBlinkEnabled()) {
+			this.step = step;
 			this.off = true;
 			this.counter = 0;
 			this.timer.start();
 		} catch (Exception ex) {
 			throw ex;
 		}
-
-		// }
 	}
 
 	/**
@@ -416,14 +430,16 @@ public final class StepByStep extends Observable implements IStepByStep {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (StepByStep.this.off)
-					StepByStep.this.step.execute();
-				else
-					StepByStep.this.step.undo();
-				StepByStep.this.off = !StepByStep.this.off;
-				StepByStep.this.counter++;
-				StepByStep.this.model.notifyObservers();
-
+				if (off)
+					step.execute();
+				else {
+					step.undo();
+					counter++;
+				}
+				model.notifyObservers();
+				off = !off;
+				if (counter == NUMBER_OF_BLINKS)
+					timer.stop();
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(
 						null,

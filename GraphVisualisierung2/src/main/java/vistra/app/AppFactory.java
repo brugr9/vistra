@@ -3,12 +3,6 @@ package vistra.app;
 import java.io.File;
 import java.util.Properties;
 
-import vistra.app.control.ActionListenerAbout;
-import vistra.app.control.ActionListenerI18n;
-import vistra.app.control.ActionListenerShortcuts;
-import vistra.app.control.state.Animation;
-import vistra.app.control.state.ParameterStateHandler;
-import vistra.app.control.state.StepByStep;
 import vistra.app.view.IView;
 import vistra.app.view.ViewFactory;
 import vistra.app.view.ViewFactory.ViewType;
@@ -30,37 +24,20 @@ final class AppFactory {
 	}
 
 	/**
-	 * Creates an application with a graphic user interface (MVC).
-	 * 
-	 * @return the view
-	 * @throws Exception
-	 */
-	static IView createApp() throws Exception {
-		try {
-			Properties properties = createProperties();
-			IParameterManager parameterManager = new ParameterManager(
-					properties);
-			IView view = createGui(parameterManager);
-			return view;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	/**
 	 * Creates an application with a graphic user interface (MVC) of given type.
 	 * 
-	 * @param viewType
+	 * @param type
+	 *            the view type
 	 * @return the view
 	 * @throws Exception
 	 */
-	static IView createApp(ViewType viewType) throws Exception {
+	static IView createApp(ViewType type) throws Exception {
 		try {
 			Properties properties = createProperties();
 			IParameterManager parameterManager = new ParameterManager(
 					properties);
-			IView view = createGui(parameterManager, viewType);
-			return view;
+			IModel model = ModelFactory.create(parameterManager);
+			return ViewFactory.create(model, type);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -95,51 +72,4 @@ final class AppFactory {
 
 	}
 
-	/**
-	 * Creates a graphic user interface.
-	 * 
-	 * @param parameterManager
-	 *            a parameter manager
-	 * @return a view as in MVC
-	 * @throws Exception
-	 */
-	private static IView createGui(IParameterManager parameterManager)
-			throws Exception {
-		try {
-			return createGui(parameterManager, ViewType.DEFAULT);
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
-
-	/**
-	 * Creates a MVC based graphic user interface.
-	 * 
-	 * @param parameterManager
-	 *            a parameter manager
-	 * @param type
-	 *            the view type
-	 * @return a view as in MVC
-	 * @throws Exception
-	 */
-	private static IView createGui(IParameterManager parameterManager,
-			ViewType type) throws Exception {
-		try {
-			IModel model = new Model();
-			// Action listener
-			model.setI18nListener(new ActionListenerI18n(model));
-			model.setShortcutsListener(new ActionListenerShortcuts(model));
-			model.setAboutListener(new ActionListenerAbout(model));
-			// State handler
-			model.setAnimationStateHandler(new Animation(model));
-			model.setSbsStateHandler(new StepByStep(model));
-			model.setParameterStateHandler(new ParameterStateHandler(
-					parameterManager, model));
-
-			IView view = ViewFactory.create(model, type);
-			return view;
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
 }

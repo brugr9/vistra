@@ -104,10 +104,8 @@ public final class ParameterStateHandler implements IParameterHandler {
 				// TODO this.handleEditEnd();
 			} else if (c.equals(Mode.PICKING.toString())) {
 				this.setMode(Mode.PICKING);
-				this.model.notifyObservers();
 			} else if (c.equals(Mode.EDITING.toString())) {
 				this.setMode(Mode.EDITING);
-				this.model.notifyObservers();
 			} else if (c.equals(ParameterEvent.quit)) {
 				this.quit();
 			}
@@ -342,7 +340,6 @@ public final class ParameterStateHandler implements IParameterHandler {
 				this.model.getAnimationStateHandler().handleOff();
 				this.setMode(Mode.EDITING);
 			}
-			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -561,7 +558,6 @@ public final class ParameterStateHandler implements IParameterHandler {
 			// deny user interaction
 			// TODO disable all interaction item (menu etc.)
 			this.setMode(Mode.PICKING);
-			this.model.notifyObservers();
 			/* Graph */
 			if (this.model.getProgress() > 0)
 				((StepByStep) this.model.getSbsStateHandler()).toBeginning();

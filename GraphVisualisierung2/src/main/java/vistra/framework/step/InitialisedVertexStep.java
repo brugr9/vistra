@@ -16,49 +16,6 @@ import vistra.framework.graph.item.state.command.UpdatedVertexCommand;
 public class InitialisedVertexStep extends AbstractStep implements IStep {
 
 	/**
-	 * Single item constructor.
-	 * 
-	 * @param i
-	 *            the vertex
-	 * @deprecated
-	 */
-	public InitialisedVertexStep(IVertex i) {
-		super();
-		try {
-			IItemStateCommand command = new InitialisedVertexCommand(i);
-			this.commandHandler.addCommand(command);
-			//
-			this.description.append("Vertex " + ((ILayoutVertex) i).getId()
-					+ " initialised" + System.lineSeparator());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Multi item constructor.
-	 * 
-	 * @param i
-	 *            the vertices
-	 * @deprecated
-	 */
-	public InitialisedVertexStep(Iterable<IVertex> i) {
-		super();
-		try {
-			for (IVertex vertex : i) {
-				IItemStateCommand command = new InitialisedVertexCommand(vertex);
-				this.commandHandler.addCommand(command);
-				//
-				this.description.append("Vertex "
-						+ ((ILayoutVertex) vertex).getId() + " initialised"
-						+ System.lineSeparator());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Multi item constructor.
 	 * 
 	 * @param s
