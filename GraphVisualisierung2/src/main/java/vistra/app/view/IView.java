@@ -27,4 +27,14 @@ public interface IView {
 	 * A field for the border.
 	 */
 	public static int BORDER = 10;
+
+	/**
+	 * View types.
+	 * 
+	 * @author Roland Bruggmann (brugr9@bfh.ch)
+	 * 
+	 */
+	public enum ViewType {
+		DEFAULT, FULL;
+	}
 }

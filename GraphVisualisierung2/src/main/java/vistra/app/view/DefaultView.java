@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import vistra.app.IModel;
 import vistra.app.Model;
+import vistra.app.control.IControl;
 import vistra.app.view.component.AlgorithmPanel;
 import vistra.app.view.component.GraphPanel;
 import vistra.app.view.component.MenuBar;
@@ -32,7 +33,7 @@ import vistra.framework.util.palette.ColorPalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class DefaultView extends JFrame implements IView {
+public class DefaultView extends JFrame implements IView {
 
 	private static final long serialVersionUID = 1L;
 
@@ -70,12 +71,13 @@ class DefaultView extends JFrame implements IView {
 	 * 
 	 * @param model
 	 *            a model as in MVC
+	 * @param control
+	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	DefaultView(IModel model) throws Exception {
+	public DefaultView(IModel model, IControl control) throws Exception {
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle(model.getResourceBundle().getString("app.label"));
 		this.setMinimumSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 		this.setResizable(false);
 		this.setLocation(20, 20);
@@ -114,6 +116,11 @@ class DefaultView extends JFrame implements IView {
 		this.add(this.toolBar, BorderLayout.NORTH);
 		this.add(this.graphPanel, BorderLayout.WEST);
 		this.add(this.anotherPanel, BorderLayout.EAST);
+		control.init();
+
+		// let's go ...
+		control.init();
+		super.setTitle(model.getResourceBundle().getString("app.label"));
 		this.setVisible(true);
 	}
 

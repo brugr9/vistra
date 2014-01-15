@@ -3,9 +3,12 @@ package vistra.app;
 import java.io.File;
 import java.util.Properties;
 
+import vistra.app.control.Control;
+import vistra.app.control.IControl;
+import vistra.app.view.DefaultView;
+import vistra.app.view.FullView;
 import vistra.app.view.IView;
-import vistra.app.view.ViewFactory;
-import vistra.app.view.ViewFactory.ViewType;
+import vistra.app.view.IView.ViewType;
 import vistra.framework.IParameterManager;
 import vistra.framework.ParameterManager;
 
@@ -36,8 +39,17 @@ final class AppFactory {
 			Properties properties = createProperties();
 			IParameterManager parameterManager = new ParameterManager(
 					properties);
-			IModel model = ModelFactory.create(parameterManager);
-			return ViewFactory.create(model, type);
+			IModel model = new Model();
+			IControl control = new Control(parameterManager, model);
+			IView view;
+			if (type == ViewType.FULL)
+				view = new FullView(model, control);
+			else if (type == ViewType.DEFAULT)
+				view = new DefaultView(model, control);
+			else
+				view = new DefaultView(model, control);
+			model.getI18nListener().actionPerformed(null);
+			return view;
 		} catch (Exception e) {
 			throw e;
 		}

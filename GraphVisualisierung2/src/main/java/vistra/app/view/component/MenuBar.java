@@ -66,10 +66,6 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 */
 	private final JMenuItem quit;
 	/**
-	 * A field for the menu item 'deCH'.
-	 */
-	// private final JMenuItem deCH;
-	/**
 	 * A field for the menu item 'deDE'.
 	 */
 	private final JMenuItem deDE;
@@ -77,10 +73,6 @@ public final class MenuBar extends JMenuBar implements Observer {
 	 * A field for the menu item 'frFR'.
 	 */
 	private final JMenuItem frFR;
-	/**
-	 * A field for the menu item 'enGB'.
-	 */
-	// private final JMenuItem enGB;
 	/**
 	 * A field for the menu item 'enUS'.
 	 */
@@ -142,28 +134,20 @@ public final class MenuBar extends JMenuBar implements Observer {
 		}
 		{// i18n
 			this.i18n = new JMenu("i18n");
-			// this.deCH = new JMenuItem("deCH");
 			this.deDE = new JMenuItem("deDE");
 			this.frFR = new JMenuItem("frFR");
-			// this.enGB = new JMenuItem("enGB");
 			this.enUS = new JMenuItem("enUS");
 			// listener
-			// this.deCH.addActionListener(model.getI18nListener());
 			this.deDE.addActionListener(model.getI18nListener());
 			this.frFR.addActionListener(model.getI18nListener());
-			// this.enGB.addActionListener(model.getI18nListener());
 			this.enUS.addActionListener(model.getI18nListener());
 			// command
-			// this.deCH.setActionCommand(I18nPalette.deCH);
 			this.deDE.setActionCommand(I18nPalette.deDE);
 			this.frFR.setActionCommand(I18nPalette.frFR);
-			// this.enGB.setActionCommand(I18nPalette.enGB);
 			this.enUS.setActionCommand(I18nPalette.enUS);
 			// add
-			// this.i18n.add(this.deCH);
 			this.i18n.add(this.deDE);
 			this.i18n.add(this.frFR);
-			// this.i18n.add(this.enGB);
 			this.i18n.add(this.enUS);
 		}
 		{// info
@@ -241,20 +225,14 @@ public final class MenuBar extends JMenuBar implements Observer {
 						this.i18n.setMnemonic(b.getString("i18n.mnemonic")
 								.toCharArray()[0]);
 						// setText
-						// this.deCH.setText(b.getString("deCH.label"));
 						this.deDE.setText(b.getString("deDE.label"));
 						this.frFR.setText(b.getString("frFR.label"));
-						// this.enGB.setText(b.getString("enGB.label"));
 						this.enUS.setText(b.getString("enUS.label"));
 						// setMnemonic
-						// this.deCH.setMnemonic(b.getString("deCH.mnemonic")
-						// .toCharArray()[0]);
 						this.deDE.setMnemonic(b.getString("deDE.mnemonic")
 								.toCharArray()[0]);
 						this.frFR.setMnemonic(b.getString("frFR.mnemonic")
 								.toCharArray()[0]);
-						// this.enGB.setMnemonic(b.getString("enGB.mnemonic")
-						// .toCharArray()[0]);
 						this.enUS.setMnemonic(b.getString("enUS.mnemonic")
 								.toCharArray()[0]);
 					}
@@ -288,10 +266,8 @@ public final class MenuBar extends JMenuBar implements Observer {
 					this.quit.setEnabled(m.isQuitEnabled());
 					// i18n
 					this.i18n.setEnabled(m.isI18nEnabled());
-					// this.deCH.setEnabled(m.isDeCHEnabled());
 					this.deDE.setEnabled(m.isDeDEEnabled());
 					this.frFR.setEnabled(m.isFrFREnabled());
-					// this.enGB.setEnabled(m.isEnGBEnabled());
 					this.enUS.setEnabled(m.isEnUSEnabled());
 					// info
 					this.help.setEnabled(m.isHelpEnabled());

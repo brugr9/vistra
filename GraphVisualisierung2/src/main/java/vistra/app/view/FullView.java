@@ -1,6 +1,7 @@
 package vistra.app.view;
 
 import vistra.app.IModel;
+import vistra.app.control.IControl;
 import vistra.app.view.component.AlgorithmPanel;
 import vistra.app.view.component.GraphPanel;
 import vistra.app.view.component.MenuBar;
@@ -22,7 +23,7 @@ import vistra.app.view.component.TraversalPanel;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class FullView extends DefaultView implements IView {
+public class FullView extends DefaultView implements IView {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,10 +32,12 @@ class FullView extends DefaultView implements IView {
 	 * 
 	 * @param model
 	 *            a model as in MVC
+	 * @param control
+	 *            a control as in MVC
 	 * @throws Exception
 	 */
-	FullView(IModel model) throws Exception {
-		super(model);
+	public FullView(IModel model, IControl control) throws Exception {
+		super(model, control);
 		// TODO
 		this.setVisible(true);
 	}
