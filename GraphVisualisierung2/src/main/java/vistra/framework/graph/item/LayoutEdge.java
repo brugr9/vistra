@@ -119,16 +119,21 @@ public class LayoutEdge extends Edge implements ILayoutEdge {
 		return this.layout.getFontColor();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setArrowStroke(Stroke stroke) {
-		// TODO Auto-generated method stub
+		this.arrowStroke = stroke;
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Stroke getArrowStroke() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.arrowStroke;
 	}
 
 }
