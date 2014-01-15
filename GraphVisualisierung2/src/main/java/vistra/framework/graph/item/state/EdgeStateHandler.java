@@ -298,7 +298,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 	void setPropertySolutionMember() throws Exception {
 		try {
 			this.setFont(FontPalette.normal);
-			this.setFontColor(ColorPalette.green);
+			this.setFontColor(ColorPalette.darkgrey);
 			this.setStroke(StrokePalette.visited);
 			this.setArrowStroke(StrokePalette.visited);
 			this.setStrokeColor(ColorPalette.green);
