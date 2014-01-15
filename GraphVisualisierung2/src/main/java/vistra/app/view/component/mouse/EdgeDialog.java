@@ -17,7 +17,6 @@ import javax.swing.border.EmptyBorder;
 
 import vistra.app.IModel;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
-import vistra.app.control.verifier.EdgeWeightVerifier;
 import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.util.Convert;

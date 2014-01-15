@@ -1,4 +1,4 @@
-package vistra.app.control.verifier;
+package vistra.app.view.component.mouse;
 
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
