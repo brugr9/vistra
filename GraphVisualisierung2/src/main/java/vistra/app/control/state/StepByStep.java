@@ -248,7 +248,10 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * Property: Sets the step-by-step view elements for state: inter.
 	 */
 	void setInter() {
-		this.model.setSbsEnabled(true);
+		if (((Animation) this.model.getAnimation()).animationTimer.isRunning())
+			this.model.setSbsEnabled(false);
+		else
+			this.model.setSbsEnabled(true);
 		this.model.notifyObservers();
 	}
 
@@ -256,9 +259,13 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * Property: Sets the step-by-step view elements for state: end.
 	 */
 	void setEnd() {
-		this.model.setSbsEnabled(true);
-		this.model.setForwardEnabled(false);
-		this.model.setToEndEnabled(false);
+		if (((Animation) this.model.getAnimation()).animationTimer.isRunning()) {
+			this.model.setSbsEnabled(false);
+		} else {
+			this.model.setSbsEnabled(true);
+			this.model.setForwardEnabled(false);
+			this.model.setToEndEnabled(false);
+		}
 		this.model.notifyObservers();
 	}
 
@@ -353,7 +360,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 					step = traversal.next();
 					// TODO
 					// if (this.model.isBlinkEnabled())
-					this.blink(step);
+					// this.blink(step);
 					step.execute();
 					this.model.setProgress(++progress);
 					// protocol

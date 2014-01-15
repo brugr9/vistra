@@ -37,7 +37,7 @@ public final class Animation extends Observable implements IAnimation {
 	/**
 	 * A field for an animation timer.
 	 */
-	private Timer animationTimer;
+	protected Timer animationTimer;
 	/**
 	 * A field for an animation listener.
 	 */
@@ -366,7 +366,6 @@ public final class Animation extends Observable implements IAnimation {
 				ex.printStackTrace();
 			}
 		}
-
 	}
 
 	/**
