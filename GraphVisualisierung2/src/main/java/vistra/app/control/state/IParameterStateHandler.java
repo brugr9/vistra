@@ -21,7 +21,7 @@ import edu.uci.ics.jung.graph.event.GraphEventListener;
  * @see IStepByStep
  * @see IAnimation
  */
-public interface IParameterHandler extends IControlContext,
+public interface IParameterStateHandler extends IControlContext,
 		ActionListener, ItemListener,
 		GraphEventListener<ILayoutVertex, ILayoutEdge> {
 

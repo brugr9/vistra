@@ -10,7 +10,9 @@ public interface IControl {
 
 	/**
 	 * Initialization.
+	 * 
+	 * @throws Exception
 	 */
-	void init();
+	void init() throws Exception;
 
 }

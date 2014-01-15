@@ -6,7 +6,7 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 
 import vistra.app.control.state.IAnimation;
-import vistra.app.control.state.IParameterHandler;
+import vistra.app.control.state.IParameterStateHandler;
 import vistra.app.control.state.IStepByStep;
 import vistra.framework.ITraversal;
 import vistra.framework.graph.ILayoutGraph;
@@ -61,7 +61,7 @@ public final class Model extends Observable implements IModel {
 	private boolean aboutEnabled;
 
 	/* Parameter */
-	private IParameterHandler parameterStateHandler;
+	private IParameterStateHandler parameterHandler;
 	// Graph
 	private ILayoutGraph graph;
 	private ILayoutVertex start;
@@ -80,7 +80,7 @@ public final class Model extends Observable implements IModel {
 	private ITraversal traversal;
 	private int progress;
 	// Step-by-Step
-	private IStepByStep sbsStateHandler;
+	private IStepByStep stepByStep;
 	private int steplength;
 	private boolean steplengthEnabled;
 	private boolean toBeginningEnabled;
@@ -88,7 +88,7 @@ public final class Model extends Observable implements IModel {
 	private boolean forwardEnabled;
 	private boolean toEndEnabled;
 	// Animation
-	private IAnimation animationStateHandler;
+	private IAnimation animation;
 	private int delay;
 	private boolean delayEnabled;
 	private boolean playEnabled;
@@ -184,9 +184,9 @@ public final class Model extends Observable implements IModel {
 		this.shortcutsListener = null;
 		this.aboutListener = null;
 		// State handler
-		this.animationStateHandler = null;
-		this.sbsStateHandler = null;
-		this.parameterStateHandler = null;
+		this.animation = null;
+		this.stepByStep = null;
+		this.parameterHandler = null;
 
 	}
 
@@ -923,8 +923,8 @@ public final class Model extends Observable implements IModel {
 	 * @see vistra.app.IModel#getParameterStateHandler()
 	 */
 	@Override
-	public IParameterHandler getParameterStateHandler() {
-		return parameterStateHandler;
+	public IParameterStateHandler getParameterStateHandler() {
+		return parameterHandler;
 	}
 
 	/*
@@ -934,8 +934,8 @@ public final class Model extends Observable implements IModel {
 	 * IParameterStateHandler)
 	 */
 	@Override
-	public void setParameterStateHandler(IParameterHandler parameterStateHandler) {
-		this.parameterStateHandler = parameterStateHandler;
+	public void setParameterStateHandler(IParameterStateHandler parameterStateHandler) {
+		this.parameterHandler = parameterStateHandler;
 	}
 
 	/*
@@ -1209,7 +1209,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public IStepByStep getSbsStateHandler() {
-		return sbsStateHandler;
+		return stepByStep;
 	}
 
 	/*
@@ -1219,8 +1219,8 @@ public final class Model extends Observable implements IModel {
 	 * ISbsStateHandler)
 	 */
 	@Override
-	public void setSbsStateHandler(IStepByStep sbsStateHandler) {
-		this.sbsStateHandler = sbsStateHandler;
+	public void setStepByStep(IStepByStep sbsStateHandler) {
+		this.stepByStep = sbsStateHandler;
 	}
 
 	/*
@@ -1350,7 +1350,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	@Override
 	public IAnimation getAnimationStateHandler() {
-		return animationStateHandler;
+		return animation;
 	}
 
 	/*
@@ -1360,8 +1360,8 @@ public final class Model extends Observable implements IModel {
 	 * IAnimationStateHandler)
 	 */
 	@Override
-	public void setAnimationStateHandler(IAnimation animationStateHandler) {
-		this.animationStateHandler = animationStateHandler;
+	public void setAnimation(IAnimation animationStateHandler) {
+		this.animation = animationStateHandler;
 	}
 
 	/*

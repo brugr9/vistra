@@ -48,7 +48,6 @@ final class AppFactory {
 				view = new DefaultView(model, control);
 			else
 				view = new DefaultView(model, control);
-			model.getI18nListener().actionPerformed(null);
 			return view;
 		} catch (Exception e) {
 			throw e;

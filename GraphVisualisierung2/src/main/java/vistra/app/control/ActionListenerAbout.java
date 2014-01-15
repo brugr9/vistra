@@ -34,10 +34,10 @@ public final class ActionListenerAbout extends AbstractActionListener {
 		ResourceBundle b = this.model.getResourceBundle();
 		try {
 			JOptionPane.showMessageDialog(null, this.model.getAboutMessage(),
-					b.getString("about.label"), 1, null); //$NON-NLS-1$
+					b.getString("about.label"), 1, null);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(),
-					b.getString("app.label"), 1, null); //$NON-NLS-1$
+					b.getString("app.label"), 1, null);
 			ex.printStackTrace();
 		}
 	}

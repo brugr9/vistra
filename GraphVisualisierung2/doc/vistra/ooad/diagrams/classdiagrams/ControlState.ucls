@@ -11,8 +11,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="2" language="java" name="vistra.app.control.state.IParameterHandler" project="GraphVisualisierung2" 
-    file="/GraphVisualisierung2/src/main/java/vistra/app/control/state/IParameterHandler.java" binary="false" 
+  <interface id="2" language="java" name="vistra.app.control.state.IParameterStateHandler" 
+    project="GraphVisualisierung2" 
+    file="/GraphVisualisierung2/src/main/java/vistra/app/control/state/IParameterStateHandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="126" y="-83"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" accessors="true" 

@@ -60,7 +60,7 @@ public class ActionListenerI18n extends AbstractActionListener {
 	 */
 	public ActionListenerI18n(IModel model) {
 		super(model);
-		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle") //$NON-NLS-1$
+		this.i18nBaseName = (this.getClass().getPackage().getName() + ".MessagesBundle")
 				.replace(".", File.separator);
 		this.actionPerformed(null);
 	}
@@ -106,7 +106,6 @@ public class ActionListenerI18n extends AbstractActionListener {
 			/* protocol */
 			this.model.setProtocol(about);
 			/* update the view */
-			// TODO
 			this.model.notifyObservers(I18nEvent.I18N);
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, ex.toString(), this.model

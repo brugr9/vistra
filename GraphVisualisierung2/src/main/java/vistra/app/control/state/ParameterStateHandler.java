@@ -37,7 +37,7 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
  * @see StepByStep
  * @see Animation
  */
-public final class ParameterStateHandler implements IParameterHandler {
+public final class ParameterStateHandler implements IParameterStateHandler {
 
 	/**
 	 * A field for a state.
@@ -68,7 +68,8 @@ public final class ParameterStateHandler implements IParameterHandler {
 		try {
 			this.state = new ParameterOff(this);
 			this.model.setGraphSaved(true);
-			this.handleNewGraphUndirected();
+			// TODO remove
+			// this.handleNewGraphUndirected();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -333,12 +334,18 @@ public final class ParameterStateHandler implements IParameterHandler {
 				this.model.getAnimationStateHandler().handleIdle();
 				this.setMode(Mode.PICKING);
 				ResourceBundle b = this.model.getResourceBundle();
-				JOptionPane.showMessageDialog(null,
-						b.getString("render.message"),
-						b.getString("app.label"), 1, null);
+				StringBuilder message = new StringBuilder();
+				message.append(b.getString("render.message")
+						+ System.lineSeparator());
+				// JOptionPane.showMessageDialog(null,
+				// message.toString(),
+				// b.getString("app.label"), 1, null);
+				this.model.setProtocol(message);
+				this.model.notifyObservers();
 			} else {
 				this.model.getAnimationStateHandler().handleOff();
 				this.setMode(Mode.EDITING);
+				this.model.notifyObservers();
 			}
 		} catch (Exception e) {
 			throw e;
@@ -573,6 +580,7 @@ public final class ParameterStateHandler implements IParameterHandler {
 					.executeAlgorithm(graph);
 			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
+			this.model.notifyObservers();
 			// done
 			return index;
 		} catch (Exception e) {

@@ -1,15 +1,11 @@
 package vistra.app.view.component.mouse;
 
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
-import javax.swing.JButton;
-
 import org.apache.commons.collections15.Factory;
 
-import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 import vistra.framework.graph.ILayoutGraph;
 import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;

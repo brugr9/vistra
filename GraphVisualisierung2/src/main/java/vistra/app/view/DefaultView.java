@@ -116,10 +116,11 @@ public class DefaultView extends JFrame implements IView {
 		this.add(this.toolBar, BorderLayout.NORTH);
 		this.add(this.graphPanel, BorderLayout.WEST);
 		this.add(this.anotherPanel, BorderLayout.EAST);
-		control.init();
-
-		// let's go ...
-		control.init();
+		try {
+			control.init();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		super.setTitle(model.getResourceBundle().getString("app.label"));
 		this.setVisible(true);
 	}

@@ -12,7 +12,7 @@ import java.awt.event.FocusListener;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see IParameterHandler
+ * @see IParameterStateHandler
  * @see IAnimation
  */
 public interface IStepByStep extends IControlContext, FocusListener,

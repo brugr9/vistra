@@ -3,7 +3,7 @@ package vistra.framework.step;
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
-import vistra.framework.graph.item.state.command.InitialisedVertexCommand;
+import vistra.framework.graph.item.state.command.InitializedVertexCommand;
 import vistra.framework.graph.item.state.command.SolutionMemberVertexCommand;
 import vistra.framework.graph.item.state.command.UpdatedVertexCommand;
 
@@ -13,7 +13,7 @@ import vistra.framework.graph.item.state.command.UpdatedVertexCommand;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class InitialisedVertexStep extends AbstractStep implements IStep {
+public class InitializedVertexStep extends AbstractStep implements IStep {
 
 	/**
 	 * Multi item constructor.
@@ -23,7 +23,7 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 	 * @param i
 	 *            the other vertices
 	 */
-	public InitialisedVertexStep(IVertex s, Iterable<IVertex> i) {
+	public InitializedVertexStep(IVertex s, Iterable<IVertex> i) {
 		super();
 		try {
 			IItemStateCommand startCommand = new UpdatedVertexCommand(s, "0");
@@ -32,15 +32,15 @@ public class InitialisedVertexStep extends AbstractStep implements IStep {
 					s);
 			this.commandHandler.addCommand(solutionMember);
 			this.description.append("Start vertex "
-					+ ((ILayoutVertex) s).getId() + " initialised"
+					+ ((ILayoutVertex) s).getId() + " initialized"
 					+ System.lineSeparator());
 			//
 			for (IVertex vertex : i) {
-				IItemStateCommand command = new InitialisedVertexCommand(vertex);
+				IItemStateCommand command = new InitializedVertexCommand(vertex);
 				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Vertex "
-						+ ((ILayoutVertex) vertex).getId() + " initialised"
+						+ ((ILayoutVertex) vertex).getId() + " initialized"
 						+ System.lineSeparator());
 			}
 		} catch (Exception e) {

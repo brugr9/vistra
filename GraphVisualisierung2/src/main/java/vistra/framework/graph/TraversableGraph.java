@@ -16,7 +16,7 @@ import vistra.framework.step.CrossEdgeStep;
 import vistra.framework.step.DiscardedEdgeStep;
 import vistra.framework.step.ForwardEdgeStep;
 import vistra.framework.step.IStep;
-import vistra.framework.step.InitialisedVertexStep;
+import vistra.framework.step.InitializedVertexStep;
 import vistra.framework.step.SolutionMemberStep;
 import vistra.framework.step.UpdatedVertexStep;
 import vistra.framework.step.VisitStep;
@@ -847,7 +847,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	public void stepInitializedVertex(IVertex s, Iterable<IVertex> i)
 			throws Exception {
 		try {
-			IStep step = new InitialisedVertexStep(s, i);
+			IStep step = new InitializedVertexStep(s, i);
 			this.add(step);
 		} catch (Exception ex) {
 			throw ex;

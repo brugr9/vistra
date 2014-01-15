@@ -82,7 +82,8 @@ public final class StepByStep extends Observable implements IStepByStep {
 		// state
 		try {
 			this.state = new SbsOff(this);
-			this.handleOff();
+			// TODO remove
+			// this.handleOff();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -351,11 +352,8 @@ public final class StepByStep extends Observable implements IStepByStep {
 					// step
 					step = traversal.next();
 					// TODO
-					// if (this.model.isBlinkEnabled()) {
-					// this.step = step;
-					// this.startBlink();
-					// this.wait();
-					// }
+					// if (this.model.isBlinkEnabled())
+					// this.blink(step);
 					step.execute();
 					this.model.setProgress(++progress);
 					// protocol
@@ -402,9 +400,13 @@ public final class StepByStep extends Observable implements IStepByStep {
 	}
 
 	/**
-	 * Starts the blink timer.
+	 * A helper method: Blinks a step.
+	 * 
+	 * @param step
+	 *            the step to blink
 	 */
-	void startBlink() {
+	private void blink(IStep step) {
+		this.step = step;
 		this.blinkTimer.start();
 		this.setChanged();
 	}

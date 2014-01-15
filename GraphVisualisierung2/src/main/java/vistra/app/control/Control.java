@@ -52,25 +52,39 @@ public class Control implements IControl {
 		this.i18n = new ActionListenerI18n(model);
 		this.shortcuts = new ActionListenerShortcuts(model);
 		this.about = new ActionListenerAbout(model);
+		this.model.setI18nListener(this.i18n);
+		this.model.setShortcutsListener(this.shortcuts);
+		this.model.setAboutListener(this.about);
 		// State handler
 		this.animation = new Animation(model);
 		this.stepByStep = new StepByStep(model);
 		this.parameterStateHandler = new ParameterStateHandler(
 				parameterManager, model);
+		this.model.setAnimation(this.animation);
+		this.model.setStepByStep(this.stepByStep);
+		this.model.setParameterStateHandler(this.parameterStateHandler);
+		try {
+			this.parameterStateHandler.handleNewGraphUndirected();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * @throws Exception
 	 */
 	@Override
-	public void init() {
-		// Action listener
-		this.model.setI18nListener(this.i18n);
-		this.model.setShortcutsListener(this.shortcuts);
-		this.model.setAboutListener(this.about);
-		// State handler
-		this.model.setAnimationStateHandler(this.animation);
-		this.model.setSbsStateHandler(this.stepByStep);
-		this.model.setParameterStateHandler(this.parameterStateHandler);
+	public void init() throws Exception {
+		try {
+			this.animation.handleOff();
+			// this.model.getI18nListener().actionPerformed(null);
+			// ((Model) this.model).notifyObservers();
+			// this.parameterStateHandler.handleNewGraphUndirected();
+		} catch (Exception e) {
+			throw e;
+		}
+
 	}
 }
