@@ -1,4 +1,4 @@
-package vistra.app.view.popup;
+package vistra.app.view.component.mouse;
 
 import java.awt.Component;
 import java.awt.event.MouseEvent;

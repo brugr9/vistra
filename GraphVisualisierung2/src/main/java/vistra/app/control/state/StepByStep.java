@@ -303,23 +303,28 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * @throws Exception
 	 */
 	boolean backward() throws Exception {
-		ITraversal t = this.model.getTraversal();
+		ITraversal traversal = this.model.getTraversal();
 		try {
 			int progress = this.model.getProgress();
+			int index = 0;
+			StringBuilder description;
 			StringBuilder protocol = this.model.getProtocol();
 			/* here we go ... */
 			for (int i = this.model.getSteplength(); 0 < i; i--) {
 				this.step.undo();
 				this.model.setProgress(--progress);
-				// remove step description
-				String description = this.step.getDescription();
-				int index = protocol.lastIndexOf(description);
+				// remove description
+				description = new StringBuilder();
+				description.append(this.step.getDescription());
+				if (!traversal.hasNext())
+					description.append(traversal.getSolution());
+				index = protocol.lastIndexOf(description.toString());
 				protocol.delete(index, index + description.length());
 				this.model.setProtocol(protocol);
 				//
 				this.model.notifyObservers();
-				if (t.hasPrevious()) {
-					this.step = t.previous();
+				if (traversal.hasPrevious()) {
+					this.step = traversal.previous();
 				} else {
 					break;
 				}
@@ -327,7 +332,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 		} catch (Exception ex) {
 			throw ex;
 		}
-		return t.hasPrevious();
+		return traversal.hasPrevious();
 	}
 
 	/**
@@ -340,7 +345,6 @@ public final class StepByStep extends Observable implements IStepByStep {
 		ITraversal traversal = this.model.getTraversal();
 		try {
 			int progress = this.model.getProgress();
-			String description = "";
 			StringBuilder protocol = this.model.getProtocol();
 			/* here we go ... */
 			for (int i = 0; i < this.model.getSteplength(); i++) {
@@ -350,8 +354,9 @@ public final class StepByStep extends Observable implements IStepByStep {
 					// this.blink();
 					this.step.execute();
 					this.model.setProgress(++progress);
-					description = this.step.getDescription();
-					protocol.append(description);
+					protocol.append(this.step.getDescription());
+					if (!traversal.hasNext())
+						protocol.append(traversal.getSolution());
 					this.model.setProtocol(protocol);
 					this.model.notifyObservers();
 				} else {

@@ -1,5 +1,6 @@
-package vistra.app.view.popup;
+package vistra.app.view.component.mouse;
 
+import java.awt.event.InputEvent;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -14,11 +15,15 @@ import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.VertexFactory;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.annotations.AnnotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.AnimatedPickingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.LabelEditingGraphMousePlugin;
+import edu.uci.ics.jung.visualization.control.RotatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
+import edu.uci.ics.jung.visualization.control.ShearingGraphMousePlugin;
+import edu.uci.ics.jung.visualization.control.TranslatingGraphMousePlugin;
 
 /**
  * An adapted JUNG mouse plugin for editing a modal graph.
@@ -65,7 +70,7 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 		((Model) model).addObserver(this.vertexPopup);
 		((Model) model).addObserver(this.edgePopup);
 
-		this.loadPlugins();
+		loadPlugins();
 		if (this.popupEditingPlugin instanceof PopupPlugin) {
 			((PopupPlugin) this.popupEditingPlugin)
 					.setModePopup(this.modePopup);
@@ -74,7 +79,6 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 			((PopupPlugin) this.popupEditingPlugin)
 					.setVertexPopup(this.vertexPopup);
 		}
-		this.setMode(Mode.PICKING); // TODO use?
 	}
 
 	/**
@@ -82,19 +86,23 @@ public class Mouse extends EditingModalGraphMouse<ILayoutVertex, ILayoutEdge>
 	 */
 	@Override
 	protected void loadPlugins() {
-		/* scaling */
-		this.scalingPlugin = new ScalingGraphMousePlugin(
-				new CrossoverScalingControl(), 0, this.in, this.out);
-		this.add(this.scalingPlugin);
-		/* picking */
-		this.pickingPlugin = new Picking();
-		this.animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
-		/* editing */
-		this.popupEditingPlugin = new PopupPlugin(this.vertexFactory,
-				this.edgeFactory);
-		this.editingPlugin = new Editing(this.vertexFactory, this.edgeFactory,
+		pickingPlugin = new Picking();
+		animatedPickingPlugin = new AnimatedPickingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
+		translatingPlugin = new TranslatingGraphMousePlugin(
+				InputEvent.BUTTON1_MASK);
+		scalingPlugin = new ScalingGraphMousePlugin(
+				new CrossoverScalingControl(), 0, in, out);
+		rotatingPlugin = new RotatingGraphMousePlugin();
+		shearingPlugin = new ShearingGraphMousePlugin();
+		editingPlugin = new Editing(this.vertexFactory, this.edgeFactory,
 				this.model);
-		this.labelEditingPlugin = new LabelEditingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
+		labelEditingPlugin = new LabelEditingGraphMousePlugin<ILayoutVertex, ILayoutEdge>();
+		annotatingPlugin = new AnnotatingGraphMousePlugin<ILayoutVertex, ILayoutEdge>(
+				rc);
+		popupEditingPlugin = new PopupPlugin(this.vertexFactory,
+				this.edgeFactory);
+		add(this.scalingPlugin);
+		setMode(Mode.EDITING);
 	}
 
 	/**

@@ -1,10 +1,6 @@
 package vistra.framework.graph;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import vistra.framework.graph.item.ILayoutEdge;
-import vistra.framework.graph.item.ILayoutItem;
 import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.ObservableGraph;
@@ -16,8 +12,8 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class LayoutGraph extends ObservableGraph<ILayoutVertex, ILayoutEdge>
-		implements ILayoutGraph {
+class LayoutGraph extends ObservableGraph<ILayoutVertex, ILayoutEdge> implements
+		ILayoutGraph {
 
 	private static final long serialVersionUID = 7604897874620015084L;
 
@@ -72,22 +68,6 @@ class LayoutGraph extends ObservableGraph<ILayoutVertex, ILayoutEdge>
 	@Override
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean unusedId(String id) {
-		Collection<ILayoutItem> items = new ArrayList<ILayoutItem>();
-		items.addAll((Collection<? extends ILayoutItem>) this.getVertices());
-		items.addAll((Collection<? extends ILayoutItem>) this.getEdges());
-		for (ILayoutItem item : items) {
-			if (item.getId() == id) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 }

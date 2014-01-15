@@ -25,9 +25,9 @@ class Traversal implements ITraversal {
 	 */
 	private IBidirectIterator<IStep> steps;
 	/**
-	 * A field for a description.
+	 * A field for a solution.
 	 */
-	private String description;
+	private String solution;
 
 	/**
 	 * Main constructor.
@@ -37,20 +37,7 @@ class Traversal implements ITraversal {
 	 */
 	Traversal(IBidirectIterator<IStep> steps) {
 		this.steps = steps;
-		this.description = "";
-	}
-
-	/**
-	 * Another constructor.
-	 * 
-	 * @param steps
-	 *            an iterator over steps
-	 * @param description
-	 *            a description
-	 */
-	public Traversal(IBidirectIterator<IStep> steps, String description) {
-		this.steps = steps;
-		this.description = description;
+		this.solution = "";
 	}
 
 	/**
@@ -109,6 +96,16 @@ class Traversal implements ITraversal {
 	@Override
 	public IStep previous() throws NoSuchElementException {
 		return this.steps.previous();
+	}
+
+	@Override
+	public void setSolution(String solution) {
+		this.solution = solution;
+	}
+
+	@Override
+	public String getSolution() {
+		return this.solution;
 	}
 
 }

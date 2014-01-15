@@ -16,7 +16,7 @@ import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.app.control.ActionListenerI18n.I18nEvent;
 import vistra.app.view.IView;
-import vistra.app.view.popup.Mouse;
+import vistra.app.view.component.mouse.Mouse;
 import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.transformer.ArrowStroke;

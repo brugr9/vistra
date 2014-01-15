@@ -20,16 +20,16 @@ public class Startup {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					AppFactory.createApp(ViewType.DEFAULT);
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null,
-							e.toString() + e.getCause(), null, 1, null);
-					e.printStackTrace();
-				}
+		 EventQueue.invokeLater(new Runnable() {
+		 @Override
+		 public void run() {
+		try {
+			AppFactory.createApp(ViewType.DEFAULT);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.toString() + e.getCause(),
+					null, 1, null);
+			e.printStackTrace();
+		}
 			}
 		});
 	}

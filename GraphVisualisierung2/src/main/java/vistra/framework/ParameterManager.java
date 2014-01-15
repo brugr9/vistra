@@ -186,7 +186,8 @@ public class ParameterManager implements IParameterManager {
 		try {
 			/* graph */
 			List<IStep> steps = new ArrayList<IStep>();
-			ITraversableGraph g = new TraversableGraph(graph, steps);
+			StringBuilder solution = new StringBuilder();
+			ITraversableGraph g = new TraversableGraph(graph, steps, solution);
 			/* algorithm */
 			this.algorithm.traverse(g);
 			/* traversal */
@@ -197,6 +198,7 @@ public class ParameterManager implements IParameterManager {
 			while (stepIterator.hasPrevious())
 				stepIterator.previous().undo();
 			ITraversal traversal = new Traversal(stepIterator);
+			traversal.setSolution(solution.toString());
 			return traversal;
 		} catch (Exception e) {
 			throw new ParameterException(e);

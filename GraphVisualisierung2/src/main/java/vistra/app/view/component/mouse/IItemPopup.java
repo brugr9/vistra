@@ -1,4 +1,4 @@
-package vistra.app.view.popup;
+package vistra.app.view.component.mouse;
 
 import java.awt.geom.Point2D;
 import java.util.Observer;

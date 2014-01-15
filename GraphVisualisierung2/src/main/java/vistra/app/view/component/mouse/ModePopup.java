@@ -1,4 +1,4 @@
-package vistra.app.view.popup;
+package vistra.app.view.component.mouse;
 
 import java.util.Observable;
 import java.util.Observer;

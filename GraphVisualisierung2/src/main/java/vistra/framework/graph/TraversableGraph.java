@@ -8,6 +8,7 @@ import net.datastructures.Entry;
 import vistra.framework.ITraversal;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.item.IEdge;
+import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.state.IVertexStateHandler;
 import vistra.framework.step.BackEdgeStep;
@@ -52,6 +53,11 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	List<IStep> steps;
 
 	/**
+	 * A field for a solution.
+	 */
+	StringBuilder solution;
+
+	/**
 	 * Main constructor.
 	 * 
 	 * @param delegate
@@ -61,9 +67,10 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 */
 	@SuppressWarnings("unchecked")
 	public TraversableGraph(Graph<? extends IVertex, ? extends IEdge> delegate,
-			List<IStep> steps) {
+			List<IStep> steps, StringBuilder solution) {
 		super((Graph<IVertex, IEdge>) delegate);
 		this.steps = steps;
+		this.solution = solution;
 	}
 
 	/*
@@ -702,6 +709,25 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	}
 
 	/**
+	 * Appends a vertex id to the solution.
+	 * 
+	 * @param id
+	 *            the id
+	 * @throws Exception
+	 */
+	private void append(String id) throws Exception {
+		try {
+			if (this.solution.length() == 0)
+				this.solution.append("Solution: ");
+			else
+				this.solution.append(" - ");
+			this.solution.append(id);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * 
 	 */
@@ -866,6 +892,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 		try {
 			IStep step = new VisitStep(v, e);
 			this.add(step);
+			this.append(((ILayoutVertex) v).getId());
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -880,6 +907,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 		try {
 			IStep step = new SolutionMemberStep(v, e);
 			this.add(step);
+			this.append(((ILayoutVertex) v).getId());
 		} catch (Exception ex) {
 			throw ex;
 		}

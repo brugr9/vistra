@@ -15,4 +15,18 @@ import vistra.framework.util.IBidirectIterator;
  */
 public interface ITraversal extends IBidirectIterator<IStep> {
 
+	/**
+	 * Sets the solution.
+	 * 
+	 * @param solution
+	 */
+	void setSolution(String solution);
+
+	/**
+	 * Returns the solution.
+	 * 
+	 * @return the solution
+	 */
+	String getSolution();
+
 }

@@ -59,14 +59,4 @@ public interface ILayoutGraph extends Graph<ILayoutVertex, ILayoutEdge>,
 	void removeGraphEventListener(
 			GraphEventListener<ILayoutVertex, ILayoutEdge> listener);
 
-	/**
-	 * Checks an item identifier.
-	 * 
-	 * @param identifier
-	 *            the identifier to check
-	 * @return {@code true} if the identifier is not yet used, {@code false}
-	 *         otherwise
-	 */
-	boolean unusedId(String identifier);
-
 }
