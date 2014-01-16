@@ -203,6 +203,10 @@ public final class Animation extends Observable implements IAnimation {
 	void setStopped() throws Exception {
 		try {
 			((StepByStep) this.model.getStepByStep()).handleIdle();
+			((ParameterStateHandler) this.model.getParameterStateHandler())
+					.setEnableMenu(true);
+			((ParameterStateHandler) this.model.getParameterStateHandler())
+					.setEnableAlgorithms(true);
 			//
 			this.model.setAnimationEnabled(true);
 			this.model.setPauseEnabled(false);
@@ -226,7 +230,11 @@ public final class Animation extends Observable implements IAnimation {
 	 */
 	void setPlaying() throws Exception {
 		try {
-			((StepByStep) this.model.getStepByStep()).handleOff();
+			this.model.getStepByStep().handleOff();
+			((ParameterStateHandler) this.model.getParameterStateHandler())
+					.setEnableMenu(false);
+			((ParameterStateHandler) this.model.getParameterStateHandler())
+					.setEnableAlgorithms(false);
 			//
 			this.model.setAnimationEnabled(true);
 			this.model.setDelayEnabled(false);

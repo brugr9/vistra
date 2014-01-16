@@ -330,19 +330,10 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void setEnableTraversal(boolean enabled) throws Exception {
 		try {
-			StringBuilder message = new StringBuilder();
 			if (enabled) {
 				this.model.getAnimation().handleIdle();
-				this.setMode(Mode.PICKING);
-				ResourceBundle b = this.model.getResourceBundle();
-				message.append(b.getString("render.message"));
-				// JOptionPane.showMessageDialog(null, message.toString(),
-				// b.getString("app.label"), 1, null);
-				message.append(System.lineSeparator());
-				this.model.setProtocol(message);
 			} else {
 				this.model.getAnimation().handleOff();
-				this.setMode(Mode.EDITING);
 			}
 			this.model.notifyObservers();
 		} catch (Exception e) {
@@ -361,6 +352,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			this.model.setMenuEnabled(enabled);
 			this.model.setSaveEnabled(!this.model.isGraphSaved());
+			if (enabled)
+				this.setMode(this.model.getMode());
 			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -475,8 +468,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void saveGraph() throws Exception {
 		try {
 			this.parameterManager.saveGraph();
-			// this.model.setGraphSaved(true);
-			// this.model.notifyObservers();
+			this.model.setGraphSaved(true);
+			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -560,15 +553,20 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	int selectAlgorithm() throws Exception {
 		try {
-			// deny user interaction
-			// TODO disable all interaction item (menu etc.)
-			this.setMode(Mode.PICKING);
+			StringBuilder message = new StringBuilder();
+			int index = this.model.getSelectedAlgorithmIndex();
+			if (index == 0) {
+				/* Graph */
+				if (this.model.getProgress() > 0)
+					((StepByStep) this.model.getStepByStep()).toBeginning();
+			} else {
+				// deny user interaction
+				// TODO disable all interaction item (menu etc.)
+				this.setMode(Mode.PICKING);
+			}
 			/* Graph */
-			if (this.model.getProgress() > 0)
-				((StepByStep) this.model.getStepByStep()).toBeginning();
 			ILayoutGraph graph = this.model.getGraph();
 			/* Algorithm */
-			int index = this.model.getSelectedAlgorithmIndex();
 			this.parameterManager.selectAlgorithm(index);
 			String description = this.parameterManager
 					.getAlgorithmDescription();
@@ -578,6 +576,16 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					.executeAlgorithm(graph);
 			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
+			if (index == 0) {
+				this.setMode(Mode.EDITING);
+			} else {
+				ResourceBundle b = this.model.getResourceBundle();
+				message.append(b.getString("render.message"));
+				// JOptionPane.showMessageDialog(null, message.toString(),
+				// b.getString("app.label"), 1, null);
+				message.append(System.lineSeparator());
+			}
+			this.model.setProtocol(message);
 			// done
 			this.model.notifyObservers();
 			return index;

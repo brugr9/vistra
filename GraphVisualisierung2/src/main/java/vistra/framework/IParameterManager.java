@@ -88,7 +88,7 @@ public interface IParameterManager {
 	void selectAlgorithm(int index) throws ParameterException;
 
 	/**
-	 * Returns the algorithm description.
+	 * Returns the description of the selected algorithm.
 	 * 
 	 * @return the description
 	 */

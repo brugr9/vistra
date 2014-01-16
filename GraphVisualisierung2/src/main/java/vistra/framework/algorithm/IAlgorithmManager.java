@@ -1,5 +1,8 @@
 package vistra.framework.algorithm;
 
+import vistra.framework.ParameterException;
+import vistra.framework.graph.ILayoutGraph;
+import vistra.framework.traversal.ITraversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -66,5 +69,33 @@ public interface IAlgorithmManager {
 	 * @throws Exception
 	 */
 	IAlgorithm getSupported(int index) throws Exception;
+
+	/**
+	 * Selects an algorithm.
+	 * 
+	 * @param index
+	 *            the algorithm index
+	 * @throws ParameterException
+	 */
+	void select(int index) throws ParameterException;
+
+	/**
+	 * Returns the description of the selected algorithm.
+	 * 
+	 * @return the description
+	 */
+	String getDescription();
+
+	/**
+	 * Traverses a graph as given by executing the algorithm. Returns a
+	 * traversal as immutable list of {@code IStep}s generated during the
+	 * execution of the algorithm.
+	 * 
+	 * @param g
+	 *            the graph to traverse
+	 * @return the traversal
+	 * @throws ParameterException
+	 */
+	ITraversal execute(ILayoutGraph graph) throws ParameterException;
 
 }

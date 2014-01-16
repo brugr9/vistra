@@ -59,10 +59,6 @@ public class GraphPanel extends JPanel implements Observer {
 	 */
 	private String title;
 	/**
-	 * A field for a name.
-	 */
-	private String name;
-	/**
 	 * A field for a titled border.
 	 */
 	private TitledBorder border;
@@ -96,9 +92,7 @@ public class GraphPanel extends JPanel implements Observer {
 	public GraphPanel(JFrame top, IModel model, Dimension size) {
 		this.setSize(size);
 		this.title = "title";
-		this.name = "name";
-		this.border = BorderFactory.createTitledBorder(this.title + " "
-				+ this.name);
+		this.border = BorderFactory.createTitledBorder(this.title + ": name");
 		this.setBorder(border);
 
 		/* viewer */
@@ -159,11 +153,11 @@ public class GraphPanel extends JPanel implements Observer {
 
 		try {
 			if (arg == I18nEvent.I18N)
-				this.title = b.getString("graph.label");
-			this.name = m.getGraph().getName();
+				this.title = b.getString("graph.label") + ": ";
+			this.title += m.getGraph().getName();
 			if (!m.isGraphSaved())
-				this.name += "*";
-			this.border.setTitle(this.title + ": " + this.name);
+				this.title += "*";
+			this.border.setTitle(this.title);
 			this.layout.setGraph(m.getGraph());
 			this.viewer.repaint();
 		} catch (Exception e) {
