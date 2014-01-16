@@ -46,35 +46,31 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 		try {
 			/* Input: A graph g and a root v of g */
 			IVertex v = g.getStart();
+			g.stepVisit(v);
 
 			Queue<IVertex> Q = new NodeQueue<IVertex>();
 			Set<IVertex> V = new HashSet<IVertex>();
 			Q.enqueue(v);
 			V.add(v);
 
-			g.stepVisit(v);
-			IVertex tempV, useV;
+			IVertex t, u = null;
 			while (!Q.isEmpty()) {
-				tempV = Q.dequeue();
-				if (g.isSuccessor(tempV, v)) {
-					g.stepVisit(tempV, g.findEdge(tempV, v)); // visit vertex
-																// via edge
-					v = tempV;
+				t = Q.dequeue();
+				if (g.isSuccessor(t, u)) {
+					g.stepVisit(t, g.findEdge(t, u)); // visit t via edge
 				}
-				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
-					// tempV
-					useV = g.getOpposite(tempV, outE); // adjacent vertex of
-					// tempV
-					if (!V.contains(useV)) {
-						V.add(useV);
-						Q.enqueue(useV);
-					} else
-						g.stepBackEdge(outE); // back-edge
+				for (IEdge outE : g.getOutEdges(t)) {// adjacent edges of t
+					u = g.getOpposite(t, outE); // adjacent vertex of t
+					if (!V.contains(u)) {
+						V.add(u);
+						Q.enqueue(u);
+					}
+					// else
+					// g.stepVisit(t, g.findEdge(t, u));
 				}
 			}
 		} catch (Exception ex) {
 			throw ex;
 		}
 	}
-
 }
