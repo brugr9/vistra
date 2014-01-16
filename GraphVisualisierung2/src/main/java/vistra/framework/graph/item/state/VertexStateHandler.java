@@ -181,7 +181,10 @@ public class VertexStateHandler extends LayoutVertex implements
 			this.setFontColor(ColorPalette.darkblue);
 			this.setStroke(StrokePalette.unexplored);
 			this.setStrokeColor(ColorPalette.darkblue);
-			this.setFillColor(ColorPalette.orange);
+			if (this.isEnd())
+				this.setFillColor(ColorPalette.blue);
+			else
+				this.setFillColor(ColorPalette.orange);
 			this.notifyObservers();
 		} catch (Exception e) {
 			throw e;
