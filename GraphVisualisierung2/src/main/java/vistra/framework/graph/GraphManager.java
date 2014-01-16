@@ -7,14 +7,9 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import vistra.framework.graph.item.ILayoutEdge;
-import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.VertexFactory;
-import vistra.framework.graph.item.transformer.VertexLocation;
 import vistra.framework.graph.ml.GraphReader;
 import vistra.framework.graph.ml.GraphWriter;
-import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.algorithms.layout.StaticLayout;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -91,16 +86,10 @@ class GraphManager implements IGraphManager {
 	public ILayoutGraph open(File file) throws Exception {
 		try {
 			this.file = file;
-			// TODO temporary layout with VertexLocation
-			Layout<ILayoutVertex, ILayoutEdge> layout = new StaticLayout<ILayoutVertex, ILayoutEdge>(
-					this.graph);
-			layout.setInitializer(new VertexLocation());
-			// TODO end
 			this.graph = this.reader.read(new FileReader(this.file));
 			this.graph.setName(this.file.getName());
-			for (int i = 0; i < this.graph.getVertexCount(); i++) {
+			for (int i = 0; i < this.graph.getVertexCount(); i++)
 				VertexFactory.nextSigma();
-			}
 			return this.graph;
 		} catch (Exception e) {
 			throw e;
