@@ -23,10 +23,10 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * A description.
 	 */
-	private final static String DESCRIPTION = "Die Breitensuche ist als Schleife "
-			+ "implementiert. Es sind sowohl gerichtete als auch ungerichtete Graphen "
-			+ "zulässig. Die Breitensuche wird für jede (schwache) Zusammenhangskomponente "
-			+ "separat durchgefürt.";
+	private final static String DESCRIPTION = "Breitensuche (breadth-first search, BFS): "
+			+ "Als Schleife implementiert; "
+			+ "es sind sowohl gerichtete als auch ungerichtete Graphen zulässig. "
+			+ "Der Algorithmus verwendet eine Queue.";
 
 	/**
 	 * Main constructor.
@@ -46,32 +46,30 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 		try {
 			/* Input: A graph g and a root v of g */
 			IVertex v = g.getStart();
-			System.out.println(v.isStart());
-			
-//			Queue<IVertex> Q = new NodeQueue<IVertex>();
-//			Set<IVertex> V = new HashSet<IVertex>();
-//			Q.enqueue(v);
-//			V.add(v);
+			Queue<IVertex> Q = new NodeQueue<IVertex>();
+			Set<IVertex> V = new HashSet<IVertex>();
+			Q.enqueue(v);
+			V.add(v);
 
-//			IVertex tempV, useV;
-//			IEdge e = null;
-//			while (!Q.isEmpty()) {
-//				tempV = Q.dequeue();
-//				if (g.isSuccessor(tempV, v)) {
-//					v = tempV;
-//					g.stepVisit(v, e); // visit vertex via edge
-//				}
-//				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
-//															// tempV
-//					useV = g.getOpposite(tempV, outE); // adjacent vertex of
-//														// tempV
-//					if (!V.contains(useV)) {
-//						V.add(useV);
-//						Q.enqueue(useV);
-//					} else
-//						g.stepBackEdge(outE); // back-edge
-//				}
-//			}
+			IVertex tempV, useV;
+			IEdge e = null;
+			while (!Q.isEmpty()) {
+				tempV = Q.dequeue();
+				if (g.isSuccessor(tempV, v)) {
+					v = tempV;
+					g.stepVisit(v, e); // visit vertex via edge
+				}
+				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
+					// tempV
+					useV = g.getOpposite(tempV, outE); // adjacent vertex of
+					// tempV
+					if (!V.contains(useV)) {
+						V.add(useV);
+						Q.enqueue(useV);
+					} else
+						g.stepBackEdge(outE); // back-edge
+				}
+			}
 		} catch (Exception ex) {
 			throw new AlgorithmException(ex);
 		}

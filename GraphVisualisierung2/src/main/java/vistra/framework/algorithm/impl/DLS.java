@@ -1,8 +1,14 @@
 package vistra.framework.algorithm.impl;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import net.datastructures.NodeStack;
+import net.datastructures.Stack;
 import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
+import vistra.framework.graph.item.IVertex;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
@@ -16,9 +22,10 @@ public class DLS extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * A description.
 	 */
-	private final static String DESCRIPTION = "Der Graph wird in Postorder traversiert. "
-			+ "Es sind sowohl gerichtete als auch ungerichtete Graphen zulässig."
-			+ "Die Knoten werden in Postorder-Reihenfolge nummeriert.";
+	private final static String DESCRIPTION = "Beschränkte Tiefensuche (depth-limited search, DLS): Der Graph wird in Postorder traversiert. "
+			+ "Es sind sowohl gerichtete als auch ungerichtete Graphen zulässig.";
+
+	ITraversableGraph g;
 
 	/**
 	 * Main constructor.
@@ -36,10 +43,28 @@ public class DLS extends AbstractAlgorithm implements IAlgorithm {
 	@Override
 	public void traverse(ITraversableGraph g) throws AlgorithmException {
 		try {
-			// TODO DLS
+			this.g = g;
+			IVertex node = g.getStart();
+			IVertex goal = g.getEnd();
+			dls(node, goal, 0);
+
 		} catch (Exception e) {
 			throw new AlgorithmException(e);
 		}
 	}
 
+	private void dls(IVertex node, IVertex goal, int depth) throws Exception {
+		try {
+			if (depth >= 0) {
+				if (node == goal) {
+					g.stepVisit(node, g.getInEdges(node).iterator().next());
+				}
+				for (IVertex child : g.getSuccessors(node))
+					// for each child in expand(node)
+					dls(child, goal, depth - 1);
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }

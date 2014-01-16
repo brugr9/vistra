@@ -23,7 +23,9 @@ public class DFSpre extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * A description.
 	 */
-	private final static String DESCRIPTION = "Der Graph wird in Preorder traversiert.";
+	private final static String DESCRIPTION = "Tiefensuche (depth-first search, DFS): "
+			+ "Der Graph wird in Preorder traversiert. "
+			+ "Der Algorithmus verwendet einen Stack.";
 
 	/**
 	 * Main constructor.

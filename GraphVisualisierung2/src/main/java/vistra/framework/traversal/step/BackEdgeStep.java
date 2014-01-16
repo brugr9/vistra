@@ -26,9 +26,9 @@ public class BackEdgeStep extends AbstractStep implements IStep {
 			this.commandHandler.addCommand(command);
 			//
 			this.description.append("Back-edge");
-			if (((ILayoutEdge) edge).getId() != null)
-				if (((ILayoutEdge) edge).getId().length() != 0)
-					this.description.append(" " + ((ILayoutEdge) edge).getId());
+			// if (((ILayoutEdge) edge).getId() != null)
+			// if (((ILayoutEdge) edge).getId().length() != 0)
+			// this.description.append(" " + ((ILayoutEdge) edge).getId());
 			this.description.append(System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,10 +49,10 @@ public class BackEdgeStep extends AbstractStep implements IStep {
 				this.commandHandler.addCommand(command);
 				//
 				this.description.append("Back-edge");
-				if (((ILayoutEdge) edge).getId() != null)
-					if (((ILayoutEdge) edge).getId().length() != 0)
-						this.description.append(" "
-								+ ((ILayoutEdge) edge).getId());
+				// if (((ILayoutEdge) edge).getId() != null)
+				// if (((ILayoutEdge) edge).getId().length() != 0)
+				// this.description.append(" "
+				//	+ ((ILayoutEdge) edge).getId());
 				this.description.append(System.lineSeparator());
 			}
 		} catch (Exception e) {

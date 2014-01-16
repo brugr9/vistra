@@ -29,7 +29,6 @@ public class VertexTransformer implements
 		layout.setStart(Boolean.parseBoolean(meta
 				.getProperty(GraphWriter.V_START)));
 		layout.setEnd(Boolean.parseBoolean(meta.getProperty(GraphWriter.V_END)));
-		System.out.println(layout.isStart());
 		return layout;
 	}
 }
