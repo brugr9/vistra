@@ -37,30 +37,32 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * A field for a model.
 	 */
 	private Model model;
+
 	/**
 	 * A field for a step.
 	 */
-	private IStep step;
+	// private IStep step;
 	/**
-	 * A field for an uiaosdölkjejhtöerhj.
+	 * A field for an off .
 	 */
-	private boolean uiaosdölkjejhtöerhj;
+	// private boolean off;
 	/**
 	 * A field for a counter.
 	 */
-	private int counter;
+	// private int counter;
 	/**
 	 * A field for a blink timer.
 	 */
-	private Timer blinkTimer;
+	// private Timer blinkTimer;
+
 	/**
 	 * A field for a blink listener.
 	 */
-	private BlinkListener blinkListener;
+	// private BlinkListener blinkListener;
 	/**
 	 * A field for a number of blinks.
 	 */
-	private static final int NUMBER_OF_BLINKS = 2;
+	// private static final int NUMBER_OF_BLINKS = 2;
 
 	/**
 	 * Main constructor.
@@ -72,13 +74,13 @@ public final class StepByStep extends Observable implements IStepByStep {
 		super();
 		this.model = (Model) model;
 		// timer
-		this.step = null;
-		this.uiaosdölkjejhtöerhj = true;
-		this.counter = 0;
-		this.blinkListener = new BlinkListener();
-		int blinkDelay = (this.model.getDelay() * ConstantPalette.aSecond)
-				/ (4 * NUMBER_OF_BLINKS);
-		this.blinkTimer = new Timer(blinkDelay, this.blinkListener);
+		// this.step = null;
+		// this.off = true;
+		// this.counter = 0;
+		// this.blinkListener = new BlinkListener();
+		// int blinkDelay = (this.model.getDelay() * ConstantPalette.aSecond)
+		// / (4 * NUMBER_OF_BLINKS);
+		// this.blinkTimer = new Timer(blinkDelay, this.blinkListener);
 		// state
 		try {
 			this.state = new SbsOff(this);
@@ -410,11 +412,11 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * @param step
 	 *            the step to blink
 	 */
-	private void blink(IStep step) {
-		this.step = step;
-		this.blinkTimer.start();
-		this.setChanged();
-	}
+	// private void blink(IStep step) {
+	// this.step = step;
+	// this.blinkTimer.start();
+	// this.setChanged();
+	// }
 
 	/**
 	 * A blink listener switching between step execute and undo according to a
@@ -423,42 +425,42 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * @author Roland Bruggmann (brugr9@bfh.ch)
 	 * 
 	 */
-	private final class BlinkListener implements ActionListener {
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			try {
-				if (uiaosdölkjejhtöerhj) {
-					step.execute();
-					model.notifyObservers();
-				} else {
-					step.undo();
-					model.notifyObservers();
-					counter++;
-				}
-				uiaosdölkjejhtöerhj = !uiaosdölkjejhtöerhj;
-				if (counter == NUMBER_OF_BLINKS) {
-					blinkTimer.stop();
-					setChanged();
-					// reset values
-					step = null;
-					uiaosdölkjejhtöerhj = true;
-					counter = 0;
-				}
-			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(
-						null,
-						ex.toString(),
-						StepByStep.this.model.getResourceBundle().getString(
-								"app.label"), 1, null);
-				ex.printStackTrace();
-			}
-
-		}
-	}
+	// private final class BlinkListener implements ActionListener {
+	//
+	// /**
+	// * {@inheritDoc}
+	// */
+	// @Override
+	// public void actionPerformed(ActionEvent e) {
+	// try {
+	// if (off) {
+	// step.execute();
+	// model.notifyObservers();
+	// } else {
+	// step.undo();
+	// model.notifyObservers();
+	// counter++;
+	// }
+	// uiaosdölkjejhtöerhj = !uiaosdölkjejhtöerhj;
+	// if (counter == NUMBER_OF_BLINKS) {
+	// blinkTimer.stop();
+	// setChanged();
+	// // reset values
+	// step = null;
+	// uiaosdölkjejhtöerhj = true;
+	// counter = 0;
+	// }
+	// } catch (Exception ex) {
+	// JOptionPane.showMessageDialog(
+	// null,
+	// ex.toString(),
+	// StepByStep.this.model.getResourceBundle().getString(
+	// "app.label"), 1, null);
+	// ex.printStackTrace();
+	// }
+	//
+	// }
+	// }
 
 	/**
 	 * Step-by-step events.

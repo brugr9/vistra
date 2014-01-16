@@ -94,48 +94,48 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="10">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <generalization id="11">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="12">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <generalization id="13">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <realization id="14">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <association id="16">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="17" name="layout"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="19">    
+  <association id="10">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="20" name="stateHandler">        
+      <attribute id="11" name="stateHandler">        
         <position height="17" width="71" x="80" y="594"/>      
       </attribute>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
+      <multiplicity id="12" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <realization id="13">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="14">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="15" name="layout"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="17">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <generalization id="18">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="19">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="20">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="21">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
