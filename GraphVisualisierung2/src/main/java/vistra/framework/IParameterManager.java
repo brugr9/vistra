@@ -67,8 +67,7 @@ public interface IParameterManager {
 	 *            the edge type
 	 * @throws ParameterException
 	 */
-	void updateSupportedAlgorithms(EdgeType edgeType)
-			throws ParameterException;
+	void updateSupportedAlgorithms(EdgeType edgeType) throws ParameterException;
 
 	/**
 	 * Returns an array of human readable names of selectable algorithms.
@@ -104,6 +103,6 @@ public interface IParameterManager {
 	 * @return the traversal
 	 * @throws ParameterException
 	 */
-	ITraversal executeAlgorithm(ILayoutGraph g) throws ParameterException;
+	ITraversal executeAlgorithm(ILayoutGraph g) throws Exception;
 
 }

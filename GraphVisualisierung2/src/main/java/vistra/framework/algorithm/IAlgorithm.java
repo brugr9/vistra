@@ -38,8 +38,8 @@ public interface IAlgorithm {
 	 * 
 	 * @param g
 	 *            the graph to traverse
-	 * @throws AlgorithmException
+	 * @throws Exception
 	 */
-	void traverse(ITraversableGraph g) throws AlgorithmException;
+	void traverse(ITraversableGraph g) throws Exception;
 
 }

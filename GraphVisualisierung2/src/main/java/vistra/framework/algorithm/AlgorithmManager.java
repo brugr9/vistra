@@ -64,12 +64,12 @@ final class AlgorithmManager implements IAlgorithmManager {
 		available = new ArrayList<IAlgorithm>();
 		try {
 			this.addAvailable(new Default());
-			// this.addAvailable(new SimpleSteps()); // TODO
 			this.addAvailable(new BFS());
 			this.addAvailable(new DFSpre());
 			this.addAvailable(new DLS());
 			this.addAvailable(new Dijkstra());
 			this.addAvailable(new Kruskal());
+			this.addAvailable(new SimpleSteps()); // TODO
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -166,7 +166,7 @@ final class AlgorithmManager implements IAlgorithmManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ITraversal execute(ILayoutGraph graph) throws ParameterException {
+	public ITraversal execute(ILayoutGraph graph) throws Exception {
 		try {
 			/* graph */
 			List<IStep> steps = new ArrayList<IStep>();
@@ -185,7 +185,7 @@ final class AlgorithmManager implements IAlgorithmManager {
 			traversal.setSolution(solution.toString());
 			return traversal;
 		} catch (Exception e) {
-			throw new ParameterException(e);
+			throw e;
 		}
 	}
 

@@ -153,12 +153,11 @@ public class ParameterManager implements IParameterManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ITraversal executeAlgorithm(ILayoutGraph graph)
-			throws ParameterException {
+	public ITraversal executeAlgorithm(ILayoutGraph graph) throws Exception {
 		try {
 			return this.algorithmManager.execute(graph);
 		} catch (Exception e) {
-			throw new ParameterException(e);
+			throw e;
 		}
 	}
 }

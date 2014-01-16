@@ -42,22 +42,23 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(ITraversableGraph g) throws AlgorithmException {
+	public void traverse(ITraversableGraph g) throws Exception {
 		try {
 			/* Input: A graph g and a root v of g */
 			IVertex v = g.getStart();
+
 			Queue<IVertex> Q = new NodeQueue<IVertex>();
 			Set<IVertex> V = new HashSet<IVertex>();
 			Q.enqueue(v);
 			V.add(v);
 
 			IVertex tempV, useV;
-			IEdge e = null;
 			while (!Q.isEmpty()) {
 				tempV = Q.dequeue();
 				if (g.isSuccessor(tempV, v)) {
 					v = tempV;
-					g.stepVisit(v, e); // visit vertex via edge
+					g.stepVisit(v, g.findEdge(tempV, v)); // visit vertex via
+					// edge
 				}
 				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
 					// tempV
@@ -71,7 +72,7 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 				}
 			}
 		} catch (Exception ex) {
-			throw new AlgorithmException(ex);
+			throw ex;
 		}
 	}
 

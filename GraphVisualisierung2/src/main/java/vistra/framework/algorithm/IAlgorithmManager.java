@@ -96,6 +96,6 @@ public interface IAlgorithmManager {
 	 * @return the traversal
 	 * @throws ParameterException
 	 */
-	ITraversal execute(ILayoutGraph graph) throws ParameterException;
+	ITraversal execute(ILayoutGraph graph) throws Exception;
 
 }
