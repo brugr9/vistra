@@ -64,8 +64,7 @@ final class AlgorithmManager implements IAlgorithmManager {
 		available = new ArrayList<IAlgorithm>();
 		try {
 			this.addAvailable(new Default());
-			this.addAvailable(new SimpleSteps()); // TODO
-													// remove
+			// this.addAvailable(new SimpleSteps()); // TODO
 			this.addAvailable(new BFS());
 			this.addAvailable(new DFSpre());
 			this.addAvailable(new DLS());

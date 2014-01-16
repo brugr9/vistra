@@ -30,40 +30,19 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 <desc>Edge name</desc>
 <default></default>
 </key>
-<graph edgedefault="directed">
-<node id="B">
-<data key="coord.x">373.0</data>
+<graph edgedefault="undirected">
+<node id="C">
+<data key="coord.x">511.0</data>
 <data key="start">false</data>
-<data key="value"></data>
-<data key="coord.y">141.0</data>
+<data key="value">0</data>
+<data key="coord.y">144.0</data>
 <data key="end">false</data>
 </node>
-<node id="H">
-<data key="coord.x">657.0</data>
+<node id="R">
+<data key="coord.x">488.0</data>
 <data key="start">false</data>
-<data key="value"></data>
-<data key="coord.y">215.0</data>
-<data key="end">false</data>
-</node>
-<node id="Q">
-<data key="coord.x">796.0</data>
-<data key="start">false</data>
-<data key="value"></data>
-<data key="coord.y">356.0</data>
-<data key="end">false</data>
-</node>
-<node id="J">
-<data key="coord.x">207.0</data>
-<data key="start">false</data>
-<data key="value"></data>
-<data key="coord.y">342.0</data>
-<data key="end">false</data>
-</node>
-<node id="L">
-<data key="coord.x">360.0</data>
-<data key="start">false</data>
-<data key="value"></data>
-<data key="coord.y">349.0</data>
+<data key="value">5</data>
+<data key="coord.y">344.0</data>
 <data key="end">false</data>
 </node>
 <node id="P">
@@ -80,25 +59,11 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 <data key="coord.y">350.0</data>
 <data key="end">false</data>
 </node>
-<node id="F">
-<data key="coord.x">474.0</data>
+<node id="B">
+<data key="coord.x">373.0</data>
 <data key="start">false</data>
 <data key="value"></data>
-<data key="coord.y">215.0</data>
-<data key="end">false</data>
-</node>
-<node id="D">
-<data key="coord.x">296.0</data>
-<data key="start">false</data>
-<data key="value"></data>
-<data key="coord.y">213.0</data>
-<data key="end">false</data>
-</node>
-<node id="E">
-<data key="coord.x">384.0</data>
-<data key="start">false</data>
-<data key="value"></data>
-<data key="coord.y">216.0</data>
+<data key="coord.y">141.0</data>
 <data key="end">false</data>
 </node>
 <node id="K">
@@ -108,18 +73,25 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 <data key="coord.y">346.0</data>
 <data key="end">false</data>
 </node>
-<node id="G">
-<data key="coord.x">562.0</data>
+<node id="J">
+<data key="coord.x">207.0</data>
 <data key="start">false</data>
 <data key="value"></data>
-<data key="coord.y">214.0</data>
+<data key="coord.y">342.0</data>
 <data key="end">false</data>
 </node>
-<node id="C">
-<data key="coord.x">511.0</data>
+<node id="D">
+<data key="coord.x">296.0</data>
 <data key="start">false</data>
 <data key="value"></data>
-<data key="coord.y">144.0</data>
+<data key="coord.y">213.0</data>
+<data key="end">false</data>
+</node>
+<node id="A">
+<data key="coord.x">444.0</data>
+<data key="start">true</data>
+<data key="value"></data>
+<data key="coord.y">60.0</data>
 <data key="end">false</data>
 </node>
 <node id="I">
@@ -129,18 +101,32 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 <data key="coord.y">343.0</data>
 <data key="end">false</data>
 </node>
-<node id="R">
-<data key="coord.x">488.0</data>
+<node id="G">
+<data key="coord.x">562.0</data>
 <data key="start">false</data>
 <data key="value"></data>
-<data key="coord.y">344.0</data>
+<data key="coord.y">214.0</data>
 <data key="end">false</data>
 </node>
-<node id="O">
-<data key="coord.x">619.0</data>
+<node id="Q">
+<data key="coord.x">796.0</data>
 <data key="start">false</data>
 <data key="value"></data>
-<data key="coord.y">351.0</data>
+<data key="coord.y">356.0</data>
+<data key="end">false</data>
+</node>
+<node id="L">
+<data key="coord.x">360.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">349.0</data>
+<data key="end">false</data>
+</node>
+<node id="F">
+<data key="coord.x">474.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">215.0</data>
 <data key="end">false</data>
 </node>
 <node id="M">
@@ -150,62 +136,76 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 <data key="coord.y">347.0</data>
 <data key="end">false</data>
 </node>
-<node id="A">
-<data key="coord.x">444.0</data>
+<node id="H">
+<data key="coord.x">657.0</data>
 <data key="start">false</data>
 <data key="value"></data>
-<data key="coord.y">60.0</data>
+<data key="coord.y">215.0</data>
 <data key="end">false</data>
 </node>
-<edge directed="false" source="G" target="O">
-<data key="weight">1</data>
-</edge>
-<edge directed="false" source="H" target="P">
-<data key="weight">1</data>
-</edge>
-<edge directed="false" source="A" target="C">
-<data key="weight">1</data>
-</edge>
-<edge directed="false" source="E" target="K">
-<data key="weight">1</data>
-</edge>
-<edge directed="false" source="D" target="J">
+<node id="O">
+<data key="coord.x">619.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">351.0</data>
+<data key="end">false</data>
+</node>
+<node id="E">
+<data key="coord.x">384.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">216.0</data>
+<data key="end">false</data>
+</node>
+<edge directed="false" source="F" target="N">
 <data key="weight">1</data>
 </edge>
 <edge directed="false" source="A" target="B">
 <data key="weight">1</data>
 </edge>
-<edge directed="false" source="E" target="L">
-<data key="weight">1</data>
-</edge>
-<edge directed="false" source="E" target="M">
+<edge directed="false" source="C" target="F">
 <data key="weight">1</data>
 </edge>
 <edge directed="false" source="F" target="R">
 <data key="weight">1</data>
 </edge>
-<edge directed="false" source="D" target="I">
+<edge directed="false" source="A" target="C">
 <data key="weight">1</data>
 </edge>
-<edge directed="false" source="B" target="E">
+<edge directed="false" source="E" target="M">
 <data key="weight">1</data>
 </edge>
-<edge directed="false" source="F" target="N">
+<edge directed="false" source="B" target="D">
 <data key="weight">1</data>
 </edge>
-<edge directed="false" source="C" target="F">
+<edge directed="false" source="H" target="P">
 <data key="weight">1</data>
 </edge>
-<edge directed="false" source="C" target="H">
+<edge directed="false" source="D" target="J">
 <data key="weight">1</data>
 </edge>
 <edge directed="false" source="C" target="G">
 <data key="weight">1</data>
 </edge>
+<edge directed="false" source="G" target="O">
+<data key="weight">1</data>
+</edge>
+<edge directed="false" source="E" target="L">
+<data key="weight">1</data>
+</edge>
 <edge directed="false" source="H" target="Q">
 <data key="weight">1</data>
 </edge>
-<edge directed="false" source="B" target="D">
+<edge directed="false" source="B" target="E">
+<data key="weight">1</data>
+</edge>
+<edge directed="false" source="D" target="I">
+<data key="weight">1</data>
+</edge>
+<edge directed="false" source="C" target="H">
+<data key="weight">1</data>
+</edge>
+<edge directed="false" source="E" target="K">
 <data key="weight">1</data>
 </edge>
 </graph>
