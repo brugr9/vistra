@@ -689,7 +689,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	private void updateAlgorithms() throws Exception {
 		try {
 			EdgeType edgeType = this.model.getGraph().getEdgeType();
-			this.parameterManager.updateSelectableAlgorithms(edgeType);
+			this.parameterManager.updateSupportedAlgorithms(edgeType);
 			String[] selectableNames = this.parameterManager
 					.getSelectableAlgorithmNames();
 			this.model.setAlgorithms(selectableNames);
