@@ -59,8 +59,6 @@ public final class Animation extends Observable implements IAnimation {
 		// state
 		try {
 			this.state = new AnimationOff(this);
-			// TODO remove
-			// this.handleOff();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

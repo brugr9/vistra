@@ -82,8 +82,6 @@ public final class StepByStep extends Observable implements IStepByStep {
 		// state
 		try {
 			this.state = new SbsOff(this);
-			// TODO remove
-			// this.handleOff();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
