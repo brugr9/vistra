@@ -888,6 +888,21 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * 
 	 */
 	@Override
+	public void stepVisit(IVertex v) throws Exception {
+		try {
+			IStep step = new VisitStep(v);
+			this.add(step);
+			this.append(((ILayoutVertex) v).getId());
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
 	public void stepVisit(IVertex v, IEdge e) throws Exception {
 		try {
 			IStep step = new VisitStep(v, e);

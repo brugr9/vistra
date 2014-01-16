@@ -222,6 +222,15 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 			throws Exception;
 
 	/**
+	 * A step method: Visit vertex.
+	 * 
+	 * @param v
+	 *            the vertex to visit
+	 * @throws Exception
+	 */
+	void stepVisit(IVertex v) throws Exception;
+
+	/**
 	 * A step method: Visit vertex over edge.
 	 * 
 	 * @param v

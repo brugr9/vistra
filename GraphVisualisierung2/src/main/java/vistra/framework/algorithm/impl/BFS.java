@@ -52,13 +52,14 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 			Q.enqueue(v);
 			V.add(v);
 
+			g.stepVisit(v);
 			IVertex tempV, useV;
 			while (!Q.isEmpty()) {
 				tempV = Q.dequeue();
 				if (g.isSuccessor(tempV, v)) {
+					g.stepVisit(tempV, g.findEdge(tempV, v)); // visit vertex
+																// via edge
 					v = tempV;
-					g.stepVisit(v, g.findEdge(tempV, v)); // visit vertex via
-					// edge
 				}
 				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
 					// tempV

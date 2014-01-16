@@ -17,6 +17,26 @@ import vistra.framework.graph.item.state.command.VisitedVertexCommand;
 public class VisitStep extends AbstractStep implements IStep {
 
 	/**
+	 * Step: visit vertex.
+	 * 
+	 * @param vertex
+	 *            the vertex to visit
+	 */
+	public VisitStep(IVertex vertex) {
+		super();
+		try {
+			IItemStateCommand vertexCommand = new VisitedVertexCommand(vertex);
+			this.commandHandler.addCommand(vertexCommand);
+			//
+			this.description.append("Vertex "
+					+ ((ILayoutVertex) vertex).getId() + " visited");
+			this.description.append(System.lineSeparator());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Step: visit vertex via edge.
 	 * 
 	 * @param vertex
