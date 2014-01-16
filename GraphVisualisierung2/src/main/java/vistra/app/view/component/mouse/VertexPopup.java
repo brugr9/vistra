@@ -88,9 +88,9 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		this.end.addActionListener(new EndActionListener());
 		//
 		this.delete = new JMenuItem("delete");
-		this.delete.addActionListener(new DeleteActionListener());
 		this.delete.setActionCommand(ParameterEvent.delete);
 		this.delete.addActionListener(this.model.getParameterStateHandler());
+		this.delete.addActionListener(new DeleteActionListener());
 
 		/**/
 		this.add(this.start);
@@ -169,10 +169,10 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 					if (vertex.isEnd()) {
 						vertex.setEnd(false);
 						model.setEnd(null);
+						end.setSelected(false);
 					}
 				}
 				vertex.setStart(start.isSelected());
-				model.notifyObservers();
 			}
 		}
 	}
@@ -196,10 +196,10 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 					if (vertex.isStart()) {
 						vertex.setStart(false);
 						model.setStart(null);
+						start.setSelected(false);
 					}
 				}
 				vertex.setEnd(end.isSelected());
-				model.notifyObservers();
 			}
 		}
 	}
@@ -215,14 +215,10 @@ public class VertexPopup extends JPopupMenu implements IItemPopup {
 		public void actionPerformed(ActionEvent e) {
 			if (vertex != null) {
 				viewer.getPickedVertexState().pick(vertex, false);
-				if (vertex == model.getStart()) {
+				if (vertex.equals(model.getStart()))
 					model.setStart(null);
-					model.notifyObservers();
-				}
-				if (vertex == model.getEnd()) {
+				if (vertex.equals(model.getEnd()))
 					model.setEnd(null);
-					model.notifyObservers();
-				}
 				viewer.getGraphLayout().getGraph().removeVertex(vertex);
 				viewer.repaint();
 			}

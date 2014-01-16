@@ -146,8 +146,12 @@ public class GraphPanel extends JPanel implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			this.layout.setGraph(m.getGraph());
 			this.border.setTitle(b.getString("graph.label"));
+			this.layout.setGraph(m.getGraph());
+			// TODO einschränken
+			for (ILayoutVertex v : m.getGraph().getVertices())
+				if (v.getLocation() != null)
+					this.layout.setLocation(v, v.getLocation());
 			this.viewer.repaint();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
