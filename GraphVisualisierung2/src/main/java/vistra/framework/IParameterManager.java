@@ -67,7 +67,7 @@ public interface IParameterManager {
 	 *            the edge type
 	 * @throws ParameterException
 	 */
-	void updateSelectableAlgorithms(EdgeType edgeType)
+	void updateSupportedAlgorithms(EdgeType edgeType)
 			throws ParameterException;
 
 	/**

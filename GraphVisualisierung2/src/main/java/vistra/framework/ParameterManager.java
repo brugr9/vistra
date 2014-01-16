@@ -108,7 +108,7 @@ public class ParameterManager implements IParameterManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updateSelectableAlgorithms(EdgeType edgeType)
+	public void updateSupportedAlgorithms(EdgeType edgeType)
 			throws ParameterException {
 		try {
 			this.algorithmManager.updateSupported(edgeType);
