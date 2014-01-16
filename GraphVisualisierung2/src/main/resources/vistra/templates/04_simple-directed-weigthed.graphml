@@ -30,7 +30,7 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 <desc>Edge name</desc>
 <default></default>
 </key>
-<graph edgedefault="undirected">
+<graph edgedefault="directed">
 <node id="F">
 <data key="coord.x">631.0</data>
 <data key="start">false</data>
