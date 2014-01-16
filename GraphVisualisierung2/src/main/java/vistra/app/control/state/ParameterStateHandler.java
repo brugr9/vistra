@@ -468,7 +468,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void saveGraph() throws Exception {
 		try {
 			this.parameterManager.saveGraph();
-			this.model.setGraphSaved(true);
+			this.setGraphSaved(true);
 			this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
@@ -509,6 +509,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 				File file = fileChooser.getSelectedFile();
 				this.parameterManager.saveGraphAs(file);
 				this.model.setGraphFile(true);
+				this.setGraphSaved(true);
 				/* Algorithm */
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
