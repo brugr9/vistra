@@ -137,9 +137,10 @@ public class DefaultView extends JFrame implements IView {
 
 		try {
 			String title = m.getResourceBundle().getString("app.label");
-			title += " - " + m.getGraph().getName();
+			title += " - ";
 			if (!m.isGraphSaved())
 				title += "*";
+			title += m.getGraph().getName();
 			super.setTitle(title);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),
