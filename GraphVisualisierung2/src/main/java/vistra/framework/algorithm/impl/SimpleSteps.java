@@ -46,16 +46,17 @@ public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 			Map<IVertex, IEdge> items = new HashTableMap<IVertex, IEdge>();
 			List<IVertex> v = new ArrayList<IVertex>(g.getVertices());
 			List<IEdge> e = new ArrayList<IEdge>(g.getEdges());
-			for (int i = 0; i < v.size(); i++)
-				items.put(v.get(i), e.get(i));
+
 
 			/* init */
 			IVertex v0 = v.get(0);
 			v.remove(0);
 			g.stepInitializedVertex(v0, v);
 			/* value */
-			g.stepUpdatedVertex(v.get(1), 5);
+			g.stepUpdatedVertex(v.get(0), 5);
 			/* visit */
+			for (int i = 1; i < v.size(); i++)
+				items.put(v.get(i), e.get(i));
 			for (Entry<IVertex, IEdge> entry : items.entrySet()) {
 				g.stepVisit(entry.getKey(), entry.getValue());
 			}

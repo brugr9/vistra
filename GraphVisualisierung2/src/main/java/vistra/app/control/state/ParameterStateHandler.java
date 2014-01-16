@@ -556,16 +556,14 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 		try {
 			StringBuilder message = new StringBuilder();
 			int index = this.model.getSelectedAlgorithmIndex();
-			if (index == 0) {
-				/* Graph */
-				if (this.model.getProgress() > 0)
-					((StepByStep) this.model.getStepByStep()).toBeginning();
-			} else {
+			if (index > 0) {
 				// deny user interaction
 				// TODO disable all interaction item (menu etc.)
 				this.setMode(Mode.PICKING);
 			}
 			/* Graph */
+			if (this.model.getProgress() > 0)
+				((StepByStep) this.model.getStepByStep()).toBeginning();
 			ILayoutGraph graph = this.model.getGraph();
 			/* Algorithm */
 			this.parameterManager.selectAlgorithm(index);
