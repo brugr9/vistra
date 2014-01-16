@@ -1,0 +1,59 @@
+\chapter{Requirements}
+% 
+\section{Vision}
+\label{sec:Vision}
+% Descibes the high-level goals and constraints, the business case, and provides an executive summary.
+Es soll eine Software erstellt werden, welche das Traversieren von Graphen mit verschiedenen Algorithmen darstellen kann. 
+
+Ein beliebiger Algorithmus, wie etwa derjenige von Dijkstra soll mit diesem Werkzeug auf einfache Weise visualisiert werden. Das Werkzeug soll sich als didaktisches Hilfsmittel eignen. Neue Algorithmen sollen ohne grossen Aufwand hinzugef\"ugt werden k\"onnen. Zudem soll die Software Graphen aus einer Datei importieren k\"onnen.
+% 
+\subsection{Problem Statement}
+\label{subsec:Problem Statement}
+% 
+\subsubsection{Graphen}
+\label{subsubsec:Graphen}
+Das System soll ungerichtete, gerichtete, ungewichtete und (positiv) gewichtete einfache Graphen mit einfachen Kanten (simple connected graphs, neither self-loops nor parallel edges) verarbeiten k\"onnen.
+
+Ein Graph wird durch Kreise (Knoten), Geraden (ungerichtete Kanten), Pfeile (gerichtete Kanten) und Beschriftungen (Knotenbezeichnungen, Kantenbezeichnungen und Kantengewichte) dargestellt. Das System kann folgende Dateioperationen ausf\"uhren:
+\begin{itemize}
+  \item Es k\"onnen neue ungerichtete und gerichtete Graphen erstellt werden.
+  \item Es k\"onnen als Datei vorliegende Graphen ge\"offnet werden.
+  \item Graphen k\"onnen bearbeitet werden.
+  \begin{itemize}
+    \item Die Anordnung der Knoten kann ver\"andert werden: Diese k\"onnen mit der Maus verschoben werden.
+  \end{itemize}
+  \item Graphen k\"onnen gespeichert werden.
+\end{itemize}
+% 
+\subsubsection{Algorithmen}
+\label{subsubsec:Algorithmen}
+Das System soll mindestens folgende implementierte Algorithmen zur Auswahl bereit halten:
+\begin{itemize}
+  \item Rekursive Tiefensuche (Depth-First Search, DFS)
+  \item Breitensuche (Breadth-First Search, BFS)
+  \item Dijkstra: Suchen des k\"urzesten Weges zwischen zwei als Start und Ende festgelegten Knoten in einem gerichteten und gewichteten Graphen (Shortest Path)
+  \item Kruskal: minimaler Spannbaum berechnen (Spanning Tree)
+\end{itemize}
+Es sollen nur diejenigen Algorithmen ausw\"ahlbar sein, die auf den Graph-Typ angewendet werden k\"onnen.
+
+Ein Entwickler von Algorithmen soll auf m\"oglichst einfache Weise weitere Algorithmen implementieren und dem System hinzuf\"ugen k\"onnen.
+% 
+\subsubsection{Traversierung}
+\label{subsubsec:Traversierung}
+\begin{itemize}
+  \item Die Traversierung kann Schrittweise erfolgen ('Step-by-step'): Dabei kann der Benutzer vor, zur\"uck, zum Anfang oder zum Ende der Visualisierung gelangen.
+  \item Die Schrittl\"ange der Visualisierung kann eingestellt werden.
+  \item Die Visualisierung kann auch abgespielt werden ('Animation'). Dabei kann der Benutzer die Animation starten, pausieren oder stoppen.
+  \item Das Tempo der abgespielten Visualisierung kann eingestellt werden.
+\end{itemize}
+% 
+\subsection{Other Requirements and Constraints}	
+\label{subsec:Other Requirements and Constraints}
+\begin{itemize}
+  \item Zu importierende Graphen werden validiert.
+  \item Zu importierende Algorithmen m\"ussen ein gegebenes Interface implementieren.
+  \item Ein Algorithmus gibt \"uber Annotations an, welche Graph-Typen damit traversiert werden k\"onnen (gerichtet, ungerichtet).
+  \item F\"ur ungewichtete Graphen wird ein Kanten-Gewicht der Gr\"osse 1 angenommen, es wird also nicht unterschieden zwischen ungewichtet und gewichtet.
+  \item Die Visualisierung zeigt Schrittweise Farb\"anderungen von Knoten und Kanten, evtl. auch errechnete Zwischenergebnisse.
+  \item Mit jedem Step der Visualisierung wird auf einer Protokollpanele eine Statusmeldung ausgegeben, die die begangenen Traversierungsschritte erl\"autert.
+\end{itemize}
