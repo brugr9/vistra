@@ -6,7 +6,7 @@ import java.util.Properties;
 
 import vistra.framework.ParameterException;
 import vistra.framework.algorithm.impl.BFS;
-import vistra.framework.algorithm.impl.DFSpre;
+import vistra.framework.algorithm.impl.DFS;
 import vistra.framework.algorithm.impl.DLS;
 import vistra.framework.algorithm.impl.Default;
 import vistra.framework.algorithm.impl.Dijkstra;
@@ -65,8 +65,8 @@ final class AlgorithmManager implements IAlgorithmManager {
 		try {
 			this.addAvailable(new Default());
 			this.addAvailable(new BFS());
-			this.addAvailable(new DFSpre());
-			this.addAvailable(new DLS());
+			this.addAvailable(new DFS());
+			// this.addAvailable(new DLS());
 			this.addAvailable(new Dijkstra());
 			this.addAvailable(new Kruskal());
 			this.addAvailable(new SimpleSteps()); // TODO

@@ -663,6 +663,41 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	}
 
 	/**
+	 * Executes a step as given and adds it to the list of steps.
+	 * 
+	 * @param step
+	 *            the step
+	 * @throws Exception
+	 */
+	private void add(IStep step) throws Exception {
+		try {
+			step.execute();
+			this.steps.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * Appends a vertex id to the solution.
+	 * 
+	 * @param id
+	 *            the id
+	 * @throws Exception
+	 */
+	private void appendToSolution(String id) throws Exception {
+		try {
+			if (this.solution.length() == 0)
+				this.solution.append("Solution: ");
+			else
+				this.solution.append(" - ");
+			this.solution.append(id);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -690,41 +725,6 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	@Override
 	public boolean isVisited(IVertex v) {
 		return ((IVertexStateHandler) v).isVisited();
-	}
-
-	/**
-	 * Executes a step as given and adds it to the list of steps.
-	 * 
-	 * @param step
-	 *            the step
-	 * @throws Exception
-	 */
-	private void add(IStep step) throws Exception {
-		try {
-			step.execute();
-			this.steps.add(step);
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
-
-	/**
-	 * Appends a vertex id to the solution.
-	 * 
-	 * @param id
-	 *            the id
-	 * @throws Exception
-	 */
-	private void append(String id) throws Exception {
-		try {
-			if (this.solution.length() == 0)
-				this.solution.append("Solution: ");
-			else
-				this.solution.append(" - ");
-			this.solution.append(id);
-		} catch (Exception ex) {
-			throw ex;
-		}
 	}
 
 	/**
@@ -892,7 +892,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 		try {
 			IStep step = new VisitStep(v);
 			this.add(step);
-			this.append(((ILayoutVertex) v).getId());
+			this.appendToSolution(((ILayoutVertex) v).getId());
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -907,7 +907,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 		try {
 			IStep step = new VisitStep(v, e);
 			this.add(step);
-			this.append(((ILayoutVertex) v).getId());
+			this.appendToSolution(((ILayoutVertex) v).getId());
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -922,7 +922,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 		try {
 			IStep step = new SolutionMemberStep(v, e);
 			this.add(step);
-			this.append(((ILayoutVertex) v).getId());
+			this.appendToSolution(((ILayoutVertex) v).getId());
 		} catch (Exception ex) {
 			throw ex;
 		}

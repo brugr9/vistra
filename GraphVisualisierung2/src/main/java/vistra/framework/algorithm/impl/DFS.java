@@ -18,7 +18,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class DFSpre extends AbstractAlgorithm implements IAlgorithm {
+public class DFS extends AbstractAlgorithm implements IAlgorithm {
 
 	/**
 	 * A description.
@@ -30,7 +30,7 @@ public class DFSpre extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * Main constructor.
 	 */
-	public DFSpre() {
+	public DFS() {
 		super();
 		super.setDescription(DESCRIPTION);
 		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
@@ -45,28 +45,29 @@ public class DFSpre extends AbstractAlgorithm implements IAlgorithm {
 		try {
 			/* Input: A graph g and a root v of g */
 			IVertex v = g.getStart();
+			g.stepVisit(v);
+
 			Stack<IVertex> S = new NodeStack<IVertex>();
 			Set<IVertex> V = new HashSet<IVertex>();
 			S.push(v);
 			V.add(v);
 
-			IVertex tempV, useV;
-			IEdge e = null;
+			IVertex t, u = null;
 			while (!S.isEmpty()) {
-				tempV = S.pop();
-				if (g.isSuccessor(tempV, v)) {
-					v = tempV;
-					g.stepVisit(v, e);
+				t = S.pop();
+				if (g.isSuccessor(t, u)) {
+					if (t.isVisited())
+						t = S.pop();
 				}
-				for (IEdge outE : g.getOutEdges(tempV)) {// adjacent edges of
-															// tempV
-					useV = g.getOpposite(tempV, outE); // adjacent vertex of
-														// tempV
-					if (!V.contains(useV)) {
-						V.add(useV);
-						S.push(useV);
-					} else
-						g.stepBackEdge(outE);
+				for (IEdge outE : g.getOutEdges(t)) {// adjacent edges of t
+					u = g.getOpposite(t, outE); // adjacent vertex of t
+					if (!V.contains(u)) {
+						V.add(u);
+						S.push(u);
+					} else {
+						// if (!u.isVisited())
+						g.stepVisit(t, g.findEdge(t, u));
+					}
 				}
 			}
 		} catch (Exception e) {
