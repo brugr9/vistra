@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns/graphml"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
+<key id="coord.x" for="node">
+<desc>Vertex x coordinate</desc>
+<default>0.0</default>
+</key>
+<key id="start" for="node">
+<desc>Vertex is start</desc>
+<default>false</default>
+</key>
+<key id="value" for="node">
+<desc>Vertex value</desc>
+<default></default>
+</key>
+<key id="coord.y" for="node">
+<desc>Vertex y coordinate</desc>
+<default>0.0</default>
+</key>
+<key id="end" for="node">
+<desc>Vertex is end</desc>
+<default>false</default>
+</key>
+<key id="weight" for="edge">
+<desc>Edge weight</desc>
+<default>1</default>
+</key>
+<key id="name" for="edge">
+<desc>Edge name</desc>
+<default></default>
+</key>
+<graph edgedefault="undirected">
+<node id="F">
+<data key="coord.x">631.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">139.0</data>
+<data key="end">false</data>
+</node>
+<node id="D">
+<data key="coord.x">550.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">443.0</data>
+<data key="end">false</data>
+</node>
+<node id="A">
+<data key="coord.x">241.0</data>
+<data key="start">true</data>
+<data key="value"></data>
+<data key="coord.y">123.0</data>
+<data key="end">false</data>
+</node>
+<node id="G">
+<data key="coord.x">442.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">73.0</data>
+<data key="end">false</data>
+</node>
+<node id="E">
+<data key="coord.x">654.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">293.0</data>
+<data key="end">true</data>
+</node>
+<node id="B">
+<data key="coord.x">211.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">273.0</data>
+<data key="end">false</data>
+</node>
+<node id="C">
+<data key="coord.x">314.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">425.0</data>
+<data key="end">false</data>
+</node>
+<edge directed="false" source="D" target="E">
+<data key="weight">2</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="B" target="E">
+<data key="weight">5</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="C" target="D">
+<data key="weight">7</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="A" target="B">
+<data key="weight">2</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="F" target="E">
+<data key="weight">6</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="G" target="F">
+<data key="weight">4</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="G" target="A">
+<data key="weight">10</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="B" target="C">
+<data key="weight">12</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="A" target="F">
+<data key="weight">3</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="C" target="E">
+<data key="weight">6</data>
+<data key="name"></data>
+</edge>
+</graph>
+</graphml>

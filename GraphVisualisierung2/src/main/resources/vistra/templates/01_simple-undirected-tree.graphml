@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns/graphml"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
+<key id="coord.x" for="node">
+<desc>Vertex x coordinate</desc>
+<default>0.0</default>
+</key>
+<key id="start" for="node">
+<desc>Vertex is start</desc>
+<default>false</default>
+</key>
+<key id="value" for="node">
+<desc>Vertex value</desc>
+<default></default>
+</key>
+<key id="coord.y" for="node">
+<desc>Vertex y coordinate</desc>
+<default>0.0</default>
+</key>
+<key id="end" for="node">
+<desc>Vertex is end</desc>
+<default>false</default>
+</key>
+<key id="weight" for="edge">
+<desc>Edge weight</desc>
+<default>1</default>
+</key>
+<key id="name" for="edge">
+<desc>Edge name</desc>
+<default></default>
+</key>
+<graph edgedefault="undirected">
+<node id="M">
+<data key="coord.x">818.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">430.0</data>
+<data key="end">false</data>
+</node>
+<node id="I">
+<data key="coord.x">282.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">440.0</data>
+<data key="end">false</data>
+</node>
+<node id="G">
+<data key="coord.x">831.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">306.0</data>
+<data key="end">false</data>
+</node>
+<node id="D">
+<data key="coord.x">76.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">308.0</data>
+<data key="end">false</data>
+</node>
+<node id="E">
+<data key="coord.x">337.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">301.0</data>
+<data key="end">false</data>
+</node>
+<node id="H">
+<data key="coord.x">71.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">437.0</data>
+<data key="end">false</data>
+</node>
+<node id="C">
+<data key="coord.x">718.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">210.0</data>
+<data key="end">false</data>
+</node>
+<node id="F">
+<data key="coord.x">558.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">301.0</data>
+<data key="end">false</data>
+</node>
+<node id="B">
+<data key="coord.x">238.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">206.0</data>
+<data key="end">false</data>
+</node>
+<node id="A">
+<data key="coord.x">441.0</data>
+<data key="start">start</data>
+<data key="value"></data>
+<data key="coord.y">118.0</data>
+<data key="end">false</data>
+</node>
+<node id="J">
+<data key="coord.x">387.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">440.0</data>
+<data key="end">false</data>
+</node>
+<node id="L">
+<data key="coord.x">620.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">434.0</data>
+<data key="end">false</data>
+</node>
+<node id="K">
+<data key="coord.x">537.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">431.0</data>
+<data key="end">false</data>
+</node>
+<edge directed="false" source="C" target="G">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="F" target="K">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="E" target="I">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="A" target="B">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="C" target="F">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="D" target="H">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="A" target="C">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="F" target="L">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="B" target="D">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="E" target="J">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="B" target="E">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+<edge directed="false" source="G" target="M">
+<data key="weight">1</data>
+<data key="name"></data>
+</edge>
+</graph>
+</graphml>
