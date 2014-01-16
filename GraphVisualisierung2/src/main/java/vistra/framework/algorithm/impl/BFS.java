@@ -5,7 +5,6 @@ import java.util.Set;
 
 import net.datastructures.NodeQueue;
 import net.datastructures.Queue;
-import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
@@ -57,16 +56,18 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 			while (!Q.isEmpty()) {
 				t = Q.dequeue();
 				if (g.isSuccessor(t, u)) {
-					g.stepVisit(t, g.findEdge(t, u)); // visit t via edge
+					if (t.isVisited())
+						t = Q.dequeue();
 				}
 				for (IEdge outE : g.getOutEdges(t)) {// adjacent edges of t
 					u = g.getOpposite(t, outE); // adjacent vertex of t
 					if (!V.contains(u)) {
 						V.add(u);
 						Q.enqueue(u);
+					} else {
+						// if (!u.isVisited())
+						g.stepVisit(t, g.findEdge(t, u));
 					}
-					// else
-					// g.stepVisit(t, g.findEdge(t, u));
 				}
 			}
 		} catch (Exception ex) {
