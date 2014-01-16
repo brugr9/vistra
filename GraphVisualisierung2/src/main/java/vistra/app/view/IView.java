@@ -1,12 +1,14 @@
 package vistra.app.view;
 
+import java.util.Observer;
+
 /**
  * A view interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public interface IView {
+public interface IView extends Observer {
 	/**
 	 * A field for the frame width.
 	 */

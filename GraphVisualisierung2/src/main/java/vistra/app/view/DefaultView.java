@@ -3,8 +3,11 @@ package vistra.app.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import vistra.app.IModel;
@@ -122,7 +125,28 @@ public class DefaultView extends JFrame implements IView {
 			e.printStackTrace();
 		}
 		super.setTitle(model.getResourceBundle().getString("app.label"));
+		((Model) model).addObserver(this);
 		this.setVisible(true);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+
+		IModel m = (IModel) o;
+		ResourceBundle b = m.getResourceBundle();
+
+		try {
+			String title = m.getResourceBundle().getString("app.label");
+			title += " - " + m.getGraph().getName();
+			if (!m.isGraphSaved())
+				title += "*";
+			super.setTitle(title);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.toString(),
+					b.getString("app.label"), 1, null);
+			e.printStackTrace();
+		}
+
 	}
 
 }

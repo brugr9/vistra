@@ -14,7 +14,6 @@ import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.ActionListenerI18n.I18nEvent;
 import vistra.app.view.IView;
 import vistra.app.view.component.mouse.Mouse;
 import vistra.framework.graph.item.ILayoutEdge;
@@ -55,10 +54,6 @@ public class GraphPanel extends JPanel implements Observer {
 	private final static double E_LABEL_CLOSENESS = 0.5;
 
 	/**
-	 * A field for a title.
-	 */
-	private String title;
-	/**
 	 * A field for a titled border.
 	 */
 	private TitledBorder border;
@@ -91,8 +86,7 @@ public class GraphPanel extends JPanel implements Observer {
 	 */
 	public GraphPanel(JFrame top, IModel model, Dimension size) {
 		this.setSize(size);
-		this.title = "title";
-		this.border = BorderFactory.createTitledBorder(this.title + ": name");
+		this.border = BorderFactory.createTitledBorder("title");
 		this.setBorder(border);
 
 		/* viewer */
@@ -152,13 +146,8 @@ public class GraphPanel extends JPanel implements Observer {
 		ResourceBundle b = m.getResourceBundle();
 
 		try {
-			if (arg == I18nEvent.I18N)
-				this.title = b.getString("graph.label") + ": ";
-			this.title += m.getGraph().getName();
-			if (!m.isGraphSaved())
-				this.title += "*";
-			this.border.setTitle(this.title);
 			this.layout.setGraph(m.getGraph());
+			this.border.setTitle(b.getString("graph.label"));
 			this.viewer.repaint();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.toString(),

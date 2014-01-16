@@ -12,7 +12,6 @@ import vistra.framework.algorithm.impl.Default;
 import vistra.framework.algorithm.impl.Dijkstra;
 import vistra.framework.algorithm.impl.Kruskal;
 import vistra.framework.algorithm.impl.SimpleSteps;
-import vistra.framework.graph.GraphManagerFactory;
 import vistra.framework.graph.ILayoutGraph;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.TraversableGraph;
@@ -21,7 +20,6 @@ import vistra.framework.traversal.Traversal;
 import vistra.framework.traversal.step.IStep;
 import vistra.framework.util.IBidirectIterator;
 import vistra.framework.util.ImmutableBidirectIterator;
-
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
