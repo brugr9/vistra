@@ -330,14 +330,13 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	 */
 	void setEnableTraversal(boolean enabled) throws Exception {
 		try {
+			StringBuilder message = new StringBuilder();
 			if (enabled) {
 				this.model.getAnimation().handleIdle();
 				this.setMode(Mode.PICKING);
 				ResourceBundle b = this.model.getResourceBundle();
-				StringBuilder message = new StringBuilder();
 				message.append(b.getString("render.message"));
-				// JOptionPane.showMessageDialog(null,
-				// message.toString(),
+				// JOptionPane.showMessageDialog(null, message.toString(),
 				// b.getString("app.label"), 1, null);
 				message.append(System.lineSeparator());
 				this.model.setProtocol(message);
@@ -536,16 +535,18 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 	void editGraph() throws Exception {
 		try {
 			// revert traversal
-			if (this.model.isToBeginningEnabled())
+			if (this.model.getTraversal().hasPrevious()) {
 				this.model.getStepByStep().handleToBeginning();
+			}
 			// revert algorithm selection
-			if (this.model.isAlgorithmsEnabled()) {
+			if (this.model.getSelectedAlgorithmIndex() > 0) {
 				this.model.setSelectedAlgorithmIndex(0);
 				this.selectAlgorithm();
+				this.setEnableAlgorithms(false);
+				this.setEnableTraversal(false);
 				this.model.setProtocol(new StringBuilder());
 			}
-			// this.model.setGraphSaved(false);
-			this.model.notifyObservers();
+			// this.model.notifyObservers();
 		} catch (Exception e) {
 			throw e;
 		}
@@ -577,8 +578,8 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					.executeAlgorithm(graph);
 			this.model.setTraversal(traversal);
 			this.model.setProgress(0);
-			// this.model.notifyObservers();
 			// done
+			this.model.notifyObservers();
 			return index;
 		} catch (Exception e) {
 			throw e;
