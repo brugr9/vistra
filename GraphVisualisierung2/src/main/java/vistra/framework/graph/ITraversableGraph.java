@@ -228,8 +228,7 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 *            the vertices to update with a value as given
 	 * @throws Exception
 	 */
-	void stepUpdatedVertex(Iterable<Entry<IVertex, Integer>> u)
-			throws Exception;
+	void stepUpdatedVertex(Entry<Integer, IVertex> u) throws Exception;
 
 	/**
 	 * A step method: Visit vertex.

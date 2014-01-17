@@ -37,7 +37,7 @@ public class Kruskal extends AbstractAlgorithm implements IAlgorithm {
 	@Override
 	public void traverse(ITraversableGraph g) throws AlgorithmException {
 		try {
-			// TODO Kruskal
+			// TODO
 		} catch (Exception e) {
 			throw new AlgorithmException(e);
 		}

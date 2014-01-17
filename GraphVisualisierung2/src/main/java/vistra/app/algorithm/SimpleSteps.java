@@ -25,6 +25,7 @@ public class SimpleSteps extends DefaultAlgorithm implements IAlgorithm {
 	 */
 	public SimpleSteps() {
 		super();
+		super.description = "Ein Algorithmus zum Testen der Farben von (min. 5) Knoten und (min. 2) Kanten.";
 	}
 
 	/**

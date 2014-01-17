@@ -885,8 +885,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * 
 	 */
 	@Override
-	public void stepUpdatedVertex(Iterable<Entry<IVertex, Integer>> u)
-			throws Exception {
+	public void stepUpdatedVertex(Entry<Integer, IVertex> u) throws Exception {
 		try {
 			IStep step = new UpdatedVertexStep(u);
 			this.add(step);

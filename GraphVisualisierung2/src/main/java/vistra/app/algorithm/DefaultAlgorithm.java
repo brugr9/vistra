@@ -19,7 +19,7 @@ public class DefaultAlgorithm implements IAlgorithm {
 	/**
 	 * A filed for the description.
 	 */
-	private String description;
+	protected String description;
 
 	/**
 	 * A field for the edge type(s).

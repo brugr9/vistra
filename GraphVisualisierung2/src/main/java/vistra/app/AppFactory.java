@@ -49,9 +49,9 @@ final class AppFactory {
 			parameterManager.addAlgorithm(new DefaultAlgorithm());
 			parameterManager.addAlgorithm(new SimpleSteps()); // TODO
 			parameterManager.addAlgorithm(new DFS());
-			parameterManager.addAlgorithm(new BFS());
+			// parameterManager.addAlgorithm(new BFS());
 			parameterManager.addAlgorithm(new Dijkstra());
-			parameterManager.addAlgorithm(new Kruskal());
+			// parameterManager.addAlgorithm(new Kruskal());
 			// MVC
 			IModel model = new Model();
 			IControl control = new Control(parameterManager, model);

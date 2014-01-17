@@ -45,24 +45,17 @@ public class UpdatedVertexStep extends AbstractStep implements IStep {
 	 * @param u
 	 *            the vertices to update with a value as given
 	 */
-	public UpdatedVertexStep(Iterable<Entry<IVertex, Integer>> u) {
+	public UpdatedVertexStep(Entry<Integer, IVertex> u) {
 		super();
 		try {
-			IVertex vertex;
-			Integer value;
-			for (Entry<IVertex, Integer> entry : u) {
-				vertex = entry.getKey();
-				value = entry.getValue();
-				//
-				IItemStateCommand command = new UpdatedVertexCommand(vertex,
-						value.toString());
-				this.commandHandler.addCommand(command);
-				//
-				this.description.append("Vertex "
-						+ ((ILayoutVertex) vertex).getId()
-						+ ", value updated to " + value
-						+ System.lineSeparator());
-			}
+			Integer value = u.getKey();
+			IVertex vertex = u.getValue();
+			IItemStateCommand command = new UpdatedVertexCommand(vertex,
+					value.toString());
+			this.commandHandler.addCommand(command);
+			this.description.append("Vertex "
+					+ ((ILayoutVertex) vertex).getId() + ", value updated to "
+					+ value + System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

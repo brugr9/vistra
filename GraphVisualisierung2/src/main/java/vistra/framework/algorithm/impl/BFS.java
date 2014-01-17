@@ -56,6 +56,7 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	 */
 	private void bfs(ITraversableGraph g, IVertex s) throws Exception {
 		try {
+			// TODO
 			// int i = 0;
 			// ArrayList<IVertex> l(i) = new ArrayList<IVertex>();
 			// l(i).add(s);
