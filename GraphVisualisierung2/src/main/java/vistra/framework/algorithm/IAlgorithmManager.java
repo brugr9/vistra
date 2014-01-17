@@ -1,6 +1,5 @@
 package vistra.framework.algorithm;
 
-import vistra.framework.ParameterException;
 import vistra.framework.graph.ILayoutGraph;
 import vistra.framework.traversal.ITraversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -29,17 +28,6 @@ public interface IAlgorithmManager {
 	boolean addAvailable(IAlgorithm algorithm) throws Exception;
 
 	/**
-	 * Removes an algorithm from the list of available algorithms. The list of
-	 * supported algorithms will be updated.
-	 * 
-	 * @param algorithm
-	 *            the algorithm to remove
-	 * @return the removed algorithm
-	 * @throws Exception
-	 */
-	boolean removeAvailable(IAlgorithm algorithm) throws Exception;
-
-	/**
 	 * Updates the list of supported algorithms. Afterwards, the list holds all
 	 * and only the algorithms capable to traverse edges as given by type.
 	 * 
@@ -56,7 +44,7 @@ public interface IAlgorithmManager {
 	 * @return the algorithm names
 	 * @throws Exception
 	 */
-	String[] getNames() throws Exception;
+	String[] getNamesOfSupported() throws Exception;
 
 	/**
 	 * Returns an algorithm out of the list of supported algorithm chosen by
@@ -75,9 +63,9 @@ public interface IAlgorithmManager {
 	 * 
 	 * @param index
 	 *            the algorithm index
-	 * @throws ParameterException
+	 * @throws Exception
 	 */
-	void select(int index) throws ParameterException;
+	void select(int index) throws Exception;
 
 	/**
 	 * Returns the description of the selected algorithm.
@@ -94,7 +82,7 @@ public interface IAlgorithmManager {
 	 * @param g
 	 *            the graph to traverse
 	 * @return the traversal
-	 * @throws ParameterException
+	 * @throws Exception
 	 */
 	ITraversal execute(ILayoutGraph graph) throws Exception;
 

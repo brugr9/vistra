@@ -3,6 +3,8 @@ package vistra.app;
 import java.io.File;
 import java.util.Properties;
 
+import vistra.app.algorithm.DefaultAlgorithm;
+import vistra.app.algorithm.SimpleSteps;
 import vistra.app.control.Control;
 import vistra.app.control.IControl;
 import vistra.app.view.DefaultView;
@@ -11,6 +13,10 @@ import vistra.app.view.IView;
 import vistra.app.view.IView.ViewType;
 import vistra.framework.IParameterManager;
 import vistra.framework.ParameterManager;
+import vistra.framework.algorithm.impl.BFS;
+import vistra.framework.algorithm.impl.DFS;
+import vistra.framework.algorithm.impl.Dijkstra;
+import vistra.framework.algorithm.impl.Kruskal;
 
 /**
  * An application factory, creates MVC based graphic user interfaces.
@@ -39,6 +45,15 @@ final class AppFactory {
 			Properties properties = createProperties();
 			IParameterManager parameterManager = new ParameterManager(
 					properties);
+			// Algorithms
+			parameterManager.addAlgorithm(new DefaultAlgorithm());
+			parameterManager.addAlgorithm(new BFS());
+			parameterManager.addAlgorithm(new DFS());
+			// parameterManager.addAlgorithm(new DLS());
+			parameterManager.addAlgorithm(new Dijkstra());
+			parameterManager.addAlgorithm(new Kruskal());
+			parameterManager.addAlgorithm(new SimpleSteps()); // TODO
+			// MVC
 			IModel model = new Model();
 			IControl control = new Control(parameterManager, model);
 			IView view;
@@ -63,7 +78,7 @@ final class AppFactory {
 
 		String propertiesName = AppFactory.class.getPackage().getName()
 				.replace(".", File.separator)
-				+ File.separator + "Application.properties";
+				+ File.separator + "App.properties";
 
 		try {
 

@@ -1,10 +1,5 @@
 package vistra.framework.algorithm.impl;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import net.datastructures.NodeStack;
-import net.datastructures.Stack;
 import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;

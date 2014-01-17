@@ -121,7 +121,7 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getName() {
+	public final String getName() {
 		return this.getClass().getSimpleName();
 	}
 

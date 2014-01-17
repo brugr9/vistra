@@ -5,13 +5,6 @@ import java.util.List;
 import java.util.Properties;
 
 import vistra.framework.ParameterException;
-import vistra.framework.algorithm.impl.BFS;
-import vistra.framework.algorithm.impl.DFS;
-import vistra.framework.algorithm.impl.DLS;
-import vistra.framework.algorithm.impl.Default;
-import vistra.framework.algorithm.impl.Dijkstra;
-import vistra.framework.algorithm.impl.Kruskal;
-import vistra.framework.algorithm.impl.SimpleSteps;
 import vistra.framework.graph.ILayoutGraph;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.TraversableGraph;
@@ -62,17 +55,6 @@ final class AlgorithmManager implements IAlgorithmManager {
 		super();
 		this.supported = new ArrayList<IAlgorithm>();
 		available = new ArrayList<IAlgorithm>();
-		try {
-			this.addAvailable(new Default());
-			this.addAvailable(new BFS());
-			this.addAvailable(new DFS());
-			// this.addAvailable(new DLS());
-			this.addAvailable(new Dijkstra());
-			this.addAvailable(new Kruskal());
-			this.addAvailable(new SimpleSteps()); // TODO
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -81,15 +63,6 @@ final class AlgorithmManager implements IAlgorithmManager {
 	@Override
 	public boolean addAvailable(IAlgorithm algorithm) throws Exception {
 		return this.available.add(algorithm);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean removeAvailable(IAlgorithm algorithm) throws Exception {
-		this.supported.remove(algorithm);
-		return this.available.remove(algorithm);
 	}
 
 	/**
@@ -118,7 +91,7 @@ final class AlgorithmManager implements IAlgorithmManager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String[] getNames() throws Exception {
+	public String[] getNamesOfSupported() throws Exception {
 		try {
 			String[] names = new String[this.supported.size()];
 			for (int i = 0; i < names.length; i++) {

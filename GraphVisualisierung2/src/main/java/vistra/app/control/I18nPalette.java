@@ -1,4 +1,4 @@
-package vistra.framework.util.palette;
+package vistra.app.control;
 
 import java.util.Locale;
 

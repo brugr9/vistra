@@ -1,19 +1,16 @@
 package vistra.app.control.state;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.util.Observable;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
 
 import vistra.app.IModel;
 import vistra.app.Model;
 import vistra.framework.traversal.ITraversal;
 import vistra.framework.traversal.step.IStep;
-import vistra.framework.util.palette.ConstantPalette;
 
 /**
  * A step-by-step handler: handles the step-by-step iteration over a

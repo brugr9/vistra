@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ILayoutGraph;
 import vistra.framework.traversal.ITraversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
@@ -58,6 +59,15 @@ public interface IParameterManager {
 	 * @throws ParameterException
 	 */
 	void saveGraphAs(File file) throws ParameterException;
+
+	/**
+	 * Adds an algorithm to the list of available algorithms.
+	 * 
+	 * @param algorithm
+	 *            the algorithm to add
+	 * @throws Exception
+	 */
+	void addAlgorithm(IAlgorithm algorithm) throws ParameterException;
 
 	/**
 	 * Updates the list of selectable algorithms. Afterwards, the list holds all

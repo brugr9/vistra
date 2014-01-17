@@ -1,4 +1,4 @@
-package vistra.framework.algorithm.impl;
+package vistra.app.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,29 +11,28 @@ import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
-import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * Breadth-first search (BFS).
+ * An algorithm for step testing.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
-
-	/**
-	 * A field for a description.
-	 */
-	private final static String ALGO_DESCRIPTION = "Test";
+public class SimpleSteps extends DefaultAlgorithm implements IAlgorithm {
 
 	/**
 	 * Main constructor.
 	 */
 	public SimpleSteps() {
 		super();
-		super.setDescription(ALGO_DESCRIPTION);
-		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
-				EdgeType.DIRECTED });
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getName() {
+		return this.getClass().getSimpleName();
 	}
 
 	/**
@@ -46,7 +45,6 @@ public class SimpleSteps extends AbstractAlgorithm implements IAlgorithm {
 			Map<IVertex, IEdge> items = new HashTableMap<IVertex, IEdge>();
 			List<IVertex> v = new ArrayList<IVertex>(g.getVertices());
 			List<IEdge> e = new ArrayList<IEdge>(g.getEdges());
-
 
 			/* init */
 			IVertex v0 = v.get(0);

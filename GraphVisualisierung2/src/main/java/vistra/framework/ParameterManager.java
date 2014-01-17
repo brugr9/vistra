@@ -6,6 +6,7 @@ import java.util.Properties;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vistra.framework.algorithm.AlgorithmManagerFactory;
+import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.algorithm.IAlgorithmManager;
 import vistra.framework.graph.GraphManagerFactory;
 import vistra.framework.graph.IGraphManager;
@@ -14,9 +15,10 @@ import vistra.framework.traversal.ITraversal;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 /**
- * A manager for accessing the two parameter 'graph' (operand) and 'algorithm'
- * (operator). This manager delegates method calls to other manager specialized
- * on graphs or algorithms (facade pattern).
+ * A manager for accessing the two traversal-parameter 'graph' (operand) and
+ * 'algorithm' (operator). This manager delegates method calls to other manager
+ * specialized on graphs ({@code IGraphManager}) or algorithms (
+ * {@code IAlgorithmManager}) (facade pattern).
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -108,6 +110,18 @@ public class ParameterManager implements IParameterManager {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void addAlgorithm(IAlgorithm algorithm) throws ParameterException {
+		try {
+			this.algorithmManager.addAvailable(algorithm);
+		} catch (Exception e) {
+			throw new ParameterException(e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void updateSupportedAlgorithms(EdgeType edgeType)
 			throws ParameterException {
 		try {
@@ -123,7 +137,7 @@ public class ParameterManager implements IParameterManager {
 	@Override
 	public String[] getSelectableAlgorithmNames() throws ParameterException {
 		try {
-			return this.algorithmManager.getNames();
+			return this.algorithmManager.getNamesOfSupported();
 		} catch (Exception e) {
 			throw new ParameterException(e);
 		}
@@ -160,4 +174,5 @@ public class ParameterManager implements IParameterManager {
 			throw e;
 		}
 	}
+
 }

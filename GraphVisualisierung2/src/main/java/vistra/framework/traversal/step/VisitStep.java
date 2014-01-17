@@ -1,7 +1,6 @@
 package vistra.framework.traversal.step;
 
 import vistra.framework.graph.item.IEdge;
-import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.state.command.DiscoveryEdgeCommand;
@@ -54,10 +53,6 @@ public class VisitStep extends AbstractStep implements IStep {
 			//
 			this.description.append("Vertex "
 					+ ((ILayoutVertex) vertex).getId() + " visited");
-			// if (((ILayoutEdge) edge).getId() != null)
-			// if (((ILayoutEdge) edge).getId().length() != 0)
-			// this.description.append(" via edge "
-			// + ((ILayoutEdge) edge).getId());
 			this.description.append(System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();

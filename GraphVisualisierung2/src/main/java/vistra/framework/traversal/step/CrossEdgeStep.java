@@ -1,7 +1,6 @@
 package vistra.framework.traversal.step;
 
 import vistra.framework.graph.item.IEdge;
-import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.state.command.CrossEdgeCommand;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 
@@ -24,11 +23,7 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 		try {
 			IItemStateCommand command = new CrossEdgeCommand(edge);
 			this.commandHandler.addCommand(command);
-			//
 			this.description.append("Cross-edge");
-			// if (((ILayoutEdge) edge).getId() != null)
-			// if (((ILayoutEdge) edge).getId().length() != 0)
-			// this.description.append(" " + ((ILayoutEdge) edge).getId());
 			this.description.append(System.lineSeparator());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,12 +42,7 @@ public class CrossEdgeStep extends AbstractStep implements IStep {
 			for (IEdge edge : edges) {
 				IItemStateCommand command = new CrossEdgeCommand(edge);
 				this.commandHandler.addCommand(command);
-				//
 				this.description.append("Cross-edge");
-				// if (((ILayoutEdge) edge).getId() != null)
-				// if (((ILayoutEdge) edge).getId().length() != 0)
-				// this.description.append(" "
-				//	+ ((ILayoutEdge) edge).getId());
 				this.description.append(System.lineSeparator());
 			}
 		} catch (Exception e) {
