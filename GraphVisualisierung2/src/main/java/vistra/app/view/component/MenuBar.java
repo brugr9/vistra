@@ -12,7 +12,7 @@ import javax.swing.KeyStroke;
 
 import vistra.app.IModel;
 import vistra.app.control.ActionListenerI18n.I18nEvent;
-import vistra.app.control.I18nPalette;
+import vistra.app.control.ActionListenerI18n.I18nPalette;
 import vistra.app.control.state.ParameterStateHandler.ParameterEvent;
 
 /**
