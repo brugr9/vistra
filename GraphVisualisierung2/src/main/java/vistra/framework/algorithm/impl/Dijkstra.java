@@ -70,7 +70,8 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 				IVertex u = u_entry.getValue();
 				u_dist = u_entry.getKey();
 				Q.remove(u_entry); // remove u from the priority queue
-				g.stepUpdatedVertex(u_entry); // the distance of u is final
+				if (u == s)
+					g.stepUpdatedVertex(u_entry); // the distance of u is final
 				g.stepSolutionMember(u);
 				if (u_dist == Integer.MAX_VALUE)
 					continue; // unreachable vertices are not processed
