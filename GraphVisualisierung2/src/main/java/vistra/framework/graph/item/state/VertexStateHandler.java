@@ -244,7 +244,7 @@ public class VertexStateHandler extends LayoutVertex implements
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setStroke(StrokePalette.visited);
-			this.setStrokeColor(ColorPalette.red);
+			this.setStrokeColor(ColorPalette.cherry);
 			this.setFillColor(ColorPalette.blue);
 			this.notifyObservers();
 		} catch (Exception e) {
@@ -263,7 +263,7 @@ public class VertexStateHandler extends LayoutVertex implements
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgrey);
 			this.setStroke(StrokePalette.visited);
-			this.setStrokeColor(ColorPalette.green);
+			this.setStrokeColor(ColorPalette.apple);
 			this.setFillColor(ColorPalette.white);
 			this.notifyObservers();
 		} catch (Exception e) {

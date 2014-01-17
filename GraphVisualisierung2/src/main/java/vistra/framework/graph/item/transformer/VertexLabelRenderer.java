@@ -31,7 +31,7 @@ public class VertexLabelRenderer extends DefaultVertexLabelRenderer {
 	 * Main constructor.
 	 */
 	public VertexLabelRenderer() {
-		super(ColorPalette.red);
+		super(ColorPalette.cherry);
 		this.layoutTransformer = new VertexFontColor();
 	}
 

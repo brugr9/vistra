@@ -19,7 +19,7 @@ import vistra.framework.algorithm.impl.Dijkstra;
 import vistra.framework.algorithm.impl.Kruskal;
 
 /**
- * An application factory, creates MVC based graphic user interfaces.
+ * An application factory, creates an MVC based graphic user interface.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
@@ -47,12 +47,13 @@ final class AppFactory {
 					properties);
 			// Algorithms
 			parameterManager.addAlgorithm(new DefaultAlgorithm());
+			parameterManager.addAlgorithm(new SimpleSteps()); // TODO
 			parameterManager.addAlgorithm(new BFS());
 			parameterManager.addAlgorithm(new DFS());
 			// parameterManager.addAlgorithm(new DLS());
 			parameterManager.addAlgorithm(new Dijkstra());
 			parameterManager.addAlgorithm(new Kruskal());
-			parameterManager.addAlgorithm(new SimpleSteps()); // TODO
+
 			// MVC
 			IModel model = new Model();
 			IControl control = new Control(parameterManager, model);

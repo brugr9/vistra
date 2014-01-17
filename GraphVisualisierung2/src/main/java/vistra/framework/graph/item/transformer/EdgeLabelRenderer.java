@@ -30,7 +30,7 @@ public class EdgeLabelRenderer extends DefaultEdgeLabelRenderer {
 	 * Main constructor.
 	 */
 	public EdgeLabelRenderer() {
-		super(ColorPalette.red);
+		super(ColorPalette.cherry);
 		this.layoutTransformer = new EdgeFontColor();
 	}
 

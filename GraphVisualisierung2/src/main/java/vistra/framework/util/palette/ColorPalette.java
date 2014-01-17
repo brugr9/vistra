@@ -20,21 +20,29 @@ public enum ColorPalette {
 	 */
 	APRICOT(235, 215, 200),
 	/**
-	 * The color red in the sRGB space.
+	 * The color cherry in the sRGB space.
 	 */
-	RED(190, 45, 0),
+	CHERRY(190, 45, 0),
 	/**
-	 * The color green in the sRGB space.
+	 * The color apple in the sRGB space.
 	 */
-	GREEN(155, 205, 50),
+	APPLE(155, 205, 50),
 	/**
-	 * The color dark green in the sRGB space.
+	 * The color kiwi in the sRGB space.
 	 */
-	DARKGREEN(90, 110, 80),
+	KIWI(90, 110, 80),
 	/**
 	 * The color orange in the sRGB space.
 	 */
 	ORANGE(235, 215, 130),
+	/**
+	 * The color citron in the sRGB space.
+	 */
+	CITRON(250, 250, 120),
+	/**
+	 * The color banana in the sRGB space.
+	 */
+	BANANA(250, 250, 160),
 	/**
 	 * The color blue in the sRGB space.
 	 */
@@ -43,14 +51,6 @@ public enum ColorPalette {
 	 * The color dark blue in the sRGB space.
 	 */
 	DARKBLUE(65, 70, 140),
-	/**
-	 * The color citron in the sRGB space.
-	 */
-	CITRON(250, 250, 120),
-	/**
-	 * The color yellow in the sRGB space.
-	 */
-	YELLOW(250, 250, 160),
 	/**
 	 * The color grey in the sRGB space.
 	 */
@@ -109,25 +109,33 @@ public enum ColorPalette {
 	}
 
 	/**
-	 * The color apricot.
+	 * The color apricot in the sRGB space.
 	 */
 	public final static Color apricot = APRICOT.getColor();
 	/**
 	 * The color red in the sRGB space.
 	 */
-	public final static Color red = RED.getColor();
+	public final static Color cherry = CHERRY.getColor();
 	/**
-	 * The color green in the sRGB space.
+	 * The color apple in the sRGB space.
 	 */
-	public final static Color green = GREEN.getColor();
+	public final static Color apple = APPLE.getColor();
 	/**
-	 * The color dark green in the sRGB space.
+	 * The color kiwi in the sRGB space.
 	 */
-	public final static Color darkgreen = DARKGREEN.getColor();
+	public final static Color kiwi = KIWI.getColor();
 	/**
 	 * The color orange in the sRGB space.
 	 */
 	public final static Color orange = ORANGE.getColor();
+	/**
+	 * The color citron in the sRGB space.
+	 */
+	public final static Color citron = CITRON.getColor();
+	/**
+	 * The color banana in the sRGB space.
+	 */
+	public final static Color banana = BANANA.getColor();
 	/**
 	 * The color blue in the sRGB space.
 	 */
@@ -136,14 +144,6 @@ public enum ColorPalette {
 	 * The color dark blue in the sRGB space.
 	 */
 	public final static Color darkblue = DARKBLUE.getColor();
-	/**
-	 * The color citron in the sRGB space.
-	 */
-	public final static Color citron = CITRON.getColor();
-	/**
-	 * The color yellow in the sRGB space.
-	 */
-	public final static Color yellow = YELLOW.getColor();
 	/**
 	 * The color grey in the sRGB space.
 	 */
