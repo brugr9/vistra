@@ -8,4 +8,11 @@ package vistra.framework.graph.item;
  */
 public interface IItem {
 
+	/**
+	 * Returns {@code true} if visited.
+	 * 
+	 * @return {@code true} if visited
+	 */
+	public boolean isVisited();
+
 }

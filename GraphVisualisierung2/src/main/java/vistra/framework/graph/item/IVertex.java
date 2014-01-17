@@ -41,11 +41,4 @@ public interface IVertex extends IItem {
 	 */
 	boolean isInitialized();
 
-	/**
-	 * Returns {@code true} if visited.
-	 * 
-	 * @return {@code true} if visited
-	 */
-	public boolean isVisited();
-
 }

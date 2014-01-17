@@ -1,7 +1,5 @@
 package vistra.framework.graph.item;
 
-import java.util.Observable;
-
 import vistra.framework.graph.ml.GraphWriter;
 import vistra.framework.util.palette.SigmaPalette;
 
@@ -11,7 +9,7 @@ import vistra.framework.util.palette.SigmaPalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class Vertex extends Observable implements IVertex {
+class Vertex extends Item implements IVertex {
 
 	/**
 	 * A field for a start.
@@ -22,11 +20,6 @@ class Vertex extends Observable implements IVertex {
 	 * A field for an end.
 	 */
 	boolean end;
-
-	/**
-	 * A field for a visited value.
-	 */
-	boolean visited;
 
 	/**
 	 * A field for a value.
@@ -40,7 +33,6 @@ class Vertex extends Observable implements IVertex {
 		super();
 		this.start = GraphWriter.V_START_DEFAULT;
 		this.end = GraphWriter.V_END_DEFAULT;
-		this.visited = false;
 		this.value = GraphWriter.V_VALUE_DEFAULT;
 	}
 
@@ -66,14 +58,6 @@ class Vertex extends Observable implements IVertex {
 	@Override
 	public boolean isInitialized() {
 		return this.value == SigmaPalette.infinity;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isVisited() {
-		return this.visited;
 	}
 
 	/**

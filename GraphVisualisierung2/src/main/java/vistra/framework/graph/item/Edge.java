@@ -1,7 +1,5 @@
 package vistra.framework.graph.item;
 
-import java.util.Observable;
-
 import vistra.framework.graph.ml.GraphWriter;
 
 /**
@@ -10,7 +8,7 @@ import vistra.framework.graph.ml.GraphWriter;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-class Edge extends Observable implements IEdge {
+class Edge extends Item implements IEdge {
 
 	/**
 	 * A field for the weight.
@@ -21,6 +19,7 @@ class Edge extends Observable implements IEdge {
 	 * Main constructor.
 	 */
 	Edge() {
+		super();
 		this.weight = GraphWriter.E_WEIGHT_DEFAULT;
 	}
 
