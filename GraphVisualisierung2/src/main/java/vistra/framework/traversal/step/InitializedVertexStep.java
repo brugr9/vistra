@@ -18,6 +18,28 @@ public class InitializedVertexStep extends AbstractStep implements IStep {
 	/**
 	 * Multi item constructor.
 	 * 
+	 * @param i
+	 *            the vertices
+	 */
+	public InitializedVertexStep(Iterable<IVertex> i) {
+		super();
+		try {
+			for (IVertex vertex : i) {
+				IItemStateCommand command = new InitializedVertexCommand(vertex);
+				this.commandHandler.addCommand(command);
+				//
+				this.description.append("Vertex "
+						+ ((ILayoutVertex) vertex).getId() + " initialized"
+						+ System.lineSeparator());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Multi item constructor.
+	 * 
 	 * @param s
 	 *            the start vertex
 	 * @param i

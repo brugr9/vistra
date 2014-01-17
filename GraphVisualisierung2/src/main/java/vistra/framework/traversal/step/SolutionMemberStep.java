@@ -16,6 +16,26 @@ import vistra.framework.graph.item.state.command.SolutionMemberVertexCommand;
 public class SolutionMemberStep extends AbstractStep implements IStep {
 
 	/**
+	 * Single items constructor.
+	 * 
+	 * @param vertex
+	 *            a vertex
+	 */
+	public SolutionMemberStep(IVertex vertex) {
+		super();
+		try {
+			IItemStateCommand vertexCommand = new SolutionMemberVertexCommand(
+					vertex);
+			this.commandHandler.addCommand(vertexCommand);
+			this.description.append("Vertex "
+					+ ((ILayoutVertex) vertex).getId() + ": Solution member");
+			this.description.append(System.lineSeparator());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Single pair of items constructor.
 	 * 
 	 * @param vertex

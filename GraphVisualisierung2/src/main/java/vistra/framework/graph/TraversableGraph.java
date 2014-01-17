@@ -856,6 +856,20 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * 
 	 */
 	@Override
+	public void stepInitializedVertex(Iterable<IVertex> i) throws Exception {
+		try {
+			IStep step = new InitializedVertexStep(i);
+			this.add(step);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
 	public void stepInitializedVertex(IVertex s, Iterable<IVertex> i)
 			throws Exception {
 		try {
@@ -936,6 +950,21 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 			this.add(step);
 			// TODO
 			// this.appendToSolution(((ILayoutEdge) e).getId());
+			this.appendToSolution(((ILayoutVertex) v).getId());
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void stepSolutionMember(IVertex v) throws Exception {
+		try {
+			IStep step = new SolutionMemberStep(v);
+			this.add(step);
 			this.appendToSolution(((ILayoutVertex) v).getId());
 		} catch (Exception ex) {
 			throw ex;

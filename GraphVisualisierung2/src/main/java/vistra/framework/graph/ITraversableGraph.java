@@ -202,6 +202,18 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * The start vertex value will be set as {@code 0}, the other vertices value
 	 * as {@code SigmaPalette.infinity}.
 	 * 
+	 * @param i
+	 *            the vertices
+	 * @throws Exception
+	 */
+	void stepInitializedVertex(Iterable<IVertex> i) throws Exception;
+
+	/**
+	 * A step method: Initialized vertex.
+	 * 
+	 * The start vertex value will be set as {@code 0}, the other vertices value
+	 * as {@code SigmaPalette.infinity}.
+	 * 
 	 * @param s
 	 *            the start vertex
 	 * @param i
@@ -258,6 +270,15 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @throws Exception
 	 */
 	void stepVisit(IVertex v, IEdge e) throws Exception;
+
+	/**
+	 * A step method: Solution-member vertex.
+	 * 
+	 * @param v
+	 *            a vertex
+	 * @throws Exception
+	 */
+	void stepSolutionMember(IVertex v) throws Exception;
 
 	/**
 	 * A step method: Solution-member vertex over edge.

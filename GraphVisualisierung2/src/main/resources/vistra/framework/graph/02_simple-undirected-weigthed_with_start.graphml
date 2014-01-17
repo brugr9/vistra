@@ -30,7 +30,7 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 <desc>Edge name</desc>
 <default></default>
 </key>
-<graph edgedefault="directed">
+<graph edgedefault="undirected">
 <node id="L">
 <data key="coord.x">489.0</data>
 <data key="start">false</data>
@@ -54,7 +54,7 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 </node>
 <node id="A">
 <data key="coord.x">204.0</data>
-<data key="start">false</data>
+<data key="start">true</data>
 <data key="value"></data>
 <data key="coord.y">175.0</data>
 <data key="end">false</data>
@@ -115,99 +115,99 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 <data key="coord.y">139.0</data>
 <data key="end">false</data>
 </node>
-<edge directed="true" source="L" target="D">
+<edge directed="false" source="L" target="D">
 <data key="weight">12</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="H" target="G">
+<edge directed="false" source="H" target="G">
 <data key="weight">10</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="A" target="B">
+<edge directed="false" source="A" target="B">
 <data key="weight">8</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="L" target="C">
+<edge directed="false" source="L" target="C">
 <data key="weight">7</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="G" target="F">
+<edge directed="false" source="G" target="F">
 <data key="weight">16</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="I" target="A">
+<edge directed="false" source="I" target="A">
 <data key="weight">2</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="I" target="H">
+<edge directed="false" source="I" target="H">
 <data key="weight">5</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="K" target="L">
+<edge directed="false" source="K" target="L">
 <data key="weight">9</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="D" target="K">
+<edge directed="false" source="D" target="K">
 <data key="weight">13</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="H" target="K">
+<edge directed="false" source="H" target="K">
 <data key="weight">14</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="F" target="E">
+<edge directed="false" source="F" target="E">
 <data key="weight">2</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="B" target="C">
+<edge directed="false" source="B" target="C">
 <data key="weight">7</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="L" target="J">
+<edge directed="false" source="L" target="J">
 <data key="weight">13</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="H" target="J">
+<edge directed="false" source="H" target="J">
 <data key="weight">26</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="D" target="C">
+<edge directed="false" source="D" target="C">
 <data key="weight">34</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="J" target="I">
+<edge directed="false" source="J" target="I">
 <data key="weight">8</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="K" target="J">
+<edge directed="false" source="K" target="J">
 <data key="weight">3</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="B" target="J">
+<edge directed="false" source="B" target="J">
 <data key="weight">7</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="K" target="E">
+<edge directed="false" source="K" target="E">
 <data key="weight">4</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="G" target="K">
+<edge directed="false" source="G" target="K">
 <data key="weight">6</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="C" target="J">
+<edge directed="false" source="C" target="J">
 <data key="weight">11</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="J" target="A">
+<edge directed="false" source="J" target="A">
 <data key="weight">19</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="K" target="F">
+<edge directed="false" source="K" target="F">
 <data key="weight">4</data>
 <data key="name"></data>
 </edge>
-<edge directed="true" source="E" target="D">
+<edge directed="false" source="E" target="D">
 <data key="weight">1</data>
 <data key="name"></data>
 </edge>
