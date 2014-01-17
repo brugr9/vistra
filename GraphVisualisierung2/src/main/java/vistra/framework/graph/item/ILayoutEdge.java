@@ -19,6 +19,14 @@ public interface ILayoutEdge extends IEdge, ILayoutItem {
 	void setWeight(int weight);
 
 	/**
+	 * Sets a visited.
+	 * 
+	 * @param visited
+	 *            the visited to set
+	 */
+	public void setVisited(boolean visited);
+
+	/**
 	 * Sets the arrow stroke.
 	 * 
 	 * @param stroke

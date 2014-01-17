@@ -58,8 +58,8 @@ public class LayoutVertex extends Vertex implements ILayoutVertex {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setVisited(boolean visited) {
-		this.visited = visited;
+	public void setValue(String value) {
+		this.value = value;
 		this.setChanged();
 	}
 
@@ -67,8 +67,8 @@ public class LayoutVertex extends Vertex implements ILayoutVertex {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setValue(String value) {
-		this.value = value;
+	public void setVisited(boolean visited) {
+		this.visited = visited;
 		this.setChanged();
 	}
 

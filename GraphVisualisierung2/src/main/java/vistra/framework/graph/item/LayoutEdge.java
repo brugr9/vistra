@@ -43,6 +43,15 @@ public class LayoutEdge extends Edge implements ILayoutEdge {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void setVisited(boolean visited) {
+		this.visited = visited;
+		this.setChanged();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void setId(String id) {
 		this.layout.setId(id);
 	}

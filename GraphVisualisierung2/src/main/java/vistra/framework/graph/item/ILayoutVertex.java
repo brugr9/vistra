@@ -44,14 +44,6 @@ public interface ILayoutVertex extends IVertex, ILayoutItem {
 	void setEnd(boolean end);
 
 	/**
-	 * Sets the visited.
-	 * 
-	 * @param visited
-	 *            the visited to set
-	 */
-	void setVisited(boolean visited);
-
-	/**
 	 * Sets a value.
 	 * 
 	 * @param value
@@ -59,6 +51,14 @@ public interface ILayoutVertex extends IVertex, ILayoutItem {
 	 */
 	void setValue(String value);
 
+	/**
+	 * Sets a visited.
+	 * 
+	 * @param visited
+	 *            the visited to set
+	 */
+	public void setVisited(boolean visited);
+	
 	/**
 	 * Returns the location.
 	 * 

@@ -181,6 +181,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 	 */
 	void setPropertyUnexplored() throws Exception {
 		try {
+			this.setVisited(false);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setStroke(StrokePalette.unexplored);
@@ -201,6 +202,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 	 */
 	void setPropertyVisited() throws Exception {
 		try {
+			this.setVisited(true);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.cherry);
 			this.setStroke(StrokePalette.visited);
@@ -221,6 +223,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 	 */
 	void setPropertyBack() throws Exception {
 		try {
+			this.setVisited(true);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.kiwi);
 			this.setStroke(StrokePalette.back);
@@ -241,6 +244,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 	 */
 	void setPropertyForward() throws Exception {
 		try {
+			this.setVisited(true);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.kiwi);
 			this.setStroke(StrokePalette.forward);
@@ -261,6 +265,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 	 */
 	void setPropertyCross() throws Exception {
 		try {
+			this.setVisited(true);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.kiwi);
 			this.setStroke(StrokePalette.cross);
@@ -279,6 +284,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 	 */
 	void setPropertyDiscarded() throws Exception {
 		try {
+			this.setVisited(true);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkblue);
 			this.setStroke(StrokePalette.discarded);
@@ -297,6 +303,7 @@ public class EdgeStateHandler extends LayoutEdge implements IEdgeStateHandler {
 	 */
 	void setPropertySolutionMember() throws Exception {
 		try {
+			this.setVisited(true);
 			this.setFont(FontPalette.normal);
 			this.setFontColor(ColorPalette.darkgrey);
 			this.setStroke(StrokePalette.visited);

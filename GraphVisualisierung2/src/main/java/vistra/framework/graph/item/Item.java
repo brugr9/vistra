@@ -8,7 +8,7 @@ import java.util.Observable;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  */
-public class Item extends Observable implements IItem {
+class Item extends Observable implements IItem {
 
 	/**
 	 * A field for a visited value.
