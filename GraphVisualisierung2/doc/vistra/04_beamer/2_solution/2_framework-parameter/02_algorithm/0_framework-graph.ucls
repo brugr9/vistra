@@ -4,7 +4,7 @@
   <class id="1" language="java" name="vistra.framework.graph.LayoutGraph" project="GraphVisualisierung2" 
     file="/GraphVisualisierung2/src/main/java/vistra/framework/graph/LayoutGraph.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="166" y="493"/>    
+    <position height="-1" width="-1" x="182" y="-57"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -24,7 +24,7 @@
   <class id="3" language="java" name="vistra.framework.algorithm.impl.BFS" project="GraphVisualisierung2" 
     file="/GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/BFS.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="466" y="790"/>    
+    <position height="-1" width="-1" x="189" y="655"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -34,13 +34,27 @@
   <class id="4" language="java" name="vistra.framework.traversal.Traversal" project="GraphVisualisierung2" 
     file="/GraphVisualisierung2/src/main/java/vistra/framework/traversal/Traversal.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="158" y="752"/>    
+    <position height="-1" width="-1" x="186" y="193"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
+  <class id="5" language="java" name="vistra.framework.algorithm.impl.AbstractAlgorithm" project="GraphVisualisierung2" 
+    file="/GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/AbstractAlgorithm.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="193" y="462"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="6">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
