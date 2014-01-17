@@ -30,64 +30,6 @@ abstract class AbstractAlgorithm implements IAlgorithm {
 	}
 
 	/**
-	 * A constructor.
-	 * 
-	 * @param description
-	 *            a description
-	 */
-	AbstractAlgorithm(String description) {
-		this.description = description;
-		this.edgeTypes = null;
-	}
-
-	/**
-	 * A constructor.
-	 * 
-	 * @param edgeType
-	 *            an edge type
-	 */
-	AbstractAlgorithm(EdgeType edgeType) {
-		this.description = "";
-		this.edgeTypes = new EdgeType[] { edgeType };
-	}
-
-	/**
-	 * A constructor.
-	 * 
-	 * @param edgeTypes
-	 */
-	AbstractAlgorithm(EdgeType[] edgeTypes) {
-		this.description = "";
-		this.edgeTypes = edgeTypes;
-	}
-
-	/**
-	 * A constructor.
-	 * 
-	 * @param description
-	 *            a description
-	 * @param edgeType
-	 *            an edge type
-	 */
-	AbstractAlgorithm(String description, EdgeType edgeType) {
-		this.description = description;
-		this.edgeTypes = new EdgeType[] { edgeType };
-	}
-
-	/**
-	 * A constructor.
-	 * 
-	 * @param description
-	 *            a description
-	 * @param edgeTypes
-	 *            an edge type array
-	 */
-	AbstractAlgorithm(String description, EdgeType[] edgeTypes) {
-		this.description = description;
-		this.edgeTypes = edgeTypes;
-	}
-
-	/**
 	 * Sets the description.
 	 * 
 	 * @param description
