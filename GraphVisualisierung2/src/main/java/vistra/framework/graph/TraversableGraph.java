@@ -8,7 +8,6 @@ import java.util.SortedSet;
 import net.datastructures.Entry;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.item.IEdge;
-import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.state.IVertexStateHandler;

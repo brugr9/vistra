@@ -13,10 +13,8 @@ import vistra.app.view.IView;
 import vistra.app.view.IView.ViewType;
 import vistra.framework.IParameterManager;
 import vistra.framework.ParameterManager;
-import vistra.framework.algorithm.impl.BFS;
 import vistra.framework.algorithm.impl.DFS;
 import vistra.framework.algorithm.impl.Dijkstra;
-import vistra.framework.algorithm.impl.Kruskal;
 
 /**
  * An application factory, creates an MVC based graphic user interface.

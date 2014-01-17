@@ -1,11 +1,7 @@
 package vistra.framework.algorithm.impl;
 
-import java.util.ArrayList;
-
-import net.datastructures.Sequence;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
-import vistra.framework.graph.item.IEdge;
 import vistra.framework.graph.item.IVertex;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
