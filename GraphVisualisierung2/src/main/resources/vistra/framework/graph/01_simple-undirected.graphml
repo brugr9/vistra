@@ -116,95 +116,95 @@ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
 <data key="end">false</data>
 </node>
 <edge directed="false" source="L" target="D">
-<data key="weight">12</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="H" target="G">
-<data key="weight">10</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="A" target="B">
-<data key="weight">8</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="L" target="C">
-<data key="weight">7</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="G" target="F">
-<data key="weight">16</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="I" target="A">
-<data key="weight">2</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="I" target="H">
-<data key="weight">5</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="K" target="L">
-<data key="weight">9</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="D" target="K">
-<data key="weight">13</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="H" target="K">
-<data key="weight">14</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="F" target="E">
-<data key="weight">2</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="B" target="C">
-<data key="weight">7</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="L" target="J">
-<data key="weight">13</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="H" target="J">
-<data key="weight">26</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="D" target="C">
-<data key="weight">34</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="J" target="I">
-<data key="weight">8</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="K" target="J">
-<data key="weight">3</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="B" target="J">
-<data key="weight">7</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="K" target="E">
-<data key="weight">4</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="G" target="K">
-<data key="weight">6</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="C" target="J">
-<data key="weight">11</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="J" target="A">
-<data key="weight">19</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="K" target="F">
-<data key="weight">4</data>
+<data key="weight">1</data>
 <data key="name"></data>
 </edge>
 <edge directed="false" source="E" target="D">

@@ -1,6 +1,7 @@
 package vistra.framework.graph;
 
 import java.util.Collection;
+import java.util.SortedSet;
 
 import net.datastructures.Entry;
 import vistra.framework.graph.item.IEdge;
@@ -88,6 +89,15 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @return the edge type
 	 */
 	EdgeType getEdgeType();
+
+	/**
+	 * Returns a view of all vertices in this graph. The ordering of the
+	 * vertices within the set is guaranteed to be in alphabetical order of the
+	 * vertices id.
+	 * 
+	 * @return a {@code SortedSet} view of all vertices in this graph
+	 */
+	SortedSet<IVertex> getVerticesSorted();
 
 	/**
 	 * Returns a previously as start vertex signed item.
@@ -229,6 +239,15 @@ public interface ITraversableGraph extends Graph<IVertex, IEdge> {
 	 * @throws Exception
 	 */
 	void stepVisit(IVertex v) throws Exception;
+
+	/**
+	 * A step method: Visit edge.
+	 * 
+	 * @param e
+	 *            the edge to discover
+	 * @throws Exception
+	 */
+	void stepVisit(IEdge e) throws Exception;
 
 	/**
 	 * A step method: Visit vertex over edge.

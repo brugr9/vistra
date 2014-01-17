@@ -1,11 +1,5 @@
 package vistra.framework.algorithm.impl;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import net.datastructures.NodeStack;
-import net.datastructures.Stack;
-import vistra.framework.algorithm.AlgorithmException;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
@@ -23,9 +17,7 @@ public class DFS extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * A description.
 	 */
-	private final static String DESCRIPTION = "Tiefensuche (depth-first search, DFS): "
-			+ "Der Graph wird in Preorder traversiert. "
-			+ "Der Algorithmus verwendet einen Stack.";
+	private final static String DESCRIPTION = "Tiefensuche (depth-first search, DFS)";
 
 	/**
 	 * Main constructor.
@@ -33,47 +25,49 @@ public class DFS extends AbstractAlgorithm implements IAlgorithm {
 	public DFS() {
 		super();
 		super.setDescription(DESCRIPTION);
-		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
-				EdgeType.DIRECTED });
+		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED });
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void traverse(ITraversableGraph g) throws AlgorithmException {
+	public void traverse(ITraversableGraph g) throws Exception {
 		try {
-			/* Input: A graph g and a root v of g */
-			IVertex v = g.getStart();
+			for (IVertex v : g.getVertices())
+				if (!v.isVisited())
+					dfs(g, v);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * Helper method.
+	 * 
+	 * @param g
+	 *            the graph
+	 * @param v
+	 *            the vertex
+	 * @throws Exception
+	 */
+	private void dfs(ITraversableGraph g, IVertex v) throws Exception {
+		try {
+			IVertex w;
 			g.stepVisit(v);
-
-			Stack<IVertex> S = new NodeStack<IVertex>();
-			Set<IVertex> V = new HashSet<IVertex>();
-			S.push(v);
-			V.add(v);
-
-			IVertex t, u = null;
-			while (!S.isEmpty()) {
-				t = S.pop();
-				if (g.isSuccessor(t, u)) {
-					if (t.isVisited())
-						t = S.pop();
-				}
-				for (IEdge outE : g.getOutEdges(t)) {// adjacent edges of t
-					u = g.getOpposite(t, outE); // adjacent vertex of t
-					if (!V.contains(u)) {
-						V.add(u);
-						S.push(u);
-					} else {
-						// if (!u.isVisited())
-						g.stepVisit(t, g.findEdge(t, u));
-					}
+			for (IEdge e : g.getIncidentEdges(v)) {
+				if (!e.isVisited()) {
+					w = g.getOpposite(v, e);
+					if (!w.isVisited()) {
+						g.stepVisit(e);
+						dfs(g, w);
+					} else
+						g.stepBackEdge(e);
 				}
 			}
-		} catch (Exception e) {
-			throw new AlgorithmException(e);
+		} catch (Exception ex) {
+			throw ex;
 		}
-
 	}
 
 }

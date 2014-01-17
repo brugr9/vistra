@@ -1,10 +1,8 @@
 package vistra.framework.algorithm.impl;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
-import net.datastructures.NodeQueue;
-import net.datastructures.Queue;
+import net.datastructures.Sequence;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.ITraversableGraph;
 import vistra.framework.graph.item.IEdge;
@@ -22,10 +20,7 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	/**
 	 * A description.
 	 */
-	private final static String DESCRIPTION = "Breitensuche (breadth-first search, BFS): "
-			+ "Als Schleife implementiert; "
-			+ "es sind sowohl gerichtete als auch ungerichtete Graphen zulässig. "
-			+ "Der Algorithmus verwendet eine Queue.";
+	private final static String DESCRIPTION = "Breitensuche (breadth-first search, BFS)";
 
 	/**
 	 * Main constructor.
@@ -33,8 +28,7 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	public BFS() {
 		super();
 		super.setDescription(DESCRIPTION);
-		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED,
-				EdgeType.DIRECTED });
+		super.setEdgeTypes(new EdgeType[] { EdgeType.UNDIRECTED });
 	}
 
 	/**
@@ -43,33 +37,47 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	@Override
 	public void traverse(ITraversableGraph g) throws Exception {
 		try {
-			/* Input: A graph g and a root v of g */
-			IVertex v = g.getStart();
-			g.stepVisit(v);
+			for (IVertex v : g.getVertices())
+				if (!v.isVisited())
+					bfs(g, v);
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
 
-			Queue<IVertex> Q = new NodeQueue<IVertex>();
-			Set<IVertex> V = new HashSet<IVertex>();
-			Q.enqueue(v);
-			V.add(v);
-
-			IVertex t, u = null;
-			while (!Q.isEmpty()) {
-				t = Q.dequeue();
-				if (g.isSuccessor(t, u)) {
-					if (t.isVisited())
-						t = Q.dequeue();
-				}
-				for (IEdge outE : g.getOutEdges(t)) {// adjacent edges of t
-					u = g.getOpposite(t, outE); // adjacent vertex of t
-					if (!V.contains(u)) {
-						V.add(u);
-						Q.enqueue(u);
-					} else {
-						// if (!u.isVisited())
-						g.stepVisit(t, g.findEdge(t, u));
-					}
-				}
-			}
+	/**
+	 * Helper method.
+	 * 
+	 * @param g
+	 *            the graph
+	 * @param v
+	 *            the vertex
+	 * @throws Exception
+	 */
+	private void bfs(ITraversableGraph g, IVertex s) throws Exception {
+		try {
+			// int i = 0;
+			// ArrayList<IVertex> l(i) = new ArrayList<IVertex>();
+			// l(i).add(s);
+			// g.stepVisit(s);
+			// IVertex w;
+			// while (!l(i).isEmpty()) {
+			// ArrayList<IVertex> l(i+1) = new ArrayList<IVertex>();
+			// for (IVertex v : l(i)) {
+			// for (IEdge e : g.getIncidentEdges(v)) {
+			// if (!e.isVisited()) {
+			// w = g.getOpposite(v, e);
+			// if (!w.isVisited()) {
+			// g.stepUpdatedVertex(w, i); // level
+			// g.stepVisit(w, e);
+			// l(i+1).add(w);
+			// } else
+			// g.stepCrossEdge(e);
+			// }
+			// }
+			// }
+			// i++;
+			// }
 		} catch (Exception ex) {
 			throw ex;
 		}

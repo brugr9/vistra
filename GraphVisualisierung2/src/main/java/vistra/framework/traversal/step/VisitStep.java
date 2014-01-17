@@ -36,6 +36,24 @@ public class VisitStep extends AbstractStep implements IStep {
 	}
 
 	/**
+	 * Step: visit edge.
+	 * 
+	 * @param edge
+	 *            the edge to visit
+	 */
+	public VisitStep(IEdge edge) {
+		super();
+		try {
+			IItemStateCommand edgeCommand = new DiscoveryEdgeCommand(edge);
+			this.commandHandler.addCommand(edgeCommand);
+			this.description.append("Edge visited");
+			this.description.append(System.lineSeparator());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Step: visit vertex via edge.
 	 * 
 	 * @param vertex

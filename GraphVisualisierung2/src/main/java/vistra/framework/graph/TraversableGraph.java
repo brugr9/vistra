@@ -3,10 +3,12 @@ package vistra.framework.graph;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.SortedSet;
 
 import net.datastructures.Entry;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.item.IEdge;
+import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.state.IVertexStateHandler;
@@ -701,6 +703,16 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * {@inheritDoc}
 	 */
 	@Override
+	public SortedSet<IVertex> getVerticesSorted() {
+		// TODO
+		// SortedSet<IVertex> s = new ;
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public IVertex getStart() {
 		for (IVertex v : this.delegate.getVertices())
 			if (v.isStart())
@@ -903,10 +915,28 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * 
 	 */
 	@Override
+	public void stepVisit(IEdge e) throws Exception {
+		try {
+			IStep step = new VisitStep(e);
+			this.add(step);
+			// TODO
+			// this.appendToSolution(((ILayoutEdge) e).getId());
+		} catch (Exception ex) {
+			throw ex;
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
 	public void stepVisit(IVertex v, IEdge e) throws Exception {
 		try {
 			IStep step = new VisitStep(v, e);
 			this.add(step);
+			// TODO
+			// this.appendToSolution(((ILayoutEdge) e).getId());
 			this.appendToSolution(((ILayoutVertex) v).getId());
 		} catch (Exception ex) {
 			throw ex;
