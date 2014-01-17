@@ -449,6 +449,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 					this.model.setStart(null);
 					this.model.setEnd(null);
 					this.model.setGraphFile(true);
+					this.model.setGraphSaved(true);
 					/* Algorithm */
 					this.updateAlgorithms();
 					this.model.notifyObservers();
