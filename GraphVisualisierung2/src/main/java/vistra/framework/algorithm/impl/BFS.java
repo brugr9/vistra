@@ -46,8 +46,8 @@ public class BFS extends AbstractAlgorithm implements IAlgorithm {
 	 * 
 	 * @param g
 	 *            the graph
-	 * @param v
-	 *            the vertex
+	 * @param s
+	 *            the start vertex
 	 * @throws Exception
 	 */
 	private void bfs(ITraversableGraph g, IVertex s) throws Exception {
