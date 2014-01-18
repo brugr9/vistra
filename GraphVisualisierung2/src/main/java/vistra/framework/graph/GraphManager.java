@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.VertexFactory;
 import vistra.framework.graph.ml.GraphReader;
 import vistra.framework.graph.ml.GraphWriter;
@@ -88,7 +89,8 @@ class GraphManager implements IGraphManager {
 			this.file = file;
 			this.graph = this.reader.read(new FileReader(this.file));
 			this.graph.setName(this.file.getName());
-			for (int i = 0; i < this.graph.getVertexCount(); i++)
+			for (@SuppressWarnings("unused")
+			IVertex v : this.graph.getVertices())
 				VertexFactory.nextSigma();
 			return this.graph;
 		} catch (Exception e) {
@@ -114,9 +116,16 @@ class GraphManager implements IGraphManager {
 	@Override
 	public void saveAs(File file) throws Exception {
 		try {
-			this.file = file;
-			this.save();
 			String name = file.getName();
+			String suffix = "."
+					+ this.fileNameExtensionFilter.getExtensions()[0];
+			if (!name.endsWith(suffix)) {
+				File newFile = new File(file.getPath().concat(suffix));
+				this.file = newFile;
+				name = newFile.getName();
+			} else
+				this.file = file;
+			this.save();
 			this.graph.setName(name);
 		} catch (Exception e) {
 			throw e;
