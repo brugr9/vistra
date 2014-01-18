@@ -9,7 +9,7 @@ import vistra.framework.graph.item.ILayoutVertex;
 import edu.uci.ics.jung.io.graphml.GraphMLReader2;
 
 /**
- * A GraphMLReader for reading in an extended graph from a GraphML file.
+ * A GraphMLReader for reading an extended graph from a GraphML file.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
