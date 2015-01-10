@@ -5,8 +5,10 @@
 
 Java-Applikation zum editieren und traversieren von Graphen.
 
-Semesterarbeit<br>
-BFH-TI, Modul Projekt 1, HS 2013
+Semesterarbeit
+
+Modul Projekt 1<br>
+Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
 
 
 
