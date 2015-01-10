@@ -1,7 +1,7 @@
 # vistra
-### Visualisierte Traversierung.
+### Visualisierte Traversierung
 
-#### Implementation von Algorithmen und Datenstrukturen.
+#### Implementation von Algorithmen und Datenstrukturen
 
 Java-Applikation zum editieren und traversieren von Graphen.
 
