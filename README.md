@@ -8,7 +8,6 @@ Semesterarbeit
 Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
 <hr>
-
 Beschreibung:
 - Java-Applikation zum editieren und traversieren von Graphen.
 
