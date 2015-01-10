@@ -12,10 +12,12 @@ Beschreibung:
 - Java-Applikation zum editieren und traversieren von Graphen.
 
 Stichworte:
-- Algorithmen (BFS, DFS, Dijkstra)
+- Algorithmen (BFS, BLS, DFS, DLS, Dijkstra)
 - Datenstrukturen (Array, Queue, Stack, Tree, Graph)
 - OOAD Design Pattern (Factory, State, Strategy, Command, Adapter)
 - Programmiersprache: Java
 - Eclipse-Projekt mit Apache Maven
 - GUI: Swing, MVC mit Java-Observer-Pattern, implementiert als state-machine
 - Persistenz mit XML-Datei
+
+![vistra](brur9.github.com/vistra/GraphVisualisierung2/doc/vistra/02_drafts/screenshots/03_app-screenshot.png)
