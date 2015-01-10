@@ -12,7 +12,7 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
 Beschreibung:
 - Java-Applikation zum editieren und traversieren von Graphen.
 
-Themen:
+Stichworte:
 - Algorithmen (BFS, DFS, Dijkstra)
 - Datenstrukturen (Array, Stack, Queue, Tree, Graph)
 - OOAD Design Pattern (Factory, State, Strategy, Command, Adapter)
