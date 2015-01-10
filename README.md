@@ -3,14 +3,14 @@
 
 #### Implementation von Algorithmen und Datenstrukturen
 
-Java-Applikation zum editieren und traversieren von Graphen.
-
 Semesterarbeit
 
 Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
 
 
+Beschreibung:
+- Java-Applikation zum editieren und traversieren von Graphen.
 
 Themen:
 - Algorithmen (BFS, DFS, Dijkstra)
