@@ -1,7 +1,5 @@
-# vistra
-### Visualisierte Traversierung von Graphen
-
-#### Implementation von Algorithmen und Datenstrukturen
+# Visualisierte Traversierung von Graphen
+### Implementation von Algorithmen und Datenstrukturen
 
 ##### Semesterarbeit
 
