@@ -20,4 +20,4 @@ Stichworte:
 - GUI: Swing, MVC mit Java-Observer-Pattern, implementiert als state-machine
 - Persistenz mit XML-Datei
 
-![vistra](brur9.github.com/vistra/GraphVisualisierung2/doc/vistra/02_drafts/screenshots/03_app-screenshot.png)
+![Bildschirmfoto](GraphVisualisierung2/doc/vistra/02_drafts/screenshots/03_app-screenshot.png)
