@@ -13,7 +13,7 @@ Beschreibung:
 
 Stichworte:
 - Algorithmen (BFS, DFS, Dijkstra)
-- Datenstrukturen (Array, Stack, Queue, Tree, Graph)
+- Datenstrukturen (Array, Queue, Stack, Tree, Graph)
 - OOAD Design Pattern (Factory, State, Strategy, Command, Adapter)
 - Programmiersprache: Java
 - Eclipse-Projekt mit Apache Maven
