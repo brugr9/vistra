@@ -19,3 +19,9 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - Eclipse-Projekt mit Apache Maven
 - GUI: Swing, MVC mit Java-Observer-Pattern, implementiert als state-machine
 - Persistenz mit GraphML
+
+##### Bibliotheken
+- <a target="_blank" href="http://net3.datastructures.net/">net.datastructures</a>
+- <a target="_blank" href="http://jung.sourceforge.net/">JUNG - Java Universal Network/Graph Framework</a>
+- <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>
+- <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
