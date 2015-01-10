@@ -18,5 +18,5 @@ Stichworte:
 - OOAD Design Pattern (Factory, State, Strategy, Command, Adapter)
 - Programmiersprache: Java
 - Eclipse-Projekt mit Apache Maven
-- GUI: state-machine, MVC mit Java-Observer-Pattern
+- GUI: Swing, MVC mit Java-Observer-Pattern, implementiert als state-machine
 - Persistenz mit XML-Datei
