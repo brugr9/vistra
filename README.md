@@ -1,6 +1,7 @@
 # vistra
-Visualisierte Traversierung.
+### Visualisierte Traversierung.
 
-Implementation von Algorithmen und Datenstrukturen.<br>
-Java-Applikation zum editieren und traversieren von Graphen.<br>
-Semesterarbeit HS 2013 im Modul Projekt 1, BFH-TI Biel.
+#### Implementation von Algorithmen und Datenstrukturen.
+
+Semesterarbeit<br>
+BFH-TI, Modul Projekt 1, HS 2013
