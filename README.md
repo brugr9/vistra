@@ -10,10 +10,11 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
 <hr>
 ![Bildschirmfoto](GraphVisualisierung2/doc/vistra/02_drafts/screenshots/03_app-screenshot.png)
 <hr>
-Beschreibung:
-- Java-Applikation zum editieren und traversieren von Graphen.
+##### Beschreibung:<br>
+Java-Applikation zum editieren und traversieren von Graphen.
+
 <hr>
-Stichworte:
+##### Stichworte:
 - Algorithmen (BFS, BLS, DFS, DLS, Dijkstra)
 - Datenstrukturen (Array, Queue, Stack, Tree, Graph)
 - OOAD Design Pattern (Factory, State, Strategy, Command, Adapter)
