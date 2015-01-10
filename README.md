@@ -1,7 +1,7 @@
 # Visualisierte Traversierung von Graphen
 ### Implementation von Algorithmen und Datenstrukturen
 
-##### Semesterarbeit
+#### Semesterarbeit
 
 Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
