@@ -18,4 +18,4 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - Programmiersprache: Java
 - Eclipse-Projekt mit Apache Maven
 - GUI: Swing, MVC mit Java-Observer-Pattern, implementiert als state-machine
-- Persistenz mit XML-Datei
+- Persistenz mit GraphML
