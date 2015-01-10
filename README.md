@@ -1,5 +1,5 @@
 # vistra
-### Visualisierte Traversierung
+### Visualisierte Traversierung von Graphen
 
 #### Implementation von Algorithmen und Datenstrukturen
 
