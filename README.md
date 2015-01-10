@@ -14,8 +14,8 @@ Beschreibung:
 
 Themen:
 - Algorithmen (BFS, DFS, Dijkstra)
-- Datenstrukturen (Queue)
-- OOAD, Design Pattern (Factory, State, Strategy, Command, Adapter)
+- Datenstrukturen (Array, Stack, Queue, Tree, Graph)
+- OOAD Design Pattern (Factory, State, Strategy, Command, Adapter)
 - Programmiersprache: Java
 - Eclipse-Projekt mit Apache Maven
 - GUI: state-machine, MVC mit Java-Observer-Pattern
