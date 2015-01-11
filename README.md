@@ -15,9 +15,9 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - Algorithmen (BFS, BLS, DFS, DLS, Dijkstra)
 - Datenstrukturen (Array, Queue, Stack, Tree, Graph)
 - OOAD Design Pattern (Factory, State, Strategy, Command, Adapter)
-- Programmiersprache: Java
+- Programmiersprache Java
 - Eclipse-Projekt mit Apache Maven
-- GUI: Swing, MVC mit Java-Observer-Pattern, implementiert als state-machine
+- GUI mit Swing, MVC mit Java-Observer-Pattern, implementiert als state-machine
 - Persistenz mit GraphML
 
 ##### Bibliotheken
