@@ -6,7 +6,7 @@
 Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
 <hr>
-![Bildschirmfoto](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png)
+![Bildschirmfoto vistra][GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png]
 <hr>
 ##### Beschreibung
 Java-Applikation zum editieren und traversieren von Graphen.
