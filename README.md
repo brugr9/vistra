@@ -17,7 +17,7 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - OOAD Design Pattern (Factory, State, Strategy, Command, Adapter)
 - Programmiersprache Java
 - Eclipse-Projekt mit Apache Maven
-- GUI mit Swing, MVC mit Java-Observer-Pattern, implementiert als state-machine
+- GUI mit Swing, [MVC](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [state-machine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
 - Dateiformat *.graphml
 
 ##### Bibliotheken
