@@ -12,7 +12,7 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
 Java-Applikation zum editieren und traversieren von Graphen.
 <hr>
 ##### Stichworte
-- Algorithmen (BFS, BLS, DFS, DLS, Dijkstra)
+- Algorithmen (BFS, BLS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), DLS, [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java))
 - Datenstrukturen (Array, Queue, Stack, Tree, Graph)
 - OOAD Design Pattern (Factory, State, Strategy, Command, Adapter)
 - Programmiersprache Java
