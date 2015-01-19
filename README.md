@@ -31,8 +31,3 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - [Release-Demo](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar) und [Beispiel-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true) (simple-undirected-weigthed_with_start.vistra)
 - [JavaDoc](GraphVisualisierung2/doc/vistra/vistra-javadoc.zip?raw=true) (vistra-javadoc.zip)
 - <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierte-traversierung-von-graphen-bericht">Bericht</a> (auf speakerdeck)
-
-
-##### TODOs
-- Textausgabe für Dijkstra und Kruskal: Angabe der Lösung ist bis dato lediglich die Reihenfolge der zur Lösung hinzugefügten Ecken
-- Editieren von Ecken und Kanten: Fang-Bereich vergrössern
