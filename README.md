@@ -27,8 +27,7 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
 
-##### Release-Demo und Bericht
-- [Release-Demo](GraphVisualisierung2/release-demo/vistra.jar
-- 
-- https://github.com/brugr9/vistra/blob/master/GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar)
+##### Release-Demo, Bericht und JavaDoc
+- [Release-Demo](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar)
 - <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierte-traversierung-von-graphen-bericht">Bericht</a> (auf speakerdeck)
+- [JavaDoc](GraphVisualisierung2/doc/vistra/vistra-javadoc.zip?raw=true) (vistra-javadoc.zip)
