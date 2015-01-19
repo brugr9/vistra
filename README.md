@@ -4,7 +4,7 @@
 #### Semesterarbeit
 
 Modul Projekt 1<br>
-Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
+Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 <hr>
 ![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
 <hr>
