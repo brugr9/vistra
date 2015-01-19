@@ -34,3 +34,4 @@ Java-Applikation zum editieren und traversieren von Graphen.
 
 ##### TODOs
 - Textausgabe für Dijkstra und Kruskal: Angabe der Lösung ist bis dato lediglich die Reihenfolge der zur Lösung hinzugefügten Ecken
+- Editieren von Ecken und Kanten: Fang-Bereich vergrössern
