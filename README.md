@@ -19,7 +19,7 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - Programmiersprache Java
 - Eclipse-Projekt mit Apache Maven
 - GUI mit Swing
-- Dateiformat *.graphml
+- Dateiformat *.vistra in GraphML
 
 ##### Bibliotheken
 - <a target="_blank" href="http://net3.datastructures.net/">net.datastructures</a>
