@@ -28,4 +28,4 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
 
 ##### Bericht
-- <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierte-traversierung-von-graphen">Bericht</a> (auf speakerdeck)
+- <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierte-traversierung-von-graphen-bericht">Bericht</a> (auf speakerdeck)
