@@ -12,7 +12,7 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013
 Java-Applikation zum editieren und traversieren von Graphen.
 <hr>
 ##### Stichworte
-- Algorithmen: BFS, BLS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), DLS, [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java)
+- Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
 - Datenstrukturen: un-/directed, un-/weighted Graph
 - [Framework](GraphVisualisierung2/src/main/java/vistra/framework/) implemetiert OOAD Design Pattern: Factory, State, Strategy, Command, Adapter
 - MVC-[App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [state-machine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
