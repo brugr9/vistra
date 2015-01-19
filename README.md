@@ -26,3 +26,6 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - <a target="_blank" href="http://jung.sourceforge.net/">JUNG - Java Universal Network/Graph Framework</a>
 - <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
+
+##### Bericht
+- <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierte-traversierung-von-graphen">Bericht</a> (auf speakerdeck)
