@@ -15,8 +15,8 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
 - Datenstrukturen: un-/gerichteter, un-/gewichteter Graph
 - [Framework](GraphVisualisierung2/src/main/java/vistra/framework/) implemetiert OOAD Design Pattern: Factory, State, Strategy, Command, Adapter
-- [MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [state-machine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
-- Programmiersprache Java
+- [MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [Zustandsmaschine (state pattern)](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
+- Objekt-orientierte Programmierung in Java
 - Eclipse-Projekt mit Apache Maven
 - GUI mit Swing
 - Dateiformat *.vistra in GraphML
