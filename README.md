@@ -28,7 +28,7 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
 
 ##### Downloads
-- [Release-Demo](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (Java-Applikation: vistra.jar)
+- Java-Applikation: [Release 1.0](GraphVisualisierung2/release-demo/vistra-1.0.jar?raw=true)
 - [Beispiel-Graph](GraphVisualisierung2/release-demo/simple-undirected-weighted_with_start.vistra?raw=true) (rechtsklick, speichern als ...)
 
 ##### Bericht
