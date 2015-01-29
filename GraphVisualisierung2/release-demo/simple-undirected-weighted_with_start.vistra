@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns/graphml"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns/graphml">
+<key id="coord.x" for="node">
+<desc>Vertex x coordinate</desc>
+<default>0.0</default>
+</key>
+<key id="start" for="node">
+<desc>Vertex is start</desc>
+<default>false</default>
+</key>
+<key id="value" for="node">
+<desc>Vertex value</desc>
+<default></default>
+</key>
+<key id="coord.y" for="node">
+<desc>Vertex y coordinate</desc>
+<default>0.0</default>
+</key>
+<key id="end" for="node">
+<desc>Vertex is end</desc>
+<default>false</default>
+</key>
+<key id="weight" for="edge">
+<desc>Edge weight</desc>
+<default>1</default>
+</key>
+<graph edgedefault="directed">
+<node id="J">
+<data key="coord.x">369.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">231.0</data>
+<data key="end">false</data>
+</node>
+<node id="F">
+<data key="coord.x">842.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">223.0</data>
+<data key="end">false</data>
+</node>
+<node id="L">
+<data key="coord.x">506.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">397.0</data>
+<data key="end">false</data>
+</node>
+<node id="H">
+<data key="coord.x">536.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">58.0</data>
+<data key="end">false</data>
+</node>
+<node id="C">
+<data key="coord.x">366.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">509.0</data>
+<data key="end">false</data>
+</node>
+<node id="K">
+<data key="coord.x">656.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">288.0</data>
+<data key="end">false</data>
+</node>
+<node id="D">
+<data key="coord.x">680.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">518.0</data>
+<data key="end">false</data>
+</node>
+<node id="I">
+<data key="coord.x">345.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">54.0</data>
+<data key="end">false</data>
+</node>
+<node id="G">
+<data key="coord.x">751.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">109.0</data>
+<data key="end">false</data>
+</node>
+<node id="B">
+<data key="coord.x">177.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">377.0</data>
+<data key="end">false</data>
+</node>
+<node id="E">
+<data key="coord.x">831.0</data>
+<data key="start">false</data>
+<data key="value"></data>
+<data key="coord.y">425.0</data>
+<data key="end">false</data>
+</node>
+<node id="A">
+<data key="coord.x">160.0</data>
+<data key="start">true</data>
+<data key="value">start</data>
+<data key="coord.y">170.0</data>
+<data key="end">false</data>
+</node>
+<edge id="" directed="false" source="D" target="K">
+<data key="weight">13</data>
+</edge>
+<edge id="" directed="false" source="J" target="B">
+<data key="weight">7</data>
+</edge>
+<edge id="" directed="false" source="A" target="J">
+<data key="weight">19</data>
+</edge>
+<edge id="" directed="false" source="J" target="C">
+<data key="weight">11</data>
+</edge>
+<edge id="" directed="false" source="H" target="I">
+<data key="weight">5</data>
+</edge>
+<edge id="" directed="false" source="L" target="J">
+<data key="weight">13</data>
+</edge>
+<edge id="" directed="false" source="B" target="C">
+<data key="weight">7</data>
+</edge>
+<edge id="" directed="false" source="L" target="D">
+<data key="weight">12</data>
+</edge>
+<edge id="" directed="false" source="A" target="B">
+<data key="weight">8</data>
+</edge>
+<edge id="" directed="false" source="E" target="F">
+<data key="weight">2</data>
+</edge>
+<edge id="" directed="false" source="K" target="E">
+<data key="weight">4</data>
+</edge>
+<edge id="" directed="false" source="J" target="K">
+<data key="weight">3</data>
+</edge>
+<edge id="" directed="false" source="L" target="C">
+<data key="weight">7</data>
+</edge>
+<edge id="" directed="false" source="D" target="E">
+<data key="weight">1</data>
+</edge>
+<edge id="" directed="false" source="G" target="H">
+<data key="weight">10</data>
+</edge>
+<edge id="" directed="false" source="K" target="F">
+<data key="weight">4</data>
+</edge>
+<edge id="" directed="false" source="H" target="K">
+<data key="weight">14</data>
+</edge>
+<edge id="" directed="false" source="C" target="D">
+<data key="weight">34</data>
+</edge>
+<edge id="" directed="false" source="K" target="L">
+<data key="weight">9</data>
+</edge>
+<edge id="" directed="false" source="A" target="I">
+<data key="weight">2</data>
+</edge>
+<edge id="" directed="false" source="F" target="G">
+<data key="weight">16</data>
+</edge>
+<edge id="" directed="false" source="I" target="J">
+<data key="weight">8</data>
+</edge>
+<edge id="" directed="false" source="J" target="H">
+<data key="weight">26</data>
+</edge>
+<edge id="" directed="false" source="K" target="G">
+<data key="weight">6</data>
+</edge>
+</graph>
+</graphml>
