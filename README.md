@@ -30,6 +30,7 @@ Java-Applikation zum editieren und traversieren von Graphen.
 ##### Downloads
 - [Release-Demo](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (Java-Applikation vistra.jar)
 - [Beispiel-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true) (Datei simple-undirected-weigthed_with_start.vistra)
+- 
 
 ##### Bericht
 - <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierte-traversierung-von-graphen-bericht">Bericht</a> (auf speakerdeck)
