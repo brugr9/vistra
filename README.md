@@ -13,10 +13,10 @@ Java-Applikation zum editieren und traversieren von Graphen.
 <hr>
 ##### Stichworte
 - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
-- Datenstrukturen: un-/gerichteter, un-/gewichteter Graph
-- [Framework](GraphVisualisierung2/src/main/java/vistra/framework/) implemetiert OOAD Design Pattern: Factory, State, Strategy, Command, Adapter
-- [MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [state-machine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
-- Programmiersprache Java
+- Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph (no self loops, no parallel edges)
+- [Framework](GraphVisualisierung2/src/main/java/vistra/framework/) implemetiert OOAD Design Pattern: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [State](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/), [Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java), [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Delegate](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
+- [MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
+- Objekt-orientierte Programmierung in Java
 - Eclipse-Projekt mit Apache Maven
 - GUI mit Swing
 - Dateiformat *.vistra in GraphML
@@ -27,7 +27,9 @@ Java-Applikation zum editieren und traversieren von Graphen.
 - <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
 
-##### Downloads und Bericht
-- [Release-Demo](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar) und [Beispiel-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true) (simple-undirected-weigthed_with_start.vistra)
-- [JavaDoc](GraphVisualisierung2/doc/vistra/vistra-javadoc.zip?raw=true) (vistra-javadoc.zip)
+##### Downloads
+- [Release-Demo](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (Java-Applikation vistra.jar)
+- [Beispiel-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true) (Datei simple-undirected-weigthed_with_start.vistra)
+
+##### Bericht
 - <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierte-traversierung-von-graphen-bericht">Bericht</a> (auf speakerdeck)
