@@ -34,12 +34,12 @@ Visualisierung der Algorithmen und Datenstrukturen
  - GUI mit Swing
  - Dateiformat *.vistra in GraphML
 
-#### Bibliotheken
+##### Bibliotheken
 - <a target="_blank" href="http://net3.datastructures.net/">net.datastructures</a>
 - <a target="_blank" href="http://jung.sourceforge.net/">JUNG - Java Universal Network/Graph Framework</a>
 - <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
 
-#### Downloads
+##### Downloads
 - [Applikation](GraphVisualisierung2/release-demo/vistra-1.0.jar?raw=true) (vistra-1.0.jar, Release 1.0)
 - <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierte-traversierung-von-graphen-bericht">Bericht</a> (auf speakerdeck)
