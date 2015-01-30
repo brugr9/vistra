@@ -15,12 +15,12 @@ Die drei Komponenten können sich in folgenden Zuständen befinden:
  - algorithm selected (Algorithmus wurde ausgewählt)
  - off (Interaktion ausgeschaltet)
 
-- Step-by-step (3):
+- Step-by-step:
  - at beginning (Stand der Traversierung: am Anfang)
  - inter (Stand der Traversierung: zwischen Anfang und Ende)
  - at end (Stand der Traversierung: am Ende)
 
-- Animation (4): 
+- Animation: 
  - playing (am laufen)
  - paused (angehalten)
  - stopped (gestoppt)
