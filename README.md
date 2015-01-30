@@ -21,24 +21,18 @@ Visualisierung der Algorithmen und Datenstrukturen
 <hr>
 
 #### Stichworte
-##### Algorithmen und Datenstrukturen:
  - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
  - Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph (no self loops, no parallel edges)
-
-##### Framework und Applikation:
-[Framework](GraphVisualisierung2/src/main/java/vistra/framework/) implemetiert OOAD Design Pattern:
+- [Framework](GraphVisualisierung2/src/main/java/vistra/framework/) implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [State](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
  - Algorithm: [Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
  - Traversal: [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Delegate](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
-
-[MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
-
-##### Specs
-- Objektorientierte Programmierung (OOP)
-- Programmiersprache Java
-- Eclipse-Projekt mit Apache Maven
-- GUI mit Swing
-- Dateiformat *.vistra in GraphML
+- [MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
+-  Programmierung
+ - Objektorientierte Programmierung (OOP) in Java
+ - Eclipse-Projekt mit Apache Maven
+ - GUI mit Swing
+ - Dateiformat *.vistra in GraphML
 
 #### Bibliotheken
 - <a target="_blank" href="http://net3.datastructures.net/">net.datastructures</a>
