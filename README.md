@@ -13,11 +13,15 @@ Java-Applikation zum editieren und traversieren von Graphen.
 Visualisierung der Algorithmen und Datenstrukturen
 - gemäss Unterlagen im Modul AlgoDat 
 - 'Look-and-feel' wie in den Unterlagen von net.datastructures
+
 ![Problem](GraphVisualisierung2/doc/vistra/04_beamer/1_problem/01_algodat.png "Problem")
 <hr>
+
 ##### Lösung
+
 ![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
 <hr>
+
 ##### Stichworte
 - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
 - Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph (no self loops, no parallel edges)
