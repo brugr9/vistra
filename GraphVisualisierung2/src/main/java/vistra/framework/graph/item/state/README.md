@@ -2,7 +2,7 @@
 ### Implementation von Algorithmen und Datenstrukturen
  
 #### Elemente des Graphen als Zustandsmaschine: State und Command Pattern
-Beim Traversieren des Graphen werden die einzelnen Elemente (Item: Vertex, Edge) besucht. Dabei verändert sich deren Zustand (Farbe, Strichstärke, Wert). Die Elemente (Item: Vertex, Edge) sind deshalb als Zustandsmaschine implementiert:
+Beim Traversieren des Graphen werden die einzelnen Elemente (Item: Vertex, Edge) z.B. aktualisiert oder besucht. Dabei verändert sich deren Zustand (Farben, Strichstärke, Wert). Die Elemente sind deshalb als Zustandsmaschine implementiert:
 
 Zustand (ItemState):
 - Mit dem Besuchen eines Elementes verändert sich dessen Zustand.
