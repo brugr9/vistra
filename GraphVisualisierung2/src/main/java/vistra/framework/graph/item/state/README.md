@@ -14,7 +14,5 @@ Zustandsänderung (ItemStateCommand):
 - Die Zustandsänderung wird durch die execute-Methode herbeigeführt.
 - Die Zustandsänderung wird durch die undo-Methode rückgängig gemacht.
 
-
-Aufgrund der möglichen Zustände wurden die dazugehörenden Zustandsänderungen entworfen. Folgende Tabelle 'From state to step' zeigt die möglichen Zustände, die Zustände als Objekte (ItemState) und die Zustandsänderungen als Objekte (ItemStateCommand):
+Aufgrund der möglichen Zustände (ItemState) wurden die dazugehörenden Zustandsänderungen (ItemStateCommand) entworfen, wie folgende Tabelle 'From state to step' zeigt:
 ![From state to step](https://raw.githubusercontent.com/brugr9/vistra/master/GraphVisualisierung2/doc/vistra/04_beamer/2_solution/2_framework-parameter/01_graph/04_list_-_from_state_to_step.png "From state to step")
-
