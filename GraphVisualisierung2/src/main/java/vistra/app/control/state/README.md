@@ -1,7 +1,4 @@
-# Visualisierte Traversierung von Graphen
-### Implementation von Algorithmen und Datenstrukturen
- 
-#### Zustandsmaschine MVC-App
+### Zustandsmaschine MVC-App
 Die MVC-App ist als Zustandsmaschine implementiert (state pattern). Dabei werden drei Komponenten unterschieden:
 - Parameter: Editieren des Graphen und Wahl des Algorithmus
 - Step-by-step (Sbs): Traversierung des Graphen Schritt-für-Schritt 
