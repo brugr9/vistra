@@ -1,39 +1,27 @@
 # Visualisierte Traversierung von Graphen
 ### Implementation von Algorithmen und Datenstrukturen
  
-#### Zustandsmaschine der MVC-App
+#### Zustandsmaschine MVC-App
 Die MVC-App ist als Zustandsmaschine implementiert (state pattern). Dabei werden drei Komponenten unterschieden:
 - Parameter: Editieren des Graphen und Wahl des Algorithmus
-- Step-by-step: Traversierung des Graphen Schritt-für-Schritt 
+- Step-by-step (Sbs): Traversierung des Graphen Schritt-für-Schritt 
 - Animation: animierte Traversierung des Graphen
 
-States:
+##### Zustände der Komponenten:
+Die drei Komponenten können sich in folgenden Zuständen befinden:
 - Parameter: 
-- 
+ - graph edited (Graph wurde editert)
+ - graph saved (Graph wurde gespeichert)
+ - algorithm selected (Algorithmus wurde ausgewählt)
+ - off (Interaktion ausgeschaltet)
 
-AbstractAnimationState.java
-AbstractParameterState.java
-AbstractSbsState.java
-Animation.java
-AnimationOff.java
-AnimationPaused.java
-AnimationPlaying.java
-AnimationStopped.java
-IAnimation.java
-IControlContext.java
-IParameterStateHandler.java
-IStepByStep.java
-ParameterAlgorithmSelected.java
-ParameterGraphEdited.java
-ParameterGraphSaved.java
-ParameterOff.java
-ParameterStateHandler.java
-README.md
-SbsAtBeginning.java
-SbsAtEnd.java
-SbsInter.java
-SbsOff.java
-StepByStep.java
+- Step-by-step (3):
+ - at beginning (Stand der Traversierung: am Anfang)
+ - inter (Stand der Traversierung: zwischen Anfang und Ende)
+ - at end (Stand der Traversierung: am Ende)
 
-- Step-by-step: 
-- Animation: 
+- Animation (4): 
+ - playing (am laufen)
+ - paused (angehalten)
+ - stopped (gestoppt)
+ - off (Interaktion ausgeschaltet)
