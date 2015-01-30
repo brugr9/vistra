@@ -5,7 +5,7 @@
 Die MVC-App ist als Zustandsmaschine implementiert (state pattern). Dabei werden drei Komponenten unterschieden:
 - Parameter: Editieren des Graphen und Wahl des Algorithmus
 - Step-by-step (Sbs): Traversierung des Graphen Schritt-für-Schritt 
-- Animation: animierte Traversierung des Graphen
+- Animation: Traversierung des Graphen animiert
 
 ##### Zustände der Komponenten:
 Die drei Komponenten können sich in folgenden Zuständen befinden:
