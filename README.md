@@ -26,7 +26,7 @@ Visualisierung von Algorithmen und Datenstrukturen
 - [Framework](GraphVisualisierung2/src/main/java/vistra/framework/) implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [State](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
  - Algorithm: [Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
- - Traversal: [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Delegate](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
+ - Traversal: [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
 - [MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
 - Programmierung
  - Objektorientierte Programmierung (OOP) in Java
