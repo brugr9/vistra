@@ -6,7 +6,7 @@ Beim Traversieren des Graphen werden die einzelnen Elemente (Item: Vertex, Edge)
 
 Zustand (ItemState):
 - Mit dem Besuchen eines Elementes verändert sich dessen Zustand.
-- Jedes Element ist ein ItemStateHandler und hat einen Stack zum speichern der Zustände.
+- Jedes Element ist ein ItemStateHandler und hat einen Stack zum speichern von Zuständen.
 
 Zustandsänderung (ItemStateCommand):
 - Die Zustandsänderung ist ein Objekt.
