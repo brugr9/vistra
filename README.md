@@ -9,14 +9,14 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 #### Beschreibung
 Java-Applikation zum editieren und traversieren von Graphen.
 <hr>
-##### Problem
+#### Problem
 Visualisierung von Algorithmen und Datenstrukturen
 - gemäss Unterlagen im Modul 'Algorithms and Data Structures'
 - 'Look-and-feel' wie in den Unterlagen von net.datastructures
 
 ![Problem](GraphVisualisierung2/doc/vistra/04_beamer/1_problem/01_algodat.png "Problem")
 
-##### Lösung
+#### Lösung
 - Framework implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [State und Command](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
  - Algorithm: [Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
