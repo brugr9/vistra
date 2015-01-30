@@ -1,7 +1,4 @@
-# Visualisierte Traversierung von Graphen
-### Implementation von Algorithmen und Datenstrukturen
- 
-#### Elemente des Graphen als Zustandsmaschine: State und Command Pattern
+### Elemente des Graphen als Zustandsmaschine: State und Command Pattern
 Beim Traversieren des Graphen werden die einzelnen Elemente (Item: Vertex, Edge) z.B. aktualisiert oder besucht. Dabei verändert sich deren Zustand (Farben, Strichstärke, Wert). Die Elemente sind deshalb als Zustandsmaschine implementiert:
 
 Zustand (ItemState):
