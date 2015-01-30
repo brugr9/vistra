@@ -38,5 +38,5 @@ Visualisierung der Algorithmen und Datenstrukturen
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
 
 #### Downloads
-- Release 1.0: [vistra-1.0.jar](GraphVisualisierung2/release-demo/vistra-1.0.jar?raw=true)
+- [vistra-1.0.jar](GraphVisualisierung2/release-demo/vistra-1.0.jar?raw=true) (Release 1.0)
 - <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierte-traversierung-von-graphen-bericht">Bericht</a> (auf speakerdeck)
