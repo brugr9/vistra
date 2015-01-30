@@ -22,7 +22,7 @@ Visualisierung der Algorithmen und Datenstrukturen
 
 #### Stichworte
 - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
-- Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph (no self loops, no parallel edges)
+- Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph
 - [Framework](GraphVisualisierung2/src/main/java/vistra/framework/) implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [State](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
  - Algorithm: [Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
