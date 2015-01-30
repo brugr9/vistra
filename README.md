@@ -10,7 +10,7 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 Java-Applikation zum editieren und traversieren von Graphen.
 
 ##### Problem
-Visualisierung der Algorithmen und Datenstrukturen
+Visualisierung von Algorithmen und Datenstrukturen
 - gemäss Unterlagen im Modul 'Algorithms and Data Structures'
 - 'Look-and-feel' wie in den Unterlagen von net.datastructures
 
