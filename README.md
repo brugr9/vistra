@@ -26,7 +26,8 @@ Visualisierung der Algorithmen und Datenstrukturen
 - Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph (no self loops, no parallel edges)
 - [Framework](GraphVisualisierung2/src/main/java/vistra/framework/) implemetiert OOAD Design Pattern: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [State](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/), [Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java), [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Delegate](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
 - [MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
-- Objekt orientierte Programmierung in Java
+- Objektorientierte Programmierung (OOP)
+- Programmiersprache Java
 - Eclipse-Projekt mit Apache Maven
 - GUI mit Swing
 - Dateiformat *.vistra in GraphML
