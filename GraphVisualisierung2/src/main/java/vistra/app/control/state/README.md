@@ -23,4 +23,5 @@ Die drei Komponenten können sich in folgenden Zuständen befinden:
  - stopped (gestoppt)
  - off (Interaktion ausgeschaltet)
 
+Ein Entwurf der State Machine als Grafik:
 ![App-Control as State Machine](https://raw.githubusercontent.com/brugr9/vistra/master/GraphVisualisierung2/doc/vistra/02_drafts/app-control_as_statemachine.png "App-Control as State Machine")
