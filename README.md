@@ -19,7 +19,7 @@ Visualisierung von Algorithmen und Datenstrukturen
 #### Lösung
 - Framework implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [Manager](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphManager.java), [State und Command](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
- - Algorithm: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [Manager und Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
+ - Algorithm: [Manager und Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
  - Traversal: [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
 - MVC-App mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
 - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
