@@ -8,10 +8,9 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 <hr>
 #### Beschreibung
 Java-Applikation zum editieren und traversieren von Graphen.
-
+<hr>
 ##### Problem
 Visualisierung von Algorithmen und Datenstrukturen gemäss Unterlagen im Modul 'Algorithms and Data Structures' ('Look-and-feel' wie in den Unterlagen von net.datastructures):
-
 ![Problem](GraphVisualisierung2/doc/vistra/04_beamer/1_problem/01_algodat.png "Problem")
 
 ##### Lösung
@@ -20,12 +19,12 @@ Visualisierung von Algorithmen und Datenstrukturen gemäss Unterlagen im Modul '
  - Algorithm: [Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
  - Traversal: [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
 - MVC-App mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
-
+- Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
 ![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
 <hr>
 
 #### Stichworte
-- Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
+- Algorithmen: BFS, DFS, Dijkstra, Kruskal
 - Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph
 - Objektorientierte Programmierung (OOP) in Java
 - Eclipse-Projekt mit Apache Maven
