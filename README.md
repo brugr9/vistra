@@ -11,7 +11,7 @@ Java-Applikation zum editieren und traversieren von Graphen.
 <hr>
 ##### Problem
 Visualisierung der Algorithmen und Datenstrukturen
-- gemäss Unterlagen im Modul AlgoDat 
+- gemäss Unterlagen im Modul 'Algorithms and Data structures'
 - 'Look-and-feel' wie in den Unterlagen von net.datastructures
 
 ![Problem](GraphVisualisierung2/doc/vistra/04_beamer/1_problem/01_algodat.png "Problem")
