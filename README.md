@@ -27,7 +27,7 @@ Visualisierung der Algorithmen und Datenstrukturen
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [State](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
  - Algorithm: [Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
  - Traversal: [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Delegate](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
-- [MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
+- [MVC-App](GraphVisualisierung2/src/main/java/vistra/app/) mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/) (Design Pattern: State)
 - Programmierung
  - Objektorientierte Programmierung (OOP) in Java
  - Eclipse-Projekt mit Apache Maven
