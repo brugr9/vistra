@@ -17,4 +17,4 @@ Zustandsänderung (ItemStateCommand):
 
 Aufgrund der möglichen Zustände wurden die dazugehörenden Zustandsänderungen entworfen. Folgende Tabelle zeigt den Zusammenhang der Zustände als Objekte (ItemState) und der Zustandsänderung als Objekte (ItemStateCommand):
 
-![From state to step](https://github.com/brugr9/vistra/GraphVisualisierung2/doc/vistra/04_beamer/2_solution/2_framework-parameter/01_graph/04_list_-_from_state_to_step.png "From state to step")
+![From state to step](https://github.com/brugr9/vistra/blob/master/GraphVisualisierung2/doc/vistra/04_beamer/2_solution/2_framework-parameter/01_graph/04_list_-_from_state_to_step.png "From state to step")
