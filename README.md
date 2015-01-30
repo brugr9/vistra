@@ -6,10 +6,17 @@
 Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 <hr>
-![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
-<hr>
 ##### Beschreibung
 Java-Applikation zum editieren und traversieren von Graphen.
+<hr>
+##### Problem
+Visualisierung der Algorithmen und Datenstrukturen
+- gemäss Unterlagen im Modul AlgoDat 
+- 'Look-and-feel' wie in den Unterlagen von net.datastructures
+![Problem](GraphVisualisierung2/doc/vistra/04_beamer/1_problem/01_algodat.png "Problem")
+<hr>
+##### Lösung
+![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
 <hr>
 ##### Stichworte
 - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
