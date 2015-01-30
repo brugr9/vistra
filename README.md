@@ -15,22 +15,22 @@ Visualisierung von Algorithmen und Datenstrukturen gemäss Unterlagen im Modul '
 ![Problem](GraphVisualisierung2/doc/vistra/04_beamer/1_problem/01_algodat.png "Problem")
 
 ##### Lösung
-![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
-<hr>
-
-#### Stichworte
 - Framework implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [State und Command](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
  - Algorithm: [Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
  - Traversal: [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
 - MVC-App mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
+
+![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
+<hr>
+
+#### Stichworte
 - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
 - Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph
-- Programmierung
- - Objektorientierte Programmierung (OOP) in Java
- - Eclipse-Projekt mit Apache Maven
- - GUI mit Swing
- - Dateiformat *.vistra in GraphML
+- Objektorientierte Programmierung (OOP) in Java
+- Eclipse-Projekt mit Apache Maven
+- GUI mit Swing
+- Dateiformat *.vistra in GraphML
 
 ##### Bibliotheken
 - <a target="_blank" href="http://net3.datastructures.net/">net.datastructures</a>
