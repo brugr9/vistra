@@ -3,7 +3,7 @@ Beim Traversieren des Graphen werden die einzelnen Elemente (Item: Vertex, Edge)
 
 Element (Item: Vertex, Edge):
 - Ein Element ist ein Objekt.
-- Jedes Element ist ein ItemStateHandler und hat einen Stack zum speichern seiner Zustände.
+- Jedes Element ist ein [ItemStateHandler](IItemStateHandler.java) und hat einen Stack zum speichern seiner Zustände.
 
 Zustand (ItemState):
 - Ein Zustand ist ein Objekt.
