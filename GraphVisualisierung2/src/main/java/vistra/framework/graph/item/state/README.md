@@ -1,5 +1,5 @@
 ### Elemente des Graphen als Zustandsmaschine
-Beim Traversieren des Graphen werden die einzelnen Elemente (Item: Vertex, Edge) z.B. aktualisiert oder besucht. Dabei verändert sich deren Zustand (Farben, Strichstärke, Wert). Die Elemente sind deshalb als State Pattern, die Zustandsänderungen als Command Pattern als  implementiert:
+Beim Traversieren des Graphen werden die einzelnen Elemente (Item: Vertex, Edge) z.B. aktualisiert oder besucht. Dabei verändert sich deren Zustand (Farben, Strichstärke, Wert). Die Elemente sind deshalb mit einem State Pattern, die Zustandsänderungen mit einem Command Pattern implementiert:
 
 Zustand (ItemState):
 - Mit dem Besuchen eines Elementes verändert sich dessen Zustand.
