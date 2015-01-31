@@ -13,3 +13,9 @@ Zustandsänderung (ItemStateCommand):
 
 Aufgrund der möglichen Zustände (ItemState) wurden die dazugehörenden Zustandsänderungen (ItemStateCommand) entworfen, wie folgende Tabelle 'From state to step' zeigt:
 ![From state to step](https://raw.githubusercontent.com/brugr9/vistra/master/GraphVisualisierung2/doc/vistra/04_beamer/2_solution/2_framework-parameter/01_graph/04_list_-_from_state_to_step.png "From state to step")
+
+In der Tabelle gibt es noch die Spalte 'Step': Ein 'Step' ist ein Schritt in der Traversierung.
+- Ein Schritt ist ein Objekt.
+- Die Schritte implementieren ebenfalls das Command Pattern.
+- Ein Schritt kann eine oder mehrere Zustandsänderungen beinhalten (macro command).
+- Die Schritte sind Teil des Frameworks und gehören zum Paket der Traversierung: [framework/traversal/step](https://github.com/brugr9/vistra/tree/master/GraphVisualisierung2/src/main/java/vistra/framework/traversal/step)
