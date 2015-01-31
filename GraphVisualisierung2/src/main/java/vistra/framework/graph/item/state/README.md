@@ -2,6 +2,7 @@
 Beim Traversieren des Graphen werden die einzelnen Elemente (Item: Vertex, Edge) z.B. aktualisiert oder besucht. Dabei verändert sich deren Zustand (Farben, Strichstärke, Wert). Die Elemente sind deshalb mit einem State Pattern, die Zustandsänderungen mit einem Command Pattern implementiert:
 
 Element (Item: Vertex, Edge):
+- Ein Element ist ein Objekt.
 - Jedes Element ist ein ItemStateHandler und hat einen Stack zum speichern seiner Zustände.
 
 Zustand (ItemState):
