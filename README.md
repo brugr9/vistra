@@ -17,20 +17,22 @@ Visualisierung von Algorithmen und Datenstrukturen
 ![Problem](GraphVisualisierung2/doc/vistra/04_beamer/1_problem/01_algodat.png "Problem")
 
 #### Lösung
+
+![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
+
 - Framework implemetiert OOAD Design Pattern:
- - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [Manager](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphManager.java), [State und Command](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
- - Algorithm: [Manager und Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
- - Traversal: [Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java)
+ - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [Manager](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphManager.java), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java), [State / Command combined](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
+ - Algorithm: [Manager and Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
+ - Traversal: [Macro Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/)
 - MVC-App mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
 - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
 
-![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
 <hr>
 
 #### Stichworte
 - Algorithmen: BFS, DFS, Dijkstra, Kruskal
 - Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph
-- Objektorientierte Programmierung (OOP) in Java
+- Objektorientierte Programmierung (OOP), JavaSE-7
 - Eclipse-Projekt mit Apache Maven
 - GUI mit Swing
 - Dateiformat *.vistra in GraphML
