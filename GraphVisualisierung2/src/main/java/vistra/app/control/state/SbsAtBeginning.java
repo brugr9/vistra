@@ -7,7 +7,7 @@ import vistra.framework.util.IState;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see StepByStep
+ * @see SbsStateHandler
  * 
  */
 class SbsAtBeginning extends AbstractSbsState implements IState {

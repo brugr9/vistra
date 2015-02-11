@@ -22,9 +22,9 @@ import vistra.framework.traversal.step.IStep;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  * @see ParameterStateHandler
- * @see Animation
+ * @see AnimationStateHandler
  */
-public final class StepByStep extends Observable implements IStepByStep {
+public final class SbsStateHandler extends Observable implements IStepByStep {
 
 	/**
 	 * A field for a step-by-step state.
@@ -67,7 +67,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * @param model
 	 *            the model
 	 */
-	public StepByStep(IModel model) {
+	public SbsStateHandler(IModel model) {
 		super();
 		this.model = (Model) model;
 		// timer
@@ -245,7 +245,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * Property: Sets the step-by-step view elements for state: inter.
 	 */
 	void setInter() {
-		if (((Animation) this.model.getAnimation()).animationTimer.isRunning())
+		if (((AnimationStateHandler) this.model.getAnimation()).animationTimer.isRunning())
 			this.model.setSbsEnabled(false);
 		else
 			this.model.setSbsEnabled(true);
@@ -256,7 +256,7 @@ public final class StepByStep extends Observable implements IStepByStep {
 	 * Property: Sets the step-by-step view elements for state: end.
 	 */
 	void setEnd() {
-		if (((Animation) this.model.getAnimation()).animationTimer.isRunning()) {
+		if (((AnimationStateHandler) this.model.getAnimation()).animationTimer.isRunning()) {
 			this.model.setSbsEnabled(false);
 		} else {
 			this.model.setSbsEnabled(true);

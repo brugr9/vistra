@@ -6,7 +6,7 @@ import java.util.List;
 import vistra.framework.graph.item.state.command.IItemStateCommand;
 
 /**
- * An item-state-command handler (macro command). A {@code ICommandHandler}
+ * An item-state command handler (macro command). A {@code ICommandHandler}
  * specialized on {@code IItemStateCommand}s.
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)

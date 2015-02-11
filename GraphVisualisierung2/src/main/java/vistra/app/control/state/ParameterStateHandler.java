@@ -34,8 +34,8 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse.Mode;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see StepByStep
- * @see Animation
+ * @see SbsStateHandler
+ * @see AnimationStateHandler
  */
 public final class ParameterStateHandler implements IParameterStateHandler {
 
@@ -564,7 +564,7 @@ public final class ParameterStateHandler implements IParameterStateHandler {
 			}
 			/* Graph */
 			if (this.model.getProgress() > 0)
-				((StepByStep) this.model.getStepByStep()).toBeginning();
+				((SbsStateHandler) this.model.getStepByStep()).toBeginning();
 			ILayoutGraph graph = this.model.getGraph();
 			/* Algorithm */
 			this.parameterManager.selectAlgorithm(index);

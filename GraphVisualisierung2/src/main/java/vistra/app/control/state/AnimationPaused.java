@@ -7,7 +7,7 @@ import vistra.framework.util.IState;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see Animation
+ * @see AnimationStateHandler
  * 
  */
 class AnimationPaused extends AbstractAnimationState implements IState {

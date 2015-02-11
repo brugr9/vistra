@@ -22,9 +22,9 @@ import vistra.framework.util.palette.ConstantPalette;
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
  * @see ParameterStateHandler
- * @see StepByStep
+ * @see SbsStateHandler
  */
-public final class Animation extends Observable implements IAnimation {
+public final class AnimationStateHandler extends Observable implements IAnimation {
 
 	/**
 	 * A field for a state.
@@ -49,7 +49,7 @@ public final class Animation extends Observable implements IAnimation {
 	 * @param model
 	 *            a model
 	 */
-	public Animation(IModel model) {
+	public AnimationStateHandler(IModel model) {
 		super();
 		this.model = (Model) model;
 		// timer
@@ -202,7 +202,7 @@ public final class Animation extends Observable implements IAnimation {
 	 */
 	void setStopped() throws Exception {
 		try {
-			((StepByStep) this.model.getStepByStep()).handleIdle();
+			((SbsStateHandler) this.model.getStepByStep()).handleIdle();
 			((ParameterStateHandler) this.model.getParameterStateHandler())
 					.setEnableMenu(true);
 			((ParameterStateHandler) this.model.getParameterStateHandler())
@@ -300,7 +300,7 @@ public final class Animation extends Observable implements IAnimation {
 		try {
 			/* go to the first step eventually */
 			if (this.model.getProgress() == this.model.getTraversal().size())
-				((StepByStep) this.model.getStepByStep()).toBeginning();
+				((SbsStateHandler) this.model.getStepByStep()).toBeginning();
 			/* start the timer */
 			this.animationTimer.start();
 			this.setChanged();
@@ -365,7 +365,7 @@ public final class Animation extends Observable implements IAnimation {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				IModel m = Animation.this.model;
+				IModel m = AnimationStateHandler.this.model;
 				if (m.getTraversal().hasNext())
 					m.getStepByStep().handleForward();
 				else

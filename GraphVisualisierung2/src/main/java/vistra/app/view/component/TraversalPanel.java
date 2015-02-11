@@ -20,8 +20,8 @@ import javax.swing.border.TitledBorder;
 
 import vistra.app.IModel;
 import vistra.app.control.ActionListenerI18n.I18nEvent;
-import vistra.app.control.state.Animation.AnimationEvent;
-import vistra.app.control.state.StepByStep.SbsEvent;
+import vistra.app.control.state.AnimationStateHandler.AnimationEvent;
+import vistra.app.control.state.SbsStateHandler.SbsEvent;
 import vistra.framework.util.palette.ColorPalette;
 
 /**

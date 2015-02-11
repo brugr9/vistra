@@ -8,7 +8,7 @@ import vistra.framework.util.IState;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see Animation
+ * @see AnimationStateHandler
  * 
  */
 abstract class AbstractAnimationState extends AbstractState implements IState {
@@ -16,7 +16,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	/**
 	 * A field for a handler.
 	 */
-	protected Animation handler;
+	protected AnimationStateHandler handler;
 
 	/**
 	 * Main constructor.
@@ -25,7 +25,7 @@ abstract class AbstractAnimationState extends AbstractState implements IState {
 	 *            a handler
 	 */
 	protected AbstractAnimationState(IAnimation handler) {
-		this.handler = (Animation) handler;
+		this.handler = (AnimationStateHandler) handler;
 	}
 
 	/**

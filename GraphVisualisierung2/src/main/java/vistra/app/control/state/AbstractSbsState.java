@@ -8,7 +8,7 @@ import vistra.framework.util.IState;
  * 
  * @author Roland Bruggmann (brugr9@bfh.ch)
  * 
- * @see StepByStep
+ * @see SbsStateHandler
  * 
  */
 abstract class AbstractSbsState extends AbstractState implements IState {
@@ -16,7 +16,7 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	/**
 	 * A field for a handler.
 	 */
-	protected StepByStep handler;
+	protected SbsStateHandler handler;
 
 	/**
 	 * Main constructor.
@@ -25,7 +25,7 @@ abstract class AbstractSbsState extends AbstractState implements IState {
 	 *            a handler
 	 */
 	protected AbstractSbsState(IStepByStep handler) {
-		this.handler = (StepByStep) handler;
+		this.handler = (SbsStateHandler) handler;
 	}
 
 	/**

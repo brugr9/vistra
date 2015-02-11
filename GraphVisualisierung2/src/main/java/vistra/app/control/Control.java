@@ -2,9 +2,9 @@ package vistra.app.control;
 
 import vistra.app.IModel;
 import vistra.app.Model;
-import vistra.app.control.state.Animation;
+import vistra.app.control.state.AnimationStateHandler;
 import vistra.app.control.state.ParameterStateHandler;
-import vistra.app.control.state.StepByStep;
+import vistra.app.control.state.SbsStateHandler;
 import vistra.framework.IParameterManager;
 
 /**
@@ -34,11 +34,11 @@ public class Control implements IControl {
 	/**
 	 * A field for an animation.
 	 */
-	private final Animation animation;
+	private final AnimationStateHandler animation;
 	/**
 	 * A field for a step-by-step.
 	 */
-	private final StepByStep stepByStep;
+	private final SbsStateHandler stepByStep;
 	/**
 	 * A field for a parameter state handler.
 	 */
@@ -57,8 +57,8 @@ public class Control implements IControl {
 		this.model.setShortcutsListener(this.shortcuts);
 		this.model.setAboutListener(this.about);
 		// State handler
-		this.animation = new Animation(model);
-		this.stepByStep = new StepByStep(model);
+		this.animation = new AnimationStateHandler(model);
+		this.stepByStep = new SbsStateHandler(model);
 		this.parameterStateHandler = new ParameterStateHandler(
 				parameterManager, model);
 		this.model.setAnimation(this.animation);
