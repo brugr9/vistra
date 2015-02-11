@@ -32,7 +32,7 @@ Visualisierung von Algorithmen und Datenstrukturen
 #### Stichworte
 - Algorithmen: BFS, DFS, Dijkstra, Kruskal
 - Datenstrukturen: un-/gerichteter, un-/gewichteter einfacher Graph
-- Objektorientierte Programmierung (OOP) in Java
+- Objektorientierte Programmierung (OOP), JavaSE-7
 - Eclipse-Projekt mit Apache Maven
 - GUI mit Swing
 - Dateiformat *.vistra in GraphML
