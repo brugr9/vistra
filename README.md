@@ -15,8 +15,6 @@ Visualisierung von Algorithmen und Datenstrukturen
 - 'Look-and-feel' wie in den Unterlagen von net.datastructures
 
 #### Lösung
--  [Bericht](https://github.com/brugr9/vistra/raw/master/GraphVisualisierung2/release-demo/bti7301-projekt1_brugr9_vistra.pdf)
-
 - Framework implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [Manager](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphManager.java), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java), [State / Command combined](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
  - Algorithm: [Manager and Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
@@ -41,4 +39,5 @@ Visualisierung von Algorithmen und Datenstrukturen
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
 
 ##### Downloads
+- [Bericht](https://github.com/brugr9/vistra/raw/master/GraphVisualisierung2/release-demo/bti7301-projekt1_brugr9_vistra.pdf)
 - [Applikation](GraphVisualisierung2/release-demo/vistra-1.0.jar?raw=true) (vistra-1.0.jar, Release 1.0)
