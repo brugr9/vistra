@@ -14,11 +14,8 @@ Visualisierung von Algorithmen und Datenstrukturen
 - gemäss Unterlagen im Modul 'Algorithms and Data Structures'
 - 'Look-and-feel' wie in den Unterlagen von net.datastructures
 
-![Problem](GraphVisualisierung2/doc/vistra/04_beamer/1_problem/01_algodat.png "Problem")
-
 #### Lösung
-
-![vistra GUI](GraphVisualisierung2/doc/vistra/04_beamer/2_solution/4_app/04_DFS_running.png "vistra GUI")
+-  [Bericht](https://github.com/brugr9/vistra/raw/master/GraphVisualisierung2/release-demo/bti7301-projekt1_brugr9_vistra.pdf)
 
 - Framework implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [Manager](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphManager.java), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java), [State / Command combined](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
@@ -45,4 +42,3 @@ Visualisierung von Algorithmen und Datenstrukturen
 
 ##### Downloads
 - [Applikation](GraphVisualisierung2/release-demo/vistra-1.0.jar?raw=true) (vistra-1.0.jar, Release 1.0)
-- <a target="_blank" href="https://speakerdeck.com/brugr9/visualisierung-von-algorithmen-und-datenstrukturen-bericht">Bericht</a> (auf Speaker Deck)
