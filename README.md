@@ -40,6 +40,6 @@ Visualisierung von Algorithmen und Datenstrukturen
 
 ##### Downloads
 - [Applikation](GraphVisualisierung2/release-demo/vistra-1.0.jar?raw=true) (vistra-1.0.jar, Release 1.0)
-- 
+
 ##### Bericht
 - <a target="_blank" href="https://www.hashdoc.com/documents/262840/visualisierung-von-algorithmen-und-datenstrukturen">Bericht Vistra</a> (auf Hashdoc)
