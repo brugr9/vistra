@@ -1,13 +1,9 @@
 # vistra
 ### Visualisierung von Algorithmen und Datenstrukturen
-
-#### Semesterarbeit
-
-Modul Projekt 1<br>
-Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
-<hr>
-#### Beschreibung
 Java-Applikation zum editieren und traversieren von Graphen.
+
+Semesterarbeit Modul Projekt 1<br>
+Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 <hr>
 #### Problem
 Visualisierung von Algorithmen und Datenstrukturen
@@ -39,5 +35,7 @@ Visualisierung von Algorithmen und Datenstrukturen
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
 
 ##### Downloads
-- [Bericht](https://github.com/brugr9/vistra/raw/master/GraphVisualisierung2/release-demo/bti7301-projekt1_brugr9_vistra.pdf)
 - [Applikation](GraphVisualisierung2/release-demo/vistra-1.0.jar?raw=true) (vistra-1.0.jar, Release 1.0)
+
+##### Bericht
+- <a target="_blank" href="https://www.hashdoc.com/documents/262840/visualisierung-von-algorithmen-und-datenstrukturen">Bericht Vistra</a> (auf Hashdoc)
