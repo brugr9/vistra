@@ -1,4 +1,4 @@
-### vistra -- Visualisierung von Algorithmen und Datenstrukturen
+### vistra - Visualisierung von Algorithmen und Datenstrukturen
 Applikation zum editieren und traversieren von Graphen.
 
 Semesterarbeit Modul Projekt 1<br>
@@ -11,8 +11,7 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 - <a target="_blank" href="https://www.hashdoc.com/documents/262840/visualisierung-von-algorithmen-und-datenstrukturen">Bericht Vistra</a> (auf Hashdoc)
 
 #### Lösung
-- Framework: 
- - Implemetiert OOAD Design Pattern:
+- Framework, implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [Manager](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphManager.java), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java), [State / Command combined](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
  - Algorithm: [Manager and Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
  - Traversal: [Macro Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/)
