@@ -1,5 +1,5 @@
 ### Zustandsmaschine MVC-App
-Die MVC-App ist als Zustandsmaschine implementiert (state pattern). Dabei werden drei Komponenten unterschieden:
+Die App ist als Zustandsmaschine implementiert (state pattern). Dabei werden drei Komponenten unterschieden:
 - Parameter: Editieren des Graphen und Wahl des Algorithmus
 - Step-by-step (Sbs): Traversierung des Graphen Schritt-für-Schritt 
 - Animation: Traversierung des Graphen animiert
@@ -22,6 +22,3 @@ Die drei Komponenten können sich in folgenden Zuständen befinden:
  - paused (angehalten)
  - stopped (gestoppt)
  - off (Interaktion ausgeschaltet)
-
-Ein Entwurf der State Machine als Grafik:
-![App-Control as State Machine](https://raw.githubusercontent.com/brugr9/vistra/master/GraphVisualisierung2/doc/vistra/02_drafts/app-control_as_statemachine.png "App-Control as State Machine")
