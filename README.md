@@ -1,28 +1,24 @@
-# vistra
-### Visualisierung von Algorithmen und Datenstrukturen
-Java-Applikation zum editieren und traversieren von Graphen.
+### vistra - Visualisierung von Algorithmen und Datenstrukturen
+Applikation zum editieren und traversieren von Graphen.
 
 Semesterarbeit Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 <hr>
 
-##### Download
+##### Downloads
 - [Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar)
 - [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true) (simple-undirected-weigthed_with_start.vistra)
-
-#### Problem
-Visualisierung von Algorithmen und Datenstrukturen
-- gemäss Unterlagen im Modul 'Algorithms and Data Structures'
-- 'Look-and-feel' wie in den Unterlagen von net.datastructures
+- <a target="_blank" href="https://www.hashdoc.com/documents/262840/visualisierung-von-algorithmen-und-datenstrukturen">Bericht Vistra</a> (auf Hashdoc)
 
 #### Lösung
-- Framework implemetiert OOAD Design Pattern:
+- Framework, implemetiert OOAD Design Pattern:
  - Graph: [Factory](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphFactory.java), [Manager](GraphVisualisierung2/src/main/java/vistra/framework/graph/GraphManager.java), [Adapter](GraphVisualisierung2/src/main/java/vistra/framework/graph/ITraversableGraph.java), [State / Command combined](GraphVisualisierung2/src/main/java/vistra/framework/graph/item/state/)
  - Algorithm: [Manager and Strategy](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/IAlgorithmManager.java)
  - Traversal: [Macro Command](GraphVisualisierung2/src/main/java/vistra/framework/traversal/step/)
-- MVC-App mit Java-Observer-Pattern, implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
-- Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
-
+ 
+- Applikation:
+ - Implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
+ - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
 <hr>
 
 #### Stichworte
@@ -38,6 +34,3 @@ Visualisierung von Algorithmen und Datenstrukturen
 - <a target="_blank" href="http://jung.sourceforge.net/">JUNG - Java Universal Network/Graph Framework</a>
 - <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
-
-##### Bericht
-- <a target="_blank" href="https://www.hashdoc.com/documents/262840/visualisierung-von-algorithmen-und-datenstrukturen">Bericht Vistra</a> (auf Hashdoc)
