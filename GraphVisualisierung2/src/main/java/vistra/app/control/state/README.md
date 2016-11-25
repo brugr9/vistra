@@ -12,7 +12,7 @@ Die drei Komponenten können sich in folgenden Zuständen befinden:
  - algorithm selected (Algorithmus wurde ausgewählt)
  - off (Interaktion ausgeschaltet)
 
-- Step-by-step:
+- Step-by-step (kurz 'Sbs'):
  - at beginning (Stand der Traversierung: am Anfang)
  - inter (Stand der Traversierung: zwischen Anfang und Ende)
  - at end (Stand der Traversierung: am Ende)
