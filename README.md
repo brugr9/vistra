@@ -5,6 +5,11 @@ Java-Applikation zum editieren und traversieren von Graphen.
 Semesterarbeit Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 <hr>
+
+##### Download
+- [Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar)
+- [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true) (simple-undirected-weigthed_with_start.vistra)
+
 #### Problem
 Visualisierung von Algorithmen und Datenstrukturen
 - gemäss Unterlagen im Modul 'Algorithms and Data Structures'
@@ -33,9 +38,6 @@ Visualisierung von Algorithmen und Datenstrukturen
 - <a target="_blank" href="http://jung.sourceforge.net/">JUNG - Java Universal Network/Graph Framework</a>
 - <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>
 - <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>
-
-##### Downloads
-- [Applikation](GraphVisualisierung2/release-demo/vistra-1.0.jar?raw=true) (vistra-1.0.jar, Release 1.0)
 
 ##### Bericht
 - <a target="_blank" href="https://www.hashdoc.com/documents/262840/visualisierung-von-algorithmen-und-datenstrukturen">Bericht Vistra</a> (auf Hashdoc)
