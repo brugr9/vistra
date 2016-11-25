@@ -4,6 +4,8 @@ Applikation zum editieren und traversieren von Graphen.
 Semesterarbeit Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 <hr>
+![vistra GUI](GraphVisualisierung2/release-demo/vistra-dijkstra.png "vistra GUI")
+<hr>
 
 ##### Downloads
 - [Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar)
