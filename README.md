@@ -5,7 +5,7 @@ Semesterarbeit Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 
 - <a target="_blank" href="https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen">Bericht auf Hashdoc</a>
-- <a target="_blank" href="https://www.youtube.com/watch?v=ckJX9gLhVcI">Screencast auf Youtube</a>
+- <a target="_blank" href="https://youtu.be/PHCs4vWJ0Cw">Screencast auf Youtube</a>
 
 <hr>
 ![vistra GUI](GraphVisualisierung2/release-demo/vistra-dijkstra.png "vistra GUI")
