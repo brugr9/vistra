@@ -10,7 +10,7 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 ##### Downloads
 - [Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar)
 - [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true) (simple-undirected-weigthed_with_start.vistra)
-- <a target="_blank" href="https://www.hashdoc.com/documents/426838/vistra-visualisierungssoftware-f-r-graphen-und-graphenalgorithmen">Bericht auf Hashdoc</a>
+- <a target="_blank" href="https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen">Bericht auf Hashdoc</a>
 
 #### Lösung
 - Framework, implemetiert OOAD Design Pattern:
