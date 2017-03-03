@@ -3,6 +3,10 @@ Applikation zum editieren und traversieren von Graphen.
 
 Semesterarbeit Modul Projekt 1<br>
 Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
+
+- <a target="_blank" href="https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen">Bericht auf Hashdoc</a>
+- <a target="_blank" href="https://www.youtube.com/watch?v=ckJX9gLhVcI">Screencast auf Youtube</a>
+
 <hr>
 ![vistra GUI](GraphVisualisierung2/release-demo/vistra-dijkstra.png "vistra GUI")
 <hr>
@@ -10,7 +14,6 @@ Berner Fachhochschule für Technik und Informatik BFH-TI, Biel/Bienne 2013/14
 ##### Downloads
 - [Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar)
 - [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true) (simple-undirected-weigthed_with_start.vistra)
-- <a target="_blank" href="https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen">Bericht auf Hashdoc</a>
 
 #### Lösung
 - Framework, implemetiert OOAD Design Pattern:
