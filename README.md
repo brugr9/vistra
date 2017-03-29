@@ -4,7 +4,7 @@ Applikation zum editieren und traversieren von Graphen.
 ![vistra GUI](GraphVisualisierung2/release-demo/vistra-dijkstra.png "vistra GUI")
 <hr>
 
-[Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true) (vistra.jar), [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true) (simple-undirected-weigthed_with_start.vistra), <a target="_blank" href="https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen">Report</a>, <a target="_blank" href="https://youtu.be/PHCs4vWJ0Cw">Screencast</a>.
+[Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true), [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true), <a target="_blank" href="https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen">Report</a>, <a target="_blank" href="https://youtu.be/PHCs4vWJ0Cw">Screencast</a>.
 
 ### Lösung
 #### Framework, implemetiert OOAD Design Pattern:
