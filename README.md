@@ -3,7 +3,7 @@ Desktop-Applikation zur Visualisierung von Graphenalgorithmen, Implementation un
 
 - Algorithmen: Depth-first search DFS, Breadth-first search BFS, Dijkstra, Kruskal. 
 - Methoden: Objektorientierte Programmierung OOP, Objektorientierte Analyse und Design OOAD. 
-- Technologie: Oracle Java, Eclipse-Projekt mit Apache Maven und Ant, GUI mit Java Swing UI-Framework, <a target="_blank" href="http://net3.datastructures.net/">net.datastructures</a>, <a target="_blank" href="http://jung.sourceforge.net/">JUNG - Java Universal Network/Graph Framework</a>, <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>, <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>. 
+- Technologie: Oracle Java, Eclipse-Projekt mit Apache Maven und Ant, Java Swing UI-Framework, Apache Commons IO, net.datastructures, Java Universal Network/Graph Framework JUNG, GraphML. 
 
 <hr>
 <a target="_blank" href="https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen">Report</a>, <a target="_blank" href="https://youtu.be/PHCs4vWJ0Cw">Screencast</a>, [Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true), [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true).
@@ -21,6 +21,6 @@ Desktop-Applikation zur Visualisierung von Graphenalgorithmen, Implementation un
  - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
 
 <hr>
-Modul Projekt 1, Semesterarbeit HS 2013/14
+Modul Projekt 1, Semesterarbeit HS 2013/14.
 
-Berner Fachhochschule, Abteilung Technik und Informatik BFH-TI, Biel/Bienne
+Berner Fachhochschule, Abteilung Technik und Informatik BFH-TI, Biel/Bienne.
