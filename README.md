@@ -1,5 +1,9 @@
 ### vistra - Visualisierung von Graphenalgorithmen
-Applikation zum editieren und traversieren von Graphen.
+Desktop-Applikation zur Visualisierung von Graphenalgorithmen, Implementation unter Berücksichtigung von Design Principles und Design Pattern.
+
+- Algorithmen: Depth-first search DFS, Breadth-first search BFS, Dijkstra, Kruskal. 
+- Methoden: Objektorientierte Programmierung OOP, Objektorientierte Analyse und Design OOAD. 
+- Technologie: Oracle Java, Eclipse-Projekt mit Apache Maven und Ant, GUI mit Java Swing UI-Framework, <a target="_blank" href="http://net3.datastructures.net/">net.datastructures</a>, <a target="_blank" href="http://jung.sourceforge.net/">JUNG - Java Universal Network/Graph Framework</a>, <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>, <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>. 
 
 ![vistra GUI](GraphVisualisierung2/release-demo/vistra-dijkstra.png "vistra GUI")
 <hr>
@@ -15,11 +19,6 @@ Applikation zum editieren und traversieren von Graphen.
 #### Applikation:
  - Implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
  - Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
-<hr>
-
-- Stichworte: BFS, DFS, Dijkstra, Kruskal, Objektorientierte Programmierung OOP, Objektorientierte Analyse und Design OOAD.
-
-- Technologie: Eclipse-Projekt mit Apache Maven, GUI mit Swing, <a target="_blank" href="http://net3.datastructures.net/">net.datastructures</a>, <a target="_blank" href="http://jung.sourceforge.net/">JUNG - Java Universal Network/Graph Framework</a>, <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>, <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>.
 
 <hr>
 Modul Projekt 1, Semesterarbeit HS 2013/14
