@@ -5,10 +5,10 @@ Desktop-Applikation zur Visualisierung von Graphenalgorithmen, Implementation un
 - Methoden: Objektorientierte Programmierung OOP, Objektorientierte Analyse und Design OOAD. 
 - Technologie: Oracle Java, Eclipse-Projekt mit Apache Maven und Ant, GUI mit Java Swing UI-Framework, <a target="_blank" href="http://net3.datastructures.net/">net.datastructures</a>, <a target="_blank" href="http://jung.sourceforge.net/">JUNG - Java Universal Network/Graph Framework</a>, <a target="_blank" href="http://commons.apache.org/proper/commons-io/">Apache Commons IO</a>, <a target="_blank" href="http://graphml.graphdrawing.org/">The GraphML File Format</a>. 
 
-![vistra GUI](GraphVisualisierung2/release-demo/vistra-dijkstra.png "vistra GUI")
 <hr>
+<a target="_blank" href="https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen">Report</a>, <a target="_blank" href="https://youtu.be/PHCs4vWJ0Cw">Screencast</a>, [Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true), [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true).
 
-[Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true), [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true), <a target="_blank" href="https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen">Report</a>, <a target="_blank" href="https://youtu.be/PHCs4vWJ0Cw">Screencast</a>.
+![vistra GUI](GraphVisualisierung2/release-demo/vistra-dijkstra.png "vistra GUI")
 
 ### Lösung
 #### Framework, implemetiert OOAD Design Pattern:
