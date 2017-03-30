@@ -2,7 +2,7 @@
 Desktop-Applikation zur Visualisierung von Graphenalgorithmen, Implementation unter Berücksichtigung von Design Principles und Design Pattern.
 
 - Algorithmen: Depth-first search DFS, Breadth-first search BFS, Dijkstra, Kruskal. 
-- Methoden: Objektorientierte Programmierung OOP, Objektorientierte Analyse und Design OOAD. 
+- Methoden: Objektorientierte Analyse und Design OOAD, Objektorientierte Programmierung OOP. 
 - Technologie: Oracle Java, Eclipse-Projekt mit Apache Maven und Ant, Java Swing UI-Framework, Apache Commons IO, net.datastructures, Java Universal Network/Graph Framework JUNG, GraphML. 
 
 
