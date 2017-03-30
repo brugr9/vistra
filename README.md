@@ -1,4 +1,4 @@
-### vistra - Visualisierung von Graphenalgorithmen
+### Visualisierung von Graphenalgorithmen
 Desktop-Applikation zur Visualisierung von Graphenalgorithmen, Implementation unter Berücksichtigung von Design Principles und Design Pattern.
 
 - Algorithmen: Depth-first search DFS, Breadth-first search BFS, Dijkstra, Kruskal. 
