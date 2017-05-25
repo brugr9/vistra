@@ -6,7 +6,7 @@ Desktop-Applikation zur Visualisierung von Graphenalgorithmen, Implementation un
 - Technologie: Oracle Java, Eclipse-Projekt mit Apache Maven und Ant, Java Swing UI-Framework, Apache Commons IO, net.datastructures, Java Universal Network/Graph Framework JUNG, GraphML. 
 
 
-- [Bericht](https://www.hashdoc.com/documents/476943/desktop-applikation-zur-visualisierung-von-graphenalgorithmen), [Screencast](https://youtu.be/PHCs4vWJ0Cw), [Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true), [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true).
+- [Bericht](https://www.slideshare.net/RolandBruggmann/desktopapp-zur-visualisierung-von-graphenalgorithmen), [Screencast](https://youtu.be/PHCs4vWJ0Cw), [Executable](GraphVisualisierung2/release-demo/vistra.jar?raw=true), [Demo-Graph](GraphVisualisierung2/release-demo/simple-undirected-weigthed_with_start.vistra?raw=true).
 
 ![vistra GUI](GraphVisualisierung2/release-demo/vistra-dijkstra.png "vistra GUI")
 
