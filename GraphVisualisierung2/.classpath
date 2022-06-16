@@ -22,8 +22,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
@@ -32,7 +33,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="doc/net.datastructures/net-datastructures-5-0.jar" sourcepath="doc/net.datastructures/net-datastructures-5-0-src-selected.zip">
+	<classpathentry kind="lib" path="C:/Users/rolan/Documents/PersonalData/09-Development/02-BFH-Projekte/vistra/GraphVisualisierung2/doc/net/datastructures/net-datastructures-5-0.jar" sourcepath="doc/net.datastructures/net-datastructures-5-0-src-selected.zip">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/GraphVisualisierung2/doc/net.datastructures/net-datastructures-5-0-src-selected.zip!/"/>
 		</attributes>
