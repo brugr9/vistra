@@ -3,19 +3,14 @@
 Framework und Applikation zur Visualisierung von Algorithmen und Datenstrukturen implementiert unter Berücksichtigung von Design Principles und Design Pattern der Objektorientierten Analyse und Design OOAD sowie unter Anwendung der Objektorientierten Programmierung.
 
 ![vistra GUI](Docs/vistra-dijkstra.png "vistra GUI")
-*Fig. 1.: GUI der Applikation VISTRA: Graph-Editor mit Farb- und Signatur-codierter Visualisierung, Algorithmus, Traversierung als Step-Player und Ausgabe von Kommentaren im Protokoll-Bereich*
+*Fig. 1.: GUI der Desktop-Applikation VISTRA: Graph-Editor mit Farb- und Signatur-codierter Visualisierung, Auswahl von Algorithmen, Traversierung als Step-Player und Ausgabe von Kommentaren im Protokoll-Bereich*
 
-Featrues:
+Features:
 
 - Graph-Editor mit Farb- und Signatur-codierter Visualisierung
-- Algorithmen: Tiefensuche (Depth-first Search DFS), Breitensuche (Breadth-first Search BFS), Kürzester Pfad (Dijkstra), Minimaler Spannbaum (Kruskal)
+- Auswahl von Algorithmen: Tiefensuche (Depth-first Search DFS), Breitensuche (Breadth-first Search BFS), Kürzester Pfad (Dijkstra), Minimaler Spannbaum (Kruskal)
 - Traversierung als Step-Player
 - Ausgabe von Kommentaren im Protokoll-Bereich
-
-Technologie:
-
-* Oracle Java, Eclipse-Projekt mit Apache Maven und Ant, Java Swing UI-Framework, Apache Commons IO
-* net.datastructures, Java Universal Network/Graph Framework JUNG, GraphML
 
 ## Lösung
 
@@ -29,6 +24,11 @@ Applikation:
 
 * Implementiert als [Zustandsmaschine](GraphVisualisierung2/src/main/java/vistra/app/control/state/)
 * Algorithmen: BFS, [DFS](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/DFS.java), [Dijkstra](GraphVisualisierung2/src/main/java/vistra/framework/algorithm/impl/Dijkstra.java), Kruskal
+
+Technologie:
+
+* Oracle Java, Eclipse-Projekt mit Apache Maven und Ant, Java Swing UI-Framework, Apache Commons IO
+* net.datastructures, Java Universal Network/Graph Framework JUNG, GraphML
 
 ## Dokumentation
 
