@@ -13,7 +13,7 @@ Framework und Applikation zur Visualisierung von Algorithmen und Datenstrukturen
 Features:
 
 * Graph-Editor mit Farb- und Signatur-codierter Visualisierung
-* Auswahl von Algorithmen: Tiefensuche (Depth-first Search DFS), ~~Breitensuche (Breadth-first Search BFS)~~, Kürzester Pfad (Dijkstra), ~~Minimaler Spannbaum (Kruskal)~~
+* Auswahl von Algorithmen: Tiefensuche (Depth-first Search DFS)<!--, Breitensuche (Breadth-first Search BFS)-->, Kürzester Pfad (Dijkstra)<!--, Minimaler Spannbaum (Kruskal)-->
 * Traversierung als Step-Player
 * Ausgabe von Kommentaren im Protokoll-Bereich
 
