@@ -2,17 +2,20 @@
 
 Framework und Applikation zur Visualisierung von Algorithmen und Datenstrukturen implementiert unter Berücksichtigung von Design Principles und Design Pattern der Objektorientierten Analyse und Design OOAD sowie unter Anwendung der Objektorientierten Programmierung.
 
+* [Screencast](https://youtu.be/PHCs4vWJ0Cw) auf Youtube
+* [Bericht](https://www.slideshare.net/RolandBruggmann/desktopapp-zur-visualisierung-von-graphenalgorithmen) auf SlideShare
+
 ![vistra GUI](Docs/vistra-dijkstra.png "vistra GUI")
 *Fig. 1.: GUI der Desktop-Applikation VISTRA: Graph-Editor mit Farb- und Signatur-codierter Visualisierung, Auswahl von Algorithmen, Traversierung als Step-Player und Ausgabe von Kommentaren im Protokoll-Bereich*
 
+## Lösung
+
 Features:
 
-- Graph-Editor mit Farb- und Signatur-codierter Visualisierung
-- Auswahl von Algorithmen: Tiefensuche (Depth-first Search DFS), Breitensuche (Breadth-first Search BFS), Kürzester Pfad (Dijkstra), Minimaler Spannbaum (Kruskal)
-- Traversierung als Step-Player
-- Ausgabe von Kommentaren im Protokoll-Bereich
-
-## Lösung
+* Graph-Editor mit Farb- und Signatur-codierter Visualisierung
+* Auswahl von Algorithmen: Tiefensuche (Depth-first Search DFS), ~~Breitensuche (Breadth-first Search BFS)~~, Kürzester Pfad (Dijkstra), ~~Minimaler Spannbaum (Kruskal)~~
+* Traversierung als Step-Player
+* Ausgabe von Kommentaren im Protokoll-Bereich
 
 Framework:
 
@@ -34,11 +37,6 @@ Technologie:
 * [net.datastructures](https://cs.brown.edu/cgc/net.datastructures.net/home.html) (cp. *Data Structures and Algorithms in Java (5th Edition)* by Michael Goodrich and Roberto Tamassia)
 * [Java Universal Network/Graph Framework JUNG](https://github.com/jrtom/jung)
 * [GraphML File Format](http://graphml.graphdrawing.org/)
-
-## Dokumentation
-
-* [Screencast](https://youtu.be/PHCs4vWJ0Cw) auf Youtube
-* [Bericht](https://www.slideshare.net/RolandBruggmann/desktopapp-zur-visualisierung-von-graphenalgorithmen) auf SlideShare
 
 ---
 
