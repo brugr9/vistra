@@ -27,8 +27,13 @@ Applikation:
 
 Technologie:
 
-* Oracle Java, Eclipse-Projekt mit Apache Maven und Ant, Java Swing UI-Framework, Apache Commons IO
-* net.datastructures, Java Universal Network/Graph Framework JUNG, GraphML
+* Oracle Java
+* Eclipse-Projekt mit Apache Maven und Ant
+* Java Swing UI-Framework
+* Apache Commons IO
+* [net.datastructures](https://cs.brown.edu/cgc/net.datastructures.net/home.html) (cp. *Data Structures and Algorithms in Java (5th Edition)* by Michael Goodrich and Roberto Tamassia)
+* [Java Universal Network/Graph Framework JUNG](https://github.com/jrtom/jung)
+* [GraphML File Format](http://graphml.graphdrawing.org/)
 
 ## Dokumentation
 
