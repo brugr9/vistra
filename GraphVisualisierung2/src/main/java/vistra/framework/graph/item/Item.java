@@ -31,4 +31,12 @@ class Item extends Observable implements IItem {
 		return this.visited;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isUnexplored() {
+		return !this.visited;
+	}
+
 }

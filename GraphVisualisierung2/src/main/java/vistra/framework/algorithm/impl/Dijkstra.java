@@ -58,7 +58,7 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 				Entry<Integer, IVertex> l = Q.insert(u_dist, u);
 				locator.put(u, l);
 			}
-			// initialize
+			// initialise
 			g.stepInitializedVertex(g.getVertices());
 
 			// grow the cloud, one vertex at a time
@@ -75,15 +75,14 @@ public class Dijkstra extends AbstractAlgorithm implements IAlgorithm {
 				g.stepSolutionMember(u);
 				if (u_dist == Integer.MAX_VALUE)
 					continue; // unreachable vertices are not processed
-				// examine all the neighbors of u and update their distances
+				// examine all the neighbours of u and update their distances
 				for (IEdge e : g.getIncidentEdges(u)) {
 					IVertex z = g.getOpposite(u, e);
 					Entry<Integer, IVertex> z_entry = locator.get(z);
-					if (!z.isVisited()) { // check that z is in Q
+					if (z.isUnexplored()) { // check that z is in Q
 						e_weight = (Integer) e.getWeight();
 						z_dist = z.getDistance();
-						if (u_dist + e_weight < z_dist) {// relaxation of edge e
-															// = (u,z)
+						if (u_dist + e_weight < z_dist) {// relaxation of edge e = (u,z)
 							g.stepUpdatedVertex(z, u_dist + e_weight);
 							Q.replaceKey(z_entry, u_dist + e_weight);
 						}

@@ -8,6 +8,7 @@ import java.util.SortedSet;
 import net.datastructures.Entry;
 import vistra.framework.algorithm.IAlgorithm;
 import vistra.framework.graph.item.IEdge;
+import vistra.framework.graph.item.ILayoutEdge;
 import vistra.framework.graph.item.ILayoutVertex;
 import vistra.framework.graph.item.IVertex;
 import vistra.framework.graph.item.state.IVertexStateHandler;
@@ -43,8 +44,7 @@ import edu.uci.ics.jung.graph.util.Pair;
  * @see IStep
  * 
  */
-public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
-		ITraversableGraph {
+public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements ITraversableGraph {
 
 	private static final long serialVersionUID = -265489538887703410L;
 
@@ -61,14 +61,12 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	/**
 	 * Main constructor.
 	 * 
-	 * @param delegate
-	 *            the graph to delegate
-	 * @param steps
-	 *            a list for the steps
+	 * @param delegate the graph to delegate
+	 * @param steps    a list for the steps
 	 */
 	@SuppressWarnings("unchecked")
-	public TraversableGraph(Graph<? extends IVertex, ? extends IEdge> delegate,
-			List<IStep> steps, StringBuilder solution) {
+	public TraversableGraph(Graph<? extends IVertex, ? extends IEdge> delegate, List<IStep> steps,
+			StringBuilder solution) {
 		super((Graph<IVertex, IEdge>) delegate);
 		this.steps = steps;
 		this.solution = solution;
@@ -249,8 +247,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see edu.uci.ics.jung.graph.Graph#isDest(java.lang.Object,
-	 * java.lang.Object)
+	 * @see edu.uci.ics.jung.graph.Graph#isDest(java.lang.Object, java.lang.Object)
 	 */
 	/**
 	 * {@inheritDoc}
@@ -263,8 +260,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see edu.uci.ics.jung.graph.Graph#addEdge(java.lang.Object,
-	 * java.lang.Object, java.lang.Object)
+	 * @see edu.uci.ics.jung.graph.Graph#addEdge(java.lang.Object, java.lang.Object,
+	 * java.lang.Object)
 	 */
 	/**
 	 * Unsupported operation.
@@ -277,8 +274,8 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see edu.uci.ics.jung.graph.Graph#addEdge(java.lang.Object,
-	 * java.lang.Object, java.lang.Object, edu.uci.ics.jung.graph.util.EdgeType)
+	 * @see edu.uci.ics.jung.graph.Graph#addEdge(java.lang.Object, java.lang.Object,
+	 * java.lang.Object, edu.uci.ics.jung.graph.util.EdgeType)
 	 */
 	/**
 	 * Unsupported operation.
@@ -422,8 +419,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * edu.uci.ics.jung.graph.Hypergraph#getIncidentVertices(java.lang.Object)
+	 * @see edu.uci.ics.jung.graph.Hypergraph#getIncidentVertices(java.lang.Object)
 	 */
 	/**
 	 * {@inheritDoc}
@@ -498,8 +494,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * Unsupported operation.
 	 */
 	@Override
-	public boolean addEdge(IEdge edge, Collection<? extends IVertex> vertices,
-			EdgeType edge_type) {
+	public boolean addEdge(IEdge edge, Collection<? extends IVertex> vertices, EdgeType edge_type) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -625,8 +620,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * edu.uci.ics.jung.graph.Hypergraph#getEdges(edu.uci.ics.jung.graph.util
+	 * @see edu.uci.ics.jung.graph.Hypergraph#getEdges(edu.uci.ics.jung.graph.util
 	 * .EdgeType)
 	 */
 	/**
@@ -640,8 +634,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * edu.uci.ics.jung.graph.Hypergraph#getEdgeCount(edu.uci.ics.jung.graph
+	 * @see edu.uci.ics.jung.graph.Hypergraph#getEdgeCount(edu.uci.ics.jung.graph
 	 * .util.EdgeType)
 	 */
 	/**
@@ -666,8 +659,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	/**
 	 * Executes a step as given and adds it to the list of steps.
 	 * 
-	 * @param step
-	 *            the step
+	 * @param step the step
 	 * @throws Exception
 	 */
 	private void add(IStep step) throws Exception {
@@ -682,8 +674,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	/**
 	 * Appends a vertex id to the solution.
 	 * 
-	 * @param id
-	 *            the id
+	 * @param id the id
 	 * @throws Exception
 	 */
 	private void appendToSolution(String id) throws Exception {
@@ -869,8 +860,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * 
 	 */
 	@Override
-	public void stepInitializedVertex(IVertex s, Iterable<IVertex> i)
-			throws Exception {
+	public void stepInitializedVertex(IVertex s, Iterable<IVertex> i) throws Exception {
 		try {
 			IStep step = new InitializedVertexStep(s, i);
 			this.add(step);
@@ -990,8 +980,7 @@ public class TraversableGraph extends GraphDecorator<IVertex, IEdge> implements
 	 * 
 	 */
 	@Override
-	public void stepSolutionMember(Iterable<Entry<IVertex, IEdge>> items)
-			throws Exception {
+	public void stepSolutionMember(Iterable<Entry<IVertex, IEdge>> items) throws Exception {
 		try {
 			IStep step = new SolutionMemberStep(items);
 			this.add(step);

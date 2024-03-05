@@ -35,7 +35,7 @@ public class DFS extends AbstractAlgorithm implements IAlgorithm {
 	public void traverse(ITraversableGraph g) throws Exception {
 		try {
 			for (IVertex v : g.getVertices())
-				if (!v.isVisited())
+				if (v.isUnexplored())
 					dfs(g, v);
 		} catch (Exception ex) {
 			throw ex;
@@ -43,7 +43,7 @@ public class DFS extends AbstractAlgorithm implements IAlgorithm {
 	}
 
 	/**
-	 * Helper method.
+	 * Depth-first search, helper method.
 	 * 
 	 * @param g
 	 *            the graph
@@ -56,9 +56,9 @@ public class DFS extends AbstractAlgorithm implements IAlgorithm {
 			IVertex w;
 			g.stepVisit(v);
 			for (IEdge e : g.getIncidentEdges(v)) {
-				if (!e.isVisited()) {
+				if (e.isUnexplored()) {
 					w = g.getOpposite(v, e);
-					if (!w.isVisited()) {
+					if (w.isUnexplored()) {
 						g.stepVisit(e);
 						dfs(g, w);
 					} else
